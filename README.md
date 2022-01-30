@@ -20,7 +20,7 @@ Plataformas|Windows
 **Tabla de contenidos**
 
 1. [Aspectos generales](#aspectos-generales)   
-    1.1. [Relato breve y parcial de una partida típica](#relato)
+    1.1. [Relato breve y parcial de una partida típica](#relato-breve)
 2. Jugabilidad  
     2.1. Mecánica  
         2.1.1. Mecánicas del personaje  
