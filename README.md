@@ -68,10 +68,9 @@ Esta será la paleta de colores que se utilizará.
  <p align="center">
   <img src="https://github.com/jgomez18UCM/Proyectos2/blob/main/images/paleta.jpg" width="400"/>
 
-https://github.com/jgomez18UCM/Proyectos2
 
-3. 1Menús y modos de juego 
-3.2 Configuración
+
+### 3.1. 3.2 Menús y modos de juego y configuración
 <li>
  Menú principal:
  Cuenta con los siguientes botones:
@@ -115,7 +114,7 @@ https://github.com/jgomez18UCM/Proyectos2
  Al utilizar las opciones de salir, el juego guardará el estado desde el último punto de guardado.
 
 
-
+https://github.com/jgomez18UCM/Proyectos2
 
 
 
