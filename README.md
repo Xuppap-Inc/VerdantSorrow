@@ -56,7 +56,13 @@ Vista General |
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica
 ---
 
+## 3.Estética
+Se busca una estética inspirada principalmente en “Más allá del jardín”. Dibujos infantiles pero con una tonalidad oscura que nos puede recordar también a la estética de Tim Burton. Los personajes, enemigos y objetos con los que interactúa el jugador tendrán tonos con más saturación para poder distinguirlos del fondo. Todo el arte tendrá lineart negro, exceptuando zonas muy alejadas del fondo. En ciertos momentos se usará una composición uniforme con un elemento contrastado para captar la atención del jugador (por ejemplo cuando el jefe de la linterna sale de la pantalla la linterna contrasta con todo lo demás).
 
+Esta será la paleta de colores que se utilizará.
+
+
+https://github.com/jgomez18UCM/Proyectos2
 
 
 
