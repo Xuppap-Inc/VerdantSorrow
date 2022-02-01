@@ -57,12 +57,67 @@ Vista General |
 ---
 
 ## 3.Estética
+<p align="center">
+  <img src="https://github.com/jgomez18UCM/Proyectos2/blob/main/images/masalladelbosque.jpg" width="400"/>
+  <p align="center">
+  <img src="https://github.com/jgomez18UCM/Proyectos2/blob/main/images/fondo1.jpg" width="400"/>
+
 Se busca una estética inspirada principalmente en “Más allá del jardín”. Dibujos infantiles pero con una tonalidad oscura que nos puede recordar también a la estética de Tim Burton. Los personajes, enemigos y objetos con los que interactúa el jugador tendrán tonos con más saturación para poder distinguirlos del fondo. Todo el arte tendrá lineart negro, exceptuando zonas muy alejadas del fondo. En ciertos momentos se usará una composición uniforme con un elemento contrastado para captar la atención del jugador (por ejemplo cuando el jefe de la linterna sale de la pantalla la linterna contrasta con todo lo demás).
 
 Esta será la paleta de colores que se utilizará.
-
+ <p align="center">
+  <img src="https://github.com/jgomez18UCM/Proyectos2/blob/main/images/paleta.jpg" width="400"/>
 
 https://github.com/jgomez18UCM/Proyectos2
+
+3. 1Menús y modos de juego 
+3.2 Configuración
+<li>
+ Menú principal:
+ Cuenta con los siguientes botones:
+  <ul>
+    - Nueva partida: Comienza una nueva partida.
+    </ul>
+   <ul>
+    - Continuar: Continúa el juego en el último punto de guardado.
+   </ul>
+    <ul>
+   -  Zonas: Te permite seleccionar un jefe contra el que luchar.
+    </ul>
+     <ul>
+   -  Ajustes: Permite regular el volumen de salida de audio.
+    </ul>
+      <ul>
+   -  Controles: Muestra una pantalla con los controles del juego.
+    </ul>
+     <ul>
+   -  Salir: Permite salir del juego.
+    </ul>
+  </ul>
+ </li>
+ <li>
+ Menú de pausa:
+ Cuenta con los siguientes botones:
+  <ul>
+    - Reanudar nivel: Permite reanudar la partida.
+    </ul>
+   <ul>
+    - Ajustes: Permite regular el volumen de salida de audio.
+   </ul>
+    <ul>
+   -  Salir al menú principal: Permite volver al menú principal.
+    </ul>
+     <ul>
+   -  Salir : Permite cerrar el juego sin tener que salir al menú principal.
+    </ul>
+  </ul>
+ </li>
+ Al utilizar las opciones de salir, el juego guardará el estado desde el último punto de guardado.
+
+
+
+
+
 
 
 
