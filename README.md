@@ -97,28 +97,24 @@ Comportamiento de los jefes:
         - Cuando recibe 3 golpes, cambia al otro lado de la pantalla. De forma que el boss siempre está al principio entre la lámpara y el jugador. Esto se repite 3-4 veces.
         - Al igual que en la primera fase, el boss persigue al jugador, y cuando lo tiene a rango, le pega un manotazo.
         - El ataque de raíces con auto-aim se realiza constantemente. Si la raíz sale cerca de la lámpara se cancela (el jefe no le pega a su lámpara).
-    <ul><li> Jefe de las manos: 
-      <ul>- Visual: Un cuerpo principal (ojo, cabeza, mago…) que ataca con 2 manos gigantes.</ul>
-      <ul>- Hay que subirse a las manos para atacar al cuerpo principal.</ul>
-      <ul>- Las manos vuelven a su posición original tras cada ataque.</ul>
-      <ul><li>Tres ataques:
-        <ul>- Clap: junta ambas manos hacia el centro de la pantalla rápidamente a ras de suelo.</ul>
-        <ul>- Puñetazo: la mano se echa hacia atrás y mete un puñetazo rápido.</ul>
-        <ul>- Martillazo: la mano choca contra el suelo.</ul>
-      </li></ul>
-      <ul>- Las manos hacen daño sólo durante el ataque. (Idea opcional: nunca hacen daño por la parte superior).</ul>
-      <ul><li>Segunda fase:
-        <ul>- El boss se desencadena y comienza a moverse por la pantalla.</ul>
-        <ul>- El resto de ataques siguen igual, solo que las manos ahora hacen daño por contacto siempre (se prenden).</ul>
-        <ul>- El movimiento del cuerpo del boss es el siguiente: <a ref="https://www.youtube.com/watch?v=5mGuCdlCcNMMovimiento">Movimiento</a></ul>
-        <ul>- Cuando choca contra el suelo lanza una bola de fuego a cada lado y se queda inmóvil unos segundos.</ul>
-        <ul>- Cada X tiempo lanza una bola de fuego hacia el jugador, que desaparece al chocar con un lateral de la pantalla o el suelo.</ul>
-      </li></ul>
-      <ul><li>Tercera fase:
-        <ul>Cámara scroll lateral hacia la derecha. El boss te persigue desde la izquierda y el jugador tendrá que correr hacia la derecha para huir.</ul>
-      </li></ul>
-    </li></ul>
-</li>
+    - Jefe de las manos: 
+      - Visual: Un cuerpo principal (ojo, cabeza, mago…) que ataca con 2 manos gigantes.
+      - Hay que subirse a las manos para atacar al cuerpo principal.
+      - Las manos vuelven a su posición original tras cada ataque.
+      - Tres ataques:
+        - Clap: junta ambas manos hacia el centro de la pantalla rápidamente a ras de suelo.
+        - Puñetazo: la mano se echa hacia atrás y mete un puñetazo rápido.
+        - Martillazo: la mano choca contra el suelo.
+      
+      - Las manos hacen daño sólo durante el ataque. (Idea opcional: nunca hacen daño por la parte superior).
+      - Segunda fase:
+        - El boss se desencadena y comienza a moverse por la pantalla.
+        - El resto de ataques siguen igual, solo que las manos ahora hacen daño por contacto siempre (se prenden).
+        - El movimiento del cuerpo del boss es el siguiente: <a ref="https://www.youtube.com/watch?v=5mGuCdlCcNMMovimiento">Movimiento</a>
+        - Cuando choca contra el suelo lanza una bola de fuego a cada lado y se queda inmóvil unos segundos.
+        - Cada X tiempo lanza una bola de fuego hacia el jugador, que desaparece al chocar con un lateral de la pantalla o el suelo.
+      - Tercera fase:
+        Cámara scroll lateral hacia la derecha. El boss te persigue desde la izquierda y el jugador tendrá que correr hacia la derecha para huir.
 
 ### <a name="controles"></a> 2.2. Controles  
 El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar, al igual que la tecla Espacio, A y D para el movimiento lateral). Se atacará con la tecla J, y se esquivará con el Shift izquierdo.
