@@ -47,7 +47,7 @@ ___
 
 Vista General |
 :--:|
-![Vista General]()|
+![Vista General](./images/interfaz.jpg)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
 El jugador realiza el tutorial. Tras eso sale al hub. Allí tiene que conseguir 3 almas de jefes para abrir una puerta. 
@@ -119,7 +119,7 @@ Comportamiento de los jefes:
 ### <a name="controles"></a> 2.2. Controles  
 El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar, al igual que la tecla Espacio, A y D para el movimiento lateral). Se atacará con la tecla J, y se esquivará con el Shift izquierdo.
 <p align="center">
-  <img src="./images/masalladelbosque.jpg" width="400"/>
+  <img src="./images/controles.png" width="400"/>
 
 ### <a name="camara"></a> 2.3. Cámara  
 La cámara estará posicionada de modo que se muestre una vista lateral del personaje y del escenario. Según el jugador vaya avanzando, la cámara lo seguirá con un cierto delay haciendo scroll, con el jugador siempre centrado en la cámara. En las peleas con los jefes la cámara está fija en el centro porque las zonas de combate ocupan una pantalla únicamente.
@@ -171,7 +171,7 @@ Esta será la paleta de colores que se utilizará.
  La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cada enemigo tendrá en la cabeza una barra que representa su vida. 
 
  <p align="center">
-  <img src="./images/paleta.jpg" width="400"/>
+  <img src="./images/interfaz.jpg" width="400"/>
 
 ---
 
@@ -203,6 +203,37 @@ Esta será la paleta de colores que se utilizará.
   - Bosses
 
   ### <a name="imagenes"></a> 5.3. Imágenes
+  - Personaje principal:
+    - Correr
+    - Saltar
+    - Atacar (en suelo)
+    - Atacar (en aire)
+    - Rodar  
+  
+    ![Personaje](./images/protagonista.png)|  
+
+  - Boss rana:
+    - Rana idle
+    - Rana saltando
+    - Rana sacando lengua
+    - Rana vulnerable  
+
+    ![Rana](./images/rana.png)|
+
+  - Boss humanoide:
+    - Idle
+    - Caminar
+    - Golpear
+
+    <img src="./images/arbol_humanoide_1.png" width="200" height="300" />  
+
+    ![Arbol2](./images/arbol_humanoide_2.png)|  
+
+  - Boss manos:
+    - Mano abierta/puño
+    - Ojo central gigante
+
+    ![BossManos](./images/bossmanos.png)|  
 
 
   ### <a name="historia"></a> 5.4. Historia  
@@ -231,6 +262,12 @@ Esta será la paleta de colores que se utilizará.
   Para traer de vuelta el equilibrio, el propio mundo ha canalizado sus fuerzas y dado vida a su avatar, Kyna con la esperanza de que este reúna las 3 esencias primordiales.  
 
  ### <a name="niveles"></a> 5.5. Niveles  
+
+  ![Nivel1](./images/niveles1.png)|  
+  Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
+  ![Nivel2](./images/niveles2.png)|  
+
+
 ---
 
 ## <a name="referencias"></a> 6. Referencias  
