@@ -185,9 +185,8 @@ Esta será la paleta de colores que se utilizará.
 
   ## <a name="contenido"></a> 5. Contenido  
   ### <a name="musica"></a> 5.1. Música  
-  - Musica de Boss.  
-  - Musica de combate normal.  
-  - Musica menú.  
+  - Música de cada uno de los jefe.
+  - Música menú.  
 
   ### <a name="sonidos"></a> 5.2. Sonidos
   - Jugador
