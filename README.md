@@ -266,9 +266,9 @@ Esta será la paleta de colores que se utilizará.
   Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
   ![Nivel2](./images/niveles2.png)| 
     
-Hud: Zona central que unifica todo el juego; al acabar el tutorial se situa al jugador en esta zona. Se trata de una escena estilo top down, con tres muros de roca en los laterales donde irán apareciendo puertas a medida que se vayan eliminando a los bosses y donde habrá una puerta central bloqueada con 3 símbolos de las 3 esencias. 
+Hub: Zona central que unifica todo el juego; al acabar el tutorial se situa al jugador en esta zona. Se trata de una escena estilo top down, con tres muros de roca en los laterales donde irán apareciendo puertas a medida que se vayan eliminando a los bosses y donde habrá una puerta central bloqueada con 3 símbolos de las 3 esencias. 
 
-Al acabar con los dos primeros bosses se pasará a un pequeño nivel en el que el jugador tiene que huir de la zona en la que se encuentra mientras se destruye el entorno. Cuando acaba este nivel, se vuelve a la escena del Hud. De vuelta a esta escena se verá destruido y en colores apagados el entorno en el que estaba el boss que se acaba de derrotar y se habrá abierto el acceso al siguiente.
+Al acabar con los dos primeros bosses se pasará a un pequeño nivel en el que el jugador tiene que huir de la zona en la que se encuentra mientras se destruye el entorno. Cuando acaba este nivel, se vuelve a la escena del Hub. De vuelta a esta escena se verá destruido y en colores apagados el entorno en el que estaba el boss que se acaba de derrotar y se habrá abierto el acceso al siguiente.
 Al terminar todos los bosses se podrá abrir la puerta final utilizando las tres esencias obtenidas.
 
   <img src="./images/Hub1.jpg" width="300" height="300">
