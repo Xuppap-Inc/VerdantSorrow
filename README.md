@@ -225,8 +225,8 @@ Esta será la paleta de colores que se utilizará.
     - Golpear
 
     <img src="./images/arbol_humanoide_1.png" width="200" height="300" />  
+    <img src="./images/arbol_humanoide_2.png" width="200" height="300" />  
 
-    ![Arbol2](./images/arbol_humanoide_2.png)|  
 
   - Boss manos:
     - Mano abierta/puño
@@ -270,8 +270,8 @@ Hub: Zona central que unifica todo el juego; al acabar el tutorial se situa al j
 
 Al acabar con los dos primeros bosses se pasará a un pequeño nivel en el que el jugador tiene que huir de la zona en la que se encuentra mientras se destruye el entorno. Cuando acaba este nivel, se vuelve a la escena del Hub. De vuelta a esta escena se verá destruido y en colores apagados el entorno en el que estaba el boss que se acaba de derrotar y se habrá abierto el acceso al siguiente.
 
-  ![Hub1](./images/Hub1.jpg)| 
-  ![Hub2](./images/Hub2.jpg)| 
+  <img src="./images/Hub1.jpg" width="300" height="300">
+  <img src="./images/Hub2.jpg" width="300" height="300">
 
 ---
 
