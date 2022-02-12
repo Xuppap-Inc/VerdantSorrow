@@ -9,6 +9,8 @@
 #include "RectangleRenderer.h"
 #include "PlayerCtrl.h"
 
+#include "box2d.h"
+
 Game::Game() : player(nullptr)
 {
 }
@@ -30,6 +32,8 @@ void Game::init()
 	player->setWidth(50);
 	player->addComponent(new RectangleRenderer());
 	player->addComponent(new PlayerCtrl(5, 5));
+
+	b2World world(b2Vec2(0.0f, 9.8f));
 }
 
 void Game::start()
