@@ -6,8 +6,10 @@
 
 #include "Container.h"
 #include "GameManager.h"
+#include "RectangleRenderer.h"
+#include "PlayerCtrl.h"
 
-Game::Game()
+Game::Game() : player(nullptr)
 {
 }
 
@@ -21,6 +23,13 @@ Game::~Game()
 void Game::init()
 {
 	SDLUtils::init("Verdant Sorrow", 800, 600, "resources/config/resources.json");
+
+	player = new Container();
+	player->getPos().set(sdlutils().width() / 2 - 25, sdlutils().height() / 2 - 25);
+	player->setHeight(50);
+	player->setWidth(50);
+	player->addComponent(new RectangleRenderer());
+	player->addComponent(new PlayerCtrl(5, 5));
 }
 
 void Game::start()

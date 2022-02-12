@@ -13,7 +13,7 @@ public:
 	void init();
 	void start();
 private:
-	
+	Container* player;
 	std::vector<Container*> objs_;
 };
 
