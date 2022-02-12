@@ -31,10 +31,20 @@ public:
 	inline float getRotation() {
 		return rot_;
 	}
-	inline void setHeight(float rot) {
+	inline void setRotation(float rot) {
 		rot_ = rot;
 	}
+
+	inline Vector2D& getPos() {
+		return pos_;
+	}
+
+	inline Vector2D& getVel() {
+		return vel_;
+	}
 private:
+	Vector2D pos_;
+	Vector2D vel_;
 	float width_;
 	float height_;
 	float rot_;
