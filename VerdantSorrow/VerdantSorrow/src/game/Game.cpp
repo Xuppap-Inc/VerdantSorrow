@@ -8,6 +8,9 @@
 #include "GameManager.h"
 #include "RectangleRenderer.h"
 #include "PlayerCtrl.h"
+#include "SimplePhysicsPlayer.h"
+#include "SimpleMove.h"
+#include "CollideWithBorders.h"
 
 Game::Game() : player(nullptr)
 {
@@ -22,14 +25,20 @@ Game::~Game()
 
 void Game::init()
 {
-	SDLUtils::init("Verdant Sorrow", 800, 600, "resources/config/resources.json");
+	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
 	player = new Container();
 	player->getPos().set(sdlutils().width() / 2 - 25, sdlutils().height() / 2 - 25);
 	player->setHeight(50);
 	player->setWidth(50);
 	player->addComponent(new RectangleRenderer());
-	player->addComponent(new PlayerCtrl(5, 5));
+	PlayerCtrl* playerController = new PlayerCtrl(50, 8);
+	player->addComponent(playerController);
+	player->addComponent(new SimplePhysicsPlayer(5));
+	player->addComponent(new SimpleMove());
+	player->addComponent(new CollideWithBorders(playerController));
+
+	objs_.push_back(player);
 }
 
 void Game::start()
