@@ -1,0 +1,13 @@
+#pragma once
+#include "Component.h"
+
+class Container;
+
+class PhysicsComponent : public Component {
+public:
+	PhysicsComponent(){}
+	virtual ~PhysicsComponent(){}
+
+	virtual void update(Container* o) = 0;
+};
+
