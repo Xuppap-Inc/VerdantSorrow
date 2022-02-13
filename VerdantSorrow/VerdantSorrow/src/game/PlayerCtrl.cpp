@@ -27,6 +27,8 @@ void PlayerCtrl::handleInput(Container* o)
 
 			vel.set(Vector2D(speed_, vel.getY()));
 		}
+
+		if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
 	}
 
 	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
