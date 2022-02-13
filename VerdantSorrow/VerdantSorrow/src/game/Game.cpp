@@ -30,30 +30,42 @@ void Game::init()
 {
 	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
+	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 
+	//Se crea el jugador 
 	player = new Container();
 	player->getPos().set(sdlutils().width() / 2 - 25, sdlutils().height() / 2 - 25);
 	player->setHeight(50);
 	player->setWidth(50);
 	player->addComponent(new RectangleRenderer());
+
+	//Componente que permite controlar al jugador
 	PlayerCtrl* playerController = new PlayerCtrl(30, 8);
 	player->addComponent(playerController);
 	player->addComponent(new SimpleMove());
+
+	//Se añade un collider al jugador
 	RectangleCollider* playerCollider = new RectangleCollider(player->getWidth(), player->getHeight());
+	colManager->addCollider(playerCollider);
 	player->addComponent(playerCollider);
 	player->addComponent(new SimplePhysicsPlayer(2.5, colManager, playerCollider));
 	player->addComponent(new CollideWithBorders(playerController));
 
-	Container* platform = new Container();
+	objs_.push_back(player);
 
+	//Se crea una plataforma de ejemplo
+	Container* platform = new Container();
 	platform->getPos().set(sdlutils().width() / 3, sdlutils().height() / 4 * 3);
 	platform->setHeight(50);
 	platform->setWidth(200);
 	platform->addComponent(new RectangleRenderer());
-	platform->addComponent(new RectangleCollider(platform->getWidth(), platform->getHeight()));
+	
+	//Se crea un collider para la plataforma
+	RectangleCollider* platformCollider = new RectangleCollider(platform->getWidth(), platform->getHeight());
+	colManager->addCollider(platformCollider);
+	platform->addComponent(platformCollider);
 
-	objs_.push_back(player);
 	objs_.push_back(platform);
 }
 

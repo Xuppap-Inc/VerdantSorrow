@@ -14,6 +14,8 @@ public:
 
 	bool hasCollisions(RectangleCollider* c);
 
+	void addCollider(RectangleCollider* col);
+
 protected:
 	std::vector<RectangleCollider*> colliders;
 };

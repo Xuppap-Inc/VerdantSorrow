@@ -36,4 +36,9 @@ bool CollisionManager::hasCollisions(RectangleCollider* c)
 	return !getCollisions(c).empty();
 }
 
+void CollisionManager::addCollider(RectangleCollider* col) 
+{
+	colliders.push_back(col);
+}
+
 
