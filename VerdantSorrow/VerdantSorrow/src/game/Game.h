@@ -1,6 +1,7 @@
 #pragma once
 #include "GameManager.h"
 #include <vector>
+#include "box2d.h"
 
 class Container;
 class GameManager;

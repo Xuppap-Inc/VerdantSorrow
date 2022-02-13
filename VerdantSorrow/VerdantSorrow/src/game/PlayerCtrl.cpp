@@ -15,11 +15,11 @@ void PlayerCtrl::handleInput(Container* o)
 		if (ihdlr.isKeyDown(SDLK_w)) {
 			
 		}
-		else if (ihdlr.isKeyDown(SDLK_a)) {
-			
+		if (ihdlr.isKeyDown(SDLK_a)) {
+			o->getVel().set(o->getVel() + Vector2D(-speed_, 0));
 		}
 		else if (ihdlr.isKeyDown(SDLK_d)) {
-			
+			o->getVel().set(o->getVel() + Vector2D(speed_, 0));
 		}
 	}
 }

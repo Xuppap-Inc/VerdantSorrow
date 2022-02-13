@@ -34,7 +34,9 @@ void Game::init()
 	player->addComponent(new RectangleRenderer());
 	player->addComponent(new PlayerCtrl(5, 5));
 
-	b2World world(b2Vec2(0.0f, 9.8f));
+	objs_.push_back(player);
+
+
 }
 
 void Game::start()
@@ -43,6 +45,35 @@ void Game::start()
 	bool exit = false;
 
 	auto& ihdlr = ih();
+
+
+	b2World world(b2Vec2(0.0f, 20.0f));
+
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0.0f, sdlutils().height()-objs_[0]->getHeight());
+	b2Body* groundBody = world.CreateBody(&groundBodyDef);
+	b2PolygonShape groundBox;
+	groundBox.SetAsBox(sdlutils().width(), 0.0f);
+	groundBody->CreateFixture(&groundBox, 0.0f);
+
+
+
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(sdlutils().width()/2, 4.0f);
+	b2Body* body = world.CreateBody(&bodyDef);
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(1.0f, 1.0f);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.0f;
+	body->CreateFixture(&fixtureDef);
+
+
+	float timeStep = 1.0f / 60.0f;
+	int32 velocityIterations = 6;
+	int32 positionIterations = 2;
 
 	while (!exit) {
 		Uint32 startTime = sdlutils().currRealTime();
@@ -58,6 +89,11 @@ void Game::start()
 		for (auto& o : objs_) {
 			o->handleInput();
 		}
+
+		world.Step(timeStep, velocityIterations, positionIterations);
+
+		b2Vec2 pos = body->GetPosition();
+		objs_[0]->getPos().set(pos.x, pos.y);
 
 		// update
 		for (auto& o : objs_) {
