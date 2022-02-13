@@ -8,6 +8,7 @@
 #include "GameManager.h"
 #include "RectangleRenderer.h"
 #include "PlayerCtrl.h"
+#include "box2d.h"
 
 #include "box2d.h"
 
