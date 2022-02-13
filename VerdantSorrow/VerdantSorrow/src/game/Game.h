@@ -15,6 +15,10 @@ public:
 	void start();
 private:
 	Container* player;
+	Container* player2;
 	std::vector<Container*> objs_;
+	b2World mundo;
+	b2Body* body;
+	b2Body* body2;
 };
 
