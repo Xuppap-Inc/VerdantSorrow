@@ -266,12 +266,21 @@ Esta será la paleta de colores que se utilizará.
   Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
   ![Nivel2](./images/niveles2.png)| 
     
+Al matar a los dos primeros bosses, se avisará al jugador de que debe huír del lugar porque va a derrumbarse; acto seguido se pasará a un nivel de huída por plataformas.
+     -Después del boss rana: Será un nivel de plataformas horizontal, el jugador tiene que llegar al final mientras caen piedras del techo. Las plataformas se caen después de que el jugador haya pasado por encima de ellas para impedir que vuelva hacia atrás. Si una piedra toca al jugador se le quitará media vida; si cae de las plataformas morirá y volverá al último checkpoint.
+     -Después del boss arbol: Será un nivel de plataformas vertical, en el que tenga que ir saltando hacia arriba, evitando ramas que salen de los laterales. Si una rama golpea al jugador, se le quitará media vida. El jugador solo puede avanzar hacia arriba, si cae muere y vuelve al último checkpoint
+     -Depués del boss de las manos: Se pasa directamente a la cinemática de fin de juego.
+     
+     
 Hub: Zona central que unifica todo el juego; al acabar el tutorial se situa al jugador en esta zona. Se trata de una escena estilo top down. Será una zona semiabierta donde se encuentran repartidos diferentes npc. El objetivo del jugador es recorrer el hub y hablar con los npcs, estos le irán contando parte de la historia y le darán pistas de cómo entrar a las zonas de los diferentes bosses. 
 En esta zona habrá diferentes objetos que se pueden destruír, dando monedas para el jugador. Estas monedas podrán intercambiarse por vidas extra en la parte baja del hub.
 
  Después de matar a los diferentes bosses se irá devolviendo al jugador al hub; en este se encontrarán cambios. La zona del boss que se acaba de destruír estará derrumbada y se habrá habilitado la entrada al siguiente boss; los dialogos de los npc estarán enfocados al siguiente boss que toca matar.
 
   <img src="./images/Hub boceto.jpeg" width="300" height="200">
+     
+     
+
 
 ---
 
