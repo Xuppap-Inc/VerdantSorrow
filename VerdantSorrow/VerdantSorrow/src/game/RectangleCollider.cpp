@@ -11,7 +11,7 @@ RectangleCollider::~RectangleCollider()
 
 void RectangleCollider::update(Container* o)
 {
-	Vector2D contPos;
+	Vector2D contPos = o->getPos();
 
 	pos_ = Vector2D(contPos.getX(), contPos.getY());
 }
