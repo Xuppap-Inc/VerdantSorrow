@@ -1,7 +1,8 @@
 #include "RectangleCollider.h"
-#include "Container.h"
+#include "../ecs/Entity.h"
+#include "Transform.h"
 
-RectangleCollider::RectangleCollider(float width, float height): height_(height), width_(width), pos_(), isTrigger_(false), active_(true)
+RectangleCollider::RectangleCollider(float width, float height): tr_(nullptr), height_(height), width_(width), pos_(), isTrigger_(false), active_(true)
 {
 }
 
@@ -9,9 +10,15 @@ RectangleCollider::~RectangleCollider()
 {
 }
 
-void RectangleCollider::update(Container* o)
+void RectangleCollider::initComponent()
 {
-	Vector2D contPos = o->getPos();
+	tr_ = ent_->getComponent<Transform>();
+	assert(tr_ != nullptr);
+}
+
+void RectangleCollider::update()
+{
+	Vector2D contPos = tr_->getPos();
 
 	pos_ = Vector2D(contPos.getX(), contPos.getY());
 }

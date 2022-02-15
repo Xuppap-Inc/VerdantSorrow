@@ -1,9 +1,9 @@
 #pragma once
-#include "GameManager.h"
-#include <vector>
 
-class Container;
-class GameManager;
+#include <vector>
+namespace ecs {
+	class Manager;
+}
 
 class Game
 {
@@ -13,7 +13,6 @@ public:
 	void init();
 	void start();
 private:
-	Container* player;
-	std::vector<Container*> objs_;
+	ecs::Manager* mngr_;
 };
 

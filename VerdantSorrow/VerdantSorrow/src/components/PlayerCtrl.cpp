@@ -1,17 +1,18 @@
 #include "PlayerCtrl.h"
 #include "../sdlutils/InputHandler.h"
-#include "Container.h"
+#include "../ecs/Entity.h"
+#include "Transform.h"
 
 
 PlayerCtrl::~PlayerCtrl()
 {
 }
 
-void PlayerCtrl::handleInput(Container* o)
+void PlayerCtrl::update()
 {
 	auto& ihdlr = ih();
 
-	auto& vel = o->getVel();
+	auto& vel = tr_->getVel();
 
 	if (ihdlr.keyDownEvent()) {
 		if (ihdlr.isKeyDown(SDLK_w) && onGround_) {
@@ -32,6 +33,12 @@ void PlayerCtrl::handleInput(Container* o)
 	}
 
 	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
+}
+
+void PlayerCtrl::initComponent()
+{
+	tr_ = ent_->getComponent<Transform>();
+	assert(tr_ != nullptr);
 }
 
 bool PlayerCtrl::isOnGround()

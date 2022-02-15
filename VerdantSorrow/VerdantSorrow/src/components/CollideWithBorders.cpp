@@ -1,9 +1,10 @@
 #include "CollideWithBorders.h"
 
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
+#include "../ecs/Entity.h"
+#include "Transform.h"
 
-CollideWithBorders::CollideWithBorders(PlayerCtrl* controller): playerController_(controller)
+CollideWithBorders::CollideWithBorders(): tr_(nullptr), playerController_(nullptr)
 {
 }
 
@@ -11,14 +12,23 @@ CollideWithBorders::~CollideWithBorders()
 {
 }
 
-void CollideWithBorders::update(Container* o)
+void CollideWithBorders::initComponent()
 {
-	auto& pos = o->getPos();
+	tr_ = ent_->getComponent<Transform>();
+	assert(tr_ != nullptr);
+
+	playerController_ = ent_->getComponent<PlayerCtrl>();
+}
+
+void CollideWithBorders::update()
+{
+	
+	auto& pos = tr_->getPos();
 
 	auto height = sdlutils().height();
 	auto width = sdlutils().width();
-	auto playerHeight = o->getHeight();
-	auto playerWidth = o->getWidth();
+	auto playerHeight = tr_->getHeight();
+	auto playerWidth = tr_->getWidth();
 	
 	if (pos.getY() > height - playerHeight) {
 	

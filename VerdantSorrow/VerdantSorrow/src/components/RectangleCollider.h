@@ -1,16 +1,20 @@
 #pragma once
-#include "PhysicsComponent.h"
+#include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
 #include <SDL.h>
 
+class Transform;
+
 class RectangleCollider :
-    public PhysicsComponent
+    public ecs::Component
 {
 public:
+    __CMPID_DECL__(ecs::_RECTANGLECOLLIDER)
     RectangleCollider(float width, float height);
     ~RectangleCollider();
 
-    void update(Container* o) override;
+    void initComponent() override;
+    void update() override;
 
     SDL_Rect getCollider();
 
@@ -21,6 +25,7 @@ public:
     bool isActive();
     
 protected:
+    Transform* tr_;
     float width_;
     float height_;
 

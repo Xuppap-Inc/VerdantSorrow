@@ -4,26 +4,28 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
 
-#include "Container.h"
-#include "GameManager.h"
-#include "RectangleRenderer.h"
-#include "PlayerCtrl.h"
-#include "SimplePhysicsPlayer.h"
-#include "SimpleMove.h"
-#include "CollideWithBorders.h"
-#include "RectangleCollider.h"
+#include "../ecs/Manager.h"
+#include "../ecs/Entity.h"
+#include "../components/RectangleRenderer.h"
+#include "../components/PlayerCtrl.h"
+#include "../components/SimplePhysicsPlayer.h"
+#include "../components/SimpleMove.h"
+#include "../components/CollideWithBorders.h"
+#include "../components/RectangleCollider.h"
+#include "../components/Transform.h"
 
 #include "CollisionManager.h"
 
-Game::Game() : player(nullptr)
+using ecs::Entity;
+using ecs::Manager;
+
+Game::Game() : mngr_(nullptr)
 {
 }
 
 Game::~Game()
 {
-	for (Container* o : objs_) {
-		delete o;
-	}
+	delete mngr_;
 }
 
 void Game::init()
@@ -32,45 +34,46 @@ void Game::init()
 
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
+	mngr_ = new Manager();
 
 	//Se crea el jugador 
-	player = new Container();
-	player->getPos().set(sdlutils().width() / 2 - 25, sdlutils().height() / 2 - 25);
-	player->setHeight(50);
-	player->setWidth(50);
-	player->addComponent(new RectangleRenderer());
+	auto player = mngr_->addEntity();
+	auto playerTr = player->addComponent<Transform>();
+	auto playerX = sdlutils().width() / 2 - 25;
+	auto playerY = sdlutils().height() / 2 - 25;
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50,50,0.0f);	
+	player->addComponent<RectangleRenderer>();
 
+	player->addComponent<PlayerCtrl>(30, 8);
 	//Componente que permite controlar al jugador
-	PlayerCtrl* playerController = new PlayerCtrl(30, 8);
-	player->addComponent(playerController);
-	player->addComponent(new SimpleMove());
+	//PlayerCtrl* playerController = new PlayerCtrl(30, 8);
+	//player->addComponent(playerController);
+	player->addComponent<SimpleMove>();
 
 	//Se añade un collider al jugador
-	RectangleCollider* playerCollider = new RectangleCollider(player->getWidth(), player->getHeight());
+	//new RectangleCollider(player->getWidth(), player->getHeight())
+	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	player->addComponent(playerCollider);
-	player->addComponent(new SimplePhysicsPlayer(2.5, colManager, playerCollider));
-	player->addComponent(new CollideWithBorders(playerController));
+	//player->addComponent(playerCollider);
+	player->addComponent<SimplePhysicsPlayer>(2.5, colManager);
+	player->addComponent<CollideWithBorders>();
 
-	objs_.push_back(player);
 
 	//Se crea una plataforma de ejemplo
-	Container* platform = new Container();
-	platform->getPos().set(sdlutils().width() / 3, sdlutils().height() / 4 * 3);
-	platform->setHeight(50);
-	platform->setWidth(200);
-	platform->addComponent(new RectangleRenderer());
+	auto platform = mngr_->addEntity();
+	auto platformTr = platform->addComponent<Transform>();
+	auto platformX = sdlutils().width() / 3;
+	auto platformY = sdlutils().height() / 4 * 3;
+	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);
+	platform->addComponent<RectangleRenderer>();
 	
 	//Se crea un collider para la plataforma
-	RectangleCollider* platformCollider = new RectangleCollider(platform->getWidth(), platform->getHeight());
+	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager->addCollider(platformCollider);
-	platform->addComponent(platformCollider);
-
-	objs_.push_back(platform);
 }
 
-void Game::start()
-{
+void Game::start() {
+
 	// a boolean to exit the loop
 	bool exit = false;
 
@@ -79,7 +82,7 @@ void Game::start()
 	while (!exit) {
 		Uint32 startTime = sdlutils().currRealTime();
 
-		// handle input
+		// refresh the input handler
 		ihdlr.refresh();
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
@@ -87,26 +90,17 @@ void Game::start()
 			continue;
 		}
 
-		for (auto& o : objs_) {
-			o->handleInput();
-		}
-
-		// update
-		for (auto& o : objs_) {
-			o->update();
-		}
+		mngr_->update();
+		mngr_->refresh();
 
 		sdlutils().clearRenderer();
-
-		// render
-		for (auto& o : objs_) {
-			o->render();
-		}
-
+		mngr_->render();
 		sdlutils().presentRenderer();
+
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 
-		if (frameTime < 20)
-			SDL_Delay(20 - frameTime);
+		if (frameTime < 10)
+			SDL_Delay(10 - frameTime);
 	}
+
 }

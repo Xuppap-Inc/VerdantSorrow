@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "RectangleCollider.h"
+#include "../components/RectangleCollider.h"
 
 class CollisionManager
 {

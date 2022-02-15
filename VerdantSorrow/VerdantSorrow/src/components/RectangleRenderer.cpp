@@ -2,7 +2,8 @@
 
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
+#include "../ecs/Entity.h"
+#include "Transform.h"
 
 RectangleRenderer::RectangleRenderer() :
 	RectangleRenderer(build_sdlcolor(0xffffffff)) {
@@ -10,18 +11,24 @@ RectangleRenderer::RectangleRenderer() :
 }
 
 RectangleRenderer::RectangleRenderer(SDL_Color color) :
-	color_(color) {
+	tr_(nullptr), color_(color) {
 }
 
 RectangleRenderer::~RectangleRenderer()
 {
 }
 
-void RectangleRenderer::render(Container* o, float r)
+void RectangleRenderer::initComponent()
 {
-	auto& pos = o->getPos();
-	auto width = o->getWidth();
-	auto height = o->getHeight();
+	tr_ = ent_->getComponent<Transform>();
+	assert(tr_ != nullptr);
+}
+
+void RectangleRenderer::render()
+{
+	auto& pos = tr_->getPos();
+	auto width = tr_->getWidth();
+	auto height = tr_->getHeight();
 
 	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(color_));
 
