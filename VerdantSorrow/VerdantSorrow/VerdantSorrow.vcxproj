@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\CollisionManager.h" />
+    <ClInclude Include="src\game\RectangleCollider.h" />
+    <ClInclude Include="src\game\CollideWithBorders.h" />
+    <ClInclude Include="src\game\SimpleMove.h" />
+    <ClInclude Include="src\game\SimplePhysicsPlayer.h" />
     <ClInclude Include="src\game\Component.h" />
     <ClInclude Include="src\game\Container.h" />
     <ClInclude Include="src\game\Game.h" />
@@ -48,6 +53,11 @@
     <ClInclude Include="src\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\CollisionManager.cpp" />
+    <ClCompile Include="src\game\RectangleCollider.cpp" />
+    <ClCompile Include="src\game\CollideWithBorders.cpp" />
+    <ClCompile Include="src\game\SimpleMove.cpp" />
+    <ClCompile Include="src\game\SimplePhysicsPlayer.cpp" />
     <ClCompile Include="src\game\Container.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\GameManager.cpp" />
