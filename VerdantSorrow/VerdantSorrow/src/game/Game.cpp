@@ -9,7 +9,7 @@
 #include "../components/RectangleRenderer.h"
 #include "../components/PlayerCtrl.h"
 #include "../components/SimplePhysicsPlayer.h"
-#include "../components/SimpleMove.h"
+#include "../components/player/PlayerAttributes.h"
 #include "../components/CollideWithBorders.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
@@ -38,6 +38,8 @@ void Game::init()
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
+	player->addComponent<PlayerAttributes>();
+
 	auto playerTr = player->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
@@ -48,7 +50,6 @@ void Game::init()
 	//Componente que permite controlar al jugador
 	//PlayerCtrl* playerController = new PlayerCtrl(30, 8);
 	//player->addComponent(playerController);
-	player->addComponent<SimpleMove>();
 
 	//Se añade un collider al jugador
 	//new RectangleCollider(player->getWidth(), player->getHeight())

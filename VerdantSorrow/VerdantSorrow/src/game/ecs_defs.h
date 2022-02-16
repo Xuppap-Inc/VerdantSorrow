@@ -19,7 +19,8 @@
 	_PLAYERCTRL, \
 	_COLLIDER, \
 	_SIMPLEMOVE, \
-	_PHYSICS
+	_PHYSICS, \
+	_PLAYERATTRIBUTES
 
 
 // Groups list - must have at least one element
