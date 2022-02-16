@@ -4,7 +4,7 @@
 #include "../ecs/Entity.h"
 #include "Transform.h"
 
-CollideWithBorders::CollideWithBorders(): tr_(nullptr), playerController_(nullptr)
+CollideWithBorders::CollideWithBorders(): tr_(nullptr), attrib_(nullptr)
 {
 }
 
@@ -17,7 +17,7 @@ void CollideWithBorders::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	playerController_ = ent_->getComponent<PlayerCtrl>();
+	attrib_ = ent_->getComponent<PlayerAttributes>();
 }
 
 void CollideWithBorders::update()
@@ -33,7 +33,7 @@ void CollideWithBorders::update()
 	if (pos.getY() > height - playerHeight) {
 	
 		pos.set(Vector2D(pos.getX(), height - playerHeight));
-		playerController_->setOnGround(true);
+		if (!attrib_->isOnGround()) attrib_->setOnGround(true);
 	}
 
 	if (pos.getX() > width - playerWidth) {

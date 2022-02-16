@@ -6,7 +6,7 @@ class PlayerAttributes :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_PLAYERATTRIBUTES)
+    __CMPID_DECL__(ecs::_ATTRIBUTES)
     PlayerAttributes();
     ~PlayerAttributes();
 

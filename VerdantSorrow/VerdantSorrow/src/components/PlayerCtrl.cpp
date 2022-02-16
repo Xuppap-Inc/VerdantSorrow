@@ -15,10 +15,10 @@ void PlayerCtrl::update()
 	auto& vel = tr_->getVel();
 
 	if (ihdlr.keyDownEvent()) {
-		if (ihdlr.isKeyDown(SDLK_w) && onGround_) {
+		if (ihdlr.isKeyDown(SDLK_w) && attrib_->isOnGround()) {
 			
 			vel.set(Vector2D(vel.getX(), -jumpForce_));
-			onGround_ = false;
+			attrib_->setOnGround(false);
 		}
 		if (ihdlr.isKeyDown(SDLK_a)) {
 
@@ -39,14 +39,7 @@ void PlayerCtrl::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-}
-
-bool PlayerCtrl::isOnGround()
-{
-	return onGround_;
-}
-
-void PlayerCtrl::setOnGround(bool set)
-{
-	onGround_ = set;
+	
+	attrib_ = ent_->getComponent<PlayerAttributes>();
+	assert(attrib_ != nullptr);
 }

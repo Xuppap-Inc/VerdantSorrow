@@ -20,7 +20,7 @@
 	_COLLIDER, \
 	_SIMPLEMOVE, \
 	_PHYSICS, \
-	_PLAYERATTRIBUTES
+	_ATTRIBUTES
 
 
 // Groups list - must have at least one element

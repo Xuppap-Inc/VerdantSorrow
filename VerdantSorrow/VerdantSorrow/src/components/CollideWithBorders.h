@@ -2,7 +2,7 @@
 #include "../ecs/Component.h"
 #include "../ecs/ecs.h"
 
-#include "PlayerCtrl.h"
+#include "player/PlayerAttributes.h"
 
 class Transform;
 
@@ -19,6 +19,6 @@ public:
 
 protected:
     Transform* tr_;
-    PlayerCtrl* playerController_;
+    PlayerAttributes* attrib_;
 };
 
