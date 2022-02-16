@@ -44,7 +44,7 @@ void Game::init()
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50,50,0.0f);	
 	player->addComponent<RectangleRenderer>();
 
-	player->addComponent<PlayerCtrl>(30, 8);
+	player->addComponent<PlayerCtrl>(20, 8);
 	//Componente que permite controlar al jugador
 	//PlayerCtrl* playerController = new PlayerCtrl(30, 8);
 	//player->addComponent(playerController);
@@ -55,7 +55,7 @@ void Game::init()
 	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	//player->addComponent(playerCollider);
-	player->addComponent<SimplePhysicsPlayer>(2.5, colManager);
+	player->addComponent<SimplePhysicsPlayer>(1.0, colManager);
 	player->addComponent<CollideWithBorders>();
 
 
