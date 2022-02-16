@@ -5,7 +5,7 @@
 class Transform;
 class RectangleRenderer : public ecs::Component {
 public:
-	__CMPID_DECL__(ecs::_RECTANGLERENDERER)
+	__CMPID_DECL__(ecs::_RENDERER)
 	RectangleRenderer();
 	RectangleRenderer(SDL_Color color);
 	virtual ~RectangleRenderer();

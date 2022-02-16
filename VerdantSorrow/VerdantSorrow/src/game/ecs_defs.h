@@ -14,13 +14,12 @@
 //
 #define _CMPS_LIST_ \
 	_TRANSFORM, \
-	_IMAGE, \
+	_RENDERER, \
 	_COLLIDEWITHBORDERS, \
 	_PLAYERCTRL, \
-	_RECTANGLERENDERER, \
-	_RECTANGLECOLLIDER, \
+	_COLLIDER, \
 	_SIMPLEMOVE, \
-	_SIMPLEPHYSICSPLAYER
+	_PHYSICS
 
 
 // Groups list - must have at least one element

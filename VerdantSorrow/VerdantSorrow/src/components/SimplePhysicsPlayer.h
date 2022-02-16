@@ -11,7 +11,7 @@ class SimplePhysicsPlayer :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_SIMPLEPHYSICSPLAYER)
+    __CMPID_DECL__(ecs::_PHYSICS)
     SimplePhysicsPlayer(float gravity, CollisionManager* colMan);
 
     ~SimplePhysicsPlayer();

@@ -9,7 +9,7 @@ class RectangleCollider :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_RECTANGLECOLLIDER)
+    __CMPID_DECL__(ecs::_COLLIDER)
     RectangleCollider(float width, float height);
     ~RectangleCollider();
 
