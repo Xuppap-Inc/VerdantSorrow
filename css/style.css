@@ -3,58 +3,59 @@ body {
 	padding: 0;
 	background: rgb(43,121,135);
 	font-family: 'Source Serif Pro',Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	/*background: radial-gradient(red,rgb(138, 17, 17),rgb(0, 0, 0));*/
-	word-wrap: break-word;
 }
+
 img{
-	border-radius: 2rem;
+	border-radius: 30px;
 }
 img:hover{
 	background: rgb(0 ,43, 52);
 }
 
 /*header*/
-header {
+#header {
 	background: rgb(7 ,53, 62);
-	padding: 0.5em 0;
-	top: 0%;
-	width: 100%;
-	box-shadow: 0 0.5rem rgba(0, 0, 0,0.25);
+	box-shadow: 0 5px rgba(0, 0, 0,0.25);
+	height: 100px;
 }
-header img{
+#header .logo{
+	max-width: 200px;
+	margin:0 auto;
+}
+#header img{
+	margin:0 auto;
 	display: block;
- 	margin-left: auto;
- 	margin-right: auto;
-	width: 10rem;
-	height: 5rem;
+	max-height: 90px;
+	padding: 5px;
 }
 
 
 
-/*main*/
-main {
-	margin: 2em auto;
-	width: 100%;
-	min-height: 30rem;
-	max-height: 100rem;
+/*instalador*/
+#instalador {
+	margin: 30px auto;
+	max-width: 1500px;
+	height: 1000px;
+	display: block;
+	overflow: hidden;
 }
 .instalador{
-	width: 80%;
-	margin:0 auto;
 	color: white;
-	background:url("../images/fondo3.jpg");
-	padding: 5rem;
-	height: 30rem;
-	background-repeat: no-repeat;
-	background-size: 100%;
+	background:url("../images/fondo1.jpg") no-repeat center center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	padding: 100px;
 }
 .instalador h1{
 	text-transform: uppercase;
-	margin-bottom: 2em;
+	margin-bottom: 50px;
 }
 .instalador p{
-	margin-bottom: 15rem;
-	width: 35rem;
+	margin-bottom: 200px;
+	width: 500px;
+	overflow:inherit;
+	word-break: break-all;
 }
 .btn_instalador{
 	position: relative;
@@ -67,6 +68,7 @@ main {
 	overflow: hidden;
 	transition: 1s all ease;
 	font-size: 1.5rem;
+	width: 100px;
 }
 .btn_instalador::before{
 	background: rgb(7 ,53, 62);
@@ -83,7 +85,11 @@ main {
 .btn_instalador:hover::before{
 	height: 100%;
 }
-
+@media (max-width: 768px) {
+	#instalador {
+		max-width: 600px;
+	}
+}
 
 /*footer*/
 footer {
