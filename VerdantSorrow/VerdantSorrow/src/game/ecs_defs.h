@@ -20,7 +20,8 @@
 	_COLLIDER, \
 	_SIMPLEMOVE, \
 	_PHYSICS, \
-	_ATTRIBUTES
+	_ATTRIBUTES, \
+	_FROGJUMP
 
 
 // Groups list - must have at least one element
