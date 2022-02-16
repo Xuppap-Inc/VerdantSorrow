@@ -13,7 +13,7 @@
 #include "../components/CollideWithBorders.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
-
+#include "../components/BossAtributos.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -58,6 +58,21 @@ void Game::init()
 	//player->addComponent(playerCollider);
 	player->addComponent<SimplePhysicsPlayer>(1.0, colManager);
 	player->addComponent<CollideWithBorders>();
+
+	//Se crea al player 
+	auto Frog = mngr_->addEntity();
+	auto FrogTr = Frog->addComponent<BossAtributos>();
+	auto FrogX = sdlutils().width() / 2 - 25;
+	auto FrogY = sdlutils().height() / 2 - 25;
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
+	Frog->addComponent<RectangleRenderer>();
+
+	//Se añade un collider al jugador
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	colManager->addCollider(frogCollider);
+	Frog->addComponent<CollideWithBorders>();
+	//Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
+	//Frog->addComponent<CollideWithBorders>();
 
 
 	//Se crea una plataforma de ejemplo

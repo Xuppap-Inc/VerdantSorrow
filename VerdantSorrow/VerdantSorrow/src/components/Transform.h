@@ -69,7 +69,7 @@ public:
 		pos_ = pos_ + vel_;
 	}
 
-private:
+protected:
 	Vector2D pos_;
 	Vector2D vel_;
 	float width_;
