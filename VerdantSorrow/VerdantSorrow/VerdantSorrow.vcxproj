@@ -19,21 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\Transform.h" />
+    <ClInclude Include="src\ecs\Component.h" />
+    <ClInclude Include="src\ecs\ecs.h" />
+    <ClInclude Include="src\game\ecs_defs.h" />
+    <ClInclude Include="src\ecs\Entity.h" />
+    <ClInclude Include="src\ecs\Manager.h" />
     <ClInclude Include="src\game\CollisionManager.h" />
-    <ClInclude Include="src\game\RectangleCollider.h" />
-    <ClInclude Include="src\game\CollideWithBorders.h" />
-    <ClInclude Include="src\game\SimpleMove.h" />
-    <ClInclude Include="src\game\SimplePhysicsPlayer.h" />
-    <ClInclude Include="src\game\Component.h" />
-    <ClInclude Include="src\game\Container.h" />
+    <ClInclude Include="src\components\RectangleCollider.h" />
+    <ClInclude Include="src\components\CollideWithBorders.h" />
+    <ClInclude Include="src\components\SimpleMove.h" />
+    <ClInclude Include="src\components\SimplePhysicsPlayer.h" />
     <ClInclude Include="src\game\Game.h" />
-    <ClInclude Include="src\game\GameManager.h" />
-    <ClInclude Include="src\game\GameObject.h" />
-    <ClInclude Include="src\game\InputComponent.h" />
-    <ClInclude Include="src\game\PhysicsComponent.h" />
-    <ClInclude Include="src\game\PlayerCtrl.h" />
-    <ClInclude Include="src\game\RectangleRenderer.h" />
-    <ClInclude Include="src\game\RenderComponent.h" />
+    <ClInclude Include="src\components\PlayerCtrl.h" />
+    <ClInclude Include="src\components\RectangleRenderer.h" />
     <ClInclude Include="src\json\JSON.h" />
     <ClInclude Include="src\json\JSONValue.h" />
     <ClInclude Include="src\json\json_demo.h" />
@@ -53,16 +52,16 @@
     <ClInclude Include="src\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ecs\Entity.cpp" />
+    <ClCompile Include="src\ecs\Manager.cpp" />
     <ClCompile Include="src\game\CollisionManager.cpp" />
-    <ClCompile Include="src\game\RectangleCollider.cpp" />
-    <ClCompile Include="src\game\CollideWithBorders.cpp" />
-    <ClCompile Include="src\game\SimpleMove.cpp" />
-    <ClCompile Include="src\game\SimplePhysicsPlayer.cpp" />
-    <ClCompile Include="src\game\Container.cpp" />
+    <ClCompile Include="src\components\RectangleCollider.cpp" />
+    <ClCompile Include="src\components\CollideWithBorders.cpp" />
+    <ClCompile Include="src\components\SimpleMove.cpp" />
+    <ClCompile Include="src\components\SimplePhysicsPlayer.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
-    <ClCompile Include="src\game\GameManager.cpp" />
-    <ClCompile Include="src\game\PlayerCtrl.cpp" />
-    <ClCompile Include="src\game\RectangleRenderer.cpp" />
+    <ClCompile Include="src\components\PlayerCtrl.cpp" />
+    <ClCompile Include="src\components\RectangleRenderer.cpp" />
     <ClCompile Include="src\json\JSON.cpp" />
     <ClCompile Include="src\json\JSONValue.cpp" />
     <ClCompile Include="src\json\json_demo.cpp" />
