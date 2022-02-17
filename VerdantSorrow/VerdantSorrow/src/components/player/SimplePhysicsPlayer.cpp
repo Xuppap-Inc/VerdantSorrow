@@ -3,7 +3,7 @@
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 
-SimplePhysicsPlayer::SimplePhysicsPlayer(float gravity, CollisionManager* colManager) : tr_(nullptr), gravity_(gravity), colMan_(colManager), collider_(nullptr)
+SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr)
 {
 }
 
@@ -16,13 +16,15 @@ void SimplePhysicsPlayer::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	collider_ = ent_->getComponent<RectangleCollider>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
+	gravity_ = ent_->getComponent<SimpleGravity>();
 	assert(tr_ != nullptr && collider_ != nullptr && attrib_ != nullptr);
 }
 
 void SimplePhysicsPlayer::update()
 {
 	//Gravedad
-	if (!attrib_->isOnGround()) tr_->getVel().set(Vector2D(tr_->getVel().getX(), tr_->getVel().getY() + gravity_));
+	if (!attrib_->isOnGround() && !gravity_->isActive()) gravity_->setActive(true);
+	else if (gravity_->isActive()) gravity_->setActive(false);
 
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {

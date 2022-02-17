@@ -24,6 +24,7 @@
     <ClInclude Include="src\components\player\PlayerAttributes.h" />
     <ClInclude Include="src\components\BossAtributos.h" />
     <ClInclude Include="src\components\player\PlayerComponents.h" />
+    <ClInclude Include="src\components\SimpleGravity.h" />
     <ClInclude Include="src\components\Transform.h" />
     <ClInclude Include="src\ecs\Component.h" />
     <ClInclude Include="src\ecs\ecs.h" />
@@ -59,6 +60,7 @@
     <ClCompile Include="src\components\FrogBoss\CollideWithBordersBoss.cpp" />
     <ClCompile Include="src\components\FrogBoss\FrogJump.cpp" />
     <ClCompile Include="src\components\player\PlayerAttributes.cpp" />
+    <ClCompile Include="src\components\SimpleGravity.cpp" />
     <ClCompile Include="src\ecs\Entity.cpp" />
     <ClCompile Include="src\ecs\Manager.cpp" />
     <ClCompile Include="src\game\CollisionManager.cpp" />

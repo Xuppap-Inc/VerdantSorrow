@@ -21,7 +21,8 @@
 	_SIMPLEMOVE, \
 	_PHYSICS, \
 	_ATTRIBUTES, \
-	_FROGJUMP
+	_FROGJUMP, \
+	_GRAVITY
 
 
 // Groups list - must have at least one element

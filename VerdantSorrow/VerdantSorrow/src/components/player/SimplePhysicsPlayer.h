@@ -3,6 +3,7 @@
 #include "../../game/CollisionManager.h"
 #include "../RectangleCollider.h"
 #include "PlayerAttributes.h"
+#include "../SimpleGravity.h"
 
 #include <vector>
 #include <iostream>
@@ -13,7 +14,7 @@ class SimplePhysicsPlayer :
 {
 public:
     __CMPID_DECL__(ecs::_PHYSICS)
-    SimplePhysicsPlayer(float gravity, CollisionManager* colMan);
+    SimplePhysicsPlayer(CollisionManager* colMan);
 
     ~SimplePhysicsPlayer();
     void initComponent() override;
@@ -21,9 +22,9 @@ public:
     void update() override;
 protected:
     Transform* tr_;
-    float gravity_;
     CollisionManager* colMan_;
     RectangleCollider* collider_;
     PlayerAttributes* attrib_;
+    SimpleGravity* gravity_;
 };
 

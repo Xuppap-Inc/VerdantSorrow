@@ -47,18 +47,20 @@ void Game::init()
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50,50,0.0f);	
 	player->addComponent<RectangleRenderer>();
 
-	//IMPORTANTE: Ponerlo antes de el PlayerCtrl siempre porque si no se salta 2 veces
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
+	player->addComponent<SimpleGravity>(2.0);
+
+	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player->addComponent<CollideWithBorders>();
 
 	//Componente que permite controlar al jugador
 	player->addComponent<PlayerCtrl>(23, 8);
 
-	//Se a�ade un collider al jugador
+	//Se añade un collider al jugador
 	//new RectangleCollider(player->getWidth(), player->getHeight())
 	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	//player->addComponent(playerCollider);
-	player->addComponent<SimplePhysicsPlayer>(1.0, colManager);
+	player->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Se crea al player 
 	auto Frog = mngr_->addEntity();
@@ -71,8 +73,8 @@ void Game::init()
 	//Se a�ade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
 	colManager->addCollider(frogCollider);
-	//El physics cambiar� pero por ahora usamos el del player que nos sirve
-	Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
+	//El physics cambiar pero por ahora usamos el del player que nos sirve
+	//Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
 
