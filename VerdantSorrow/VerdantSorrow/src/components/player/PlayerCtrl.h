@@ -1,6 +1,6 @@
 #pragma once
-#include "../ecs/Component.h"
-#include "player/PlayerAttributes.h"
+#include "../../ecs/Component.h"
+#include "PlayerAttributes.h"
 
 #include <SDL.h>
 class Transform;

@@ -13,9 +13,22 @@ public:
     bool isOnGround();
     void setOnGround(bool set);
 
+    bool isRightStop();
+    void setRightStop(bool set);
+
+    bool isLeftStop();
+    void setLeftStop(bool set);
+
 protected:
 
     int lives;
+
+    //Booleana que indica si el jugador está tocando el suelo
     bool onGround;
+
+    //Booleana que indica si el jugador se puede mover hacia la derecha
+    bool rightStop;
+    //Booleana que indica si el jugador se puede mover hacia la izquierda
+    bool leftStop;
 };
 

@@ -1,7 +1,7 @@
 #include "PlayerCtrl.h"
-#include "../sdlutils/InputHandler.h"
-#include "../ecs/Entity.h"
-#include "Transform.h"
+#include "../../sdlutils/InputHandler.h"
+#include "../../ecs/Entity.h"
+#include "../Transform.h"
 
 
 PlayerCtrl::~PlayerCtrl()
@@ -15,23 +15,29 @@ void PlayerCtrl::update()
 	auto& vel = tr_->getVel();
 
 	if (ihdlr.keyDownEvent()) {
+		
+		//salto
 		if (ihdlr.isKeyDown(SDLK_w) && attrib_->isOnGround()) {
 			
 			vel.set(Vector2D(vel.getX(), -jumpForce_));
 			attrib_->setOnGround(false);
 		}
-		if (ihdlr.isKeyDown(SDLK_a)) {
+		//movimiento izquierda
+		if (ihdlr.isKeyDown(SDLK_a) && !attrib_->isLeftStop()) {
 
 			vel.set(Vector2D(-speed_, vel.getY()));
 		}
-		else if (ihdlr.isKeyDown(SDLK_d)) {
+		//movimiento derecha
+		else if (ihdlr.isKeyDown(SDLK_d) && !attrib_->isRightStop()) {
 
 			vel.set(Vector2D(speed_, vel.getY()));
 		}
 
+		//si no se están pulsando las de movimiento se queda quieto
 		if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
 	}
 
+	//si no se están pulsando las de movimiento se queda quieto
 	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
 }
 

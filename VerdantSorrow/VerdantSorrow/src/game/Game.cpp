@@ -6,14 +6,14 @@
 
 #include "../ecs/Manager.h"
 #include "../ecs/Entity.h"
+
 #include "../components/RectangleRenderer.h"
-#include "../components/PlayerCtrl.h"
-#include "../components/SimplePhysicsPlayer.h"
-#include "../components/player/PlayerAttributes.h"
-#include "../components/CollideWithBorders.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
 #include "../components/BossAtributos.h"
+
+#include "../components/player/PlayerComponents.h"
+
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -50,7 +50,7 @@ void Game::init()
 	player->addComponent<CollideWithBorders>();
 
 	//Componente que permite controlar al jugador
-	player->addComponent<PlayerCtrl>(20, 8);
+	player->addComponent<PlayerCtrl>(23, 8);
 
 	//Se añade un collider al jugador
 	//new RectangleCollider(player->getWidth(), player->getHeight())
@@ -70,7 +70,6 @@ void Game::init()
 	//Se añade un collider al jugador
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
 	colManager->addCollider(frogCollider);
-	Frog->addComponent<CollideWithBorders>();
 	//Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
 	//Frog->addComponent<CollideWithBorders>();
 

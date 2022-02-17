@@ -1,7 +1,8 @@
 #pragma once
-#include "../ecs/Component.h"
-#include "../game/CollisionManager.h"
-#include "RectangleCollider.h"
+#include "../../ecs/Component.h"
+#include "../../game/CollisionManager.h"
+#include "../RectangleCollider.h"
+#include "PlayerAttributes.h"
 
 #include <vector>
 #include <iostream>
@@ -23,5 +24,6 @@ protected:
     float gravity_;
     CollisionManager* colMan_;
     RectangleCollider* collider_;
+    PlayerAttributes* attrib_;
 };
 

@@ -1,7 +1,7 @@
 #include "PlayerAttributes.h"
 #include "../../ecs/Entity.h"
 
-PlayerAttributes::PlayerAttributes(): lives(3), onGround(false)
+PlayerAttributes::PlayerAttributes(): lives(3), onGround(false), rightStop(false), leftStop(false)
 {
 }
 
@@ -17,4 +17,24 @@ bool PlayerAttributes::isOnGround()
 void PlayerAttributes::setOnGround(bool set)
 {
 	onGround = set;
+}
+
+bool PlayerAttributes::isRightStop()
+{
+	return rightStop;
+}
+
+void PlayerAttributes::setRightStop(bool set)
+{
+	rightStop = set;
+}
+
+bool PlayerAttributes::isLeftStop()
+{
+	return leftStop;
+}
+
+void PlayerAttributes::setLeftStop(bool set)
+{
+	leftStop = set;
 }

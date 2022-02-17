@@ -1,8 +1,8 @@
 #pragma once
-#include "../ecs/Component.h"
-#include "../ecs/ecs.h"
+#include "../../ecs/Component.h"
+#include "../../ecs/ecs.h"
 
-#include "player/PlayerAttributes.h"
+#include "PlayerAttributes.h"
 
 class Transform;
 
