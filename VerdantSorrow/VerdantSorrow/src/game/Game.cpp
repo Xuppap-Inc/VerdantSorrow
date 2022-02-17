@@ -14,6 +14,7 @@
 
 #include "../components/player/PlayerComponents.h"
 
+#include "../components/FrogBoss/CollideWithBordersBoss.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -52,7 +53,7 @@ void Game::init()
 	//Componente que permite controlar al jugador
 	player->addComponent<PlayerCtrl>(23, 8);
 
-	//Se añade un collider al jugador
+	//Se aï¿½ade un collider al jugador
 	//new RectangleCollider(player->getWidth(), player->getHeight())
 	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
@@ -67,11 +68,13 @@ void Game::init()
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
 	Frog->addComponent<RectangleRenderer>();
 
-	//Se añade un collider al jugador
+	//Se aï¿½ade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
 	colManager->addCollider(frogCollider);
-	//Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
-	//Frog->addComponent<CollideWithBorders>();
+	//El physics cambiarï¿½ pero por ahora usamos el del player que nos sirve
+	Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
+	//Collider de paredes
+	Frog->addComponent<CollideWithBordersBoss>();
 
 
 	//Se crea una plataforma de ejemplo
