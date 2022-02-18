@@ -50,8 +50,6 @@ void SimplePhysicsPlayer::update()
 					}
 										
 				}
-				/*std::cout << "ha colisionado" << std::endl;*/
-				
 			}			
 		}
 
