@@ -66,7 +66,7 @@ void Game::init()
 	auto Frog = mngr_->addEntity();
 	auto FrogTr = Frog->addComponent<BossAtributos>();
 	auto FrogX = sdlutils().width() / 2 - 25;
-	auto FrogY = sdlutils().height() / 2 - 25;
+	auto FrogY = sdlutils().height();
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
 	Frog->addComponent<RectangleRenderer>();
 
