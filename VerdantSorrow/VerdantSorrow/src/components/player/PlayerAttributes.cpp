@@ -1,7 +1,7 @@
 #include "PlayerAttributes.h"
 #include "../../ecs/Entity.h"
 
-PlayerAttributes::PlayerAttributes(): lives(3), onGround(false), rightStop(false), leftStop(false)
+PlayerAttributes::PlayerAttributes(): lives_(3), onGround(false), rightStop(false), leftStop(false)
 {
 }
 
@@ -37,4 +37,8 @@ bool PlayerAttributes::isLeftStop()
 void PlayerAttributes::setLeftStop(bool set)
 {
 	leftStop = set;
+}
+
+void PlayerAttributes::damagePlayer(int lives) {
+	lives_ -= lives;
 }
