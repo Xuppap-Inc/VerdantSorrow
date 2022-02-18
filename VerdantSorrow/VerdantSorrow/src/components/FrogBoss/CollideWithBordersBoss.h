@@ -1,21 +1,19 @@
 #pragma once
-#include "../../ecs/Component.h"
-#include "../../ecs/ecs.h"
+#include "../OnBorders.h"
 
 class Transform;
 
 class CollideWithBordersBoss :
-    public ecs::Component
+    public OnBorders
 {
 public:
-    __CMPID_DECL__(ecs::_COLLIDEWITHBORDERS)
-        CollideWithBordersBoss();
+    CollideWithBordersBoss();
     ~CollideWithBordersBoss();
-    void initComponent() override;
 
-    void update() override;
+    void onBottom() override;
+    void onLeft() override;
+    void onRight() override;
 
 protected:
-    Transform* tr_;
 };
 
