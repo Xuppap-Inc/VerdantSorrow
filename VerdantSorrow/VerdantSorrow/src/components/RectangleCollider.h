@@ -19,10 +19,30 @@ public:
 
     SDL_Rect getCollider();
 
+    /**
+    Método que permite cambiar la variable isTrigger, que indica si el collider es un trigger
+    *
+    @param set: Valor que tomará isTrigger
+    */
     void setIsTrigger(bool set);
+    /**
+    Método que indica si el collider es un trigger
+    *
+    @return true si es un trigger, false en caso contrario
+    */
     bool isTrigger();
 
+    /**
+    Método que permite cambiar la variable active, que indica si el collider se encuentra activo
+    *
+    @param set: Valor que tomará active
+    */
     void setActive(bool set);
+    /**
+    Método que indica si elcollider se encuentra activo
+    *
+    @return true si está activo, false en caso contrario
+    */
     bool isActive();
 
     Entity* getEntity();
