@@ -4,8 +4,10 @@
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 
-CollideWithBorders::CollideWithBorders(): tr_(nullptr), attrib_(nullptr)
+CollideWithBorders::CollideWithBorders(): OnBorders()
 {
+	attrib_ = nullptr;
+	tr_ = nullptr;
 }
 
 CollideWithBorders::~CollideWithBorders()
@@ -19,45 +21,43 @@ void CollideWithBorders::initComponent()
 	assert(tr_ != nullptr && attrib_ != nullptr);
 }
 
-void CollideWithBorders::update()
+void CollideWithBorders::onBottom()
 {
-	
 	auto& pos = tr_->getPos();
 	auto& vel = tr_->getVel();
 
 	auto height = sdlutils().height();
-	auto width = sdlutils().width();
 	auto playerHeight = tr_->getHeight();
+
+	if (!attrib_->isOnGround()) {
+
+		attrib_->setOnGround(true);
+		pos.set(Vector2D(pos.getX(), height - playerHeight));
+		vel.set(Vector2D(vel.getX(), 0));
+	}
+}
+
+void CollideWithBorders::onLeft()
+{
+	auto& pos = tr_->getPos();
+
+	pos.set(Vector2D(0, pos.getY()));
+	attrib_->setLeftStop(true);
+}
+
+void CollideWithBorders::onRight()
+{
+	auto& pos = tr_->getPos();
+
+	auto width = sdlutils().width();
 	auto playerWidth = tr_->getWidth();
-	
-	//Borde inferior
-	if (pos.getY() > height - playerHeight) {
-	
-		if (!attrib_->isOnGround()) {
-			
-			attrib_->setOnGround(true);
-			pos.set(Vector2D(pos.getX(), height - playerHeight));
-			vel.set(Vector2D(vel.getX(), 0));
-		}
-	}
 
-	//Borde derecho
-	if (pos.getX() > width - playerWidth) {
-	
-		pos.set(Vector2D(width - playerWidth, pos.getY()));
-		attrib_->setRightStop(true);
-	}
-	//Borde izquierdo
-	else if (pos.getX() < 0) {
+	pos.set(Vector2D(width - playerWidth, pos.getY()));
+	attrib_->setRightStop(true);
+}
 
-		pos.set(Vector2D(0, pos.getY()));
-		attrib_->setLeftStop(true);
-	}
-
-	//si no toca bordes laterales pone las variables a false
-	else {
-		
-		if (attrib_->isRightStop()) attrib_->setRightStop(false);
-		if (attrib_->isLeftStop()) attrib_->setLeftStop(false);
-	}
+void CollideWithBorders::onNoLeftAndRight()
+{
+	if (attrib_->isRightStop()) attrib_->setRightStop(false);
+	if (attrib_->isLeftStop()) attrib_->setLeftStop(false);
 }

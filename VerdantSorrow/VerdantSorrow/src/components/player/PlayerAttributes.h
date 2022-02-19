@@ -19,9 +19,11 @@ public:
     bool isLeftStop();
     void setLeftStop(bool set);
 
+    void damagePlayer(int lives);
+
 protected:
 
-    int lives;
+    int lives_;
 
     //Booleana que indica si el jugador está tocando el suelo
     bool onGround;

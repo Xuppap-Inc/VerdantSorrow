@@ -47,3 +47,7 @@ bool RectangleCollider::isActive()
 {
 	return active_;
 }
+
+Entity* RectangleCollider::getEntity() {
+	return ent_;
+}

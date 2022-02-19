@@ -4,6 +4,7 @@
 #include <SDL.h>
 
 class Transform;
+using ecs::Entity;
 
 class RectangleCollider :
     public ecs::Component
@@ -23,6 +24,8 @@ public:
 
     void setActive(bool set);
     bool isActive();
+
+    Entity* getEntity();
     
 protected:
     Transform* tr_;

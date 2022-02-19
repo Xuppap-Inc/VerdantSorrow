@@ -1,24 +1,25 @@
 #pragma once
-#include "../../ecs/Component.h"
-#include "../../ecs/ecs.h"
+#include "../OnBorders.h"
 
 #include "PlayerAttributes.h"
 
 class Transform;
 
 class CollideWithBorders :
-    public ecs::Component
+    public OnBorders
 {
 public:
-    __CMPID_DECL__(ecs::_COLLIDEWITHBORDERS)
     CollideWithBorders();
     ~CollideWithBorders();
     void initComponent() override;
 
-    void update() override;
+    void onBottom() override;
+    void onLeft() override;
+    void onRight() override;
+    void onNoLeftAndRight() override;
 
 protected:
-    Transform* tr_;
+
     PlayerAttributes* attrib_;
 };
 
