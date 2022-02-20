@@ -1,5 +1,5 @@
 #include "SimplePhysicsPlayer.h"
-#include "../BossAtributos.h"
+#include "../FrogBoss/BossAtributos.h"
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 

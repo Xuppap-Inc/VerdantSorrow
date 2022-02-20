@@ -24,7 +24,7 @@
     <ClInclude Include="src\components\FrogBoss\FrogJump.h" />
     <ClInclude Include="src\components\player\Attack.h" />
     <ClInclude Include="src\components\player\PlayerAttributes.h" />
-    <ClInclude Include="src\components\BossAtributos.h" />
+    <ClInclude Include="src\components\FrogBoss\BossAtributos.h" />
     <ClInclude Include="src\components\player\PlayerComponents.h" />
     <ClInclude Include="src\components\SimpleGravity.h" />
     <ClInclude Include="src\components\Transform.h" />

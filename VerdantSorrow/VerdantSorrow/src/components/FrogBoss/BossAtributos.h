@@ -1,5 +1,5 @@
 #pragma once
-#include "Transform.h"
+#include "../Transform.h"
 class BossAtributos : public Transform
 {
 private:

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "CollisionManager.h"
 namespace ecs {
 	class Manager;
 }
@@ -12,6 +13,9 @@ public:
 	virtual ~Game();
 	void init();
 	void start();
+
+	void frogGenerator(CollisionManager* colManager);
+	
 private:
 	ecs::Manager* mngr_;
 };

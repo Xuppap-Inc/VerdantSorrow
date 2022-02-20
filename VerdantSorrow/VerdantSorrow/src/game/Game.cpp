@@ -10,7 +10,7 @@
 #include "../components/RectangleRenderer.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
-#include "../components/BossAtributos.h"
+#include "../components/FrogBoss/BossAtributos.h"
 
 #include "../components/player/PlayerComponents.h"
 
@@ -65,21 +65,7 @@ void Game::init()
 	//Componente de ataque del jugador
 	player->addComponent<Attack>(50, 50);
 
-	//Se crea a ña rana 
-	auto Frog = mngr_->addEntity();
-	auto FrogTr = Frog->addComponent<BossAtributos>();
-	auto FrogX = sdlutils().width() / 2 - 25;
-	auto FrogY = sdlutils().height();
-	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
-	Frog->addComponent<RectangleRenderer>();
-
-	//Se a�ade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
-	colManager->addCollider(frogCollider);
-	//El physics cambiar pero por ahora usamos el del player que nos sirve
-	//Frog->addComponent<SimplePhysicsPlayer>(1.0, colManager);
-	//Collider de paredes
-	Frog->addComponent<CollideWithBordersBoss>();
+	frogGenerator(colManager);
 
 
 	//Se crea una plataforma de ejemplo
@@ -126,4 +112,22 @@ void Game::start() {
 			SDL_Delay(10 - frameTime);
 	}
 
+}
+
+
+void Game::frogGenerator(CollisionManager* colManager) {
+
+	//Se crea a la rana 
+	auto Frog = mngr_->addEntity();
+	auto FrogTr = Frog->addComponent<BossAtributos>();
+	auto FrogX = sdlutils().width() / 2 - 25;
+	auto FrogY = sdlutils().height();
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
+	Frog->addComponent<RectangleRenderer>(SDL_Color());
+
+	//Se a�ade un collider a la rana
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	colManager->addCollider(frogCollider);
+	//Collider de paredes
+	Frog->addComponent<CollideWithBordersBoss>();
 }
