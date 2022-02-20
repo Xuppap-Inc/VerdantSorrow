@@ -62,7 +62,10 @@ void Game::init()
 	colManager->addCollider(playerCollider);
 	player->addComponent<SimplePhysicsPlayer>(colManager);
 
-	//Se crea al player 
+	//Componente de ataque del jugador
+	player->addComponent<Attack>(50, 50);
+
+	//Se crea a ña rana 
 	auto Frog = mngr_->addEntity();
 	auto FrogTr = Frog->addComponent<BossAtributos>();
 	auto FrogX = sdlutils().width() / 2 - 25;

@@ -22,7 +22,8 @@
 	_PHYSICS, \
 	_ATTRIBUTES, \
 	_FROGJUMP, \
-	_GRAVITY
+	_GRAVITY, \
+	_ATTACK
 
 
 // Groups list - must have at least one element
