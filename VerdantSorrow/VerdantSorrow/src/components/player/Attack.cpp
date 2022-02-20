@@ -5,7 +5,7 @@
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
 
-Attack::Attack(float width, float height): tr_(nullptr), height_(height), width_(width), pos_(), active_(false), attackDuration(500),attackCoolDown(1000)
+Attack::Attack(float width, float height): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000)
 {
 }
 
@@ -55,21 +55,6 @@ void Attack::render()
 	}
 }
 
-SDL_Rect Attack::getCollider()
-{
-	return {(int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_};
-}
-
-void Attack::setActive(bool set)
-{
-	active_ = set;
-}
-
-bool Attack::isActive()
-{
-	return active_;
-}
-
 Entity* Attack::getEntity() {
 	return ent_;
 }
@@ -82,6 +67,6 @@ void Attack::setPosition()
 
 	if (playerMovementDir >= 0)
 		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
-	else
+	else 
 		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());
 }

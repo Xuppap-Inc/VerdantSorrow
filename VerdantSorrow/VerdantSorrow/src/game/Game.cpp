@@ -15,6 +15,7 @@
 #include "../components/player/PlayerComponents.h"
 
 #include "../components/FrogBoss/CollideWithBordersBoss.h"
+#include "../components/FrogBoss/SimplePhysicsBoss.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -95,6 +96,7 @@ void Game::frogGenerator(CollisionManager* colManager) {
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
+	Frog->addComponent<SimplePhysicsBoss>(colManager);
 }
 
 void Game::playerGenerator(CollisionManager* colManager) {
@@ -128,7 +130,8 @@ void Game::playerGenerator(CollisionManager* colManager) {
 	player->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Componente de ataque del jugador
-	player->addComponent<Attack>(50, 50);
+	auto playerAttackCollider = player->addComponent<Attack>(50, 50);
+	colManager->addCollider(playerAttackCollider);
 }
 void Game::platformGenerator(CollisionManager* colManager) {
 

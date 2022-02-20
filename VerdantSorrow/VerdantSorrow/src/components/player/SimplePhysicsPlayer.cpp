@@ -45,7 +45,6 @@ void SimplePhysicsPlayer::update()
 					if (!invulnerable_) {
 						attrib_->damagePlayer(1);
 						invulnerable_ = true;
-						std::cout << "a" << std::endl;
 						invTimer = sdlutils().currRealTime();
 					}
 										

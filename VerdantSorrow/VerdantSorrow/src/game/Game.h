@@ -17,6 +17,8 @@ public:
 	void frogGenerator(CollisionManager* colManager);
 
 	void playerGenerator(CollisionManager* colManager);
+
+	void platformGenerator(CollisionManager* colManager);
 	
 private:
 	ecs::Manager* mngr_;

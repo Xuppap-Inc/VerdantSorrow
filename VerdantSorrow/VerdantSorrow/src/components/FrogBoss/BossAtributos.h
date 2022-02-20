@@ -14,8 +14,8 @@ public:
 		return life_;
 	}
 
-	void setLife(float l) {
-		life_ = l;
+	void setDamage(float l) {
+		life_ -= l;
 	}
 
 	void init (Vector2D pos, Vector2D vel, float w, float h, float r, float l) {
