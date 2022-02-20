@@ -37,48 +37,9 @@ void Game::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
 
-	//Se crea el jugador 
-	auto player = mngr_->addEntity();
-	player->addComponent<PlayerAttributes>();
-
-	auto playerTr = player->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 - 25;
-	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50,50,0.0f);	
-	player->addComponent<RectangleRenderer>();
-
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
-	player->addComponent<SimpleGravity>(2.0);
-
-	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player->addComponent<CollideWithBorders>();
-
-	//Componente que permite controlar al jugador
-	player->addComponent<PlayerCtrl>(23, 8);
-
-	//Se añade un collider al jugador
-	//new RectangleCollider(player->getWidth(), player->getHeight())
-	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
-	colManager->addCollider(playerCollider);
-	player->addComponent<SimplePhysicsPlayer>(colManager);
-
-	//Componente de ataque del jugador
-	player->addComponent<Attack>(50, 50);
-
+	playerGenerator(colManager);
 	frogGenerator(colManager);
-
-
-	//Se crea una plataforma de ejemplo
-	auto platform = mngr_->addEntity();
-	auto platformTr = platform->addComponent<Transform>();
-	auto platformX = sdlutils().width() / 3;
-	auto platformY = sdlutils().height() / 4 * 3;
-	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);
-	platform->addComponent<RectangleRenderer>();
-	
-	//Se crea un collider para la plataforma
-	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
-	colManager->addCollider(platformCollider);
+	platformGenerator(colManager);
 }
 
 void Game::start() {
@@ -130,4 +91,56 @@ void Game::frogGenerator(CollisionManager* colManager) {
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
+}
+
+void Game::playerGenerator(CollisionManager* colManager) {
+
+	//Se crea el jugador 
+	auto player = mngr_->addEntity();
+	//Se le añaden los atributos del player, no los del transform
+	player->addComponent<PlayerAttributes>();
+	//Se le añade el transform
+	auto playerTr = player->addComponent<Transform>();
+	auto playerX = sdlutils().width() / 2 - 25;
+	auto playerY = sdlutils().height() / 2 - 25;
+	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 50, 0.0f);
+	//Se le da un renderer rectangular blanco por defecto al player
+	player->addComponent<RectangleRenderer>();
+
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
+	player->addComponent<SimpleGravity>(2.0);
+
+	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
+	player->addComponent<CollideWithBorders>();
+
+	//Componente que permite controlar al jugador
+	player->addComponent<PlayerCtrl>(23, 8);
+
+	//Se añade un collider al jugador
+	//new RectangleCollider(player->getWidth(), player->getHeight())
+	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	colManager->addCollider(playerCollider);
+	player->addComponent<SimplePhysicsPlayer>(colManager);
+
+	//Componente de ataque del jugador
+	player->addComponent<Attack>(50, 50);
+}
+void Game::platformGenerator(CollisionManager* colManager) {
+
+	//Se crea una plataforma de ejemplo
+	auto platform = mngr_->addEntity();
+	//Se añade el transform a la plataforma
+	auto platformTr = platform->addComponent<Transform>();
+	auto platformX = sdlutils().width() / 3;
+	auto platformY = sdlutils().height() / 4 * 3;
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la plataforma
+	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);
+	//Se le da un renderer rectangular, blanco por defecto
+	platform->addComponent<RectangleRenderer>();
+
+	//Se crea un collider para la plataforma
+	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
+	//Se añade el collider de la plataforma al colliderManager
+	colManager->addCollider(platformCollider);
 }
