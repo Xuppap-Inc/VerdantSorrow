@@ -7,6 +7,7 @@
 
 Attack::Attack(float width, float height): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000)
 {
+	setActive(false);
 }
 
 Attack::~Attack()
