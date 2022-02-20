@@ -11,7 +11,7 @@
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
 #include "../components/FrogBoss/BossAtributos.h"
-
+#include "../components//FrogBoss/FrogJump.h"
 #include "../components/player/PlayerComponents.h"
 
 #include "../components/FrogBoss/CollideWithBordersBoss.h"
@@ -97,6 +97,10 @@ void Game::frogGenerator(CollisionManager* colManager) {
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<CollisionsSwordFrog>(colManager);
+	Frog->addComponent<SimpleGravity>(1.5);
+	Frog->addComponent<FrogJump>(30);
+	
+
 }
 
 void Game::playerGenerator(CollisionManager* colManager) {

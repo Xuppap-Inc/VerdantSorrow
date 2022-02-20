@@ -15,10 +15,11 @@ CollideWithBordersBoss::~CollideWithBordersBoss()
 void CollideWithBordersBoss::onBottom()
 {
 	auto& pos = tr_->getPos();
+	auto& vel = tr_->getVel();
 
 	auto height = sdlutils().height();
 	auto bossHeight = tr_->getHeight();
-
+	vel.setX(0);
 	pos.set(Vector2D(pos.getX(), height - bossHeight));
 }
 

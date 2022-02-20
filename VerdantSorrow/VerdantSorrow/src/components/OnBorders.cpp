@@ -59,6 +59,6 @@ void OnBorders::update()
 	//si no toca bordes laterales
 	else {
 		
-		onNoTopAndBot();
+		onNoLeftAndRight();
 	}
 }
