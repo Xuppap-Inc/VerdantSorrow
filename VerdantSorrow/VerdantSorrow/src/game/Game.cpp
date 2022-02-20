@@ -80,14 +80,18 @@ void Game::frogGenerator(CollisionManager* colManager) {
 
 	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
+	//Se añaden los atributos del boss que están junto al transform
 	auto FrogTr = Frog->addComponent<BossAtributos>();
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
+	//Se le dan las posiciones iniciales, vecocidad, ancho y alto a la rana
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
+	//Se le añade un color inicial a la rana, en este caso es negro
 	Frog->addComponent<RectangleRenderer>(SDL_Color());
 
-	//Se a�ade un collider a la rana
+	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	//Se añade el collider al colliderGameManager
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
