@@ -41,7 +41,7 @@ void Game::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	frogGenerator(colManager, player);
+	//frogGenerator(colManager, player);
 	platformGenerator(colManager);
 }
 
@@ -142,7 +142,7 @@ void Game::platformGenerator(CollisionManager* colManager) {
 	auto platform = mngr_->addEntity();
 	//Se añade el transform a la plataforma
 	auto platformTr = platform->addComponent<Transform>();
-	auto platformX = sdlutils().width() / 3;
+	auto platformX = sdlutils().width() / 3 - 200;
 	auto platformY = sdlutils().height() / 4 * 3;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la plataforma
 	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);

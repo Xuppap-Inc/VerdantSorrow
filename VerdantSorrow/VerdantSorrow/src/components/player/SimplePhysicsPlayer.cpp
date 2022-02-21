@@ -36,7 +36,38 @@ void SimplePhysicsPlayer::update()
 		
 			if (c->isActive() && !c->isTrigger()) {
 			
-				
+				//colisiones
+				auto pos = collider_->getPos(); //jugador
+				auto posCollider = c->getPos(); //otros
+
+				auto& velPlayer = tr_->getVel();
+
+				if (pos.getX() < posCollider.getX()) {//colision por la izda
+							
+					velPlayer.setX(0);
+					tr_->getPos().setX(c->getPos().getX() - collider_->getWidth());
+					attrib_->setRightStop(true);
+				}
+				else if (pos.getX() > posCollider.getX() + c->getWidth()) {//colision por la derecha
+
+					velPlayer.setX(0);
+					attrib_->setLeftStop(true);
+				}
+				else { //dentro de la plataforma (eje x)
+					if (pos.getY() <= posCollider.getY()) {//arriba
+						velPlayer.setY(0);
+						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
+						attrib_->setOnGround(true);
+
+					}
+					else {
+						if (abs(velPlayer.getY()) > 5) {
+							velPlayer.setY(0);
+						}
+					}
+				}
+
+
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				
