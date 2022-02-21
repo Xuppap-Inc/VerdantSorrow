@@ -14,9 +14,9 @@ public:
 	void init();
 	void start();
 
-	void frogGenerator(CollisionManager* colManager);
+	void frogGenerator(CollisionManager* colManager, Entity* player);
 
-	void playerGenerator(CollisionManager* colManager);
+	void playerGenerator(CollisionManager* colManager, Entity* player);
 
 	void platformGenerator(CollisionManager* colManager);
 	

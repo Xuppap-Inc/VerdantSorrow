@@ -38,8 +38,10 @@ void Game::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
 
-	playerGenerator(colManager);
-	frogGenerator(colManager);
+	//Se crea el jugador 
+	auto player = mngr_->addEntity();
+	playerGenerator(colManager, player);
+	frogGenerator(colManager, player);
 	platformGenerator(colManager);
 }
 
@@ -77,7 +79,7 @@ void Game::start() {
 }
 
 
-void Game::frogGenerator(CollisionManager* colManager) {
+void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 
 	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
@@ -96,17 +98,14 @@ void Game::frogGenerator(CollisionManager* colManager) {
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
-	Frog->addComponent<CollisionsSwordFrog>(colManager);
+	Frog->addComponent<CollisionsSwordFrog>(colManager, player);
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
 	
 
 }
 
-void Game::playerGenerator(CollisionManager* colManager) {
-
-	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	//Se le añaden los atributos del player, no los del transform
 	player->addComponent<PlayerAttributes>();
 	//Se le añade el transform

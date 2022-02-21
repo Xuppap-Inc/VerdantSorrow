@@ -16,13 +16,15 @@ class CollisionsSwordFrog :
 {
 public:
     __CMPID_DECL__(ecs::_PHYSICS)
-        CollisionsSwordFrog(CollisionManager* colMan);
+        CollisionsSwordFrog(CollisionManager* colMan, Entity* player);
 
     ~CollisionsSwordFrog();
     void initComponent() override;
+    
 
     void update() override;
 protected:
+    Entity* playerEntity_;
     CollisionManager* colMan_;
     RectangleCollider* collider_;
     BossAtributos* attrib_;
