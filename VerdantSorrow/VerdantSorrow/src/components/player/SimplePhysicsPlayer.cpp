@@ -30,6 +30,8 @@ void SimplePhysicsPlayer::update()
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {
 	
+		lastCollisionWasUp_ = false;
+
 		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
 		
 		for (auto c : colliders) {
@@ -60,10 +62,12 @@ void SimplePhysicsPlayer::update()
 					attrib_->setLeftStop(true);
 				}
 				else { //dentro de la plataforma (eje x)
+
 					if (upCollision) {//arriba
 						velPlayer.setY(0);
 						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
 						attrib_->setOnGround(true);
+						lastCollisionWasUp_ = true;
 
 					}
 					else {//abajo
@@ -93,6 +97,12 @@ void SimplePhysicsPlayer::update()
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
 		invulnerable_ = false;
 		
+	}
+	else {
+		if (lastCollisionWasUp_) {
+			attrib_->setOnGround(false);
+			lastCollisionWasUp_ = false;
+		}
 	}
 }
 

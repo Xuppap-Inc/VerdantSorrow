@@ -33,7 +33,7 @@ void CollisionsSwordFrog::update()
 
 		for (auto c : colliders) {
 			//Si está activa y no es trigger
-			if (c->isActive() && !c->isTrigger()) {
+			if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bossAt = ent->getComponent<BossAtributos>();
 				//Si con o que colisiona es la propia rana la golpea, se pone un tiempo de invulnerabilidad y pierde vida

@@ -135,6 +135,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player->addComponent<Attack>(50, 50);
+	playerAttackCollider->setIsTrigger(true);
 	colManager->addCollider(playerAttackCollider);
 }
 void Game::platformGenerator(CollisionManager* colManager) {
