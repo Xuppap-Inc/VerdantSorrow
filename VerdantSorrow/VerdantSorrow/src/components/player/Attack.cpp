@@ -67,6 +67,7 @@ void Attack::update()
 					if (!invulnerable_) {
 						bA->setDamage(1);
 						invulnerable_ = true;
+						std::cout << bA->getLife() << std::endl;
 						invTimer = sdlutils().currRealTime();
 					}
 				}
