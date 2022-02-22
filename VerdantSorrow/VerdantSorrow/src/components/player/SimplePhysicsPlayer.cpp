@@ -42,45 +42,52 @@ void SimplePhysicsPlayer::update()
 
 				auto& velPlayer = tr_->getVel();
 
-				if (pos.getX() < posCollider.getX()) {//colision por la izda
+				bool leftCollision = pos.getX() - velPlayer.getX() + collider_->getWidth() <= posCollider.getX();
+				bool rightCollision = pos.getX() - velPlayer.getX() >= posCollider.getX() + c->getWidth();
+				bool upCollision = pos.getY() + velPlayer.getY() <= posCollider.getY();
+
+
+				if (leftCollision) {//colision por la izda
 							
 					velPlayer.setX(0);
-					tr_->getPos().setX(c->getPos().getX() - collider_->getWidth());
+					tr_->getPos().setX(posCollider.getX() - collider_->getWidth());
 					attrib_->setRightStop(true);
 				}
-				else if (pos.getX() > posCollider.getX() + c->getWidth()) {//colision por la derecha
+				else if (rightCollision) {//colision por la derecha
 
 					velPlayer.setX(0);
+					tr_->getPos().setX(posCollider.getX() + c->getWidth());
 					attrib_->setLeftStop(true);
 				}
 				else { //dentro de la plataforma (eje x)
-					if (pos.getY() <= posCollider.getY()) {//arriba
+					if (upCollision) {//arriba
 						velPlayer.setY(0);
 						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
 						attrib_->setOnGround(true);
 
 					}
-					else {
-						if (abs(velPlayer.getY()) > 5) {
-							velPlayer.setY(0);
-						}
+					else {//abajo
+						
+						velPlayer.setY(0);
+						tr_->getPos().setY(c->getPos().getY() + c->getHeight());
+						
 					}
 				}
-
-
+			}
+			else if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				
+
 				if (bA != nullptr) {
-					
+
 					if (!invulnerable_) {
 						attrib_->damagePlayer(1);
 						invulnerable_ = true;
 						invTimer = sdlutils().currRealTime();
 					}
-										
+
 				}
-			}			
+			}
 		}
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;

@@ -41,7 +41,7 @@ void Game::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	//frogGenerator(colManager, player);
+	frogGenerator(colManager, player);
 	platformGenerator(colManager);
 }
 
@@ -94,6 +94,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	frogCollider->setIsTrigger(true);
 	//Se añade el collider al colliderGameManager
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
