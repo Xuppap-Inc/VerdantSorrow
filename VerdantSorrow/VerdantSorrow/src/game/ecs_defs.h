@@ -23,7 +23,8 @@
 	_ATTRIBUTES, \
 	_FROGJUMP, \
 	_GRAVITY, \
-	_ATTACK
+	_ATTACK,\
+	_FRAMEDIMAGE
 
 
 // Groups list - must have at least one element

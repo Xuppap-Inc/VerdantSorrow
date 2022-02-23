@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\FramedImage.h" />
     <ClInclude Include="src\game\Hub.h" />
     <ClInclude Include="src\components\OnBorders.h" />
     <ClInclude Include="src\components\FrogBoss\CollideWithBordersBoss.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="src\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\FramedImage.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
     <ClCompile Include="src\components\OnBorders.cpp" />
     <ClCompile Include="src\components\FrogBoss\CollideWithBordersBoss.cpp" />

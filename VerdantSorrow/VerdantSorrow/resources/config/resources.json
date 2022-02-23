@@ -9,7 +9,14 @@
   "images" : [
     { "id" : "sdl_logo", "file" : "resources/images/SDL_logo.png" },
     { "id" : "tennis_ball", "file" : "resources/images/tennis_ball.png" },
-    { "id" : "star", "file" : "resources/images/star.png"}
+    {
+      "id": "star",
+      "file": "resources/images/star.png"
+    },
+    {
+      "id": "ranaidle",
+      "file": "resources/images/rana_idle.png"
+    }
   ],
   
   "messages" : [

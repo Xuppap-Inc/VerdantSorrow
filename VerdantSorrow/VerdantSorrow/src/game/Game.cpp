@@ -10,6 +10,7 @@
 #include "../components/RectangleRenderer.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
+#include "../components/FramedImage.h"
 #include "../components/FrogBoss/BossAtributos.h"
 #include "../components//FrogBoss/FrogJump.h"
 #include "../components/player/PlayerComponents.h"
@@ -87,9 +88,9 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto a la rana
-	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 50, 50, 0.0f, 3.0f);
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f, 3.0f);
 	//Se le añade un color inicial a la rana, en este caso es negro
-	Frog->addComponent<RectangleRenderer>(SDL_Color());
+	//Frog->addComponent<RectangleRenderer>(SDL_Color());
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
@@ -100,6 +101,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
+	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
 	frogCollider->setIsTrigger(true);
 
 }
