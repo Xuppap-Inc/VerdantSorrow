@@ -30,5 +30,9 @@ protected:
     SimpleGravity* gravity_;
     bool invulnerable_;
     Uint32 invTimer;
+
+    //variable que indica si hay que activar el setOnGround después de haber colisionado con la cara superior de un collider
+    //es parecido a un OnCollisionExit de Unity pero solo para una cara
+    bool lastCollisionWasUp_ = false;
 };
 

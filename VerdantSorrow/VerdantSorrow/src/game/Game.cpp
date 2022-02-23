@@ -15,7 +15,6 @@
 #include "../components/player/PlayerComponents.h"
 
 #include "../components/FrogBoss/CollideWithBordersBoss.h"
-#include "../components/FrogBoss/CollisionsSwordFrog.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -94,14 +93,14 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	frogCollider->setIsTrigger(true);
 	//Se añade el collider al colliderGameManager
 	colManager->addCollider(frogCollider);
 	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
-	Frog->addComponent<CollisionsSwordFrog>(colManager, player);
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
-	
+	frogCollider->setIsTrigger(true);
 
 }
 
@@ -133,8 +132,9 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	player->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player->addComponent<Attack>(50, 50);
+	auto playerAttackCollider = player->addComponent<Attack>(50, 50, colManager);
 	colManager->addCollider(playerAttackCollider);
+	playerAttackCollider->setIsTrigger(true);
 }
 void Game::platformGenerator(CollisionManager* colManager) {
 
@@ -142,7 +142,7 @@ void Game::platformGenerator(CollisionManager* colManager) {
 	auto platform = mngr_->addEntity();
 	//Se añade el transform a la plataforma
 	auto platformTr = platform->addComponent<Transform>();
-	auto platformX = sdlutils().width() / 3;
+	auto platformX = sdlutils().width() / 3 - 200;
 	auto platformY = sdlutils().height() / 4 * 3;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la plataforma
 	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);

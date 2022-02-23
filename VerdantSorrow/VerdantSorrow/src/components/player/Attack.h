@@ -2,6 +2,7 @@
 #include "../../ecs/Component.h"
 #include "../../utils/Vector2D.h"
 #include "../RectangleCollider.h"
+#include "../../game/CollisionManager.h"
 #include <SDL.h>
 
 class Transform;
@@ -11,7 +12,7 @@ class Attack : public RectangleCollider
 {
 public:
     __CMPID_DECL__(ecs::_ATTACK)
-    Attack(float width, float height);
+    Attack(float width, float height, CollisionManager* colManager);
     ~Attack();
 
     void initComponent() override;
@@ -33,6 +34,10 @@ protected:
     int attackCoolDown;
     int lastAttack;
 
+    Attack* collider_;
+    CollisionManager* colMan_;
+    bool invulnerable_;
+    Uint32 invTimer;
     /**
     * Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
     */
