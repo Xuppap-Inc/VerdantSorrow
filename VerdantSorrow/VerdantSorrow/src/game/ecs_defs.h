@@ -24,7 +24,8 @@
 	_FROGJUMP, \
 	_GRAVITY, \
 	_ATTACK,\
-	_FRAMEDIMAGE
+	_FRAMEDIMAGE,\
+	_IMAGE
 
 
 // Groups list - must have at least one element

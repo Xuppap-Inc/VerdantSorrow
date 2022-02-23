@@ -11,6 +11,7 @@
 #include "../components/RectangleCollider.h"
 #include "../components/Transform.h"
 #include "../components/FramedImage.h"
+#include "../components/Image.h"
 #include "../components/FrogBoss/BossAtributos.h"
 #include "../components//FrogBoss/FrogJump.h"
 #include "../components/player/PlayerComponents.h"
@@ -114,9 +115,9 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 50, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 	//Se le da un renderer rectangular blanco por defecto al player
-	player->addComponent<RectangleRenderer>();
+	//player->addComponent<RectangleRenderer>();
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
 	player->addComponent<SimpleGravity>(2.0);
@@ -132,7 +133,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player->addComponent<SimplePhysicsPlayer>(colManager);
-
+	player->addComponent<Image>(&sdlutils().images().at("chica"));
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player->addComponent<Attack>(50, 50, colManager);
 	colManager->addCollider(playerAttackCollider);

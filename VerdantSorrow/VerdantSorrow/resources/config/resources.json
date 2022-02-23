@@ -16,6 +16,10 @@
     {
       "id": "ranaidle",
       "file": "resources/images/rana_idle.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
     }
   ],
   
