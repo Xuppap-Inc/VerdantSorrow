@@ -4,10 +4,14 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
+#include "../FrogBoss/BossAtributos.h"
 
-Attack::Attack(float width, float height): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000)
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000)
 {
 	setActive(false);
+	colMan_ = colManager;
+	invTimer = 0;
+	invulnerable_ = true;
 }
 
 Attack::~Attack()
@@ -16,8 +20,10 @@ Attack::~Attack()
 
 void Attack::initComponent()
 {
+	collider_ = this;
+
 	tr_ = ent_->getComponent<Transform>();
-	assert(tr_ != nullptr);
+	assert(tr_ != nullptr, collider_ !=nullptr);
 
 	lastAttack = sdlutils().currRealTime();
 }
@@ -45,6 +51,31 @@ void Attack::update()
 				}
 			}
 		}
+	}
+
+	//Colisiones
+	if (colMan_->hasCollisions(collider_)) {
+
+		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
+
+		for (auto c : colliders) {
+
+			if (c->isActive() && c->isTrigger()) {
+				ecs::Entity* ent = c->getEntity();
+				BossAtributos* bA = ent->getComponent<BossAtributos>();
+				if (bA != nullptr) {
+					if (!invulnerable_) {
+						bA->setDamage(1);
+						invulnerable_ = true;
+						std::cout << bA->getLife() << std::endl;
+						invTimer = sdlutils().currRealTime();
+					}
+				}
+			}
+		}
+
+		if (invTimer + 1000 > sdlutils().currRealTime()) return;
+		invulnerable_ = false;
 	}
 }
 

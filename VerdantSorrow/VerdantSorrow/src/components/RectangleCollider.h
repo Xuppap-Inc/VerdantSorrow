@@ -46,6 +46,10 @@ public:
     bool isActive();
 
     Entity* getEntity();
+
+    Vector2D getPos() { return pos_; };
+    float getWidth() { return width_; };
+    float getHeight() { return height_; };
     
 protected:
     Transform* tr_;
