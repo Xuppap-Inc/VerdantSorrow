@@ -9,7 +9,7 @@
 #include "Transform.h"
 
 
-FramedImage::FramedImage(Texture* tex, int row, int column) : frametime(50), tr_(), tex_(tex), row_(row), column_(column)
+FramedImage::FramedImage(Texture* tex, int row, int column,float time) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;

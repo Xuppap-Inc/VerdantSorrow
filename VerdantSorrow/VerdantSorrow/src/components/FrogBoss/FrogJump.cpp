@@ -1,6 +1,7 @@
 #include "FrogJump.h"
 
 #include "../Transform.h"
+#include "../FramedImage.h"
 #include "../../ecs/Entity.h"
 
 FrogJump::FrogJump(): tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpCd_(2000)
@@ -13,6 +14,7 @@ FrogJump::FrogJump(float jumpForce): tr_(), isJumping_(false), jumpForce_(jumpFo
 
 void FrogJump::initComponent()
 {
+	fr_ = ent_->getComponent<FramedImage>();
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 }
