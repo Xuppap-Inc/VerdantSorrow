@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\FrogBoss\FrogBigJumpLateral.h" />
+    <ClInclude Include="src\components\FrogBoss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\FramedImage.h" />
     <ClInclude Include="src\game\Hub.h" />
@@ -60,8 +62,11 @@
     <ClInclude Include="src\utils\mpl.h" />
     <ClInclude Include="src\utils\Singleton.h" />
     <ClInclude Include="src\utils\Vector2D.h" />
+    <ClInclude Include="src\components\wave\WaveMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\FrogBoss\FrogBigJumpLateral.cpp" />
+    <ClCompile Include="src\components\FrogBoss\FrogBigJump.cpp" />
     <ClCompile Include="src\components\Image.cpp" />
     <ClCompile Include="src\components\FramedImage.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
@@ -91,6 +96,7 @@
     <ClCompile Include="src\sdlutils\Texture.cpp" />
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
+    <ClCompile Include="src\components\wave\WaveMovement.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

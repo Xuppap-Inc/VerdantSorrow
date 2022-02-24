@@ -22,10 +22,13 @@
 	_PHYSICS, \
 	_ATTRIBUTES, \
 	_FROGJUMP, \
+	_FROGBIGJUMP, \
+	_FROGBIGJUMPLATERAL, \
 	_GRAVITY, \
 	_ATTACK,\
 	_FRAMEDIMAGE,\
-	_IMAGE
+	_IMAGE,\
+	_WAVEMOVEMENT
 
 
 // Groups list - must have at least one element
