@@ -96,7 +96,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f, 3.0f);
 	//Se le añade un color inicial a la rana, en este caso es negro
 	//Frog->addComponent<RectangleRenderer>(SDL_Color());
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4, 200);
+
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
 	frogCollider->setIsTrigger(true);
@@ -106,8 +106,14 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
+<<<<<<< HEAD
 	Frog->addComponent<FrogBigJump>(40);
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
+=======
+	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
+	frogCollider->setIsTrigger(true);
+
+>>>>>>> parent of e0af03b (la rana hace flip y esas cosas)
 }
 
 void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
