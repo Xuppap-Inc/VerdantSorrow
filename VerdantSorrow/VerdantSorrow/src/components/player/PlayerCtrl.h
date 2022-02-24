@@ -18,6 +18,8 @@ private:
 	Transform* tr_;
 	float jumpForce_;
 	float speed_;
+	float deceleration = 0.85;
+	bool deslizar = false;
 
 	//Indica la direccion del movimiento del jugador (se usa para la direccion de ataque y animacion?)
 	int movementDir_;

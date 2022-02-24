@@ -46,13 +46,12 @@ void Attack::update()
 				if (currentTime >= lastAttack + attackDuration + attackCoolDown) {
 					setActive(true);
 					lastAttack = currentTime;
-
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 				}
 			}
 		}
 	}
-
+	/*std::cout << isActive();*/
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {
 
@@ -60,7 +59,7 @@ void Attack::update()
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger()) {
+			if (c->isActive() && c->isTrigger() && collider_->isActive()) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {

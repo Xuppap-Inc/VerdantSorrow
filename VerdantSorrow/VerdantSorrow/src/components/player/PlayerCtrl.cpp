@@ -27,7 +27,7 @@ void PlayerCtrl::update()
 		}
 		//movimiento izquierda
 		if (ihdlr.isKeyDown(SDLK_a) && !attrib_->isLeftStop()) {
-
+			 
 			vel.set(Vector2D(-speed_, vel.getY()));
 			movementDir_ = -1;
 		}
@@ -37,13 +37,29 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(speed_, vel.getY()));
 			movementDir_ = 1;
 		}
-
-		//si no se están pulsando las de movimiento se queda quieto
-		if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
+		
+		////si no se están pulsando las de movimiento se queda quieto
+		//if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
 	}
-
-	//si no se están pulsando las de movimiento se queda quieto
-	else if (isAttacking || (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d))) vel.set(Vector2D(0, vel.getY()));
+	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) {
+		deslizar = true;
+	}
+	
+	//Si deslizar está activado, es decir ha dejado de pulsar d y a
+	//Si la velocidad es mayor que 1, positiva o negativa se irá reduciendo poco a poco
+	if (deslizar && (tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1)) 
+		vel.set(Vector2D(tr_->getVel().getX() * deceleration, vel.getY()));
+	
+	//Al llegar a menor de 1 se pondrá a 0 directamente y se desactivará deslizar
+	else if ((tr_->getVel().getX() < 1 && movementDir_ == 1) || (tr_->getVel().getX() > -1 && movementDir_ == -1)) {
+		vel.set(Vector2D(0, vel.getY()));
+		deslizar = false;
+	}
+	//Da igual lo que pase si ataca, que va a pararse en seco
+	if (isAttacking){
+		vel.set(Vector2D(0, vel.getY()));
+		deslizar = false;
+	}
 }
 
 void PlayerCtrl::initComponent()
