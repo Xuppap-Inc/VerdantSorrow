@@ -50,9 +50,30 @@ Vista General |
 ![Vista General](./images/interfaz.jpg)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
-El jugador realiza el tutorial. Tras eso sale al hub. Allí tiene que conseguir 3 almas de jefes para abrir una puerta. 
+El jugador realiza el tutorial, lo que le enseña las mecánicas básicas y además le enseña que puede matar moscas y atravesar raíces rodando. 
 
-Cada alma la consigue derrotando al jefe correspondiente.  
+Tras eso sale al hub. Allí podrá hablar con distintos NPCs que explican la historia brevemente y además alguno le menciona su primer objetivo, la rana.
+
+El jugador encuentra la zona en la que se encuentra la rana y entra para pelear contra ella. Al derrotarla sale a hub nuevamente para buscar el segundo objetivo, además, en el hub los NPCs tendrán nuevos diálogos referenciándolo.
+
+Tras encontrar y derrotar al segundo jefe el jugador vuelve a repetir el ciclo de hablar y buscar al tercero.
+
+Al derrotar al tercer jefe el jugador debe escapar en un nivel de plataformas a contrareloj. Al llegar al hub podrá finalmente abrir la puerta y descubrir qué se encuentra tras esta.
+
+Se reproduce una cinemática final al abrir la puerta.
+
+### <a name = "tiempos"></a> 1.2. Duración esperada de una partida
+El tiempo aproximado que debe durar una partida de un jugador novel se compone de:
+
+- El tiempo que tarda en realizar el tutorial: aproximadamente unos **3-5 min**.
+- El tiempo de búsqueda del jefe en el hub, teniendo en cuenta la lectura de los diálogos para poder acceder al jefe: aproximadamente unos **3-5 min**. Un total de 3 veces: unos **10-15 min**
+- El tiempo de batalla contra la rana: aproximadamente unos **3 min** de pelea, es probable que se necesiten varios intentos, aproximadamente **3 intentos**. Total: unos **10 min**.
+- El tiempo de batalla contra el árbol: aproximadamente unos **3 min** de pelea, es probable que se necesiten varios intentos, aproximadamente **2-3 intentos**. Total: unos **8 min**.
+- El tiempo de batalla contra el ojo con manos: aproximadamente unos **3 min** de pelea, es probable que se necesiten varios intentos, aproximadamente **4 intentos**. Total: unos **12 min**.
+- El tiempo que se tarda en superar el nivel de huída tras el tercer jefe: aproximadamente **1 min**.
+- El tiempo que dura la cinemática final y algún diálogo extra: aproximadamente **3 min**.
+
+Total del juego: unos **45 min**, esta duración asume que el jugador lee diálogos y requiere varios intentos por jefe, además la vida de los jefes puede ser ajustable, por lo tanto una medida algo más realista sería: unos **15-20 minutos** sin leer muchos diálogos, unos **25-30 minutos** leyendo todos los diálogos. La habilidad del jugador influye de forma significativa en esta duración.
 
 ---  
 ## <a name = "jugabilidad"></a> 2. Jugabilidad  
@@ -61,9 +82,11 @@ Cada alma la consigue derrotando al jefe correspondiente.
 
 -Movimiento: El jugador podrá moverse hacia la izquierda o la derecha con un movimiento lateral a velocidad constante. Además podrá saltar.  
 
+-Movimiento top down: El jugador podrá moverse en **X direcciones** en el hub.  
+
 -Esquivar: El jugador podrá esquivar ataques, consiguiendo frames de invulnerabilidad durante la animación de esquivar.  
 
--Ataque: El personaje dará un barrido hacia delante con la espada, haciendo un daño. Te quedas quieto cuando estés atacando.  
+-Ataque: El personaje dará un barrido hacia delante con la espada, en vertical, de forma que el ataque es un **arco de la altura del jugador**. Te quedas quieto cuando estés atacando. El ataque hace 1 de daño.
 
 -Vida: El jugador dispondrá de tres vidas, perdiendo una por cada golpe que reciba de un enemigo. Al recibir un golpe el jugador será impulsado hacia atrás y brillará en blanco.
 
@@ -74,45 +97,72 @@ Comportamiento de los jefes:
       - Visual: Una rana quiere comer moscas con la lengua.
       - Primera fase:  
           - La rana va saltando de un lado a otro de la pantalla. Empieza saltando hacia la izquierda, calculando la distancia del salto aleatoriamente dentro de un intervalo.
-          - Si el salto hace que la rana salga de la pantalla, salta en la otra dirección.
+
+          - La rana rebota con los bordes de la pantalla, en ese momento cambia la dirección del salto.
+
           - Ataque de la lengua: Cada X saltos(decidido aleatoriamente entre un intervalo), hace este ataque:
             - Aparece una mosca cerca del jugador, a una distancia determinada de la rana siempre a la misma distancia del suelo. Si la posición se sale de la pantalla, aparece en la otra dirección. La mosca aparece siempre a la altura del jugador.
+
             - X segundos después, la rana lanza la lengua hasta la posición x de la mosca y hace daño, y vuelve rápidamente. La lengua sale de forma horizontal.
+
             - Si matas a la mosca se enfada y realiza un ataque, un salto sobre sí mismo realizando una onda expansiva al caer. Tras este ataque se queda vulnerable durante un tiempo.
+
             - La onda expansiva se define como un proyectil que se mueve de forma horizontal desde la posición del boss hasta uno de los extremos de la pantalla, pegado al suelo a velocidad constante, de tamaño lo suficientemente pequeño para que pueda ser saltado por el jugador.
+
         - Segunda fase:
-              - Mismo comportamiento que en la primera fase.
-              - La rana se enfada y cambia de color (por ejemplo), ahora ataca al jugador.
-              - Añade un nuevo ataque en que los saltos son el doble de alto y cada uno causa una onda expansiva.
-              - En cada salto la rana tiene un 70% de probabilidad de hacer saltos pequeños y un 30% de hacer saltos grandes.
-              - El ataque de la lengua cambiaria. Ahora la mosca no aparece antes de tirar la lengua, si no que siempre ataca siempre hacia el jugador de forma horizontal.
+          - Mismo comportamiento que en la primera fase.
+
+          - La rana se enfada y cambia de color (por ejemplo), ahora ataca al jugador.
+
+          - Añade un nuevo ataque en que los saltos son el doble de alto y cada uno causa una onda expansiva.
+
+          - En cada salto la rana tiene un 70% de probabilidad de hacer saltos pequeños y un 30% de hacer saltos grandes.
+
+          - El ataque de la lengua cambiaria. Ahora la mosca no aparece antes de tirar la lengua, si no que siempre ataca siempre hacia el jugador de forma horizontal.
     - Árbol humanoide:
       - Visual: Groot con una lámpara.
       - Primera fase: 
-        - Se va acercando hacia la posición x del jugador, y cuando está lo suficientemente cerca, manotazo a melee, se queda quieto un instante.
+        - Se va acercando hacia la posición x del jugador, y cuando está lo suficientemente cerca, manotazo a melee (un arco frente al jefe de diámetro igual a su alto, similar al jugador), se queda quieto un instante.
+
         - Ola de raíces: Tras un tiempo aleatorio en un intervalo, salen raíces del suelo progresivamente izquierda a derecha, separadas a la misma distancia cada una con un pequeño delay entre que sale una rama y otra. Cubriendo todo el alto de la pantalla. Antes de que salga una raíz, hay un indicador de una raíz pequeñita en la posición en la que va a salir la raíz.
+
         - Ataque raíces con auto-aim: Cada X segundos, elegidos aleatoriamente dentro de un intervalo. El boss se sale de pantalla, la lámpara se queda en mitad del ancho de la pantalla, y lo suficientemente alta para que el jugador no llegue. Las raíces del ataque anterior van saliendo en la posición del jugador cada X segundos. Si una de las raíces alcanza a la lámpara, se le hace mucho daño y se cambia a otro patrón de ataque.
+        
       - Segunda fase: 
         - El boss ya no lleva la lámpara con él. La lámpara aparece en un lado de la pantalla.
+
         - Cuando recibe 3 golpes, cambia al otro lado de la pantalla. De forma que el boss siempre está al principio entre la lámpara y el jugador. Esto se repite 3-4 veces.
+
         - Al igual que en la primera fase, el boss persigue al jugador, y cuando lo tiene a rango, le pega un manotazo.
+
         - El ataque de raíces con auto-aim se realiza constantemente. Si la raíz sale cerca de la lámpara se cancela (el jefe no le pega a su lámpara).
     - Jefe de las manos: 
       - Visual: Un cuerpo principal (ojo, cabeza, mago…) que ataca con 2 manos gigantes.
+
       - Hay que subirse a las manos para atacar al cuerpo principal.
+
       - Las manos vuelven a su posición original tras cada ataque.
+
       - Tres ataques:
         - Clap: junta ambas manos hacia el centro de la pantalla rápidamente a ras de suelo.
+
         - Puñetazo: la mano se echa hacia atrás y mete un puñetazo rápido.
-        - Martillazo: la mano choca contra el suelo.
+
+        - Martillazo: la mano choca contra el suelo, provoca una onda expansiva.
       
-      - Las manos hacen daño sólo durante el ataque. (Idea opcional: nunca hacen daño por la parte superior).
+      - Las manos hacen daño sólo durante el ataque..
+
       - Segunda fase:
         - El boss se desencadena y comienza a moverse por la pantalla.
+
         - El resto de ataques siguen igual, solo que las manos ahora hacen daño por contacto siempre (se prenden).
+
         - El movimiento del cuerpo del boss es el siguiente: <a ref="https://www.youtube.com/watch?v=5mGuCdlCcNMMovimiento">Movimiento</a>
+
         - Cuando choca contra el suelo lanza una bola de fuego a cada lado y se queda inmóvil unos segundos.
+
         - Cada X tiempo lanza una bola de fuego hacia el jugador, que desaparece al chocar con un lateral de la pantalla o el suelo.
+
       - Tercera fase:
         Cámara scroll lateral hacia la derecha. El boss te persigue desde la izquierda y el jugador tendrá que correr hacia la derecha para huir.
 
