@@ -4,7 +4,7 @@
 #include "../Transform.h"
 #include "Attack.h"
 
-
+using namespace std;
 PlayerCtrl::~PlayerCtrl()
 {
 }
@@ -24,39 +24,48 @@ void PlayerCtrl::update()
 			
 			vel.set(Vector2D(vel.getX(), -jumpForce_));
 			attrib_->setOnGround(false);
+			deslizar = false;
 		}
 		//movimiento izquierda
 		if (ihdlr.isKeyDown(SDLK_a) && !attrib_->isLeftStop()) {
 			 
 			vel.set(Vector2D(-speed_, vel.getY()));
 			movementDir_ = -1;
+			deslizar = false;
 		}
 		//movimiento derecha
 		else if (ihdlr.isKeyDown(SDLK_d) && !attrib_->isRightStop()) {
 
 			vel.set(Vector2D(speed_, vel.getY()));
 			movementDir_ = 1;
+			deslizar = false;
 		}
 		
 		////si no se están pulsando las de movimiento se queda quieto
 		//if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) vel.set(Vector2D(0, vel.getY()));
 	}
-	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d)) {
+	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w)) {
+		cout << "dos arriba" << endl;
 		deslizar = true;
 	}
 	
 	//Si deslizar está activado, es decir ha dejado de pulsar d y a
 	//Si la velocidad es mayor que 1, positiva o negativa se irá reduciendo poco a poco
-	if (deslizar && (tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1)) 
+	if (deslizar){
+		if ((tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1))
 		vel.set(Vector2D(tr_->getVel().getX() * deceleration, vel.getY()));
+	}
+		
 	
 	//Al llegar a menor de 1 se pondrá a 0 directamente y se desactivará deslizar
-	else if ((tr_->getVel().getX() < 1 && movementDir_ == 1) || (tr_->getVel().getX() > -1 && movementDir_ == -1)) {
+	else if (((tr_->getVel().getX() < 1 && movementDir_ == 1) || (tr_->getVel().getX() > -1 && movementDir_ == -1)) && deslizar && attrib_->isOnGround()) {
+		//cout << "frenando" << endl;
 		vel.set(Vector2D(0, vel.getY()));
 		deslizar = false;
 	}
 	//Da igual lo que pase si ataca, que va a pararse en seco
 	if (isAttacking){
+		cout << "atacando" << endl;
 		vel.set(Vector2D(0, vel.getY()));
 		deslizar = false;
 	}
