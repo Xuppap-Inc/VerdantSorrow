@@ -3,7 +3,6 @@
 #include "../../sdlutils/SDLUtils.h"
 
 class Transform;
-class FramedImage;
 
 class FrogJump : public ecs::Component 
 {
@@ -17,10 +16,8 @@ public:
 
 private:
 	Transform* tr_;
-	FramedImage* fr_;
 	bool isJumping_;
 	float jumpForce_;
 	Uint32 lastJump_;
 	Uint32 jumpCd_;
-	int dir=-1;
 };

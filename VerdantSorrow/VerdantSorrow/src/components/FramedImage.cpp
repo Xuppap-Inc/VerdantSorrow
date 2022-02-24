@@ -9,11 +9,7 @@
 #include "Transform.h"
 
 
-FramedImage::FramedImage():flipX_(false), tr_()
-{
-}
-
-FramedImage::FramedImage(Texture* tex, int row, int column,float fametime_) : frametime(fametime_), tr_(), tex_(tex), row_(row), column_(column),flipX_(false)
+FramedImage::FramedImage(Texture* tex, int row, int column) : frametime(50), tr_(), tex_(tex), row_(row), column_(column)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -52,11 +48,11 @@ void FramedImage::render()
 	SDL_RendererFlip flip= SDL_FLIP_NONE;
 	//flip the sprite
 	if (flipX_) {
-		flip = SDL_FLIP_HORIZONTAL;		
-		
+		flip = SDL_FLIP_HORIZONTAL;
+
 	}
-	
-	
+
+
 
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
