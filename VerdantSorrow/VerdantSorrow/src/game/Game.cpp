@@ -102,18 +102,9 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
-<<<<<<< HEAD
-<<<<<<< HEAD
-	Frog->addComponent<FrogBigJump>(40);
+	//Frog->addComponent<FrogBigJump>(40);
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
-=======
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
-=======
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
->>>>>>> parent of 7df08a5 (Generador de onda expansiva sin eliminarse)
 	frogCollider->setIsTrigger(true);
-
->>>>>>> parent of e0af03b (la rana hace flip y esas cosas)
 }
 
 void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
