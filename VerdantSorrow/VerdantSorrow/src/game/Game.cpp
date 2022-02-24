@@ -13,8 +13,10 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/FrogBoss/BossAtributos.h"
-#include "../components//FrogBoss/FrogJump.h"
+#include "../components/FrogBoss/FrogJump.h"
+#include "../components/FrogBoss/FrogBigJump.h"
 #include "../components/player/PlayerComponents.h"
+#include "../components/Wave/WaveMovement.h"
 
 #include "../components/FrogBoss/CollideWithBordersBoss.h"
 #include "CollisionManager.h"
@@ -44,6 +46,8 @@ void Game::init()
 	playerGenerator(colManager, player);
 	frogGenerator(colManager, player);
 	platformGenerator(colManager);
+	waveGenerator(colManager, player, sdlutils().width() / 2, -1);
+	waveGenerator(colManager, player, sdlutils().width() / 2, 1);
 }
 
 void Game::start() {
@@ -88,7 +92,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	auto FrogTr = Frog->addComponent<BossAtributos>();
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
-	//Se le dan las posiciones iniciales, vecocidad, ancho y alto a la rana
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f, 3.0f);
 	//Se le añade un color inicial a la rana, en este caso es negro
 	//Frog->addComponent<RectangleRenderer>(SDL_Color());
@@ -102,8 +106,8 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
+	Frog->addComponent<FrogBigJump>(40);
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"),6,4);
-	frogCollider->setIsTrigger(true);
 
 }
 
@@ -156,4 +160,29 @@ void Game::platformGenerator(CollisionManager* colManager) {
 	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	//Se añade el collider de la plataforma al colliderManager
 	colManager->addCollider(platformCollider);
+}
+
+void Game::waveGenerator(CollisionManager* colManager, Entity* player, float x, int dir) {
+
+	//Se crea la onda expansiva
+	auto Wave = mngr_->addEntity();
+	//Se añaden los atributos del boss que están junto al transform
+	auto WaveTr = Wave->addComponent<BossAtributos>();
+	auto WaveX = x;
+	auto WaveY = sdlutils().height()-50;
+	//dir = {-1, 1}
+	auto WaveDir = dir;
+	auto WaveSpeed = 5;
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
+	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f, 3.0f);
+	//Se le añade un color inicial a la onda
+	Wave->addComponent<RectangleRenderer>(SDL_Color());
+
+	//Se añade un collider a la onda
+	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
+	waveCollider->setIsTrigger(true);
+	//Se añade el collider al colliderGameManager
+	colManager->addCollider(waveCollider);
+	//Se añade el movimiento horizontal
+	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
 }

@@ -19,6 +19,8 @@ public:
 	void playerGenerator(CollisionManager* colManager, Entity* player);
 
 	void platformGenerator(CollisionManager* colManager);
+
+	void waveGenerator(CollisionManager* colManager, Entity* player, float x, int dir);
 	
 private:
 	ecs::Manager* mngr_;
