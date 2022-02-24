@@ -131,7 +131,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	player->addComponent<CollideWithBorders>();
 
 	//Componente que permite controlar al jugador
-	player->addComponent<PlayerCtrl>(23, 8);
+	player->addComponent<PlayerCtrl>(23, 8, 0.85);
 
 	//Se añade un collider al jugador
 	//new RectangleCollider(player->getWidth(), player->getHeight())
