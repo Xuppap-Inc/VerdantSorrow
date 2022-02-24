@@ -12,8 +12,8 @@ public:
 
 	__CMPID_DECL__(ecs::_FRAMEDIMAGE)
 
-
-		FramedImage(Texture* tex, int row, int column);
+		FramedImage();
+		FramedImage(Texture* tex, int row, int column, float fametime_);
 	virtual ~FramedImage();
 
 	void setTexture(Texture* tex) {
@@ -22,6 +22,7 @@ public:
 	void select_sprite(int x, int y);
 	void initComponent() override;
 	void render() override;
+	void flipX(bool s);
 
 private:
 	Transform* tr_;
@@ -33,6 +34,6 @@ private:
 	int i = 0;
 	int j = 0;
 	float initime = 0;
-
+	bool flipX_ ;
 };
 
