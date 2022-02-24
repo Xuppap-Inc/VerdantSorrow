@@ -31,16 +31,18 @@ void FrogJump::update()
 	/*	std::cout << x << std::endl;*/
 		vel = new Vector2D(x, -jumpForce_);	
 		vel = vel.normalize() * jumpForce_;	
-		if (x < 0)direct = -1;
-		else direct = 1;
+		if (x < 0)fr_->flipX(false);
+		else fr_->flipX(true);
 	}
-	if (direct != dir) {
 		//flipx 
-		fr_->flipX(true);
-	}
+		
+	
+	
+
 
 	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) { 
 		isJumping_ = false;
 		lastJump_ = sdlutils().currRealTime();
+		
 	};
 }
