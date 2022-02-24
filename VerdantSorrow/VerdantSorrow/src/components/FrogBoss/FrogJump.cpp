@@ -27,12 +27,20 @@ void FrogJump::update()
 		isJumping_ = true;
 		auto x = RNG.nextInt(-1000, 1000) / 100.0;
 	/*	std::cout << x << std::endl;*/
-		vel = new Vector2D(x, -jumpForce_);	
-		vel = vel.normalize() * jumpForce_;			
+		vel = new Vector2D(x, -jumpForce_);
+		vel = vel.normalize() * jumpForce_;
+		if (x < 0)fr_->flipX(false);
+		else fr_->flipX(true);
 	}
+		//flipx
 
-	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) { 
+
+
+
+
+	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {
 		isJumping_ = false;
 		lastJump_ = sdlutils().currRealTime();
+
 	};
 }

@@ -36,7 +36,7 @@ void FramedImage::initComponent()
 void FramedImage::render()
 {
 	select_sprite(i, j);
-	if (sdlutils().currRealTime() - initime >= 50) {
+	if (sdlutils().currRealTime() - initime >= frametime) {
 		if (i < column_ - 1)i++;
 		else {
 			i = 0;
@@ -45,10 +45,24 @@ void FramedImage::render()
 		if (j >= row_)j = 0;
 		initime = sdlutils().currRealTime();
 	}
+	SDL_RendererFlip flip= SDL_FLIP_NONE;
+	//flip the sprite
+	if (flipX_) {
+		flip = SDL_FLIP_HORIZONTAL;
+
+	}
+
+
 
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
 
 	assert(tex_ != nullptr);
-	tex_->render(m_clip, dest, tr_->getRot());
+	tex_->render(m_clip, dest, tr_->getRot(),nullptr,flip);
+
+}
+
+void FramedImage::flipX(bool s)
+{
+	flipX_ = s;
 }
