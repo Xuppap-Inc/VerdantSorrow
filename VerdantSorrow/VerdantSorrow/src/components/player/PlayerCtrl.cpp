@@ -51,8 +51,8 @@ void PlayerCtrl::update()
 	
 	//Si deslizar está activado, es decir ha dejado de pulsar d y a
 	//Si la velocidad es mayor que 1, positiva o negativa se irá reduciendo poco a poco
-	if (deslizar){
-		if ((tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1))
+	if ((tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1)){
+		if (deslizar)
 		vel.set(Vector2D(tr_->getVel().getX() * deceleration, vel.getY()));
 	}
 		
