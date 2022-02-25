@@ -44,9 +44,12 @@ void SimplePhysicsPlayer::update()
 
 				auto& velPlayer = tr_->getVel();
 
-				bool leftCollision = pos.getX() - velPlayer.getX() + collider_->getWidth() <= posCollider.getX();
-				bool rightCollision = pos.getX() - velPlayer.getX() >= posCollider.getX() + c->getWidth();
-				bool upCollision = pos.getY() + velPlayer.getY() <= posCollider.getY();
+				float lastPositionX = pos.getX() - velPlayer.getX();
+				float lastPositionY = pos.getY() - velPlayer.getY();
+
+				bool leftCollision = lastPositionX + collider_->getWidth() <= posCollider.getX();
+				bool rightCollision = lastPositionX >= posCollider.getX() + c->getWidth();
+				bool upCollision = lastPositionY + collider_->getHeight() <= posCollider.getY();
 
 
 				if (leftCollision) {//colision por la izda
@@ -61,22 +64,19 @@ void SimplePhysicsPlayer::update()
 					tr_->getPos().setX(posCollider.getX() + c->getWidth());
 					attrib_->setLeftStop(true);
 				}
-				else { //dentro de la plataforma (eje x)
+				 //dentro de la plataforma (eje x)
+				else if (upCollision) {//arriba
+					velPlayer.setY(0);
+					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
+					attrib_->setOnGround(true);
+					lastCollisionWasUp_ = true;
 
-					if (upCollision) {//arriba
-						velPlayer.setY(0);
-						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
-						attrib_->setOnGround(true);
-						lastCollisionWasUp_ = true;
-
-					}
-					else {//abajo
-						
-						velPlayer.setY(0);
-						tr_->getPos().setY(c->getPos().getY() + c->getHeight());
-						
-					}
 				}
+				else {//abajo
+					velPlayer.setY(0);
+					tr_->getPos().setY(c->getPos().getY() + c->getHeight());		
+				}
+				
 			}
 			else if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
