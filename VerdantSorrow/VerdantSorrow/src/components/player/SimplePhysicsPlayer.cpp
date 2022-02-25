@@ -22,22 +22,20 @@ void SimplePhysicsPlayer::initComponent()
 }
 
 void SimplePhysicsPlayer::update()
-{
+{	
 	//Gravedad
 	if (!attrib_->isOnGround() && !gravity_->isActive()) gravity_->setActive(true);
 	else if (gravity_->isActive()) gravity_->setActive(false);
 
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {
-	
-		lastCollisionWasUp_ = false;
 
 		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
-		
+
 		for (auto c : colliders) {
-		
+
 			if (c->isActive() && !c->isTrigger()) {
-			
+
 				//colisiones
 				auto pos = collider_->getPos(); //jugador
 				auto posCollider = c->getPos(); //otros
@@ -50,33 +48,35 @@ void SimplePhysicsPlayer::update()
 				bool leftCollision = lastPositionX + collider_->getWidth() <= posCollider.getX();
 				bool rightCollision = lastPositionX >= posCollider.getX() + c->getWidth();
 				bool upCollision = lastPositionY + collider_->getHeight() <= posCollider.getY();
+				bool downCollision = lastPositionY >= posCollider.getY() + c->getHeight();
 
-
-				if (leftCollision) {//colision por la izda
-							
-					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() - collider_->getWidth());
-					attrib_->setRightStop(true);
+				if (upCollision) {//arriba
+					if (!attrib_->isOnGround()) {
+						velPlayer.setY(0);
+						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
+						attrib_->setOnGround(true);
+					}
+				}
+				else if (downCollision) {//abajo
+					velPlayer.setY(0);
+					tr_->getPos().setY(c->getPos().getY() + c->getHeight());
+				}
+				else if (leftCollision) {//colision por la izda
+					if (!attrib_->isRightStop()) {
+						velPlayer.setX(0);
+						tr_->getPos().setX(posCollider.getX() - collider_->getWidth());
+						attrib_->setRightStop(true);
+					}
 				}
 				else if (rightCollision) {//colision por la derecha
+					if (!attrib_->isLeftStop()) {
+						velPlayer.setX(0);
+						tr_->getPos().setX(posCollider.getX() + c->getWidth());
+						attrib_->setLeftStop(true);
+					}
+				}
 
-					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() + c->getWidth());
-					attrib_->setLeftStop(true);
-				}
-				 //dentro de la plataforma (eje x)
-				else if (upCollision) {//arriba
-					velPlayer.setY(0);
-					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
-					attrib_->setOnGround(true);
-					lastCollisionWasUp_ = true;
-
-				}
-				else {//abajo
-					velPlayer.setY(0);
-					tr_->getPos().setY(c->getPos().getY() + c->getHeight());		
-				}
-				
+				std::cout << upCollision << " " << leftCollision << " " << downCollision << " " << rightCollision << " " << std::endl;
 			}
 			else if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
@@ -95,15 +95,10 @@ void SimplePhysicsPlayer::update()
 		}
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
-		invulnerable_ = false;
-		
+		invulnerable_ = false;		
+
 	}
-	else {
-		if (lastCollisionWasUp_) {
-			attrib_->setOnGround(false);
-			lastCollisionWasUp_ = false;
-		}
-	}
+
 }
 
 

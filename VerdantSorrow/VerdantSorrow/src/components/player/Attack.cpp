@@ -47,7 +47,7 @@ void Attack::update()
 			}
 		}
 	}
-	//Colisiones
+	//Colisiones (con boss)
 	if (colMan_->hasCollisions(this)) {
 
 		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(this);

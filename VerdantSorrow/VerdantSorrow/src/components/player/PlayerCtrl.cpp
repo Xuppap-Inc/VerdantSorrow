@@ -23,7 +23,8 @@ void PlayerCtrl::update()
 		deslizar = true;
 		isRolling = false;
 	}
-	//el jugador solo se puede mover si no esta atacando
+
+	//el jugador solo se puede mover si no esta atacando ni haciendo voltereta
 	if (!isAttacking && !isRolling && ihdlr.keyDownEvent()) {
 		//salto
 		if ((ihdlr.isKeyDown(SDLK_w) || ihdlr.isKeyDown(SDLK_SPACE)) && attrib_->isOnGround()) {
@@ -46,6 +47,7 @@ void PlayerCtrl::update()
 			movementDir_ = 1;
 			deslizar = false;
 		}
+
 		//Roll
 		//Si ha pasado el tiempo suficiente como para volver a hacer roll y se pulsa el shift
 		//Si es movementdir = -1(izquierda) se da velocidad hacia la izquierda,
@@ -53,32 +55,32 @@ void PlayerCtrl::update()
 		//Se activa el cooldown y el booleano que informa que está haciendo el roll
 		if (ihdlr.isKeyDown(SDLK_LSHIFT)){
 			if (currentTime >= lastRoll + rollDuration + rollDuration) {
-				if (movementDir_ == -1) vel.set(Vector2D(-rollSpeed_, vel.getY()));
+				if (movementDir_ < 0) vel.set(Vector2D(-rollSpeed_, vel.getY()));
 				else vel.set(Vector2D(rollSpeed_, vel.getY()));
 				lastRoll = currentTime;
 				isRolling = true;
 			}
 		}
 	}
-	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w) && !isRolling) {
-		cout << "entro" << endl;
+	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w) && !isRolling && !isAttacking) {
+		cout << "deslizo" << endl;
 		deslizar = true;
 	}
 		
 	//Si deslizar está activado, es decir ha dejado de pulsar d y a
 	//Si la velocidad es mayor que 1, positiva o negativa se irá reduciendo poco a poco
-	if ((tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1)){
+	if ((tr_->getVel().getX() >= 1 && movementDir_ > 0) || (tr_->getVel().getX() <= -1 && movementDir_ < 0)){
 		if (deslizar)
-		vel.set(Vector2D(tr_->getVel().getX() * deceleration_, vel.getY()));
+			vel.set(Vector2D(tr_->getVel().getX() * deceleration_, vel.getY()));
 	}
-		
-	
 	//Al llegar a menor de 1 se pondrá a 0 directamente y se desactivará deslizar
-	else if (((tr_->getVel().getX() < 1 && movementDir_ == 1) || (tr_->getVel().getX() > -1 && movementDir_ == -1)) 
+	else if (((tr_->getVel().getX() < 1 && movementDir_ > 0) || (tr_->getVel().getX() > -1 && movementDir_ < 0))
 		&& deslizar && attrib_->isOnGround()) {
+
 		vel.set(Vector2D(0, vel.getY()));
 		deslizar = false;
 	}
+
 	//Da igual lo que pase si ataca, que va a pararse en seco
 	if (isAttacking){
 		vel.set(Vector2D(0, vel.getY()));
