@@ -42,3 +42,8 @@ void PlayerAttributes::setLeftStop(bool set)
 void PlayerAttributes::damagePlayer(int lives) {
 	lives_ -= lives;
 }
+
+int PlayerAttributes::getLives()
+{
+	return lives_;
+}

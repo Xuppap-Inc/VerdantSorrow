@@ -27,7 +27,8 @@
 	_ATTACK,\
 	_FRAMEDIMAGE,\
 	_IMAGE,\
-	_WAVEMOVEMENT
+	_WAVEMOVEMENT, \
+	_PLAYERUI
 
 
 // Groups list - must have at least one element

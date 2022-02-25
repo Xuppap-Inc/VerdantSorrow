@@ -56,6 +56,12 @@ public:
     */
     void damagePlayer(int lives);
 
+    /**
+    Método que indica las vidas del jugador
+    *
+    @return las vidas del jugador actuales
+    */
+    int getLives();
 protected:
 
     int lives_;

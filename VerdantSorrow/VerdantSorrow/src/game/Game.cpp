@@ -138,10 +138,14 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	colManager->addCollider(playerCollider);
 	player->addComponent<SimplePhysicsPlayer>(colManager);
 	player->addComponent<Image>(&sdlutils().images().at("chica"));
+
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player->addComponent<Attack>(50, 50, colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
+
+	//Componente ui jugador
+	player->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 }
 void Game::platformGenerator(CollisionManager* colManager) {
 
