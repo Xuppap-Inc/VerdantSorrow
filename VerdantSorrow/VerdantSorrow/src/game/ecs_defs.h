@@ -28,7 +28,8 @@
 	_FRAMEDIMAGE,\
 	_IMAGE,\
 	_WAVEMOVEMENT, \
-	_PLAYERUI
+	_PLAYERUI, \
+	_BOSS_ATTRIBUTES
 
 
 // Groups list - must have at least one element

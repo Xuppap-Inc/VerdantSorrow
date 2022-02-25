@@ -5,7 +5,7 @@ class BossAtributos : public Transform
 private:
 	float life_;
 public:
-
+	__CMPID_DECL__(ecs::_BOSS_ATTRIBUTES)
 	BossAtributos() :life_(), Transform() {};
 	BossAtributos(Vector2D pos, Vector2D vel, float w, float h, float r, float vida) : life_(vida),
 		Transform(pos, vel, w, h, r) {};
