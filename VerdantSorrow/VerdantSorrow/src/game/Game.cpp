@@ -15,7 +15,6 @@
 #include "../components/FrogBoss/BossAtributos.h"
 #include "../components/FrogBoss/FrogJump.h"
 #include "../components/FrogBoss/FrogBigJump.h"
-#include "../components/FrogBoss/FrogBigJumpLateral.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/Wave/WaveMovement.h"
 

@@ -46,3 +46,13 @@ void FrogJump::update()
 
 	};
 }
+
+void FrogJump::attack(int dir) {
+	//Habrá que esperar los frames de anticipación de la animación cuando haya
+	auto& vel = tr_->getVel();
+
+	//x = {-1, 1} 
+	int x = 10 * dir;
+	vel = new Vector2D(x, -jumpForce_);
+	vel = vel.normalize() * jumpForce_;
+}

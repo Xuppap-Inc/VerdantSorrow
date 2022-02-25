@@ -13,6 +13,7 @@ public:
 
 	void initComponent() override;
 	void update() override;
+	void attack(int dir);
 
 private:
 	Transform* tr_;
