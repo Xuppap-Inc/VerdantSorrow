@@ -3,6 +3,7 @@
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 #include "Attack.h"
+#include "../../sdlutils/SDLUtils.h"
 
 using namespace std;
 PlayerCtrl::~PlayerCtrl()
@@ -12,13 +13,18 @@ PlayerCtrl::~PlayerCtrl()
 void PlayerCtrl::update()
 {
 	auto& ihdlr = ih();
-
+	auto currentTime = sdlutils().currRealTime();
 	auto& vel = tr_->getVel();
 	bool isAttacking = ent_->getComponent<Attack>()->isActive();
 
+	//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
+	//Se desactiva y se activa el deslizar
+	if (currentTime >= lastRoll + rollDuration && isRolling) {
+		deslizar = true;
+		isRolling = false;
+	}
 	//el jugador solo se puede mover si no esta atacando
-	if (!isAttacking && ihdlr.keyDownEvent()) {
-		
+	if (!isAttacking && !isRolling && ihdlr.keyDownEvent()) {
 		//salto
 		if ((ihdlr.isKeyDown(SDLK_w) || ihdlr.isKeyDown(SDLK_SPACE)) && attrib_->isOnGround()) {
 			
@@ -41,10 +47,24 @@ void PlayerCtrl::update()
 			deslizar = false;
 		}
 		//Roll
-		if (ihdlr.isKeyDown(SDLK_LSHIFT)) vel.set(Vector2D(-speed_, vel.getY()));
+		//Si ha pasado el tiempo suficiente como para volver a hacer roll y se pulsa el shift
+		//Si es movementdir = -1(izquierda) se da velocidad hacia la izquierda,
+		//Si es movementdir = 1(derecha)se da velocidad hacia la derecha
+		//Se activa el cooldown y el booleano que informa que está haciendo el roll
+		if (ihdlr.isKeyDown(SDLK_LSHIFT)){
+			if (currentTime >= lastRoll + rollDuration + rollDuration) {
+				if (movementDir_ == -1) vel.set(Vector2D(-rollSpeed_, vel.getY()));
+				else vel.set(Vector2D(rollSpeed_, vel.getY()));
+				lastRoll = currentTime;
+				isRolling = true;
+			}
+		}
 	}
-	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w)) 	
+	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w) && !isRolling) {
+		cout << "entro" << endl;
 		deslizar = true;
+	}
+		
 	//Si deslizar está activado, es decir ha dejado de pulsar d y a
 	//Si la velocidad es mayor que 1, positiva o negativa se irá reduciendo poco a poco
 	if ((tr_->getVel().getX() >= 1 && movementDir_ == 1) || (tr_->getVel().getX() <= -1 && movementDir_ == -1)){
