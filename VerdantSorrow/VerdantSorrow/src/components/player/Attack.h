@@ -34,10 +34,7 @@ protected:
     int attackCoolDown;
     int lastAttack;
 
-    Attack* collider_;
     CollisionManager* colMan_;
-    bool invulnerable_;
-    Uint32 invTimer;
     /**
     * Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
     */

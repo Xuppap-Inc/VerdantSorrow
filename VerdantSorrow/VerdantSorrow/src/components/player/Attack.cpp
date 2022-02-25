@@ -10,8 +10,6 @@ Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nul
 {
 	setActive(false);
 	colMan_ = colManager;
-	invTimer = 0;
-	invulnerable_ = true;
 }
 
 Attack::~Attack()
@@ -20,8 +18,6 @@ Attack::~Attack()
 
 void Attack::initComponent()
 {
-	collider_ = this;
-
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr, collider_ !=nullptr);
 
@@ -34,11 +30,11 @@ void Attack::update()
 	auto currentTime = sdlutils().currRealTime();
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
-		
+
 		setPosition();
 
 		if (currentTime >= lastAttack + attackDuration)
-			setActive(false);	
+			setActive(false);
 	}
 	else {
 		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
@@ -51,32 +47,25 @@ void Attack::update()
 			}
 		}
 	}
-	/*std::cout << isActive();*/
 	//Colisiones
-	if (colMan_->hasCollisions(collider_)) {
+	if (colMan_->hasCollisions(this)) {
 
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
+		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(this);
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger() && collider_->isActive()) {
+			if (c->isActive() && c->isTrigger() && isActive()) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
-					if (!invulnerable_) {
-						bA->setDamage(1);
-						invulnerable_ = true;
-						std::cout << bA->getLife() << std::endl;
-						invTimer = sdlutils().currRealTime();
-					}
+					bA->setDamage(1);
+					std::cout << "Vida rana: " << bA->getLife() << std::endl;
 				}
 			}
 		}
-
-		if (invTimer + 1000 > sdlutils().currRealTime()) return;
-		invulnerable_ = false;
 	}
 }
+
 
 void Attack::render()
 {
