@@ -89,11 +89,12 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
 	//Se añaden los atributos del boss que están junto al transform
-	auto FrogTr = Frog->addComponent<BossAtributos>();
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
+	auto FrogTr = Frog->addComponent<Transform>();
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
-	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f, 3.0f);
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150);
 	//Se le añade un color inicial a la rana, en este caso es negro
 	//Frog->addComponent<RectangleRenderer>(SDL_Color());
@@ -169,14 +170,15 @@ void Game::waveGenerator(CollisionManager* colManager, Entity* player, float x, 
 	//Se crea la onda expansiva
 	auto Wave = mngr_->addEntity();
 	//Se añaden los atributos del boss que están junto al transform
-	auto WaveTr = Wave->addComponent<BossAtributos>();
+	auto WaveAtribs = Wave->addComponent<BossAtributos>();
+	auto WaveTr = Wave->addComponent<Transform>();
 	auto WaveX = x;
 	auto WaveY = sdlutils().height() - 50;
 	//dir = {-1, 1}
 	auto WaveDir = dir;
 	auto WaveSpeed = 5;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
-	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f, 3.0f);
+	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f);
 	//Se le añade un color inicial a la onda
 	Wave->addComponent<RectangleRenderer>(SDL_Color());
 

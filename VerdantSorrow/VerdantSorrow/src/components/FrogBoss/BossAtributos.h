@@ -1,14 +1,13 @@
 #pragma once
-#include "../Transform.h"
-class BossAtributos : public Transform
+class BossAtributos :
+	public ecs::Component
 {
 private:
 	float life_;
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTRIBUTES)
-	BossAtributos() :life_(), Transform() {};
-	BossAtributos(Vector2D pos, Vector2D vel, float w, float h, float r, float vida) : life_(vida),
-		Transform(pos, vel, w, h, r) {};
+	BossAtributos() :life_(){};
+	BossAtributos(float vida) : life_(vida)	{};
 
 	float getLife() {
 		return life_;
@@ -16,15 +15,6 @@ public:
 
 	void setDamage(float l) {
 		life_ -= l;
-	}
-
-	void init (Vector2D pos, Vector2D vel, float w, float h, float r, float l) {
-		pos_ = pos;
-		vel_ = vel;
-		width_ = w;
-		height_ = h;
-		rot_ = r;
-		life_ = l;
 	}
 };
 
