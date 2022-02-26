@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\FrogBoss\FrogAttackManager.h" />
     <ClInclude Include="src\components\player\PlayerUI.h" />
     <ClInclude Include="src\components\FrogBoss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
@@ -63,8 +64,10 @@
     <ClInclude Include="src\utils\Singleton.h" />
     <ClInclude Include="src\utils\Vector2D.h" />
     <ClInclude Include="src\components\wave\WaveMovement.h" />
+    <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\FrogBoss\FrogAttackManager.cpp" />
     <ClCompile Include="src\components\player\PlayerUI.cpp" />
     <ClCompile Include="src\components\FrogBoss\FrogBigJump.cpp" />
     <ClCompile Include="src\components\Image.cpp" />
@@ -97,6 +100,7 @@
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
     <ClCompile Include="src\components\wave\WaveMovement.cpp" />
+    <ClCompile Include="src\components\FrogBoss\TongueAttack.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

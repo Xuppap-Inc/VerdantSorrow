@@ -8,8 +8,8 @@ class WaveMovement : public ecs::Component
 {
 public:
 	__CMPID_DECL__(ecs::_WAVEMOVEMENT)
-		WaveMovement();
-	WaveMovement(int speed, float jumpForce);
+	WaveMovement();
+	WaveMovement(int dir, float speed);
 
 	void initComponent() override;
 	void update() override;

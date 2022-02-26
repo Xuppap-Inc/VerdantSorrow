@@ -84,7 +84,7 @@ void Game::start() {
 }
 
 
-void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
+void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
@@ -112,11 +112,11 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player) {
 
 }
 
-void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
+void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se le añaden los atributos del player, no los del transform
-	player->addComponent<PlayerAttributes>();
+	player_->addComponent<PlayerAttributes>();
 	//Se le añade el transform
-	auto playerTr = player->addComponent<Transform>();
+	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
@@ -125,27 +125,27 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 	//player->addComponent<RectangleRenderer>();
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
-	player->addComponent<SimpleGravity>(2.0);
+	player_->addComponent<SimpleGravity>(2.0);
 
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player->addComponent<CollideWithBorders>();
+	player_->addComponent<CollideWithBorders>();
 	//Se añade un collider al jugador
-	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
+	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
-	player->addComponent<SimplePhysicsPlayer>(colManager);
-	player->addComponent<Image>(&sdlutils().images().at("chica"));
+	player_->addComponent<SimplePhysicsPlayer>(colManager);
+	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player->addComponent<Attack>(50, 50, colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(50, 50, colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 
 	//Componente ui jugador
-	player->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 }
 void Game::platformGenerator(CollisionManager* colManager) {
 
@@ -165,7 +165,7 @@ void Game::platformGenerator(CollisionManager* colManager) {
 	//Se añade el collider de la plataforma al colliderManager
 	colManager->addCollider(platformCollider);
 }
-void Game::waveGenerator(CollisionManager* colManager, Entity* player, float x, int dir) {
+void Game::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
 
 	//Se crea la onda expansiva
 	auto Wave = mngr_->addEntity();

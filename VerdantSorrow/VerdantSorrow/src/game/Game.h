@@ -14,13 +14,13 @@ public:
 	void init();
 	void start();
 
-	void frogGenerator(CollisionManager* colManager, Entity* player);
+	void frogGenerator(CollisionManager* colManager, Entity* player_);
 
-	void playerGenerator(CollisionManager* colManager, Entity* player);
+	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 	void platformGenerator(CollisionManager* colManager);
 	
-	void waveGenerator(CollisionManager* colManager, Entity* player, float x, int dir);
+	void waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir);
 
 private:
 	ecs::Manager* mngr_;
