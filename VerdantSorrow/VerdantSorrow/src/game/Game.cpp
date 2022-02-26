@@ -44,7 +44,7 @@ void Game::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	//frogGenerator(colManager, player);
+	frogGenerator(colManager, player);
 	platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);

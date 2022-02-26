@@ -66,3 +66,11 @@ void FramedImage::flipX(bool s)
 {
 	flipX_ = s;
 }
+
+void FramedImage::changetexture(Texture* tex, int row, int column, float time)
+{
+	frametime = time;
+	row_ = row;
+	column = column_;
+	tex_ = tex;
+}
