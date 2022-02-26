@@ -1,7 +1,6 @@
 #include "PlayerAttributes.h"
 #include "../../ecs/Entity.h"
 
-#include <iostream>
 PlayerAttributes::PlayerAttributes(): lives_(3), onGround(false), rightStop(false), leftStop(false)
 {
 }
@@ -18,8 +17,6 @@ bool PlayerAttributes::isOnGround()
 void PlayerAttributes::setOnGround(bool set)
 {
 	onGround = set;
-	//std::cout << "Player ground: " << onGround << std::endl;
-
 }
 
 bool PlayerAttributes::isRightStop()

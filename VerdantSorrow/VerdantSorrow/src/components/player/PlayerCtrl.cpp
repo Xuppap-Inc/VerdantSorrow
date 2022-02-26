@@ -54,7 +54,7 @@ void PlayerCtrl::update()
 		//Si es movementdir = 1(derecha)se da velocidad hacia la derecha
 		//Se activa el cooldown y el booleano que informa que está haciendo el roll
 		if (ihdlr.isKeyDown(SDLK_LSHIFT)){
-			if (currentTime >= lastRoll + rollDuration + rollDuration) {
+			if (currentTime >= lastRoll + rollDuration + rollCooldown) {
 				if (movementDir_ < 0) vel.set(Vector2D(-rollSpeed_, vel.getY()));
 				else vel.set(Vector2D(rollSpeed_, vel.getY()));
 				lastRoll = currentTime;
