@@ -12,7 +12,7 @@ public:
 	void init();
 	void start();
 
-	void playerGenerator(CollisionManager* colManager, Entity* player);
+	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 private:
 	ecs::Manager* mngr_;
