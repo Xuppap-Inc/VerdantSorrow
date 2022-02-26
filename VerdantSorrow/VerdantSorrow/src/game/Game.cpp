@@ -128,14 +128,13 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player) {
 
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player->addComponent<CollideWithBorders>();
-
+	//Se añade un collider al jugador
+	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 
-	//Se añade un collider al jugador
-	//new RectangleCollider(player->getWidth(), player->getHeight())
-	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
-	colManager->addCollider(playerCollider);
+	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	player->addComponent<SimplePhysicsPlayer>(colManager);
 	player->addComponent<Image>(&sdlutils().images().at("chica"));
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../ecs/Component.h"
 #include "PlayerAttributes.h"
-
+#include "../RectangleCollider.h"
 #include <SDL.h>
 class Transform;
 class PlayerCtrl : public ecs::Component
@@ -16,6 +16,7 @@ public:
 	int getMovementDir() { return movementDir_; }
 
 private:
+	RectangleCollider* playerCol_;
 	Transform* tr_;
 	float jumpForce_;
 	float speed_;
