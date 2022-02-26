@@ -29,7 +29,8 @@
 	_IMAGE,\
 	_WAVEMOVEMENT, \
 	_PLAYERUI, \
-	_BOSS_ATTRIBUTES
+	_BOSS_ATTRIBUTES, \
+	_BOSS_HP_BAR
 
 
 // Groups list - must have at least one element

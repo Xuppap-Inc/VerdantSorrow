@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\BossHPBar.h" />
     <ClInclude Include="src\components\player\PlayerUI.h" />
     <ClInclude Include="src\components\FrogBoss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
@@ -65,6 +66,7 @@
     <ClInclude Include="src\components\wave\WaveMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\BossHPBar.cpp" />
     <ClCompile Include="src\components\player\PlayerUI.cpp" />
     <ClCompile Include="src\components\FrogBoss\FrogBigJump.cpp" />
     <ClCompile Include="src\components\Image.cpp" />
