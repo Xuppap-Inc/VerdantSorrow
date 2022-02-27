@@ -96,7 +96,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerHubControl>(8);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
-	player_->addComponent<SimplePhysicsPlayer>(colManager);
+	//player_->addComponent<SimplePhysicsPlayer>(colManager);
 	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 

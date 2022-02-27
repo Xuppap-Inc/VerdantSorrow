@@ -3,10 +3,14 @@
 #include <iostream>
 
 #include "game/Game.h"
+#include "game/Hub.h"
 void start() {
-	Game g;
+	Hub h;
+	h.init();
+	h.start();
+	/*Game g;
 	g.init();
-	g.start();
+	g.start();*/
 }
 int main(int ac, char **av) {
 	try {
