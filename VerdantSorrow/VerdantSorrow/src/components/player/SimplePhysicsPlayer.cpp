@@ -93,7 +93,8 @@ void SimplePhysicsPlayer::update()
 						// Knock back
 						auto& vel = tr_->getVel();
 						vel.set(Vector2D(-5, -5));
-						// getMovementDir
+						attrib_->setOnGround(false);
+						//getMovementDir
 					}
 
 				}
