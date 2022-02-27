@@ -23,6 +23,7 @@ public:
 	void initComponent() override;
 	void render() override;
 	void flipX(bool h);
+	void changetexture(Texture* tex, int row, int column, float time);
 
 private:
 	Transform* tr_;
