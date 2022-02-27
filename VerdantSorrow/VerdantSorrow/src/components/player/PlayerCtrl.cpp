@@ -100,3 +100,13 @@ void PlayerCtrl::initComponent()
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
 }
+
+// Realiza un knockback en la direccion especificada
+void PlayerCtrl::doKnockback(int dir) {
+
+	auto& vel = tr_->getVel();
+	vel.set(Vector2D(knockbackForceX * dir, -knockbackForceY));
+	attrib_->setOnGround(false);
+
+	deslizar = true;
+}

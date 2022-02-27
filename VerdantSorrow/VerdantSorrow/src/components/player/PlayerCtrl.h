@@ -14,7 +14,7 @@ public:
 	void update() override;
 	void initComponent() override;
 	int getMovementDir() { return movementDir_; }
-	void changeSlideAtribute(bool value) { deslizar = value; }
+	void doKnockback(int dir);
 
 private:
 	RectangleCollider* playerCol_;
@@ -25,6 +25,7 @@ private:
 	float deceleration_ = 0.85;
 	float rollCooldown = 1000, rollDuration = 500, lastRoll;
 	bool deslizar = false, isRolling = false;
+	float knockbackForceX = 10, knockbackForceY = 10;
 
 	//Indica la direccion del movimiento del jugador (se usa para la direccion de ataque y animacion?)
 	int movementDir_;

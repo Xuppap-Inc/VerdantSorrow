@@ -92,19 +92,14 @@ void SimplePhysicsPlayer::update()
 						invTimer = sdlutils().currRealTime();
 
 
-						//Habrá que esperar los frames de anticipación de la animación cuando haya
-						//auto& vel = tr_->getVel();
-						//int x = 10 * -1;
-						//vel = new Vector2D(x, -5);
-						//vel = vel.normalize() * 5;
-
-
-						//// Knock back
-						auto& vel = tr_->getVel();
-						vel.set(Vector2D(-3, -5));
-						attrib_->setOnGround(false);
-						ctrl_->changeSlideAtribute(true);
-						//getMovementDir
+						// Knock back
+						float enemyXpos = ent->getComponent<Transform>()->getPos().getX();
+						// Calcular la direccion en la que se realizara el knockback
+						int knockbackDir; // Almacenarla en "knockbackDir"
+						enemyXpos > tr_->getPos().getX()
+							? knockbackDir = 1 : knockbackDir = -1;
+						// Informar al controlador
+						ctrl_->doKnockback(knockbackDir);
 					}
 
 				}
