@@ -85,7 +85,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f);
 	
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
