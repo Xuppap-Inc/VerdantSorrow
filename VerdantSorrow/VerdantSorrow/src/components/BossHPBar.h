@@ -2,7 +2,7 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "FrogBoss/BossAtributos.h"
-
+#include "../utils/Vector2D.h"
 class BossHPBar : public ecs::Component {
 public:
 
