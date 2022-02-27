@@ -9,7 +9,7 @@
 #include "Transform.h"
 
 
-FramedImage::FramedImage(Texture* tex, int row, int column,float time) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false)
+FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -37,12 +37,18 @@ void FramedImage::render()
 {
 	select_sprite(i, j);
 	if (sdlutils().currRealTime() - initime >= frametime) {
-		if (i < column_ - 1)i++;
+		if (i < column_ - 1) { 
+			i++; 
+			currentnumframes++;
+		}
 		else {
 			i = 0;
 			j++;
+			currentnumframes++;
 		}
-		if (j >= row_)j = 0;
+		if (currentnumframes >= numframes || j >= row_) { j = 0; i = 0; currentnumframes = 0; }
+
+
 		initime = sdlutils().currRealTime();
 	}
 	SDL_RendererFlip flip= SDL_FLIP_NONE;

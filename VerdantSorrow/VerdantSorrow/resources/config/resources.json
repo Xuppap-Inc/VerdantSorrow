@@ -5,10 +5,16 @@
     { "id" : "ARIAL24", "file" : "resources/fonts/ARIAL.ttf", "size": 24 },
     { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
   ],
-  
-  "images" : [
-    { "id" : "sdl_logo", "file" : "resources/images/SDL_logo.png" },
-    { "id" : "tennis_ball", "file" : "resources/images/tennis_ball.png" },
+
+  "images": [
+    {
+      "id": "sdl_logo",
+      "file": "resources/images/SDL_logo.png"
+    },
+    {
+      "id": "tennis_ball",
+      "file": "resources/images/tennis_ball.png"
+    },
     {
       "id": "star",
       "file": "resources/images/star.png"
@@ -20,6 +26,10 @@
     {
       "id": "chica",
       "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "ranajump",
+      "file": "resources/images/rana_jump.png"
     }
   ],
   

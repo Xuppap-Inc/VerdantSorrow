@@ -13,7 +13,7 @@ public:
 	__CMPID_DECL__(ecs::_FRAMEDIMAGE)
 
 
-		FramedImage(Texture* tex, int row, int column,float time);
+		FramedImage(Texture* tex, int row, int column,float time,int numframes);
 	virtual ~FramedImage();
 
 	void setTexture(Texture* tex) {
@@ -36,6 +36,8 @@ private:
 	int j = 0;
 	bool flipX_;
 	float initime = 0;
+	int numframes;
+	int currentnumframes = 0;
 
 };
 

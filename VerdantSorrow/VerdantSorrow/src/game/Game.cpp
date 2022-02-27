@@ -95,7 +95,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto FrogY = sdlutils().height();
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150);
+	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6,150,31);
 	//Se le añade un color inicial a la rana, en este caso es negro
 	//Frog->addComponent<RectangleRenderer>(SDL_Color());
 
