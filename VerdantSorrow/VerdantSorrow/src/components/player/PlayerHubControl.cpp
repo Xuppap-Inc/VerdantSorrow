@@ -16,23 +16,28 @@ void PlayerHubControl::update()
 
 
 	//movimiento en 8 direcciones
+	if (ihdlr.keyDownEvent()) {
 
-	if (ihdlr.isKeyDown(SDLK_w)) {
 
-		vel.set(Vector2D(vel.getX(), 0));
+		if (ihdlr.isKeyDown(SDLK_w)) {
+
+			vel.set(Vector2D(vel.getX(), -speed_));
+		}
+		if (ihdlr.isKeyDown(SDLK_a)) {
+
+			vel.set(Vector2D(-speed_, vel.getY()));
+		}
+		if (ihdlr.isKeyDown(SDLK_d)) {
+
+			vel.set(Vector2D(speed_, vel.getY()));
+		}
+		if (ihdlr.isKeyDown(SDLK_s)) {
+
+			vel.set(Vector2D(vel.getX(), speed_));
+		}
 	}
-	if (ihdlr.isKeyDown(SDLK_a)) {
-
-		vel.set(Vector2D(0, -vel.getY()));
-	}
-	if (ihdlr.isKeyDown(SDLK_d)) {
-
-		vel.set(Vector2D(0, vel.getY()));
-	}
-	if (ihdlr.isKeyDown(SDLK_s)) {
-
-		vel.set(Vector2D(-vel.getX(), 0));
-	}
+	else
+		vel.set(Vector2D(0, 0));
 }
 
 void PlayerHubControl::initComponent()

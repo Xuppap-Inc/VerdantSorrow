@@ -3,7 +3,11 @@
 #include <iostream>
 
 #include "game/Game.h"
+#include "game/Hub.h"
 void start() {
+	//Hub h;
+	//h.init();
+	//h.start();
 	Game g;
 	g.init();
 	g.start();
