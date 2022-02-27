@@ -31,7 +31,8 @@
 	_PLAYERUI, \
 	_BOSS_ATTRIBUTES, \
 	_BOSS_HP_BAR, \
-	_BOSS_ATTACK_MANAGER
+	_BOSS_ATTACK_MANAGER, \
+	_FOLLOWPLAYER 
 
 
 // Groups list - must have at least one element
