@@ -37,6 +37,7 @@ bool PlayerAttributes::isLeftStop()
 void PlayerAttributes::setLeftStop(bool set)
 {
 	leftStop = set;
+
 }
 
 void PlayerAttributes::damagePlayer(int lives) {

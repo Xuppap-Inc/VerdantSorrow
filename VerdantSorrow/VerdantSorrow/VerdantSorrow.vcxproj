@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\FollowPlayer.h" />
     <ClInclude Include="src\components\player\PlayerHubControl.h" />
     <ClInclude Include="src\components\BossHPBar.h" />
     <ClInclude Include="src\components\FrogBoss\FrogAttackManager.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\FollowPlayer.cpp" />
     <ClCompile Include="src\components\player\PlayerHubControl.cpp" />
     <ClCompile Include="src\components\BossHPBar.cpp" />
     <ClCompile Include="src\components\FrogBoss\FrogAttackManager.cpp" />
