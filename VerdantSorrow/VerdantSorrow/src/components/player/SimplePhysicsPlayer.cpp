@@ -78,7 +78,7 @@ void SimplePhysicsPlayer::update()
 					}
 				}
 
-				std::cout << upCollision << " " << leftCollision << " " << downCollision << " " << rightCollision << " " << std::endl;
+				//std::cout << upCollision << " " << leftCollision << " " << downCollision << " " << rightCollision << " " << std::endl;
 			}
 			else if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();

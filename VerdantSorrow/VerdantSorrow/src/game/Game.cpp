@@ -15,6 +15,7 @@
 #include "../components/FrogBoss/BossAtributos.h"
 #include "../components/FrogBoss/FrogJump.h"
 #include "../components/FrogBoss/FrogBigJump.h"
+#include "../components/BossHPBar.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/Wave/WaveMovement.h"
 
@@ -115,6 +116,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
 	//Frog->addComponent<FrogBigJump>(40);
+	Frog->addComponent<BossHPBar>();
 
 }
 
