@@ -99,7 +99,9 @@ void SimplePhysicsPlayer::update()
 						enemyXpos > tr_->getPos().getX()
 							? knockbackDir = 1 : knockbackDir = -1;
 						// Informar al controlador
-						ctrl_->doKnockback(knockbackDir);
+
+
+						ctrl_->doKnockback(knockbackDir, enemyXpos);
 					}
 
 				}
