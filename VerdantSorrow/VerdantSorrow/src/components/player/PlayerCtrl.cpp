@@ -102,9 +102,7 @@ void PlayerCtrl::initComponent()
 }
 
 // Realiza un knockback en la direccion especificada
-void PlayerCtrl::doKnockback(int dir, float frogX) {
-
-	cout << "PlayerX = " << tr_->getPos().getX();
+void PlayerCtrl::doKnockback(int dir) {
 
 	auto& vel = tr_->getVel();
 	vel.set(Vector2D(knockbackForceX * dir, -knockbackForceY));

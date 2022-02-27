@@ -14,7 +14,7 @@ public:
 	void update() override;
 	void initComponent() override;
 	int getMovementDir() { return movementDir_; }
-	void doKnockback(int dir, float enemX);
+	void doKnockback(int dir);
 
 private:
 	RectangleCollider* playerCol_;
