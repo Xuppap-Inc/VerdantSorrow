@@ -89,13 +89,19 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
 	//Se añaden los atributos del boss que están junto al transform
+
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
+
+	
+
 	auto FrogTr = Frog->addComponent<Transform>();
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
+
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6,150,31);
+
 	//Se le añade un color inicial a la rana, en este caso es negro
 	//Frog->addComponent<RectangleRenderer>(SDL_Color());
 
