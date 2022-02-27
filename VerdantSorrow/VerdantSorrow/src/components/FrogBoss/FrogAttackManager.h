@@ -24,12 +24,13 @@ public:
 	void update() override;
 	ecs::Entity* createFly();
 	void createWave(int dir);
+	void onFlyDied();
 private:
 	FrogJump* frogJump_;
 	FrogBigJump* bigJump_;
 	TongueAttack* tongueAttack_;
 	ecs::Entity* fly_;
-	ecs::Entity* player_;
+	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
 	
@@ -38,5 +39,7 @@ private:
 	int jumpDirection_;	
 	int jumpsUntilNextTongue_;
 	int flySpacing_;
+
+	
 };
 
