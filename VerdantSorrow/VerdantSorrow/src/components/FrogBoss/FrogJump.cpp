@@ -8,7 +8,7 @@ FrogJump::FrogJump(): tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpC
 {
 }
 
-FrogJump::FrogJump(float jumpForce): tr_(), isJumping_(false), jumpForce_(jumpForce), lastJump_(), jumpCd_(2000)
+FrogJump::FrogJump(float jumpForce): tr_(), isJumping_(false), jumpForce_(jumpForce), lastJump_(), jumpCd_(1000)
 {
 }
 
@@ -31,6 +31,8 @@ void FrogJump::update()
 	/*	std::cout << x << std::endl;*/
 		vel = new Vector2D(x, -jumpForce_);
 		vel = vel.normalize() * jumpForce_;
+		fr_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
+		fr_->repeat(false);
 		if (x < 0)fr_->flipX(false);
 		else fr_->flipX(true);
 	}
@@ -43,8 +45,10 @@ void FrogJump::update()
 	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {
 		isJumping_ = false;
 		lastJump_ = sdlutils().currRealTime();
+		
 
-	};
+	}
+	
 }
 
 void FrogJump::attack(int dir) {

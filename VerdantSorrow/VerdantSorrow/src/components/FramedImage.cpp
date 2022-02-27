@@ -9,7 +9,7 @@
 #include "Transform.h"
 
 
-FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_)
+FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_),repeat_(false), repeating_(false)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -35,18 +35,25 @@ void FramedImage::initComponent()
 
 void FramedImage::render()
 {
+	
 	select_sprite(i, j);
-	if (sdlutils().currRealTime() - initime >= frametime) {
+
+	if (!repeating_&&sdlutils().currRealTime() - initime >= frametime/numframes) {
+		currentnumframes++;
 		if (i < column_ - 1) { 
-			i++; 
-			currentnumframes++;
+			i++; 	
 		}
 		else {
 			i = 0;
-			j++;
-			currentnumframes++;
+			j++;		
 		}
-		if (currentnumframes >= numframes || j >= row_) { j = 0; i = 0; currentnumframes = 0; }
+		if ((currentnumframes >= numframes - 1)) { 
+			j = 0; i = 0; currentnumframes = 0;
+		    if (repeat_) {
+			  repeating_ = true;
+			}
+			 
+		}
 
 
 		initime = sdlutils().currRealTime();
@@ -73,12 +80,23 @@ void FramedImage::flipX(bool s)
 	flipX_ = s;
 }
 
+void FramedImage::repeat(bool h)
+{
+	repeat_ = h;
+}
 
-void FramedImage::changeanim(Texture* tex, int row, int column, float time)
+
+void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_)
 {
 	frametime = time;
 	tex_ = tex;
 	row_ = row;
 	column_ = column;
+	currentnumframes = 0;
+	numframes = numframes_;
+	i = j = 0;
+	initime = sdlutils().currRealTime();
+	m_clip.w = tex_->width() / column;
+	m_clip.h = tex_->height() / row;
 
 }

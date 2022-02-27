@@ -29,6 +29,7 @@ void FrogBigJump::update()
 		/*	std::cout << x << std::endl;*/
 		vel = new Vector2D(x, -jumpForce_);
 		vel = vel.normalize() * jumpForce_;
+		//fr_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 	}
 
 	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {

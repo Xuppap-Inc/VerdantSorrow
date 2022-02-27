@@ -23,9 +23,9 @@ public:
 	void initComponent() override;
 	void render() override;
 	void flipX(bool h);
+	void repeat(bool h);
 
-
-	void changeanim(Texture* tex, int row, int column, float time);
+	void changeanim(Texture* tex, int row, int column, float time, int numframes_);
 
 
 private:
@@ -41,6 +41,8 @@ private:
 	float initime = 0;
 	int numframes;
 	int currentnumframes = 0;
+	bool repeat_;
+	bool repeating_;
 
 };
 
