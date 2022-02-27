@@ -88,6 +88,12 @@ void SimplePhysicsPlayer::update()
 						attrib_->damagePlayer(1);
 						invulnerable_ = true;
 						invTimer = sdlutils().currRealTime();
+
+
+						// Knock back
+						auto& vel = tr_->getVel();
+						vel.set(Vector2D(-5, -5));
+						// getMovementDir
 					}
 
 				}
