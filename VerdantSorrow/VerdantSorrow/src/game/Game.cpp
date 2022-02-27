@@ -18,6 +18,8 @@
 #include "../components/BossHPBar.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/Wave/WaveMovement.h"
+#include "../components/FollowPlayer.h"
+#include "../components/BossHPBar.h"
 
 #include "../components/FrogBoss/CollideWithBordersBoss.h"
 #include "CollisionManager.h"
@@ -49,6 +51,7 @@ void Game::init()
 	platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
+	flyGenerator(colManager, player);
 }
 
 void Game::start() {
@@ -115,7 +118,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 	Frog->addComponent<FrogJump>(30);
-	//Frog->addComponent<FrogBigJump>(40);
+	Frog->addComponent<FrogBigJump>(40);
 	Frog->addComponent<BossHPBar>();
 
 }
@@ -155,6 +158,30 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 }
+void Game::flyGenerator(CollisionManager* colManager, Entity* player_) {
+
+
+	auto Fly = mngr_->addEntity();
+	auto FlyAtribs = Fly->addComponent<BossAtributos>(1.0f);
+	auto FlyTr = Fly->addComponent<Transform>();
+	auto playerTr = player_->getComponent<Transform>();
+	auto FlyX = playerTr->getPos().getX();
+	auto distY= 100;
+	auto FlyY = playerTr->getPos().getY();
+
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
+	FlyTr->init(Vector2D(FlyX, FlyY+distY), Vector2D(), 50,50, 0.0f);
+
+	//Se le añade un color inicial en este caso es negro
+	Fly->addComponent<RectangleRenderer>(SDL_Color());
+
+	//Componente que se usa para seguir al jugador
+	//Fly->addComponent<FollowPlayer>(playerTr, 150.0f,-100.0f, Vector2D(), 7.0f);
+
+	
+
+}
+
 void Game::platformGenerator(CollisionManager* colManager) {
 
 	//Se crea una plataforma de ejemplo
