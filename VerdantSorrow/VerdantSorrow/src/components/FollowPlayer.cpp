@@ -42,7 +42,6 @@ void FollowPlayer::update()
 	}
 	else
 	{
-		//flyVel = playerVel * 0.5f;
 		Vector2D distance = (playerPos - flyPos);
 		auto velX = distance.normalize().getX();
 		if (abs(distance.getX()) <= offsetX_) 
@@ -50,7 +49,7 @@ void FollowPlayer::update()
 			velX = 0.0f;
 		}
 
-		flyVel = Vector2D((velX * followVel_), distance.getY());
+		flyVel = Vector2D((velX * followVel_), distance.getY()+ offsetY_);
 		
 	}
 
