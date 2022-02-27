@@ -4,6 +4,7 @@
 #include "../RectangleCollider.h"
 #include "PlayerAttributes.h"
 #include "../SimpleGravity.h"
+#include "PlayerCtrl.h"
 #include "../../sdlutils/SDLUtils.h"
 
 #include <vector>
@@ -28,6 +29,7 @@ protected:
     RectangleCollider* collider_;
     PlayerAttributes* attrib_;
     SimpleGravity* gravity_;
+    PlayerCtrl* ctrl_;
     bool invulnerable_;
     Uint32 invTimer;
 };

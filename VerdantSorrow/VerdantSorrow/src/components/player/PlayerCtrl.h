@@ -14,6 +14,7 @@ public:
 	void update() override;
 	void initComponent() override;
 	int getMovementDir() { return movementDir_; }
+	void changeSlideAtribute(bool value) { deslizar = value; }
 
 private:
 	RectangleCollider* playerCol_;

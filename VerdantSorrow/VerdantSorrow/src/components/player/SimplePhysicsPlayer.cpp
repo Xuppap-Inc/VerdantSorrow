@@ -18,6 +18,8 @@ void SimplePhysicsPlayer::initComponent()
 	collider_ = ent_->getComponent<RectangleCollider>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
 	gravity_ = ent_->getComponent<SimpleGravity>();
+	ctrl_ = ent_->getComponent<PlayerCtrl>();
+
 	assert(tr_ != nullptr && collider_ != nullptr && attrib_ != nullptr);
 }
 
@@ -90,10 +92,18 @@ void SimplePhysicsPlayer::update()
 						invTimer = sdlutils().currRealTime();
 
 
-						// Knock back
+						//Habrá que esperar los frames de anticipación de la animación cuando haya
+						//auto& vel = tr_->getVel();
+						//int x = 10 * -1;
+						//vel = new Vector2D(x, -5);
+						//vel = vel.normalize() * 5;
+
+
+						//// Knock back
 						auto& vel = tr_->getVel();
-						vel.set(Vector2D(-5, -5));
+						vel.set(Vector2D(-3, -5));
 						attrib_->setOnGround(false);
+						ctrl_->changeSlideAtribute(true);
 						//getMovementDir
 					}
 
@@ -103,8 +113,9 @@ void SimplePhysicsPlayer::update()
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
 		invulnerable_ = false;		
-
 	}
+
+
 
 }
 
