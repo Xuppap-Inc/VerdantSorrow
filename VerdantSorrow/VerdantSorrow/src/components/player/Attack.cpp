@@ -59,7 +59,6 @@ void Attack::update()
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
 					bA->setDamage(1);
-					std::cout << "Vida rana: " << bA->getLife() << std::endl;
 				}
 			}
 		}
@@ -70,8 +69,11 @@ void Attack::update()
 void Attack::render()
 {
 	if(isActive()){
-		Texture* tx = &sdlutils().images().at("star");
-		tx->render(getCollider());
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 0,0,0, 255);
+
+		SDL_Rect dest = getCollider();
+
+		SDL_RenderFillRect(sdlutils().renderer(), &dest);
 	}
 }
 
