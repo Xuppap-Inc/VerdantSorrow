@@ -175,13 +175,15 @@ El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar
 La cámara estará posicionada de modo que se muestre una vista lateral del personaje y del escenario. Según el jugador vaya avanzando, la cámara lo seguirá con un cierto delay haciendo scroll, con el jugador siempre centrado en la cámara. En las peleas con los jefes la cámara está fija en el centro porque las zonas de combate ocupan una pantalla únicamente.
 
 ### <a name="dinamica"></a> 2.4. Dinámica  
-- Objetivo: Avanzar a través de las diferentes zonas venciendo a los jefes que se encuentren por el camino.  
+- Objetivo: Avanzar a través de las diferentes zonas venciendo a los 3 jefes para abrir la puerta central.  
 
-- Ganar: Acabar con el jefe final.  
+- Ganar: Acabar con el jefe actual.
 
-- Perder: Morir en combate contra los enemigos.  
+- Recompensa: Nuevos caminos en el hub, nuevos diálogos y jefe.
 
-- Castigo: Volver a empezar desde el checkpoint más cercano (los checkpoints estarán en pequeños pasillos entre las zonas).  
+- Perder: Morir en combate contra los jefes  
+
+- Castigo: Volver al hub y tener que comenzar de nuevo el jefe.  
 
 
 ### <a name="estetica"></a> 2.5. Estética
