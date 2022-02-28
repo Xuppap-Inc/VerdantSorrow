@@ -4,7 +4,8 @@
 #include "../Transform.h"
 
 
-SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0)
+SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
+	exitCollision(false),lastCollision(3,false)
 {
 }
 
@@ -46,39 +47,35 @@ void SimplePhysicsPlayer::update()
 
 				float lastPositionX = pos.getX() - velPlayer.getX();
 				float lastPositionY = pos.getY() - velPlayer.getY();
+				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
+				float colliderDiffY = (tr_->getHeight() - collider_->getHeight()) / 2;
 
-				bool leftCollision = lastPositionX + collider_->getWidth() <= posCollider.getX();
-				bool rightCollision = lastPositionX >= posCollider.getX() + c->getWidth();
-				bool upCollision = lastPositionY + collider_->getHeight() <= posCollider.getY();
-				bool downCollision = lastPositionY >= posCollider.getY() + c->getHeight();
-
-				if (upCollision) {//arriba
-					if (!attrib_->isOnGround()) {
-						velPlayer.setY(0);
-						tr_->getPos().setY(c->getPos().getY() - collider_->getHeight());
-						attrib_->setOnGround(true);
-					}
+				if (lastPositionX + collider_->getWidth() <= posCollider.getX()) {//colision por la izda
+					velPlayer.setX(0);
+					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX);
+					attrib_->setRightStop(true);
+					lastCollision[1] = true;
+					
 				}
-				else if (downCollision) {//abajo
+				else if (lastPositionX >= posCollider.getX() + c->getWidth()) {//colision por la derecha
+					velPlayer.setX(0);
+					tr_->getPos().setX(posCollider.getX() + c->getWidth() - colliderDiffX);
+					attrib_->setLeftStop(true);
+					lastCollision[2] = true;
+				}
+				else if (lastPositionY + collider_->getHeight() <= posCollider.getY()) {//arriba
+
 					velPlayer.setY(0);
-					tr_->getPos().setY(c->getPos().getY() + c->getHeight());
+					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight() - colliderDiffY);
+					attrib_->setOnGround(true);
+					lastCollision[0] = true;
 				}
-				else if (leftCollision) {//colision por la izda
-					if (!attrib_->isRightStop()) {
-						velPlayer.setX(0);
-						tr_->getPos().setX(posCollider.getX() - collider_->getWidth());
-						attrib_->setRightStop(true);
-					}
-				}
-				else if (rightCollision) {//colision por la derecha
-					if (!attrib_->isLeftStop()) {
-						velPlayer.setX(0);
-						tr_->getPos().setX(posCollider.getX() + c->getWidth());
-						attrib_->setLeftStop(true);
-					}
+				else if (lastPositionY >= posCollider.getY() + c->getHeight()) {//abajo
+					velPlayer.setY(0);
+					tr_->getPos().setY(c->getPos().getY() + c->getHeight() - colliderDiffY);
 				}
 
-				//std::cout << upCollision << " " << leftCollision << " " << downCollision << " " << rightCollision << " " << std::endl;
+				exitCollision = true;
 			}
 			else if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
@@ -110,6 +107,21 @@ void SimplePhysicsPlayer::update()
 		invulnerable_ = false;		
 	}
 
+	else if (exitCollision) {
+		if (lastCollision[0]) {
+			attrib_->setOnGround(false);
+			lastCollision[0] = false;
+		}
+		if (lastCollision[1]) {
+			attrib_->setRightStop(false);
+			lastCollision[1] = false;
+		}
+		if (lastCollision[2]) {
+			attrib_->setLeftStop(false);
+			lastCollision[2] = false;
+		}
+		exitCollision = false;
+	}
 
 
 }

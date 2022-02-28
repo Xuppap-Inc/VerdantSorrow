@@ -22,7 +22,6 @@ void PlayerCtrl::update()
 	if (currentTime >= lastRoll + rollDuration && isRolling) {
 		deslizar = true;
 		isRolling = false;
-		playerCol_->setActive(true);
 	}
 
 	//el jugador solo se puede mover si no esta atacando ni haciendo voltereta
@@ -60,7 +59,6 @@ void PlayerCtrl::update()
 				else vel.set(Vector2D(rollSpeed_, vel.getY()));
 				lastRoll = currentTime;
 				isRolling = true;
-				playerCol_->setActive(false);
 			}
 		}
 	}

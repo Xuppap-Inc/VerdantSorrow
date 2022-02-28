@@ -51,7 +51,7 @@ void Game::init()
 	platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
-	flyGenerator(colManager, player);
+	//flyGenerator(colManager, player);
 }
 
 void Game::start() {
@@ -131,7 +131,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	//Se le da un renderer rectangular blanco por defecto al player
 	//player->addComponent<RectangleRenderer>();
 
@@ -141,7 +141,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
