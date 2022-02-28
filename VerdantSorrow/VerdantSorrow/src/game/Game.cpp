@@ -85,63 +85,52 @@ void Game::start() {
 
 void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
-	//Se crea a la rana 
 	auto Frog = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
-
-	
 
 	auto FrogTr = Frog->addComponent<Transform>();
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height();
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
+
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
-
-	//Se le añade un color inicial a la rana, en este caso es negro
-	//Frog->addComponent<RectangleRenderer>(SDL_Color());
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
 	frogCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
 	colManager->addCollider(frogCollider);
-	//Collider de paredes
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
+
 	Frog->addComponent<FrogJump>(30);
 	//Frog->addComponent<FrogBigJump>(40);
+
 	Frog->addComponent<BossHPBar>();
 
 }
 
 void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
-	//Se le añaden los atributos del player, no los del transform
 	player_->addComponent<PlayerAttributes>();
-	//Se le añade el transform
+
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
-	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
-	//Se le da un renderer rectangular blanco por defecto al player
 
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
 	player_->addComponent<SimpleGravity>(2.0);
-
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
+
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 
-	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
+	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
+
 	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
@@ -178,20 +167,16 @@ void Game::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 void Game::platformGenerator(CollisionManager* colManager) {
 
-	//Se crea una plataforma de ejemplo
 	auto platform = mngr_->addEntity();
-	//Se añade el transform a la plataforma
+
 	auto platformTr = platform->addComponent<Transform>();
 	auto platformX = sdlutils().width() / 3 - 200;
 	auto platformY = sdlutils().height() / 4 * 3;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la plataforma
 	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);
-	//Se le da un renderer rectangular, blanco por defecto
+
 	platform->addComponent<RectangleRenderer>();
 
-	//Se crea un collider para la plataforma
 	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
-	//Se añade el collider de la plataforma al colliderManager
 	colManager->addCollider(platformCollider);
 }
 void Game::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
