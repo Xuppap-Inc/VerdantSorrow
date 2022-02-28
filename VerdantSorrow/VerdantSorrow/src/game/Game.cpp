@@ -15,6 +15,7 @@
 #include "../components/player/PlayerComponents.h"
 #include "../components/BossComponents.h"
 #include "../components/Wave/WaveMovement.h"
+#include "../components/FrogBoss/FrogAttackManager.h"
 
 
 #include "CollisionManager.h"
@@ -103,7 +104,8 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 
-	Frog->addComponent<FrogJump>(30);
+	Frog->addComponent<FrogAttackManager>();
+	//Frog->addComponent<FrogJump>(30);
 	//Frog->addComponent<FrogBigJump>(40);
 
 	Frog->addComponent<BossHPBar>();
@@ -140,6 +142,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+	mngr_->setHandler(ecs::_PLAYER, player_);
 }
 void Game::flyGenerator(CollisionManager* colManager, Entity* player_) {
 

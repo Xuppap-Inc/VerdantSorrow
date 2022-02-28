@@ -33,30 +33,49 @@ void FrogAttackManager::initComponent()
 	tongueAttack_ = ent_->addComponent<TongueAttack>();
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	attr_ = ent_->getComponent<BossAtributos>();
 	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr;	
 	assert(correct);
 }
 
+//Patrones de ataque de la rana
 void FrogAttackManager::update()
 {
 	auto& rand = sdlutils().rand();
 	if (frogState_ == FIRST_PHASE) {
-		if (jumpsUntilNextTongue_ == 0 && !jumping_) {
-			//TODO spawn fly, tongue attack
-			std::cout << "Lenguetazo" << std::endl;
-			jumpsUntilNextTongue_ = rand.nextInt(3, 5);
+		if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
+			std::cout << "hacia la izq" << std::endl;
+			jumpDirection_ == -1;
 		}
-		if (jumping_ && tr_->getPos().getY() + tr_->getHeight() > sdlutils().height()) {
+		else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
+			std::cout << "hacia la der" << std::endl;
+			jumpDirection_ == 1;
+		}
+		
+		
+		if (jumping_ && attr_->isOnGround()) {
+			std::cout << "parando" << std::endl;
 			jumping_ = false;
 			--jumpsUntilNextTongue_;
+			if (jumpsUntilNextTongue_ == 0) {
+				//TODO spawn fly, tongue attack
+				std::cout << "Lenguetazo" << std::endl;
+				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
+			}
 		}
 		if (!jumping_) {
-			int dir = 1;
-			frogJump_->attack(dir);
+			std::cout << "saltando" << std::endl;
+			frogJump_->attack(jumpDirection_);
+			jumping_ = true;
 		}
+		
+		
+
 	}else if (FLY_DIED) {
 		//Cambio a sprite enfadado
-		bigJump_->attack(0);
+		if (!jumping_ && !jumpingBig_) {
+			bigJump_->attack(0); 			
+		}
 	}
 	else if (SECOND_PHASE) {
 		auto jump = rand.nextInt(0, 100);

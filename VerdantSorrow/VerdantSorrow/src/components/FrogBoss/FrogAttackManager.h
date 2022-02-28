@@ -5,6 +5,7 @@ class FrogBigJump;
 class Transform;
 class TongueAttack;
 class CollisionManager;
+class BossAtributos;
 
 #pragma once
 class FrogAttackManager : public ecs::Component
@@ -33,13 +34,14 @@ private:
 	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
+	BossAtributos* attr_;
 	
 	State frogState_;
 	bool jumping_;
 	int jumpDirection_;	
 	int jumpsUntilNextTongue_;
 	int flySpacing_;
-
-	
+	bool attacking_;
+	bool jumpingBig_;
 };
 

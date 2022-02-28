@@ -20,22 +20,22 @@ void FrogBigJump::initComponent()
 
 void FrogBigJump::update()
 {
-	auto& RNG = sdlutils().rand();
-	auto& vel = tr_->getVel();
+	//auto& RNG = sdlutils().rand();
+	//auto& vel = tr_->getVel();
 
-	if (lastJump_ + jumpCd_ <= sdlutils().currRealTime() && !isJumping_) {
-		isJumping_ = true;
-		int x = 0;
-		/*	std::cout << x << std::endl;*/
-		vel = new Vector2D(x, -jumpForce_);
-		vel = vel.normalize() * jumpForce_;
-		//fr_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-	}
+	//if (lastJump_ + jumpCd_ <= sdlutils().currRealTime() && !isJumping_) {
+	//	isJumping_ = true;
+	//	int x = 0;
+	//	/*	std::cout << x << std::endl;*/
+	//	vel = new Vector2D(x, -jumpForce_);
+	//	vel = vel.normalize() * jumpForce_;
+	//	//fr_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+	//}
 
-	if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {
-		isJumping_ = false;
-		lastJump_ = sdlutils().currRealTime();
-	};
+	//if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {
+	//	isJumping_ = false;
+	//	lastJump_ = sdlutils().currRealTime();
+	//};
 }
 
 void FrogBigJump::attack(int dir) {
