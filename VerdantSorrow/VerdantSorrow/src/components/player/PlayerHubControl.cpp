@@ -36,8 +36,11 @@ void PlayerHubControl::update()
 			vel.set(Vector2D(vel.getX(), speed_));
 		}
 	}
-	else
+	else {
+
 		vel.set(Vector2D(0, 0));
+	}
+	vel.normalize();
 }
 
 void PlayerHubControl::initComponent()

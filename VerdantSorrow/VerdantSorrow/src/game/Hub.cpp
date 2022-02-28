@@ -88,9 +88,9 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f);
 	
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>();
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(8);
