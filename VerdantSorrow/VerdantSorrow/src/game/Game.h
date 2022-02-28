@@ -22,6 +22,8 @@ public:
 	
 	void waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir);
 
+	void rootGenerator(CollisionManager* colManager, Entity* player_, float x);
+
 	void flyGenerator(CollisionManager* colManager, Entity* player_);
 
 private:
