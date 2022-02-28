@@ -12,16 +12,11 @@
 #include "../components/Transform.h"
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
-#include "../components/FrogBoss/BossAtributos.h"
-#include "../components/FrogBoss/FrogJump.h"
-#include "../components/FrogBoss/FrogBigJump.h"
-#include "../components/BossHPBar.h"
 #include "../components/player/PlayerComponents.h"
+#include "../components/BossComponents.h"
 #include "../components/Wave/WaveMovement.h"
-#include "../components/FollowPlayer.h"
-#include "../components/BossHPBar.h"
 
-#include "../components/FrogBoss/CollideWithBordersBoss.h"
+
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -133,7 +128,6 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	//Se le da un renderer rectangular blanco por defecto al player
-	//player->addComponent<RectangleRenderer>();
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre porque si no no se colisiona correctamente contra el suelo
 	player_->addComponent<SimpleGravity>(2.0);

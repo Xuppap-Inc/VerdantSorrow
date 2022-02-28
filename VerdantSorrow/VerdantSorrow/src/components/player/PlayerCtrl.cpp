@@ -63,7 +63,6 @@ void PlayerCtrl::update()
 		}
 	}
 	else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w) && !isRolling && !isAttacking) {
-		cout << "deslizo" << endl;
 		deslizar = true;
 	}
 		

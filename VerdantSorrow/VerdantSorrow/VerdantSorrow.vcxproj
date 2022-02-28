@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\BossComponents.h" />
     <ClInclude Include="src\components\FollowPlayer.h" />
     <ClInclude Include="src\components\player\PlayerHubControl.h" />
     <ClInclude Include="src\components\BossHPBar.h" />
