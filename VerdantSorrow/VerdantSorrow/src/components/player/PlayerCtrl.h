@@ -9,12 +9,15 @@ class PlayerCtrl : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::_PLAYERCTRL)
 	PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) : tr_(nullptr), speed_(speed), jumpForce_(jumpForce)
-		, rollSpeed_(rollSpeed)	, deceleration_(deceleration), attrib_(),movementDir_(1) {}
+		, rollSpeed_(rollSpeed)	, deceleration_(deceleration), attrib_(),movementDir_(1),lastRoll(),playerCol_(nullptr) {}
 	virtual ~PlayerCtrl();
 	void update() override;
 	void initComponent() override;
+
 	int getMovementDir() { return movementDir_; }
 	void doKnockback(int dir);
+	void doAttack();
+	void doSlide();
 
 private:
 	RectangleCollider* playerCol_;
@@ -24,10 +27,10 @@ private:
 	float rollSpeed_;
 	float deceleration_ = 0.85;
 	float rollCooldown = 1000, rollDuration = 500, lastRoll;
-	bool deslizar = false, isRolling = false;
+	bool slide = false, isRolling = false;
 	float knockbackForceX = 10, knockbackForceY = 10;
 
-	//Indica la direccion del movimiento del jugador (se usa para la direccion de ataque y animacion?)
+	//Indica la direccion del movimiento del jugador
 	int movementDir_;
 
 	PlayerAttributes* attrib_;
