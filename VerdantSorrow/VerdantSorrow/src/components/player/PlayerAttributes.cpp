@@ -40,6 +40,16 @@ void PlayerAttributes::setLeftStop(bool set)
 
 }
 
+bool PlayerAttributes::isDownStop()
+{
+	return downStop;
+}
+
+void PlayerAttributes::setDownStop(bool set)
+{
+	downStop = set;
+}
+
 void PlayerAttributes::damagePlayer(int lives) {
 	lives_ -= lives;
 }

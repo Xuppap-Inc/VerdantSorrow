@@ -48,6 +48,18 @@ public:
     @param set: Valor que tomará leftStop
     */
     void setLeftStop(bool set);
+    /**
+   Método que indica si el jugador no puede ir hacia ABAJO
+   *
+   @return true si tiene bloqueada la acción de moverse hacia abajo, false en caso contrario
+   */
+    bool isDownStop();
+    /**
+    Método que permite cambiar la variable downStop, que indica si el jugador no puede ir hacia ABAJO
+    *
+    @param set: Valor que tomará downStop
+    */
+    void setDownStop(bool set);
 
     /**
     Método que resta una cantidad determinada de vidas al jugador
@@ -73,5 +85,7 @@ protected:
     bool rightStop;
     //Booleana que indica si el jugador se puede mover hacia la izquierda
     bool leftStop;
+    //Indica si se puede mover hacia abajo
+    bool downStop;
 };
 
