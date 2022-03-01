@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "FrogScene.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -24,16 +24,16 @@
 using ecs::Entity;
 using ecs::Manager;
 
-Game::Game() : mngr_(nullptr)
+FrogScene::FrogScene() : mngr_(nullptr)
 {
 }
 
-Game::~Game()
+FrogScene::~FrogScene()
 {
 	delete mngr_;
 }
 
-void Game::init()
+void FrogScene::init()
 {
 	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
@@ -52,7 +52,7 @@ void Game::init()
 	//flyGenerator(colManager, player);
 }
 
-void Game::start() {
+void FrogScene::start() {
 
 	// a boolean to exit the loop
 	bool exit = false;
@@ -86,7 +86,7 @@ void Game::start() {
 }
 
 
-void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
+void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto Frog = mngr_->addEntity();
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
@@ -114,7 +114,7 @@ void Game::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 }
 
-void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
+void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
@@ -146,7 +146,7 @@ void Game::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 	mngr_->setHandler(ecs::_PLAYER, player_);
 }
-void Game::flyGenerator(CollisionManager* colManager, Entity* player_) {
+void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 
 	auto Fly = mngr_->addEntity();
@@ -170,7 +170,7 @@ void Game::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 }
 
-void Game::platformGenerator(CollisionManager* colManager) {
+void FrogScene::platformGenerator(CollisionManager* colManager) {
 
 	auto platform = mngr_->addEntity();
 
@@ -184,7 +184,7 @@ void Game::platformGenerator(CollisionManager* colManager) {
 	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager->addCollider(platformCollider);
 }
-void Game::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
+void FrogScene::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
 
 	//Se crea la onda expansiva
 	auto Wave = mngr_->addEntity();
@@ -209,7 +209,7 @@ void Game::waveGenerator(CollisionManager* colManager, Entity* player_, float x,
 	//Se añade el movimiento horizontal
 	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
 }
-void Game::rootGenerator(CollisionManager* colManager, Entity* player_, float x) {
+void FrogScene::rootGenerator(CollisionManager* colManager, Entity* player_, float x) {
 
 	//Se crea la raiz
 	auto Root = mngr_->addEntity();

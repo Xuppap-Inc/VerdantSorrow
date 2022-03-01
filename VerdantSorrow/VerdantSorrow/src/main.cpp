@@ -2,15 +2,15 @@
 
 #include <iostream>
 
-#include "game/Game.h"
+#include "game/FrogScene.h"
 #include "game/Hub.h"
 void start() {
-	Hub h;
+	/*Hub h;
 	h.init();
-	h.start();
-	/*Game g;
-	g.init();
-	g.start();*/
+	h.start();*/
+	FrogScene f;
+	f.init();
+	f.start();
 }
 int main(int ac, char **av) {
 	try {

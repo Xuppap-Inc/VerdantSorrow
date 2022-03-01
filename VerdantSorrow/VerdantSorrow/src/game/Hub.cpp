@@ -1,5 +1,5 @@
 #include "Hub.h"
-#include "Game.h"
+#include "FrogScene.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"

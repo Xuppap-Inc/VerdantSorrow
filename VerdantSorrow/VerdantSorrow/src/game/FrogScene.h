@@ -6,11 +6,11 @@ namespace ecs {
 	class Manager;
 }
 
-class Game
+class FrogScene
 {
 public: 
-	Game();
-	virtual ~Game();
+	FrogScene();
+	virtual ~FrogScene();
 	void init();
 	void start();
 
