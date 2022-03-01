@@ -1,5 +1,4 @@
 #include "Hub.h"
-#include "FrogScene.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -16,7 +15,6 @@
 #include "../components/player/PlayerComponents.h"
 #include "../components/player/PlayerHubControl.h"
 
-#include "../components/FrogBoss/CollideWithBordersBoss.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
