@@ -28,7 +28,7 @@ void BossHPBar::render() {
 
 	SDL_SetRenderDrawColor(sdlutils().renderer(),255,0,0,255);
 
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() /maxHp), 10);
+	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), (attrib_->getLife() >= 0 ? (maxBarLength * (attrib_->getLife() /maxHp)): 0), 10);
 
 	SDL_RenderFillRect(sdlutils().renderer(), &rect);
 

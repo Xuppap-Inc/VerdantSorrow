@@ -5,7 +5,7 @@
 #include "../utils/Vector2D.h"
 #include <cassert>
 
-class Transform: public ecs::Component {
+class Transform : public ecs::Component {
 public:
 
 	// This line expands to the following (see the defintion of
@@ -14,24 +14,26 @@ public:
 	//    constexpr static ecs::cmpId_type id = ecs::_TRANSFORM
 	//
 	__CMPID_DECL__(ecs::_TRANSFORM)
-
-	Transform() :
-			pos_(), vel_(), width_(), height_(), rot_() {
+		/* g establece si hay gravedad en el jugador para las colisiones en la parte 
+		baja de la pantalla en el hub*/
+		Transform() :
+		pos_(), vel_(), width_(), height_(), rot_(), gravity_() {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
-			pos_(pos), vel_(vel), width_(w), height_(h), rot_(r) {
+		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r) {
 	}
 
 	virtual ~Transform() {
 	}
 
-	void init(Vector2D pos, Vector2D vel, float w, float h, float r) {
+	void init(Vector2D pos, Vector2D vel, float w, float h, float r, bool g = true) {
 		pos_ = pos;
 		vel_ = vel;
 		width_ = w;
 		height_ = h;
 		rot_ = r;
+		gravity_ = g;
 	}
 
 	Vector2D& getPos() {
@@ -68,6 +70,9 @@ public:
 	void update() override {
 		pos_ = pos_ + vel_;
 	}
+	bool getGravity() {
+		return gravity_;
+	}
 
 protected:
 	Vector2D pos_;
@@ -75,5 +80,6 @@ protected:
 	float width_;
 	float height_;
 	float rot_;
+	bool gravity_;
 };
 

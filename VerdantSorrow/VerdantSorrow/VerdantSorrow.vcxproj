@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\root\RootMovement.h" />
+    <ClInclude Include="src\components\BossComponents.h" />
+    <ClInclude Include="src\components\FollowPlayer.h" />
     <ClInclude Include="src\components\player\PlayerHubControl.h" />
     <ClInclude Include="src\components\BossHPBar.h" />
     <ClInclude Include="src\components\FrogBoss\FrogAttackManager.h" />
@@ -45,7 +48,7 @@
     <ClInclude Include="src\components\RectangleCollider.h" />
     <ClInclude Include="src\components\player\CollideWithBorders.h" />
     <ClInclude Include="src\components\player\SimplePhysicsPlayer.h" />
-    <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\game\FrogScene.h" />
     <ClInclude Include="src\components\player\PlayerCtrl.h" />
     <ClInclude Include="src\components\RectangleRenderer.h" />
     <ClInclude Include="src\json\JSON.h" />
@@ -69,6 +72,8 @@
     <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\root\RootMovement.cpp" />
+    <ClCompile Include="src\components\FollowPlayer.cpp" />
     <ClCompile Include="src\components\player\PlayerHubControl.cpp" />
     <ClCompile Include="src\components\BossHPBar.cpp" />
     <ClCompile Include="src\components\FrogBoss\FrogAttackManager.cpp" />
@@ -89,7 +94,7 @@
     <ClCompile Include="src\components\RectangleCollider.cpp" />
     <ClCompile Include="src\components\player\CollideWithBorders.cpp" />
     <ClCompile Include="src\components\player\SimplePhysicsPlayer.cpp" />
-    <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\game\FrogScene.cpp" />
     <ClCompile Include="src\components\player\PlayerCtrl.cpp" />
     <ClCompile Include="src\components\RectangleRenderer.cpp" />
     <ClCompile Include="src\json\JSON.cpp" />

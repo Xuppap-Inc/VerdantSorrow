@@ -20,7 +20,7 @@ void RectangleCollider::update()
 {
 	Vector2D contPos = tr_->getPos();
 
-	pos_ = Vector2D(contPos.getX(), contPos.getY());
+	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
 }
 
 SDL_Rect RectangleCollider::getCollider()

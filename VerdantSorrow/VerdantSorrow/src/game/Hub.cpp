@@ -1,5 +1,4 @@
 #include "Hub.h"
-#include "Game.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -16,7 +15,6 @@
 #include "../components/player/PlayerComponents.h"
 #include "../components/player/PlayerHubControl.h"
 
-#include "../components/FrogBoss/CollideWithBordersBoss.h"
 #include "CollisionManager.h"
 
 using ecs::Entity;
@@ -85,12 +83,12 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f,false);
 	
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>();
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(8);

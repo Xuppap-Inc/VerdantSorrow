@@ -28,8 +28,8 @@ void CollideWithBorders::onBottom()
 
 	auto height = sdlutils().height();
 	auto playerHeight = tr_->getHeight();
-
-	if (!attrib_->isOnGround()) {
+	bool gr = tr_->getGravity();
+	if (!attrib_->isOnGround()||!gr) {
 
 		attrib_->setOnGround(true);
 		pos.set(Vector2D(pos.getX(), height - playerHeight));
@@ -54,6 +54,14 @@ void CollideWithBorders::onRight()
 
 	pos.set(Vector2D(width - playerWidth, pos.getY()));
 	attrib_->setRightStop(true);
+}
+
+void CollideWithBorders::onTop()
+{
+	auto& pos = tr_->getPos();
+
+	pos.set(Vector2D(pos.getX(), 0));
+	attrib_->setDownStop(true);
 }
 
 void CollideWithBorders::onNoLeftAndRight()

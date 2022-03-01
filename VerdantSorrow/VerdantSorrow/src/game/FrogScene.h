@@ -6,11 +6,11 @@ namespace ecs {
 	class Manager;
 }
 
-class Game
+class FrogScene
 {
 public: 
-	Game();
-	virtual ~Game();
+	FrogScene();
+	virtual ~FrogScene();
 	void init();
 	void start();
 
@@ -21,6 +21,10 @@ public:
 	void platformGenerator(CollisionManager* colManager);
 	
 	void waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir);
+
+	void rootGenerator(CollisionManager* colManager, Entity* player_, float x);
+
+	void flyGenerator(CollisionManager* colManager, Entity* player_);
 
 private:
 	ecs::Manager* mngr_;

@@ -175,13 +175,15 @@ El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar
 La cámara estará posicionada de modo que se muestre una vista lateral del personaje y del escenario. Según el jugador vaya avanzando, la cámara lo seguirá con un cierto delay haciendo scroll, con el jugador siempre centrado en la cámara. En las peleas con los jefes la cámara está fija en el centro porque las zonas de combate ocupan una pantalla únicamente.
 
 ### <a name="dinamica"></a> 2.4. Dinámica  
-- Objetivo: Avanzar a través de las diferentes zonas venciendo a los jefes que se encuentren por el camino.  
+- Objetivo: Avanzar a través de las diferentes zonas venciendo a los 3 jefes para abrir la puerta central.  
 
-- Ganar: Acabar con el jefe final.  
+- Ganar: Acabar con el jefe actual.
 
-- Perder: Morir en combate contra los enemigos.  
+- Recompensa: Nuevos caminos en el hub, nuevos diálogos y jefe.
 
-- Castigo: Volver a empezar desde el checkpoint más cercano (los checkpoints estarán en pequeños pasillos entre las zonas).  
+- Perder: Morir en combate contra los jefes  
+
+- Castigo: Volver al hub y tener que comenzar de nuevo el jefe.  
 
 
 ### <a name="estetica"></a> 2.5. Estética
@@ -309,8 +311,38 @@ Esta será la paleta de colores que se utilizará.
   Por último, el de Etheria acabó por transformarse en un ser informe sin mente, una masa de materia en continua alteración, salvo por su único ojo y sus dos gigantescas manos que arremeten contra todo aquello que ve.  
 
   Para traer de vuelta el equilibrio, el propio mundo ha canalizado sus fuerzas y dado vida a su avatar, Kyna con la esperanza de que este reúna las 3 esencias primordiales.  
+     
+ **Desarrollo de la Historia hacia el jugador**
+     
+  Al comenzar el juego, se le mostrará al jugador el grueso de la historia, el por qué está ahí y cual es el argumento que lo rodea. Decimos que se le cuenta el grueso pero no el total, puesto que a lo largo del juego a medida que hable con los NPCs del Hub estos, le informarán de manera progresiva de todo lo que ha pasado, qué fue lo que llevó al mundo de Arven a su estado actual, qué se espera de él y distintos detalles argumentales para dar sensación de una historia de la que el jugador es partícipe y pieza clave.
+     
+  Siendo así, se le mostrará la historia en la fase de tutorial, en su exploración del hub a medida que avance puesto que los NPCs le irán contando distintas partes del argumento en función de los bosses que haya superado y por último al finalizar el juego, cuando reúna las esencias de los 3 bosses sirviendo de cierre al mismo.
+     
+  La historia se le mostrará al jugador mediante cuadros de diálogo y en caso de tener tiempo se añadirá bien una secuencia de imágenes, bien una secuencia cinematográfica breve para el inicio y el final del juego.
 
  ### <a name="niveles"></a> 5.5. Niveles  
+     
+     La progresión a lo largo del juego, si se distibuye en niveles, esquemáticamente sería la siguiente:
+     
+        - Tutorial: Se le muestran al jugador los controles de los que tendrá que hacer uso a lo largo del juego, así como se le expondrán las mecánicas de las que tendrá que hacer uso y la dinámica general del juego, lo que incluye también un NPC con el cual interactúe.
+     
+        - Hub: Esta será la zona más amplia del juego con una vista "Top/Down" en la cual el jugador puede desplazarse libremente dentro de los límites, hablando con los NPCs que encuentre en él, los cuales le darán, bien información relacionada con el lore para que el jugador tenga conciencia de la historia que le rodea, bien de los bosses a los que tendrá que enfrentarse. En este Hub el jugador también encontrará las entradas a los distintos bosses, entradas que se irán desbloqueando progresivamente, dado que el orden de enfrentamiento a estos es inalterable.
+     
+        -Boss Rana: (#mecanicas-de-enemigos)
+     
+        -Huida del Boss Rana: tras superar este primer boss el escenario comienza a derrumbarse y el jugador tendrá que ir avanzando en una fase de plataformeo horizontal hacia la derecha, evitando los elementos que caerán de la parte superior del nivel. En caso de que el jugador muera en este nivel, se le devolverá al comienzo del mismo.
+     
+        -Retorno al Hub: el jugador vuelve al hub notando cambios en el mismo, como que la entrada al primer boss está destruida, la puerta de las 3 esencias al norte del hub tiene la primera marca iluminada y los NPCs con los que puede interactuar le darán información distinta a la que le dieron al principio.
+     
+        -Boss Árbol: (#mecanicas-de-enemigos)
+     
+        -Huida del Boss Árbol: tras superar el segundo boss, esta vez la huida será en sentido vertical ascendente ascendiendo mediante saltos en platafrormas. Tendremos ramas que aaparecerán de los laterales del nivel haciendo daño al jugador, y haciendo que si este cae hacia abajo muera en el acto, volviendo al inicio de esta fase de huida.
+     
+        -Retorno al Hub: el jugador vuelve al hub por segunda vez notando cambios similares a los primeros puesto que ahora las entradas a los dos primeros bosses están destruidas y los dos simbolos correspondientes en la puerta al norte del hub están iluminados a falta del tercero. Los NPCs del hub de nuevo le darán información distinta a la que ya le dieron las veces anteriores.
+     
+        -Boss Manos: (#mecanicas-de-enemigos)
+     
+        -Retorno al Hub: el jugador vuelve directamente al Hub tras derrotar al tercer boss y ahora todas las entradas están destruidas, los NPCs le felicitan y le instan a ir hacia la puerta, la cual tiene iluminados los 3 símbolos de las esencias. El jugador interactuará con ella y se le muestra la descripción del desenlace del juego y de las buenas consecuencias que sus actos traerán al mundo de Arven, siendo así el final del juego.
 
   ![Nivel1](./images/niveles1.png)|  
   Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
@@ -369,7 +401,7 @@ En esta zona habrá diferentes objetos que se pueden destruír, dando monedas pa
 
 
 
-https://github.com/jgomez18UCM/Proyectos2
+https://github.com/Xuppap-Inc/VerdantSorrow
 
 
 

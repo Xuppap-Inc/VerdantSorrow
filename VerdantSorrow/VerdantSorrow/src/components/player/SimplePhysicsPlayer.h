@@ -32,5 +32,9 @@ protected:
     PlayerCtrl* ctrl_;
     bool invulnerable_;
     Uint32 invTimer;
+
+    //cuando se deja de colisionar, se resetea lo necesario
+    bool exitCollision;
+    std::vector <bool> lastCollision;
 };
 
