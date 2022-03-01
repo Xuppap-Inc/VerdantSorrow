@@ -1,0 +1,2 @@
+En el sprite de salto, los frames 0-4 son de subida.
+Y el resto de bajada
