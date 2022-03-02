@@ -6,7 +6,7 @@
 #include "../player/PlayerCtrl.h"
 #include "../FrogBoss/BossAtributos.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000)
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000),lastAttack()
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -20,8 +20,6 @@ void Attack::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr, collider_ !=nullptr);
-
-	lastAttack = sdlutils().currRealTime();
 }
 
 void Attack::update()
@@ -48,17 +46,17 @@ void Attack::update()
 		}
 	}
 	//Colisiones (con boss)
-	if (colMan_->hasCollisions(this) && this->isActive()) {
+	if (isActive() && colMan_->hasCollisions(this)) {
 
 		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(this);
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger() && isActive()) {
+			if (c->isActive() && c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
-					bA->setDamage(1);
+					bA->setDamage(1.0f);
 				}
 			}
 		}
