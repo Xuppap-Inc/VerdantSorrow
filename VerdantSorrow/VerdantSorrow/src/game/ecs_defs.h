@@ -45,6 +45,7 @@
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \
-    _BOSS, \
-	_PLAYER
+    _FROGBOSS, \
+	_PLAYER, \
+	_FLY
 

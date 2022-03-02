@@ -110,6 +110,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
 	fly_->addComponent<RectangleRenderer>();
+	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;;
 }
 
