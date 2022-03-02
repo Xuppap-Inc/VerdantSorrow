@@ -18,6 +18,8 @@ public:
 
 	void setDamage(float l) {
 		life_ -= l;
+		if (life_ < 0)
+			life_ = 0;
 	}
 
 	bool isOnGround() {

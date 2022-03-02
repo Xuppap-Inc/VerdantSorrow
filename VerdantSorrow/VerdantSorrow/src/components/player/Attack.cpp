@@ -6,7 +6,7 @@
 #include "../player/PlayerCtrl.h"
 #include "../FrogBoss/BossAtributos.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(500),lastAttack()
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(300),lastAttack()
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -56,7 +56,7 @@ void Attack::update()
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
-					bA->setDamage(1.0f);
+					bA->setDamage(0.1f);
 				}
 			}
 		}
