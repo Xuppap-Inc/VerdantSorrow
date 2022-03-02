@@ -24,5 +24,11 @@ private:
 	float maxBarLength;
 	//posicion de la barra
 	Vector2D pos;
+
+	//variables para que la barra de vida baje poco a poco
+	float accumulatedDamage;
+	float lastHP;
+	int lastAccumulatedDmgDecrease;
+	int AccumulatedDmgDecreaseCooldown;
 };
 
