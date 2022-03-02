@@ -18,6 +18,7 @@ public:
 	void doKnockback(int dir);
 	void doAttack();
 	void doSlide();
+	void handleInput();
 
 private:
 	RectangleCollider* playerCol_;

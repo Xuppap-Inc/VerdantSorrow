@@ -6,7 +6,7 @@
 #include "../player/PlayerCtrl.h"
 #include "../FrogBoss/BossAtributos.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(500),attackCoolDown(1000),lastAttack()
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(500),lastAttack()
 {
 	setActive(false);
 	colMan_ = colManager;
