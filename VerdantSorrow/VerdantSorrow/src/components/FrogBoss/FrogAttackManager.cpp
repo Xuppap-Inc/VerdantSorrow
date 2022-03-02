@@ -1,17 +1,12 @@
-#include "FrogAttackManager.h"
 #include "../../ecs/Entity.h"
 #include "../../ecs/Manager.h"
-#include "FrogBigJump.h"
-#include "FrogJump.h"
-#include "TongueAttack.h"
 #include "../Transform.h"
-#include "../wave/WaveMovement.h"
 #include "../RectangleCollider.h"
 #include "../RectangleRenderer.h"
 #include "../../game/CollisionManager.h"
-#include "BossAtributos.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../FramedImage.h"
+#include "../BossComponents.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_()
@@ -46,14 +41,7 @@ void FrogAttackManager::update()
 	auto& rand = sdlutils().rand();
 	if (frogState_ == FIRST_PHASE) {
 		//Cambio en la dirección del salto si choca con bordes
-		if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
-			anim_->flipX(false);
-			jumpDirection_ = -1;
-		}
-		else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
-			jumpDirection_ = 1;
-			anim_->flipX(true);
-		}
+		
 		
 		//Si está saltando y tocando el suelo a la vez, para de saltar
 		if (jumping_ && attr_->isOnGround()) {
@@ -97,6 +85,55 @@ void FrogAttackManager::update()
 	else if (SECOND_PHASE) {
 		auto jump = rand.nextInt(0, 100);
 	}
+
+	if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
+		anim_->flipX(false);
+		jumpDirection_ = -1;
+	}
+	else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
+		jumpDirection_ = 1;
+		anim_->flipX(true);
+	}
+
+	switch (frogState_) {
+		case JUMPING:
+			if (attr_->isOnGround()) {
+				frogState_ = WAITING;
+				jumping_ = false;
+				jumpsUntilNextTongue_--;
+			}
+			break;
+		case JUMPING_BIG:
+			if (attr_->isOnGround()) {
+				frogState_ = WAITING;
+				jumpingBig_ = false;
+				if (secondPhase_) jumpsUntilNextTongue_--;
+				createWaves();
+			}
+			break;
+		case CALC_NEXT_ATTACK:
+			if (jumpsUntilNextTongue_ == 0) {
+				std::cout << "Lenguetazo" << std::endl;
+				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
+			}
+			break;
+		case WAITING:
+			if (jumpsDelay_ + lastUpdate_ < sdlutils().currRealTime()) {
+
+			}
+			break;
+		case FLY_DIED:
+			if (!jumping_ && !jumpingBig_) {
+				bigJump_->attack(0);
+				jumpingBig_ = true;
+				//Lanzar animacion de salto largo
+			}
+			break;
+		case SECOND_PHASE:
+			break;
+		default:
+			break;
+	}
 }
 
 
@@ -124,6 +161,9 @@ void  FrogAttackManager::createWave(int dir)
 	auto WaveY = sdlutils().height() - 50;
 	//dir = {-1, 1}
 	auto WaveDir = dir;
+	if (WaveDir == 1) {
+		WaveX += tr_->getWidth();
+	}
 	auto WaveSpeed = 5;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
 	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f);
@@ -149,3 +189,4 @@ void FrogAttackManager::createWaves()
 void FrogAttackManager::onFlyDied() {
 	frogState_ = FLY_DIED;
 }
+

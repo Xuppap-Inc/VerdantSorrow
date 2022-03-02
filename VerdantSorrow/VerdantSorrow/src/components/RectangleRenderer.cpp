@@ -35,4 +35,5 @@ void RectangleRenderer::render()
 	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), width, height);
 
 	SDL_RenderFillRect(sdlutils().renderer(), &rect);
+	
 }

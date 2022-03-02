@@ -52,7 +52,7 @@ void Attack::update()
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger()) {
+			if (c->isActive() && c->isTrigger() ) {
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
