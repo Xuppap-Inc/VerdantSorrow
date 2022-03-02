@@ -11,14 +11,15 @@
 #include "../../game/CollisionManager.h"
 #include "BossAtributos.h"
 #include "../../sdlutils/SDLUtils.h"
+#include "../FramedImage.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
-				frogState_(FIRST_PHASE), jumping_(), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_()
+				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_()
 {
 }
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(), fly_(), player_(), tr_(), collManager_(collManager),
-					frogState_(FIRST_PHASE), jumping_(), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), tongueAttack_()
+					frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), tongueAttack_()
 {
 }
 
@@ -34,6 +35,7 @@ void FrogAttackManager::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	attr_ = ent_->getComponent<BossAtributos>();
+	anim_ = ent_->getComponent<FramedImage>();
 	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr;	
 	assert(correct);
 }
@@ -43,29 +45,35 @@ void FrogAttackManager::update()
 {
 	auto& rand = sdlutils().rand();
 	if (frogState_ == FIRST_PHASE) {
+		//Cambio en la dirección del salto si choca con bordes
 		if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
-			std::cout << "hacia la izq" << std::endl;
-			jumpDirection_ == -1;
+			anim_->flipX(false);
+			jumpDirection_ = -1;
 		}
 		else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
-			std::cout << "hacia la der" << std::endl;
-			jumpDirection_ == 1;
+			jumpDirection_ = 1;
+			anim_->flipX(true);
 		}
 		
-		
+		//Si está saltando y tocando el suelo a la vez, para de saltar
 		if (jumping_ && attr_->isOnGround()) {
-			std::cout << "parando" << std::endl;
 			jumping_ = false;
 			--jumpsUntilNextTongue_;
+			//Start Idle animation
+
+			//Si no quedan saltos hasta la proxima lengua, se cambia de estado a ataque con lengua.
 			if (jumpsUntilNextTongue_ == 0) {
 				//TODO spawn fly, tongue attack
 				std::cout << "Lenguetazo" << std::endl;
 				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
 			}
 		}
-		if (!jumping_) {
-			std::cout << "saltando" << std::endl;
+		
+		if (!jumping_ && !jumpingBig_) {
 			frogJump_->attack(jumpDirection_);
+			//Start Jump animation
+			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
+			//Cambio de estado a saltando
 			jumping_ = true;
 		}
 		
@@ -73,15 +81,25 @@ void FrogAttackManager::update()
 
 	}else if (FLY_DIED) {
 		//Cambio a sprite enfadado
+		if (jumpingBig_ && attr_->isOnGround()) {
+			jumpingBig_ = false;
+			createWaves();
+			frogState_ = FIRST_PHASE;
+			//Start Idle animation
+		}
+		if (frogState_ != FLY_DIED) return;
 		if (!jumping_ && !jumpingBig_) {
-			bigJump_->attack(0); 			
+			bigJump_->attack(0); 
+			jumpingBig_ = true;
+			//Lanzar animación de salto grande
 		}
 	}
 	else if (SECOND_PHASE) {
 		auto jump = rand.nextInt(0, 100);
 	}
-
 }
+
+
 
 ecs::Entity* FrogAttackManager::createFly()
 {
@@ -119,6 +137,12 @@ void  FrogAttackManager::createWave(int dir)
 	//Se añade el movimiento horizontal
 	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
 
+}
+
+void FrogAttackManager::createWaves()
+{
+	createWave(1);
+	createWave(-1);
 }
 
 void FrogAttackManager::onFlyDied() {

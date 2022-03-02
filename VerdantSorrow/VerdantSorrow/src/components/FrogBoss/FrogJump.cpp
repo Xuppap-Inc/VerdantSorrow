@@ -57,7 +57,7 @@ void FrogJump::attack(int dir) {
 	auto& vel = tr_->getVel();
 
 	//x = {-1, 1} 
-	int x = RNG.nextInt(5000, 10000)/100.0 * dir;
+	int x = RNG.nextInt(500, 1000)/100.0 * dir;
 	vel = new Vector2D(x, -jumpForce_);
 	vel = vel.normalize() * jumpForce_;
 }

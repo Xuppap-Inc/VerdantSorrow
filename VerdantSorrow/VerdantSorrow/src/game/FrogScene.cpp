@@ -106,7 +106,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 
-	Frog->addComponent<FrogAttackManager>();
+	Frog->addComponent<FrogAttackManager>(colManager);
 	//Frog->addComponent<FrogJump>(30);
 	//Frog->addComponent<FrogBigJump>(40);
 
