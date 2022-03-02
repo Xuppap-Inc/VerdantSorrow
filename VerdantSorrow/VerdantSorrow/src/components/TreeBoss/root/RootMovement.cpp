@@ -1,7 +1,7 @@
 #include "RootMovement.h"
 
-#include "../Transform.h"
-#include "../../ecs/Entity.h"
+#include "../../Transform.h"
+#include "../../../ecs/Entity.h"
 
 RootMovement::RootMovement() : tr_()
 {

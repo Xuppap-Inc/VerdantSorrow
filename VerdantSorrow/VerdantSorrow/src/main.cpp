@@ -3,14 +3,33 @@
 #include <iostream>
 
 #include "game/FrogScene.h"
+#include "game/TreeScene.h"
 #include "game/Hub.h"
 void start() {
-	/*Hub h;
-	h.init();
-	h.start();*/
-	FrogScene f;
-	f.init();
-	f.start();
+
+	int n = -1;
+
+	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Árbol" << std::endl;
+	std::cin >> n;
+
+	if (n == 0) {
+	
+		Hub h;
+		h.init();
+		h.start();
+	}
+	else if (n == 1) {
+
+		FrogScene f;
+		f.init();
+		f.start();
+	}
+	else if (n == 2) {
+
+		TreeScene t;
+		t.init();
+		t.start();
+	}
 }
 int main(int ac, char **av) {
 	try {
