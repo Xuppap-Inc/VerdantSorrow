@@ -5,12 +5,12 @@
 #include "game/FrogScene.h"
 #include "game/Hub.h"
 void start() {
-	/*Hub h;
+	Hub h;
 	h.init();
-	h.start();*/
-	FrogScene f;
+	h.start();
+	/*FrogScene f;
 	f.init();
-	f.start();
+	f.start();*/
 }
 int main(int ac, char **av) {
 	try {

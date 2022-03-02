@@ -12,6 +12,7 @@ public:
 	void init();
 	void start();
 
+	void entryGenerator(CollisionManager* colManager);
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 private:

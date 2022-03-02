@@ -40,6 +40,7 @@ void Hub::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+	entryGenerator(colManager);
 }
 
 void Hub::start() {
@@ -100,4 +101,19 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+}
+//Crea la entrada a los bosses para que cuando el jugador se acerque cambia de escena
+void Hub::entryGenerator(CollisionManager* colManager) {
+
+	auto entry = mngr_->addEntity();
+
+	auto entryTr = entry->addComponent<Transform>();
+	auto entryX = sdlutils().width() / 3 - 200;
+	auto entryY = sdlutils().height() / 4 * 3;
+	entryTr->init(Vector2D(entryX, entryY), Vector2D(), 200, 50, 0.0f);
+
+	entry->addComponent<RectangleRenderer>();
+
+	auto entryCollider = entry->addComponent<RectangleCollider>(entryTr->getWidth(), entryTr->getHeight());
+	colManager->addCollider(entryCollider);
 }
