@@ -2,34 +2,15 @@
 
 #include <iostream>
 
-#include "game/FrogScene.h"
-#include "game/TreeScene.h"
-#include "game/Hub.h"
+#include "ecs/Manager.h"
 void start() {
 
 	int n = -1;
 
 	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Árbol" << std::endl;
 	std::cin >> n;
-
-	if (n == 0) {
-	
-		Hub h;
-		h.init();
-		h.start();
-	}
-	else if (n == 1) {
-
-		FrogScene f;
-		f.init();
-		f.start();
-	}
-	else if (n == 2) {
-
-		TreeScene t;
-		t.init();
-		t.start();
-	}
+	ecs::Manager* mngr_ = new ecs::Manager();
+	mngr_->changeScene(n);
 }
 int main(int ac, char **av) {
 	try {

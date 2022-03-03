@@ -99,6 +99,8 @@ public:
 	//
 	void refresh();
 
+	void changeScene(int n);
+
 private:
 
 	// class Entity is a friend so it can access addToGroup and removeFromGroup

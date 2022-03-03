@@ -1,7 +1,9 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Manager.h"
-
+#include "../game/FrogScene.h"
+#include "../game/Hub.h"
+#include "../game/TreeScene.h"
 namespace ecs {
 
 Manager::Manager() :
@@ -54,6 +56,34 @@ void Manager::refresh() {
 				}
 			}), //
 			ents_.end());
+
+}
+
+void Manager::changeScene(int n)
+{
+	switch (n)
+	{
+	case 0: {
+		Hub h;
+		h.init() ;
+		h.start();
+		break;
+	}
+	case 1: {
+		FrogScene f;
+		f.init();
+		f.start();
+		break;
+	}
+	case 2: {
+		TreeScene t;
+		t.init();
+		t.start();
+		break;
+	}
+	default:
+		break;
+	}
 
 }
 
