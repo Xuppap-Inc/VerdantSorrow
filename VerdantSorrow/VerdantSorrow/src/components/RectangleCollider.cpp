@@ -1,6 +1,7 @@
 #include "RectangleCollider.h"
 #include "../ecs/Entity.h"
 #include "Transform.h"
+#include "../sdlutils/SDLUtils.h"
 
 RectangleCollider::RectangleCollider(float width, float height): tr_(nullptr), height_(height), width_(width), pos_(), isTrigger_(false), active_(true)
 {
@@ -21,6 +22,11 @@ void RectangleCollider::update()
 	Vector2D contPos = tr_->getPos();
 
 	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
+}
+
+void RectangleCollider::render()
+{
+	drawCollider();
 }
 
 SDL_Rect RectangleCollider::getCollider()
@@ -46,6 +52,13 @@ void RectangleCollider::setActive(bool set)
 bool RectangleCollider::isActive()
 {
 	return active_;
+}
+
+void RectangleCollider::drawCollider()
+{
+	SDL_Rect r = getCollider();
+	SDL_SetRenderDrawColor(sdlutils().renderer(), 255,0,0, 255);
+	SDL_RenderDrawRect(sdlutils().renderer(),&r);
 }
 
 Entity* RectangleCollider::getEntity() {

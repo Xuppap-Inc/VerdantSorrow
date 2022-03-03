@@ -72,6 +72,8 @@ void Attack::render()
 		SDL_Rect dest = getCollider();
 
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
+
+		drawCollider();
 	}
 }
 
