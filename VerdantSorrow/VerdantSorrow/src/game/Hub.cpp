@@ -40,6 +40,7 @@ void Hub::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+	EntryGenerator(colManager);
 }
 
 void Hub::start() {
@@ -91,7 +92,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(8);
+	player_->addComponent<PlayerHubControl>(8,colManager);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
@@ -100,4 +101,20 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+}
+
+void Hub::EntryGenerator(CollisionManager* colManager)
+{
+	auto frogEntry = mngr_->addEntity();
+
+	auto frogEntryTr = frogEntry->addComponent<Transform>();
+	auto frogEntryX = sdlutils().width() / 3 - 200;
+	auto frogEntryY = sdlutils().height() / 4 * 3;
+	frogEntryTr->init(Vector2D(frogEntryX, frogEntryY), Vector2D(), 200, 50, 0.0f);
+
+	frogEntry->addComponent<RectangleRenderer>();
+
+	auto frogEntryCollider = frogEntry->addComponent<RectangleCollider>(frogEntryTr->getWidth(), frogEntryTr->getHeight());
+	colManager->addCollider(frogEntryCollider);
+	frogEntryCollider->setIsTrigger(true);
 }

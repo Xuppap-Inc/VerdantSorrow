@@ -13,6 +13,7 @@ public:
 	void start();
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
+	void EntryGenerator(CollisionManager* colManager);
 
 private:
 	ecs::Manager* mngr_;
