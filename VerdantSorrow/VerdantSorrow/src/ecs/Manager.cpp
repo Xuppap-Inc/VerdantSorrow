@@ -9,7 +9,8 @@ namespace ecs {
 Manager::Manager() :
 		ents_(), //
 		hdlrs_(), //
-		entsByGroup_() //
+		entsByGroup_(), //
+		debug_(false)
 {
 	// we reserve space for 100 entities, just to avoid resizing. You
 	// can adjust this number.

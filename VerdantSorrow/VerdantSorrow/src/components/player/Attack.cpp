@@ -73,7 +73,6 @@ void Attack::render()
 
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
 
-		drawCollider();
 	}
 }
 

@@ -24,9 +24,10 @@ void RectangleCollider::update()
 	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
 }
 
-void RectangleCollider::render()
+void RectangleCollider::debug()
 {
-	drawCollider();
+	if(isActive())
+		drawCollider();
 }
 
 SDL_Rect RectangleCollider::getCollider()

@@ -40,6 +40,7 @@ void FrogScene::init()
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
+	mngr_->setDebug(true); //activamos modo debug
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
@@ -75,6 +76,7 @@ void FrogScene::start() {
 
 		sdlutils().clearRenderer();
 		mngr_->render();
+		mngr_->debug();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;

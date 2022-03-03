@@ -16,7 +16,7 @@ public:
 
     void initComponent() override;
     void update() override;
-    void render() override;
+    void debug() override;
 
     SDL_Rect getCollider();
 
