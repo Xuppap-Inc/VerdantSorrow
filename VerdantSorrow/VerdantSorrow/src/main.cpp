@@ -3,16 +3,18 @@
 #include <iostream>
 
 #include "ecs/Manager.h"
+#include "sdlutils/SDLUtils.h"
 void start() {
-
 	int n = -1;
 
 	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Árbol" << std::endl;
 	std::cin >> n;
 	ecs::Manager* mngr_ = new ecs::Manager();
+	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 	mngr_->changeScene(n);
 }
 int main(int ac, char **av) {
+
 	try {
 		start();
 	} catch (const std::string &e) { // catch exceptions thrown as strings

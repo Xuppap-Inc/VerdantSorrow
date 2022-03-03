@@ -31,7 +31,7 @@ Hub::~Hub()
 
 void Hub::init()
 {
-	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
+	
 
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
@@ -73,7 +73,7 @@ void Hub::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
+	SDL_Quit();
 }
 
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {

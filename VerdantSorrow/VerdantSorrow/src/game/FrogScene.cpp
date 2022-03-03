@@ -35,7 +35,7 @@ FrogScene::~FrogScene()
 
 void FrogScene::init()
 {
-	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
+	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
@@ -83,6 +83,7 @@ void FrogScene::start() {
 			SDL_Delay(10 - frameTime);
 	}
 
+	SDL_Quit();
 }
 
 
