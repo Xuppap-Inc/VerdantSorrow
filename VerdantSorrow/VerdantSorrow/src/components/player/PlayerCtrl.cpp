@@ -91,6 +91,10 @@ void PlayerCtrl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
+
+	anim_ = ent_->getComponent<FramedImage>();
+
+	//anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 1000, 31);
 }
 
 // Realiza un knockback en la direccion especificada

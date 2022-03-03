@@ -146,6 +146,10 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 	mngr_->setHandler(ecs::_PLAYER, player_);
+
+	// Animacion del jugador
+	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+	player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 }
 void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
@@ -166,9 +170,6 @@ void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente que se usa para seguir al jugador
 	//Fly->addComponent<FollowPlayer>(playerTr, 150.0f,-100.0f, Vector2D(), 7.0f);
-
-	
-
 }
 
 void FrogScene::platformGenerator(CollisionManager* colManager) {
