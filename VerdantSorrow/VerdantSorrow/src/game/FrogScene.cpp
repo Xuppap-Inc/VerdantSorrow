@@ -129,7 +129,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<CollideWithBorders>();
 
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 

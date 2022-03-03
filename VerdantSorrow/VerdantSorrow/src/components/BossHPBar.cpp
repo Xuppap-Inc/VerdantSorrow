@@ -8,7 +8,7 @@
 #include "Transform.h"
 
 BossHPBar::BossHPBar() :
-	attrib_(),maxHp(),maxBarLength(),pos(),accumulatedDamage(),lastHP(), AccumulatedDmgDecreaseCooldown(25), lastAccumulatedDmgDecrease(){
+	attrib_(),maxHp(),maxBarLength(),pos(),accumulatedDamage(),lastHP(), AccumulatedDmgDecreaseCooldown(30), lastAccumulatedDmgDecrease(){
 }
 
 BossHPBar::~BossHPBar() {
