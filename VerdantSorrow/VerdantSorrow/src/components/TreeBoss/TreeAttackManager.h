@@ -23,13 +23,16 @@ public:
 	TreeAttackManager(CollisionManager* collManager);
 	void initComponent() override;
 	void update() override;
-	void createRoot(int x);
+
+	int getRootWidth() { return rootWidth_; }
 private:
 	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
 	BossAtributos* attr_;
 	FramedImage* anim_;
+	RootWave* rootWave_;
 	
+	int rootWidth_;
 };
 

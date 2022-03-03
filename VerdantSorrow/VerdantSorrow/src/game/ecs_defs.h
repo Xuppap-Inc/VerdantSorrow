@@ -33,7 +33,8 @@
 	_BOSS_HP_BAR, \
 	_BOSS_ATTACK_MANAGER, \
 	_FOLLOWPLAYER, \
-	_ROOTMOVEMENT
+	_ROOTMOVEMENT, \
+	_ROOTWAVE
 
 
 // Groups list - must have at least one element

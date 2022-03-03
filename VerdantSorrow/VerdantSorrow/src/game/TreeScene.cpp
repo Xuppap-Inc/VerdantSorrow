@@ -14,8 +14,8 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/BossComponents.h"
-#include "../components/Wave/WaveMovement.h"
-#include "../components/FrogBoss/FrogAttackManager.h"
+#include "../components/TreeBoss/TreeAttackManager.h"
+#include "../components/TreeBoss/RootWave.h"
 #include "../components/TreeBoss/Root/RootMovement.h"
 
 
@@ -99,6 +99,9 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	colManager->addCollider(treeCollider);
 
 	Tree_->addComponent<BossHPBar>();
+
+	Tree_->addComponent<RootWave>(colManager);
+	Tree_->addComponent<TreeAttackManager>(colManager);
 
 }
 
