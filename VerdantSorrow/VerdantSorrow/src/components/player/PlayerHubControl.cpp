@@ -3,6 +3,7 @@
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 #include "../../sdlutils/SDLUtils.h"
+#include "../../ecs/Manager.h"
 using namespace std;
 PlayerHubControl::~PlayerHubControl()
 {
@@ -41,6 +42,10 @@ void PlayerHubControl::update()
 		vel.set(Vector2D(0, 0));
 	}
 	vel.normalize();
+
+	if (colMan_->hasCollisions(playerCol_)) {
+		mngr_->changeScene(1);
+	}
 }
 
 void PlayerHubControl::initComponent()

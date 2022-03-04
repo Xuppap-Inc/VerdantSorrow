@@ -6,13 +6,19 @@
 #include "../../sdlutils/SDLUtils.h"
 
 using namespace std;
-PlayerCtrl::~PlayerCtrl()
+PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
+	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
+	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
+	rollCooldown_(1000), rollDuration_(500), isRolling_(false), knockbackForceX_(10), knockbackForceY_(10), slide_(false), roll_(false)
+{
+}
+
+PlayerCtrl::~PlayerCtrl() 
 {
 }
 
 void PlayerCtrl::update()
 {
-	auto& ihdlr = ih();
 	auto currentTime = sdlutils().currRealTime();
 
 	auto& vel = tr_->getVel();
@@ -20,66 +26,61 @@ void PlayerCtrl::update()
 
 	//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
 	//Se desactiva y se activa el deslizar
-	if (currentTime >= lastRoll + rollDuration && isRolling) {
-		slide = true;
-		isRolling = false;
+	if (currentTime >= lastRoll_ + rollDuration_ && isRolling_) {
+		slide_ = true;
+		isRolling_ = false;
 	}
 
+	if (!isAttacking && !isRolling_) {
 
-	if (!isAttacking && !isRolling) {
-		//std::cout << "canmove" << std::endl;
-		if (ihdlr.keyDownEvent()) {
-			//std::cout << "key" << std::endl;
-			//salto
-			if ((ihdlr.isKeyDown(SDLK_w) || ihdlr.isKeyDown(SDLK_SPACE)) && attrib_->isOnGround()) {
+		//handle input
+		handleInput();
 
-				vel.set(Vector2D(vel.getX(), -jumpForce_));
-				attrib_->setOnGround(false);
-				slide = false;
-			}
+		//salto
+		if (jump_ && attrib_->isOnGround()) {
 
-			//if (ihdlr.isKeyDown(SDLK_a) && ihdlr.isKeyDown(SDLK_d)) {
-			//	vel.set(Vector2D(0, vel.getY()));
-			//	movementDir_ = 1;
-			//	slide = false;
-			//	//std::cout << "nulo" << std::endl;
-			//}
-			
-			//movimiento izquierda
-			if (ihdlr.isKeyDown(SDLK_a) && !attrib_->isLeftStop()) {
-
-				vel.set(Vector2D(-speed_, vel.getY()));
-				movementDir_ = -1;
-				slide = false;
-				//std::cout << "iz" << std::endl;
-			}
-			//movimiento derecha
-			else if (ihdlr.isKeyDown(SDLK_d) && !attrib_->isRightStop()) {
-
-				vel.set(Vector2D(speed_, vel.getY()));
-				movementDir_ = 1;
-				slide = false;
-				//std::cout << "dr" << std::endl;
-			}
-
-			//Roll
-			//Si ha pasado el tiempo suficiente como para volver a hacer roll y se pulsa el shift
-			//Se activa el cooldown y el booleano que informa que está haciendo el roll
-			//Se establece la velocidad
-			if (ihdlr.isKeyDown(SDLK_LSHIFT)) {
-				if (currentTime >= lastRoll + rollDuration + rollCooldown) {
-					vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
-					lastRoll = currentTime;
-					isRolling = true;
-				}
-			}
-
+			vel.set(Vector2D(vel.getX(), -jumpForce_));
+			attrib_->setOnGround(false);
+			slide_ = false;
 		}
-		else if (ihdlr.isKeyUp(SDLK_a) && ihdlr.isKeyUp(SDLK_d) && ihdlr.isKeyUp(SDLK_w))
-			slide = true;
+
+		//moviemiento nulo
+		if (moveRight_ && moveLeft_) {
+			vel.set(Vector2D(0, vel.getY()));
+			movementDir_ = 1;
+			slide_ = false;
+		}
+		//movimiento izquierda
+		else if (moveLeft_ && !attrib_->isLeftStop()) {
+
+			vel.set(Vector2D(-speed_, vel.getY()));
+			movementDir_ = -1;
+			slide_ = false;
+
+			anim_->flipX(true);
+		}
+		//movimiento derecha
+		else if (moveRight_ && !attrib_->isRightStop()) {
+
+			vel.set(Vector2D(speed_, vel.getY()));
+			movementDir_ = 1;
+			slide_ = false;
+
+			anim_->flipX(false);
+		}
+
+		//Roll
+		if (roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
+			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
+			lastRoll_ = currentTime;
+			isRolling_ = true;
+		}
+			
+		if (!moveLeft_ && !moveRight_)
+			slide_ = true;
 	}
 
-	if (slide)
+	if (slide_)
 		doSlide();	
 
 	if (isAttacking)
@@ -94,23 +95,29 @@ void PlayerCtrl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
+	anim_ = ent_->getComponent<FramedImage>();
+	//assert(anim_ != nullptr);
+
+	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
 // Realiza un knockback en la direccion especificada
 void PlayerCtrl::doKnockback(int dir) {
 
-	tr_->getVel().set(Vector2D(knockbackForceX * dir, -knockbackForceY));
+	tr_->getVel().set(Vector2D(knockbackForceX_ * dir, -knockbackForceY_));
 	attrib_->setOnGround(false);
 
-	slide = true;
+	slide_ = true;
+
+	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
 void PlayerCtrl::doAttack()
 {
 	//Da igual lo que pase si ataca, que va a pararse en seco
 	auto& vel = tr_->getVel();
-	vel.set(Vector2D(0, vel.getY()));
-	slide = false;
+	vel.set(Vector2D(0, 0));
+	slide_ = false;
 }
 
 void PlayerCtrl::doSlide()
@@ -127,6 +134,32 @@ void PlayerCtrl::doSlide()
 	else if (abs(vel.getX()) < 1) {
 
 		tr_->getVel().set(Vector2D(0, vel.getY()));
-		slide = false;
+		slide_ = false;
+	}
+}
+
+void PlayerCtrl::handleInput()
+{
+	auto& ihdlr = ih();
+
+	if (ihdlr.keyUpEvent()) {
+		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
+			moveLeft_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
+			moveRight_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_W) && ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
+			jump_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
+			roll_ = false;
+	}
+	if (ihdlr.keyDownEvent()) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+			moveLeft_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+			moveRight_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_W) || ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
+			jump_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
+			roll_ = true;
 	}
 }

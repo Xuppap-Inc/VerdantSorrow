@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\root\RootMovement.h" />
+    <ClInclude Include="src\components\TreeBoss\RootSpawner.h" />
+    <ClInclude Include="src\components\TreeBoss\TreeAttackManager.h" />
+    <ClInclude Include="src\components\TreeBoss\RootWave.h" />
+    <ClInclude Include="src\components\TreeBoss\root\RootMovement.h" />
     <ClInclude Include="src\components\BossComponents.h" />
     <ClInclude Include="src\components\FollowPlayer.h" />
     <ClInclude Include="src\components\player\PlayerHubControl.h" />
@@ -29,6 +32,7 @@
     <ClInclude Include="src\components\FrogBoss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\FramedImage.h" />
+    <ClInclude Include="src\game\TreeScene.h" />
     <ClInclude Include="src\game\Hub.h" />
     <ClInclude Include="src\components\OnBorders.h" />
     <ClInclude Include="src\components\FrogBoss\CollideWithBordersBoss.h" />
@@ -72,7 +76,9 @@
     <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\root\RootMovement.cpp" />
+    <ClCompile Include="src\components\TreeBoss\RootSpawner.cpp" />
+    <ClCompile Include="src\components\TreeBoss\RootWave.cpp" />
+    <ClCompile Include="src\components\TreeBoss\root\RootMovement.cpp" />
     <ClCompile Include="src\components\FollowPlayer.cpp" />
     <ClCompile Include="src\components\player\PlayerHubControl.cpp" />
     <ClCompile Include="src\components\BossHPBar.cpp" />
@@ -81,6 +87,8 @@
     <ClCompile Include="src\components\FrogBoss\FrogBigJump.cpp" />
     <ClCompile Include="src\components\Image.cpp" />
     <ClCompile Include="src\components\FramedImage.cpp" />
+    <ClCompile Include="src\components\TreeBoss\TreeAttackManager.cpp" />
+    <ClCompile Include="src\game\TreeScene.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
     <ClCompile Include="src\components\OnBorders.cpp" />
     <ClCompile Include="src\components\FrogBoss\CollideWithBordersBoss.cpp" />
@@ -212,10 +220,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\TMXLite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\TMXLite\lib\DebugStatic;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtmxlite-s-d.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -226,12 +237,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\TMXLite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\TMXLite\lib\ReleaseStatic;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtmxlite-s.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -6,6 +6,7 @@ class Transform;
 class TongueAttack;
 class CollisionManager;
 class BossAtributos;
+class FramedImage;
 
 #pragma once
 class FrogAttackManager : public ecs::Component
@@ -25,6 +26,7 @@ public:
 	void update() override;
 	ecs::Entity* createFly();
 	void createWave(int dir);
+	void createWaves();
 	void onFlyDied();
 private:
 	FrogJump* frogJump_;
@@ -35,6 +37,7 @@ private:
 	Transform* tr_;
 	CollisionManager* collManager_;
 	BossAtributos* attr_;
+	FramedImage* anim_;
 	
 	State frogState_;
 	bool jumping_;

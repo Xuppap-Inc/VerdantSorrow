@@ -16,7 +16,7 @@
 #include "../components/BossComponents.h"
 #include "../components/Wave/WaveMovement.h"
 #include "../components/FrogBoss/FrogAttackManager.h"
-#include "../components/Root/RootMovement.h"
+#include "../components/TreeBoss/Root/RootMovement.h"
 
 
 #include "CollisionManager.h"
@@ -35,11 +35,12 @@ FrogScene::~FrogScene()
 
 void FrogScene::init()
 {
-	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
+	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
+	mngr_->setDebug(true); //activamos modo debug
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
@@ -75,6 +76,7 @@ void FrogScene::start() {
 
 		sdlutils().clearRenderer();
 		mngr_->render();
+		mngr_->debug();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -83,6 +85,7 @@ void FrogScene::start() {
 			SDL_Delay(10 - frameTime);
 	}
 
+	SDL_Quit();
 }
 
 
@@ -100,13 +103,13 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
 
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 100, FrogTr->getHeight() - 30);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
 	Frog->addComponent<CollideWithBordersBoss>();
 	Frog->addComponent<SimpleGravity>(1.5);
 
-	Frog->addComponent<FrogAttackManager>();
+	Frog->addComponent<FrogAttackManager>(colManager);
 	//Frog->addComponent<FrogJump>(30);
 	//Frog->addComponent<FrogBigJump>(40);
 
@@ -120,22 +123,25 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
+	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);
 
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
+
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
 
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
-	player_->addComponent<Image>(&sdlutils().images().at("chica"));
+	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player_->addComponent<Attack>(50,playerTr->getHeight(), colManager);
@@ -145,6 +151,9 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
 	mngr_->setHandler(ecs::_PLAYER, player_);
+
+	// Animacion del jugador
+	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 }
 void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
@@ -165,9 +174,6 @@ void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente que se usa para seguir al jugador
 	//Fly->addComponent<FollowPlayer>(playerTr, 150.0f,-100.0f, Vector2D(), 7.0f);
-
-	
-
 }
 
 void FrogScene::platformGenerator(CollisionManager* colManager) {
@@ -208,26 +214,4 @@ void FrogScene::waveGenerator(CollisionManager* colManager, Entity* player_, flo
 	colManager->addCollider(waveCollider);
 	//Se añade el movimiento horizontal
 	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
-}
-void FrogScene::rootGenerator(CollisionManager* colManager, Entity* player_, float x) {
-
-	//Se crea la raiz
-	auto Root = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-	auto RootAtribs = Root->addComponent<BossAtributos>();
-	auto RootTr = Root->addComponent<Transform>();
-	auto RootX = x;
-	auto RootY = sdlutils().height() - 50;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 500, 0.0f);
-	//Se le añade un color inicial a la raiz
-	Root->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Se añade un collider a la onda
-	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
-	RootCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
-	colManager->addCollider(RootCollider);
-	//Se añade el movimiento horizontal
-	Root->addComponent<RootMovement>();
 }

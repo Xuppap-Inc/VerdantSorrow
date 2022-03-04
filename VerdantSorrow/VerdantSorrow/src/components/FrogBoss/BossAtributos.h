@@ -9,8 +9,8 @@ private:
 	bool onLeftBorder_;
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTRIBUTES)
-	BossAtributos() :life_(){};
-	BossAtributos(float vida) : life_(vida)	{};
+	BossAtributos() : life_(), onGround_(false), onRightBorder_(false), onLeftBorder_(false) {};
+	BossAtributos(float vida) : life_(vida), onGround_(false), onRightBorder_(false), onLeftBorder_(false)	{};
 
 	float getLife() {
 		return life_;
@@ -18,6 +18,8 @@ public:
 
 	void setDamage(float l) {
 		life_ -= l;
+		if (life_ < 0)
+			life_ = 0;
 	}
 
 	bool isOnGround() {

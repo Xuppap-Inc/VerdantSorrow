@@ -94,10 +94,25 @@ public:
 			ents_[i]->render();
 	}
 
+	//call debug of all entities
+	//
+	void debug() {
+		if (debug_) {
+			auto n = ents_.size();
+			for (auto i = 0u; i < n; i++)
+				ents_[i]->debug();
+		}
+	}
+
 	// eliminate dead entities (the implementation of this method
 	// is in Manager.cpp, but we could also defined it here).
 	//
 	void refresh();
+
+	void changeScene(int n);
+
+	//changes boolean that says if debug mode is on
+	void setDebug(bool set) { debug_ = set; };
 
 private:
 
@@ -119,6 +134,9 @@ private:
 	std::vector<Entity*> ents_;
 	std::array<Entity*, maxHdlrId> hdlrs_;
 	std::array<std::vector<Entity*>, maxGroupId> entsByGroup_;
+
+	//bool that says if debug mode is on
+	bool debug_;
 };
 
 } // end of namespace
