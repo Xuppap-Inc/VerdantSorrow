@@ -56,6 +56,8 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(-speed_, vel.getY()));
 			movementDir_ = -1;
 			slide_ = false;
+
+			anim_->flipX(true);
 		}
 		//movimiento derecha
 		else if (moveRight_ && !attrib_->isRightStop()) {
@@ -63,6 +65,8 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(speed_, vel.getY()));
 			movementDir_ = 1;
 			slide_ = false;
+
+			anim_->flipX(false);
 		}
 
 		//Roll
@@ -104,6 +108,8 @@ void PlayerCtrl::doKnockback(int dir) {
 	attrib_->setOnGround(false);
 
 	slide_ = true;
+
+	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
 void PlayerCtrl::doAttack()

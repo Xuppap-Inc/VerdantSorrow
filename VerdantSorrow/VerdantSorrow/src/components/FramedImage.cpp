@@ -65,14 +65,11 @@ void FramedImage::render()
 
 	}
 
-
-
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
 
 	assert(tex_ != nullptr);
 	tex_->render(m_clip, dest, tr_->getRot(),nullptr,flip);
-
 }
 
 void FramedImage::flipX(bool s)
