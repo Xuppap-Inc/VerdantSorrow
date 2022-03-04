@@ -2,6 +2,7 @@
 
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
+#include "../../RectangleCollider.h"
 
 RootMovement::RootMovement() : tr_(), speed(0.25)
 {
@@ -19,7 +20,8 @@ void RootMovement::initComponent()
 void RootMovement::update()
 {
 	if (speed == 0) {
-		//Desactivar el collider
+		auto c=ent_->getComponent<RectangleCollider>();
+		c->setActive(false);
 	}
 	else {
 		if (tr_->getPos().getY() < 100) speed = 0;
