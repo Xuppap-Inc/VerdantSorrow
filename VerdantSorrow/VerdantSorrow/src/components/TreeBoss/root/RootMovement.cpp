@@ -24,7 +24,7 @@ void RootMovement::update()
 	else {
 		if (tr_->getPos().getY() < 100) speed = 0;
 		else if (tr_->getPos().getY() < sdlutils().height() - 30)
-			speed = 30;
+			speed = 50;
 		auto& vel = tr_->getVel();
 		vel = new Vector2D(0, -speed);
 	}
