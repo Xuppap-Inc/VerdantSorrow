@@ -53,10 +53,10 @@ void RootWave::createRoot(int x)
 	auto RootAtribs = Root->addComponent<BossAtributos>();
 	auto RootTr = Root->addComponent<Transform>();
 	auto RootX = x;
-	auto RootY = sdlutils().height() - 50;
+	auto RootY = sdlutils().height();
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
 	int rootWidth_ = 25;
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), rootWidth_, 500, 0.0f);
+	RootTr->init(Vector2D(RootX, RootY), Vector2D(), rootWidth_, 800, 0.0f);
 	//Se le añade un color inicial a la raiz
 	Root->addComponent<RectangleRenderer>(SDL_Color());
 

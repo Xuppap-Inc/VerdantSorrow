@@ -146,9 +146,9 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 	auto RootAtribs = Root->addComponent<BossAtributos>();
 	auto RootTr = Root->addComponent<Transform>();
 	auto RootX = x;
-	auto RootY = sdlutils().height() - 50;
+	auto RootY = sdlutils().height()+200;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 500, 0.0f);
+	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 1000, 0.0f);
 	//Se le añade un color inicial a la raiz
 	Root->addComponent<RectangleRenderer>(SDL_Color());
 

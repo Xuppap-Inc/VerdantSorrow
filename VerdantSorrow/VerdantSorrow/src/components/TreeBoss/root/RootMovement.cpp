@@ -3,7 +3,10 @@
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
 
-RootMovement::RootMovement() : tr_()
+RootMovement::RootMovement() : tr_(), speed(0.25)
+{
+}
+RootMovement::~RootMovement()
 {
 }
 
@@ -15,7 +18,14 @@ void RootMovement::initComponent()
 
 void RootMovement::update()
 {
-	auto& vel = tr_->getVel();
-
-	vel = new Vector2D(0, -1);
+	if (speed == 0) {
+		//Desactivar el collider
+	}
+	else {
+		if (tr_->getPos().getY() < 100) speed = 0;
+		else if (tr_->getPos().getY() < sdlutils().height() - 30)
+			speed = 30;
+		auto& vel = tr_->getVel();
+		vel = new Vector2D(0, -speed);
+	}
 }
