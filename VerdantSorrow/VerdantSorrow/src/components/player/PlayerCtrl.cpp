@@ -72,7 +72,7 @@ void PlayerCtrl::update()
 			isRolling_ = true;
 		}
 			
-		if (!jump_ && !moveLeft_ && !moveRight_)
+		if (!moveLeft_ && !moveRight_)
 			slide_ = true;
 	}
 
@@ -91,8 +91,8 @@ void PlayerCtrl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
-
 	anim_ = ent_->getComponent<FramedImage>();
+	//assert(anim_ != nullptr);
 
 	//anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 1000, 31);
 }
@@ -141,9 +141,7 @@ void PlayerCtrl::handleInput()
 			moveLeft_ = false;
 		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
 			moveRight_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_W))
-			jump_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
+		if (ihdlr.isKeyUp(SDL_SCANCODE_W) && ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
 			jump_ = false;
 		if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
 			roll_ = false;
@@ -153,9 +151,7 @@ void PlayerCtrl::handleInput()
 			moveLeft_ = true;
 		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
 			moveRight_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_W))
-			jump_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
+		if (ihdlr.isKeyDown(SDL_SCANCODE_W) || ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
 			jump_ = true;
 		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
 			roll_ = true;

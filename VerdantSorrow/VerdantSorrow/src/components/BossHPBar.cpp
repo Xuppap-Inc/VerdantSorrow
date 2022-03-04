@@ -33,7 +33,7 @@ void BossHPBar::render() {
 	accumulatedDamage += (lastHP - attrib_->getLife());
 
 	//barra roja
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), (attrib_->getLife() >= 0 ? (maxBarLength * (attrib_->getLife() / maxHp)) : 0), 10);
+	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / maxHp), 10);
 	//barra de daño acumulado
 	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY(), maxBarLength * (accumulatedDamage / maxHp), rect.h);
 
