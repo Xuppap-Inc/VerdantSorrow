@@ -8,7 +8,7 @@ public:
 
 	__CMPID_DECL__(ecs::_BOSS_HP_BAR)
 
-	BossHPBar();
+		BossHPBar();
 	virtual ~BossHPBar();
 
 	void initComponent() override;
@@ -28,7 +28,7 @@ private:
 	//variables para que la barra de vida baje poco a poco
 	float accumulatedDamage;
 	float lastHP;
-	int lastAccumulatedDmgDecrease;
-	int AccumulatedDmgDecreaseCooldown;
+	int accumulatedDmgDecrease;
+	int accumulatedDmgFirstDecrease;
 };
 
