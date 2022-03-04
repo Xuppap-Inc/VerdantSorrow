@@ -126,9 +126,9 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);
 
-	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 2000, 30);
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
 
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
