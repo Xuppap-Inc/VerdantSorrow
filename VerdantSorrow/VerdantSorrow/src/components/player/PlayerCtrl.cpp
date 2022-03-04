@@ -91,7 +91,7 @@ void PlayerCtrl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
-	//anim_ = ent_->getComponent<FramedImage>();
+	anim_ = ent_->getComponent<FramedImage>();
 	//assert(anim_ != nullptr);
 
 	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);

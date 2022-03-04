@@ -25,7 +25,7 @@ private:
 	RectangleCollider* playerCol_;
 	Transform* tr_;
 	PlayerAttributes* attrib_;
-	//FramedImage* anim_;
+	FramedImage* anim_;
 
 	//variables de velocidad
 	float jumpForce_, speed_, rollSpeed_, deceleration_;
