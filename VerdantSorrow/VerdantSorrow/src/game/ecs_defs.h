@@ -34,7 +34,8 @@
 	_BOSS_ATTACK_MANAGER, \
 	_FOLLOWPLAYER, \
 	_ROOTMOVEMENT, \
-	_ROOTWAVE
+	_ROOTWAVE, \
+	_ROOTSPAWNER
 
 
 // Groups list - must have at least one element

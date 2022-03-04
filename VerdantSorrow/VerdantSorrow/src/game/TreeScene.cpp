@@ -17,6 +17,7 @@
 #include "../components/TreeBoss/TreeAttackManager.h"
 #include "../components/TreeBoss/RootWave.h"
 #include "../components/TreeBoss/Root/RootMovement.h"
+#include "../components/TreeBoss/RootSpawner.h"
 
 
 #include "CollisionManager.h"
@@ -100,7 +101,8 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	Tree_->addComponent<BossHPBar>();
 
-	Tree_->addComponent<RootWave>(colManager);
+	Tree_->addComponent<RootSpawner>(colManager);
+	Tree_->addComponent<RootWave>();
 	Tree_->addComponent<TreeAttackManager>(colManager);
 
 }

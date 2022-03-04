@@ -1,25 +1,29 @@
 #pragma once
 #include "../../ecs/Component.h"
-#include "root/RootMovement.h"
-#include "TreeAttackManager.h"
+#include "RootSpawner.h"
 
 class RootWave : public ecs::Component
 {
 public:
-	__CMPID_DECL__(ecs::_ROOTWAVE)
+	__CMPID_DECL__(ecs::_ROOTSPAWNER)
 
-	RootWave(CollisionManager* collManager);
+	RootWave();
 	~RootWave();
 
 	void initComponent() override;
 	void update() override;
 	void attack(int dir);
-	void createRoot(int x);
 
 private:
 	Transform* tr_;
-	CollisionManager* collManager_;
+	RootSpawner* rootSpawner_;
 
-	Uint32 lastTime;
+	Uint32 lastTime_;
+	bool attacking_;
+	float rootPos_;
+	int dir_;
+	int rootW_;
+
+	int timeBetweenRoots_;
 };
 

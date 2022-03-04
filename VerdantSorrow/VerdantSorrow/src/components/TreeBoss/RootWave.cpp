@@ -9,7 +9,7 @@
 #include "../../game/CollisionManager.h"
 #include "../FrogBoss/BossAtributos.h"
 
-RootWave::RootWave(CollisionManager* collManager) : collManager_(collManager), tr_(), lastTime(0)
+RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), dir_(1), rootPos_(-1), rootW_(0), timeBetweenRoots_(1000)
 {
 }
 
@@ -20,51 +20,35 @@ RootWave::~RootWave()
 void RootWave::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
+	rootSpawner_ = ent_->getComponent<RootSpawner>();
 
-	bool comps = tr_ != nullptr;
+	bool comps = tr_ != nullptr && rootSpawner_ != nullptr;
 	assert(comps);
 }
 
 void RootWave::update()
 {
+	if (attacking_ && sdlutils().currRealTime() - lastTime_ > timeBetweenRoots_) {
+	
+		rootSpawner_->createRoot(rootPos_);
+		rootPos_ += (rootW_ + 5) * dir_;
+
+		lastTime_ = sdlutils().currRealTime();
+
+		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) attacking_ = false;
+	}
 }
 
 void RootWave::attack(int dir)
 {
-	auto rootPos = tr_->getPos().getX();
-	lastTime = sdlutils().currRealTime();
-	createRoot(rootPos);
-	rootPos += (25 + 5) * dir;
+	//inicializa variables
+	rootPos_ = tr_->getPos().getX();
+	dir_ = dir;
+	attacking_ = true;
+	rootW_ = rootSpawner_->getRootWidth();
 
-	while (rootPos > 0 && rootPos < sdlutils().width()) {
-	
-		createRoot(rootPos);
-		rootPos += (25 + 5) * dir;
-
-		lastTime = sdlutils().currRealTime();
-	}
-}
-
-void RootWave::createRoot(int x)
-{
-	//Se crea la raiz
-	auto Root = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-	auto RootAtribs = Root->addComponent<BossAtributos>();
-	auto RootTr = Root->addComponent<Transform>();
-	auto RootX = x;
-	auto RootY = sdlutils().height();
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	int rootWidth_ = 25;
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), rootWidth_, 800, 0.0f);
-	//Se le añade un color inicial a la raiz
-	Root->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Se añade un collider a la onda
-	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
-	RootCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
-	collManager_->addCollider(RootCollider);
-	//Se añade el movimiento horizontal
-	Root->addComponent<RootMovement>();
+	//crea la primera raíz
+	rootSpawner_->createRoot(rootPos_);
+	rootPos_ += (rootW_ + 5) * dir;
+	lastTime_ = sdlutils().currRealTime();
 }
