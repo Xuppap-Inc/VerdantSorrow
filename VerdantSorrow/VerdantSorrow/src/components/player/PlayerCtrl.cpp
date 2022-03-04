@@ -19,7 +19,6 @@ PlayerCtrl::~PlayerCtrl()
 
 void PlayerCtrl::update()
 {
-	auto& ihdlr = ih();
 	auto currentTime = sdlutils().currRealTime();
 
 	auto& vel = tr_->getVel();
@@ -35,30 +34,7 @@ void PlayerCtrl::update()
 	if (!isAttacking && !isRolling_) {
 
 		//handle input
-		if (ihdlr.keyUpEvent()) {
-			if (ihdlr.isKeyUp(SDL_SCANCODE_A))
-				moveLeft_ = false;
-			if (ihdlr.isKeyUp(SDL_SCANCODE_D))
-				moveRight_ = false;
-			if (ihdlr.isKeyUp(SDL_SCANCODE_W))
-				jump_ = false;
-			if (ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
-				jump_ = false;
-			if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
-				roll_ = false;
-		}
-		if (ihdlr.keyDownEvent()) {
-			if (ihdlr.isKeyDown(SDL_SCANCODE_A))
-				moveLeft_ = true;
-			if (ihdlr.isKeyDown(SDL_SCANCODE_D))
-				moveRight_ = true;
-			if (ihdlr.isKeyDown(SDL_SCANCODE_W))
-				jump_ = true;
-			if (ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
-				jump_ = true;
-			if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
-				roll_ = true;
-		}
+		handleInput();
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -96,7 +72,7 @@ void PlayerCtrl::update()
 			isRolling_ = true;
 		}
 			
-		if (!jump_ && !moveLeft_ && !moveRight_)
+		if (!moveLeft_ && !moveRight_)
 			slide_ = true;
 	}
 
@@ -105,8 +81,6 @@ void PlayerCtrl::update()
 
 	if (isAttacking)
 		doAttack();
-	else if(attrib_->isOnGround())
-		attrib_->setOnGround(false);
 }
 
 void PlayerCtrl::initComponent()
@@ -117,6 +91,10 @@ void PlayerCtrl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
+	anim_ = ent_->getComponent<FramedImage>();
+	//assert(anim_ != nullptr);
+
+	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
 // Realiza un knockback en la direccion especificada
@@ -133,7 +111,6 @@ void PlayerCtrl::doAttack()
 	//Da igual lo que pase si ataca, que va a pararse en seco
 	auto& vel = tr_->getVel();
 	vel.set(Vector2D(0, 0));
-	attrib_->setOnGround(true);
 	slide_ = false;
 }
 
@@ -152,5 +129,31 @@ void PlayerCtrl::doSlide()
 
 		tr_->getVel().set(Vector2D(0, vel.getY()));
 		slide_ = false;
+	}
+}
+
+void PlayerCtrl::handleInput()
+{
+	auto& ihdlr = ih();
+
+	if (ihdlr.keyUpEvent()) {
+		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
+			moveLeft_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
+			moveRight_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_W) && ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
+			jump_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
+			roll_ = false;
+	}
+	if (ihdlr.keyDownEvent()) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+			moveLeft_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+			moveRight_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_W) || ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
+			jump_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
+			roll_ = true;
 	}
 }

@@ -61,6 +61,13 @@ public:
 	virtual void render() {
 	}
 
+	// A component has a debug method, and by default it
+	// does nothing -- some components will not override this
+	// method.
+	//
+	virtual void debug() {
+	}
+
 protected: // we allow direct use these fields from subclasses
 
 	Entity *ent_; // a pointer to the entity, should not be deleted on destruction

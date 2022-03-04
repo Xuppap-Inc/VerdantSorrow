@@ -80,6 +80,14 @@ public:
 			currCmps_[i]->render();
 	}
 
+	//call debug method of all components
+	//
+	void debug() {
+		auto n = currCmps_.size();
+		for (auto i = 0u; i < n; i++)
+			currCmps_[i]->debug();
+	}
+
 	// Adds a component. It receives the type T (to be created), and the
 	// list of arguments (if any) to be passed to the constructor.
 	// The component identifier 'cId' is taken from T::id.
