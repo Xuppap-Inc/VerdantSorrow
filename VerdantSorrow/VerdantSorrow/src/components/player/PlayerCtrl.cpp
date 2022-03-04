@@ -94,7 +94,7 @@ void PlayerCtrl::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	//assert(anim_ != nullptr);
 
-	//anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 1000, 31);
+	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
 // Realiza un knockback en la direccion especificada

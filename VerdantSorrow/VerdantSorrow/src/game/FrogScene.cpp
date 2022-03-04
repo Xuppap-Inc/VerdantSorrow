@@ -151,7 +151,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-	player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 2000, 30);
 }
 void FrogScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 

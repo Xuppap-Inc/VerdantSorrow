@@ -30,6 +30,14 @@
     {
       "id": "ranajump",
       "file": "resources/images/rana_jump.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/Chica_Idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/Chica_Run.png"
     }
     
   ],
