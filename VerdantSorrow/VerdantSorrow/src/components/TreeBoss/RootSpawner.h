@@ -10,7 +10,7 @@ class FramedImage;
 class RootSpawner : public ecs::Component
 {
 public:
-	__CMPID_DECL__(ecs::_ROOTWAVE)
+	__CMPID_DECL__(ecs::_ROOTSPAWNER)
 
 	RootSpawner(CollisionManager* collManager);
 	~RootSpawner();
