@@ -42,6 +42,9 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(vel.getX(), -jumpForce_));
 			attrib_->setOnGround(false);
 			slide_ = false;
+
+			// Animacion
+			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 3000, 20, "Chica_Jump");
 		}
 
 		//moviemiento nulo
@@ -78,6 +81,16 @@ void PlayerCtrl::update()
 			
 		if (!moveLeft_ && !moveRight_)
 			slide_ = true;
+
+		// Animation
+		if (attrib_->isOnGround()) {
+			if (moveRight_ || moveLeft_) {
+				anim_->changeanim(&sdlutils().images().at("Chica_Run"), 4, 6, 3000, 20, "Chica_Run");
+			}
+			else {
+				anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 4, 6, 3000, 20, "Chica_Idle");
+			}
+		}
 	}
 
 	if (slide_)

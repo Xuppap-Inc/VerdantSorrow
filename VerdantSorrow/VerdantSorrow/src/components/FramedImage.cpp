@@ -64,7 +64,7 @@ void FramedImage::render()
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
 
-	if (currentAnim == "Chica") {
+	if (currentAnim == "Chica_Idle" || currentAnim == "Chica_Jump") {
 		float multiplier = 1.3f;
 		//float offset
 		float xOffset = -10;
@@ -90,7 +90,7 @@ void FramedImage::repeat(bool h)
 }
 
 
-void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_)
+void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
 	frametime = time;
 	tex_ = tex;
@@ -102,4 +102,6 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 	initime = sdlutils().currRealTime();
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
+
+	currentAnim = newAnim;
 }

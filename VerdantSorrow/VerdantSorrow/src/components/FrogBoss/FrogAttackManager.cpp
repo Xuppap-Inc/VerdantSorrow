@@ -72,7 +72,7 @@ void FrogAttackManager::update()
 		if (!jumping_ && !jumpingBig_) {
 			frogJump_->attack(jumpDirection_);
 			//Start Jump animation
-			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
+			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31, "ranajump");
 			//Cambio de estado a saltando
 			jumping_ = true;
 		}

@@ -25,7 +25,7 @@ public:
 	void flipX(bool h);
 	void repeat(bool h);
 
-	void changeanim(Texture* tex, int row, int column, float time, int numframes_);
+	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
 
 private:
 	Transform* tr_;
