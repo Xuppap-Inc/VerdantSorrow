@@ -13,12 +13,12 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
-#include "../components/BossComponents.h"
-#include "../components/TreeBoss/TreeAttackManager.h"
-#include "../components/TreeBoss/RootWave.h"
-#include "../components/TreeBoss/Root/RootMovement.h"
-#include "../components/TreeBoss/RootSpawner.h"
-#include "../components/TreeBoss/RootAutoAim.h"
+#include "../components/boss/BossComponents.h"
+#include "../components/boss/tree_boss/TreeAttackManager.h"
+#include "../components/boss/tree_boss/RootWave.h"
+#include "../components/boss/tree_boss/Root/RootMovement.h"
+#include "../components/boss/tree_boss/RootSpawner.h"
+#include "../components/boss/tree_boss/RootAutoAim.h"
 
 
 #include "CollisionManager.h"

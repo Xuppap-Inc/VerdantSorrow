@@ -1,7 +1,7 @@
 #include "FrogBigJump.h"
 
-#include "../Transform.h"
-#include "../../ecs/Entity.h"
+#include "../../Transform.h"
+#include "../../../ecs/Entity.h"
 
 FrogBigJump::FrogBigJump() : tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpCd_(2000)
 {

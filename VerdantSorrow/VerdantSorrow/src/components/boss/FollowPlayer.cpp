@@ -1,6 +1,6 @@
 #include "FollowPlayer.h"
-#include "../components/Transform.h"
-#include "../ecs/Entity.h"
+#include "../../components/Transform.h"
+#include "../../ecs/Entity.h"
 
 FollowPlayer::FollowPlayer(): 
 	tr_(),

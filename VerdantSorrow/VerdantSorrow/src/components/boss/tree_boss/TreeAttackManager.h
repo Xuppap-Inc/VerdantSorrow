@@ -1,4 +1,4 @@
-#include "../../ecs/Component.h"
+#include "../../../ecs/Component.h"
 #include "root/RootMovement.h"
 
 class RootWave;

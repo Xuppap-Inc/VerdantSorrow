@@ -19,28 +19,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\TreeBoss\RootAutoAim.h" />
-    <ClInclude Include="src\components\TreeBoss\RootSpawner.h" />
-    <ClInclude Include="src\components\TreeBoss\TreeAttackManager.h" />
-    <ClInclude Include="src\components\TreeBoss\RootWave.h" />
-    <ClInclude Include="src\components\TreeBoss\root\RootMovement.h" />
-    <ClInclude Include="src\components\BossComponents.h" />
-    <ClInclude Include="src\components\FollowPlayer.h" />
+    <ClInclude Include="src\components\boss\tree_boss\RootAutoAim.h" />
+    <ClInclude Include="src\components\boss\tree_boss\RootSpawner.h" />
+    <ClInclude Include="src\components\boss\tree_boss\TreeAttackManager.h" />
+    <ClInclude Include="src\components\boss\tree_boss\RootWave.h" />
+    <ClInclude Include="src\components\boss\tree_boss\root\RootMovement.h" />
+    <ClInclude Include="src\components\boss\BossComponents.h" />
+    <ClInclude Include="src\components\boss\FollowPlayer.h" />
     <ClInclude Include="src\components\player\PlayerHubControl.h" />
-    <ClInclude Include="src\components\BossHPBar.h" />
-    <ClInclude Include="src\components\FrogBoss\FrogAttackManager.h" />
+    <ClInclude Include="src\components\boss\BossHPBar.h" />
+    <ClInclude Include="src\components\boss\frog_boss\FrogAttackManager.h" />
     <ClInclude Include="src\components\player\PlayerUI.h" />
-    <ClInclude Include="src\components\FrogBoss\FrogBigJump.h" />
+    <ClInclude Include="src\components\boss\frog_boss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\FramedImage.h" />
     <ClInclude Include="src\game\TreeScene.h" />
     <ClInclude Include="src\game\Hub.h" />
     <ClInclude Include="src\components\OnBorders.h" />
-    <ClInclude Include="src\components\FrogBoss\CollideWithBordersBoss.h" />
-    <ClInclude Include="src\components\FrogBoss\FrogJump.h" />
+    <ClInclude Include="src\components\boss\CollideWithBordersBoss.h" />
+    <ClInclude Include="src\components\boss\frog_boss\FrogJump.h" />
     <ClInclude Include="src\components\player\Attack.h" />
     <ClInclude Include="src\components\player\PlayerAttributes.h" />
-    <ClInclude Include="src\components\FrogBoss\BossAtributos.h" />
+    <ClInclude Include="src\components\boss\BossAtributos.h" />
     <ClInclude Include="src\components\player\PlayerComponents.h" />
     <ClInclude Include="src\components\SimpleGravity.h" />
     <ClInclude Include="src\components\Transform.h" />
@@ -73,28 +73,28 @@
     <ClInclude Include="src\utils\mpl.h" />
     <ClInclude Include="src\utils\Singleton.h" />
     <ClInclude Include="src\utils\Vector2D.h" />
-    <ClInclude Include="src\components\wave\WaveMovement.h" />
-    <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
+    <ClInclude Include="src\components\boss\frog_boss\wave\WaveMovement.h" />
+    <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\TreeBoss\RootAutoAim.cpp" />
-    <ClCompile Include="src\components\TreeBoss\RootSpawner.cpp" />
-    <ClCompile Include="src\components\TreeBoss\RootWave.cpp" />
-    <ClCompile Include="src\components\TreeBoss\root\RootMovement.cpp" />
-    <ClCompile Include="src\components\FollowPlayer.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\RootAutoAim.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\RootSpawner.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\RootWave.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\root\RootMovement.cpp" />
+    <ClCompile Include="src\components\boss\FollowPlayer.cpp" />
     <ClCompile Include="src\components\player\PlayerHubControl.cpp" />
-    <ClCompile Include="src\components\BossHPBar.cpp" />
-    <ClCompile Include="src\components\FrogBoss\FrogAttackManager.cpp" />
+    <ClCompile Include="src\components\boss\BossHPBar.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\FrogAttackManager.cpp" />
     <ClCompile Include="src\components\player\PlayerUI.cpp" />
-    <ClCompile Include="src\components\FrogBoss\FrogBigJump.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\FrogBigJump.cpp" />
     <ClCompile Include="src\components\Image.cpp" />
     <ClCompile Include="src\components\FramedImage.cpp" />
-    <ClCompile Include="src\components\TreeBoss\TreeAttackManager.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\TreeAttackManager.cpp" />
     <ClCompile Include="src\game\TreeScene.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
     <ClCompile Include="src\components\OnBorders.cpp" />
-    <ClCompile Include="src\components\FrogBoss\CollideWithBordersBoss.cpp" />
-    <ClCompile Include="src\components\FrogBoss\FrogJump.cpp" />
+    <ClCompile Include="src\components\boss\CollideWithBordersBoss.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\FrogJump.cpp" />
     <ClCompile Include="src\components\player\Attack.cpp" />
     <ClCompile Include="src\components\player\PlayerAttributes.cpp" />
     <ClCompile Include="src\components\SimpleGravity.cpp" />
@@ -118,8 +118,8 @@
     <ClCompile Include="src\sdlutils\Texture.cpp" />
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
-    <ClCompile Include="src\components\wave\WaveMovement.cpp" />
-    <ClCompile Include="src\components\FrogBoss\TongueAttack.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\wave\WaveMovement.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

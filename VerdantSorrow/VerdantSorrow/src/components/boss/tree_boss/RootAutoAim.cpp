@@ -1,13 +1,13 @@
 #include "RootAutoAim.h"
 
-#include "../../sdlutils/SDLUtils.h"
-#include "../../ecs/Entity.h"
-#include "../../ecs/Manager.h"
-#include "../Transform.h"
-#include "../RectangleCollider.h"
-#include "../RectangleRenderer.h"
-#include "../../game/CollisionManager.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../../../sdlutils/SDLUtils.h"
+#include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
+#include "../../Transform.h"
+#include "../../RectangleCollider.h"
+#include "../../RectangleRenderer.h"
+#include "../../../game/CollisionManager.h"
+#include "../BossAtributos.h"
 
 RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), timeBetweenRoots_(1000), player_(player), playerTr_()
 {

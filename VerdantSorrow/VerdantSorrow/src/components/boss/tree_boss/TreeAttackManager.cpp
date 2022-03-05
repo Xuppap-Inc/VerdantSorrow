@@ -1,16 +1,16 @@
 #include "TreeAttackManager.h"
 
-#include "../../ecs/Entity.h"
-#include "../../ecs/Manager.h"
-#include "../Transform.h"
-#include "../RectangleCollider.h"
-#include "../RectangleRenderer.h"
-#include "../../game/CollisionManager.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
+#include "../../Transform.h"
+#include "../../RectangleCollider.h"
+#include "../../RectangleRenderer.h"
+#include "../../../game/CollisionManager.h"
+#include "../BossAtributos.h"
 #include "RootWave.h"
 #include "RootAutoAim.h"
-#include "../../sdlutils/SDLUtils.h"
-#include "../FramedImage.h"
+#include "../../../sdlutils/SDLUtils.h"
+#include "../../FramedImage.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_()
 {

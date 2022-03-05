@@ -1,13 +1,13 @@
 #include "RootWave.h"
 
-#include "../../sdlutils/SDLUtils.h"
-#include "../../ecs/Entity.h"
-#include "../../ecs/Manager.h"
-#include "../Transform.h"
-#include "../RectangleCollider.h"
-#include "../RectangleRenderer.h"
-#include "../../game/CollisionManager.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../../../sdlutils/SDLUtils.h"
+#include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
+#include "../../Transform.h"
+#include "../../RectangleCollider.h"
+#include "../../RectangleRenderer.h"
+#include "../../../game/CollisionManager.h"
+#include "../BossAtributos.h"
 
 RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), dir_(1), rootPos_(-1), rootW_(0), timeBetweenRoots_(500)
 {

@@ -1,7 +1,7 @@
 #include "waveMovement.h"
 
-#include "../Transform.h"
-#include "../../ecs/Entity.h"
+#include "../../../Transform.h"
+#include "../../../../ecs/Entity.h"
 
 WaveMovement::WaveMovement() : tr_(), dir_(), speed_()
 {

@@ -1,13 +1,13 @@
 #include "RootSpawner.h"
 
-#include "../../sdlutils/SDLUtils.h"
-#include "../../ecs/Entity.h"
-#include "../../ecs/Manager.h"
-#include "../Transform.h"
-#include "../RectangleCollider.h"
-#include "../RectangleRenderer.h"
-#include "../../game/CollisionManager.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../../../sdlutils/SDLUtils.h"
+#include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
+#include "../../Transform.h"
+#include "../../RectangleCollider.h"
+#include "../../RectangleRenderer.h"
+#include "../../../game/CollisionManager.h"
+#include "../BossAtributos.h"
 
 RootSpawner::RootSpawner(CollisionManager* collManager) : collManager_(collManager), framedImg_(), rootWidth_(25)
 {

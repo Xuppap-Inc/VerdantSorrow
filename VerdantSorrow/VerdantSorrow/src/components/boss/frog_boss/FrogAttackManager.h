@@ -1,4 +1,4 @@
-#include "../../ecs/Component.h"
+#include "../../../ecs/Component.h"
 
 class FrogJump;
 class FrogBigJump;

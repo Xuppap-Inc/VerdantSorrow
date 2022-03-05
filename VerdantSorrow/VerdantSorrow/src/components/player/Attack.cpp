@@ -4,7 +4,7 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../boss/BossAtributos.h"
 
 Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(300),lastAttack()
 {

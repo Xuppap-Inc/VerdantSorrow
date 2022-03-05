@@ -1,8 +1,8 @@
 #include "FrogJump.h"
 
-#include "../Transform.h"
-#include "../FramedImage.h"
-#include "../../ecs/Entity.h"
+#include "../../Transform.h"
+#include "../../FramedImage.h"
+#include "../../../ecs/Entity.h"
 
 FrogJump::FrogJump(): tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpCd_(2000)
 {

@@ -1,4 +1,4 @@
-#include "../../ecs/Component.h"
+#include "../../../ecs/Component.h"
 
 #pragma once
 class TongueAttack : public ecs::Component

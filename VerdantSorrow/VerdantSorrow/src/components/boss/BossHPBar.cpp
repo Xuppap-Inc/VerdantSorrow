@@ -2,10 +2,10 @@
 
 #include <cassert>
 
-#include "../ecs/Entity.h"
-#include "../sdlutils/macros.h"
-#include "../sdlutils/SDLUtils.h"
-#include "Transform.h"
+#include "../../ecs/Entity.h"
+#include "../../sdlutils/macros.h"
+#include "../../sdlutils/SDLUtils.h"
+#include "../Transform.h"
 
 BossHPBar::BossHPBar() :
 	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(), lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease() {

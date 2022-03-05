@@ -1,8 +1,8 @@
 #include "RootMovement.h"
 
-#include "../../Transform.h"
-#include "../../../ecs/Entity.h"
-#include "../../RectangleCollider.h"
+#include "../../../Transform.h"
+#include "../../../../ecs/Entity.h"
+#include "../../../RectangleCollider.h"
 
 RootMovement::RootMovement() : tr_(), speed(0.25)
 {

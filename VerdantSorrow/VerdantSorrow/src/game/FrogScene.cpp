@@ -13,10 +13,10 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
-#include "../components/BossComponents.h"
-#include "../components/Wave/WaveMovement.h"
-#include "../components/FrogBoss/FrogAttackManager.h"
-#include "../components/TreeBoss/Root/RootMovement.h"
+#include "../components/boss/BossComponents.h"
+#include "../components/boss/frog_boss/wave/WaveMovement.h"
+#include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "../components/boss/tree_boss/Root/RootMovement.h"
 
 
 #include "CollisionManager.h"
