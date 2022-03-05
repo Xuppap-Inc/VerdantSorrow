@@ -32,7 +32,7 @@ void RectangleCollider::debug()
 
 SDL_Rect RectangleCollider::getCollider()
 {
-	return {(int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_};
+	return build_sdlrect(pos_, width_, height_);
 }
 
 void RectangleCollider::setIsTrigger(bool set)

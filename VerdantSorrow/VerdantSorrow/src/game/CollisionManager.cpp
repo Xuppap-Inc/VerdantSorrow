@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "../sdlutils/SDLUtils.h"
 
 CollisionManager::CollisionManager()
 {
@@ -26,7 +27,7 @@ std::vector<RectangleCollider*> CollisionManager::getCollisions(RectangleCollide
 
 bool CollisionManager::collision(SDL_Rect r1, SDL_Rect r2)
 {
-	SDL_Rect r = { r2.x - 1,r2.y - 1,r2.w + 2,r2.h + 2 };
+	SDL_Rect r = build_sdlrect(r2.x - 1, r2.y - 1, r2.w + 2, r2.h + 2);
 	if (SDL_HasIntersection(&r1, &r) == SDL_TRUE) return true;
 
 	return false;
