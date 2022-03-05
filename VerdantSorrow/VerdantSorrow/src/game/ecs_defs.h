@@ -36,7 +36,9 @@
 	_ROOTMOVEMENT, \
 	_ROOTWAVE, \
 	_ROOTSPAWNER, \
-	_ROOTAUTOAIM
+	_ROOTAUTOAIM,\
+	_TREEMOVEMENT,\
+	_MELEEATTACK
 
 
 // Groups list - must have at least one element

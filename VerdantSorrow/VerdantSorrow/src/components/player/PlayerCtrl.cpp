@@ -44,7 +44,7 @@ void PlayerCtrl::update()
 			slide_ = false;
 
 			// Animacion
-			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 3000, 20, "Chica_Jump");
+			/*anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 3000, 20, "Chica_Jump");*/
 		}
 
 		//moviemiento nulo
@@ -60,7 +60,7 @@ void PlayerCtrl::update()
 			movementDir_ = -1;
 			slide_ = false;
 
-			anim_->flipX(true);
+			/*anim_->flipX(true);*/
 		}
 		//movimiento derecha
 		else if (moveRight_ && !attrib_->isRightStop()) {
@@ -69,7 +69,7 @@ void PlayerCtrl::update()
 			movementDir_ = 1;
 			slide_ = false;
 
-			anim_->flipX(false);
+	/*		anim_->flipX(false);*/
 		}
 
 		//Roll
@@ -85,10 +85,10 @@ void PlayerCtrl::update()
 		// Animation
 		if (attrib_->isOnGround()) {
 			if (moveRight_ || moveLeft_) {
-				anim_->changeanim(&sdlutils().images().at("Chica_Run"), 4, 6, 3000, 20, "Chica_Run");
+				/*anim_->changeanim(&sdlutils().images().at("Chica_Run"), 4, 6, 3000, 20, "Chica_Run");*/
 			}
 			else {
-				anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 4, 6, 3000, 20, "Chica_Idle");
+			/*	anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 4, 6, 3000, 20, "Chica_Idle");*/
 			}
 		}
 	}
