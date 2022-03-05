@@ -31,10 +31,10 @@ void PlayerCtrl::update()
 		isRolling_ = false;
 	}
 
-	if (!isAttacking && !isRolling_) {
+	//handle input
+	handleInput();
 
-		//handle input
-		handleInput();
+	if (!isAttacking && !isRolling_) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {

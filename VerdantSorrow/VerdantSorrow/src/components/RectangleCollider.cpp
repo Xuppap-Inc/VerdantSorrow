@@ -19,9 +19,11 @@ void RectangleCollider::initComponent()
 
 void RectangleCollider::update()
 {
-	Vector2D contPos = tr_->getPos();
+	if (isActive()) {
+		Vector2D contPos = tr_->getPos();
 
-	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
+		pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_) / 2, contPos.getY() + (tr_->getHeight() - height_) / 2);
+	}
 }
 
 void RectangleCollider::debug()
