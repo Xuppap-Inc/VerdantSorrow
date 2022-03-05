@@ -39,102 +39,102 @@ void FrogAttackManager::initComponent()
 //Patrones de ataque de la rana
 void FrogAttackManager::update()
 {
-	//auto& rand = sdlutils().rand();
-	//if (frogState_ == FIRST_PHASE) {
-	//	//Cambio en la dirección del salto si choca con bordes
-	//	
-	//	
-	//	//Si está saltando y tocando el suelo a la vez, para de saltar
-	//	if (jumping_ && attr_->isOnGround()) {
-	//		jumping_ = false;
-	//		--jumpsUntilNextTongue_;
-	//		//Start Idle animation
+	auto& rand = sdlutils().rand();
+	if (frogState_ == FIRST_PHASE) {
+		//Cambio en la dirección del salto si choca con bordes
+		
+		
+		//Si está saltando y tocando el suelo a la vez, para de saltar
+		if (jumping_ && attr_->isOnGround()) {
+			jumping_ = false;
+			--jumpsUntilNextTongue_;
+			//Start Idle animation
 
-	//		//Si no quedan saltos hasta la proxima lengua, se cambia de estado a ataque con lengua.
-	//		if (jumpsUntilNextTongue_ == 0) {
-	//			//TODO spawn fly, tongue attack
-	//			std::cout << "Lenguetazo" << std::endl;
-	//			jumpsUntilNextTongue_ = rand.nextInt(3, 5);
-	//		}
-	//	}
-	//	
-	//	if (!jumping_ && !jumpingBig_) {
-	//		frogJump_->attack(jumpDirection_);
-	//		//Start Jump animation
-	//		anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
-	//		//Cambio de estado a saltando
-	//		jumping_ = true;
-	//	}
-	//	
-	//	
+			//Si no quedan saltos hasta la proxima lengua, se cambia de estado a ataque con lengua.
+			if (jumpsUntilNextTongue_ == 0) {
+				//TODO spawn fly, tongue attack
+				std::cout << "Lenguetazo" << std::endl;
+				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
+			}
+		}
+		
+		if (!jumping_ && !jumpingBig_) {
+			frogJump_->attack(jumpDirection_);
+			//Start Jump animation
+			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
+			//Cambio de estado a saltando
+			jumping_ = true;
+		}
+		
+		
 
-	//}else if (FLY_DIED) {
-	//	//Cambio a sprite enfadado
-	//	if (jumpingBig_ && attr_->isOnGround()) {
-	//		jumpingBig_ = false;
-	//		createWaves();
-	//		frogState_ = FIRST_PHASE;
-	//		//Start Idle animation
-	//	}
-	//	if (frogState_ != FLY_DIED) return;
-	//	if (!jumping_ && !jumpingBig_) {
-	//		bigJump_->attack(0); 
-	//		jumpingBig_ = true;
-	//		//Lanzar animación de salto grande
-	//	}
-	//}
-	//else if (SECOND_PHASE) {
-	//	auto jump = rand.nextInt(0, 100);
-	//}
+	}else if (FLY_DIED) {
+		//Cambio a sprite enfadado
+		if (jumpingBig_ && attr_->isOnGround()) {
+			jumpingBig_ = false;
+			createWaves();
+			frogState_ = FIRST_PHASE;
+			//Start Idle animation
+		}
+		if (frogState_ != FLY_DIED) return;
+		if (!jumping_ && !jumpingBig_) {
+			bigJump_->attack(0); 
+			jumpingBig_ = true;
+			//Lanzar animación de salto grande
+		}
+	}
+	else if (SECOND_PHASE) {
+		auto jump = rand.nextInt(0, 100);
+	}
 
-	//if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
-	//	anim_->flipX(false);
-	//	jumpDirection_ = -1;
-	//}
-	//else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
-	//	jumpDirection_ = 1;
-	//	anim_->flipX(true);
-	//}
+	if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
+		anim_->flipX(false);
+		jumpDirection_ = -1;
+	}
+	else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
+		jumpDirection_ = 1;
+		anim_->flipX(true);
+	}
 
-	//switch (frogState_) {
-	//	case JUMPING:
-	//		if (attr_->isOnGround()) {
-	//			frogState_ = WAITING;
-	//			jumping_ = false;
-	//			jumpsUntilNextTongue_--;
-	//		}
-	//		break;
-	//	case JUMPING_BIG:
-	//		if (attr_->isOnGround()) {
-	//			frogState_ = WAITING;
-	//			jumpingBig_ = false;
-	//			if (secondPhase_) jumpsUntilNextTongue_--;
-	//			createWaves();
-	//		}
-	//		break;
-	//	case CALC_NEXT_ATTACK:
-	//		if (jumpsUntilNextTongue_ == 0) {
-	//			std::cout << "Lenguetazo" << std::endl;
-	//			jumpsUntilNextTongue_ = rand.nextInt(3, 5);
-	//		}
-	//		break;
-	//	case WAITING:
-	//		if (jumpsDelay_ + lastUpdate_ < sdlutils().currRealTime()) {
+	switch (frogState_) {
+		case JUMPING:
+			if (attr_->isOnGround()) {
+				frogState_ = WAITING;
+				jumping_ = false;
+				jumpsUntilNextTongue_--;
+			}
+			break;
+		case JUMPING_BIG:
+			if (attr_->isOnGround()) {
+				frogState_ = WAITING;
+				jumpingBig_ = false;
+				if (secondPhase_) jumpsUntilNextTongue_--;
+				createWaves();
+			}
+			break;
+		case CALC_NEXT_ATTACK:
+			if (jumpsUntilNextTongue_ == 0) {
+				std::cout << "Lenguetazo" << std::endl;
+				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
+			}
+			break;
+		case WAITING:
+			if (jumpsDelay_ + lastUpdate_ < sdlutils().currRealTime()) {
 
-	//		}
-	//		break;
-	//	case FLY_DIED:
-	//		if (!jumping_ && !jumpingBig_) {
-	//			bigJump_->attack(0);
-	//			jumpingBig_ = true;
-	//			//Lanzar animacion de salto largo
-	//		}
-	//		break;
-	//	case SECOND_PHASE:
-	//		break;
-	//	default:
-	//		break;
-	//}
+			}
+			break;
+		case FLY_DIED:
+			if (!jumping_ && !jumpingBig_) {
+				bigJump_->attack(0);
+				jumpingBig_ = true;
+				//Lanzar animacion de salto largo
+			}
+			break;
+		case SECOND_PHASE:
+			break;
+		default:
+			break;
+	}
 }
 
 

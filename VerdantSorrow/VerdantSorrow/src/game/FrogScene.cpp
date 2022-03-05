@@ -104,7 +104,6 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 100, FrogTr->getHeight() - 30);
-	frogCollider->setActive(false);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
 
