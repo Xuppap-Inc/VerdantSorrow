@@ -1,6 +1,6 @@
 #include "TreeMovement.h"
-#include "../../components/Transform.h"
-#include "../../ecs/Entity.h"
+#include "../../../components/Transform.h"
+#include "../../../ecs/Entity.h"
 
 TreeMovement::TreeMovement() :
 	tr_(),

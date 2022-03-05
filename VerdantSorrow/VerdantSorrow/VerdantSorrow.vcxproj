@@ -33,8 +33,8 @@
     <ClInclude Include="src\components\boss\frog_boss\FrogBigJump.h" />
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\FramedImage.h" />
-    <ClInclude Include="src\components\TreeBoss\MeleeAttack.h" />
-    <ClInclude Include="src\components\TreeBoss\TreeMovement.h" />
+    <ClInclude Include="src\components\boss\tree_boss\MeleeAttack.h" />
+    <ClInclude Include="src\components\boss\tree_boss\TreeMovement.h" />
     <ClInclude Include="src\game\TreeScene.h" />
     <ClInclude Include="src\game\Hub.h" />
     <ClInclude Include="src\components\OnBorders.h" />
@@ -92,8 +92,8 @@
     <ClCompile Include="src\components\Image.cpp" />
     <ClCompile Include="src\components\FramedImage.cpp" />
     <ClCompile Include="src\components\boss\tree_boss\TreeAttackManager.cpp" />
-    <ClCompile Include="src\components\TreeBoss\MeleeAttack.cpp" />
-    <ClCompile Include="src\components\TreeBoss\TreeMovement.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\MeleeAttack.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\TreeMovement.cpp" />
     <ClCompile Include="src\game\TreeScene.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
     <ClCompile Include="src\components\OnBorders.cpp" />

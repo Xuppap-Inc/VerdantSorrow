@@ -1,8 +1,8 @@
 #pragma once
-#include "../../ecs/Component.h"
-#include "../../utils/Vector2D.h"
-#include "../RectangleCollider.h"
-#include "../../game/CollisionManager.h"
+#include "../../../ecs/Component.h"
+#include "../../../utils/Vector2D.h"
+#include "../../RectangleCollider.h"
+#include "../../../game/CollisionManager.h"
 #include <SDL.h>
 
 class Transform;

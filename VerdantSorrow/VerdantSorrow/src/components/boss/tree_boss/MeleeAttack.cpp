@@ -1,10 +1,10 @@
 #include "MeleeAttack.h"
-#include "../../ecs/Entity.h"
-#include "../Transform.h"
-#include "../../sdlutils/InputHandler.h"
-#include "../../sdlutils/SDLUtils.h"
-#include "../player/PlayerCtrl.h"
-#include "../boss/BossAtributos.h"
+#include "../../../ecs/Entity.h"
+#include "../../Transform.h"
+#include "../../../sdlutils/InputHandler.h"
+#include "../../../sdlutils/SDLUtils.h"
+#include "../../player/PlayerCtrl.h"
+#include "../../boss/BossAtributos.h"
 
 MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(200), attackCoolDown(300), lastAttack()
 {
