@@ -2,26 +2,29 @@
 #include "../../ecs/Component.h"
 #include "RootSpawner.h"
 
-class RootWave : public ecs::Component
+class RootAutoAim : public ecs::Component
 {
 public:
-	__CMPID_DECL__(ecs::_ROOTWAVE)
+	__CMPID_DECL__(ecs::_ROOTAUTOAIM)
 
-	RootWave();
-	~RootWave();
+	RootAutoAim(ecs::Entity* player);
+	~RootAutoAim();
 
 	void initComponent() override;
 	void update() override;
-	void attack(int dir);
+	void attack();
+	void cancelAttack();
 
 private:
 	Transform* tr_;
 	RootSpawner* rootSpawner_;
 
+	ecs::Entity* player_;
+	Transform* playerTr_;
+
 	Uint32 lastTime_;
 	bool attacking_;
 	float rootPos_;
-	int dir_;
 	int rootW_;
 
 	int timeBetweenRoots_;

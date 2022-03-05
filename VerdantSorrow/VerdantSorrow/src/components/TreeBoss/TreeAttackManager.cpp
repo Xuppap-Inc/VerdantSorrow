@@ -8,10 +8,11 @@
 #include "../../game/CollisionManager.h"
 #include "../FrogBoss/BossAtributos.h"
 #include "RootWave.h"
+#include "RootAutoAim.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../FramedImage.h"
 
-TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0)
+TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_()
 {
 }
 
@@ -19,7 +20,7 @@ TreeAttackManager::~TreeAttackManager()
 {
 }
 
-TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), rootWidth_(0)
+TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_()
 {
 }
 
@@ -30,10 +31,12 @@ void TreeAttackManager::initComponent()
 	attr_ = ent_->getComponent<BossAtributos>();
 
 	rootWave_ = ent_->getComponent<RootWave>();
-	bool correct = tr_ != nullptr && player_ != nullptr && attr_ != nullptr && rootWave_ != nullptr;
+	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
+	bool correct = tr_ != nullptr && player_ != nullptr && attr_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr;
 	assert(correct);
 
-	rootWave_->attack(1);
+	//rootWave_->attack(1);
+	rootAutoAim_->attack();
 }
 
 void TreeAttackManager::update()

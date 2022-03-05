@@ -35,7 +35,8 @@
 	_FOLLOWPLAYER, \
 	_ROOTMOVEMENT, \
 	_ROOTWAVE, \
-	_ROOTSPAWNER
+	_ROOTSPAWNER, \
+	_ROOTAUTOAIM
 
 
 // Groups list - must have at least one element

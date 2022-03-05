@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\TreeBoss\RootAutoAim.h" />
     <ClInclude Include="src\components\TreeBoss\RootSpawner.h" />
     <ClInclude Include="src\components\TreeBoss\TreeAttackManager.h" />
     <ClInclude Include="src\components\TreeBoss\RootWave.h" />
@@ -76,6 +77,7 @@
     <ClInclude Include="src\components\FrogBoss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\TreeBoss\RootAutoAim.cpp" />
     <ClCompile Include="src\components\TreeBoss\RootSpawner.cpp" />
     <ClCompile Include="src\components\TreeBoss\RootWave.cpp" />
     <ClCompile Include="src\components\TreeBoss\root\RootMovement.cpp" />

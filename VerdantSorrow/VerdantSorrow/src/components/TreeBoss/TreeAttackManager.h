@@ -2,6 +2,7 @@
 #include "root/RootMovement.h"
 
 class RootWave;
+class RootAutoAim;
 class Transform;
 class CollisionManager;
 class BossAtributos;
@@ -32,6 +33,8 @@ private:
 	BossAtributos* attr_;
 	FramedImage* anim_;
 	RootWave* rootWave_;
+
+	RootAutoAim* rootAutoAim_;
 	
 	int rootWidth_;
 };
