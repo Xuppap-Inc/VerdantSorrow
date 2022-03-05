@@ -61,7 +61,6 @@ void FramedImage::render()
 
 
 	//SDL_Rect dest;
-
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
 
@@ -70,25 +69,11 @@ void FramedImage::render()
 		//float offset
 		float xOffset = -10;
 		float yOffset = -20;
-		//Vector2D posOffset = { tr_->getPos().getX() + xOffset, tr_->getPos().getX() + yOffset };
-		//dest = build_sdlrect( posOffset, tr_->getWidth() * multiplier,
-		//	tr_->getHeight() * multiplier);
 		dest = build_sdlrect(tr_->getPos(), tr_->getWidth() * multiplier,
 			tr_->getHeight() * multiplier);
 		dest.x += xOffset;
 		dest.y += yOffset;
 	}
-
-	//// Elegir el tamaño dependiendo del personaje/animacion
-	//if (tex_ == sdlutils().images().at("ChicaIdle")) {
-	//	float multiplier = 1.3f;
-	//	dest = build_sdlrect(tr_->getPos(), tr_->getWidth() * multiplier,
-	//		tr_->getHeight() * multiplier);
-	//}
-	//else {
-	//	dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
-	//		tr_->getHeight());
-	//}
 
 	assert(tex_ != nullptr);
 	tex_->render(m_clip, dest, tr_->getRot(),nullptr,flip);
