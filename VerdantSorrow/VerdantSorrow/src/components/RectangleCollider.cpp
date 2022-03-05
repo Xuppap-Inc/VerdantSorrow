@@ -3,6 +3,10 @@
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
 
+
+RectangleCollider::RectangleCollider() : tr_(nullptr), height_(), width_(), pos_(), isTrigger_(false), active_(true)
+{
+}
 RectangleCollider::RectangleCollider(float width, float height): tr_(nullptr), height_(height), width_(width), pos_(), isTrigger_(false), active_(true)
 {
 }
@@ -24,11 +28,13 @@ void RectangleCollider::update()
 	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
 }
 
+
 void RectangleCollider::debug()
 {
-	if(isActive())
+	if (isActive())
 		drawCollider();
 }
+
 
 SDL_Rect RectangleCollider::getCollider()
 {

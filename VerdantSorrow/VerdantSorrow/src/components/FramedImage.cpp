@@ -100,3 +100,7 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 	m_clip.h = tex_->height() / row;
 
 }
+int FramedImage::getFrameNum() 
+{
+	return currentnumframes;
+}

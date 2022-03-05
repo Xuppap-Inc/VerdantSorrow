@@ -27,6 +27,7 @@ public:
 
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_);
 
+	int getFrameNum();
 
 private:
 	Transform* tr_;
