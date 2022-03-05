@@ -13,7 +13,7 @@ public:
 	__CMPID_DECL__(ecs::_FRAMEDIMAGE)
 
 
-		FramedImage(Texture* tex, int row, int column,float time,int numframes);
+		FramedImage(Texture* tex, int row, int column,float time,int numframes, std::string anim);
 	virtual ~FramedImage();
 
 	void setTexture(Texture* tex) {
@@ -26,7 +26,6 @@ public:
 	void repeat(bool h);
 
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_);
-
 
 private:
 	Transform* tr_;
@@ -43,6 +42,6 @@ private:
 	int currentnumframes = 0;
 	bool repeat_;
 	bool repeating_;
-
+	std::string currentAnim;
 };
 
