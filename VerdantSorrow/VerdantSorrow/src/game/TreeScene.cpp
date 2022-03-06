@@ -111,6 +111,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	Tree_->addComponent<RootAutoAim>(player_);
 	Tree_->addComponent<TreeAttackManager>(colManager);
 	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2, 4.0f);
+	Tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
 }
 
 void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {

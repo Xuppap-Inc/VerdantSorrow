@@ -5,6 +5,7 @@
 #include "../../../game/CollisionManager.h"
 #include <SDL.h>
 
+class TreeMovement;
 class Transform;
 using ecs::Entity;
 
@@ -29,6 +30,7 @@ public:
 protected:
     Transform* tr_;
 
+    TreeMovement* treeMovement_;
     //Variables que controlan el timing del ataque
     int attackDuration;
     int attackCoolDown;
