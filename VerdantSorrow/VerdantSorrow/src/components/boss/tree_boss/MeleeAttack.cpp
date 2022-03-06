@@ -41,22 +41,6 @@ void MeleeAttack::update()
 			setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 		}
 	}
-	//Colisiones (con boss)
-	if (isActive() && colMan_->hasCollisions(this)) {
-
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(this);
-
-		for (auto c : colliders) {
-
-			if (c->isActive() && !c->isTrigger()) {
-				ecs::Entity* ent = c->getEntity();
-				PlayerAttributes* playerAt = ent->getComponent<PlayerAttributes>();
-				if (playerAt != nullptr) {
-					playerAt->damagePlayer(1);
-				}
-			}
-		}
-	}
 }
 
 
