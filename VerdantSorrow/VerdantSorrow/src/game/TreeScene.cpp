@@ -117,8 +117,10 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 
+
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
 	player_->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
@@ -131,8 +133,6 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
-
-	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player_->addComponent<Attack>(50,playerTr->getHeight(), colManager);
