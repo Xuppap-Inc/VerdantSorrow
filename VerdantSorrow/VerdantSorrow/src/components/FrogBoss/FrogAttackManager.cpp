@@ -169,6 +169,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	else {
 		jumpsUntilNextTongue_--;
 	}
+	//Iniciar animación Idle y ponerla en repeticiión, si esta en segunda fase poner idle de segunda fase -> !MIRIAM EL REPEAT DE FRAMED IMAGE ESTA INVERTIDO!
 	/*anim_->changeanim(&sdlutils().images().at("ranaidle"), 6, 4, 3, 24);
 	anim_->repeat(false);*/
 }
@@ -184,23 +185,23 @@ void FrogAttackManager::nextAttack()
 		return;
 	}
 	if (jumpsUntilNextTongue_ == 0) {
-		//std::cout << "Lenguetazo" << std::endl;
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
 		frogState_ = TONGUE;
+		//No tengo ni idea de como se lanzará la animacion aqui
 		tongueAttack_->attack(secondPhase_? fly_->getComponent<Transform>() : player_);
 		if (!secondPhase_) /*createFly()*/;
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
 		if (nextJump >= 30) {
+			//lanzar animacion de salto en el metodo attack
 			frogJump_->attack(jumpDirection_);
 			frogState_ = JUMPING;
-			//std::cout << "Salto" << std::endl;
 		}
 		else {
 			bigJump_->attack(jumpDirection_);
+			//lanzar animavion de salto en el metodo attack
 			frogState_ = JUMPING_BIG;
-			//std::cout << "Salto" << std::endl;
 		}
 
 	}
