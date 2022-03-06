@@ -89,7 +89,6 @@ void FramedImage::repeat(bool h)
 	repeat_ = h;
 }
 
-
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
 	frametime = time;
