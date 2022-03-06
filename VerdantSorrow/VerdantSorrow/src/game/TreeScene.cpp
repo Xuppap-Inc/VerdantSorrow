@@ -13,11 +13,14 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
-#include "../components/BossComponents.h"
-#include "../components/TreeBoss/TreeAttackManager.h"
-#include "../components/TreeBoss/RootWave.h"
-#include "../components/TreeBoss/Root/RootMovement.h"
-#include "../components/TreeBoss/RootSpawner.h"
+#include "../components/boss/BossComponents.h"
+#include "../components/boss/tree_boss/TreeAttackManager.h"
+#include "../components/boss/tree_boss/RootWave.h"
+#include "../components/boss/tree_boss/Root/RootMovement.h"
+#include "../components/boss/tree_boss/RootSpawner.h"
+#include "../components/boss/tree_boss/RootAutoAim.h"
+#include "../components/boss/tree_boss/MeleeAttack.h"
+#include "../components/boss/tree_boss/TreeMovement.h"
 
 
 #include "CollisionManager.h"
@@ -105,8 +108,10 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	Tree_->addComponent<RootSpawner>(colManager);
 	Tree_->addComponent<RootWave>();
+	Tree_->addComponent<RootAutoAim>(player_);
 	Tree_->addComponent<TreeAttackManager>(colManager);
-
+	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 4, 4.0f);
+	Tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
 }
 
 void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
@@ -115,8 +120,10 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 
+
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
 	player_->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
@@ -129,8 +136,6 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
-
-	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player_->addComponent<Attack>(50,playerTr->getHeight(), colManager);

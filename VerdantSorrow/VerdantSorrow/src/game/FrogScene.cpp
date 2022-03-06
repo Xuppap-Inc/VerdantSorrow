@@ -13,10 +13,10 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
-#include "../components/BossComponents.h"
-#include "../components/Wave/WaveMovement.h"
-#include "../components/FrogBoss/FrogAttackManager.h"
-#include "../components/TreeBoss/Root/RootMovement.h"
+#include "../components/boss/BossComponents.h"
+#include "../components/boss/frog_boss/wave/WaveMovement.h"
+#include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "../components/boss/tree_boss/Root/RootMovement.h"
 
 
 #include "CollisionManager.h"
@@ -99,7 +99,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto FrogY = sdlutils().height();
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
 
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31, "Rana");
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
 
 	//Se añade un collider a la rana
@@ -126,7 +126,8 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);
 
-	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
+	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
+	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(2.0);

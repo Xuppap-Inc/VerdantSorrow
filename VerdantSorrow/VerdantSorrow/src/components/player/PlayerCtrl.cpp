@@ -31,10 +31,10 @@ void PlayerCtrl::update()
 		isRolling_ = false;
 	}
 
-	if (!isAttacking && !isRolling_) {
+	//handle input
+	handleInput();
 
-		//handle input
-		handleInput();
+	if (!isAttacking && !isRolling_) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -42,6 +42,10 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(vel.getX(), -jumpForce_));
 			attrib_->setOnGround(false);
 			slide_ = false;
+
+			// Animacion
+			anim_->repeat(true);
+			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 300, 20, "Chica_Jump");
 		}
 
 		//moviemiento nulo
@@ -78,6 +82,23 @@ void PlayerCtrl::update()
 			
 		if (!moveLeft_ && !moveRight_)
 			slide_ = true;
+
+		// Animation
+		if (attrib_->isOnGround()) {
+			if (moveRight_ || moveLeft_) {
+				if (anim_->getCurrentAnimation() != "Chica_Run") {
+					anim_->repeat(false);
+					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
+				}
+			}
+			else {
+				if (anim_->getCurrentAnimation() != "Chica_Idle") {
+					anim_->repeat(false);
+					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
+				}
+
+			}
+		}
 	}
 
 	if (slide_)

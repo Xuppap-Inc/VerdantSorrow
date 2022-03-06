@@ -18,13 +18,6 @@ public:
     void initComponent() override;
     void update() override;
     void render() override;
-
-    /**
-    Método que permite cambiar la variable active, que indica si el collider se encuentra activo
-    *
-    @param set: Valor que tomará active
-    */
-    Entity* getEntity();
     
 protected:
     Transform* tr_;
@@ -38,6 +31,6 @@ protected:
     /**
     * Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
     */
-    void setPosition();
+    void setPosition() override;
 };
 

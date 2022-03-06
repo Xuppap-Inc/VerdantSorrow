@@ -26,6 +26,7 @@ public:
 		// create and initialise the entity
 		auto e = new Entity();
 		e->setAlive(true);
+		e->setActive(true);
 		e->resetGroups();
 		e->setContext(this);
 

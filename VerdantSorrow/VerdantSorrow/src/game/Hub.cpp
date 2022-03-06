@@ -14,6 +14,8 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/player/PlayerHubControl.h"
+#include "../components/hub/NpcCtrl.h"
+#include "../components/hub/DialogBoxMngr.h"
 
 #include "CollisionManager.h"
 
@@ -36,11 +38,24 @@ void Hub::init()
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
+	mngr_->setDebug(true);
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	EntryGenerator(colManager);
+	auto dialogBox = mngr_->addEntity();
+	dialogBoxGenerator(dialogBox);
+	NPCGenerator(colManager,dialogBox);
+}
+
+void Hub::dialogBoxGenerator(Entity* dialogBox)
+{
+	dialogBox->setActive(false);
+	auto tr = dialogBox->addComponent<Transform>();
+	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
+	dialogBox->addComponent<RectangleRenderer>();
+	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
 }
 
 void Hub::start() {
@@ -66,6 +81,7 @@ void Hub::start() {
 
 		sdlutils().clearRenderer();
 		mngr_->render();
+		mngr_->debug();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -117,4 +133,19 @@ void Hub::EntryGenerator(CollisionManager* colManager)
 	auto frogEntryCollider = frogEntry->addComponent<RectangleCollider>(frogEntryTr->getWidth(), frogEntryTr->getHeight());
 	colManager->addCollider(frogEntryCollider);
 	frogEntryCollider->setIsTrigger(true);
+}
+
+void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
+{
+	auto npc = mngr_->addEntity();
+	auto npctr = npc->addComponent<Transform>();
+	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f,false);
+
+	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
+	colManager->addCollider(col);
+	col->setIsTrigger(true);
+
+	npc->addComponent<RectangleRenderer>();
+
+	npc->addComponent<NpcCtrl>(colManager,dialogBox_);
 }
