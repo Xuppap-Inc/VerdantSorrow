@@ -86,7 +86,7 @@ void PlayerCtrl::update()
 		// Animation
 		if (attrib_->isOnGround()) {
 			if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
-			if (moveRight_ || moveLeft_) {
+			if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
 				if (anim_->getCurrentAnimation() != "Chica_Run") {
 					anim_->repeat(false);
 					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
