@@ -72,10 +72,6 @@ void MeleeAttack::render()
 	}
 }
 
-Entity* MeleeAttack::getEntity() {
-	return ent_;
-}
-
 void MeleeAttack::setPosition()
 {
 	int grootMovementDir = ent_->getComponent<TreeMovement>()->getMovementDir();

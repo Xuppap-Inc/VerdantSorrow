@@ -62,22 +62,38 @@ public:
 		return alive_;
 	}
 
+	// Setting the state of the entity (active or not)
+	//
+	inline void setActive(bool active) {
+		active_ = active;
+	}
+
+	// Returns the state of the entity (active or not)
+	//
+	inline bool isActive() {
+		return active_;
+	}
+
 	// Updating  an entity simply calls the update of all
 	// components
 	//
 	void update() {
-		auto n = currCmps_.size();
-		for (auto i = 0u; i < n; i++)
-			currCmps_[i]->update();
+		if (isActive()) {
+			auto n = currCmps_.size();
+			for (auto i = 0u; i < n; i++)
+				currCmps_[i]->update();
+		}
 	}
 
 	// Rendering an entity simply calls the render of all
 	// components
 	//
 	void render() {
-		auto n = currCmps_.size();
-		for (auto i = 0u; i < n; i++)
-			currCmps_[i]->render();
+		if (isActive()) {
+			auto n = currCmps_.size();
+			for (auto i = 0u; i < n; i++)
+				currCmps_[i]->render();
+		}
 	}
 
 	//call debug method of all components
@@ -218,6 +234,7 @@ private:
 	std::vector<Component*> currCmps_;
 	std::bitset<maxGroupId> groups_;
 	bool alive_;
+	bool active_;
 };
 
 } // end of name space

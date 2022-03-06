@@ -14,6 +14,8 @@ public:
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 	void EntryGenerator(CollisionManager* colManager);
+	void NPCGenerator(CollisionManager* colManager, Entity* dialogBox_);
+	void dialogBoxGenerator(Entity* dialogBox);
 
 private:
 	ecs::Manager* mngr_;

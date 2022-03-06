@@ -36,9 +36,11 @@
 	_ROOTMOVEMENT, \
 	_ROOTWAVE, \
 	_ROOTSPAWNER, \
-	_ROOTAUTOAIM,\
-	_TREEMOVEMENT,\
-	_MELEEATTACK
+	_ROOTAUTOAIM, \
+	_TREEMOVEMENT, \
+	_MELEEATTACK, \
+	_NPC_CTRL, \
+	_DIALOG_BOX_MNGR
 
 
 // Groups list - must have at least one element

@@ -4,6 +4,7 @@
 #include "../Transform.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../../ecs/Manager.h"
+#include "../hub/NpcCtrl.h"
 using namespace std;
 PlayerHubControl::~PlayerHubControl()
 {
@@ -44,7 +45,16 @@ void PlayerHubControl::update()
 	vel.normalize();
 
 	if (colMan_->hasCollisions(playerCol_)) {
-		mngr_->changeScene(1);
+		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(playerCol_);
+
+		bool changeScene = false;
+		int i = 0;
+		while (!changeScene && i < colliders.size()) {
+			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
+			i++;
+		}
+		if(changeScene)
+			mngr_->changeScene(1);
 	}
 }
 

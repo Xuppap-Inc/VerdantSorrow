@@ -25,21 +25,20 @@ void Attack::initComponent()
 void Attack::update()
 {
 	auto& ihdlr = ih();
-	auto currentTime = sdlutils().currRealTime();
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
 		setPosition();
 
-		if (currentTime >= lastAttack + attackDuration)
+		if (sdlutils().currRealTime() >= lastAttack + attackDuration)
 			setActive(false);
 	}
 	else {
 		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
 			if (ihdlr.isKeyDown(SDLK_j)) {
-				if (currentTime >= lastAttack + attackDuration + attackCoolDown) {
+				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
 					setActive(true);
-					lastAttack = currentTime;
+					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 				}
 			}
@@ -74,10 +73,6 @@ void Attack::render()
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
 
 	}
-}
-
-Entity* Attack::getEntity() {
-	return ent_;
 }
 
 void Attack::setPosition()
