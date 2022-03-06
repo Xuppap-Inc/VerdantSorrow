@@ -5,16 +5,13 @@
 TreeMovement::TreeMovement() :
 	tr_(),
 	playerTr_(),
-	offsetX_(),
-	offsetY_()
+	offsetX_()
 {
 }
-TreeMovement::TreeMovement(Transform* playerTransform_, float offsetX, float offsetY, Vector2D velocity, float followVelocity) :
+TreeMovement::TreeMovement(Transform* playerTransform_, float offsetX, float followVelocity) :
 	tr_(),
 	playerTr_(playerTransform_),
 	offsetX_(offsetX),
-	offsetY_(offsetY),
-	vel_(velocity),
 	followVel_(followVelocity)
 {
 }
@@ -29,18 +26,28 @@ void TreeMovement::initComponent()
 
 void TreeMovement::update()
 {
-
 	auto playerPos = playerTr_->getPos();
 	auto playerVel = playerTr_->getVel();
-	auto& flyPos = tr_->getPos();
-	auto& flyVel = tr_->getVel();
+	auto& treePos = tr_->getPos();
+	auto& treeVel = tr_->getVel();
+	Vector2D distance;
 
-	Vector2D distance = (playerPos - flyPos);
-	auto velX = distance.normalize().getX();
-	if (abs(distance.getX()) <= offsetX_)
-	{
-		velX = 0.0f;
+	//Si se encuentra el jugador en el cuerpo de groot no se mueve
+	if (playerPos.getX() > tr_->getPos().getX() && playerPos.getX() < tr_->getPos().getX() + tr_->getWidth())
+		treeVel = Vector2D(0, 0);
+	else {
+		//Se calcula la velocidad sumando o restando el ancho del jugador,
+		//Dependiendo de si se encuentra en la derecha o en la izquierda del árbol
+		if (playerPos.getX() < tr_->getPos().getX()) distance = (playerPos + Vector2D(playerTr_->getWidth(), 0) - treePos);
+		else distance = (playerPos - Vector2D(playerTr_->getWidth(), 0) - treePos);
+
+		//Calcula la velocidad, y según un offset elegido a mano, si está demasiado cerca se parará
+		auto velX = distance.normalize().getX();
+		if (abs(distance.getX()) <= offsetX_)
+		{
+			velX = 0.0f;
+		}
+		treeVel = Vector2D((velX * followVel_), 0);
 	}
-
-	flyVel = Vector2D((velX * followVel_), distance.getY() + offsetY_);
+	
 }

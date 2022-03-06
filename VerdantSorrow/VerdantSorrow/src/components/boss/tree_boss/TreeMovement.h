@@ -9,7 +9,7 @@ public:
 	__CMPID_DECL__(ecs::_TREEMOVEMENT)
 
 		TreeMovement();
-	TreeMovement(Transform* playerTransform_, float offsetX, float offsetY, Vector2D velocity, float followVelocity);
+	TreeMovement(Transform* playerTransform_, float offsetX, float followVelocity);
 	~TreeMovement();
 
 	void initComponent() override;
@@ -19,9 +19,7 @@ private:
 	Transform* tr_;
 	Transform* playerTr_;
 	float offsetX_;
-	float offsetY_;
 	float lastUpdate_;
-	Vector2D vel_;
 	float followVel_;
 };
 
