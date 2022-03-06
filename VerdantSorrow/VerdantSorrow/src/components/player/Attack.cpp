@@ -42,11 +42,11 @@ void Attack::update()
 
 					if (attrib_->isOnGround()) {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 200, 10, "Chica_AtkFloor");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 150, 10, "Chica_AtkFloor");
 					}
 					else {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 150, 9, "Chica_AtkAir");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 100, 9, "Chica_AtkAir");
 					}
 
 					setActive(true);

@@ -83,12 +83,21 @@ void FramedImage::render()
 		multiplierY = 1.3f;
 		xOffset = -10;
 		yOffset = -20;
+		if (flipX_) { xOffset = -20; }
 	}
-	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkAir" || currentAnim == "Chica_AtkFinished") {
+	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
 		multiplierX = 1.6f;
 		multiplierY = 1.2f;
 		xOffset = -20;
 		yOffset = -7;
+		if (flipX_) { xOffset = -30; }
+	}
+	else if (currentAnim == "Chica_AtkAir") {
+		multiplierX = 1.6f;
+		multiplierY = 1.2f;
+		xOffset = 0;
+		yOffset = -7;
+		if (flipX_) { xOffset = -60; }
 	}
 
 	// Aplicar propiedades
