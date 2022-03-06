@@ -64,7 +64,7 @@ void FramedImage::render()
 	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
 		tr_->getHeight());
 
-	if (currentAnim == "Chica_Idle" || currentAnim == "Chica_Jump") {
+	if (currentAnim == "Chica_Idle" || currentAnim == "Chica_Jump" || currentAnim == "Chica_Run") {
 		float multiplier = 1.3f;
 		//float offset
 		float xOffset = -10;
