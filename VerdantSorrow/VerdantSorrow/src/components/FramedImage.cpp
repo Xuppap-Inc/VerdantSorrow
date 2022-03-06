@@ -34,9 +34,13 @@ void FramedImage::initComponent()
 
 void FramedImage::render()
 {
-	select_sprite(i, j);
+	if (!repeating_)
+		select_sprite(i, j);
 
-	if (!repeating_&&sdlutils().currRealTime() - initime >= frametime/numframes) {
+	if (!repeating_ && sdlutils().currRealTime() - initime >= frametime/numframes) {
+
+		select_sprite(i, j);
+
 		currentnumframes++;
 		if (i < column_ - 1) { 
 			i++; 	
@@ -50,6 +54,8 @@ void FramedImage::render()
 		    if (repeat_) {
 			  repeating_ = true;
 			}
+
+			//repeating_ = false;
 		}
 
 		initime = sdlutils().currRealTime();
@@ -87,6 +93,7 @@ void FramedImage::flipX(bool s)
 void FramedImage::repeat(bool h)
 {
 	repeat_ = h;
+	repeating_ = false;
 }
 
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
