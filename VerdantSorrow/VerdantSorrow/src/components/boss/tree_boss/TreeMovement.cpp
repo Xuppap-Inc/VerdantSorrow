@@ -50,28 +50,28 @@ void TreeMovement::update()
 			distance = (playerPos - Vector2D(playerTr_->getWidth(), 0) - treePos);
 			movementDir_ = 1;
 		}
+
+
 		//Calcula la velocidad, y según un offset elegido a mano, si está demasiado cerca se parará
-		auto velX = distance.normalize().getX();
-		std::cout << abs(distance.getX()) - playerTr_->getWidth() << std::endl;
-		if (movementDir_ <= 0) {
-			if (abs(distance.getX()) <= offsetX_)
-			{
-				isNextToPlayer_ = true;
-				velX = 0.0f;
-			}
-			else if (treeVel.getX() > 1) isNextToPlayer_ = false;
+		float spaceBetweenPlayerRoot;
+		if (movementDir_ <= 0){
+			treeVel = Vector2D((-followVel_), 0);
+			spaceBetweenPlayerRoot = abs(distance.getX());
 		}
-		else {
-			if (abs(distance.getX() - playerTr_->getWidth()) <= offsetX_)
-			{
-				isNextToPlayer_ = true;
-				velX = 0.0f;
-			}
-			else if(treeVel.getX() > 1)isNextToPlayer_ = false;
+		else{
+			treeVel = Vector2D((followVel_), 0);
+			spaceBetweenPlayerRoot = abs(distance.getX() - playerTr_->getWidth());
 		}
+
+		if (spaceBetweenPlayerRoot <= offsetX_)
+		{
+			isNextToPlayer_ = true;
+			treeVel = Vector2D(0, 0);
+		}
+		else if (abs(treeVel.getX()) > 1) isNextToPlayer_ = false;
 		
+
 		
-		treeVel = Vector2D((velX * followVel_), 0);
 	}
 	
 }
