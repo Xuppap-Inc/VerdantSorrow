@@ -78,19 +78,33 @@ void FramedImage::render()
 	float xOffset = 0;
 	float yOffset = 0;
 
-	if (currentAnim == "Chica_Idle" || currentAnim == "Chica_Jump" || currentAnim == "Chica_Run") {
-		multiplierX = 1.3f;
+	if (currentAnim == "Chica_Idle") {
+		multiplierX = 1.4f;
 		multiplierY = 1.3f;
 		xOffset = -10;
+		yOffset = -20;
+		if (flipX_) { xOffset = -30; }
+	}
+	else if (currentAnim == "Chica_Jump") {
+		multiplierX = 1.5f;
+		multiplierY = 1.3f;
+		xOffset = -30;
+		yOffset = -20;
+		if (flipX_) { xOffset = -15; }
+	}
+	else if (currentAnim == "Chica_Run") {
+		multiplierX = 1.6f;
+		multiplierY = 1.3f;
+		xOffset = -40;
 		yOffset = -20;
 		if (flipX_) { xOffset = -20; }
 	}
 	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-		multiplierX = 1.6f;
+		multiplierX = 1.7f;
 		multiplierY = 1.2f;
-		xOffset = -20;
+		xOffset = -25;
 		yOffset = -7;
-		if (flipX_) { xOffset = -30; }
+		if (flipX_) { xOffset = -45; }
 	}
 	else if (currentAnim == "Chica_AtkAir") {
 		multiplierX = 1.6f;
