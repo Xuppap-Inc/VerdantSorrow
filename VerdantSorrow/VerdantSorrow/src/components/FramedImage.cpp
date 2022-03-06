@@ -86,9 +86,9 @@ void FramedImage::render()
 	}
 	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkAir" || currentAnim == "Chica_AtkFinished") {
 		multiplierX = 1.6f;
-		multiplierY = 1.3f;
+		multiplierY = 1.2f;
 		xOffset = -20;
-		yOffset = -20;
+		yOffset = -7;
 	}
 
 	// Aplicar propiedades
