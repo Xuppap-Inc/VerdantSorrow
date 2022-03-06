@@ -85,6 +85,7 @@ void PlayerCtrl::update()
 
 		// Animation
 		if (attrib_->isOnGround()) {
+			if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
 			if (moveRight_ || moveLeft_) {
 				if (anim_->getCurrentAnimation() != "Chica_Run") {
 					anim_->repeat(false);
@@ -96,7 +97,6 @@ void PlayerCtrl::update()
 					anim_->repeat(false);
 					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
 				}
-
 			}
 		}
 	}

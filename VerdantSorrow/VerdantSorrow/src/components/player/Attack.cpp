@@ -6,7 +6,7 @@
 #include "../player/PlayerCtrl.h"
 #include "../boss/BossAtributos.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(300),lastAttack()
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(300),attackCoolDown(300),lastAttack()
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -19,6 +19,8 @@ Attack::~Attack()
 void Attack::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
+	anim_ = ent_->getComponent<FramedImage>();
+	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ !=nullptr);
 }
 
@@ -37,6 +39,16 @@ void Attack::update()
 		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
 			if (ihdlr.isKeyDown(SDLK_j)) {
 				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
+
+					if (attrib_->isOnGround()) {
+						anim_->repeat(true);
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 200, 10, "Chica_AtkFloor");
+					}
+					else {
+						anim_->repeat(true);
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 150, 9, "Chica_AtkAir");
+					}
+
 					setActive(true);
 					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe

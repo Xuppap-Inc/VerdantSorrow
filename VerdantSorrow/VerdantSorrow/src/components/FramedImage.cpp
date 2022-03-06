@@ -55,6 +55,8 @@ void FramedImage::render()
 			  repeating_ = true;
 			}
 
+			if (currentAnim == "Chica_AtkFloor")
+				currentAnim = "Chica_AtkFinished";
 			//repeating_ = false;
 		}
 
@@ -67,19 +69,33 @@ void FramedImage::render()
 
 
 	//SDL_Rect dest;
-	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
-		tr_->getHeight());
+	//SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
+	//	tr_->getHeight());
+
+	float multiplierX = 1;
+	float multiplierY = 1;
+	//float offset
+	float xOffset = 0;
+	float yOffset = 0;
 
 	if (currentAnim == "Chica_Idle" || currentAnim == "Chica_Jump" || currentAnim == "Chica_Run") {
-		float multiplier = 1.3f;
-		//float offset
-		float xOffset = -10;
-		float yOffset = -20;
-		dest = build_sdlrect(tr_->getPos(), tr_->getWidth() * multiplier,
-			tr_->getHeight() * multiplier);
-		dest.x += xOffset;
-		dest.y += yOffset;
+		multiplierX = 1.3f;
+		multiplierY = 1.3f;
+		xOffset = -10;
+		yOffset = -20;
 	}
+	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkAir" || currentAnim == "Chica_AtkFinished") {
+		multiplierX = 1.6f;
+		multiplierY = 1.2f;
+		xOffset = -20;
+		yOffset = -7;
+	}
+
+	// Aplicar propiedades
+	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth() * multiplierX,
+		tr_->getHeight() * multiplierY);
+	dest.x += xOffset;
+	dest.y += yOffset;
 
 	assert(tex_ != nullptr);
 	tex_->render(m_clip, dest, tr_->getRot(),nullptr,flip);
