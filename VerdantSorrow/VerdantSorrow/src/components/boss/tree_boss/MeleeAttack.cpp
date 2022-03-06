@@ -3,8 +3,8 @@
 #include "../../Transform.h"
 #include "../../../sdlutils/InputHandler.h"
 #include "../../../sdlutils/SDLUtils.h"
-#include "../../player/PlayerCtrl.h"
-#include "../../boss/BossAtributos.h"
+#include "../../boss/tree_boss/TreeMovement.h"
+#include "../../player/PlayerAttributes.h"
 
 MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(200), attackCoolDown(300), lastAttack()
 {
@@ -19,12 +19,12 @@ MeleeAttack::~MeleeAttack()
 void MeleeAttack::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
-	assert(tr_ != nullptr, collider_ != nullptr);
+	treeMovement_ = ent_->getComponent<TreeMovement>();
+	assert(tr_ != nullptr, collider_ != nullptr, treeMovement_ !=  nullptr);
 }
 
 void MeleeAttack::update()
 {
-	auto& ihdlr = ih();
 	auto currentTime = sdlutils().currRealTime();
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
@@ -34,15 +34,11 @@ void MeleeAttack::update()
 		if (currentTime >= lastAttack + attackDuration)
 			setActive(false);
 	}
-	else {
-		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
-			if (ihdlr.isKeyDown(SDLK_j)) {
-				if (currentTime >= lastAttack + attackDuration + attackCoolDown) {
-					setActive(true);
-					lastAttack = currentTime;
-					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
-				}
-			}
+	else {	
+		if (treeMovement_->isNextToPlayer() && currentTime >= lastAttack + attackDuration + attackCoolDown) {
+			setActive(true);
+			lastAttack = currentTime;
+			setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 		}
 	}
 	//Colisiones (con boss)
@@ -52,11 +48,11 @@ void MeleeAttack::update()
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger()) {
+			if (c->isActive() && !c->isTrigger()) {
 				ecs::Entity* ent = c->getEntity();
-				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				if (bA != nullptr) {
-					bA->setDamage(0.1f);
+				PlayerAttributes* playerAt = ent->getComponent<PlayerAttributes>();
+				if (playerAt != nullptr) {
+					playerAt->damagePlayer(1);
 				}
 			}
 		}
@@ -82,11 +78,11 @@ Entity* MeleeAttack::getEntity() {
 
 void MeleeAttack::setPosition()
 {
-	int playerMovementDir = ent_->getComponent<PlayerCtrl>()->getMovementDir();
+	int grootMovementDir = ent_->getComponent<TreeMovement>()->getMovementDir();
 
 	Vector2D contPos = tr_->getPos();
 
-	if (playerMovementDir >= 0)
+	if (grootMovementDir >= 0)
 		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
 	else
 		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());

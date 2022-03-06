@@ -12,6 +12,8 @@ public:
 	TreeMovement(Transform* playerTransform_, float offsetX, float followVelocity);
 	~TreeMovement();
 
+	int getMovementDir() { return movementDir_; }
+	bool isNextToPlayer() { return isNextToPlayer_; }
 	void initComponent() override;
 	virtual void update() override;
 
@@ -21,5 +23,7 @@ private:
 	float offsetX_;
 	float lastUpdate_;
 	float followVel_;
+	int movementDir_;
+	bool isNextToPlayer_;
 };
 
