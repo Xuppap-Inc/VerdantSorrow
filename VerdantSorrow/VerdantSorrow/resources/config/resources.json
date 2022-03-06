@@ -42,8 +42,11 @@
     {
       "id": "Chica_Jump",
       "file": "resources/images/Chica_Jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/Chica_AtkFloor.png"
     }
-    
   ],
   
   "messages" : [
