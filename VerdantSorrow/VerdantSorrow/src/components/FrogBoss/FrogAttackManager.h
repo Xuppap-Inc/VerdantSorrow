@@ -14,11 +14,12 @@ class FrogAttackManager : public ecs::Component
 
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTACK_MANAGER)
-	enum State {
+		enum State {
 		FIRST_PHASE,
 		CALC_NEXT_ATTACK,
 		JUMPING,
 		JUMPING_BIG,
+		TONGUE,
 		WAITING,
 
 		FLY_DIED,
@@ -47,13 +48,14 @@ private:
 	
 	State frogState_;
 	bool secondPhase_;
+	bool angry_;
 	bool jumping_;
 	int jumpDirection_;	
 	int jumpsUntilNextTongue_;
 	int flySpacing_;
 	bool attacking_;
 	bool jumpingBig_;
-	Uint32 jumpsDelay_;
+	Uint32 delay_;
 	Uint32 lastUpdate_;
 };
 
