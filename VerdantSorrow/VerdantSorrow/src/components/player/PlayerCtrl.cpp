@@ -44,7 +44,7 @@ void PlayerCtrl::update()
 			slide_ = false;
 
 			// Animacion
-			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 500, 20, "Chica_Jump");
+			//anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 500, 20, "Chica_Jump");
 		}
 
 		//moviemiento nulo
@@ -85,12 +85,13 @@ void PlayerCtrl::update()
 		// Animation
 		if (attrib_->isOnGround()) {
 			if (moveRight_ || moveLeft_) {
-				if (anim_->getCurrentAnimation() != "Chica_Run")
-					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 7, 1500, 30, "Chica_Run");
+				if (anim_->getCurrentAnimation() != "Chica_Run") {
+					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
+				}
 			}
 			else {
-				if (anim_->getCurrentAnimation() != "Chica_Idle")
-					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 7, 1500, 30, "Chica_Idle");
+				//if (anim_->getCurrentAnimation() != "Chica_Idle")
+				//	anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 7, 1500, 30, "Chica_Idle");
 			}
 		}
 	}
