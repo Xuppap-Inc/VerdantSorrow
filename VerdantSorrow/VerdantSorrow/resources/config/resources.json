@@ -46,6 +46,10 @@
     {
       "id": "Chica_AtkFloor",
       "file": "resources/images/Chica_AtkFloor.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
     }
   ],
   
