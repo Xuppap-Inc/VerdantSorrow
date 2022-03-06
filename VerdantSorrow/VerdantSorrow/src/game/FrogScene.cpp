@@ -41,12 +41,16 @@ void FrogScene::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new Manager();
 	mngr_->setDebug(true); //activamos modo debug
-
+	
+	background();
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	frogGenerator(colManager, player);
 	platformGenerator(colManager);
+
+
+	
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
 	//rootGenerator(colManager, player, sdlutils().width() / 2);
@@ -86,6 +90,16 @@ void FrogScene::start() {
 	}
 
 	SDL_Quit();
+}
+
+void FrogScene::background()
+{
+	auto backgr_ = mngr_->addEntity(); 
+	auto backgr_Tr = backgr_->addComponent<Transform>();
+	auto FrogX = 0 ;
+	auto FrogY = 0;
+	backgr_Tr->init(Vector2D(FrogX, FrogY), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
 }
 
 
