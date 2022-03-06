@@ -40,80 +40,21 @@ void FrogAttackManager::initComponent()
 void FrogAttackManager::update()
 {
 	auto& rand = sdlutils().rand();
-	//if (frogState_ == FIRST_PHASE) {
-	//	//Cambio en la dirección del salto si choca con bordes
-	//	
-	//	
-	//	//Si está saltando y tocando el suelo a la vez, para de saltar
-	//	if (jumping_ && attr_->isOnGround()) {
-	//		jumping_ = false;
-	//		--jumpsUntilNextTongue_;
-	//		//Start Idle animation
-
-	//		//Si no quedan saltos hasta la proxima lengua, se cambia de estado a ataque con lengua.
-	//		if (jumpsUntilNextTongue_ == 0) {
-	//			//TODO spawn fly, tongue attack
-	//			std::cout << "Lenguetazo" << std::endl;
-	//			jumpsUntilNextTongue_ = rand.nextInt(3, 5);
-	//		}
-	//	}
-	//	
-	//	if (!jumping_ && !jumpingBig_) {
-	//		frogJump_->attack(jumpDirection_);
-	//		//Start Jump animation
-	//		anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31);
-	//		//Cambio de estado a saltando
-	//		jumping_ = true;
-	//	}
-	//	
-	//	
-
-	//}else if (FLY_DIED) {
-	//	//Cambio a sprite enfadado
-	//	if (jumpingBig_ && attr_->isOnGround()) {
-	//		jumpingBig_ = false;
-	//		createWaves();
-	//		frogState_ = FIRST_PHASE;
-	//		//Start Idle animation
-	//	}
-	//	if (frogState_ != FLY_DIED) return;
-	//	if (!jumping_ && !jumpingBig_) {
-	//		bigJump_->attack(0); 
-	//		jumpingBig_ = true;
-	//		//Lanzar animación de salto grande
-	//	}
-	//}
-	//else if (SECOND_PHASE) {
-	//	auto jump = rand.nextInt(0, 100);
-	//}
-
-	if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
-		anim_->flipX(false);
-		jumpDirection_ = -1;
+	if (attr_->getLife() <= 0) {
+		std::cout << "Muerte" << std::endl;
+		ent_->setAlive(false);
+		return;
 	}
-	else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
-		jumpDirection_ = 1;
-		anim_->flipX(true);
-	}
+	flipOnBorders();
 	switch (frogState_) {
 		case JUMPING:
 			if (attr_->isOnGround()) {
-				frogState_ = WAITING;
-				jumping_ = false;
-				jumpsUntilNextTongue_--;
-				delay_ = rand.nextInt(1000, 2500);
-				lastUpdate_ = sdlutils().currRealTime();
+				onGrounded(jumping_, false);
 			}
 			break;
 		case JUMPING_BIG:
 			if (attr_->isOnGround()) {
-				frogState_ = WAITING;
-				jumpingBig_ = false;
-				if (secondPhase_) jumpsUntilNextTongue_--;
-				createWaves();
-				if (angry_) /*Volver a rana normal*/;
-				delay_ = rand.nextInt(1000, 2500);
-				lastUpdate_ = sdlutils().currRealTime();
+				onGrounded(jumpingBig_, true);
 			}
 			break;
 		case TONGUE:
@@ -125,34 +66,7 @@ void FrogAttackManager::update()
 			lastUpdate_ = sdlutils().currRealTime();
 			break;
 		case CALC_NEXT_ATTACK:
-			if (!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) { 
-				//Launch second phase animation
-				frogState_ = WAITING;
-				//delay_  = duracion de la animacion de cambio de fase
-				lastUpdate_ = sdlutils().currRealTime();
-				secondPhase_ = true; 
-				return;
-			}
-			if (jumpsUntilNextTongue_ == 0) {
-				std::cout << "Lenguetazo" << std::endl;
-				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
-				frogState_ = TONGUE;
-				if (!secondPhase_) /*createFly()*/;
-			}
-			else {
-				int nextJump = secondPhase_ ? rand.nextInt(0, 100) : 100;
-				if (nextJump >= 30) {
-					frogJump_->attack(jumpDirection_);
-					frogState_ = JUMPING;
-					std::cout << "Salto" << std::endl;
-				}
-				else {
-					bigJump_->attack(jumpDirection_);
-					frogState_ = JUMPING_BIG;
-					std::cout << "Salto" << std::endl;
-				}
-				
-			}
+			nextAttack();
 			break;
 		case WAITING:
 			//std::cout << "esperando" << std::endl;
@@ -227,5 +141,68 @@ void FrogAttackManager::createWaves()
 
 void FrogAttackManager::onFlyDied() {
 	frogState_ = FLY_DIED;
+}
+
+void FrogAttackManager::flipOnBorders()
+{
+	if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
+		anim_->flipX(false);
+		jumpDirection_ = -1;
+	}
+	else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
+		jumpDirection_ = 1;
+		anim_->flipX(true);
+	}
+}
+
+void FrogAttackManager::onGrounded(bool& jump, bool isBig)
+{
+	frogState_ = WAITING;
+	jump = false;
+	delay_ = sdlutils().rand().nextInt(1000, 2500);
+	lastUpdate_ = sdlutils().currRealTime();
+	if (isBig) {
+		if (secondPhase_) jumpsUntilNextTongue_--;
+		createWaves();
+		if (angry_) /*Volver a rana normal*/;
+	}
+	else {
+		jumpsUntilNextTongue_--;
+	}
+	/*anim_->changeanim(&sdlutils().images().at("ranaidle"), 6, 4, 3, 24);
+	anim_->repeat(false);*/
+}
+
+void FrogAttackManager::nextAttack()
+{
+	if(!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
+		//Launch second phase animation
+		frogState_ = WAITING;
+		//delay_  = duracion de la animacion de cambio de fase
+		lastUpdate_ = sdlutils().currRealTime();
+		secondPhase_ = true;
+		return;
+	}
+	if (jumpsUntilNextTongue_ == 0) {
+		//std::cout << "Lenguetazo" << std::endl;
+		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
+		frogState_ = TONGUE;
+		tongueAttack_->attack(secondPhase_? fly_->getComponent<Transform>() : player_);
+		if (!secondPhase_) /*createFly()*/;
+	}
+	else {
+		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
+		if (nextJump >= 30) {
+			frogJump_->attack(jumpDirection_);
+			frogState_ = JUMPING;
+			//std::cout << "Salto" << std::endl;
+		}
+		else {
+			bigJump_->attack(jumpDirection_);
+			frogState_ = JUMPING_BIG;
+			//std::cout << "Salto" << std::endl;
+		}
+
+	}
 }
 

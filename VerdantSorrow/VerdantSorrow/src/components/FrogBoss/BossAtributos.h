@@ -10,7 +10,7 @@ private:
 	bool onLeftBorder_;
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTRIBUTES)
-		BossAtributos() : life_(), maxHp_(), onGround_(false), onRightBorder_(false), onLeftBorder_(false) {};
+	BossAtributos() : life_(), maxHp_(), onGround_(false), onRightBorder_(false), onLeftBorder_(false) {};
 	BossAtributos(float vida) : life_(vida), maxHp_(vida), onGround_(false), onRightBorder_(false), onLeftBorder_(false)	{};
 
 	float getLife() {

@@ -14,17 +14,18 @@ class FrogAttackManager : public ecs::Component
 
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTACK_MANAGER)
-		enum State {
+
+	static enum State {
 		FIRST_PHASE,
 		CALC_NEXT_ATTACK,
 		JUMPING,
 		JUMPING_BIG,
 		TONGUE,
 		WAITING,
-
 		FLY_DIED,
 		SECOND_PHASE
 	};
+
 	FrogAttackManager();
 	~FrogAttackManager();
 	FrogAttackManager(CollisionManager* collManager);
@@ -36,6 +37,9 @@ public:
 	void onFlyDied();
 	void a();
 private:
+	void flipOnBorders();
+	void onGrounded(bool &jump, bool isBig);
+	void nextAttack();
 	FrogJump* frogJump_;
 	FrogBigJump* bigJump_;
 	TongueAttack* tongueAttack_;

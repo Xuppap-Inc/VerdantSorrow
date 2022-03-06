@@ -46,7 +46,7 @@ void FrogScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	frogGenerator(colManager, player);
-	platformGenerator(colManager);
+	//platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
 	//rootGenerator(colManager, player, sdlutils().width() / 2);
@@ -92,7 +92,7 @@ void FrogScene::start() {
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto Frog = mngr_->addEntity();
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
 
 	auto FrogTr = Frog->addComponent<Transform>();
 	auto FrogX = sdlutils().width() / 2 - 25;
@@ -106,15 +106,15 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 100, FrogTr->getHeight() - 30);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
-
-	Frog->addComponent<CollideWithBordersBoss>();
+	
 	Frog->addComponent<SimpleGravity>(1.5);
+	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
 	////Frog->addComponent<FrogJump>(30);
 	////Frog->addComponent<FrogBigJump>(40);
 
-	//Frog->addComponent<BossHPBar>();
+	Frog->addComponent<BossHPBar>();
 
 }
 
