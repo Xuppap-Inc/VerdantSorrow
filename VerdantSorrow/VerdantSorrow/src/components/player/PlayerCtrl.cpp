@@ -137,7 +137,7 @@ void PlayerCtrl::doAttack()
 {
 	//Da igual lo que pase si ataca, que va a pararse en seco
 	auto& vel = tr_->getVel();
-	vel.set(Vector2D(0, 0));
+	vel.set(Vector2D(0, vel.getY()));
 	slide_ = false;
 }
 

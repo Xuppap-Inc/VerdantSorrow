@@ -68,22 +68,10 @@ void Attack::update()
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
 					bA->setDamage(0.1f);
+					tr_->getVel().setY(0);
 				}
 			}
 		}
-	}
-}
-
-
-void Attack::render()
-{
-	if(isActive()){
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0,0,0, 255);
-
-		SDL_Rect dest = getCollider();
-
-		SDL_RenderFillRect(sdlutils().renderer(), &dest);
-
 	}
 }
 

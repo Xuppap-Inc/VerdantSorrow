@@ -20,7 +20,6 @@ public:
 
     void initComponent() override;
     void update() override;
-    void render() override;
     
 protected:
     Transform* tr_;
