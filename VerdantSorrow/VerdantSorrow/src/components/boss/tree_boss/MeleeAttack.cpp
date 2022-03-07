@@ -29,17 +29,8 @@ void MeleeAttack::update()
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
-		setPosition();
-
 		if (currentTime >= lastAttack + attackDuration)
 			setActive(false);
-	}
-	else {	
-		if (treeMovement_->isNextToPlayer() && currentTime >= lastAttack + attackDuration + attackCoolDown) {
-			setActive(true);
-			lastAttack = currentTime;
-			setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
-		}
 	}
 }
 
@@ -52,18 +43,24 @@ void MeleeAttack::render()
 		SDL_Rect dest = getCollider();
 
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
-
 	}
 }
 
-void MeleeAttack::setPosition()
+void MeleeAttack::attack(int dir)
 {
-	int grootMovementDir = ent_->getComponent<TreeMovement>()->getMovementDir();
+	auto currentTime = sdlutils().currRealTime();
 
-	Vector2D contPos = tr_->getPos();
+	setActive(true);
+	lastAttack = currentTime;
+	setPosition(dir);
+}
 
-	if (grootMovementDir >= 0)
-		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
+void MeleeAttack::setPosition(int dir)
+{
+	Vector2D pos = tr_->getPos();
+
+	if (dir > 0)
+		pos_ = Vector2D(pos.getX() + tr_->getWidth(), pos.getY());
 	else
-		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());
+		pos_ = Vector2D(pos.getX() - width_, pos.getY());
 }

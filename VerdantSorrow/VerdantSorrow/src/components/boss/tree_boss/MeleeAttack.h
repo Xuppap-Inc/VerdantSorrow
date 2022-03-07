@@ -20,6 +20,8 @@ public:
     void update() override;
     void render() override;
 
+    void attack(int dir);
+
 protected:
     Transform* tr_;
 
@@ -30,9 +32,10 @@ protected:
     int lastAttack;
 
     CollisionManager* colMan_;
+
     /**
-    * Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
+    * Setea la posicion del ataque delante del arbol, teniendo en cuenta su direccion de movimiento
     */
-    void setPosition() override;
+    void setPosition(int dir) ;
 };
 

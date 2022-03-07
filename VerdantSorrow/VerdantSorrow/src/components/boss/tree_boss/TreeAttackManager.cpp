@@ -41,4 +41,5 @@ void TreeAttackManager::initComponent()
 
 void TreeAttackManager::update()
 {
+
 }
