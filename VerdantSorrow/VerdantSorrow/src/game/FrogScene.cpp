@@ -133,7 +133,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 - 25;
+	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);

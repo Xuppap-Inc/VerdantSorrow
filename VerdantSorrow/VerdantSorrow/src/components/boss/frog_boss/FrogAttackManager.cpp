@@ -89,6 +89,11 @@ void FrogAttackManager::update()
 				angry_ = true;
 				//Lanzar animacion de salto largo
 			}
+			else
+			{
+				if (jumping_) frogState_ = JUMPING;
+				else if (jumpingBig_) frogState_ = JUMPING_BIG;
+			}
 			break;
 		default:
 			break;
@@ -100,9 +105,11 @@ void FrogAttackManager::update()
 ecs::Entity* FrogAttackManager::createFly()
 {
 	fly_ = mngr_->addEntity();
-	auto attr = fly_->addComponent<Transform>();
-	attr->init(Vector2D(player_->getPos().getX(), player_->getPos().getY()), Vector2D(), 100, 100, 0.0f);
-	auto coll = fly_->addComponent<RectangleCollider>(tr_->getWidth(), tr_->getHeight());
+	auto fTr = fly_->addComponent<Transform>();
+	auto flyY = sdlutils().height() - tr_->getHeight();
+	auto flyX = player_->getPos().getX();
+	fTr->init(Vector2D(flyX, flyY), Vector2D(), 100, 100, 0.0f);
+	auto coll = fly_->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
@@ -115,7 +122,7 @@ void  FrogAttackManager::createWave(int dir)
 {
 	//Se crea la onda expansiva
 	auto Wave = mngr_->addEntity();
-	//Se a�ade el transform
+	//Se añade el transform
 	auto WaveTr = Wave->addComponent<Transform>();
 	auto WaveX = tr_->getPos().getX();
 	auto WaveY = sdlutils().height() - 50;
@@ -127,7 +134,7 @@ void  FrogAttackManager::createWave(int dir)
 	auto WaveSpeed = 5;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
 	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f);
-	//Se le a�ade un color inicial a la onda
+	//Se le añade un color inicial a la onda
 	Wave->addComponent<RectangleRenderer>(SDL_Color());
 
 	//Se a�ade un collider a la onda
@@ -184,7 +191,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 void FrogAttackManager::nextAttack()
 {
 	if(!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
-		//Launch second phase animation
+		//Lanzar animacion del cambio de fase
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
 		lastUpdate_ = sdlutils().currRealTime();
@@ -194,7 +201,7 @@ void FrogAttackManager::nextAttack()
 	if (jumpsUntilNextTongue_ == 0) {
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
 		frogState_ = TONGUE;
-		//No tengo ni idea de como se lanzar� la animacion aqui
+		//No tengo ni idea de como se lanzara la animacion aqui
 		if (!secondPhase_) createFly();
 		tongueAttack_->attack(!secondPhase_? fly_->getComponent<Transform>() : player_);
 		

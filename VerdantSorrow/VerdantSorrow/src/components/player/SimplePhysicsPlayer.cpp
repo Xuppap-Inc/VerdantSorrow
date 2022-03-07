@@ -2,6 +2,8 @@
 #include "../boss/BossAtributos.h"
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
+#include "../boss/frog_boss/wave/WaveMovement.h"
+#include "../boss/frog_boss/TongueAttack.h"
 
 
 SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
@@ -100,6 +102,16 @@ void SimplePhysicsPlayer::update()
 					}
 
 				}
+
+				WaveMovement* wave = ent->getComponent<WaveMovement>();
+				if (wave != nullptr) {
+					if (!invulnerable_) {
+						attrib_->damagePlayer(1);
+						invulnerable_ = true;
+						invTimer = sdlutils().currRealTime();
+					}
+				}
+
 			}
 		}
 
