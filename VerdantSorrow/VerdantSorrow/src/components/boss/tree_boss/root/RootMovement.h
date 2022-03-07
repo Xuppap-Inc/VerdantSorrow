@@ -1,6 +1,7 @@
 #pragma once
 #include "../../../../ecs/Component.h"
 #include "../../../../sdlutils/SDLUtils.h"
+#include "../../../RectangleCollider.h"
 
 class Transform;
 
@@ -16,5 +17,7 @@ public:
 
 private:
 	Transform* tr_;
-	float speed;
+	RectangleCollider* col_;
+	float speed_;
+	float lastTime_;
 };
