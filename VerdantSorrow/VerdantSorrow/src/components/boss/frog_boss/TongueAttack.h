@@ -1,6 +1,6 @@
 #pragma once
-#include "../../ecs/Component.h"
-#include "../RectangleCollider.h"
+#include "../../../ecs/Component.h"
+#include "../../RectangleCollider.h"
 
 class Transform;
 class CollisionManager;

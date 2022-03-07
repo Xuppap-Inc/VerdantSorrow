@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\BossComponents.h" />
     <ClInclude Include="src\components\hub\DialogBoxMngr.h" />
     <ClInclude Include="src\components\hub\NpcCtrl.h" />
     <ClInclude Include="src\components\boss\tree_boss\RootAutoAim.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />
     <ClCompile Include="src\components\hub\DialogBoxMngr.cpp" />
     <ClCompile Include="src\components\hub\NpcCtrl.cpp" />
     <ClCompile Include="src\components\boss\tree_boss\RootAutoAim.cpp" />
@@ -127,7 +129,6 @@
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\wave\WaveMovement.cpp" />
-    <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
