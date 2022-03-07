@@ -64,6 +64,17 @@ void FrogAttackManager::update()
 			//Si no quedan saltos hasta la proxima lengua, se cambia de estado a ataque con lengua.
 			if (jumpsUntilNextTongue_ == 0) {
 				//TODO spawn fly, tongue attack
+				auto lengua_ = mngr_->addEntity();
+				auto attr = lengua_->addComponent<Transform>();
+				auto lado_ = 0;
+				if (jumpDirection_ == -1)lado_ = tr_->getWidth();
+			
+				attr->init(Vector2D(tr_->getPos().getX()+lado_, tr_->getPos().getY()+ tr_->getHeight()/2), Vector2D(), 400, 200, 0.0f);
+				lengua_->addComponent<FramedImage>(&sdlutils().images().at("lengua"), 1, 4, 2000, 4, "lengua");
+				auto coll = lengua_->addComponent<RectangleCollider>(tr_->getWidth(), tr_->getHeight());
+				coll->setIsTrigger(true);
+				collManager_->addCollider(coll);
+
 				std::cout << "Lenguetazo" << std::endl;
 				jumpsUntilNextTongue_ = rand.nextInt(3, 5);
 			}
@@ -72,7 +83,7 @@ void FrogAttackManager::update()
 		if (!jumping_ && !jumpingBig_) {
 			frogJump_->attack(jumpDirection_);
 			//Start Jump animation
-			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 500, 31, "ranajump");
+			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 600, 32, "ranajump");
 			//Cambio de estado a saltando
 			jumping_ = true;
 		}
@@ -86,11 +97,13 @@ void FrogAttackManager::update()
 			createWaves();
 			frogState_ = FIRST_PHASE;
 			//Start Idle animation
+			anim_->changeanim(&sdlutils().images().at("ranaidle"), 4, 6, 1000,24, "ranaidle");
 		}
 		if (frogState_ != FLY_DIED) return;
 		if (!jumping_ && !jumpingBig_) {
 			bigJump_->attack(0); 
 			jumpingBig_ = true;
+			anim_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 700, 32, "ranajump");
 			//Lanzar animación de salto grande
 		}
 	}
@@ -109,7 +122,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	auto coll = fly_->addComponent<RectangleCollider>(tr_->getWidth(), tr_->getHeight());
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
-	fly_->addComponent<RectangleRenderer>();
+	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	return fly_;;
 }
 

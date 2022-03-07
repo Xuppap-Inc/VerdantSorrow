@@ -7,8 +7,11 @@
   ],
 
 
-  "images" : [
-    { "id" : "sdl_logo", "file" : "resources/images/SDL_logo.png" },
+  "images": [
+    {
+      "id": "sdl_logo",
+      "file": "resources/images/SDL_logo.png"
+    },
 
     {
       "id": "tennis_ball",
@@ -50,15 +53,28 @@
     {
 
       "id": "fondo1",
-      "file": "resources/images/fondo1.png"},
-      {
-        "id": "Chica_AtkAir",
-        "file": "resources/images/Chica_AtkAir.png"
-      }
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
+    },
+    {
+      "id": "ranacambiofase",
+      "file": "resources/images/rana_cambio_fase.png"
+    },
+    {
+      "id": "mosca",
+      "file": "resources/images/mosca.png"
+    },
+    {
+      "id": "lengua",
+      "file": "resources/images/lengua.png"
+    }
 
 
 
-    
+
   ],
 
   "messages" : [
