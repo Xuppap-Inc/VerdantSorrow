@@ -23,9 +23,9 @@ void RectangleCollider::initComponent()
 
 void RectangleCollider::update()
 {
-	Vector2D contPos = tr_->getPos();
-
-	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_)/2, contPos.getY() + (tr_->getHeight() - height_)/2);
+	if (isActive())
+		setPosition();
+	
 }
 
 
@@ -38,7 +38,7 @@ void RectangleCollider::debug()
 
 SDL_Rect RectangleCollider::getCollider()
 {
-	return {(int)pos_.getX(), (int)pos_.getY(), (int)width_, (int)height_};
+	return build_sdlrect(pos_, width_, height_);
 }
 
 void RectangleCollider::setIsTrigger(bool set)
@@ -66,6 +66,12 @@ void RectangleCollider::drawCollider()
 	SDL_Rect r = getCollider();
 	SDL_SetRenderDrawColor(sdlutils().renderer(), 255,0,0, 255);
 	SDL_RenderDrawRect(sdlutils().renderer(),&r);
+}
+
+void RectangleCollider::setPosition()
+{
+	Vector2D contPos = tr_->getPos();
+	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_) / 2, contPos.getY() + (tr_->getHeight() - height_) / 2);
 }
 
 Entity* RectangleCollider::getEntity() {

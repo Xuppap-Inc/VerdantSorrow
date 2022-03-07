@@ -4,9 +4,9 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
-#include "../FrogBoss/BossAtributos.h"
+#include "../boss/BossAtributos.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(200),attackCoolDown(300),lastAttack()
+Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(300),attackCoolDown(300),lastAttack()
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -19,27 +19,38 @@ Attack::~Attack()
 void Attack::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
+	anim_ = ent_->getComponent<FramedImage>();
+	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ !=nullptr);
 }
 
 void Attack::update()
 {
 	auto& ihdlr = ih();
-	auto currentTime = sdlutils().currRealTime();
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
 		setPosition();
 
-		if (currentTime >= lastAttack + attackDuration)
+		if (sdlutils().currRealTime() >= lastAttack + attackDuration)
 			setActive(false);
 	}
 	else {
 		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
 			if (ihdlr.isKeyDown(SDLK_j)) {
-				if (currentTime >= lastAttack + attackDuration + attackCoolDown) {
+				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
+
+					if (attrib_->isOnGround()) {
+						anim_->repeat(true);
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 150, 10, "Chica_AtkFloor");
+					}
+					else {
+						anim_->repeat(true);
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 100, 9, "Chica_AtkAir");
+					}
+
 					setActive(true);
-					lastAttack = currentTime;
+					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 				}
 			}
@@ -76,10 +87,6 @@ void Attack::render()
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
 
 	}
-}
-
-Entity* Attack::getEntity() {
-	return ent_;
 }
 
 void Attack::setPosition()

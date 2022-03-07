@@ -51,6 +51,7 @@ public:
 
     void drawCollider();
 
+
     Entity* getEntity();
 
     Vector2D getPos() { return pos_; };
@@ -58,6 +59,10 @@ public:
     float getHeight() { return height_; };
     
 protected:
+
+    //posiciona al collider en la posicion que le corresponde
+    virtual void setPosition();
+
     Transform* tr_;
     float width_;
     float height_;

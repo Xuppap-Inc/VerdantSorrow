@@ -13,7 +13,7 @@ public:
 	virtual ~FrogScene();
 	void init();
 	void start();
-
+	void background();
 	void frogGenerator(CollisionManager* colManager, Entity* player_);
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);

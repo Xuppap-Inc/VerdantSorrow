@@ -3,6 +3,8 @@
 #include "../../utils/Vector2D.h"
 #include "../RectangleCollider.h"
 #include "../../game/CollisionManager.h"
+#include "../FramedImage.h"
+#include "PlayerAttributes.h"
 #include <SDL.h>
 
 class Transform;
@@ -13,18 +15,12 @@ class Attack : public RectangleCollider
 public:
     __CMPID_DECL__(ecs::_ATTACK)
     Attack(float width, float height, CollisionManager* colManager);
+    //Attack(float width, float height, CollisionManager* colManager, FramedImage* anim);
     ~Attack();
 
     void initComponent() override;
     void update() override;
     void render() override;
-
-    /**
-    Método que permite cambiar la variable active, que indica si el collider se encuentra activo
-    *
-    @param set: Valor que tomará active
-    */
-    Entity* getEntity();
     
 protected:
     Transform* tr_;
@@ -35,9 +31,11 @@ protected:
     int lastAttack;
 
     CollisionManager* colMan_;
+    FramedImage* anim_;
+    PlayerAttributes* attrib_;
     /**
     * Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
     */
-    void setPosition();
+    void setPosition() override;
 };
 

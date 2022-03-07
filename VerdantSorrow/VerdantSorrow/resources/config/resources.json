@@ -36,9 +36,53 @@
       "file": "resources/images/Chica_Idle.png"
     },
     {
-      "id": "ranaidle",
-      "file": "resources/images/rana_idle.png"
+      "id": "Chica_Run",
+      "file": "resources/images/Chica_Run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/Chica_Jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/Chica_AtkFloor.png"
+    },
+    {
+
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
+    },
+    {
+      "id": "ranacambiofase",
+      "file": "resources/images/rana_cambio_fase.png"
+    },
+    {
+      "id": "mosca",
+      "file": "resources/images/mosca.png"
+    },
+    {
+      "id": "lengua",
+      "file": "resources/images/lengua.png"
     }
+
+
+
+
+  ],
+
+  "messages" : [
+    { "id" : "PressAnyKey", "text" : "Press Any Key", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id" : "HelloSDL", "text" : "Hello SDL!", "font" : "ARIAL48", "color" : "0x0000ffff" }
+  ],
+
+  "sounds" : [
+    { "id" : "gunshot", "file" : "resources/sound/gunshot.wav" },
+    { "id" : "explosion", "file" : "resources/sound/explosion.wav" }
+  ],
 
   ]
   
