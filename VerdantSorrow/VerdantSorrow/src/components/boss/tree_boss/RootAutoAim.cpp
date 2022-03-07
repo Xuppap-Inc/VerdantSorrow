@@ -31,7 +31,7 @@ void RootAutoAim::update()
 {
 	if (attacking_ && sdlutils().currRealTime() - lastTime_ > timeBetweenRoots_) {
 	
-		rootPos_ = playerTr_->getPos().getX();
+		rootPos_ = playerTr_->getPos().getX() + playerTr_->getWidth() / 2 - rootW_ / 2;
 		rootSpawner_->createRoot(rootPos_);
 
 		lastTime_ = sdlutils().currRealTime();

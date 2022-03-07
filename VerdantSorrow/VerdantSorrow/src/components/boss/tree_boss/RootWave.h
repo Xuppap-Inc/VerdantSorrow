@@ -23,7 +23,8 @@ private:
 	float rootPos_;
 	int dir_;
 	int rootW_;
-
-	int timeBetweenRoots_;
+	
+	const int spaceBeetweenRoots_ = 10;
+	const int timeBetweenRoots_ = 500;
 };
 

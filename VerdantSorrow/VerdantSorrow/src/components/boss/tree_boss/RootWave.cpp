@@ -9,7 +9,7 @@
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
 
-RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), dir_(1), rootPos_(-1), rootW_(0), timeBetweenRoots_(500)
+RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), dir_(1), rootPos_(-1), rootW_(0)
 {
 }
 
@@ -31,7 +31,7 @@ void RootWave::update()
 	if (attacking_ && sdlutils().currRealTime() - lastTime_ > timeBetweenRoots_) {
 	
 		rootSpawner_->createRoot(rootPos_);
-		rootPos_ += (rootW_ + 10) * dir_;
+		rootPos_ += (rootW_ + spaceBeetweenRoots_) * dir_;
 
 		lastTime_ = sdlutils().currRealTime();
 
@@ -49,6 +49,6 @@ void RootWave::attack(int dir)
 
 	//crea la primera raíz
 	rootSpawner_->createRoot(rootPos_);
-	rootPos_ += (rootW_ + 5) * dir;
+	rootPos_ += (rootW_ + spaceBeetweenRoots_) * dir;
 	lastTime_ = sdlutils().currRealTime();
 }
