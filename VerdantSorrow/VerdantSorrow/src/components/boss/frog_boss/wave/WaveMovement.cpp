@@ -21,10 +21,11 @@ void WaveMovement::initComponent()
 void WaveMovement::update()
 {
 	auto& vel = tr_->getVel();
+	auto pos = tr_->getPos();
 
 	vel = new Vector2D(speed_ * dir_, 0);
 
-	if (sdlutils().currRealTime() - lastTime_ > 3000) {
+	if (pos.getX() < 0 - tr_->getWidth() || pos.getX() > sdlutils().width()) {
 		ent_->setAlive(false);
 	}
 }

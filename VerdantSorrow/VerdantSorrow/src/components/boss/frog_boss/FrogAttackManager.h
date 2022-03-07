@@ -1,4 +1,5 @@
 #include "../../../ecs/Component.h"
+#include "../../../sdlutils/SDLUtils.h"
 
 class FrogJump;
 class FrogBigJump;

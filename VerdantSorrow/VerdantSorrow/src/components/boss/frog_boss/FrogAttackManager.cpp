@@ -12,6 +12,7 @@
 #include "../BossAtributos.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../FramedImage.h"
+#include "FlyHp.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_()
@@ -105,6 +106,8 @@ ecs::Entity* FrogAttackManager::createFly()
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
+	fly_->addComponent<FlyHp>(this);
+	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;;
 }
 
@@ -192,8 +195,9 @@ void FrogAttackManager::nextAttack()
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
 		frogState_ = TONGUE;
 		//No tengo ni idea de como se lanzar� la animacion aqui
-		tongueAttack_->attack(secondPhase_? fly_->getComponent<Transform>() : player_);
-		if (!secondPhase_) /*createFly()*/;
+		if (!secondPhase_) createFly();
+		tongueAttack_->attack(!secondPhase_? fly_->getComponent<Transform>() : player_);
+		
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
