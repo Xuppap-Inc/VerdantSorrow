@@ -9,7 +9,7 @@
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
 
-RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), timeBetweenRoots_(1000), player_(player), playerTr_()
+RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), TIME_BETWEEN_ROOTS(1000), player_(player), playerTr_()
 {
 }
 
@@ -29,7 +29,7 @@ void RootAutoAim::initComponent()
 
 void RootAutoAim::update()
 {
-	if (attacking_ && sdlutils().currRealTime() - lastTime_ > timeBetweenRoots_) {
+	if (attacking_ && sdlutils().currRealTime() - lastTime_ > TIME_BETWEEN_ROOTS) {
 	
 		rootPos_ = playerTr_->getPos().getX() + playerTr_->getWidth() / 2 - rootW_ / 2;
 		rootSpawner_->createRoot(rootPos_);

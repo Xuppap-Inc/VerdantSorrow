@@ -27,6 +27,6 @@ private:
 	float rootPos_;
 	int rootW_;
 
-	int timeBetweenRoots_;
+	int TIME_BETWEEN_ROOTS;
 };
 

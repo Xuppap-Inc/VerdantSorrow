@@ -106,12 +106,16 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	Tree_->addComponent<BossHPBar>();
 
+	//IMPORTANTE: movimiento y spawner antes de los ataques
+	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
 	Tree_->addComponent<RootSpawner>(colManager);
+	
 	Tree_->addComponent<RootWave>();
 	Tree_->addComponent<RootAutoAim>(player_);
-	Tree_->addComponent<TreeAttackManager>(colManager);
-	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
 	Tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
+	
+	//IMPORTANTE: attack manager al final
+	Tree_->addComponent<TreeAttackManager>(colManager);
 }
 
 void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {

@@ -2,6 +2,8 @@
 #include "../../../ecs/Component.h"
 #include "RootSpawner.h"
 
+class TreeMovement;
+
 class RootWave : public ecs::Component
 {
 public:
@@ -17,6 +19,7 @@ public:
 private:
 	Transform* tr_;
 	RootSpawner* rootSpawner_;
+	TreeMovement* treeMovement_;
 
 	Uint32 lastTime_;
 	bool attacking_;
@@ -24,7 +27,7 @@ private:
 	int dir_;
 	int rootW_;
 	
-	const int spaceBeetweenRoots_ = 10;
-	const int timeBetweenRoots_ = 500;
+	const int SPACE_BETWEEN_ROOTS = 10;
+	const int TIME_BETWEEN_ROOTS = 500;
 };
 

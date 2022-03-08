@@ -29,8 +29,10 @@ void MeleeAttack::update()
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
-		if (currentTime >= lastAttack + attackDuration)
+		if (currentTime >= lastAttack + attackDuration) {
 			setActive(false);
+			treeMovement_->setMoveActive(true);
+		}
 	}
 }
 
@@ -63,4 +65,6 @@ void MeleeAttack::setPosition(int dir)
 		pos_ = Vector2D(pos.getX() + tr_->getWidth(), pos.getY());
 	else
 		pos_ = Vector2D(pos.getX() - width_, pos.getY());
+
+	treeMovement_->setMoveActive(false);
 }

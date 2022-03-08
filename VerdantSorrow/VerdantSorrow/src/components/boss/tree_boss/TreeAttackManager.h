@@ -3,6 +3,7 @@
 
 class RootWave;
 class RootAutoAim;
+class MeleeAttack;
 class Transform;
 class CollisionManager;
 class BossAtributos;
@@ -15,10 +16,15 @@ class TreeAttackManager : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTACK_MANAGER)
 	enum State {
-		FIRST_PHASE,
-		FLY_DIED,
-		SECOND_PHASE
+		MOVING,
+		WAVE,
+		SPECIAL_ATTACK
 	};
+	enum Phase {
+		PHASE1,
+		PHASE2
+	};
+
 	TreeAttackManager();
 	~TreeAttackManager();
 	TreeAttackManager(CollisionManager* collManager);
@@ -27,15 +33,24 @@ public:
 
 	int getRootWidth() { return rootWidth_; }
 private:
+
+	const float MELEE_ATTACK_DISTANCE = 20.0;
+	const int TIME_BETWEEN_WAVES = 5000;
+
+	State state;
+	Phase phase;
+
 	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
 	BossAtributos* attr_;
 	FramedImage* anim_;
-	RootWave* rootWave_;
 
+	RootWave* rootWave_;
 	RootAutoAim* rootAutoAim_;
+	MeleeAttack* meleeAttack_;
 	
 	int rootWidth_;
+	int attackTimer_;
 };
 
