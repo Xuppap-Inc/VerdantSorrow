@@ -14,13 +14,14 @@ public :
 	~TongueAttack();
 	void initComponent() override;
 	void update() override;
-	void attack(Transform * objective); //metodo que lanza la lengua hacia el jugador
-
+	void attack(bool fly); //metodo que lanza la lengua hacia el jugador Transform * objective
+	bool finished();
 protected:
 
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
 	CollisionManager* colMan_;
 	float delay_;
-	float currentTime;
+	float lastUpdate_;
+	bool finishedAttack_;
 };
 

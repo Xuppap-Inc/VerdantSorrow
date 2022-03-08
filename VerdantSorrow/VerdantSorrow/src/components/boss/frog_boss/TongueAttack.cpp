@@ -32,15 +32,18 @@ void TongueAttack::initComponent()
 }
 void TongueAttack::update()
 {
-	if (sdlutils().currRealTime() - currentTime >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
+	if (sdlutils().currRealTime() - lastUpdate_ >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
 	{
 		setActive(false);
-		currentTime = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
+		finishedAttack_ = true;
+		lastUpdate_ = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
+		
 	}
 }
-void TongueAttack::attack(Transform * objective)//bool fly
+void TongueAttack::attack(bool fly)
 {
-	
+	auto entObjective = fly ? mngr_->getHandler(ecs::_FLY) : mngr_->getHandler(ecs::_PLAYER);
+	auto objective = entObjective->getComponent<Transform>();
 	auto posFrog = tr_->getPos(); //Posicion rana
 	auto posObj = objective->getPos(); //Posicion mosca objetivo
 	Vector2D iniPos; //Posicion inicial para el collider
@@ -62,7 +65,13 @@ void TongueAttack::attack(Transform * objective)//bool fly
 	tongW = (finPos - iniPos).magnitude();
 	setCollider(iniPos,tongW,50); //Crea el collider y lo activa
 	setActive(true);
+	finishedAttack_ = false; //El ataque no ha terminado aun
 	
+}
+
+bool TongueAttack::finished()
+{
+	return finishedAttack_;
 }
 
 void TongueAttack::setCollider(Vector2D pos, float w, float h)

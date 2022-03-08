@@ -64,12 +64,13 @@ void FrogAttackManager::update()
 			}
 			break;
 		case TONGUE:
-			/*if (tongueAttack_->finished()) {
-				
-			}*/
-			frogState_ = WAITING;
-			delay_ = rand.nextInt(1000, 3000);
-			lastUpdate_ = sdlutils().currRealTime();
+			if (tongueAttack_->finished()) 
+			{
+				frogState_ = WAITING;
+				delay_ = rand.nextInt(1000, 3000);
+				lastUpdate_ = sdlutils().currRealTime();
+			}
+			
 			break;
 		case CALC_NEXT_ATTACK:
 			nextAttack();
@@ -203,7 +204,7 @@ void FrogAttackManager::nextAttack()
 		frogState_ = TONGUE;
 		//No tengo ni idea de como se lanzara la animacion aqui
 		if (!secondPhase_) createFly();
-		tongueAttack_->attack(!secondPhase_? fly_->getComponent<Transform>() : player_);
+		tongueAttack_->attack(!secondPhase_);
 		
 	}
 	else {
