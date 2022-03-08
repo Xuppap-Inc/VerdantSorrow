@@ -47,10 +47,7 @@ void FrogScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	frogGenerator(colManager, player);
-	platformGenerator(colManager);
-
-
-	
+	//platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
 	//rootGenerator(colManager, player, sdlutils().width() / 2);
@@ -106,7 +103,7 @@ void FrogScene::background()
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto Frog = mngr_->addEntity();
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(3.0f);
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
 
 	auto FrogTr = Frog->addComponent<Transform>();
 	auto FrogX = sdlutils().width() / 2 - 25;
@@ -117,15 +114,16 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
 	
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 100, FrogTr->getHeight() - 30);
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight() );
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
-	Frog->addComponent<CollideWithBordersBoss>();
+	
 	Frog->addComponent<SimpleGravity>(1.5);
+	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
-	//Frog->addComponent<FrogJump>(30);
-	//Frog->addComponent<FrogBigJump>(40);
+	////Frog->addComponent<FrogJump>(30);
+	////Frog->addComponent<FrogBigJump>(40);
 
 	Frog->addComponent<BossHPBar>();
 
@@ -135,7 +133,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 - 25;
+	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);

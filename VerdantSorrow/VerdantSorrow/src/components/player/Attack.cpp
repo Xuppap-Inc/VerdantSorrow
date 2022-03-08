@@ -5,6 +5,7 @@
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
 #include "../boss/BossAtributos.h"
+#include "../boss/frog_boss/FlyHp.h"
 
 Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(300),attackCoolDown(300),lastAttack()
 {
@@ -63,12 +64,18 @@ void Attack::update()
 
 		for (auto c : colliders) {
 
-			if (c->isActive() && c->isTrigger()) {
+
+			if (c->isActive() && c->isTrigger() ) 
+			{
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				if (bA != nullptr) {
 					bA->setDamage(0.1f);
 					tr_->getVel().setY(0);
+				}
+				FlyHp* fHP = ent->getComponent<FlyHp>();
+				if (fHP != nullptr) {
+					fHP->receiveHit();
 				}
 			}
 		}

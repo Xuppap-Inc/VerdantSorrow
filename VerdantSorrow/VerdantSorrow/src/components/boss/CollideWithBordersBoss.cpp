@@ -27,7 +27,7 @@ void CollideWithBordersBoss::onBottom()
 {
 	auto& pos = tr_->getPos();
 	auto& vel = tr_->getVel();
-	vel.setX(0);
+	vel.set(Vector2D(0,0));
 	auto height = sdlutils().height();
 	auto bossHeight = tr_->getHeight();	
 	pos.set(Vector2D(pos.getX(), height - bossHeight));

@@ -150,3 +150,7 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 
 	currentAnim = newAnim;
 }
+int FramedImage::getFrameNum() 
+{
+	return currentnumframes;
+}

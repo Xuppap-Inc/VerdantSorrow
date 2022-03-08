@@ -23,6 +23,8 @@
 	_ATTRIBUTES, \
 	_FROGJUMP, \
 	_FROGBIGJUMP, \
+	_FROGTONGUE, \
+	_FLY_HP, \
 	_GRAVITY, \
 	_ATTACK,\
 	_FRAMEDIMAGE,\
@@ -52,6 +54,7 @@
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \
-    _BOSS, \
-	_PLAYER
+    _FROGBOSS, \
+	_PLAYER, \
+	_FLY
 

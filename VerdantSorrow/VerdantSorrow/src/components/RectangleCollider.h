@@ -11,11 +11,14 @@ class RectangleCollider :
 {
 public:
     __CMPID_DECL__(ecs::_COLLIDER)
+
+    RectangleCollider();
     RectangleCollider(float width, float height);
     ~RectangleCollider();
 
     void initComponent() override;
     void update() override;
+
     void debug() override;
 
     SDL_Rect getCollider();
@@ -54,8 +57,6 @@ public:
     Vector2D getPos() { return pos_; };
     float getWidth() { return width_; };
     float getHeight() { return height_; };
-
-
     
 protected:
 
