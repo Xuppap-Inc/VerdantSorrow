@@ -16,6 +16,7 @@ public :
 	void update() override;
 	void attack(bool fly); //metodo que lanza la lengua hacia el jugador Transform * objective
 	bool finished();
+	void cancel();
 protected:
 
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
@@ -23,5 +24,6 @@ protected:
 	float delay_;
 	float lastUpdate_;
 	bool finishedAttack_;
+	bool fly_;
 };
 

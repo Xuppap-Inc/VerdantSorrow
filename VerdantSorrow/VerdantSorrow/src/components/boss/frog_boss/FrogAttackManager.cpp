@@ -84,7 +84,7 @@ void FrogAttackManager::update()
 		case FLY_DIED:
 			if (!jumping_ && !jumpingBig_) {
 				bigJump_->attack(0);
-				//tongueAttack_->cancel();
+				tongueAttack_->cancel();
 				jumpingBig_ = true;
 				frogState_ = JUMPING_BIG;
 				angry_ = true;
