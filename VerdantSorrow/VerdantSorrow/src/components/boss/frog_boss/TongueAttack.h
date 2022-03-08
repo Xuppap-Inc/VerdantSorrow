@@ -17,10 +17,10 @@ public :
 	void attack(Transform * objective); //metodo que lanza la lengua hacia el jugador
 
 protected:
-	//Transform* tr_;
+
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
 	CollisionManager* colMan_;
-	float delay_=100;
+	float delay_;
 	float currentTime;
 };
 
