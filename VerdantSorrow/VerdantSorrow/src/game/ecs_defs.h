@@ -43,7 +43,8 @@
 	_MELEEATTACK, \
 	_NPC_CTRL, \
 	_DIALOG_BOX_MNGR, \
-	_HANDS_MANAGER
+	_HANDS_MANAGER, \
+	_PUNIETAZO
 
 
 // Groups list - must have at least one element

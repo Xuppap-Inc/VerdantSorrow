@@ -57,6 +57,8 @@ public:
     Vector2D getPos() { return pos_; };
     float getWidth() { return width_; };
     float getHeight() { return height_; };
+    void setWidth(float width) {  width_=width; };
+    void setHeight(float height) { height_ = height; };
     
 protected:
 

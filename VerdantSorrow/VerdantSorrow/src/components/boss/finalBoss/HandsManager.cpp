@@ -5,6 +5,7 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../Image.h"
+#include "Punietazo.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager):colmanager_(colManager)
@@ -30,7 +31,7 @@ void HandsManager::initComponent()
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>(manoIzTr->getWidth(), manoIzTr->getHeight());
 	colmanager_->addCollider(manoIzCollider);
-
+	leftHand_->addComponent<Punietazo>();
 
 
 	auto manoDrTr = rightHand_->addComponent<Transform>();
