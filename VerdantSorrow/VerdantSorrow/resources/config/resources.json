@@ -12,6 +12,10 @@
       "id": "sdl_logo",
       "file": "resources/images/SDL_logo.png"
     },
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
 
     {
       "id": "ojo",
