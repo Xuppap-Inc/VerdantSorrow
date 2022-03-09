@@ -13,6 +13,10 @@
       "file": "resources/images/SDL_logo.png"
     },
     {
+      "id": "matt",
+      "file": "resources/images/matt.jpg"
+    },
+    {
       "id": "ojo",
       "file": "resources/images/Ojo.png"
     },
