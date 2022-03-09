@@ -36,5 +36,6 @@ protected:
     //cuando se deja de colisionar, se resetea lo necesario
     bool exitCollision;
     std::vector <bool> lastCollision;
+    void onCollisionExit();
 };
 

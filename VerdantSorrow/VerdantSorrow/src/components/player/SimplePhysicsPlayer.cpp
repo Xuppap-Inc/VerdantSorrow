@@ -7,7 +7,7 @@
 
 
 SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
-	exitCollision(false),lastCollision(3,false)
+exitCollision(false), lastCollision(3, false)
 {
 }
 
@@ -27,7 +27,7 @@ void SimplePhysicsPlayer::initComponent()
 }
 
 void SimplePhysicsPlayer::update()
-{	
+{
 	//Gravedad
 	if (!attrib_->isOnGround() && !gravity_->isActive()) gravity_->setActive(true);
 	else if (gravity_->isActive()) gravity_->setActive(false);
@@ -57,7 +57,7 @@ void SimplePhysicsPlayer::update()
 					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX);
 					attrib_->setRightStop(true);
 					lastCollision[1] = true;
-					
+
 				}
 				else if (lastPositionX >= posCollider.getX() + c->getWidth()) {//colision por la derecha
 					velPlayer.setX(0);
@@ -80,6 +80,9 @@ void SimplePhysicsPlayer::update()
 				exitCollision = true;
 			}
 			else if (c->isActive() && c->isTrigger()) {
+
+				onCollisionExit();
+
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 
@@ -116,10 +119,15 @@ void SimplePhysicsPlayer::update()
 		}
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
-		invulnerable_ = false;		
+		invulnerable_ = false;
 	}
+	else
+		onCollisionExit();
+}
 
-	else if (exitCollision) {
+void SimplePhysicsPlayer::onCollisionExit()
+{
+	 if (exitCollision) {
 		if (lastCollision[0]) {
 			attrib_->setOnGround(false);
 			lastCollision[0] = false;
@@ -134,8 +142,6 @@ void SimplePhysicsPlayer::update()
 		}
 		exitCollision = false;
 	}
-
-
 }
 
 
