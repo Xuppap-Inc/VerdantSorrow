@@ -85,11 +85,50 @@
     {
       "id": "lengua",
       "file": "resources/images/lengua.png"
+    },
+    {
+      "id": "rana_cambio_fase",
+      "file": "resources/images/rana_cambio_fase.png"
+    },
+    {
+      "file": "resources/images/rana_enfadada_idle.png"
+    },
+    {
+      "id": "rana_enfadada_jump",
+      "file": "resources/images/rana_enfadada_jump.png"
+    },
+    {
+      "id": "rana_enfadada_lengua",
+      "file": "resources/images/rana_enfadada_lengua.png"
+    },
+    {
+      "id": "rana_enfadada_muerte",
+      "file": "resources/images/rana_enfadada_muerte.png"
+    },
+    {
+      "id": "rana_idle",
+      "file": "resources/images/rana_idle.png"
+    },
+    {
+      "id": "rana_jump",
+      "file": "resources/images/rana_jump.png"
+    },
+    {
+      "id": "rana_lengua",
+      "file": "resources/images/rana_lengua.png"
+    },
+    {
+      "id": "rana_salto_a_vulnerable",
+      "file": "resources/images/rana_salto_a_vulnerable.png"
+    },
+    {
+      "id": "rana_vulnerable",
+      "file": "resources/images/rana_vulnerable.png"
+    },
+    {
+      "id": "rana_vulnerable_a_idle",
+      "file": "resources/images/rana_vulnerable_a_idle.png"
     }
-
-
-
-
   ],
 
   "messages" : [
