@@ -7,7 +7,7 @@
 void start() {
 	int n = -1;
 
-	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" << std::endl;
+	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" << "3. Escena Final" << std::endl;
 	std::cin >> n;
 	ecs::Manager* mngr_ = new ecs::Manager();
 	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");

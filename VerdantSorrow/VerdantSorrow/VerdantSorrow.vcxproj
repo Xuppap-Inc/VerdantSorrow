@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\FinalBossScene.h" />
     <ClInclude Include="src\components\BossComponents.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyHp.h" />
     <ClInclude Include="src\components\hub\DialogBoxMngr.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\FinalBossScene.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyHp.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />
     <ClCompile Include="src\components\hub\DialogBoxMngr.cpp" />
