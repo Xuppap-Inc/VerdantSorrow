@@ -4,6 +4,7 @@
 #include "../game/FrogScene.h"
 #include "../game/Hub.h"
 #include "../game/TreeScene.h"
+#include "../game/FinalBossScene.h"
 namespace ecs {
 
 Manager::Manager() :
@@ -78,6 +79,12 @@ void Manager::changeScene(int n)
 	}
 	case 2: {
 		TreeScene t;
+		t.init();
+		t.start();
+		break;
+	}
+	case 3: {
+		FinalBossScene t;
 		t.init();
 		t.start();
 		break;
