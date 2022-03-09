@@ -16,6 +16,8 @@ public:
 	void background();
 	void finalBossGenerator(CollisionManager* colManager, Entity* player_);
 
+	void createHands(Transform* BossTr, CollisionManager* colManager);
+
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 	void platformGenerator(CollisionManager* colManager);

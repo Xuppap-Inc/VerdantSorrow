@@ -44,7 +44,6 @@ void FinalBossScene::init()
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	
 	finalBossGenerator(colManager, player);
 	//platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
@@ -109,9 +108,8 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height()/2;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(),100, 100, 0.0f);
 
-	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
-	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
 	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
+
 	//Se añade un collider a la rana
 	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
 	bossCollider->setIsTrigger(true);
@@ -122,6 +120,33 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	FinalBossFace->addComponent<BossHPBar>();
 
+	createHands(BossTr, colManager);
+
+
+
+}
+
+void FinalBossScene::createHands(Transform* BossTr, CollisionManager* colManager)
+{
+	auto manoIz = mngr_->addEntity();
+	auto manoIzTr = manoIz->addComponent<Transform>();
+	manoIzTr->init(BossTr->getPos() + Vector2D(-100, 100), Vector2D(), 50, 50, 0.0f, false);
+	manoIz->addComponent<Image>(&sdlutils().images().at("mano"));
+
+	//Se añade un collider a la rana
+	auto manoIzCollider = manoIz->addComponent<RectangleCollider>(manoIzTr->getWidth(), manoIzTr->getHeight());
+	colManager->addCollider(manoIzCollider);
+
+
+	auto manoDr = mngr_->addEntity();
+	auto manoDrTr = manoDr->addComponent<Transform>();
+	manoDrTr->init(BossTr->getPos() + Vector2D(100 + BossTr->getWidth() - 50, 100), Vector2D(), 50, 50, 0.0f, false);
+	manoDr->addComponent<Image>(&sdlutils().images().at("mano"));
+
+
+	//Se añade un collider a la rana
+	auto manoDrCollider = manoDr->addComponent<RectangleCollider>(manoDrTr->getWidth(), manoDrTr->getHeight());
+	colManager->addCollider(manoDrCollider);
 }
 
 void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
@@ -163,41 +188,8 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 }
-void FinalBossScene::flyGenerator(CollisionManager* colManager, Entity* player_) {
 
 
-	auto Fly = mngr_->addEntity();
-	auto FlyAtribs = Fly->addComponent<BossAtributos>(1.0f);
-	auto FlyTr = Fly->addComponent<Transform>();
-	auto playerTr = player_->getComponent<Transform>();
-	auto FlyX = playerTr->getPos().getX();
-	auto distY = 100;
-	auto FlyY = playerTr->getPos().getY();
-
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la rana
-	FlyTr->init(Vector2D(FlyX, FlyY + distY), Vector2D(), 50, 50, 0.0f);
-
-	//Se le añade un color inicial en este caso es negro
-	Fly->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Componente que se usa para seguir al jugador
-	//Fly->addComponent<FollowPlayer>(playerTr, 150.0f,-100.0f, Vector2D(), 7.0f);
-}
-
-void FinalBossScene::platformGenerator(CollisionManager* colManager) {
-
-	auto platform = mngr_->addEntity();
-
-	auto platformTr = platform->addComponent<Transform>();
-	auto platformX = sdlutils().width() / 3 - 200;
-	auto platformY = sdlutils().height() / 4 * 3;
-	platformTr->init(Vector2D(platformX, platformY), Vector2D(), 200, 50, 0.0f);
-
-	platform->addComponent<RectangleRenderer>();
-
-	auto platformCollider = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
-	colManager->addCollider(platformCollider);
-}
 void FinalBossScene::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
 
 	//Se crea la onda expansiva
