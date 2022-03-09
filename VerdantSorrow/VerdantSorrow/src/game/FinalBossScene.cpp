@@ -102,7 +102,7 @@ void FinalBossScene::background()
 void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto FinalBossFace = mngr_->addEntity();
-	//auto FrogAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
+	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = sdlutils().width() / 2 ;
@@ -111,16 +111,16 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
-	FinalBossFace->addComponent<Image>(&sdlutils().images().at("chica"));
+	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	//Se añade un collider a la rana
-	//auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
-	//bossCollider->setIsTrigger(true);
-	//colManager->addCollider(bossCollider);
+	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
+	bossCollider->setIsTrigger(true);
+	colManager->addCollider(bossCollider);
 
-	////FinalBossFace->addComponent<SimpleGravity>(1.5);
-	////FinalBossFace->addComponent<CollideWithBordersBoss>();
+	//FinalBossFace->addComponent<SimpleGravity>(1.5);
+	//FinalBossFace->addComponent<CollideWithBordersBoss>();
 
-	//FinalBossFace->addComponent<BossHPBar>();
+	FinalBossFace->addComponent<BossHPBar>();
 
 }
 
