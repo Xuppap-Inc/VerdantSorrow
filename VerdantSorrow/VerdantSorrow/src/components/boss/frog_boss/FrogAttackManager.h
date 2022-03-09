@@ -23,6 +23,7 @@ public:
 		JUMPING_BIG,
 		TONGUE,
 		WAITING,
+		WAITING_FOR_TONGUE,
 		FLY_DIED,
 		SECOND_PHASE
 	};
@@ -62,5 +63,7 @@ private:
 	bool jumpingBig_;
 	Uint32 delay_;
 	Uint32 lastUpdate_;
+	Uint32 tongueDelay_;
+
 };
 
