@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\BossComponents.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyHp.h" />
     <ClInclude Include="src\components\hub\DialogBoxMngr.h" />
     <ClInclude Include="src\components\hub\NpcCtrl.h" />
