@@ -15,12 +15,17 @@
 #include "FlyHp.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
-				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(), tongueDelay_(3000)
+				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), 
+				jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(), 
+				tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE)
 {
 }
 
-FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(), fly_(), player_(), tr_(), collManager_(collManager),
-					frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), tongueAttack_(), tongueDelay_(3000)
+FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(), 
+				fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
+				jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), 
+				flySpacing_(0), tongueAttack_(), tongueDelay_(3000), animState_(ANIM_IDLE), 
+				animNewState_(ANIM_IDLE)
 {
 }
 
@@ -48,7 +53,9 @@ void FrogAttackManager::update()
 	auto& rand = sdlutils().rand();
 	if (attr_->getLife() <= 0) {
 		std::cout << "Muerte" << std::endl;
-		ent_->setAlive(false);
+		animNewState_ = ANIM_DEATH;
+		if(anim_->getFrameNum()==16)
+			ent_->setAlive(false);
 		return;
 	}
 	flipOnBorders();
@@ -97,6 +104,7 @@ void FrogAttackManager::update()
 				frogState_ = JUMPING_BIG;
 				angry_ = true;
 				//Lanzar animacion de salto largo
+				animNewState_ = ANIM_BIG_JUMP;
 			}
 			else
 			{
@@ -106,6 +114,58 @@ void FrogAttackManager::update()
 			break;
 		default:
 			break;
+	}if (animState_ != animNewState_) {
+		animState_ = animNewState_;
+		switch (animState_)
+		{
+		case FrogAttackManager::ANIM_IDLE:
+			if (!secondPhase_)anim_->changeanim(&sdlutils().images().at("rana_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_idle");
+			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_idle");
+			break;
+		case FrogAttackManager::ANIM_JUMP:
+			if (!secondPhase_) anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_jump");
+			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_enfadada_jump");
+			if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
+			break;
+		case FrogAttackManager::ANIM_BIG_JUMP:
+			if (!secondPhase_) {
+				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_jump");
+				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_JUMP_TO_VULNERABLE;
+			}
+			else {
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_enfadada_jump");
+				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
+			}
+
+			break;
+		case FrogAttackManager::ANIM_TONGUE:
+			if (!secondPhase_)anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
+			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana__enfadada_lengua");
+			if (anim_->getFrameNum() == 24) anim_->select_sprite(6, 4);
+			break;
+		case FrogAttackManager::ANIM_CHANGE_PHASE:
+			anim_->changeanim(&sdlutils().images().at("rana_cambio_fase"), 4, 6, (1000 / 30) * 23, 23, "rana_cambio_fase");
+			if (anim_->getFrameNum() == 23) animNewState_ = ANIM_IDLE;
+			break;
+		case FrogAttackManager::ANIM_JUMP_TO_VULNERABLE:
+			anim_->changeanim(&sdlutils().images().at("rana_salto_a_vulnerable"), 2, 6, (1000 / 30) * 10, 10, "rana_salto_a_vulnerable");
+			if (anim_->getFrameNum() == 10) animNewState_ = ANIM_VULNERABLE;
+			break;
+		case FrogAttackManager::ANIM_VULNERABLE:
+			anim_->changeanim(&sdlutils().images().at("rana_vulnerable"), 4, 6, (1000 / 30) * 21, 21, "rana_vulnerable");
+			if (anim_->getFrameNum() == 10) animNewState_ = ANIM_VULNERABLE_TO_IDLE;
+			break;
+		case FrogAttackManager::ANIM_VULNERABLE_TO_IDLE:
+			anim_->changeanim(&sdlutils().images().at("rana_vulnerable_a_idle"), 1, 5, (1000 / 30) * 5, 5, "rana_vulnerable_a_idle");
+			if (anim_->getFrameNum() == 5) animNewState_ = ANIM_IDLE;
+			break;
+		case FrogAttackManager::ANIM_DEATH:
+			anim_->changeanim(&sdlutils().images().at("rana_enfadada_muerte"), 3, 6, (1000 / 30) * 16, 16, "rana_enfadada_muerte");
+			if (anim_->getFrameNum() == 14) anim_->select_sprite(4, 3);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -193,14 +253,14 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 		jumpsUntilNextTongue_--;
 	}
 	//Iniciar animaci�n Idle y ponerla en repeticii�n, si esta en segunda fase poner idle de segunda fase -> !MIRIAM EL REPEAT DE FRAMED IMAGE ESTA INVERTIDO!
-	/*anim_->changeanim(&sdlutils().images().at("ranaidle"), 6, 4, 3, 24);
-	anim_->repeat(false);*/
+	animNewState_ = ANIM_IDLE;
 }
 
 void FrogAttackManager::nextAttack()
 {
 	if(!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
 		//Lanzar animacion del cambio de fase
+		animNewState_ = ANIM_CHANGE_PHASE;
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
 		lastUpdate_ = sdlutils().currRealTime();
@@ -211,13 +271,17 @@ void FrogAttackManager::nextAttack()
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
 		frogState_ = TONGUE;
 		//No tengo ni idea de como se lanzara la animacion aqui
-		if (!secondPhase_) createFly();
+		if (!secondPhase_) {
+			createFly();
+			animNewState_ = ANIM_TONGUE;
+		}
 		frogState_ = WAITING_FOR_TONGUE;
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
 		if (nextJump >= 30) {
 			//lanzar animacion de salto en el metodo attack
+			animNewState_ = ANIM_JUMP;
 			frogJump_->attack(jumpDirection_);
 			frogState_ = JUMPING;
 		}
@@ -225,6 +289,7 @@ void FrogAttackManager::nextAttack()
 			bigJump_->attack(jumpDirection_);
 			//lanzar animavion de salto en el metodo attack
 			frogState_ = JUMPING_BIG;
+			animNewState_ = ANIM_BIG_JUMP;
 		}
 
 	}

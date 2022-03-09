@@ -37,8 +37,18 @@ public:
 	void createWave(int dir);
 	void createWaves();
 	void onFlyDied();
-	void a();
 private:
+	enum AnimState {
+		ANIM_IDLE,
+		ANIM_JUMP,
+		ANIM_BIG_JUMP,
+		ANIM_TONGUE,
+		ANIM_CHANGE_PHASE,
+		ANIM_JUMP_TO_VULNERABLE,
+		ANIM_VULNERABLE,
+		ANIM_VULNERABLE_TO_IDLE,
+		ANIM_DEATH,
+	};
 	void flipOnBorders();
 	void onGrounded(bool &jump, bool isBig);
 	void nextAttack();
@@ -53,6 +63,8 @@ private:
 	FramedImage* anim_;
 	
 	State frogState_;
+	AnimState animState_;
+	AnimState animNewState_;
 	bool secondPhase_;
 	bool angry_;
 	bool jumping_;
