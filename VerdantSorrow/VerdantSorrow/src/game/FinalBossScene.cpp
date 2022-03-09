@@ -18,6 +18,7 @@
 
 
 #include "CollisionManager.h"
+#include "../components/boss/finalBoss/HandsManager.h"
 
 using ecs::Entity;
 using ecs::Manager;
@@ -108,8 +109,9 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height()/2;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(),100, 100, 0.0f);
 
+	
 	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
-
+	FinalBossFace->addComponent<HandsManager>(colManager);
 	//Se añade un collider a la rana
 	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
 	bossCollider->setIsTrigger(true);
@@ -120,34 +122,13 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	FinalBossFace->addComponent<BossHPBar>();
 
-	createHands(BossTr, colManager);
+
 
 
 
 }
 
-void FinalBossScene::createHands(Transform* BossTr, CollisionManager* colManager)
-{
-	auto manoIz = mngr_->addEntity();
-	auto manoIzTr = manoIz->addComponent<Transform>();
-	manoIzTr->init(BossTr->getPos() + Vector2D(-100, 100), Vector2D(), 50, 50, 0.0f, false);
-	manoIz->addComponent<Image>(&sdlutils().images().at("mano"));
 
-	//Se añade un collider a la rana
-	auto manoIzCollider = manoIz->addComponent<RectangleCollider>(manoIzTr->getWidth(), manoIzTr->getHeight());
-	colManager->addCollider(manoIzCollider);
-
-
-	auto manoDr = mngr_->addEntity();
-	auto manoDrTr = manoDr->addComponent<Transform>();
-	manoDrTr->init(BossTr->getPos() + Vector2D(100 + BossTr->getWidth() - 50, 100), Vector2D(), 50, 50, 0.0f, false);
-	manoDr->addComponent<Image>(&sdlutils().images().at("mano"));
-
-
-	//Se añade un collider a la rana
-	auto manoDrCollider = manoDr->addComponent<RectangleCollider>(manoDrTr->getWidth(), manoDrTr->getHeight());
-	colManager->addCollider(manoDrCollider);
-}
 
 void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
