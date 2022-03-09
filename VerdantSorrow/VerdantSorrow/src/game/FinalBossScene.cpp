@@ -14,8 +14,6 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
-#include "../components/boss/frog_boss/wave/WaveMovement.h"
-#include "../components/boss/frog_boss/FrogAttackManager.h"
 #include "../components/boss/tree_boss/Root/RootMovement.h"
 
 
@@ -42,11 +40,12 @@ void FinalBossScene::init()
 	mngr_ = new Manager();
 	mngr_->setDebug(true); //activamos modo debug
 
-	background();
+	//background();
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	//finalBossGenerator(colManager, player);
+	
+	finalBossGenerator(colManager, player);
 	//platformGenerator(colManager);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
 	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
@@ -102,30 +101,26 @@ void FinalBossScene::background()
 
 void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* player_) {
 
-	auto Frog = mngr_->addEntity();
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
+	auto FinalBossFace = mngr_->addEntity();
+	//auto FrogAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
 
-	auto FrogTr = Frog->addComponent<Transform>();
-	auto FrogX = sdlutils().width() / 2 - 25;
-	auto FrogY = sdlutils().height();
-	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), 250, 150, 0.0f);
+	auto BossTr = FinalBossFace->addComponent<Transform>();
+	auto BossX = sdlutils().width() / 2 ;
+	auto BossY = sdlutils().height()/2;
+	BossTr->init(Vector2D(BossX, BossY), Vector2D(),100, 100, 0.0f);
 
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
+	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
-
+	FinalBossFace->addComponent<Image>(&sdlutils().images().at("chica"));
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth(), FrogTr->getHeight());
-	frogCollider->setIsTrigger(true);
-	colManager->addCollider(frogCollider);
+	//auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
+	//bossCollider->setIsTrigger(true);
+	//colManager->addCollider(bossCollider);
 
-	Frog->addComponent<SimpleGravity>(1.5);
-	Frog->addComponent<CollideWithBordersBoss>();
+	////FinalBossFace->addComponent<SimpleGravity>(1.5);
+	////FinalBossFace->addComponent<CollideWithBordersBoss>();
 
-	Frog->addComponent<FrogAttackManager>(colManager);
-	////Frog->addComponent<FrogJump>(30);
-	////Frog->addComponent<FrogBigJump>(40);
-
-	Frog->addComponent<BossHPBar>();
+	//FinalBossFace->addComponent<BossHPBar>();
 
 }
 
@@ -226,5 +221,5 @@ void FinalBossScene::waveGenerator(CollisionManager* colManager, Entity* player_
 	//Se añade el collider al colliderGameManager
 	colManager->addCollider(waveCollider);
 	//Se añade el movimiento horizontal
-	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
+	//Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
 }
