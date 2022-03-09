@@ -19,6 +19,11 @@
     },
 
     {
+      "id": "mano",
+      "file": "resources/images/mano.png"
+    },
+
+    {
       "id": "tennis_ball",
       "file": "resources/images/tennis_ball.png"
     },
