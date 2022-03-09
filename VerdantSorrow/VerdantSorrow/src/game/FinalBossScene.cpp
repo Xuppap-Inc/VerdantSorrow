@@ -148,7 +148,7 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 	player_->addComponent<CollideWithBorders>();
 
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight()-30);
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
 

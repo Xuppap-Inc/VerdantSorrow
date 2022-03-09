@@ -8,7 +8,7 @@
 #include "../../RectangleRenderer.h"
 
 TongueAttack::TongueAttack(CollisionManager *colMan):RectangleCollider(), 
-	colMan_(colMan),delay_(5000), lastUpdate_(0), finishedAttack_(false), fly_(false)
+	colMan_(colMan),delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false)
 {
 	
 	setIsTrigger(true);
@@ -38,10 +38,6 @@ void TongueAttack::update()
 		finishedAttack_ = true;
 		lastUpdate_ = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
 		
-		if (fly_)
-		{
-			mngr_->getHandler(ecs::_FLY)->setAlive(false); //Si el objetivo es la mosca, la mata
-		}
 	}
 	
 }
@@ -74,6 +70,11 @@ void TongueAttack::attack(bool fly)
 	setCollider(iniPos,tongW,50); //Crea el collider y lo activa
 	setActive(true);
 	finishedAttack_ = false; //El ataque no ha terminado aun
+
+	if (fly_)
+	{
+		mngr_->getHandler(ecs::_FLY)->setAlive(false); //Si el objetivo es la mosca, la mata
+	}
 	
 }
 

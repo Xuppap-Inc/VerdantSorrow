@@ -15,12 +15,12 @@
 #include "FlyHp.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
-				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_()
+				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(), tongueDelay_(3000)
 {
 }
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(), fly_(), player_(), tr_(), collManager_(collManager),
-					frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), tongueAttack_()
+					frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), flySpacing_(0), tongueAttack_(), tongueDelay_(3000)
 {
 }
 
@@ -67,6 +67,7 @@ void FrogAttackManager::update()
 			if (tongueAttack_->finished()) 
 			{
 				frogState_ = WAITING;
+				
 				delay_ = rand.nextInt(1000, 3000);
 				lastUpdate_ = sdlutils().currRealTime();
 			}
@@ -79,6 +80,13 @@ void FrogAttackManager::update()
 			//std::cout << "esperando" << std::endl;
 			if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
 				frogState_ = CALC_NEXT_ATTACK;
+			}
+			break; 
+		case WAITING_FOR_TONGUE:
+			//std::cout << "esperando" << std::endl;
+			if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
+				tongueAttack_->attack(!secondPhase_);
+				frogState_ = TONGUE;
 			}
 			break;
 		case FLY_DIED:
@@ -116,7 +124,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	fly_->addComponent<FlyHp>(this);
 	mngr_->setHandler(ecs::_FLY, fly_);
-	return fly_;;
+	return fly_;
 }
 
 void  FrogAttackManager::createWave(int dir)
@@ -204,8 +212,7 @@ void FrogAttackManager::nextAttack()
 		frogState_ = TONGUE;
 		//No tengo ni idea de como se lanzara la animacion aqui
 		if (!secondPhase_) createFly();
-		tongueAttack_->attack(!secondPhase_);
-		
+		frogState_ = WAITING_FOR_TONGUE;
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
