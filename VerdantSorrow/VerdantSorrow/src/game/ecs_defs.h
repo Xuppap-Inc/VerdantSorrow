@@ -42,7 +42,8 @@
 	_TREEMOVEMENT, \
 	_MELEEATTACK, \
 	_NPC_CTRL, \
-	_DIALOG_BOX_MNGR
+	_DIALOG_BOX_MNGR, \
+	_HANDS_MANAGER
 
 
 // Groups list - must have at least one element

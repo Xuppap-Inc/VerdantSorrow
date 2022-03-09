@@ -12,6 +12,24 @@
       "id": "sdl_logo",
       "file": "resources/images/SDL_logo.png"
     },
+    {
+      "id": "matt",
+      "file": "resources/images/matt.jpg"
+    },
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
+
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
+
+    {
+      "id": "mano",
+      "file": "resources/images/mano.png"
+    },
 
     {
       "id": "tennis_ball",
