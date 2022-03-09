@@ -22,6 +22,8 @@ public:
 
     void attack(int dir);
 
+    bool hasFinished() { return attacking_ == false; };
+
 protected:
     Transform* tr_;
 
@@ -37,5 +39,7 @@ protected:
     * Setea la posicion del ataque delante del arbol, teniendo en cuenta su direccion de movimiento
     */
     void setPosition(int dir) ;
+
+    bool attacking_;
 };
 

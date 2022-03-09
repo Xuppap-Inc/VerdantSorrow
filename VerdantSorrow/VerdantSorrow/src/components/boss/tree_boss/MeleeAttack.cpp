@@ -6,7 +6,7 @@
 #include "../../boss/tree_boss/TreeMovement.h"
 #include "../../player/PlayerAttributes.h"
 
-MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(200), attackCoolDown(300), lastAttack()
+MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(200), attackCoolDown(300), lastAttack(), attacking_(false)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -32,6 +32,7 @@ void MeleeAttack::update()
 		if (currentTime >= lastAttack + attackDuration) {
 			setActive(false);
 			treeMovement_->setMoveActive(true);
+			attacking_ = false;
 		}
 	}
 }
@@ -55,6 +56,8 @@ void MeleeAttack::attack(int dir)
 	setActive(true);
 	lastAttack = currentTime;
 	setPosition(dir);
+
+	attacking_ = true;
 }
 
 void MeleeAttack::setPosition(int dir)

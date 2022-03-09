@@ -16,6 +16,8 @@ public:
 	void update() override;
 	void attack(int dir);
 
+	bool hasFinished() { return attacking_ == false; };
+
 private:
 	Transform* tr_;
 	RootSpawner* rootSpawner_;
@@ -28,6 +30,6 @@ private:
 	int rootW_;
 	
 	const int SPACE_BETWEEN_ROOTS = 10;
-	const int TIME_BETWEEN_ROOTS = 500;
+	const int TIME_BETWEEN_ROOTS = 150;
 };
 

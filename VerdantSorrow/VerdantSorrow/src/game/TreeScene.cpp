@@ -93,7 +93,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	auto TreeAtribs = Tree_->addComponent<BossAtributos>(3.0f);
 
 	auto TreeTr = Tree_->addComponent<Transform>();
-	auto TreeX = sdlutils().width() / 2 - 80;
+	auto TreeX = sdlutils().width() / 4 * 3 - 80;
 	auto TreeY = sdlutils().height() - 320;
 	TreeTr->init(Vector2D(TreeX, TreeY), Vector2D(), 160, 320, 0.0f);
 
@@ -122,7 +122,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 - 25;
+	auto playerX = sdlutils().width() / 4 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 

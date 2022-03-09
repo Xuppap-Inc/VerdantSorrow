@@ -23,9 +23,7 @@ void RectangleCollider::initComponent()
 
 void RectangleCollider::update()
 {
-	if (isActive())
-		setPosition();
-	
+	setPosition();
 }
 
 

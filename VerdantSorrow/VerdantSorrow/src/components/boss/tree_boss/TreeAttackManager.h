@@ -34,7 +34,7 @@ public:
 	int getRootWidth() { return rootWidth_; }
 private:
 
-	const float MELEE_ATTACK_DISTANCE = 20.0;
+	const float MELEE_ATTACK_DISTANCE = 50.0;
 	const int TIME_BETWEEN_WAVES = 5000;
 
 	State state;
@@ -51,6 +51,8 @@ private:
 	MeleeAttack* meleeAttack_;
 	
 	int rootWidth_;
-	int attackTimer_;
+	int lastTimeWave_;
+
+	bool attacking_;
 };
 

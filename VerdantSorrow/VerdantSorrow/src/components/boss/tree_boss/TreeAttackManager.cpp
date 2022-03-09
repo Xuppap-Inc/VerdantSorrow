@@ -14,7 +14,7 @@
 #include "../../FramedImage.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-									attackTimer_(0)
+									lastTimeWave_(0), attacking_(false)
 {
 }
 
@@ -23,7 +23,8 @@ TreeAttackManager::~TreeAttackManager()
 }
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), 
-																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), attackTimer_(0)
+																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), lastTimeWave_(0), 
+																	attacking_(false)
 {
 }
 
@@ -42,6 +43,8 @@ void TreeAttackManager::initComponent()
 
 	phase = PHASE1;
 	state = MOVING;
+
+	lastTimeWave_ = sdlutils().currRealTime();
 }
 
 void TreeAttackManager::update()
@@ -61,19 +64,31 @@ void TreeAttackManager::update()
 
 	if (state == MOVING) {
 
+		if (meleeAttack_->hasFinished()) attacking_ = false;
+
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (absDistance < MELEE_ATTACK_DISTANCE) {
 
 			meleeAttack_->attack(dir);
+			attacking_ = true;
 		}
 
-		attackTimer_ += sdlutils().currRealTime();
+		int time = sdlutils().currRealTime();
 
-		if (attackTimer_ >= TIME_BETWEEN_WAVES) state = WAVE;
+		if (time - lastTimeWave_ >= TIME_BETWEEN_WAVES && !attacking_) {
+			
+			state = WAVE;
+			rootWave_->attack(dir);
+		}
 	}
 
 	else if (state == WAVE) {
-	
-		rootWave_->attack(dir);
+
+		if (rootWave_->hasFinished()) {
+			
+			state = MOVING;
+
+			lastTimeWave_ = sdlutils().currRealTime();
+		}
 	}
 }
