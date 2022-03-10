@@ -5,7 +5,9 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../Image.h"
+#include "../CollideWithBordersBoss.h"
 #include "Punietazo.h"
+#include "ClapAttack.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager):colmanager_(colManager)
@@ -31,7 +33,8 @@ void HandsManager::initComponent()
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>(manoIzTr->getWidth(), manoIzTr->getHeight());
 	colmanager_->addCollider(manoIzCollider);
-	leftHand_->addComponent<Punietazo>();
+	leftHand_->addComponent<ClapAttack>(true);
+	/*leftHand_->addComponent<Punietazo>();*/
 
 
 	auto manoDrTr = rightHand_->addComponent<Transform>();
@@ -42,4 +45,5 @@ void HandsManager::initComponent()
 	//Se añade un collider a la rana
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>(manoDrTr->getWidth(), manoDrTr->getHeight());
 	colmanager_->addCollider(manoDrCollider);
+	rightHand_->addComponent<ClapAttack>(false);
 }

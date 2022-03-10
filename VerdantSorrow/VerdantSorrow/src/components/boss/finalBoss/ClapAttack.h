@@ -6,20 +6,22 @@
 #include <SDL.h>
 
 class Transform;
-using ecs::Entity;
 
 class ClapAttack : public RectangleCollider
 {
 public:
     __CMPID_DECL__(ecs::_MELEEATTACK)
     
-    ClapAttack(Entity* leftHand, Entity* rightHand);
+    ClapAttack(bool leftHand);
     ~ClapAttack();
 
     void initComponent() override;
     void update() override;
 protected:
-    Entity* leftHand_;
-    Entity* rightHand_;
+    Transform* tr_;
+    RectangleCollider* collider_;
+    bool leftHand_, movingToAttack = true;
+    int handSpeed = 4;
+    float timerToStart_ = 0, countdownToStart = 0;
 };
 
