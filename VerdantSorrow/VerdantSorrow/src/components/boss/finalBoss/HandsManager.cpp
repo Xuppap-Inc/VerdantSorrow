@@ -39,7 +39,10 @@ void HandsManager::initComponent()
 	rightHand_->addComponent<Image>(&sdlutils().images().at("mano"));
 
 
+	
+
 	//Se añade un collider a la rana
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>(manoDrTr->getWidth(), manoDrTr->getHeight());
 	colmanager_->addCollider(manoDrCollider);
+//	rightHand_->addComponent<Punietazo>();
 }
