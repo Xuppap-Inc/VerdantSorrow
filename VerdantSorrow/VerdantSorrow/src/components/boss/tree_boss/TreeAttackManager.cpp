@@ -38,6 +38,14 @@ void TreeAttackManager::initComponent()
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
 	meleeAttack_ = ent_->getComponent<MeleeAttack>();
 
+	musicaFase2_ = &sdlutils().musics().at("musica_linterna_fase2");
+	musicaFase2_->play();
+	musicaFase2_->setMusicVolume(0);
+
+	musicaFase1_ = &sdlutils().soundEffects().at("musica_linterna_fase1");
+	musicaFase1_->play(10, 0);
+	musicaFase1_->setChannelVolume(80, 0);
+
 	bool correct = tr_ != nullptr && player_ != nullptr && attr_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr;
 	assert(correct);
 
@@ -69,6 +77,8 @@ void TreeAttackManager::update()
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (absDistance < MELEE_ATTACK_DISTANCE) {
 
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
+			s->play();
 			meleeAttack_->attack(dir);
 			attacking_ = true;
 		}

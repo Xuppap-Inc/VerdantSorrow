@@ -142,6 +142,24 @@
   <ItemGroup>
     <None Include="resources\config\resources.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\sound\musica_hub.wav" />
+    <Media Include="resources\sound\musica_linterna_fase1.wav" />
+    <Media Include="resources\sound\musica_linterna_fase2.wav" />
+    <Media Include="resources\sound\musica_rana_fase1.wav" />
+    <Media Include="resources\sound\musica_rana_fase2.wav" />
+    <Media Include="resources\sound\sfx_arbol_attack.wav" />
+    <Media Include="resources\sound\sfx_arbol_damage.wav" />
+    <Media Include="resources\sound\sfx_cambio_fase.wav" />
+    <Media Include="resources\sound\sfx_chica_attack1.wav" />
+    <Media Include="resources\sound\sfx_chica_attack2.wav" />
+    <Media Include="resources\sound\sfx_manos_attack.wav" />
+    <Media Include="resources\sound\sfx_manos_damage.wav" />
+    <Media Include="resources\sound\sfx_manos_fuego.wav" />
+    <Media Include="resources\sound\sfx_mosca_damage.wav" />
+    <Media Include="resources\sound\sfx_mosca_idle.wav" />
+    <Media Include="resources\sound\sfx_rana_damage.wav" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

@@ -42,7 +42,15 @@ void FrogAttackManager::initComponent()
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	attr_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
-	
+
+	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
+	musicaFase2_->play();
+	musicaFase2_->setMusicVolume(0);
+
+	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
+	musicaFase1_->play(10, 0);
+	musicaFase1_->setChannelVolume(80, 0);
+
 	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr;	
 	assert(correct);
 }
@@ -261,6 +269,10 @@ void FrogAttackManager::nextAttack()
 	if(!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
 		//Lanzar animacion del cambio de fase
 		animNewState_ = ANIM_CHANGE_PHASE;
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
+		s->play();
+		musicaFase2_->setMusicVolume(100);
+		musicaFase1_->pauseChannel(0);
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
 		lastUpdate_ = sdlutils().currRealTime();

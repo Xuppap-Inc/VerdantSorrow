@@ -50,6 +50,9 @@ private:
 	RootAutoAim* rootAutoAim_;
 	MeleeAttack* meleeAttack_;
 	
+	SoundEffect* musicaFase1_;
+	Music* musicaFase2_;
+
 	int rootWidth_;
 	int lastTimeWave_;
 
