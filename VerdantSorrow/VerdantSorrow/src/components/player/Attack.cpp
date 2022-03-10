@@ -50,6 +50,16 @@ void Attack::update()
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 100, 9, "Chica_AtkAir");
 					}
 
+					if (sdlutils().rand().nextInt(0, 2) == 0) {
+						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
+						s->play();
+					}
+					else
+					{
+						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
+						s->play();
+					}
+
 					setActive(true);
 					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
