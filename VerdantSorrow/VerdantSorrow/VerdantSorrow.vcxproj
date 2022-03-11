@@ -22,6 +22,7 @@
     <ClInclude Include="src\components\boss\finalBoss\Punietazo.h" />
     <ClInclude Include="src\components\boss\finalBoss\HandsManager.h" />
     <ClInclude Include="src\components\boss\finalBoss\ClapAttack.h" />
+    <ClInclude Include="src\components\boss\tree_boss\LanternSpawner.h" />
     <ClInclude Include="src\game\FinalBossScene.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyHp.h" />
     <ClInclude Include="src\components\hub\DialogBoxMngr.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="src\components\boss\finalBoss\Punietazo.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\HandsManager.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\ClapAttack.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\LanternSpawner.cpp" />
     <ClCompile Include="src\game\FinalBossScene.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyHp.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />
