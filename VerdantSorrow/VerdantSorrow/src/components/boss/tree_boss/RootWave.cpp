@@ -43,7 +43,6 @@ void RootWave::update()
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			
 			attacking_ = false;
-			treeMovement_->setMoveActive(true);
 		}
 	}
 }

@@ -11,11 +11,11 @@
 #include "Transform.h"
 
 Image::Image() :
-	tr_(), tex_() {
+	tr_(), tex_(), visible_(true) {
 }
 
 Image::Image(Texture* tex) :
-	tr_(), tex_(tex) {
+	tr_(), tex_(tex), visible_(true) {
 }
 
 Image::~Image() {
@@ -28,10 +28,21 @@ void Image::initComponent() {
 
 void Image::render() {
 
-	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
-		tr_->getHeight());
+	if (visible_) {
+		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
+			tr_->getHeight());
 
-	assert(tex_ != nullptr);
-	tex_->render(dest, tr_->getRot());
+		assert(tex_ != nullptr);
+		tex_->render(dest, tr_->getRot());
+	}
+}
 
+void Image::setVisible(bool set)
+{
+	visible_ = set;
+}
+
+bool Image::isVisible()
+{
+	return visible_;
 }

@@ -20,6 +20,9 @@ public:
 	bool isMoveActive() { return moveActive_; }
 	void setMoveActive(bool set) { moveActive_ = set; }
 
+	void moveToCenter();
+	bool hasFinishedMovingToCenter();
+
 private:
 	Transform* tr_;
 	Transform* playerTr_;
@@ -29,5 +32,6 @@ private:
 	bool isNextToPlayer_;
 
 	bool moveActive_;
+	bool movingToCenter_;
 };
 

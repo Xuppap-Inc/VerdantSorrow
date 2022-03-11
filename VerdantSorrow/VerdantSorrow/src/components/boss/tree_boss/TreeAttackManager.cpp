@@ -12,9 +12,11 @@
 #include "MeleeAttack.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../FramedImage.h"
+#include "../../Image.h"
+#include "TreeMovement.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-									lastTimeWave_(0), attacking_(false)
+									timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false)
 {
 }
 
@@ -23,8 +25,8 @@ TreeAttackManager::~TreeAttackManager()
 }
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), 
-																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), lastTimeWave_(0), 
-																	attacking_(false)
+																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
+																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false)
 {
 }
 
@@ -33,6 +35,9 @@ void TreeAttackManager::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	attr_ = ent_->getComponent<BossAtributos>();
+	img_ = ent_->getComponent<Image>();
+	treeCol_ = ent_->getComponent<RectangleCollider>();
+	movement_ = ent_->getComponent<TreeMovement>();
 
 	rootWave_ = ent_->getComponent<RootWave>();
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
@@ -52,7 +57,8 @@ void TreeAttackManager::initComponent()
 	phase = PHASE1;
 	state = MOVING;
 
-	lastTimeWave_ = sdlutils().currRealTime();
+	timerWave_.reset();
+	timerSpecial_.reset();
 }
 
 void TreeAttackManager::update()
@@ -83,13 +89,9 @@ void TreeAttackManager::update()
 			attacking_ = true;
 		}
 
-		int time = sdlutils().currRealTime();
+		if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir);
 
-		if (time - lastTimeWave_ >= TIME_BETWEEN_WAVES && !attacking_) {
-			
-			state = WAVE;
-			rootWave_->attack(dir);
-		}
+		if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 	}
 
 	else if (state == WAVE) {
@@ -98,7 +100,98 @@ void TreeAttackManager::update()
 			
 			state = MOVING;
 
-			lastTimeWave_ = sdlutils().currRealTime();
+			movement_->setMoveActive(true);
+
+			//timers
+			timerWave_.reset();
+			timerSpecial_.resume();
+
+			attacking_ = false;
+		}
+	}
+
+	else if (state == SPECIAL_ATTACK) {
+	
+		if (!waiting_ && rootAutoAim_->hasFinished()) {
+		
+			//reactiva al arbol
+			img_->setVisible(true);
+			treeCol_->setActive(true);
+
+			//lo devuelve al centro
+			returnToIni();
+
+			waitTimer_.reset();
+
+			waiting_ = true;
+		}
+
+		else if (waiting_ && waitTimer_.currTime() > WAIT_AFTER_SPECIAL) {
+
+			state = MOVING;
+
+			//timers
+			timerSpecial_.reset();
+			timerWave_.resume();
+
+			attacking_ = false;
+			movement_->setMoveActive(true);
+
+			waitTimer_.reset();
+			waitTimer_.pause();
+		}
+	}
+
+	else if (state == MOVING_TO_CENTER) {
+	
+		if (movement_->hasFinishedMovingToCenter()) {
+		
+			attackSpecial();
 		}
 	}
 }
+
+void TreeAttackManager::returnToIni()
+{
+	auto treeX = sdlutils().width() / 2 - 80;
+	auto treeY = sdlutils().height() - 320;
+	tr_->getPos().set(Vector2D(treeX, treeY));
+}
+
+void TreeAttackManager::attackWave(int dir)
+{
+	if (!attacking_) {
+
+		//pausa el timer del otro ataque
+		timerSpecial_.pause();
+
+		state = WAVE;
+		rootWave_->attack(dir);
+	}
+}
+
+void TreeAttackManager::attackSpecial()
+{
+	state = SPECIAL_ATTACK;
+
+	rootAutoAim_->attack();
+
+	img_->setVisible(false);
+	treeCol_->setActive(false);
+}
+
+void TreeAttackManager::prepareToSpecial()
+{
+	if (!attacking_) {
+
+		attacking_ = true;
+
+		//pausa el timer del otro ataque
+		timerWave_.pause();
+
+		state = MOVING_TO_CENTER;
+
+		movement_->moveToCenter();
+	}
+}
+

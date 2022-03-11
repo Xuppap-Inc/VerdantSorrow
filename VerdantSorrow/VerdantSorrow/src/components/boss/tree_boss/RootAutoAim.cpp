@@ -8,8 +8,9 @@
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
+#include "TreeMovement.h"
 
-RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), TIME_BETWEEN_ROOTS(1000), player_(player), playerTr_()
+RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), player_(player), playerTr_(), iniTime_(0), movement_()
 {
 }
 
@@ -23,7 +24,9 @@ void RootAutoAim::initComponent()
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	playerTr_ = player_->getComponent<Transform>();
 
-	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && playerTr_ != nullptr;
+	movement_ = ent_->getComponent<TreeMovement>();
+
+	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && playerTr_ != nullptr && movement_	!= nullptr;
 	assert(comps);
 }
 
@@ -36,6 +39,8 @@ void RootAutoAim::update()
 
 		lastTime_ = sdlutils().currRealTime();
 	}
+
+	if (sdlutils().currRealTime() - iniTime_ > DURATION) cancelAttack();
 }
 
 void RootAutoAim::cancelAttack()
@@ -46,5 +51,8 @@ void RootAutoAim::cancelAttack()
 void RootAutoAim::attack()
 {
 	attacking_ = true;
+	iniTime_ = sdlutils().currRealTime();
 	rootW_ = rootSpawner_->getRootWidth();
+
+	movement_->setMoveActive(false);
 }

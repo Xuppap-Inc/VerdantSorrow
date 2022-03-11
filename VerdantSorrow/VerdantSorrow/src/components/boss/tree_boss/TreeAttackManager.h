@@ -1,5 +1,6 @@
 #include "../../../ecs/Component.h"
 #include "root/RootMovement.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
 class RootWave;
 class RootAutoAim;
@@ -8,6 +9,8 @@ class Transform;
 class CollisionManager;
 class BossAtributos;
 class FramedImage;
+class Image;
+class TreeMovement;
 
 #pragma once
 class TreeAttackManager : public ecs::Component
@@ -18,7 +21,8 @@ public:
 	enum State {
 		MOVING,
 		WAVE,
-		SPECIAL_ATTACK
+		SPECIAL_ATTACK,
+		MOVING_TO_CENTER
 	};
 	enum Phase {
 		PHASE1,
@@ -37,6 +41,9 @@ private:
 	const float MELEE_ATTACK_DISTANCE = 50.0;
 	const int TIME_BETWEEN_WAVES = 5000;
 
+	const int TIME_FOR_SPECIAL = 10000;
+	const int WAIT_AFTER_SPECIAL = 1000;
+
 	State state;
 	Phase phase;
 
@@ -45,6 +52,10 @@ private:
 	CollisionManager* collManager_;
 	BossAtributos* attr_;
 	FramedImage* anim_;
+	Image* img_;
+	RectangleCollider* treeCol_;
+
+	TreeMovement* movement_;
 
 	RootWave* rootWave_;
 	RootAutoAim* rootAutoAim_;
@@ -54,8 +65,17 @@ private:
 	Music* musicaFase2_;
 
 	int rootWidth_;
-	int lastTimeWave_;
+	VirtualTimer timerWave_;
+	VirtualTimer timerSpecial_;
+	VirtualTimer waitTimer_;
 
 	bool attacking_;
+	bool waiting_;
+
+	void returnToIni();
+
+	void attackWave(int dir);
+	void attackSpecial();
+	void prepareToSpecial();
 };
 

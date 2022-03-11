@@ -26,8 +26,13 @@ public:
 	void initComponent() override;
 	void render() override;
 
+	void setVisible(bool set);
+	bool isVisible();
+
 private:
 	Transform* tr_;
 	Texture* tex_;
+
+	bool visible_;
 };
 
