@@ -10,7 +10,7 @@ class FramedImage;
 class LanternSpawner: public ecs::Component
 {
 public:
-	//_CMPID_DECL_(ecs::_LANTERNSPAWNER);
+	__CMPID_DECL__(ecs::_LANTERNSPAWNER);
 
 		LanternSpawner(CollisionManager* collManager);
 		~LanternSpawner();

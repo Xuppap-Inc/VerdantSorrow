@@ -20,6 +20,8 @@ public:
 
 	void rootGenerator(CollisionManager* colManager, Entity* player_, float x);
 
+	void lanternGenerator(CollisionManager* colManager, Entity* player_, float x);
+
 private:
 	ecs::Manager* mngr_;
 };

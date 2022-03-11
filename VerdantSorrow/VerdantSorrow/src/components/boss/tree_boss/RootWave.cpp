@@ -10,7 +10,9 @@
 #include "../BossAtributos.h"
 #include "TreeMovement.h"
 
-RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), dir_(1), rootPos_(-1), rootW_(0), treeMovement_()
+
+RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), 
+dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),lanternSpawner_(),lanternPos_(-1)
 {
 }
 
@@ -23,8 +25,10 @@ void RootWave::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
+	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
 
-	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr;
+	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr
+		/* && lanternSpawner_ != nullptr */ ;
 	assert(comps);
 }
 
@@ -43,6 +47,7 @@ void RootWave::update()
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			
 			attacking_ = false;
+			lanternSpawner_->createLantern(lanternPos_);
 		}
 	}
 }

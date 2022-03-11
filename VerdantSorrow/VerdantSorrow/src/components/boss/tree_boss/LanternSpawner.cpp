@@ -10,6 +10,7 @@
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
 
+
 LanternSpawner::LanternSpawner(CollisionManager* collManager)
 {
 }
