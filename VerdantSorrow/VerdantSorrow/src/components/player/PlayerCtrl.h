@@ -20,6 +20,7 @@ public:
 	void doAttack();
 	void doSlide();
 	void handleInput();
+	bool isRolling() { return isRolling_; };
 
 private:
 	RectangleCollider* playerCol_;

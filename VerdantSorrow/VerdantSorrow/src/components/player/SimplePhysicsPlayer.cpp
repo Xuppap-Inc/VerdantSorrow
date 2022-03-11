@@ -88,7 +88,7 @@ void SimplePhysicsPlayer::update()
 
 				if (bA != nullptr) {
 
-					if (!invulnerable_) {
+					if (!invulnerable_ && !ctrl_->isRolling()) {
 						attrib_->damagePlayer(1);
 						invulnerable_ = true;
 						invTimer = sdlutils().currRealTime();

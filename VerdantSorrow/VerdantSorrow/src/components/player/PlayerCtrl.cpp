@@ -80,7 +80,7 @@ void PlayerCtrl::update()
 			isRolling_ = true;
 		}
 			
-		if (!moveLeft_ && !moveRight_)
+		if (!moveLeft_ && !moveRight_ && !isRolling_)
 			slide_ = true;
 
 		// Animation
