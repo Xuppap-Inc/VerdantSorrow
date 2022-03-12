@@ -51,6 +51,8 @@ void TreeScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	treeGenerator(colManager, player);
+	lanternGenerator(colManager, player, 100);
+	
 }
 
 void TreeScene::start() {
@@ -108,14 +110,15 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	Tree_->addComponent<BossHPBar>();
 
 	//IMPORTANTE: movimiento y spawner antes de los ataques
+		//Se le añade el compo de sacar linterna
+	Tree_->addComponent<LanternSpawner>(colManager);
 	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
 	Tree_->addComponent<RootSpawner>(colManager);
 	
 	Tree_->addComponent<RootWave>();
 	Tree_->addComponent<RootAutoAim>(player_);
 	Tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
-	//Se le añade el compo de sacar linterna
-	Tree_->addComponent<LanternSpawner>(colManager);
+
 	
 	//IMPORTANTE: attack manager al final
 	Tree_->addComponent<TreeAttackManager>(colManager);
@@ -180,24 +183,24 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* player_, float x)
 {
 	//crea entidad linterna
-	auto lantern = mngr_->addEntity();
+	auto Lantern = mngr_->addEntity();
 
 	//atributos del boss
-	auto lanternAtribs = lantern->addComponent<BossAtributos>();
-	auto lanternTr = lantern->addComponent<Transform>();
-	auto lanternX = x;
-	auto lanternY = sdlutils().height()/2;
+	auto LanternAtribs = Lantern->addComponent<BossAtributos>();
+	auto LanternTr = Lantern->addComponent<Transform>();
+	auto LanternX = x;
+	auto LanternY = sdlutils().height()/2;
 
 	//damos paramtros iniciales
-	lanternTr->init(Vector2D(lanternX, lanternY), Vector2D(), 200, 500, 0.0f);
+	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), 200, 500, 0.0f);
 	//de momento con un color pocho
-	lantern->addComponent<RectangleRenderer>(SDL_Color());
+	Lantern->addComponent<RectangleRenderer>(SDL_Color());
 
 	//collider de la lampara
-	auto lanternCollider = lantern->addComponent <RectangleCollider>
-		(lanternTr->getWidth(), lanternTr->getHeight());
+	auto LanternCollider = Lantern->addComponent <RectangleCollider>
+		(25,25);
 	//se hace trigger
-	lanternCollider->setIsTrigger(true);
+	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
-	colManager->addCollider(lanternCollider);
+	colManager->addCollider(LanternCollider);
 }

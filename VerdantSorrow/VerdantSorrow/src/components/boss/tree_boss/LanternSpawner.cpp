@@ -9,9 +9,14 @@
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
+#include <time.h>
+#include <random>
+
+
 
 
 LanternSpawner::LanternSpawner(CollisionManager* collManager)
+	: collManager_(collManager), framedImg_(), lanternWidht_(50)
 {
 }
 
@@ -25,28 +30,34 @@ void LanternSpawner::initComponent()
 
 void LanternSpawner::createLantern(int x)
 {
+	//distribucion random de intervalo variable en distintas llamadas
+	std::random_device seed;
+	std::mt19937 gen{ seed() };
+	std::uniform_int_distribution <>myrand(0, sdlutils().width());
 
 	//crea entidad linterna
-	auto lantern = mngr_->addEntity();
+	auto Lantern = mngr_->addEntity();
 
-	//atributos del boss
-	auto lanternAtribs = lantern->addComponent<BossAtributos>();
-	auto lanternTr = lantern->addComponent<Transform>();
-	auto lanternX = x;
-	auto lanternY = sdlutils().height();
+	//atributos de linterna
+	auto LanternAtribs = Lantern->addComponent<BossAtributos>();
+	auto LanternTr = Lantern->addComponent<Transform>();
+	auto LanternX = myrand(gen);
+	auto LanternY = sdlutils().height()/3;
+	std::cout << LanternX << std::endl;
+
 
 	//damos paramtros iniciales
-	lanternTr->init(Vector2D(lanternX, lanternY), Vector2D(), lanternWidht_, 500, 0.0f);
+	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), lanternWidht_, 50, 0.0f);
 	//de momento con un color pocho
-	lantern->addComponent<RectangleRenderer>(SDL_Color());
+	Lantern->addComponent<RectangleRenderer>(SDL_Color());
 
 	//collider de la lampara
-	auto lanternCollider = lantern->addComponent <RectangleCollider>
-		(lanternTr->getWidth(), lanternTr->getHeight());
+	auto LanternCollider = Lantern->addComponent <RectangleCollider>
+		(LanternTr->getWidth(), LanternTr->getHeight());
 	//se hace trigger
-	lanternCollider->setIsTrigger(true);
+	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
-	collManager_->addCollider(lanternCollider);
+	collManager_->addCollider(LanternCollider);
 
 	
 }

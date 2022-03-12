@@ -14,6 +14,7 @@
 #include "../../FramedImage.h"
 #include "../../Image.h"
 #include "TreeMovement.h"
+#include "LanternSpawner.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
 									timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false)

@@ -22,13 +22,16 @@ RootWave::~RootWave()
 
 void RootWave::initComponent()
 {
+	//nuevo feat
+	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
 	tr_ = ent_->getComponent<Transform>();
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
-	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
+
+	
 
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr
-		/* && lanternSpawner_ != nullptr */ ;
+		 && lanternSpawner_ != nullptr  ;
 	assert(comps);
 }
 
@@ -42,7 +45,7 @@ void RootWave::update()
 		rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir_;
 
 		lastTime_ = sdlutils().currRealTime();
-
+		
 		//si llega al borde de la pantalla acaba el ataque y activa el movimiento
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			
@@ -67,4 +70,7 @@ void RootWave::attack(int dir)
 	rootSpawner_->createRoot(rootPos_);
 	rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir;
 	lastTime_ = sdlutils().currRealTime();
+
+	//creacion de linterna
+	lanternSpawner_->createLantern(tr_->getPos().getX());
 }
