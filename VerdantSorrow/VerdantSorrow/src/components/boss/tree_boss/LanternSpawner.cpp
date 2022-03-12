@@ -28,7 +28,7 @@ void LanternSpawner::initComponent()
 {
 }
 
-void LanternSpawner::createLantern(int x)
+void LanternSpawner::createLantern()
 {
 	//distribucion random de intervalo variable en distintas llamadas
 	std::random_device seed;

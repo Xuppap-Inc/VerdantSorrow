@@ -17,7 +17,7 @@
 #include "LanternSpawner.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-									timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false)
+timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lanternSpawner_()
 {
 }
 
@@ -27,7 +27,7 @@ TreeAttackManager::~TreeAttackManager()
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
-																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false)
+																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false),lanternSpawner_()
 {
 }
 
@@ -39,6 +39,7 @@ void TreeAttackManager::initComponent()
 	img_ = ent_->getComponent<Image>();
 	treeCol_ = ent_->getComponent<RectangleCollider>();
 	movement_ = ent_->getComponent<TreeMovement>();
+	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
 
 	rootWave_ = ent_->getComponent<RootWave>();
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
@@ -187,8 +188,9 @@ void TreeAttackManager::prepareToSpecial()
 
 		attacking_ = true;
 
-		//pausa el timer del otro ataque
+		//pausa el timer del otro ataque y crea la lampara
 		timerWave_.pause();
+		lanternSpawner_->createLantern();
 
 		state = MOVING_TO_CENTER;
 

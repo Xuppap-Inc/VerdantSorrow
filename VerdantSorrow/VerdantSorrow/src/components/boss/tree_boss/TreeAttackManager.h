@@ -11,6 +11,7 @@ class BossAtributos;
 class FramedImage;
 class Image;
 class TreeMovement;
+class LanternSpawner;
 
 #pragma once
 class TreeAttackManager : public ecs::Component
@@ -60,6 +61,8 @@ private:
 	RootWave* rootWave_;
 	RootAutoAim* rootAutoAim_;
 	MeleeAttack* meleeAttack_;
+
+	LanternSpawner* lanternSpawner_;
 	
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;

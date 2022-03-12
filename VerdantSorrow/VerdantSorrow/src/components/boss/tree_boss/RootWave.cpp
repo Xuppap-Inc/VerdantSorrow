@@ -50,7 +50,7 @@ void RootWave::update()
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			
 			attacking_ = false;
-			lanternSpawner_->createLantern(lanternPos_);
+			
 		}
 	}
 }
@@ -71,6 +71,5 @@ void RootWave::attack(int dir)
 	rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir;
 	lastTime_ = sdlutils().currRealTime();
 
-	//creacion de linterna
-	lanternSpawner_->createLantern(tr_->getPos().getX());
+	
 }

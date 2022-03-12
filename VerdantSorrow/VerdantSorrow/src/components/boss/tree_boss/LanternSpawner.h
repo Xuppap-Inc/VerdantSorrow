@@ -16,7 +16,7 @@ public:
 		~LanternSpawner();
 
 	void initComponent() override;
-	void createLantern(int x);
+	void createLantern();
 
 
 private:
