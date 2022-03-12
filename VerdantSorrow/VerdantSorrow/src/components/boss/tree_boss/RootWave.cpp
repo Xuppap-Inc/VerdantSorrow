@@ -12,7 +12,7 @@
 
 
 RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), 
-dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),lanternSpawner_(),lanternPos_(-1)
+dir_(1), rootPos_(-1), rootW_(0), treeMovement_()
 {
 }
 
@@ -22,16 +22,14 @@ RootWave::~RootWave()
 
 void RootWave::initComponent()
 {
-	//nuevo feat
-	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
+	
 	tr_ = ent_->getComponent<Transform>();
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
 
 	
 
-	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr
-		 && lanternSpawner_ != nullptr  ;
+	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr;
 	assert(comps);
 }
 

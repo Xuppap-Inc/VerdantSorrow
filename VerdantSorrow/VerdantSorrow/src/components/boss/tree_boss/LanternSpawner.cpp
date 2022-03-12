@@ -15,8 +15,8 @@
 
 
 
-LanternSpawner::LanternSpawner(CollisionManager* collManager)
-	: collManager_(collManager), framedImg_(), lanternWidht_(50)
+LanternSpawner::LanternSpawner(CollisionManager* colManager)
+	: colManager_(colManager), framedImg_(), lanternWidht_(50)
 {
 }
 
@@ -57,7 +57,7 @@ void LanternSpawner::createLantern()
 	//se hace trigger
 	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
-	collManager_->addCollider(LanternCollider);
+	colManager_->addCollider(LanternCollider);
 
 	
 }

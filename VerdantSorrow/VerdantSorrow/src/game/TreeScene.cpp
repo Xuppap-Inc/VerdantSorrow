@@ -51,7 +51,7 @@ void TreeScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	treeGenerator(colManager, player);
-	lanternGenerator(colManager, player, 100);
+	//lanternGenerator(colManager, player, 100);
 	
 }
 
@@ -192,13 +192,13 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* player_, 
 	auto LanternY = sdlutils().height()/2;
 
 	//damos paramtros iniciales
-	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), 200, 500, 0.0f);
+	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), 25, 50, 0.0f);
 	//de momento con un color pocho
 	Lantern->addComponent<RectangleRenderer>(SDL_Color());
 
 	//collider de la lampara
 	auto LanternCollider = Lantern->addComponent <RectangleCollider>
-		(25,25);
+		(LanternTr->getWidth(), LanternTr->getHeight());
 	//se hace trigger
 	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
