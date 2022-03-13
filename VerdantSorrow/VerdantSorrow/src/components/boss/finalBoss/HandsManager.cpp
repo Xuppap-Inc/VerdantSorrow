@@ -54,7 +54,7 @@ void HandsManager::initComponent()
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
 	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
 
-	state_ = MARTILLAZO;
+	state_ = CLAP;
 }
 
 void HandsManager::update()
@@ -84,7 +84,7 @@ void HandsManager::update()
 			clapLeft_->changeState(ClapAttack::REPOSO);
 			clapRight_->changeState(ClapAttack::REPOSO);
 
-			state_ = REPOSO;
+			state_ = PUNIETAZO;
 		}
 	}
 	else if (state_ == PUNIETAZO) { // primero el derecho luego el izdo
@@ -126,7 +126,7 @@ void HandsManager::update()
 			punietazoleft_->changeState(Punietazo::REPOSO);
 			punietazoleft_->changeState(Punietazo::REPOSO);
 
-			state_ = REPOSO;
+			state_ = MARTILLAZO;
 		}
 
 	}
@@ -156,7 +156,7 @@ void HandsManager::update()
 			}
 			else if (hammerRight_->getstate() == HammerArm::FIN) {
 				hammerRight_->changeState(HammerArm::REPOSO);
-				state_ = REPOSO;
+				state_ = CLAP;
 			}
 		}
 		else {
@@ -175,7 +175,7 @@ void HandsManager::update()
 				}
 				else if (hammerLeft_->getstate() == HammerArm::FIN) {
 					hammerLeft_->changeState(HammerArm::REPOSO);
-					state_ = REPOSO;
+					state_ = CLAP;
 				}
 			}
 		}
