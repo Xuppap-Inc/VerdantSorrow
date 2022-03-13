@@ -55,7 +55,7 @@ void ClapAttack::goCenter()
 		else {
 			tr_->getVel().set(Vector2D(0, 0));
 			tr_->getPos().setX(objectivePos);
-			changeState(BACK);
+			changeState(REPOSOSUELO);
 		}
 	}
 	else {
