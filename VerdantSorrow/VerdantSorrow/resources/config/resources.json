@@ -133,6 +133,10 @@
     {
       "id": "rana_vulnerable_a_idle",
       "file": "resources/images/rana_vulnerable_a_idle.png"
+    },
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
     }
   ],
 

@@ -85,6 +85,7 @@
     <ClInclude Include="src\utils\Vector2D.h" />
     <ClInclude Include="src\components\boss\frog_boss\wave\WaveMovement.h" />
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
+    <ClInclude Include="src\components\VFX.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\boss\finalBoss\HammerArm.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\wave\WaveMovement.cpp" />
+    <ClCompile Include="src\components\VFX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\resources.json" />

@@ -46,7 +46,8 @@
 	_HANDS_MANAGER, \
 	_PUNIETAZO, \
 	_CLAP_ATTACK, \
-	_HAMMER_ARM
+	_HAMMER_ARM, \
+	_VFX
 
 
 // Groups list - must have at least one element

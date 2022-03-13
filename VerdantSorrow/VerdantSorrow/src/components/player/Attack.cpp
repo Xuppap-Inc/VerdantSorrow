@@ -6,6 +6,8 @@
 #include "../player/PlayerCtrl.h"
 #include "../boss/BossAtributos.h"
 #include "../boss/frog_boss/FlyHp.h"
+#include "../../ecs/Manager.h"
+#include "../VFX.h"
 
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
@@ -39,7 +41,7 @@ void Attack::update()
 			setActive(false);
 	}
 	else {
-		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presioada)
+		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
 			if (ihdlr.isKeyDown(SDLK_j)) {
 				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
 
@@ -79,6 +81,13 @@ void Attack::update()
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 					s->setChannelVolume(70);
 					s->play();
+
+					auto VFXEnt = mngr_->addEntity();
+					auto VFXTr = VFXEnt->addComponent<Transform>();
+					VFXTr->init(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()), Vector2D(), 500, 400, 0.0f);
+					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_cloud"), 3, 6, (1000 / 30) * 14, 14, "vfx");
+					VFXEnt->addComponent<VFX>(14);
+					 
 					bA->setDamage(0.6f);
 					tr_->getVel().setY(0);
 					newAttack = false;
