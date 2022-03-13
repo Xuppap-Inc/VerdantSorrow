@@ -71,25 +71,27 @@ void TreeAttackManager::update()
 	float absDistance = abs(distance);
 
 	//direccion para los ataques
-	int dir;
 
-	if (distance > 0) dir = 1;
-	else dir = -1;
+	if (!attacking_) {
+		if (distance > 0) dir_ = 1;
+		else dir_ = -1;
+	}
 
 	if (state == MOVING) {
 
-		if (meleeAttack_->hasFinished()) attacking_ = false;
+		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (absDistance < MELEE_ATTACK_DISTANCE) {
+		if (absDistance < MELEE_ATTACK_DISTANCE && newAtack_) {
 
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
 			s->play();
-			meleeAttack_->attack(dir);
+			meleeAttack_->attack(dir_);
 			attacking_ = true;
+			newAtack_ = false;
 		}
 
-		if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir);
+		if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
 
 		if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 	}

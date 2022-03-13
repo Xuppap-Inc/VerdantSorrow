@@ -7,7 +7,9 @@
 #include "../boss/BossAtributos.h"
 #include "../boss/frog_boss/FlyHp.h"
 
-Attack::Attack(float width, float height, CollisionManager* colManager): tr_(nullptr), RectangleCollider(width, height), attackDuration(300),attackCoolDown(300),lastAttack()
+Attack::Attack(float width, float height, CollisionManager* colManager) :
+	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
+	attackCoolDown(300), lastAttack(), newAttack(false)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -50,15 +52,9 @@ void Attack::update()
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 100, 9, "Chica_AtkAir");
 					}
 
-					if (sdlutils().rand().nextInt(0, 2) == 0) {
-						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
-						s->play();
-					}
-					else
-					{
-						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
-						s->play();
-					}
+					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
+					s->play();
+					newAttack = true;
 
 					setActive(true);
 					lastAttack = sdlutils().currRealTime();
@@ -79,9 +75,13 @@ void Attack::update()
 			{
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				if (bA != nullptr) {
-					bA->setDamage(0.1f);
+				if (bA != nullptr && newAttack) {
+					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
+					s->setChannelVolume(70);
+					s->play();
+					bA->setDamage(0.6f);
 					tr_->getVel().setY(0);
+					newAttack = false;
 				}
 				FlyHp* fHP = ent->getComponent<FlyHp>();
 				if (fHP != nullptr) {
