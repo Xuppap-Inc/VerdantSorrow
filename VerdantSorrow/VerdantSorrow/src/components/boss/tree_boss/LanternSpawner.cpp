@@ -26,6 +26,8 @@ LanternSpawner::~LanternSpawner()
 
 void LanternSpawner::initComponent()
 {
+	tr_ = ent_->getComponent<Transform>();
+	assert(tr_ != nullptr);
 }
 
 void LanternSpawner::createLantern()

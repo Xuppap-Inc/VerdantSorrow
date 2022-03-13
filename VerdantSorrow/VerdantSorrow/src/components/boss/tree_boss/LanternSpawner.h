@@ -22,6 +22,7 @@ public:
 private:
 	CollisionManager* colManager_;
 	FramedImage* framedImg_;
+	Transform* tr_;
 
 	int lanternWidht_;
 	
