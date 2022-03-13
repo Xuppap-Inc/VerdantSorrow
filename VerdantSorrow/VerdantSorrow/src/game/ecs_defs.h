@@ -45,7 +45,8 @@
 	_DIALOG_BOX_MNGR, \
 	_HANDS_MANAGER, \
 	_PUNIETAZO, \
-	_CLAP_ATTACK
+	_CLAP_ATTACK, \
+	_HAMMER_ARM
 
 
 // Groups list - must have at least one element

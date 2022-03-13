@@ -34,11 +34,11 @@ void HammerArm::goDiagonal()
 	else {
 		tr_->getVel().set(Vector2D(0, 0));
 		tr_->getPos().set(Vector2D(xObjective, sdlutils().height() - tr_->getHeight()));
-		changeState(CENTER);
+		changeState(HIT);
 	}
 }
 
-void HammerArm::goCenter()
+void HammerArm::attack()
 {
 	int objectivePos;
 

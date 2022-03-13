@@ -13,25 +13,24 @@ public:
 
     enum State {
         DIAGONAL = 0,
-        CENTER,
+        HIT,
         BACK,
         REPOSO,
         REPOSOSUELO,
         FIN
     };
 
-    __CMPID_DECL__(ecs::_CLAP_ATTACK)
+    __CMPID_DECL__(ecs::_HAMMER_ARM)
 
         HammerArm(bool leftHand);
         ~HammerArm();
 
     void initComponent() override;
 
-    void goCenter();
+    void attack();
     void goBack();
     void goDiagonal();
     void stayFloor();
-
 
     State getstate() { return state_; };
     void changeState(State s) { state_ = s; };
