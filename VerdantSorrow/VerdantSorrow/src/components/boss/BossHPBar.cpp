@@ -8,7 +8,11 @@
 #include "../Transform.h"
 
 BossHPBar::BossHPBar() :
-	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(), lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease() {
+	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(),
+	lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease(),
+	bossBarArrow(&sdlutils().images().at("bossBarArrow")),
+	middleBar(&sdlutils().images().at("middleBar"))
+{
 }
 
 BossHPBar::~BossHPBar() {

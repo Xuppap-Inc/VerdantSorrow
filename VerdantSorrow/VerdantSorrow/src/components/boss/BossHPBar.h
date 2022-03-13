@@ -3,6 +3,7 @@
 #include "../../ecs/Component.h"
 #include "BossAtributos.h"
 #include "../../utils/Vector2D.h"
+#include "../../sdlutils/Texture.h"
 class BossHPBar : public ecs::Component {
 public:
 
@@ -30,5 +31,9 @@ private:
 	float lastHP;
 	int accumulatedDmgDecrease;
 	int accumulatedDmgFirstDecrease;
+
+	// Texturas
+	Texture* bossBarArrow;
+	Texture* middleBar;
 };
 

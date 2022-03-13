@@ -78,6 +78,14 @@
       "file": "resources/images/HealthDetail.png"
     },
     {
+      "id": "bossBarArrow",
+      "file": "resources/images/BossBarArrow.png"
+    },
+        {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
 
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
