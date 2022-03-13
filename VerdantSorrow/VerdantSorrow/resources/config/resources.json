@@ -70,6 +70,10 @@
       "file": "resources/images/heart.png"
     },
     {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
       "id": "healthDetail",
       "file": "resources/images/HealthDetail.png"
     },
