@@ -33,7 +33,8 @@ private:
 	int accumulatedDmgFirstDecrease;
 
 	// Texturas
-	Texture* bossBarArrow;
+	Texture* bossBarArrow_left;
+	Texture* bossBarArrow_right;
 	Texture* middleBar;
 };
 

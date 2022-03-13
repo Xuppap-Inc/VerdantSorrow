@@ -78,10 +78,14 @@
       "file": "resources/images/HealthDetail.png"
     },
     {
-      "id": "bossBarArrow",
-      "file": "resources/images/BossBarArrow.png"
+      "id": "bossBarArrow_Left",
+      "file": "resources/images/BossBarArrow_Left.png"
     },
-        {
+    {
+      "id": "bossBarArrow_Right",
+      "file": "resources/images/BossBarArrow_Right.png"
+    },
+    {
       "id": "middleBar",
       "file": "resources/images/middleBar.png"
     },
