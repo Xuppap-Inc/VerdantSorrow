@@ -66,6 +66,10 @@
       "file": "resources/images/Chica_AtkFloor.png"
     },
     {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
 
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
