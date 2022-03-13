@@ -13,7 +13,7 @@ public:
 		DOWN = 0, 
 		FOLLOW,
 		HIT, 
-		REDUCE,
+		BACK,
 		REPOSO,
 		FIN
 	};
@@ -26,26 +26,37 @@ public:
 	void goDown();
 	void followPlayer();
 	void hit();
-	void reduce();
-
+	void goBack();
 
 	State getstate() { return state_; };
 	void changeState(State s) { state_ = s; };
 
 private:
-
-	State state_;
-	float time;
 	Transform* tr_;
 	CollisionManager* colmanager_;
 	RectangleCollider* col_;
 	Transform* playertr_;
-	float speed;
-	bool para = false;
-	float tiempo2;
-	bool stop = false;
+
+	State state_;
+
+
+	float hitTime_;
+	float goBackTime_;
+
+	//initial hand tr
 	float initialwidth_;
 	float initialheight_;
+	Vector2D initialpos_;
+	float dW, dH;
+
+	//max hand size
+	float maxWidth_;
+	float maxHeight_;
+
+	//hand speed
+	int handSpeed_;
+
+
 
 };
 

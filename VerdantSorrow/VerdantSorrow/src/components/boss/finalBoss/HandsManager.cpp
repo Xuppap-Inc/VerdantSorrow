@@ -98,8 +98,8 @@ void HandsManager::update()
 		else if (punietazoright_->getstate() == Punietazo::HIT)
 			punietazoright_->hit();
 
-		else if (punietazoright_->getstate() == Punietazo::REDUCE)
-			punietazoright_->reduce();
+		else if (punietazoright_->getstate() == Punietazo::BACK)
+			punietazoright_->goBack();
 
 
 
@@ -115,8 +115,8 @@ void HandsManager::update()
 		else if (punietazoleft_->getstate() == Punietazo::HIT)
 			punietazoleft_->hit();
 
-		else if (punietazoleft_->getstate() == Punietazo::REDUCE)
-			punietazoleft_->reduce();
+		else if (punietazoleft_->getstate() == Punietazo::BACK)
+			punietazoleft_->goBack();
 
 
 		else {

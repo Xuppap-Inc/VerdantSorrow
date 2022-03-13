@@ -9,7 +9,7 @@
 
 
 
-Punietazo::Punietazo() :time(sdlutils().currRealTime()), speed(8), tiempo2(sdlutils().currRealTime()), state_(REPOSO)
+Punietazo::Punietazo() :hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(6), dW(4), dH(4)
 {
 
 }
@@ -29,40 +29,40 @@ void Punietazo::initComponent()
 
 	initialwidth_ = tr_->getWidth();
 	initialheight_ = tr_->getHeight();
+	initialpos_ = tr_->getPos();
+
+	maxWidth_ = 2 * initialwidth_;
+	maxHeight_ = 2 * initialheight_;
 }
 
 void Punietazo::goDown()
 {
-	if (tr_->getPos().getY() <= sdlutils().height() - tr_->getHeight()) {
-		tr_->getPos().setY(tr_->getPos().getY() + 3);
+	int objectivePos = sdlutils().height() - tr_->getHeight();
+
+	if (tr_->getPos().getY() < objectivePos) {
+
+		tr_->getVel().setY(handSpeed_);
 		col_->setActive(false);
 	}
-	else
-		state_ = FOLLOW;
+	else {
+		tr_->getPos().setY(objectivePos);
+		changeState(FOLLOW);
+	}
 }
 
 void Punietazo::followPlayer()
 {
-	auto width = tr_->getWidth();
-	auto height = tr_->getHeight();
-	auto& vel_ = tr_->getVel();
+	auto handPos = tr_->getPos();
+	auto playerPos = playertr_->getPos();
 
-	if (!(tr_->getPos().getX() >= playertr_->getPos().getX() && tr_->getPos().getX() < playertr_->getPos().getX() + playertr_->getWidth())) {
+	if (!(handPos.getX() >= playerPos.getX() && handPos.getX() < playerPos.getX() + playertr_->getWidth())) {
 
-		auto mano = tr_->getPos();
-		auto player = playertr_->getPos();
-
-		if (mano.getX() > player.getX()) {
-			vel_ = Vector2D(-speed, 0);
-		}
-		else {
-			vel_ = Vector2D(speed, 0);
-		}
+		tr_->getVel() = (handPos.getX() > playerPos.getX() ? Vector2D(-handSpeed_, 0) : Vector2D(handSpeed_, 0));
 	}
 	else
 	{
-		time = sdlutils().currRealTime();
-		state_ = HIT;
+		hitTime_ = sdlutils().currRealTime();
+		changeState(HIT);
 	}
 }
 
@@ -70,44 +70,82 @@ void Punietazo::hit()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
-	auto& vel_ = tr_->getVel();
-	vel_ = Vector2D(0, 0);
+	tr_->getVel().set(Vector2D(0, 0));
 
-	if (sdlutils().currRealTime() - time >= 350) {
+	if (sdlutils().currRealTime() - hitTime_ >= 350) {
 		col_->setIsTrigger(true);
 		col_->setActive(true);
-		col_->setWidth(tr_->getWidth());
-		col_->setHeight(tr_->getHeight());
-		state_ = REDUCE;
-		tiempo2 = sdlutils().currRealTime();
+
+		col_->setWidth(width);
+		col_->setHeight(height);
+
+		changeState(BACK);
+
+		goBackTime_ = sdlutils().currRealTime();
 	}
 	else {
-		tr_->setWidth(width + 4);
-		tr_->setHeight(height + 4);
-		tr_->getPos().setY(tr_->getPos().getY() - 4);
-		tr_->getPos().setX(tr_->getPos().getX() - 4);
+		int nextWidth = std::min(width + dW, maxWidth_);
+		int nextHeight = std::min(height + dH, maxHeight_);
+
+		tr_->getPos().setY(tr_->getPos().getY() - (nextWidth - width));
+		tr_->getPos().setX(tr_->getPos().getX() - (nextHeight - height));
+
+		tr_->setWidth(nextWidth);
+		tr_->setHeight(nextHeight);
 	}
 }
 
-void Punietazo::reduce()
+void Punietazo::goBack()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
 
-	if (sdlutils().currRealTime() - tiempo2 >= 750) {
-		if (width > initialwidth_) {
-			col_->setActive(false);
-			tr_->setWidth(width - 2);
-			tr_->setHeight(height - 2);
-			tr_->getPos().setY(tr_->getPos().getY() + 2);
-			tr_->getPos().setX(tr_->getPos().getX() + 2);
+	if (sdlutils().currRealTime() - goBackTime_ >= 750) {
 
+		col_->setActive(false);
+
+		bool isSize = false, isPos = false;
+
+		if (abs(tr_->getPos().getX() - initialpos_.getX()) > 5 || abs(tr_->getPos().getY() - initialpos_.getY()) > 5) {
+			Vector2D dir = initialpos_ - tr_->getPos();
+			tr_->getVel().set(dir.normalize() * handSpeed_);
 		}
-		else
-			state_ = FIN;
+		else { //correct pos
+			tr_->getVel().set(Vector2D(0, 0));
+			tr_->getPos().set(initialpos_);
+			isPos = true;
+		}
+
+
+		if (abs(width - initialwidth_) > 1 || abs(height - initialheight_) > 1) {
+
+			int nextWidth = std::max(width - dW, initialwidth_);
+			int nextHeight = std::max(height - dH, initialheight_);
+
+			tr_->getPos().setY(tr_->getPos().getY() + (nextWidth - width));
+			tr_->getPos().setX(tr_->getPos().getX() + (nextHeight - height));
+
+			tr_->setWidth(nextWidth);
+			tr_->setHeight(nextHeight);
+		}
+		else { //correct size
+			tr_->setWidth(initialwidth_);
+			tr_->setHeight(initialheight_);
+			isSize = true;
+		}
+
+		if (isPos && isSize) {
+			changeState(FIN);
+
+			col_->setWidth(width);
+			col_->setHeight(height);
+			col_->setActive(true);
+			col_->setIsTrigger(false);
+		}
 
 	}
 
 }
+
 
 
