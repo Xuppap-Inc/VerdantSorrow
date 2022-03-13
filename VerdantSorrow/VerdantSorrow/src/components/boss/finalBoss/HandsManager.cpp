@@ -39,7 +39,7 @@ void HandsManager::initComponent()
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
 	punietazoleft_ = leftHand_->addComponent<Punietazo>();
-
+	hammerLeft_ = leftHand_->addComponent<HammerArm>();
 
 
 
@@ -52,9 +52,9 @@ void HandsManager::initComponent()
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
+	hammerRight_ = rightHand_->addComponent<HammerArm>();
 
-
-	state_ = CLAP;
+	state_ = MARTILLAZO;
 }
 
 void HandsManager::update()

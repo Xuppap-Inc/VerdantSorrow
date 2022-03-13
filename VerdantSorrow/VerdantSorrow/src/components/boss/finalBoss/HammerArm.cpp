@@ -5,7 +5,7 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../ecs/Manager.h"
 
-HammerArm::HammerArm(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO), initialPos()
+HammerArm::HammerArm() :tr_(nullptr), state_(REPOSO), initialPos()
 {
 }
 
@@ -41,36 +41,18 @@ void HammerArm::goDiagonal()
 
 void HammerArm::attack()
 {
-	int objectivePos;
 
 	collider_->setActive(true);
 	collider_->setIsTrigger(true);
 
-
-	if (leftHand_) {
-		objectivePos = sdlutils().width() / 2;
-
-		if (tr_->getPos().getX() > objectivePos) {
-			tr_->getVel().set(Vector2D(-handSpeed * 2, 0));
-		}
-		else {
-			tr_->getVel().set(Vector2D(0, 0));
-			tr_->getPos().setX(objectivePos);
-			changeState(BACK);
-		}
+	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight()) {
+		tr_->getVel().set(Vector2D(handSpeed * 2, 0));
 	}
 	else {
-		objectivePos = sdlutils().width() / 2 - tr_->getWidth();
-
-		if (tr_->getPos().getX() < objectivePos) {
-			tr_->getVel().set(Vector2D(handSpeed * 2, 0));
-		}
-		else {
-			tr_->getVel().set(Vector2D(0, 0));
-			tr_->getPos().setX(objectivePos);
-			lastTimeFloor = sdlutils().currRealTime();
-			changeState(REPOSOSUELO);
-		}
+		tr_->getVel().set(Vector2D(0, 0));
+		tr_->getPos().setX(sdlutils().height() - tr_->getHeight());
+		lastTimeFloor = sdlutils().currRealTime();
+		changeState(REPOSOSUELO);
 	}
 }
 
@@ -91,4 +73,9 @@ void HammerArm::stayFloor() {
 	collider_->setIsTrigger(false);
 	if (sdlutils().currRealTime() > lastTimeFloor + cooldoownInFloor)
 		changeState(BACK);
+}
+
+void HammerArm::getPlayerX()
+{
+	playerXPos = playertr_->getPos().getX();
 }

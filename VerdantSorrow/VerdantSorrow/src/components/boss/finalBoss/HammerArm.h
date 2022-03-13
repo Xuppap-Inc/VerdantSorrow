@@ -22,7 +22,7 @@ public:
 
     __CMPID_DECL__(ecs::_HAMMER_ARM)
 
-        HammerArm(bool leftHand);
+        HammerArm();
         ~HammerArm();
 
     void initComponent() override;
@@ -31,7 +31,7 @@ public:
     void goBack();
     void goDiagonal();
     void stayFloor();
-    void getPlayerX() { playerXPos = playertr_->getPos().getX(); }
+    void getPlayerX();
 
     State getstate() { return state_; };
     void changeState(State s) { state_ = s; };
@@ -39,7 +39,6 @@ public:
 protected:
     Transform* tr_;
     RectangleCollider* collider_;
-    bool leftHand_;
     int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
     Transform* playertr_;
     int playerXPos;
