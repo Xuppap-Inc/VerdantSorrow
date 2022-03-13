@@ -8,8 +8,16 @@ class Punietazo :
     public ecs::Component
 {
 public:
+    enum State {
+        DOWN = 0, // just before starting a new game
+        FOLLOW, // between rounds
+        PUNIETAZO, // playing
+        FUERA,// game over
+        REPOSO,
+        FIN
+    };
     __CMPID_DECL__(ecs::_PUNIETAZO)
-     Punietazo();
+     Punietazo(State state);
     ~Punietazo();
     void initComponent()override;
     void godown();
@@ -17,14 +25,15 @@ public:
     void punietazo();
     void makesamall();
     void update()override;
+    State getstate() {
+        return state_;
+    }
+    void changeState(State s) {
+        state_ = s;
+    }
 
 private:
-    enum State {
-        DOWN = 0, // just before starting a new game
-        FOLLOW, // between rounds
-        PUNIETAZO, // playing
-        FUERA // game over
-    };
+  
     State state_;
     float time;
     Transform* tr_;
@@ -37,5 +46,6 @@ private:
     bool stop=false;
     float initialwidth_;
     float initialheight_;
+ 
 };
 

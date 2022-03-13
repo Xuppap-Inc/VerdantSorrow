@@ -33,20 +33,34 @@ void HandsManager::initComponent()
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>(manoIzTr->getWidth(), manoIzTr->getHeight());
 	colmanager_->addCollider(manoIzCollider);
-	leftHand_->addComponent<ClapAttack>(true);
-	/*leftHand_->addComponent<Punietazo>();*/
+	//leftHand_->addComponent<ClapAttack>(true);
+leftHand_->addComponent<Punietazo>(Punietazo::DOWN);
 
 
 	auto manoDrTr = rightHand_->addComponent<Transform>();
 	manoDrTr->init(tr_->getPos() + Vector2D(100 +tr_->getWidth() - 50, 100), Vector2D(), 50, 50, 0.0f, false);
 	rightHand_->addComponent<Image>(&sdlutils().images().at("mano"));
 
-
-	
-
 	//Se añade un collider a la rana
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>(manoDrTr->getWidth(), manoDrTr->getHeight());
 	colmanager_->addCollider(manoDrCollider);
-	rightHand_->addComponent<ClapAttack>(false);
-//	rightHand_->addComponent<Punietazo>();
+	//rightHand_->addComponent<ClapAttack>(false);
+	rightHand_->addComponent<Punietazo>(Punietazo::REPOSO);
+
+	punietazoright_ = rightHand_->getComponent<Punietazo>();
+	punietazoleft_ = leftHand_->getComponent<Punietazo>();
+
+}
+
+void HandsManager::update()
+{
+	if (punietazoright_->getstate() == Punietazo::FIN) {
+		punietazoright_->changeState(Punietazo::REPOSO);
+		punietazoleft_->changeState(Punietazo::DOWN);
+	}
+	else if(punietazoleft_->getstate() == Punietazo::FIN)
+	{
+		punietazoleft_->changeState(Punietazo::REPOSO);
+		punietazoright_->changeState(Punietazo::DOWN);
+	}
 }
