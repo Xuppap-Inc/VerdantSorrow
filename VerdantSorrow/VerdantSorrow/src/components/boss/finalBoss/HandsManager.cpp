@@ -8,6 +8,7 @@
 #include "../CollideWithBordersBoss.h"
 #include "Punietazo.h"
 #include "ClapAttack.h"
+#include "HammerArm.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), state_(REPOSO)

@@ -7,6 +7,7 @@ class Tranform;
 class CollisionManager;
 class Punietazo;
 class ClapAttack;
+class HammerArm;
 
 class HandsManager :
 	public ecs::Component
