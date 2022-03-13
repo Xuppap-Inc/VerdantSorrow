@@ -7,21 +7,42 @@
 
 class Transform;
 
-class ClapAttack : public RectangleCollider
+class ClapAttack : public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_MELEEATTACK)
+
+    enum State {
+        SIDE = 0,
+        DOWN,
+        CENTER,
+        BACK,
+        REPOSO,
+        FIN
+    };
+
+    __CMPID_DECL__(ecs::_CLAP_ATTACK)
     
     ClapAttack(bool leftHand);
     ~ClapAttack();
 
     void initComponent() override;
-    void update() override;
+
+    void goSide();
+    void goDown();
+    void goCenter();
+    void goBack();
+
+    State getstate() { return state_; };
+    void changeState(State s) { state_ = s; };
+
 protected:
     Transform* tr_;
     RectangleCollider* collider_;
-    bool leftHand_, movingToAttack = true;
-    int handSpeed = 4;
-    float timerToStart_ = 0, countdownToStart = 0;
+    bool leftHand_;
+    int handSpeed = 6;
+
+
+    Vector2D initialPos;
+    State state_;
 };
 

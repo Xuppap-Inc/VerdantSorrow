@@ -44,7 +44,8 @@
 	_NPC_CTRL, \
 	_DIALOG_BOX_MNGR, \
 	_HANDS_MANAGER, \
-	_PUNIETAZO
+	_PUNIETAZO, \
+	_CLAP_ATTACK
 
 
 // Groups list - must have at least one element
