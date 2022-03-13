@@ -70,6 +70,22 @@
       "file": "resources/images/heart.png"
     },
     {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "bossBarArrow",
+      "file": "resources/images/BossBarArrow.png"
+    },
+        {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
 
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
@@ -133,6 +149,26 @@
     {
       "id": "rana_vulnerable_a_idle",
       "file": "resources/images/rana_vulnerable_a_idle.png"
+    },
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_lantern",
+      "file": "resources/images/vfx_lantern.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
+    {
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
     }
   ],
 

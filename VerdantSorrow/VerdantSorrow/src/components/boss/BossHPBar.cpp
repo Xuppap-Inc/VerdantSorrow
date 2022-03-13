@@ -8,7 +8,11 @@
 #include "../Transform.h"
 
 BossHPBar::BossHPBar() :
-	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(), lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease() {
+	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(),
+	lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease(),
+	bossBarArrow(&sdlutils().images().at("bossBarArrow")),
+	middleBar(&sdlutils().images().at("middleBar"))
+{
 }
 
 BossHPBar::~BossHPBar() {
@@ -31,6 +35,9 @@ void BossHPBar::render() {
 		accumulatedDmgFirstDecrease = sdlutils().currRealTime() + 1000;
 
 	accumulatedDamage += (lastHP - attrib_->getLife());
+
+
+	// Fondo de las barras
 
 	//barra roja
 	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / maxHp), 10);
