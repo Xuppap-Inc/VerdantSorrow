@@ -35,11 +35,14 @@ private:
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
 	Transform* tr_;
+	Transform* playertr_;
 	CollisionManager* colmanager_;
 	Punietazo* punietazoright_;
 	Punietazo* punietazoleft_;
 	ClapAttack* clapLeft_;
 	ClapAttack* clapRight_;
+	HammerArm* hammerRight_;
+	HammerArm* hammerLeft_;
 
 	State state_;
 };

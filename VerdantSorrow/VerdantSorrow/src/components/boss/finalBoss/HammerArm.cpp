@@ -3,6 +3,7 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../../sdlutils/SDLUtils.h"
+#include "../../../ecs/Manager.h"
 
 HammerArm::HammerArm(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO), initialPos()
 {
@@ -16,7 +17,8 @@ void HammerArm::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	collider_ = ent_->getComponent<RectangleCollider>();
-	assert(tr_ != nullptr, collider_ != nullptr);
+	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	assert(tr_ != nullptr, collider_ != nullptr, playertr_ != nullptr);
 
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
 }
@@ -24,19 +26,18 @@ void HammerArm::initComponent()
 void HammerArm::goDiagonal()
 {
 	collider_->setActive(false);
-	int xObjective;
-	if (!leftHand_) xObjective = 0;
-	else xObjective = sdlutils().width() - tr_->getWidth();
-	if (abs(tr_->getPos().getX() - xObjective) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight()) > 5) {
-		Vector2D dir = Vector2D(xObjective - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight());/*initialPos - tr_->getPos();*/
+
+	if (abs(tr_->getPos().getX() - playerXPos) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight()) > 5) {
+		Vector2D dir = Vector2D(playerXPos - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight());/*initialPos - tr_->getPos();*/
 		tr_->getVel().set(dir.normalize() * handSpeed);
 	}
 	else {
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().set(Vector2D(xObjective, sdlutils().height() - tr_->getHeight()));
+		tr_->getPos().set(Vector2D(playerXPos, sdlutils().height() - tr_->getHeight()));
 		changeState(HIT);
 	}
 }
+
 
 void HammerArm::attack()
 {

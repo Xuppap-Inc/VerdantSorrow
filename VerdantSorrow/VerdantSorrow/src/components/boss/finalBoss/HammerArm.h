@@ -31,6 +31,7 @@ public:
     void goBack();
     void goDiagonal();
     void stayFloor();
+    void getPlayerX() { playerXPos = playertr_->getPos().getX(); }
 
     State getstate() { return state_; };
     void changeState(State s) { state_ = s; };
@@ -40,7 +41,8 @@ protected:
     RectangleCollider* collider_;
     bool leftHand_;
     int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
-
+    Transform* playertr_;
+    int playerXPos;
 
     Vector2D initialPos;
     State state_;

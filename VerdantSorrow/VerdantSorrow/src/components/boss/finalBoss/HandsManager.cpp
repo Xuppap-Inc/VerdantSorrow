@@ -22,6 +22,9 @@ HandsManager::~HandsManager()
 
 void HandsManager::initComponent()
 {
+	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	assert(playertr_ != nullptr);
+
 	float handSize = 100;
 
 	leftHand_ = mngr_->addEntity();
@@ -57,9 +60,9 @@ void HandsManager::initComponent()
 void HandsManager::update()
 {
 	if (state_ == CLAP) {
-	    if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
-		clapLeft_->goDiagonal();
-		clapRight_->goDiagonal();
+		if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
+			clapLeft_->goDiagonal();
+			clapRight_->goDiagonal();
 		}
 		else if (clapLeft_->getstate() == ClapAttack::CENTER || clapRight_->getstate() == ClapAttack::CENTER) {
 			clapLeft_->goCenter();
@@ -124,7 +127,45 @@ void HandsManager::update()
 
 	}
 	else if (state_ == MARTILLAZO) {
-
+		if (playertr_->getPos().getX() - playertr_->getWidth() < sdlutils().width() / 2) {
+			if (hammerLeft_->getstate() == HammerArm::REPOSO) {
+				if (hammerRight_->getstate() == HammerArm::REPOSO) {
+					hammerRight_->goDiagonal();
+				}
+				else if (hammerRight_->getstate() == HammerArm::HIT) {
+					hammerRight_->attack();
+				}
+				else if (hammerRight_->getstate() == HammerArm::REPOSOSUELO) {
+					hammerRight_->stayFloor();
+				}
+				else if (hammerRight_->getstate() == HammerArm::BACK) {
+					hammerRight_->goBack();
+				}
+				else if (hammerRight_->getstate() == HammerArm::FIN) {
+					hammerRight_->changeState(HammerArm::REPOSO);
+					state_ = REPOSO;
+				}
+			}
+		}
+		else {
+			if (hammerRight_->getstate() == HammerArm::REPOSO) {
+				if (hammerLeft_->getstate() == HammerArm::REPOSO) {
+					hammerLeft_->goDiagonal();
+				}
+				else if (hammerLeft_->getstate() == HammerArm::HIT) {
+					hammerLeft_->attack();
+				}
+				else if (hammerLeft_->getstate() == HammerArm::REPOSOSUELO) {
+					hammerLeft_->stayFloor();
+				}
+				else if (hammerLeft_->getstate() == HammerArm::BACK) {
+					hammerLeft_->goBack();
+				}
+				else if (hammerLeft_->getstate() == HammerArm::FIN) {
+					hammerLeft_->changeState(HammerArm::REPOSO);
+					state_ = REPOSO;
+				}
+			}
+		}
 	}
-
 }
