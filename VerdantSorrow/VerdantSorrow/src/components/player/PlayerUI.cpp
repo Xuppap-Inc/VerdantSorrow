@@ -22,10 +22,12 @@ void PlayerUI::initComponent()
 
 void PlayerUI::render()
 {
-	int x = 10, y = 10, size = 50;
+	int x = 100, y = 40, size = 50;
 	for (int i = 0; i < attrib_->getLives(); i++) {
 		tex_->render({ x,y,size,size });
-		x += size + 10;
+		x += size + 20;
 	}
+
+	healthDetailTexture->render({ 10, 10, 450, 125 });
 }
 
