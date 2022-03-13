@@ -61,6 +61,10 @@ void HandsManager::update()
 {
 	if (state_ == CLAP) {
 		if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
+			clapLeft_->changeState(ClapAttack::DIAGONAL);
+			clapRight_->changeState(ClapAttack::DIAGONAL);
+		}
+		else if (clapLeft_->getstate() == ClapAttack::DIAGONAL || clapRight_->getstate() == ClapAttack::DIAGONAL) {
 			clapLeft_->goDiagonal();
 			clapRight_->goDiagonal();
 		}
@@ -130,6 +134,10 @@ void HandsManager::update()
 		if (playertr_->getPos().getX() - playertr_->getWidth() < sdlutils().width() / 2) {
 			if (hammerLeft_->getstate() == HammerArm::REPOSO) {
 				if (hammerRight_->getstate() == HammerArm::REPOSO) {
+					hammerRight_->changeState(HammerArm::DIAGONAL);
+					hammerRight_->getPlayerX();
+				}
+				else if (hammerRight_->getstate() == HammerArm::DIAGONAL) {
 					hammerRight_->goDiagonal();
 				}
 				else if (hammerRight_->getstate() == HammerArm::HIT) {
@@ -150,6 +158,10 @@ void HandsManager::update()
 		else {
 			if (hammerRight_->getstate() == HammerArm::REPOSO) {
 				if (hammerLeft_->getstate() == HammerArm::REPOSO) {
+					hammerLeft_->changeState(HammerArm::DIAGONAL);
+					hammerLeft_->getPlayerX();
+				}
+				else if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
 					hammerLeft_->goDiagonal();
 				}
 				else if (hammerLeft_->getstate() == HammerArm::HIT) {
