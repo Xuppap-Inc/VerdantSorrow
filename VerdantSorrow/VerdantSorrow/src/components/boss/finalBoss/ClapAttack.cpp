@@ -21,49 +21,19 @@ void ClapAttack::initComponent()
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
 }
 
-void ClapAttack::goSide()
+void ClapAttack::goDiagonal()
 {
-	int objectivePos;
-
 	collider_->setActive(false);
-
-	if (leftHand_) {
-		objectivePos = sdlutils().width() - tr_->getWidth();
-
-		if (tr_->getPos().getX() < objectivePos) {
-			tr_->getVel().set(Vector2D(handSpeed, 0));
-		}
-		else {
-			tr_->getVel().set(Vector2D(0, 0));
-			tr_->getPos().setX(objectivePos);
-			changeState(DOWN);
-		}
-	}
-	else {
-		objectivePos = 0;
-
-		if (tr_->getPos().getX() > objectivePos) {
-			tr_->getVel().set(Vector2D(-handSpeed, 0));
-		}
-		else {
-			tr_->getVel().set(Vector2D(0, 0));
-			tr_->getPos().setX(objectivePos);
-			changeState(DOWN);
-		}
-	}
-}
-
-void ClapAttack::goDown()
-{
-	int objectivePos = sdlutils().height() - tr_->getWidth();
-
-
-	if (tr_->getPos().getY() < objectivePos) {
-		tr_->getVel().set(Vector2D(0, handSpeed));
+	int xObjective;
+	if (!leftHand_) xObjective = 0;
+	else xObjective = sdlutils().width() - tr_->getWidth();
+	if (abs(tr_->getPos().getX() - xObjective) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight()) > 5) {
+		Vector2D dir = Vector2D(xObjective - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight());/*initialPos - tr_->getPos();*/
+		tr_->getVel().set(dir.normalize() * handSpeed);
 	}
 	else {
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().setY(objectivePos);
+		tr_->getPos().set(Vector2D(xObjective, sdlutils().height() - tr_->getHeight()));
 		changeState(CENTER);
 	}
 }
@@ -97,7 +67,8 @@ void ClapAttack::goCenter()
 		else {
 			tr_->getVel().set(Vector2D(0, 0));
 			tr_->getPos().setX(objectivePos);
-			changeState(BACK);
+			lastTimeFloor = sdlutils().currRealTime();
+			changeState(REPOSOSUELO);
 		}
 	}
 }
@@ -113,4 +84,10 @@ void ClapAttack::goBack()
 		tr_->getPos().set(initialPos);
 		changeState(FIN);
 	}
+}
+
+void ClapAttack::stayFloor() {
+	collider_->setIsTrigger(false);
+	if(sdlutils().currRealTime() > lastTimeFloor + cooldoownInFloor)
+		changeState(BACK);
 }

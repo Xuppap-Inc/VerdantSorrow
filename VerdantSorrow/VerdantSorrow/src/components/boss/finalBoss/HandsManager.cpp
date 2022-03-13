@@ -50,28 +50,23 @@ void HandsManager::initComponent()
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
 
 
-	state_ = PUNIETAZO;
+	state_ = CLAP;
 }
 
 void HandsManager::update()
 {
 	if (state_ == CLAP) {
-
-		if (clapLeft_->getstate() == ClapAttack::REPOSO && clapRight_->getstate() == ClapAttack::REPOSO) {
-			clapLeft_->changeState(ClapAttack::SIDE);
-			clapRight_->changeState(ClapAttack::SIDE);
-		}
-		else if (clapLeft_->getstate() == ClapAttack::SIDE || clapRight_->getstate() == ClapAttack::SIDE) {
-			clapLeft_->goSide();
-			clapRight_->goSide();
-		}
-		else if (clapLeft_->getstate() == ClapAttack::DOWN || clapRight_->getstate() == ClapAttack::DOWN) {
-			clapLeft_->goDown();
-			clapRight_->goDown();
+	    if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
+		clapLeft_->goDiagonal();
+		clapRight_->goDiagonal();
 		}
 		else if (clapLeft_->getstate() == ClapAttack::CENTER || clapRight_->getstate() == ClapAttack::CENTER) {
 			clapLeft_->goCenter();
 			clapRight_->goCenter();
+		}
+		else if (clapLeft_->getstate() == ClapAttack::REPOSOSUELO || clapRight_->getstate() == ClapAttack::REPOSOSUELO) {
+			clapLeft_->stayFloor();
+			clapRight_->stayFloor();
 		}
 		else if (clapLeft_->getstate() == ClapAttack::BACK || clapRight_->getstate() == ClapAttack::BACK) {
 			clapLeft_->goBack();

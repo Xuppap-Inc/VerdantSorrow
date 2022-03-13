@@ -4,6 +4,7 @@
 #include "../Transform.h"
 #include "../boss/frog_boss/wave/WaveMovement.h"
 #include "../boss/frog_boss/TongueAttack.h"
+#include "../boss/finalBoss/ClapAttack.h"
 
 
 SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
@@ -85,8 +86,9 @@ void SimplePhysicsPlayer::update()
 
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
+				ClapAttack* cA = ent->getComponent<ClapAttack>();
 
-				if (bA != nullptr) {
+				if (bA != nullptr || cA != nullptr) {
 
 					if (!invulnerable_ && !ctrl_->isRolling()) {
 						attrib_->damagePlayer(1);
