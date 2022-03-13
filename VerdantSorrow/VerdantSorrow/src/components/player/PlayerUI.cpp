@@ -2,8 +2,11 @@
 
 #include "../../ecs/Entity.h"
 #include "../../sdlutils/Texture.h"
+#include "../../sdlutils/SDLUtils.h"
 
-PlayerUI::PlayerUI(Texture* tex) : tex_(tex), attrib_(nullptr)
+PlayerUI::PlayerUI(Texture* tex) : 
+	tex_(tex), attrib_(nullptr),
+	healthDetailTexture(&sdlutils().images().at("healthDetail"))
 {
 }
 

@@ -17,5 +17,7 @@ public:
 protected:
     Texture* tex_;
     PlayerAttributes* attrib_;
+
+    Texture* healthDetailTexture;
 };
 
