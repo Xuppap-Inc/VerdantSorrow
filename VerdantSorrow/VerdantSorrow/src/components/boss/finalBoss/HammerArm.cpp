@@ -27,8 +27,8 @@ void HammerArm::goDiagonal()
 {
 	collider_->setActive(false);
 
-	if (abs(tr_->getPos().getX() - playerXPos) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight()) > 5) {
-		Vector2D dir = Vector2D(playerXPos - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight());/*initialPos - tr_->getPos();*/
+	if (abs(tr_->getPos().getX() - playerXPos) > 5 || abs(tr_->getPos().getY()) > 5) {
+		Vector2D dir = Vector2D(playerXPos - tr_->getPos().getX(), - tr_->getPos().getY());/*initialPos - tr_->getPos();*/
 		tr_->getVel().set(dir.normalize() * handSpeed);
 	}
 	else {
