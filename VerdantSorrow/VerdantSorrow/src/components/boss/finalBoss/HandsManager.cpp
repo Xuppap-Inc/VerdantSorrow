@@ -39,7 +39,7 @@ void HandsManager::initComponent()
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
 	punietazoleft_ = leftHand_->addComponent<Punietazo>();
-	hammerLeft_ = leftHand_->addComponent<HammerArm>();
+	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
 
@@ -52,7 +52,7 @@ void HandsManager::initComponent()
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
-	hammerRight_ = rightHand_->addComponent<HammerArm>();
+	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
 
 	state_ = MARTILLAZO;
 }
@@ -131,37 +131,37 @@ void HandsManager::update()
 
 	}
 	else if (state_ == MARTILLAZO) {
-		if (playertr_->getPos().getX() - playertr_->getWidth() < sdlutils().width() / 2) {
-			if (hammerLeft_->getstate() == HammerArm::REPOSO) {
-				if (hammerRight_->getstate() == HammerArm::REPOSO) {
-					hammerRight_->changeState(HammerArm::DIAGONAL);
-					hammerRight_->getPlayerX();
-				}
-				else if (hammerRight_->getstate() == HammerArm::DIAGONAL) {
-					hammerRight_->goDiagonal();
-				}
-				else if (hammerRight_->getstate() == HammerArm::HIT) {
-					hammerRight_->attack();
-				}
-				else if (hammerRight_->getstate() == HammerArm::REPOSOSUELO) {
-					hammerRight_->stayFloor();
-				}
-				else if (hammerRight_->getstate() == HammerArm::BACK) {
-					hammerRight_->goBack();
-				}
-				else if (hammerRight_->getstate() == HammerArm::FIN) {
-					hammerRight_->changeState(HammerArm::REPOSO);
-					state_ = REPOSO;
-				}
+		if (hammerLeft_->getstate() == HammerArm::REPOSO && hammerRight_->getstate() == HammerArm::REPOSO) {
+			if (playertr_->getPos().getX() - playertr_->getWidth() < sdlutils().width() / 2){
+				hammerRight_->changeState(HammerArm::DIAGONAL);
+				hammerRight_->getPlayerX();
+			}
+			else {
+				hammerLeft_->changeState(HammerArm::DIAGONAL);
+				hammerLeft_->getPlayerX();
+			}
+		}
+		else if (hammerLeft_->getstate() == HammerArm::REPOSO) {
+			if (hammerRight_->getstate() == HammerArm::DIAGONAL) {
+				hammerRight_->goDiagonal();
+			}
+			else if (hammerRight_->getstate() == HammerArm::HIT) {
+				hammerRight_->attack();
+			}
+			else if (hammerRight_->getstate() == HammerArm::REPOSOSUELO) {
+				hammerRight_->stayFloor();
+			}
+			else if (hammerRight_->getstate() == HammerArm::BACK) {
+				hammerRight_->goBack();
+			}
+			else if (hammerRight_->getstate() == HammerArm::FIN) {
+				hammerRight_->changeState(HammerArm::REPOSO);
+				state_ = REPOSO;
 			}
 		}
 		else {
 			if (hammerRight_->getstate() == HammerArm::REPOSO) {
-				if (hammerLeft_->getstate() == HammerArm::REPOSO) {
-					hammerLeft_->changeState(HammerArm::DIAGONAL);
-					hammerLeft_->getPlayerX();
-				}
-				else if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
+				if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
 					hammerLeft_->goDiagonal();
 				}
 				else if (hammerLeft_->getstate() == HammerArm::HIT) {

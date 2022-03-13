@@ -6,7 +6,7 @@
 #include <SDL.h>
 
 class Transform;
-
+class CollisionManager;
 class HammerArm : public ecs::Component
 {
 public:
@@ -22,7 +22,7 @@ public:
 
     __CMPID_DECL__(ecs::_HAMMER_ARM)
 
-        HammerArm();
+        HammerArm(CollisionManager* colManager);
         ~HammerArm();
 
     void initComponent() override;
@@ -37,11 +37,13 @@ public:
     void changeState(State s) { state_ = s; };
 
 protected:
+    void createWave(int dir);
     Transform* tr_;
     RectangleCollider* collider_;
     int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
     Transform* playertr_;
     int playerXPos;
+    CollisionManager* colManager_;
 
     Vector2D initialPos;
     State state_;
