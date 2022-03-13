@@ -137,6 +137,22 @@
     {
       "id": "vfx_cloud",
       "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_lantern",
+      "file": "resources/images/vfx_lantern.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
+    {
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
     }
   ],
 

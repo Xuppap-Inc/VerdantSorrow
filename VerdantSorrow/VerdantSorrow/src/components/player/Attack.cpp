@@ -84,9 +84,9 @@ void Attack::update()
 
 					auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();
-					VFXTr->init(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()), Vector2D(), 500, 400, 0.0f);
-					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_cloud"), 3, 6, (1000 / 30) * 14, 14, "vfx");
-					VFXEnt->addComponent<VFX>(14);
+					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
+					VFXEnt->addComponent<VFX>(6);
 					 
 					bA->setDamage(0.6f);
 					tr_->getVel().setY(0);
