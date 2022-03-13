@@ -11,12 +11,12 @@ class ClapAttack : public ecs::Component
 {
 public:
 
-    enum State {
-        SIDE = 0,
-        DOWN,
+    enum State {    
+        DIAGONAL = 0,
         CENTER,
         BACK,
         REPOSO,
+        REPOSOSUELO,
         FIN
     };
 
@@ -27,10 +27,11 @@ public:
 
     void initComponent() override;
 
-    void goSide();
-    void goDown();
     void goCenter();
     void goBack();
+    void goDiagonal();
+    void stayFloor();
+
 
     State getstate() { return state_; };
     void changeState(State s) { state_ = s; };
@@ -39,7 +40,7 @@ protected:
     Transform* tr_;
     RectangleCollider* collider_;
     bool leftHand_;
-    int handSpeed = 6;
+    int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
 
 
     Vector2D initialPos;
