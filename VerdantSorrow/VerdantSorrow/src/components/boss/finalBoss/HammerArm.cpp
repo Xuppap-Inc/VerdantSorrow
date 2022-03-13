@@ -50,7 +50,7 @@ void HammerArm::attack()
 	}
 	else {
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().setX(sdlutils().height() - tr_->getHeight());
+		tr_->getPos().setY(sdlutils().height() - tr_->getHeight());
 		lastTimeFloor = sdlutils().currRealTime();
 		changeState(REPOSOSUELO);
 	}
