@@ -136,7 +136,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
+	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
