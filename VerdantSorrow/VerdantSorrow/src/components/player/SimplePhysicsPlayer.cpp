@@ -45,6 +45,7 @@ void SimplePhysicsPlayer::update()
 				//colisiones
 				auto pos = collider_->getPos(); //jugador
 				auto posCollider = c->getPos(); //otros
+				auto velCollider = c->getEntity()->getComponent<Transform>()->getVel();
 
 				auto& velPlayer = tr_->getVel();
 
@@ -53,27 +54,28 @@ void SimplePhysicsPlayer::update()
 				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
 				float colliderDiffY = (tr_->getHeight() - collider_->getHeight());
 
-				if (lastPositionX + collider_->getWidth() <= posCollider.getX()) {//colision por la izda
+				if (lastPositionX + collider_->getWidth() + velCollider.getX() <= posCollider.getX()) {//colision por la izda
 					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX);
+					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX + velCollider.getX());
 					attrib_->setRightStop(true);
 					lastCollision[1] = true;
 
 				}
-				else if (lastPositionX >= posCollider.getX() + c->getWidth()) {//colision por la derecha
+				else if (lastPositionX + velCollider.getX() >= posCollider.getX() + c->getWidth()) {//colision por la derecha
 					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() + c->getWidth() - colliderDiffX);
+					tr_->getPos().setX(posCollider.getX() + c->getWidth() - colliderDiffX + velCollider.getX());
 					attrib_->setLeftStop(true);
 					lastCollision[2] = true;
 				}
-				else if (lastPositionY + collider_->getHeight() <= posCollider.getY()) {//arriba
+				else if (lastPositionY + collider_->getHeight() + velCollider.getY() <= posCollider.getY()) {//arriba
 
 					velPlayer.setY(0);
-					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight() - colliderDiffY);
+					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight() - colliderDiffY + velCollider.getY());
+					tr_->getPos().setX(tr_->getPos().getX() + velCollider.getX());
 					attrib_->setOnGround(true);
 					lastCollision[0] = true;
 				}
-				else if (lastPositionY >= posCollider.getY() + c->getHeight()) {//abajo
+				else if (lastPositionY>= posCollider.getY() + c->getHeight()) {//abajo
 					velPlayer.setY(0);
 					tr_->getPos().setY(c->getPos().getY() + c->getHeight() - colliderDiffY);
 				}
@@ -129,7 +131,7 @@ void SimplePhysicsPlayer::update()
 
 void SimplePhysicsPlayer::onCollisionExit()
 {
-	 if (exitCollision) {
+	if (exitCollision) {
 		if (lastCollision[0]) {
 			attrib_->setOnGround(false);
 			lastCollision[0] = false;
@@ -143,6 +145,7 @@ void SimplePhysicsPlayer::onCollisionExit()
 			lastCollision[2] = false;
 		}
 		exitCollision = false;
+
 	}
 }
 

@@ -124,7 +124,7 @@ void HandsManager::update()
 
 		else {
 			punietazoleft_->changeState(Punietazo::REPOSO);
-			punietazoleft_->changeState(Punietazo::REPOSO);
+			punietazoright_->changeState(Punietazo::REPOSO);
 
 			state_ = MARTILLAZO;
 		}
