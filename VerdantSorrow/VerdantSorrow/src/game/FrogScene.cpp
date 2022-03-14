@@ -163,7 +163,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));
-	player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"));
+	player_->addComponent<PlayerUI>();
 	mngr_->setHandler(ecs::_PLAYER, player_);
 
 	// Animacion del jugador

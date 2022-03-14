@@ -147,7 +147,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerAttackCollider->setIsTrigger(true);
 
 	//Componente ui jugador
-	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+	player_->addComponent<PlayerUI>();
 	mngr_->setHandler(ecs::_PLAYER, player_);
 }
 

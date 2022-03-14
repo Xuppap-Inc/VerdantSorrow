@@ -75,11 +75,10 @@ void SimplePhysicsPlayer::update()
 					attrib_->setOnGround(true);
 					lastCollision[0] = true;
 				}
-				else if (lastPositionY>= posCollider.getY() + c->getHeight()) {//abajo
+				else if (lastPositionY >= posCollider.getY() + c->getHeight()) {//abajo
 					velPlayer.setY(0);
 					tr_->getPos().setY(c->getPos().getY() + c->getHeight() - colliderDiffY);
 				}
-
 				exitCollision = true;
 			}
 			else if (c->isActive() && c->isTrigger()) {
@@ -120,12 +119,14 @@ void SimplePhysicsPlayer::update()
 				}
 
 			}
+			else //collider no activo
+				onCollisionExit();
 		}
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
 		invulnerable_ = false;
 	}
-	else
+	else //no colisiones
 		onCollisionExit();
 }
 

@@ -165,7 +165,6 @@
     <Media Include="resources\sound\sfx_rana_damage.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\..\..\Downloads\HealthDetail.png" />
     <Image Include="resources\images\BossBarArrow_Left.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />

@@ -8,7 +8,7 @@ class Texture;
 class PlayerUI : public ecs::Component{
 public:
         __CMPID_DECL__(ecs::_PLAYERUI)
-        PlayerUI(Texture* heart_);
+        PlayerUI();
         virtual ~PlayerUI();
 
         void initComponent() override;

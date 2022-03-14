@@ -4,8 +4,8 @@
 #include "../../sdlutils/Texture.h"
 #include "../../sdlutils/SDLUtils.h"
 
-PlayerUI::PlayerUI(Texture* heart_) : 
-	heart(heart_),
+PlayerUI::PlayerUI() : 
+	heart(&sdlutils().images().at("heart")),
 	heartBlack(&sdlutils().images().at("heartBlack")),
 	healthDetailTexture(&sdlutils().images().at("healthDetail")),
 	attrib_(nullptr)
