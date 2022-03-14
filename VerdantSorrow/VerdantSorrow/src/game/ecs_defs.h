@@ -47,7 +47,8 @@
 	_PUNIETAZO, \
 	_CLAP_ATTACK, \
 	_HAMMER_ARM, \
-	_VFX
+	_VFX, \
+	_FINALBOSSMOVE
 
 
 // Groups list - must have at least one element
