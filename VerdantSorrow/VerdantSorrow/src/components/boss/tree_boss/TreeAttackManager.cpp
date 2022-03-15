@@ -96,6 +96,8 @@ void TreeAttackManager::update()
 		if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
 
 		if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
+
+		lanternSpawner_
 	}
 
 	else if (state == WAVE) {
@@ -151,6 +153,7 @@ void TreeAttackManager::update()
 		if (movement_->hasFinishedMovingToCenter()) {
 		
 			attackSpecial();
+			
 		}
 	}
 }
@@ -190,9 +193,9 @@ void TreeAttackManager::prepareToSpecial()
 
 		attacking_ = true;
 
-		//pausa el timer del otro ataque y crea la lampara
+		//pausa el timer del otro ataque y crea la lampara en el medio suspendida
 		timerWave_.pause();
-		lanternSpawner_->createLantern();
+		lanternSpawner_->createLantern(sdlutils().width()/2,sdlutils().height()/3);
 
 		state = MOVING_TO_CENTER;
 

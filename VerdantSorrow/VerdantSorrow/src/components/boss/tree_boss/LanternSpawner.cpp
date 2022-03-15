@@ -8,6 +8,8 @@
 #include "../../RectangleCollider.h"
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
+#include "TreeMovement.h"
+#include "TreeAttackManager.h"
 #include "../BossAtributos.h"
 #include <time.h>
 #include <random>
@@ -22,6 +24,7 @@ LanternSpawner::LanternSpawner(CollisionManager* colManager)
 
 LanternSpawner::~LanternSpawner()
 {
+	
 }
 
 void LanternSpawner::initComponent()
@@ -30,7 +33,11 @@ void LanternSpawner::initComponent()
 	assert(tr_ != nullptr);
 }
 
-void LanternSpawner::createLantern()
+void LanternSpawner::update() {
+	
+}
+
+void LanternSpawner::createLantern(int x,int y)
 {
 	//distribucion random de intervalo variable en distintas llamadas
 	std::random_device seed;
@@ -43,8 +50,8 @@ void LanternSpawner::createLantern()
 	//atributos de linterna
 	auto LanternAtribs = Lantern->addComponent<BossAtributos>();
 	auto LanternTr = Lantern->addComponent<Transform>();
-	auto LanternX = myrand(gen);
-	auto LanternY = sdlutils().height()/3;
+	auto LanternX = x;
+	auto LanternY = y;
 	std::cout << LanternX << std::endl;
 
 
