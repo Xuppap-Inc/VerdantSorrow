@@ -116,7 +116,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 
 	//Componente ui jugador
-	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+	player_->addComponent<PlayerUI>();
 }
 
 void Hub::EntryGenerator(CollisionManager* colManager)

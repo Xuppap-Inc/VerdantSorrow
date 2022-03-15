@@ -28,6 +28,8 @@ protected:
     int attackDuration;
     int attackCoolDown;
     int lastAttack;
+    
+    bool newAttack;
 
     CollisionManager* colMan_;
     FramedImage* anim_;

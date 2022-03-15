@@ -4,6 +4,7 @@
 #include "../Transform.h"
 #include "../boss/frog_boss/wave/WaveMovement.h"
 #include "../boss/frog_boss/TongueAttack.h"
+#include "../boss/finalBoss/ClapAttack.h"
 
 
 SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
@@ -44,6 +45,7 @@ void SimplePhysicsPlayer::update()
 				//colisiones
 				auto pos = collider_->getPos(); //jugador
 				auto posCollider = c->getPos(); //otros
+				auto velCollider = c->getEntity()->getComponent<Transform>()->getVel();
 
 				auto& velPlayer = tr_->getVel();
 
@@ -52,23 +54,24 @@ void SimplePhysicsPlayer::update()
 				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
 				float colliderDiffY = (tr_->getHeight() - collider_->getHeight());
 
-				if (lastPositionX + collider_->getWidth() <= posCollider.getX()) {//colision por la izda
+				if (lastPositionX + collider_->getWidth() + velCollider.getX() <= posCollider.getX()) {//colision por la izda
 					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX);
+					tr_->getPos().setX(posCollider.getX() - collider_->getWidth() - colliderDiffX + velCollider.getX());
 					attrib_->setRightStop(true);
 					lastCollision[1] = true;
 
 				}
-				else if (lastPositionX >= posCollider.getX() + c->getWidth()) {//colision por la derecha
+				else if (lastPositionX + velCollider.getX() >= posCollider.getX() + c->getWidth()) {//colision por la derecha
 					velPlayer.setX(0);
-					tr_->getPos().setX(posCollider.getX() + c->getWidth() - colliderDiffX);
+					tr_->getPos().setX(posCollider.getX() + c->getWidth() - colliderDiffX + velCollider.getX());
 					attrib_->setLeftStop(true);
 					lastCollision[2] = true;
 				}
-				else if (lastPositionY + collider_->getHeight() <= posCollider.getY()) {//arriba
+				else if (lastPositionY + collider_->getHeight() + velCollider.getY() <= posCollider.getY()) {//arriba
 
 					velPlayer.setY(0);
-					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight() - colliderDiffY);
+					tr_->getPos().setY(c->getPos().getY() - collider_->getHeight() - colliderDiffY + velCollider.getY());
+					tr_->getPos().setX(tr_->getPos().getX() + velCollider.getX());
 					attrib_->setOnGround(true);
 					lastCollision[0] = true;
 				}
@@ -76,7 +79,6 @@ void SimplePhysicsPlayer::update()
 					velPlayer.setY(0);
 					tr_->getPos().setY(c->getPos().getY() + c->getHeight() - colliderDiffY);
 				}
-
 				exitCollision = true;
 			}
 			else if (c->isActive() && c->isTrigger()) {
@@ -85,8 +87,9 @@ void SimplePhysicsPlayer::update()
 
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
+				ClapAttack* cA = ent->getComponent<ClapAttack>();
 
-				if (bA != nullptr) {
+				if (bA != nullptr || cA != nullptr) {
 
 					if (!invulnerable_ && !ctrl_->isRolling()) {
 						attrib_->damagePlayer(1);
@@ -116,18 +119,20 @@ void SimplePhysicsPlayer::update()
 				}
 
 			}
+			else //collider no activo
+				onCollisionExit();
 		}
 
 		if (invTimer + 5000 > sdlutils().currRealTime()) return;
 		invulnerable_ = false;
 	}
-	else
+	else //no colisiones
 		onCollisionExit();
 }
 
 void SimplePhysicsPlayer::onCollisionExit()
 {
-	 if (exitCollision) {
+	if (exitCollision) {
 		if (lastCollision[0]) {
 			attrib_->setOnGround(false);
 			lastCollision[0] = false;
@@ -141,6 +146,7 @@ void SimplePhysicsPlayer::onCollisionExit()
 			lastCollision[2] = false;
 		}
 		exitCollision = false;
+
 	}
 }
 

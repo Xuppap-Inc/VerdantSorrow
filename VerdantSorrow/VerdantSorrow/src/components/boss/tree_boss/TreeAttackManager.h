@@ -75,6 +75,9 @@ private:
 	bool attacking_;
 	bool waiting_;
 
+	bool newAtack_;
+	int dir_;
+
 	void returnToIni();
 
 	void attackWave(int dir);

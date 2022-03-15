@@ -93,7 +93,7 @@ void TreeScene::start() {
 void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto Tree_ = mngr_->addEntity();
-	auto TreeAtribs = Tree_->addComponent<BossAtributos>(3.0f);
+	auto TreeAtribs = Tree_->addComponent<BossAtributos>(10.0f);
 
 	auto TreeTr = Tree_->addComponent<Transform>();
 	auto TreeX = sdlutils().width() / 4 * 3 - 80;
@@ -142,7 +142,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 4);
+	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
@@ -153,7 +153,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerAttackCollider->setIsTrigger(true);
 
 	//Componente ui jugador
-	player_->addComponent<PlayerUI>(&sdlutils().images().at("tennis_ball"));
+	player_->addComponent<PlayerUI>();
 	mngr_->setHandler(ecs::_PLAYER, player_);
 }
 

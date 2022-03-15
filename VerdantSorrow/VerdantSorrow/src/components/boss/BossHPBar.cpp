@@ -8,7 +8,12 @@
 #include "../Transform.h"
 
 BossHPBar::BossHPBar() :
-	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(), lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease() {
+	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(),
+	lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease(),
+	bossBarArrow_left(&sdlutils().images().at("bossBarArrow_Left")),
+	bossBarArrow_right(&sdlutils().images().at("bossBarArrow_Right")),
+	middleBar(&sdlutils().images().at("middleBar"))
+{
 }
 
 BossHPBar::~BossHPBar() {
@@ -32,6 +37,16 @@ void BossHPBar::render() {
 
 	accumulatedDamage += (lastHP - attrib_->getLife());
 
+
+	float xOffset = 350;
+	float xLeft = sdlutils().width() / 2 - xOffset - 5;
+	float xRight = sdlutils().width() / 2 + xOffset - 45;
+	// Fondo de las barras
+	bossBarArrow_left->render(build_sdlrect(xLeft, 628, 50, 50));
+	bossBarArrow_right->render(build_sdlrect(xRight, 628, 50, 50));
+	middleBar->render({ sdlutils().width() / 2 - 320, 638, 640, 25 });
+
+
 	//barra roja
 	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / maxHp), 10);
 	//barra de daño acumulado
@@ -54,5 +69,4 @@ void BossHPBar::render() {
 	}
 
 	lastHP = attrib_->getLife();
-
 }

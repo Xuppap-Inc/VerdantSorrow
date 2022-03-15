@@ -9,8 +9,9 @@
 
 
 
-Punietazo::Punietazo():time(sdlutils().currRealTime()),speed(8),tiempo2(sdlutils().currRealTime())
+Punietazo::Punietazo() :hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(6), dW(4), dH(4)
 {
+
 }
 
 Punietazo::~Punietazo()
@@ -20,170 +21,131 @@ Punietazo::~Punietazo()
 void Punietazo::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
-	rect_ = ent_->getComponent<RectangleCollider>();
+	assert(tr_ != nullptr);
+	col_ = ent_->getComponent<RectangleCollider>();
+	assert(col_ != nullptr);
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	assert(playertr_ != nullptr);
+
 	initialwidth_ = tr_->getWidth();
 	initialheight_ = tr_->getHeight();
+	initialpos_ = tr_->getPos();
+
+	maxWidth_ = 2 * initialwidth_;
+	maxHeight_ = 2 * initialheight_;
 }
 
-void Punietazo::godown()
+void Punietazo::goDown()
 {
-	
-	if (tr_->getPos().getY() <= sdlutils().height() - tr_->getHeight()) {
-		tr_->getPos().setY(tr_->getPos().getY() + 3);
-		rect_->setActive(false);
+	int objectivePos = sdlutils().height() - tr_->getHeight();
+
+	if (tr_->getPos().getY() < objectivePos) {
+
+		tr_->getVel().setY(handSpeed_);
+		col_->setActive(false);
 	}
-	else  state_ = FOLLOW; 
-	
-
-	
-	
+	else {
+		tr_->getPos().setY(objectivePos);
+		changeState(FOLLOW);
+	}
 }
 
-void Punietazo::persiguejugador()
+void Punietazo::followPlayer()
 {
-	auto width = tr_->getWidth();
-	auto height = tr_->getHeight();
-	auto& vel_ = tr_->getVel();
-	if (!(tr_->getPos().getX() >= playertr_->getPos().getX() && tr_->getPos().getX() < playertr_->getPos().getX() + playertr_->getWidth())) {
+	auto handPos = tr_->getPos();
+	auto playerPos = playertr_->getPos();
 
-		auto mano = tr_->getPos();
-		auto player = playertr_->getPos();
-		//time = sdlutils().currRealTime();
-		//tiempo2 = sdlutils().currRealTime();
-		if (mano.getX() > player.getX()) {
-			vel_ = Vector2D(-speed, 0);
-		}
-		else {
-			vel_ = Vector2D(speed, 0);
-		}
-		//	vel_ = Vector2D(Vector2D(q - p) > 0 ? 1.0f : -1.0f,0);
+	if (!(handPos.getX() >= playerPos.getX() && handPos.getX() < playerPos.getX() + playertr_->getWidth())) {
+
+		tr_->getVel() = (handPos.getX() > playerPos.getX() ? Vector2D(-handSpeed_, 0) : Vector2D(handSpeed_, 0));
 	}
 	else
 	{
-		time = sdlutils().currRealTime();
-		state_ = PUNIETAZO;
+		hitTime_ = sdlutils().currRealTime();
+		changeState(HIT);
 	}
 }
 
-void Punietazo::punietazo()
+void Punietazo::hit()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
-	auto& vel_ = tr_->getVel();
-	vel_ = Vector2D(0, 0);
-	if (sdlutils().currRealTime() - time >= 350) {
-		rect_->setIsTrigger(true);
-		rect_->setActive(true);
-		rect_->setWidth(tr_->getWidth());
-		rect_->setHeight(tr_->getHeight());		
-		state_ =FUERA;
-		tiempo2 = sdlutils().currRealTime();
+	tr_->getVel().set(Vector2D(0, 0));
+
+	if (sdlutils().currRealTime() - hitTime_ >= 350) {
+		col_->setIsTrigger(true);
+		col_->setActive(true);
+
+		col_->setWidth(width);
+		col_->setHeight(height);
+
+		changeState(BACK);
+
+		goBackTime_ = sdlutils().currRealTime();
 	}
 	else {
-		tr_->setWidth(width + 4);
-		tr_->setHeight(height + 4);
-		tr_->getPos().setY(tr_->getPos().getY() - 4);
-		tr_->getPos().setX(tr_->getPos().getX() - 4);		
+		int nextWidth = std::min(width + dW, maxWidth_);
+		int nextHeight = std::min(height + dH, maxHeight_);
+
+		tr_->getPos().setY(tr_->getPos().getY() - (nextWidth - width));
+		tr_->getPos().setX(tr_->getPos().getX() - (nextHeight - height));
+
+		tr_->setWidth(nextWidth);
+		tr_->setHeight(nextHeight);
 	}
 }
 
-void Punietazo::makesamall()
+void Punietazo::goBack()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
-	if (sdlutils().currRealTime() - tiempo2 >= 750) {
-		if (width > initialwidth_) {
-			rect_->setActive(false);
-			tr_->setWidth(width - 2);
-			tr_->setHeight(height - 2);
-			tr_->getPos().setY(tr_->getPos().getY() + 2);
-			tr_->getPos().setX(tr_->getPos().getX() + 2);
 
+	if (sdlutils().currRealTime() - goBackTime_ >= 750) {
+
+		col_->setActive(false);
+
+		bool isSize = false, isPos = false;
+
+		if (abs(tr_->getPos().getX() - initialpos_.getX()) > 5 || abs(tr_->getPos().getY() - initialpos_.getY()) > 5) {
+			Vector2D dir = initialpos_ - tr_->getPos();
+			tr_->getVel().set(dir.normalize() * handSpeed_);
 		}
-		else {
-			state_ = FOLLOW;
+		else { //correct pos
+			tr_->getVel().set(Vector2D(0, 0));
+			tr_->getPos().set(initialpos_);
+			isPos = true;
 		}
+
+
+		if (abs(width - initialwidth_) > 1 || abs(height - initialheight_) > 1) {
+
+			int nextWidth = std::max(width - dW, initialwidth_);
+			int nextHeight = std::max(height - dH, initialheight_);
+
+			tr_->getPos().setY(tr_->getPos().getY() + (nextWidth - width));
+			tr_->getPos().setX(tr_->getPos().getX() + (nextHeight - height));
+
+			tr_->setWidth(nextWidth);
+			tr_->setHeight(nextHeight);
+		}
+		else { //correct size
+			tr_->setWidth(initialwidth_);
+			tr_->setHeight(initialheight_);
+			isSize = true;
+		}
+
+		if (isPos && isSize) {
+			changeState(FIN);
+
+			col_->setWidth(width);
+			col_->setHeight(height);
+			col_->setActive(true);
+			col_->setIsTrigger(false);
+		}
+
 	}
-	
+
 }
 
-void Punietazo::update()
-{
-	switch (state_)
-	{
-	default:
-		break;
-	}
-	switch (state_) {
-	case  State::DOWN:
-		godown();
-		break;
-	case  State::FOLLOW:
-		persiguejugador();
-		break;
-	case  State::PUNIETAZO:
-		punietazo();
-		break;
-	case  State::FUERA:
-		makesamall();
-		break;
-	default:
-		break;
-	}
 
 
-
-
-	//if (tr_->getPos().getY() <= sdlutils().height() - tr_->getHeight()) {
-	//	tr_->getPos().setY(tr_->getPos().getY() +3);
-	//	
-	//	rect_->setActive(false);
-	//}
-	//else {
-	//	auto width = tr_->getWidth();
-	//	auto height = tr_->getHeight();
-	//	auto& vel_ = tr_->getVel();
-	//	if (!para&&!(tr_->getPos().getX() >= playertr_->getPos().getX()  && tr_->getPos().getX() < playertr_->getPos().getX() + playertr_->getWidth())) {
-	//		
-	//		auto mano = tr_->getPos();
-	//		auto player = playertr_->getPos();
-	//		time = sdlutils().currRealTime();
-	//		tiempo2 = sdlutils().currRealTime();
-	//		if (mano.getX() > player.getX()) {
-	//			vel_ = Vector2D(-speed, 0);
-	//		}
-	//		else { 
-	//			vel_ = Vector2D(speed, 0);
-	//		}
-	//	//	vel_ = Vector2D(Vector2D(q - p) > 0 ? 1.0f : -1.0f,0);
-
-	//	}
-	//	else if(!stop) {
-	//		para = true;
-	//		vel_ = Vector2D(0, 0);
-	//		if (sdlutils().currRealTime() - time >= 750) {
-	//			rect_->setIsTrigger(true);
-	//			rect_->setActive(true);			
-	//			rect_->setWidth(tr_->getWidth());
-	//			rect_->setHeight(tr_->getHeight());
-	//			tiempo2 = sdlutils().currRealTime();
-	//			stop = true;
-	//		}
-	//		else {
-	//			tr_->setWidth(width + 2);
-	//			tr_->setHeight(height + 2);
-	//			tr_->getPos().setY(tr_->getPos().getY() - 2);
-	//			tr_->getPos().setX(tr_->getPos().getX() - 2);
-	//			tiempo2 = sdlutils().currRealTime();
-	//		}
-	//	}
-	//	
-	//		
-	//		
-	//		
-	//	
-	//	
-	//}
-	
-}

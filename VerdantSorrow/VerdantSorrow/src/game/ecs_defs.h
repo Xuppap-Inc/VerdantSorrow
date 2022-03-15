@@ -45,8 +45,12 @@
 	_DIALOG_BOX_MNGR, \
 	_HANDS_MANAGER, \
 	_LANTERNSPAWNER, \
-	_PUNIETAZO
-	
+	_PUNIETAZO, \
+	_CLAP_ATTACK, \
+	_HAMMER_ARM, \
+	_VFX, \
+	_FINALBOSSMOVE
+
 
 
 // Groups list - must have at least one element
