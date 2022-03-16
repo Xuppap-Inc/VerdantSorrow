@@ -20,6 +20,7 @@ public:
 	~FinalBossMovement();
 	void update() override;
 	void bounce();
+	void restartBouncing();
 	void initComponent()override;
 private:
 	void createWave(int dir);
@@ -30,5 +31,7 @@ private:
 	EyeState eyeState_;
 	CollisionManager* colManager_;
 	float eyeSpeed;
+	int lastTimeGround = 0, timeInGround = 1000;
+	Vector2D velocitySaved;
 };
 
