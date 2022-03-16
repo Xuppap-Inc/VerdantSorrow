@@ -2,25 +2,20 @@
 
 #include <vector>
 #include "CollisionManager.h"
-namespace ecs {
-	class Manager;
-}
+#include "Scene.h"
 
-class TreeScene
+
+class TreeScene :public Scene
 {
-public: 
-	TreeScene();
-	virtual ~TreeScene();
+public:
+	TreeScene() :Scene() {};
+	~TreeScene() {};
 	void init();
-	void start();
 
 	void treeGenerator(CollisionManager* colManager, Entity* player_);
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 	void rootGenerator(CollisionManager* colManager, Entity* player_, float x);
-
-private:
-	ecs::Manager* mngr_;
 };
 
