@@ -6,18 +6,18 @@
 #include "../../RectangleCollider.h"
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
-#include "../BossAtributos.h"
 #include "RootWave.h"
 #include "RootAutoAim.h"
 #include "MeleeAttack.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../FramedImage.h"
 #include "../../Image.h"
+#include "LanternMovement.h"
 #include "TreeMovement.h"
-#include "LanternSpawner.h"
+#include "LanternCollisions.h"
 
-TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), attr_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lanternSpawner_()
+TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
+timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_()
 {
 }
 
@@ -25,9 +25,9 @@ TreeAttackManager::~TreeAttackManager()
 {
 }
 
-TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), attr_(), 
+TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
-																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false),lanternSpawner_()
+																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_()
 {
 }
 
@@ -35,11 +35,14 @@ void TreeAttackManager::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	attr_ = ent_->getComponent<BossAtributos>();
 	img_ = ent_->getComponent<Image>();
 	treeCol_ = ent_->getComponent<RectangleCollider>();
 	movement_ = ent_->getComponent<TreeMovement>();
-	lanternSpawner_ = ent_->getComponent<LanternSpawner>();
+
+	lantern_ = mngr_->getHandler(ecs::_LANTERN);
+	lanternTr_ = lantern_->getComponent<Transform>();
+	lanternMov_ = lantern_->getComponent<LanternMovement>();
+	lanternCols_ = lantern_->getComponent<LanternCollisions>();
 
 	rootWave_ = ent_->getComponent<RootWave>();
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
@@ -53,7 +56,7 @@ void TreeAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	bool correct = tr_ != nullptr && player_ != nullptr && attr_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr;
+	bool correct = tr_ != nullptr && player_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr && lanternTr_ != nullptr;
 	assert(correct);
 
 	phase = PHASE1;
@@ -106,6 +109,7 @@ void TreeAttackManager::update()
 			
 			state = MOVING;
 
+			lanternMov_->setActive(true);
 			movement_->setMoveActive(true);
 
 			//timers
@@ -142,6 +146,7 @@ void TreeAttackManager::update()
 
 			attacking_ = false;
 			movement_->setMoveActive(true);
+			lanternCols_->setDamaged(false);
 
 			waitTimer_.reset();
 			waitTimer_.pause();
@@ -153,7 +158,6 @@ void TreeAttackManager::update()
 		if (movement_->hasFinishedMovingToCenter()) {
 		
 			attackSpecial();
-			
 		}
 	}
 }
@@ -195,9 +199,12 @@ void TreeAttackManager::prepareToSpecial()
 
 		//pausa el timer del otro ataque y crea la lampara en el medio suspendida
 		timerWave_.pause();
-		lanternSpawner_->createLantern(sdlutils().width()-100, sdlutils().height()-50,true);
-		lanternSpawner_->createLantern(sdlutils().width() / 2, sdlutils().height() / 3,true);
-		lanternSpawner_->createLantern(20, sdlutils().height()-50,true);
+
+		lanternMov_->setActive(false);
+
+		//lanternTr_->getPos().set(Vector2D(sdlutils().width()-100, sdlutils().height()-50));
+		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 3));
+		//lanternTr_->createLantern(20, sdlutils().height()-50);
 
 		state = MOVING_TO_CENTER;
 

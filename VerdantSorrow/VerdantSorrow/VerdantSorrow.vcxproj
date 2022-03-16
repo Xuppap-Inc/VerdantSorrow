@@ -26,6 +26,7 @@
     <ClInclude Include="src\components\boss\finalBoss\ClapAttack.h" />
     <ClInclude Include="src\components\boss\tree_boss\LanternMovement.h" />
     <ClInclude Include="src\components\boss\tree_boss\LanternSpawner.h" />
+    <ClInclude Include="src\components\boss\tree_boss\LanternCollisions.h" />
     <ClInclude Include="src\game\FinalBossScene.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyHp.h" />
     <ClInclude Include="src\components\hub\DialogBoxMngr.h" />
@@ -98,6 +99,7 @@
     <ClCompile Include="src\components\boss\finalBoss\ClapAttack.cpp" />
     <ClCompile Include="src\components\boss\tree_boss\LanternMovement.cpp" />
     <ClCompile Include="src\components\boss\tree_boss\LanternSpawner.cpp" />
+    <ClCompile Include="src\components\boss\tree_boss\LanternCollisions.cpp" />
     <ClCompile Include="src\game\FinalBossScene.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyHp.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\TongueAttack.cpp" />

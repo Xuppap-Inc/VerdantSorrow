@@ -19,7 +19,7 @@
 
 
 LanternSpawner::LanternSpawner(CollisionManager* colManager)
-	: colManager_(colManager), framedImg_(), lanternWidht_(50)
+	: colManager_(colManager), framedImg_(), lanternWidth_(100)
 {
 }
 
@@ -47,30 +47,31 @@ void LanternSpawner::createLantern(int x,int y,bool quieta)
 	std::uniform_int_distribution <>myrand(0, sdlutils().width());
 
 	//crea entidad linterna
-	auto Lantern = mngr_->addEntity();
+	auto lantern = mngr_->addEntity();
+
+	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto LanternAtribs = Lantern->addComponent<BossAtributos>();
-	auto LanternTr = Lantern->addComponent<Transform>();
+	auto LanternAtribs = lantern->addComponent<BossAtributos>();
+	auto LanternTr = lantern->addComponent<Transform>();
 	auto LanternX = x;
 	auto LanternY = y;
-	std::cout << LanternX << std::endl;
 
 
 	//damos paramtros iniciales
-	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), lanternWidht_, 50, 0.0f);
+	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), lanternWidth_, lanternWidth_, 0.0f);
 	//de momento con un color pocho
-	Lantern->addComponent<RectangleRenderer>(SDL_Color());
+	lantern->addComponent<RectangleRenderer>(SDL_Color());
 
 	//collider de la lampara
-	auto LanternCollider = Lantern->addComponent <RectangleCollider>
+	auto LanternCollider = lantern->addComponent <RectangleCollider>
 		(LanternTr->getWidth(), LanternTr->getHeight());
 	//se hace trigger
 	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
 	colManager_->addCollider(LanternCollider);
 	//la damos movimiento
-	Lantern->addComponent<LanternMovement>();
+	lantern->addComponent<LanternMovement>();
 
 	
 }

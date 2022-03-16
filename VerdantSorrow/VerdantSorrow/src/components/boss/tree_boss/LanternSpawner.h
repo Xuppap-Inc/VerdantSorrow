@@ -12,8 +12,8 @@ class LanternSpawner: public ecs::Component
 public:
 	__CMPID_DECL__(ecs::_LANTERNSPAWNER)
 
-		LanternSpawner(CollisionManager* collManager);
-		~LanternSpawner();
+	LanternSpawner(CollisionManager* collManager);
+	~LanternSpawner();
 
 	void initComponent() override;
 	void createLantern(int x, int y,bool quieta);
@@ -28,7 +28,7 @@ private:
 	int* posX_;
 	int* posY;
 
-	int lanternWidht_;
+	int lanternWidth_;
 	
 };
 
