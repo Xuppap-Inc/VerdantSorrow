@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\SceneManager.h" />
+    <ClInclude Include="src\game\Scene.h" />
     <ClInclude Include="src\components\boss\finalBoss\FinalBossMovement.h" />
     <ClInclude Include="src\components\boss\finalBoss\HammerArm.h" />
     <ClInclude Include="src\components\boss\finalBoss\Punietazo.h" />
@@ -89,6 +91,8 @@
     <ClInclude Include="src\components\VFX.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\SceneManager.cpp" />
+    <ClCompile Include="src\game\Scene.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\FinalBossMovement.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\HammerArm.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\Punietazo.cpp" />
