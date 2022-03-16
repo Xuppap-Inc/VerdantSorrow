@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 class Transform;
+class BossAtributos;
 class FinalBossMovement : public ecs::Component
 {
 public:
@@ -15,7 +16,7 @@ public:
 	void initComponent()override;
 private :
 	Transform* tr_;
-
-
+	BossAtributos* bA_;
+	bool startMovement = true;
 };
 
