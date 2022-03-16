@@ -21,20 +21,17 @@
 #include "../components/boss/finalBoss/HandsManager.h"
 #include "../components/boss/finalBoss/FinalBossMovement.h"
 
-using ecs::Entity;
-using ecs::Manager;
 
 
 void FinalBossScene::init()
 {
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
-
+	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-	mngr_ = new Manager();
-	mngr_->setDebug(true); //activamos modo debug
+	
 
-	//background();
+	background();
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -46,45 +43,9 @@ void FinalBossScene::init()
 	//flyGenerator(colManager, player);
 }
 
-void FinalBossScene::start() {
-
-	// a boolean to exit the loop
-	bool exit = false;
-
-	auto& ihdlr = ih();
-
-	while (!exit) {
-		Uint32 startTime = sdlutils().currRealTime();
-
-		// refresh the input handler
-		ihdlr.refresh();
-
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
-			continue;
-		}
-
-		mngr_->update();
-		mngr_->refresh();
-
-		sdlutils().clearRenderer();
-		mngr_->render();
-		mngr_->debug();
-		sdlutils().presentRenderer();
-
-		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
-		if (frameTime < 10)
-			SDL_Delay(10 - frameTime);
-	}
-
-	SDL_Quit();
-}
-
 void FinalBossScene::background()
 {
-	Scene::background("fondo 1");
-	//backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
+	Scene::background("fondo1");
 }
 
 
@@ -111,11 +72,6 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	//FinalBossFace->addComponent<CollideWithBordersBoss>();
 
 	FinalBossFace->addComponent<BossHPBar>();
-
-
-
-
-
 }
 
 

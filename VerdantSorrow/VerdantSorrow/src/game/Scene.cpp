@@ -29,17 +29,8 @@ Scene::~Scene()
 
 void Scene::init()
 {	
-
-	//Para gestionar las colisiones
-	CollisionManager* colManager = new CollisionManager();
 	mngr_ = new ecs::Manager();
 	mngr_->setDebug(true); //activamos modo debug
-
-	//background();
-	//Se crea el jugador 
-	auto player = mngr_->addEntity();
-	playerGenerator(colManager, player);
-
 }
 
 void Scene::start()
