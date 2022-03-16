@@ -10,6 +10,7 @@
 #include "../../../game/CollisionManager.h"
 #include "TreeMovement.h"
 #include "TreeAttackManager.h"
+#include "LanternMovement.h"
 #include "../BossAtributos.h"
 #include <time.h>
 #include <random>
@@ -35,9 +36,10 @@ void LanternSpawner::initComponent()
 
 void LanternSpawner::update() {
 	
+	
 }
 
-void LanternSpawner::createLantern(int x,int y)
+void LanternSpawner::createLantern(int x,int y,bool quieta)
 {
 	//distribucion random de intervalo variable en distintas llamadas
 	std::random_device seed;
@@ -67,6 +69,8 @@ void LanternSpawner::createLantern(int x,int y)
 	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
 	colManager_->addCollider(LanternCollider);
+	//la damos movimiento
+	Lantern->addComponent<LanternMovement>();
 
 	
 }

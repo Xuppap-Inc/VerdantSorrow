@@ -22,6 +22,7 @@
 #include "../components/boss/tree_boss/MeleeAttack.h"
 #include "../components/boss/tree_boss/TreeMovement.h"
 #include "../components/boss/tree_boss/LanternSpawner.h"
+#include"../components//boss//tree_boss/LanternMovement.h"
 
 
 #include "CollisionManager.h"
@@ -51,7 +52,7 @@ void TreeScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	treeGenerator(colManager, player);
-	//lanternGenerator(colManager, player, 100);
+	
 	
 }
 
@@ -101,6 +102,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	TreeTr->init(Vector2D(TreeX, TreeY), Vector2D(), 160, 320, 0.0f);
 
 	Tree_->addComponent<Image>(&sdlutils().images().at("chica"));
+	lanternGenerator(colManager, Tree_, TreeTr->getPos().getX(), TreeTr->getPos().getY());
 
 	//Se añade un collider al arbol
 	auto treeCollider = Tree_->addComponent<RectangleCollider>(TreeTr->getWidth(), TreeTr->getHeight());
@@ -180,7 +182,7 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 	Root->addComponent<RootMovement>();
 }
 
-void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* player_, float x)
+void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y)
 {
 	//crea entidad linterna
 	auto Lantern = mngr_->addEntity();
@@ -189,7 +191,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* player_, 
 	auto LanternAtribs = Lantern->addComponent<BossAtributos>();
 	auto LanternTr = Lantern->addComponent<Transform>();
 	auto LanternX = x;
-	auto LanternY = sdlutils().height()/2;
+	auto LanternY = y;
 
 	//damos paramtros iniciales
 	LanternTr->init(Vector2D(LanternX, LanternY), Vector2D(), 25, 50, 0.0f);
@@ -203,4 +205,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* player_, 
 	LanternCollider->setIsTrigger(true);
 	//le pasamos el collider al manager
 	colManager->addCollider(LanternCollider);
+	//le añadimos el movimiento
+	auto treePos = tree_->getComponent<Transform>();
+	Lantern->addComponent<LanternMovement>(treePos);
 }

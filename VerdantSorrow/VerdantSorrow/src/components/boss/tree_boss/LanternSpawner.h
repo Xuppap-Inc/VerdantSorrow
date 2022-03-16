@@ -16,14 +16,15 @@ public:
 		~LanternSpawner();
 
 	void initComponent() override;
-	void createLantern(int x, int y);
-	void update();
+	void createLantern(int x, int y,bool quieta);
+	virtual void update();
 
 
 private:
 	CollisionManager* colManager_;
 	FramedImage* framedImg_;
 	Transform* tr_;
+	bool* quieta_;
 	int* posX_;
 	int* posY;
 
