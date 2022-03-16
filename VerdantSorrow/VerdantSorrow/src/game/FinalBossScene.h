@@ -2,17 +2,17 @@
 
 #include <vector>
 #include "CollisionManager.h"
-namespace ecs {
-	class Manager;
-}
 
-class FinalBossScene
+#include "Scene.h"
+
+
+class FinalBossScene: public Scene
 {
 public: 
-	FinalBossScene();
-	virtual ~FinalBossScene();
+	FinalBossScene() :Scene() {}
+	~FinalBossScene() {};
 	void init();
-	void start();
+	//start lo hace scene directamente
 	void background();
 	void finalBossGenerator(CollisionManager* colManager, Entity* player_);
 	 
@@ -23,7 +23,6 @@ public:
 
 	void flyGenerator(CollisionManager* colManager, Entity* player_);
 
-private:
-	ecs::Manager* mngr_;
+
 };
 

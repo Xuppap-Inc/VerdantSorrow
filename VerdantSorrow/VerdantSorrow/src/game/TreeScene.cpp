@@ -25,65 +25,20 @@
 
 #include "CollisionManager.h"
 
-using ecs::Entity;
-using ecs::Manager;
 
-TreeScene::TreeScene() : mngr_(nullptr)
-{
-}
-
-TreeScene::~TreeScene()
-{
-	delete mngr_;
-}
 
 void TreeScene::init()
 {
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
-
+	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-	mngr_ = new Manager();
-	mngr_->setDebug(true);
+	
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	treeGenerator(colManager, player);
-}
-
-void TreeScene::start() {
-
-	// a boolean to exit the loop
-	bool exit = false;
-
-	auto& ihdlr = ih();
-
-	while (!exit) {
-		Uint32 startTime = sdlutils().currRealTime();
-
-		// refresh the input handler
-		ihdlr.refresh();
-
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
-			continue;
-		}
-
-		mngr_->update();
-		mngr_->refresh();
-
-		sdlutils().clearRenderer();
-		mngr_->render();
-		mngr_->debug();
-		sdlutils().presentRenderer();
-
-		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
-		if (frameTime < 10)
-			SDL_Delay(10 - frameTime);
-	}
-	SDL_Quit();
 }
 
 

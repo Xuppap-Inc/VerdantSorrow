@@ -2,17 +2,15 @@
 
 #include <vector>
 #include "CollisionManager.h"
-namespace ecs {
-	class Manager;
-}
+#include "Scene.h"
 
-class FrogScene
+
+class FrogScene: public Scene
 {
 public: 
-	FrogScene();
-	virtual ~FrogScene();
+	FrogScene() :Scene() {};
+	~FrogScene() {};
 	void init();
-	void start();
 	void background();
 	void frogGenerator(CollisionManager* colManager, Entity* player_);
 
@@ -24,7 +22,5 @@ public:
 
 	void flyGenerator(CollisionManager* colManager, Entity* player_);
 
-private:
-	ecs::Manager* mngr_;
 };
 

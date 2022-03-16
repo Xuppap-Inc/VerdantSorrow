@@ -19,26 +19,15 @@
 
 #include "CollisionManager.h"
 
-using ecs::Entity;
-using ecs::Manager;
 
-Hub::Hub() : mngr_(nullptr)
-{
-}
-
-Hub::~Hub()
-{
-	delete mngr_;
-}
 
 void Hub::init()
 {
-	
+	Scene::init();
 
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-	mngr_ = new Manager();
-	mngr_->setDebug(true);
+
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
@@ -58,39 +47,6 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
 }
 
-void Hub::start() {
-
-	// a boolean to exit the loop
-	bool exit = false;
-
-	auto& ihdlr = ih();
-
-	while (!exit) {
-		Uint32 startTime = sdlutils().currRealTime();
-
-		// refresh the input handler
-		ihdlr.refresh();
-
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
-			continue;
-		}
-
-		mngr_->update();
-		mngr_->refresh();
-
-		sdlutils().clearRenderer();
-		mngr_->render();
-		mngr_->debug();
-		sdlutils().presentRenderer();
-
-		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
-		if (frameTime < 10)
-			SDL_Delay(10 - frameTime);
-	}
-	SDL_Quit();
-}
 
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se le añaden los atributos del player, no los del transform
