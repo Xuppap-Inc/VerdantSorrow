@@ -19,8 +19,6 @@ private:
 	//atributos del boss
 	BossAtributos* attrib_;
 
-	//maxima vida del boss
-	float maxHp;
 	//maximo width de la barra
 	float maxBarLength;
 	//posicion de la barra

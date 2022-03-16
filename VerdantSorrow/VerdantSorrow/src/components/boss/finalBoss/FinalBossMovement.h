@@ -6,17 +6,27 @@
 
 class Transform;
 class BossAtributos;
+class HandsManager;
+
 class FinalBossMovement : public ecs::Component
 {
 public:
-	__CMPID_DECL__(ecs::_FINALBOSSMOVE)
-	FinalBossMovement();
+	enum Phase { PHASE1, PHASE2 };
+	enum EyeState { BOUNCE, GROUND, };
+
+	__CMPID_DECL__(ecs::_BOSS_ATTACK_MANAGER)
+		FinalBossMovement();
 	~FinalBossMovement();
 	void update() override;
+	void bounce();
 	void initComponent()override;
-private :
+private:
 	Transform* tr_;
 	BossAtributos* bA_;
-	bool startMovement = true;
+	HandsManager* handMngr_;
+	Phase phase_;
+	EyeState eyeState_;
+
+	float eyeSpeed;
 };
 

@@ -40,6 +40,7 @@ private:
 
 	//variables del knockback
 	float knockbackForceX_, knockbackForceY_;
+	bool isKnockback;
 
 	//Indica la direccion del movimiento del jugador
 	int movementDir_;

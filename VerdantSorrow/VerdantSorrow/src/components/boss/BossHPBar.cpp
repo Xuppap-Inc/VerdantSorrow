@@ -8,7 +8,7 @@
 #include "../Transform.h"
 
 BossHPBar::BossHPBar() :
-	attrib_(), maxHp(), maxBarLength(), pos(), accumulatedDamage(),
+	attrib_(), maxBarLength(), pos(), accumulatedDamage(),
 	lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease(),
 	bossBarArrow_left(&sdlutils().images().at("bossBarArrow_Left")),
 	bossBarArrow_right(&sdlutils().images().at("bossBarArrow_Right")),
@@ -23,7 +23,6 @@ void BossHPBar::initComponent() {
 	attrib_ = ent_->getComponent<BossAtributos>();
 	assert(attrib_ != nullptr);
 
-	maxHp = attrib_->getLife();
 	lastHP = attrib_->getLife();
 	maxBarLength = sdlutils().width() * 0.5f;
 	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 75);
@@ -48,9 +47,9 @@ void BossHPBar::render() {
 
 
 	//barra roja
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / maxHp), 10);
+	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
 	//barra de daño acumulado
-	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY(), maxBarLength * (accumulatedDamage / maxHp), rect.h);
+	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY(), maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
 
 
 	//dibujar barras

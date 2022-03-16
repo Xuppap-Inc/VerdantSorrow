@@ -9,7 +9,8 @@ using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
 	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
-	rollCooldown_(1000), rollDuration_(250), isRolling_(false), knockbackForceX_(20), knockbackForceY_(20), slide_(false), roll_(false)
+	rollCooldown_(1000), rollDuration_(250), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
+	, isKnockback(false)
 {
 }
 
@@ -34,7 +35,7 @@ void PlayerCtrl::update()
 	//handle input
 	handleInput();
 
-	if (!isAttacking && !isRolling_) {
+	if (!isAttacking && !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -130,6 +131,8 @@ void PlayerCtrl::doKnockback(int dir) {
 
 	slide_ = true;
 
+	isKnockback = true;
+
 	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
 }
 
@@ -156,6 +159,7 @@ void PlayerCtrl::doSlide()
 
 		tr_->getVel().set(Vector2D(0, vel.getY()));
 		slide_ = false;
+		isKnockback = false;
 	}
 }
 
