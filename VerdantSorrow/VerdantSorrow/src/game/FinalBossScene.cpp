@@ -24,14 +24,6 @@
 using ecs::Entity;
 using ecs::Manager;
 
-FinalBossScene::FinalBossScene() : mngr_(nullptr)
-{
-}
-
-FinalBossScene::~FinalBossScene()
-{
-	delete mngr_;
-}
 
 void FinalBossScene::init()
 {
@@ -91,12 +83,8 @@ void FinalBossScene::start() {
 
 void FinalBossScene::background()
 {
-	auto backgr_ = mngr_->addEntity();
-	auto backgr_Tr = backgr_->addComponent<Transform>();
-	auto FrogX = 0;
-	auto FrogY = 0;
-	backgr_Tr->init(Vector2D(FrogX, FrogY), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
+	Scene::background("fondo 1");
+	//backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
 }
 
 

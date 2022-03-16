@@ -2,15 +2,18 @@
 
 #include <vector>
 #include "CollisionManager.h"
+
+#include "Scene.h"
+
 namespace ecs {
 	class Manager;
 }
 
-class FinalBossScene
+class FinalBossScene: public Scene
 {
 public: 
-	FinalBossScene();
-	virtual ~FinalBossScene();
+	FinalBossScene() :Scene() {}
+	~FinalBossScene() {};
 	void init();
 	void start();
 	void background();
