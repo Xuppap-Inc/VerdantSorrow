@@ -7,6 +7,7 @@
 class Transform;
 class BossAtributos;
 class HandsManager;
+class CollisionManager;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -15,18 +16,19 @@ public:
 	enum EyeState { BOUNCE, GROUND, };
 
 	__CMPID_DECL__(ecs::_BOSS_ATTACK_MANAGER)
-		FinalBossMovement();
+		FinalBossMovement(CollisionManager* colManager);
 	~FinalBossMovement();
 	void update() override;
 	void bounce();
 	void initComponent()override;
 private:
+	void createWave(int dir);
 	Transform* tr_;
 	BossAtributos* bA_;
 	HandsManager* handMngr_;
 	Phase phase_;
 	EyeState eyeState_;
-
+	CollisionManager* colManager_;
 	float eyeSpeed;
 };
 

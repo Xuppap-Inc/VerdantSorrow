@@ -5,8 +5,12 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../boss/BossAtributos.h"
 #include "HandsManager.h"
+#include "../../Image.h"
+#include "../frog_boss/wave/WaveMovement.h"
+#include "../../../game/CollisionManager.h"
 
-FinalBossMovement::FinalBossMovement() :tr_(nullptr), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(4)
+FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
+	tr_(nullptr), colManager_(colManager),  bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(4)
 {
 }
 
@@ -27,11 +31,10 @@ void FinalBossMovement::update()
 	if (phase_ == PHASE1) {
 		if (bA_->getLife() <= bA_->getMaxHp() / 2)
 			phase_ = PHASE2;
-
-		tr_->getVel() = Vector2D(0, 0);//ESTO SE VA
 	}
 	else if (phase_ == PHASE2) {
-		bounce();
+		if(eyeState_ == EyeState::BOUNCE) bounce();
+
 	}
 }
 
@@ -53,6 +56,8 @@ void FinalBossMovement::bounce()
 	else if (pos_.getY() + tr_->getHeight() > sdlutils().height()) {
 		pos_.setY(sdlutils().height() - tr_->getHeight());
 		vel_.setY(-vel_.getY());
+		createWave(1);
+		createWave(-1);
 		//sdlutils().soundEffects().at("wall_hit").play();
 	}
 	else if (pos_.getX() + tr_->getWidth() > sdlutils().width()) {
@@ -67,4 +72,32 @@ void FinalBossMovement::bounce()
 
 	vel_ = vel_.normalize() * eyeSpeed;
 }
+void FinalBossMovement::createWave(int dir)
+{
+	//Se crea la onda expansiva
+	auto Wave = mngr_->addEntity();
+	//Se anyade el transform
+	auto WaveTr = Wave->addComponent<Transform>();
+	auto WaveX = tr_->getPos().getX();
+	auto WaveY = sdlutils().height() - 50;
+	//dir = {-1, 1}
+	auto WaveDir = dir;
+	if (WaveDir == 1) {
+		WaveX += tr_->getWidth();
+	}
+	auto WaveSpeed = 5;
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
+	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 80, 50, 0.0f);
+	//Se le anyade un color inicial a la onda
+	Wave->addComponent<Image>(&sdlutils().images().at("bolaFuego"));
+
+	//Se anyade un collider a la onda
+	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
+	waveCollider->setIsTrigger(true);
+	//Se anyade el collider al colliderGameManager
+	colManager_->addCollider(waveCollider);
+	//Se anyade el movimiento horizontal
+	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
+}
+
 
