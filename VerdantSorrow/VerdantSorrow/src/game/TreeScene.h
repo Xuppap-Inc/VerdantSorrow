@@ -8,8 +8,8 @@
 class TreeScene :public Scene
 {
 public:
-	TreeScene() :Scene() {};
-	~TreeScene() {};
+	TreeScene() :Scene() {}
+	~TreeScene() {}
 	void init();
 
 	void treeGenerator(CollisionManager* colManager, Entity* player_);
