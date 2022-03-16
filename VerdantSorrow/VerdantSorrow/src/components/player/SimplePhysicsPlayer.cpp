@@ -98,11 +98,11 @@ void SimplePhysicsPlayer::update()
 
 
 						// Knock back
-						float enemyXpos = ent->getComponent<Transform>()->getPos().getX();
+						float enemyXpos = (ent->getComponent<Transform>()->getPos().getX() + ent->getComponent<Transform>()->getWidth()) / 2;
 						// Calcular la direccion en la que se realizara el knockback
 						int knockbackDir; // Almacenarla en "knockbackDir"
 						enemyXpos > tr_->getPos().getX()
-							? knockbackDir = 1 : knockbackDir = -1;
+							? knockbackDir = -1 : knockbackDir = 1;
 						// Informar al controlador
 						ctrl_->doKnockback(knockbackDir);
 					}
