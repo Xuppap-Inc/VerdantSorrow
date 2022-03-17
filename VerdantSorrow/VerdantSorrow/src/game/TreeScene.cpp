@@ -96,8 +96,6 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
 
-	auto treeAtribs = tree_->addComponent<BossAtributos>(10.0f);
-
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 320;

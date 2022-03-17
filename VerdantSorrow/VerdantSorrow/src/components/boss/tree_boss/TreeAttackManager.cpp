@@ -109,7 +109,6 @@ void TreeAttackManager::update()
 			
 			state = MOVING;
 
-			lanternMov_->setActive(true);
 			movement_->setMoveActive(true);
 
 			//timers
@@ -127,6 +126,7 @@ void TreeAttackManager::update()
 			//reactiva al arbol
 			img_->setVisible(true);
 			treeCol_->setActive(true);
+			lanternMov_->setActive(true);
 
 			//lo devuelve al centro
 			returnToIni();
@@ -146,6 +146,7 @@ void TreeAttackManager::update()
 
 			attacking_ = false;
 			movement_->setMoveActive(true);
+			lanternMov_->setActive(true);
 			
 
 			waitTimer_.reset();
