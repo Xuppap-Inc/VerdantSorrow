@@ -105,7 +105,7 @@ void TreeAttackManager::update()
 
 	else if (state == WAVE) {
 		lanternCols_->setDamaged(true); //waves no hacen daño
-		if (rootWave_->hasFinished()) {
+		if (rootWave_->getMove()) {
 			
 			state = MOVING;
 

@@ -16,6 +16,7 @@ public:
 	void initComponent() override;
 	void update() override;
 	void attack(int dir);
+	bool getMove() { return ableMove_; }
 
 	bool hasFinished() { return attacking_ == false; };
 
@@ -26,7 +27,10 @@ private:
 	LanternSpawner* lanternSpawner_;
 
 	Uint32 lastTime_;
+	Uint32 nextTime_;
+	Uint32 movingTime_;
 	bool attacking_;
+	bool ableMove_;
 	float rootPos_;
 	int dir_;
 	int rootW_;
