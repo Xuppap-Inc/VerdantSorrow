@@ -104,7 +104,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == WAVE) {
-
+		lanternCols_->setDamaged(true); //waves no hacen daño
 		if (rootWave_->hasFinished()) {
 			
 			state = MOVING;
@@ -121,7 +121,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == SPECIAL_ATTACK) {
-	
+		
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
 		
 			//reactiva al arbol
@@ -146,7 +146,7 @@ void TreeAttackManager::update()
 
 			attacking_ = false;
 			movement_->setMoveActive(true);
-			lanternCols_->setDamaged(false);
+			
 
 			waitTimer_.reset();
 			waitTimer_.pause();
@@ -186,6 +186,8 @@ void TreeAttackManager::attackSpecial()
 	state = SPECIAL_ATTACK;
 
 	rootAutoAim_->attack();
+	lanternCols_->setDamaged(false);//raices especial si hacen daño
+
 
 	img_->setVisible(false);
 	treeCol_->setActive(false);

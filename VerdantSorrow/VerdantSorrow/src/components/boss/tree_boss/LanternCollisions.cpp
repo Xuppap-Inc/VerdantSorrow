@@ -36,7 +36,7 @@ void LanternCollisions::update()
 				RootMovement* rootMov = ent->getComponent<RootMovement>();
 
 				if (!damaged_ && rootMov != nullptr) {
-
+					std::cout << "daño" << std::endl;
 					attrib_->setDamage(3);
 					damaged_ = true;
 				}
