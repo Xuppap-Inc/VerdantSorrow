@@ -35,9 +35,9 @@ void LanternCollisions::update()
 				ecs::Entity* ent = c->getEntity();
 				RootMovement* rootMov = ent->getComponent<RootMovement>();
 
-				if (damaged_ && rootMov != nullptr) {
+				if (!damaged_ && rootMov != nullptr) {
 
-					attrib_->setDamage(1);
+					attrib_->setDamage(3);
 					damaged_ = true;
 				}
 			}
