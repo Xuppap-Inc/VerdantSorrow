@@ -68,6 +68,7 @@ void TreeAttackManager::initComponent()
 
 void TreeAttackManager::update()
 {
+	std::cout << state << std::endl;
 	Vector2D playerPos = player_->getPos();
 	Vector2D treePos = tr_->getPos();
 
@@ -83,7 +84,7 @@ void TreeAttackManager::update()
 	}
 
 	if (state == MOVING) {
-
+		//lanternCols_->setDamaged(false);
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
 		//si se encuentra a distancia de ataque a melee, ataca
@@ -104,7 +105,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == WAVE) {
-
+		//lanternCols_->setDamaged(false);
 		if (rootWave_->hasFinished()) {
 			
 			state = MOVING;
@@ -121,7 +122,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == SPECIAL_ATTACK) {
-	
+		lanternCols_->setDamaged(true);
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
 		
 			//reactiva al arbol
@@ -146,7 +147,8 @@ void TreeAttackManager::update()
 
 			attacking_ = false;
 			movement_->setMoveActive(true);
-			lanternCols_->setDamaged(false);
+			
+			
 
 			waitTimer_.reset();
 			waitTimer_.pause();
@@ -154,7 +156,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == MOVING_TO_CENTER) {
-	
+		//lanternCols_->setDamaged(false);
 		if (movement_->hasFinishedMovingToCenter()) {
 		
 			attackSpecial();
