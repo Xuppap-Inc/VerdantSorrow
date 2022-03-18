@@ -6,43 +6,34 @@
 #include "../../ecs/Manager.h"
 #include "../hub/NpcCtrl.h"
 using namespace std;
-PlayerHubControl::~PlayerHubControl()
+PlayerHubControl::PlayerHubControl(float speed, CollisionManager* colManager) : playerCol_(), tr_(), speed_(speed), attrib_(), colMan_(colManager),
+moveDown_(false), moveLeft_(false), moveRight_(false), moveUp_(false)
 {
 }
 
 void PlayerHubControl::update()
 {
-	auto& ihdlr = ih();
 	auto currentTime = sdlutils().currRealTime();
 	auto& vel = tr_->getVel();
 
 
+	handleInput();
+
 	//movimiento en 8 direcciones
-	if (ihdlr.keyDownEvent()) {
+	vel.set(Vector2D(0, 0));
 
+	if (moveUp_ && !moveDown_)
+		vel.setY(-speed_);
+	else if (!moveUp_ && moveDown_)
+		vel.setY(speed_);
 
-		if (ihdlr.isKeyDown(SDLK_w)) {
+	if (moveLeft_ && !moveRight_)
+		vel.setX(-speed_);
+	else if (!moveLeft_ && moveRight_)
+		vel.setX(speed_);
 
-			vel.set(Vector2D(vel.getX(), -speed_));
-		}
-		if (ihdlr.isKeyDown(SDLK_a)) {
-
-			vel.set(Vector2D(-speed_, vel.getY()));
-		}
-		if (ihdlr.isKeyDown(SDLK_d)) {
-
-			vel.set(Vector2D(speed_, vel.getY()));
-		}
-		if (ihdlr.isKeyDown(SDLK_s)) {
-
-			vel.set(Vector2D(vel.getX(), speed_));
-		}
-	}
-	else {
-
-		vel.set(Vector2D(0, 0));
-	}
-	vel.normalize();
+	if (vel.magnitude() != 0)
+		vel = vel.normalize() * speed_;
 
 	if (colMan_->hasCollisions(playerCol_)) {
 		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(playerCol_);
@@ -53,7 +44,7 @@ void PlayerHubControl::update()
 			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
 			i++;
 		}
-		if(changeScene)
+		if (changeScene)
 			mngr_->changeScene(1);
 	}
 }
@@ -67,4 +58,30 @@ void PlayerHubControl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
+}
+
+void PlayerHubControl::handleInput()
+{
+	auto& ihdlr = ih();
+
+	if (ihdlr.keyUpEvent()) {
+		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
+			moveLeft_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
+			moveRight_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_W))
+			moveUp_ = false;
+		if (ihdlr.isKeyUp(SDL_SCANCODE_S))
+			moveDown_ = false;
+	}
+	if (ihdlr.keyDownEvent()) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+			moveLeft_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+			moveRight_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_W))
+			moveUp_ = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_S))
+			moveDown_ = true;
+	}
 }

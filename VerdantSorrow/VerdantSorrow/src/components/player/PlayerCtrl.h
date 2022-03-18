@@ -19,8 +19,10 @@ public:
 	void doKnockback(int dir);
 	void doAttack();
 	void doSlide();
+	void animationManagement();
 	void handleInput();
 	bool isRolling() { return isRolling_; };
+	void disableKnockback();
 
 private:
 	RectangleCollider* playerCol_;

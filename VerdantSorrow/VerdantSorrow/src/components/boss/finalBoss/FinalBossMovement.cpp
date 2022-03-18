@@ -6,7 +6,7 @@
 #include "../../boss/BossAtributos.h"
 #include "HandsManager.h"
 #include "../../Image.h"
-#include "../frog_boss/wave/WaveMovement.h"
+#include "../wave/WaveMovement.h"
 #include "../../../game/CollisionManager.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :

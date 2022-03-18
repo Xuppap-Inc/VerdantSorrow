@@ -50,7 +50,8 @@
 	_PUNIETAZO, \
 	_CLAP_ATTACK, \
 	_HAMMER_ARM, \
-	_VFX
+	_VFX, \
+	_WAVE_SPAWNER
 
 
 

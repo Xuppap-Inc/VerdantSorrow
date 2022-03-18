@@ -5,7 +5,7 @@
 #include "FrogJump.h"
 #include "TongueAttack.h"
 #include "../../Transform.h"
-#include "wave/WaveMovement.h"
+#include "../wave/WaveMovement.h"
 #include "../../RectangleCollider.h"
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"

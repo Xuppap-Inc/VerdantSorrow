@@ -2,7 +2,7 @@
 #include "../boss/BossAtributos.h"
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
-#include "../boss/frog_boss/wave/WaveMovement.h"
+#include "../boss/wave/WaveMovement.h"
 #include "../boss/frog_boss/TongueAttack.h"
 #include "../boss/finalBoss/ClapAttack.h"
 
