@@ -18,7 +18,7 @@
 #include "../BossAtributos.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_()
+timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
 }
 
@@ -28,7 +28,8 @@ TreeAttackManager::~TreeAttackManager()
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
-																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_()
+																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), 
+																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
 }
 
@@ -77,13 +78,6 @@ void TreeAttackManager::update()
 
 	float absDistance = abs(distance);
 
-	if (phase != PHASE2 && attribs_->getLife() <= attribs_->getMaxHp() / 2) {
-	
-		phase = PHASE2;
-
-		rootAutoAim_->attack(true);
-	}
-
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
@@ -103,11 +97,22 @@ void TreeAttackManager::update()
 			newAtack_ = false;
 		}
 
-		if (phase == PHASE1 && timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
+		if (phase == PHASE1) {
 
-		if (phase == PHASE1 && timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
+			if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
 
-		
+				phase = PHASE2;
+
+				rootAutoAim_->attack(true);
+			}
+
+			else {
+
+				if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
+
+				if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
+			}
+		}
 	}
 
 	else if (state == WAVE) {
@@ -214,7 +219,7 @@ void TreeAttackManager::prepareToSpecial()
 
 		//lanternTr_->getPos().set(Vector2D(sdlutils().width()-100, sdlutils().height()-50));
 		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 3));
-		//lanternTr_->createLantern(20, sdlutils().height()-50);
+		//lanternTr_->getPos().set(Vector2D(20, sdlutils().height()-50);
 
 		state = MOVING_TO_CENTER;
 
