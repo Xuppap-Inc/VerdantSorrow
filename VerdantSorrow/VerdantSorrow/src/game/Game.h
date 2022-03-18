@@ -1,9 +1,14 @@
 #pragma once
-#include "../utils/Singleton.h"
-class Game :public Singleton<Game>
+#include "../ecs/Manager.h"
+
+class Game
 {
-	friend Singleton<Game>;
 public:
-	static void start();
+	Game();
+	~Game();
+	void start();
+	void update();
+private:
+	ecs::Manager *mngr_;
 };
 
