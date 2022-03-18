@@ -20,7 +20,6 @@ public:
 
 	void lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y);
 
-private:
-	ecs::Manager* mngr_;
+
 };
 

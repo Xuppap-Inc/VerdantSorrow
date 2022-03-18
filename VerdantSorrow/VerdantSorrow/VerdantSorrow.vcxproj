@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\SceneManager.h" />
     <ClInclude Include="src\game\Scene.h" />
     <ClInclude Include="src\components\boss\finalBoss\FinalBossMovement.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="src\components\VFX.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\SceneManager.cpp" />
     <ClCompile Include="src\game\Scene.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\FinalBossMovement.cpp" />
