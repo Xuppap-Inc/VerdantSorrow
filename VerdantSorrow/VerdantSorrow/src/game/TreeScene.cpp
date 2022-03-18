@@ -21,6 +21,9 @@
 #include "../components/boss/tree_boss/RootAutoAim.h"
 #include "../components/boss/tree_boss/MeleeAttack.h"
 #include "../components/boss/tree_boss/TreeMovement.h"
+#include "../components/boss/tree_boss/LanternSpawner.h"
+#include "../components//boss//tree_boss/LanternMovement.h"
+#include "../components//boss//tree_boss/LanternCollisions.h"
 
 
 #include "CollisionManager.h"
@@ -44,33 +47,34 @@ void TreeScene::init()
 
 void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
-	auto Tree_ = mngr_->addEntity();
-	auto TreeAtribs = Tree_->addComponent<BossAtributos>(10.0f);
+	auto tree_ = mngr_->addEntity();
 
-	auto TreeTr = Tree_->addComponent<Transform>();
-	auto TreeX = sdlutils().width() / 4 * 3 - 80;
-	auto TreeY = sdlutils().height() - 320;
-	TreeTr->init(Vector2D(TreeX, TreeY), Vector2D(), 160, 320, 0.0f);
+	mngr_->setHandler(ecs::_TREEBOSS, tree_);
 
-	Tree_->addComponent<Image>(&sdlutils().images().at("chica"));
+	auto treeTr = tree_->addComponent<Transform>();
+	auto treeX = sdlutils().width() / 4 * 3 - 80;
+	auto treeY = sdlutils().height() - 320;
+	treeTr->init(Vector2D(treeX, treeY), Vector2D(), 160, 320, 0.0f);
+
+	tree_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Se añade un collider al arbol
-	auto treeCollider = Tree_->addComponent<RectangleCollider>(TreeTr->getWidth(), TreeTr->getHeight());
+	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth(), treeTr->getHeight());
 	treeCollider->setIsTrigger(true);
 	colManager->addCollider(treeCollider);
 
-	Tree_->addComponent<BossHPBar>();
-
 	//IMPORTANTE: movimiento y spawner antes de los ataques
-	Tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
-	Tree_->addComponent<RootSpawner>(colManager);
+	tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
+	tree_->addComponent<RootSpawner>(colManager);
 	
-	Tree_->addComponent<RootWave>();
-	Tree_->addComponent<RootAutoAim>(player_);
-	Tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
+	tree_->addComponent<RootWave>();
+	tree_->addComponent<RootAutoAim>(player_);
+	tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
+
+	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
 	
 	//IMPORTANTE: attack manager al final
-	Tree_->addComponent<TreeAttackManager>(colManager);
+	tree_->addComponent<TreeAttackManager>(colManager);
 }
 
 void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
@@ -127,4 +131,40 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 	colManager->addCollider(RootCollider);
 	//Se añade el movimiento horizontal
 	Root->addComponent<RootMovement>();
+}
+
+void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y)
+{
+	//distribucion random de intervalo variable en distintas llamadas
+	std::random_device seed;
+	std::mt19937 gen{ seed() };
+	std::uniform_int_distribution <>myrand(0, sdlutils().width());
+
+	//crea entidad linterna
+	auto lantern = mngr_->addEntity();
+
+	mngr_->setHandler(ecs::_LANTERN, lantern);
+
+	//atributos de linterna
+	auto lanternAtribs = lantern->addComponent<BossAtributos>(10.0f);
+	lantern->addComponent<BossHPBar>();
+	auto lanternTr = lantern->addComponent<Transform>();
+	auto lanternX = x;
+	auto lanternY = y;
+
+	//damos paramtros iniciales
+	lanternTr->init(Vector2D(lanternX, lanternY), Vector2D(), 100, 100, 0.0f);
+	//de momento con un color pocho
+	lantern->addComponent<RectangleRenderer>(SDL_Color());
+
+	//collider de la lampara
+	auto lanternCollider = lantern->addComponent <RectangleCollider>(lanternTr->getWidth(), lanternTr->getHeight());
+	//se hace trigger
+	lanternCollider->setIsTrigger(true);
+	//le pasamos el collider al manager
+	colManager->addCollider(lanternCollider);
+	//la damos movimiento
+	lantern->addComponent<LanternMovement>();
+
+	lantern->addComponent<LanternCollisions>(colManager);
 }

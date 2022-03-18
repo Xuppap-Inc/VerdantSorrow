@@ -44,10 +44,14 @@
 	_NPC_CTRL, \
 	_DIALOG_BOX_MNGR, \
 	_HANDS_MANAGER, \
+	_LANTERNSPAWNER, \
+	_LANTERNMOVEMENT, \
+	_LANTERN_COLLISIONS, \
 	_PUNIETAZO, \
 	_CLAP_ATTACK, \
 	_HAMMER_ARM, \
 	_VFX
+
 
 
 // Groups list - must have at least one element
@@ -61,5 +65,7 @@
 #define _HDLRS_LIST_ \
     _FROGBOSS, \
 	_PLAYER, \
-	_FLY
+	_FLY, \
+	_LANTERN, \
+	_TREEBOSS
 

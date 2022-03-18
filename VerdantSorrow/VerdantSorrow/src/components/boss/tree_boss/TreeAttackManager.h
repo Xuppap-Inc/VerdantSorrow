@@ -7,10 +7,11 @@ class RootAutoAim;
 class MeleeAttack;
 class Transform;
 class CollisionManager;
-class BossAtributos;
 class FramedImage;
 class Image;
 class TreeMovement;
+class LanternMovement;
+class LanternCollisions;
 
 #pragma once
 class TreeAttackManager : public ecs::Component
@@ -50,7 +51,6 @@ private:
 	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
-	BossAtributos* attr_;
 	FramedImage* anim_;
 	Image* img_;
 	RectangleCollider* treeCol_;
@@ -60,6 +60,11 @@ private:
 	RootWave* rootWave_;
 	RootAutoAim* rootAutoAim_;
 	MeleeAttack* meleeAttack_;
+
+	Entity* lantern_;
+	Transform* lanternTr_;
+	LanternMovement* lanternMov_;
+	LanternCollisions* lanternCols_;
 	
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
