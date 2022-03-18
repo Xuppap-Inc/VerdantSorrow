@@ -7,6 +7,8 @@ public:
 	enum scenes { Hub, Frog, Tree, Eye };
 	SceneManager();
 	~SceneManager();
+	void update();
+	void render();
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_);
 private:
