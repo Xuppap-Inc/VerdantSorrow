@@ -10,7 +10,7 @@
 #include "../BossAtributos.h"
 #include "TreeMovement.h"
 
-RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), player_(player), playerTr_(), iniTime_(0), movement_()
+RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), player_(player), playerTr_(), iniTime_(0), movement_(), infiniteDuration_(false)
 {
 }
 
@@ -40,7 +40,7 @@ void RootAutoAim::update()
 		lastTime_ = sdlutils().currRealTime();
 	}
 
-	if (sdlutils().currRealTime() - iniTime_ > DURATION) cancelAttack();
+	if (!infiniteDuration_ && sdlutils().currRealTime() - iniTime_ > DURATION) cancelAttack();
 }
 
 void RootAutoAim::cancelAttack()
@@ -48,9 +48,11 @@ void RootAutoAim::cancelAttack()
 	attacking_ = false;
 }
 
-void RootAutoAim::attack()
+void RootAutoAim::attack(bool infinite)
 {
 	attacking_ = true;
+	infiniteDuration_ = infinite;
+
 	iniTime_ = sdlutils().currRealTime();
 	rootW_ = rootSpawner_->getRootWidth();
 

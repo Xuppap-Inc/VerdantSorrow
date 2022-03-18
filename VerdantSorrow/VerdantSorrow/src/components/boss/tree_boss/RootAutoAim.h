@@ -14,7 +14,7 @@ public:
 
 	void initComponent() override;
 	void update() override;
-	void attack();
+	void attack(bool infinite);
 	void cancelAttack();
 
 	bool hasFinished() { return !attacking_; };
@@ -36,5 +36,7 @@ private:
 	bool attacking_;
 	float rootPos_;
 	int rootW_;
+
+	bool infiniteDuration_;
 };
 

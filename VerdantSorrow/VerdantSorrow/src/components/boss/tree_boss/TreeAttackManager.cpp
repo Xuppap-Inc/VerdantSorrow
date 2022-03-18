@@ -15,6 +15,7 @@
 #include "LanternMovement.h"
 #include "TreeMovement.h"
 #include "LanternCollisions.h"
+#include "../BossAtributos.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
 timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_()
@@ -43,6 +44,7 @@ void TreeAttackManager::initComponent()
 	lanternTr_ = lantern_->getComponent<Transform>();
 	lanternMov_ = lantern_->getComponent<LanternMovement>();
 	lanternCols_ = lantern_->getComponent<LanternCollisions>();
+	attribs_ = lantern_->getComponent<BossAtributos>();
 
 	rootWave_ = ent_->getComponent<RootWave>();
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
@@ -75,7 +77,12 @@ void TreeAttackManager::update()
 
 	float absDistance = abs(distance);
 
-	//direccion para los ataques
+	if (phase != PHASE2 && attribs_->getLife() <= attribs_->getMaxHp() / 2) {
+	
+		phase = PHASE2;
+
+		rootAutoAim_->attack(true);
+	}
 
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
@@ -96,9 +103,9 @@ void TreeAttackManager::update()
 			newAtack_ = false;
 		}
 
-		if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
+		if (phase == PHASE1 && timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
 
-		if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
+		if (phase == PHASE1 && timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 
 		
 	}
@@ -186,7 +193,7 @@ void TreeAttackManager::attackSpecial()
 {
 	state = SPECIAL_ATTACK;
 
-	rootAutoAim_->attack();
+	rootAutoAim_->attack(false);
 	lanternCols_->setDamaged(false);//raices especial si hacen daño
 
 

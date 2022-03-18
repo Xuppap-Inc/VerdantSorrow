@@ -12,6 +12,7 @@ class Image;
 class TreeMovement;
 class LanternMovement;
 class LanternCollisions;
+class BossAtributos;
 
 #pragma once
 class TreeAttackManager : public ecs::Component
@@ -65,6 +66,7 @@ private:
 	Transform* lanternTr_;
 	LanternMovement* lanternMov_;
 	LanternCollisions* lanternCols_;
+	BossAtributos* attribs_;
 	
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
