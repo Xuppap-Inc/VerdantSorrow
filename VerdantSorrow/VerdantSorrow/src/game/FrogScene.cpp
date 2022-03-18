@@ -14,7 +14,7 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
-#include "../components/boss/frog_boss/wave/WaveMovement.h"
+#include "../components/boss/wave/WaveMovement.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
 #include "../components/boss/tree_boss/Root/RootMovement.h"
 

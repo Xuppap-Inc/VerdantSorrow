@@ -64,7 +64,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(8,colManager);
+	player_->addComponent<PlayerHubControl>(3,colManager);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);

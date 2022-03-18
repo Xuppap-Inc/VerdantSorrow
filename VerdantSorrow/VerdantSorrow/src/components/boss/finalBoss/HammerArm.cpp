@@ -4,7 +4,7 @@
 #include "../../RectangleCollider.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../ecs/Manager.h"
-#include "../frog_boss/wave/WaveMovement.h"
+#include "../wave/WaveMovement.h"
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
 

@@ -9,10 +9,11 @@ class PlayerHubControl: public ecs::Component
 {
 public:
 	__CMPID_DECL__(ecs::_PLAYERCTRL)
-		PlayerHubControl( float speed, CollisionManager* colManager) : speed_(speed),tr_(nullptr), attrib_(),colMan_(colManager) {}
-	virtual ~PlayerHubControl();
+		PlayerHubControl(float speed, CollisionManager* colManager);
+	virtual ~PlayerHubControl() {};
 	void update() override;
 	void initComponent() override;
+	void handleInput();
 
 private:
 	RectangleCollider* playerCol_;
@@ -20,4 +21,6 @@ private:
 	float speed_;
 	PlayerAttributes* attrib_;
 	CollisionManager* colMan_;
+
+	bool moveLeft_, moveRight_, moveUp_, moveDown_;
 };
