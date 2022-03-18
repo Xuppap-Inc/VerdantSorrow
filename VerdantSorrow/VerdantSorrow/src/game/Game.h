@@ -10,5 +10,6 @@ public:
 	void update();
 private:
 	ecs::Manager *mngr_;
+	SceneManager* scMngr_;
 };
 

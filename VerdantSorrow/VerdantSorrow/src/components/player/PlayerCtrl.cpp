@@ -96,7 +96,6 @@ void PlayerCtrl::update()
 	if (isKnockback)
 		disableKnockback();
 
-	std::cout << vel << std::endl;
 }
 
 void PlayerCtrl::initComponent()

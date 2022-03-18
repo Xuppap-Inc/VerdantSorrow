@@ -3,26 +3,30 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
+#include "SceneManager.h"
 
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr)
+Game::Game() : mngr_(nullptr),scMngr_(nullptr)
 {
 }
 
 Game::~Game()
 {
 	delete mngr_;
+	delete scMngr_;
 }
 
 //Inicializa el juego y llama a las escenas
 void Game::start() {
 	int n = -1;
 
+	//Método temporal para poder acceder a todas las escenas
 	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" << std::endl << "3. Escena Final" << std::endl;
 	std::cin >> n;
 
+	//Crea el game Manager
 	mngr_ = new ecs::Manager();
 
 	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
@@ -37,7 +41,10 @@ void Game::update()
 	// a boolean to exit the loop
 	bool exit = false;
 
+	//Imput handler
 	auto& ihdlr = ih();
+
+	scMngr_ = new SceneManager();
 
 	while (!exit) {
 		Uint32 startTime = sdlutils().currRealTime();
@@ -63,6 +70,5 @@ void Game::update()
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
 	SDL_Quit();
 }
