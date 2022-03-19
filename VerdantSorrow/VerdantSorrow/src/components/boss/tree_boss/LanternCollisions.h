@@ -7,6 +7,7 @@ class Transform;
 class BossAtributos;
 class RectangleCollider;
 class LanternMovement;
+class Attack;
 
 class LanternCollisions: public ecs::Component
 {
@@ -33,7 +34,11 @@ private:
 
 	LanternMovement* lanterMov_;
 
+	Attack* playerAttack_;
+
 	bool damaged_;
+
+	bool attacked_;
 
 	bool secondPhase_;
 	int contAttacks_;

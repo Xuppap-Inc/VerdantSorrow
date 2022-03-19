@@ -9,7 +9,7 @@
 #include "../../player/Attack.h"
 
 LanternCollisions::LanternCollisions(CollisionManager* colManager) : attrib_(), lanternTr_(), collider_(), colMan_(colManager), damaged_(false), 
-lanterMov_(), secondPhase_(false), contAttacks_(0)
+lanterMov_(), secondPhase_(false), contAttacks_(0), attacked_(false), playerAttack_()
 {
 }
 
@@ -24,7 +24,12 @@ void LanternCollisions::initComponent()
 
 	attrib_ = ent_->getComponent<BossAtributos>();
 	collider_ = ent_->getComponent<RectangleCollider>();
-	assert(lanternTr_ != nullptr);
+
+	playerAttack_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Attack>();
+
+	bool correct = lanternTr_ != nullptr && lanterMov_ != nullptr && attrib_ != nullptr && collider_ != nullptr && playerAttack_ != nullptr;
+
+	assert(correct);
 }
 
 void LanternCollisions::update()
@@ -48,9 +53,11 @@ void LanternCollisions::update()
 					damaged_ = true;
 				}
 
-				else if (secondPhase_ && attack != nullptr) {
+				else if (secondPhase_ && !attacked_ && attack != nullptr) {
 				
 					contAttacks_++;
+
+					attacked_ = true;
 
 					if (contAttacks_ >= NUM_ATTACKS_TO_REPOSITION) {
 					
@@ -62,6 +69,8 @@ void LanternCollisions::update()
 			}
 		}
 	}
+
+	if (attacked_ && playerAttack_->hasFinished()) attacked_ = false;
 }
 
 void LanternCollisions::setDamaged(bool set)

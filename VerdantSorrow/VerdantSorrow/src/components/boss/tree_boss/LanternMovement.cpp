@@ -42,10 +42,10 @@ void LanternMovement::moveToSide()
 {
 	int x;
 
-	if (rightSide) x = sdlutils().width() - 50;
-	else x = 50;
+	if (rightSide) x = sdlutils().width() - 100 - lanternTr_->getHeight() / 2;
+	else x = 100;
 
-	lanternTr_->getPos().set(Vector2D(sdlutils().width() - 100, x));
+	lanternTr_->getPos().set(Vector2D(x, sdlutils().height() - 100 - lanternTr_->getHeight() / 2));
 
 	rightSide = !rightSide;
 }
