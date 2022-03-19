@@ -53,10 +53,10 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
-	auto treeY = sdlutils().height() - 320;
-	treeTr->init(Vector2D(treeX, treeY), Vector2D(), 160, 320, 0.0f);
+	auto treeY = sdlutils().height() - 360;
+	treeTr->init(Vector2D(treeX, treeY), Vector2D(), 160, 360, 0.0f);
 
-	tree_->addComponent<Image>(&sdlutils().images().at("chica"));
+	tree_->addComponent<Image>(&sdlutils().images().at("groot"));
 
 	//Se añade un collider al arbol
 	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth(), treeTr->getHeight());
