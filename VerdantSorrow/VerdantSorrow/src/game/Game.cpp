@@ -57,13 +57,14 @@ void Game::update()
 			continue;
 		}
 
-		mngr_->update();
+		scMngr_->update();
+		/*mngr_->update();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		sdlutils().presentRenderer();
+		sdlutils().presentRenderer();*/
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

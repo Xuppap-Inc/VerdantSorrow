@@ -48,6 +48,17 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 }
 
 
+void Hub::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se le añaden los atributos del player, no los del transform
 	player_->addComponent<PlayerAttributes>();
