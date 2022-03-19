@@ -205,9 +205,7 @@ void TreeAttackManager::prepareToSpecial()
 
 		lanternMov_->setActive(false);
 
-		//lanternTr_->getPos().set(Vector2D(sdlutils().width()-100, sdlutils().height()-50));
 		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 3));
-		//lanternTr_->createLantern(20, sdlutils().height()-50);
 
 		state = MOVING_TO_CENTER;
 

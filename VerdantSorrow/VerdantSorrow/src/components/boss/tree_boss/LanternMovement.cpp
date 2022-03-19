@@ -3,7 +3,7 @@
 #include "../../../ecs/Manager.h"
 #include "../../../components/Transform.h"
 
-LanternMovement::LanternMovement() :treeTr_(), lanternTr_(), active(true)
+LanternMovement::LanternMovement() :treeTr_(), lanternTr_(), active(true), rightSide(false)
 {
 }
 
@@ -36,4 +36,16 @@ bool LanternMovement::isActive()
 void LanternMovement::setActive(bool set)
 {
 	active = set;
+}
+
+void LanternMovement::moveToSide()
+{
+	int x;
+
+	if (rightSide) x = sdlutils().width() - 50;
+	else x = 50;
+
+	lanternTr_->getPos().set(Vector2D(sdlutils().width() - 100, x));
+
+	rightSide = !rightSide;
 }
