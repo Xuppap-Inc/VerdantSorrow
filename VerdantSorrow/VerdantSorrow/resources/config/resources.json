@@ -183,6 +183,10 @@
     {
       "id": "root",
       "file": "resources/images/root.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
     }
   ],
 
