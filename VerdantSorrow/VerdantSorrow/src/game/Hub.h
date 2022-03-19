@@ -9,6 +9,7 @@ public:
 	~Hub() {}
 	void init();
 
+	virtual void update () override;
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 	void EntryGenerator(CollisionManager* colManager);
 	void NPCGenerator(CollisionManager* colManager, Entity* dialogBox_);

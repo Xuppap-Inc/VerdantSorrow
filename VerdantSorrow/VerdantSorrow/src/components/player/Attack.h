@@ -20,6 +20,8 @@ public:
 
     void initComponent() override;
     void update() override;
+
+    bool hasFinished();
     
 protected:
     Transform* tr_;
@@ -30,6 +32,7 @@ protected:
     int lastAttack;
     
     bool newAttack;
+    bool finished_;
 
     CollisionManager* colMan_;
     FramedImage* anim_;

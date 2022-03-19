@@ -48,6 +48,17 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 }
 
 
+void Hub::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Se le añaden los atributos del player, no los del transform
 	player_->addComponent<PlayerAttributes>();
@@ -64,7 +75,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(8,colManager);
+	player_->addComponent<PlayerHubControl>(3,colManager);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);

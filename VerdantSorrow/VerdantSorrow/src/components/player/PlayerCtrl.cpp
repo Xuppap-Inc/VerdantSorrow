@@ -14,7 +14,7 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 {
 }
 
-PlayerCtrl::~PlayerCtrl() 
+PlayerCtrl::~PlayerCtrl()
 {
 }
 
@@ -73,40 +73,29 @@ void PlayerCtrl::update()
 
 			anim_->flipX(false);
 		}
+		else
+			slide_ = true;
 
 		//Roll
 		if (roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
 			lastRoll_ = currentTime;
 			isRolling_ = true;
-		}
-			
-		if (!moveLeft_ && !moveRight_ && !isRolling_)
-			slide_ = true;
+		}	
 
-		// Animation
-		if (attrib_->isOnGround()) {
-			if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
-			if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
-				if (anim_->getCurrentAnimation() != "Chica_Run") {
-					anim_->repeat(false);
-					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
-				}
-			}
-			else {
-				if (anim_->getCurrentAnimation() != "Chica_Idle") {
-					anim_->repeat(false);
-					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
-				}
-			}
-		}
 	}
 
+	animationManagement();
+
 	if (slide_)
-		doSlide();	
+		doSlide();
 
 	if (isAttacking)
 		doAttack();
+
+	if (isKnockback)
+		disableKnockback();
+
 }
 
 void PlayerCtrl::initComponent()
@@ -118,9 +107,7 @@ void PlayerCtrl::initComponent()
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
 	anim_ = ent_->getComponent<FramedImage>();
-	//assert(anim_ != nullptr);
-
-	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
+	assert(anim_ != nullptr);
 }
 
 // Realiza un knockback en la direccion especificada
@@ -129,11 +116,8 @@ void PlayerCtrl::doKnockback(int dir) {
 	tr_->getVel().set(Vector2D(knockbackForceX_ * dir, -knockbackForceY_));
 	attrib_->setOnGround(false);
 
-	slide_ = true;
-
 	isKnockback = true;
-
-	//anim_->changeanim(&sdlutils().images().at("ChicaIdle"), 6, 6, 1000, 31);
+	slide_ = true;
 }
 
 void PlayerCtrl::doAttack()
@@ -159,7 +143,26 @@ void PlayerCtrl::doSlide()
 
 		tr_->getVel().set(Vector2D(0, vel.getY()));
 		slide_ = false;
-		isKnockback = false;
+	}
+}
+
+void PlayerCtrl::animationManagement()
+{
+	// Animation
+	if (attrib_->isOnGround()) {
+		if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
+			if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
+				if (anim_->getCurrentAnimation() != "Chica_Run") {
+					anim_->repeat(false);
+					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
+				}
+			}
+			else {
+				if (anim_->getCurrentAnimation() != "Chica_Idle") {
+					anim_->repeat(false);
+					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
+				}
+			}
 	}
 }
 
@@ -187,4 +190,10 @@ void PlayerCtrl::handleInput()
 		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
 			roll_ = true;
 	}
+}
+
+void PlayerCtrl::disableKnockback()
+{
+	if (abs(tr_->getVel().getX()) < 1)
+		isKnockback = false;
 }

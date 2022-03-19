@@ -2,21 +2,16 @@
 
 #include <iostream>
 
-#include "ecs/Manager.h"
-#include "sdlutils/SDLUtils.h"
-void start() {
-	int n = -1;
+#include "game/Game.h"
 
-	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" << std::endl << "3. Escena Final"  << std::endl;
-	std::cin >> n;
-	ecs::Manager* mngr_ = new ecs::Manager();
-	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
-	mngr_->changeScene(n);
-}
 int main(int ac, char **av) {
 
 	try {
-		start();
+		//Se inicializa el juego, donde se controla todo
+		Game* g = new Game();
+		g->start();
+		g->update();
+		delete g;
 	} catch (const std::string &e) { // catch exceptions thrown as strings
 		std::cerr << e << std::endl;
 	} catch (const char *e) { // catch exceptions thrown as char*
