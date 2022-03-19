@@ -12,31 +12,34 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../ecs/Component.h"
 
-WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr)
+#include <cassert>
+
+WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(5), waveHeight_(50), waveWidth_(150)
 {
 }
 
-void WaveSpawner::createWaves()
+void WaveSpawner::createWaves(Transform* tr)
 {
-	createWave(-1);
-	createWave(1);
+	createWave(-1, tr);
+	createWave(1, tr);
 }
 
-void WaveSpawner::createWave(int dir)
+void WaveSpawner::createWave(int dir, Transform* tr)
 {
 	//Se crea la onda expansiva
 	auto Wave = mngr_->addEntity();
 
+
+	float WaveY = sdlutils().height() - waveHeight_, WaveX;
+
+	if (dir > 0)
+		WaveX = tr->getPos().getX() + tr->getWidth();
+	else
+		WaveX = tr->getPos().getX() - waveWidth_;
+
 	//Se anyade el transform
-	auto WaveTr = Wave->addComponent<Transform>();
-	auto WaveX = playerTr_->getPos().getX();
-	auto WaveY = sdlutils().height() - waveHeight;
+	auto WaveTr = Wave->addComponent<Transform>(Vector2D(WaveX, WaveY), Vector2D(), waveWidth_, waveHeight_, 0.0f);
 
-	if (dir == 1)
-		WaveX += playerTr_->getWidth();
-
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
-	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), waveWidth, waveHeight, 0.0f);
 	//Se le anyade un color inicial a la onda
 	Wave->addComponent<RectangleRenderer>(SDL_Color());
 

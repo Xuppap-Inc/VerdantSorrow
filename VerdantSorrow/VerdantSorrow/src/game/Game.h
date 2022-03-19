@@ -1,6 +1,8 @@
 #pragma once
 #include "../ecs/Manager.h"
 
+class SceneManager;
+
 class Game
 {
 public:

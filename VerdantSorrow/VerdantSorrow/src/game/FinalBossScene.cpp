@@ -21,6 +21,8 @@
 #include "../components/boss/finalBoss/HandsManager.h"
 #include "../components/boss/finalBoss/FinalBossMovement.h"
 
+#include "../components/boss/wave/WaveSpawner.h"
+
 
 
 void FinalBossScene::init()
@@ -29,18 +31,26 @@ void FinalBossScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-	
+
 
 	background();
+
+	waveSpawnerGenerator(colManager);
+
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+
 	finalBossGenerator(colManager, player);
-	//platformGenerator(colManager);
-	//waveGenerator(colManager, player, sdlutils().width() / 2, -1);
-	//waveGenerator(colManager, player, sdlutils().width() / 2, 1);
-	//rootGenerator(colManager, player, sdlutils().width() / 2);
-	//flyGenerator(colManager, player);
+
+}
+
+void FinalBossScene::waveSpawnerGenerator(CollisionManager*& colManager)
+{
+	//se crea wave spwner
+	auto waveSp = mngr_->addEntity();
+	waveSp->addComponent<WaveSpawner>(colManager);
+	mngr_->setHandler(ecs::_WAVE_GENERATOR, waveSp);
 }
 
 void FinalBossScene::background()
@@ -55,11 +65,11 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
-	auto BossX = (sdlutils().width()-100) / 2 ;
-	auto BossY = sdlutils().height()/2;
-	BossTr->init(Vector2D(BossX, BossY), Vector2D(0,0),100, 100, 0.0f);
+	auto BossX = (sdlutils().width() - 100) / 2;
+	auto BossY = sdlutils().height() / 2;
+	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 100, 100, 0.0f);
 
-	
+
 	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<HandsManager>(colManager);
 	FinalBossFace->addComponent<FinalBossMovement>(colManager);
@@ -68,8 +78,6 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);
 
-	//FinalBossFace->addComponent<SimpleGravity>(1.5);
-	//FinalBossFace->addComponent<CollideWithBordersBoss>();
 
 	FinalBossFace->addComponent<BossHPBar>();
 }
@@ -94,7 +102,7 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 	player_->addComponent<CollideWithBorders>();
 
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 40, playerTr->getHeight()-30);
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 40, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
@@ -114,31 +122,4 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-}
-
-
-void FinalBossScene::waveGenerator(CollisionManager* colManager, Entity* player_, float x, int dir) {
-
-	//Se crea la onda expansiva
-	auto Wave = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-	auto WaveAtribs = Wave->addComponent<BossAtributos>();
-	auto WaveTr = Wave->addComponent<Transform>();
-	auto WaveX = x;
-	auto WaveY = sdlutils().height() - 50;
-	//dir = {-1, 1}
-	auto WaveDir = dir;
-	auto WaveSpeed = 5;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
-	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f);
-	//Se le añade un color inicial a la onda
-	Wave->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Se añade un collider a la onda
-	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
-	waveCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
-	colManager->addCollider(waveCollider);
-	//Se añade el movimiento horizontal
-	//Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
 }

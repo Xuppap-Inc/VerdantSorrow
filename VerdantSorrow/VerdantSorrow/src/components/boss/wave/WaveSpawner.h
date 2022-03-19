@@ -13,16 +13,15 @@ public:
 	~WaveSpawner() {};
 
 	//crea waves hacia los dos lados
-	void createWaves();
+	void createWaves(Transform* tr);
 
 private:
 	//crea una wave hacia la direccion dir
-	void createWave(int dir);
+	void createWave(int dir, Transform* tr);
 
-	Transform* playerTr_;
 	CollisionManager* colManager_;
 
-	float waveSpeed_ = 5;
-	float waveHeight = 50;
-	float waveWidth = 150;
+	float waveSpeed_;
+	float waveHeight_;
+	float waveWidth_;
 };

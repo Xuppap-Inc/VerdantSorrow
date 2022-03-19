@@ -52,7 +52,7 @@ void SimplePhysicsPlayer::update()
 				float lastPositionX = pos.getX() - velPlayer.getX();
 				float lastPositionY = pos.getY() - velPlayer.getY();
 				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
-				float colliderDiffY = (tr_->getHeight() - collider_->getHeight());
+				float colliderDiffY = (tr_->getHeight() - collider_->getHeight()) / 2;
 
 				if (lastPositionX + collider_->getWidth() + velCollider.getX() <= posCollider.getX()) {//colision por la izda
 					velPlayer.setX(0);

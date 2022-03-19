@@ -7,6 +7,8 @@
 
 class Transform;
 class CollisionManager;
+class WaveSpawner;
+
 class HammerArm : public ecs::Component
 {
 public:
@@ -37,7 +39,6 @@ public:
     void changeState(State s) { state_ = s; };
 
 protected:
-    void createWave(int dir);
     Transform* tr_;
     RectangleCollider* collider_;
     int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
@@ -47,5 +48,7 @@ protected:
 
     Vector2D initialPos;
     State state_;
+
+    WaveSpawner* waveSp_;
 };
 
