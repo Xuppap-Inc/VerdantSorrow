@@ -93,8 +93,8 @@
       "file": "resources/images/fondo1.png"
     },
     {
-      "id": "Suelo_Rana",
-      "file": "resources/images/Suelo_Rana.png"
+      "id": "fondoSuelo",
+      "file": "resources/images/fondoSuelo.png"
     },
     {
       "id": "Chica_AtkAir",

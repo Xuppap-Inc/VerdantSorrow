@@ -181,7 +181,9 @@
     <Media Include="resources\sound\sfx_rana_damage.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\assets\fondos\Suelo_Rana.png" />
     <Image Include="resources\images\BossBarArrow_Left.png" />
+    <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />
     <Image Include="resources\images\middleBar.png" />
