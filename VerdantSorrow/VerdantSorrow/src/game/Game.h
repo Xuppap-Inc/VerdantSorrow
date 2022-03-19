@@ -2,6 +2,8 @@
 #include "../ecs/Manager.h"
 #include "../game/SceneManager.h"
 
+class SceneManager;
+
 class Game
 {
 public:

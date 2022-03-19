@@ -68,5 +68,6 @@
 	_PLAYER, \
 	_FLY, \
 	_LANTERN, \
-	_TREEBOSS
+	_TREEBOSS, \
+	_WAVE_GENERATOR
 

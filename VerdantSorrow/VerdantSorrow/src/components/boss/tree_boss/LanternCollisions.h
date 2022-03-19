@@ -6,6 +6,8 @@
 class Transform;
 class BossAtributos;
 class RectangleCollider;
+class LanternMovement;
+class Attack;
 
 class LanternCollisions: public ecs::Component
 {
@@ -18,14 +20,27 @@ public:
 	virtual void update()override;
 
 	void setDamaged(bool set);
+	void changeToSecondPhase();
 
 private:
+
+	const int NUM_ATTACKS_TO_REPOSITION = 3;
+
 	Transform* lanternTr_;
 	BossAtributos* attrib_;
 	RectangleCollider* collider_;
 
 	CollisionManager* colMan_;
 
+	LanternMovement* lanterMov_;
+
+	Attack* playerAttack_;
+
 	bool damaged_;
+
+	bool attacked_;
+
+	bool secondPhase_;
+	int contAttacks_;
 };
 

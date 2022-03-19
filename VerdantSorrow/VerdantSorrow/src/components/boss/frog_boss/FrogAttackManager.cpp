@@ -13,11 +13,12 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../FramedImage.h"
 #include "FlyHp.h"
+#include "../wave/WaveSpawner.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), 
 				jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(), 
-				tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE)
+				tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
 {
 }
 
@@ -25,7 +26,7 @@ FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(
 				fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
 				jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), 
 				flySpacing_(0), tongueAttack_(), tongueDelay_(3000), animState_(ANIM_IDLE), 
-				animNewState_(ANIM_IDLE)
+				animNewState_(ANIM_IDLE),waveSp_()
 {
 }
 
@@ -42,6 +43,7 @@ void FrogAttackManager::initComponent()
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	attr_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
+	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaFase2_->play();
@@ -51,7 +53,7 @@ void FrogAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr;	
+	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_!=nullptr;	
 	assert(correct);
 }
 
@@ -177,8 +179,6 @@ void FrogAttackManager::update()
 	}
 }
 
-
-
 ecs::Entity* FrogAttackManager::createFly()
 {
 	fly_ = mngr_->addEntity();
@@ -193,41 +193,6 @@ ecs::Entity* FrogAttackManager::createFly()
 	fly_->addComponent<FlyHp>(this);
 	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;
-}
-
-void  FrogAttackManager::createWave(int dir)
-{
-	//Se crea la onda expansiva
-	auto Wave = mngr_->addEntity();
-	//Se añade el transform
-	auto WaveTr = Wave->addComponent<Transform>();
-	auto WaveX = tr_->getPos().getX();
-	auto WaveY = sdlutils().height() - 50;
-	//dir = {-1, 1}
-	auto WaveDir = dir;
-	if (WaveDir == 1) {
-		WaveX += tr_->getWidth();
-	}
-	auto WaveSpeed = 5;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
-	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 150, 50, 0.0f);
-	//Se le añade un color inicial a la onda
-	Wave->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Se a�ade un collider a la onda
-	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
-	waveCollider->setIsTrigger(true);
-	//Se a�ade el collider al colliderGameManager
-	collManager_->addCollider(waveCollider);
-	//Se a�ade el movimiento horizontal
-	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
-
-}
-
-void FrogAttackManager::createWaves()
-{
-	createWave(1);
-	createWave(-1);
 }
 
 void FrogAttackManager::onFlyDied() {
@@ -254,7 +219,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	lastUpdate_ = sdlutils().currRealTime();
 	if (isBig) {
 		if (secondPhase_) jumpsUntilNextTongue_--;
-		createWaves();
+		waveSp_->createWaves(tr_);
 		if (angry_) /*Volver a rana normal*/;
 	}
 	else {

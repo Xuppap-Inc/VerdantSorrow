@@ -8,6 +8,7 @@ class TongueAttack;
 class CollisionManager;
 class BossAtributos;
 class FramedImage;
+class WaveSpawner;
 
 #pragma once
 class FrogAttackManager : public ecs::Component
@@ -34,8 +35,6 @@ public:
 	void initComponent() override;
 	void update() override;
 	ecs::Entity* createFly();
-	void createWave(int dir);
-	void createWaves();
 	void onFlyDied();
 private:
 	enum AnimState {
@@ -63,7 +62,10 @@ private:
 	FramedImage* anim_;
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
-	
+
+	//clase para spawnear waves
+	WaveSpawner* waveSp_;
+
 	State frogState_;
 	AnimState animState_;
 	AnimState animNewState_;

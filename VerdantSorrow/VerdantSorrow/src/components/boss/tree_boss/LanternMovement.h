@@ -16,10 +16,14 @@ public:
 	bool isActive();
 	void setActive(bool set);
 
+	void moveToSide();
+
 private:
 	Transform* lanternTr_;
 	Transform* treeTr_;
 	
 	bool active;
+
+	bool rightSide;
 };
 

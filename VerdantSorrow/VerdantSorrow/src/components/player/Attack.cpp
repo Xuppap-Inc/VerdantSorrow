@@ -11,7 +11,7 @@
 
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
-	attackCoolDown(300), lastAttack(), newAttack(false)
+	attackCoolDown(300), lastAttack(), newAttack(false), finished_(true)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -26,7 +26,7 @@ void Attack::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	anim_ = ent_->getComponent<FramedImage>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
-	assert(tr_ != nullptr, collider_ !=nullptr);
+	assert(tr_ != nullptr, collider_ != nullptr && attrib_ != nullptr);
 }
 
 void Attack::update()
@@ -37,8 +37,11 @@ void Attack::update()
 
 		setPosition();
 
-		if (sdlutils().currRealTime() >= lastAttack + attackDuration)
+		if (sdlutils().currRealTime() >= lastAttack + attackDuration) {
+			
 			setActive(false);
+			finished_ = true;
+		}
 	}
 	else {
 		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
@@ -91,6 +94,8 @@ void Attack::update()
 					bA->setDamage(0.6f);
 					tr_->getVel().setY(0);
 					newAttack = false;
+
+					finished_ = false;
 				}
 				FlyHp* fHP = ent->getComponent<FlyHp>();
 				if (fHP != nullptr) {
@@ -99,6 +104,11 @@ void Attack::update()
 			}
 		}
 	}
+}
+
+bool Attack::hasFinished()
+{
+	return finished_;
 }
 
 void Attack::setPosition()
