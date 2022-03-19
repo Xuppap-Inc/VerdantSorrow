@@ -10,7 +10,7 @@
 #include "../BossAtributos.h"
 #include "../../Image.h"
 
-RootSpawner::RootSpawner(CollisionManager* collManager) : collManager_(collManager), framedImg_(), rootWidth_(25)
+RootSpawner::RootSpawner(CollisionManager* collManager) : collManager_(collManager), framedImg_(), rootWidth_(60)
 {
 }
 
