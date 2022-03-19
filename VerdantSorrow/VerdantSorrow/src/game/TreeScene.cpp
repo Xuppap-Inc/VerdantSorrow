@@ -155,7 +155,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	//damos paramtros iniciales
 	lanternTr->init(Vector2D(lanternX, lanternY), Vector2D(), 100, 100, 0.0f);
 	//de momento con un color pocho
-	lantern->addComponent<RectangleRenderer>(SDL_Color());
+	lantern->addComponent<Image>(&sdlutils().images().at("lampara"));
 
 	//collider de la lampara
 	auto lanternCollider = lantern->addComponent <RectangleCollider>(lanternTr->getWidth(), lanternTr->getHeight());
