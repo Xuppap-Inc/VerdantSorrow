@@ -43,7 +43,7 @@ void FrogScene::init()
 	frogGenerator(colManager, player);
 	auto particles = mngr_->addEntity();
 	 particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 8, 5, 2000, 32, "particles");
+	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
 
 }
 
