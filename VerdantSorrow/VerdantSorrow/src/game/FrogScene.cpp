@@ -59,6 +59,8 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 void FrogScene::background()
 {
 	Scene::background("fondo1");
+
+	//Texture* floor = &sdlutils().images().at("Suelo_Rana");
 }
 
 
