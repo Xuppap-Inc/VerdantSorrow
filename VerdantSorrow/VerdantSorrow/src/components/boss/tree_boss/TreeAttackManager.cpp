@@ -116,7 +116,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == WAVE) {
-		lanternCols_->setDamaged(true); //waves no hacen daño
+		lanternCols_->setDamaged(true); //waves no hacen daï¿½o
 		if (rootWave_->getMove()) {
 			
 			state = MOVING;
@@ -199,7 +199,7 @@ void TreeAttackManager::attackSpecial()
 	state = SPECIAL_ATTACK;
 
 	rootAutoAim_->attack(false);
-	lanternCols_->setDamaged(false);//raices especial si hacen daño
+	lanternCols_->setDamaged(false);//raices especial si hacen daï¿½o
 
 
 	img_->setVisible(false);
@@ -217,9 +217,7 @@ void TreeAttackManager::prepareToSpecial()
 
 		lanternMov_->setActive(false);
 
-		//lanternTr_->getPos().set(Vector2D(sdlutils().width()-100, sdlutils().height()-50));
 		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 3));
-		//lanternTr_->getPos().set(Vector2D(20, sdlutils().height()-50);
 
 		state = MOVING_TO_CENTER;
 
