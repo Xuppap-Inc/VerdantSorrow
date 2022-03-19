@@ -8,51 +8,181 @@
 
 
   "images": [
-    { "id": "bolaFuego", "file": "resources/images/bola_fuego.png" },
-    { "id": "sdl_logo", "file": "resources/images/SDL_logo.png" },
-    { "id": "matt", "file": "resources/images/matt.jpg" },
-    { "id": "ojo", "file": "resources/images/Ojo.png" },
-    { "id": "ojo", "file": "resources/images/Ojo.png" },
-    { "id": "mano", "file": "resources/images/mano.png" },
-    { "id": "tennis_ball", "file": "resources/images/tennis_ball.png" },
-    { "id": "star", "file": "resources/images/star.png" },
-    { "id": "chica", "file": "resources/images/chicafoto.png"},
-    { "id": "ranajump", "file": "resources/images/rana_jump.png" },
-    { "id": "Chica_Idle", "file": "resources/images/Chica_Idle.png" },
-    { "id": "Chica_Run", "file": "resources/images/Chica_Run.png" },
-    { "id": "Chica_Jump", "file": "resources/images/Chica_Jump.png" },
-    { "id": "Chica_AtkFloor", "file": "resources/images/Chica_AtkFloor.png" },
-    { "id": "heart", "file": "resources/images/heart.png" },
-    { "id": "heartBlack", "file": "resources/images/heartBlack.png" },
-    { "id": "healthDetail", "file": "resources/images/HealthDetail.png" },
-    { "id": "bossBarArrow_Left", "file": "resources/images/BossBarArrow_Left.png" },
-    { "id": "bossBarArrow_Right", "file": "resources/images/BossBarArrow_Right.png" },
-    { "id": "middleBar", "file": "resources/images/middleBar.png" },
-    { "id": "fondo1", "file": "resources/images/fondo1.png" },
-    { "id": "Chica_AtkAir", "file": "resources/images/Chica_AtkAir.png" },
-    { "id": "ranacambiofase", "file": "resources/images/rana_cambio_fase.png" },
-    { "id": "mosca", "file": "resources/images/mosca.png" },
-    { "id": "lengua", "file": "resources/images/lengua.png" },
-    { "id": "rana_cambio_fase", "file": "resources/images/rana_cambio_fase.png" },
-    { "id": "rana_enfadada_idle", "file": "resources/images/rana_enfadada_idle.png" },
-    { "id": "rana_enfadada_jump", "file": "resources/images/rana_enfadada_jump.png" },
-    { "id": "rana_enfadada_lengua", "file": "resources/images/rana_enfadada_lengua.png" },
-    { "id": "rana_enfadada_muerte", "file": "resources/images/rana_enfadada_muerte.png" },
-    { "id": "rana_idle", "file": "resources/images/rana_idle.png" },
-    { "id": "rana_jump", "file": "resources/images/rana_jump.png" },
-    { "id": "rana_lengua", "file": "resources/images/rana_lengua.png" },
-    { "id": "rana_salto_a_vulnerable", "file": "resources/images/rana_salto_a_vulnerable.png" },
-    { "id": "rana_vulnerable", "file": "resources/images/rana_vulnerable.png" },
-    { "id": "rana_vulnerable_a_idle", "file": "resources/images/rana_vulnerable_a_idle.png" },
-    { "id": "vfx_cloud", "file": "resources/images/vfx_cloud.png" },
-    { "id": "vfx_smoke", "file": "resources/images/vfx_smoke.png" },
-    { "id": "vfx_lantern", "file": "resources/images/vfx_lantern.png" },
-    { "id": "vfx_attack", "file": "resources/images/vfx_attack.png" },
+    {
+      "id": "bolaFuego",
+      "file": "resources/images/bola_fuego.png"
+    },
+    {
+      "id": "sdl_logo",
+      "file": "resources/images/SDL_logo.png"
+    },
+    {
+      "id": "matt",
+      "file": "resources/images/matt.jpg"
+    },
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
+    {
+      "id": "mano",
+      "file": "resources/images/mano.png"
+    },
+    {
+      "id": "tennis_ball",
+      "file": "resources/images/tennis_ball.png"
+    },
+    {
+      "id": "star",
+      "file": "resources/images/star.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "ranajump",
+      "file": "resources/images/rana_jump.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/Chica_Idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/Chica_Run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/Chica_Jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/Chica_AtkFloor.png"
+    },
+    {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "bossBarArrow_Left",
+      "file": "resources/images/BossBarArrow_Left.png"
+    },
+    {
+      "id": "bossBarArrow_Right",
+      "file": "resources/images/BossBarArrow_Right.png"
+    },
+    {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
+    },
+    {
+      "id": "ranacambiofase",
+      "file": "resources/images/rana_cambio_fase.png"
+    },
+    {
+      "id": "mosca",
+      "file": "resources/images/mosca.png"
+    },
+    {
+      "id": "lengua",
+      "file": "resources/images/lengua.png"
+    },
+    {
+      "id": "rana_cambio_fase",
+      "file": "resources/images/rana_cambio_fase.png"
+    },
+    {
+      "id": "rana_enfadada_idle",
+      "file": "resources/images/rana_enfadada_idle.png"
+    },
+    {
+      "id": "rana_enfadada_jump",
+      "file": "resources/images/rana_enfadada_jump.png"
+    },
+    {
+      "id": "rana_enfadada_lengua",
+      "file": "resources/images/rana_enfadada_lengua.png"
+    },
+    {
+      "id": "rana_enfadada_muerte",
+      "file": "resources/images/rana_enfadada_muerte.png"
+    },
+    {
+      "id": "rana_idle",
+      "file": "resources/images/rana_idle.png"
+    },
+    {
+      "id": "rana_jump",
+      "file": "resources/images/rana_jump.png"
+    },
+    {
+      "id": "rana_lengua",
+      "file": "resources/images/rana_lengua.png"
+    },
+    {
+      "id": "rana_salto_a_vulnerable",
+      "file": "resources/images/rana_salto_a_vulnerable.png"
+    },
+    {
+      "id": "rana_vulnerable",
+      "file": "resources/images/rana_vulnerable.png"
+    },
+    {
+      "id": "rana_vulnerable_a_idle",
+      "file": "resources/images/rana_vulnerable_a_idle.png"
+    },
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_lantern",
+      "file": "resources/images/vfx_lantern.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
     {
       "id": "vfx_star",
       "file": "resources/images/vfx_star.png"
     },
-    { "id": "groot","file": "resources/images/groot.png"
+    {
+      "id": "groot",
+      "file": "resources/images/groot.png"
+    },
+    {
+      "id": "lampara",
+      "file": "resources/images/lampara.png"
+    },
+    {
+      "id": "root",
+      "file": "resources/images/root.png"
     }
   ],
 

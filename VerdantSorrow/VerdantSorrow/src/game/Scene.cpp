@@ -68,6 +68,10 @@ void Scene::start()
 	SDL_Quit();
 }
 
+void Scene::update()
+{
+}
+
 void Scene::background(std::string backgroundName)
 {
 	auto backgr_ = mngr_->addEntity();

@@ -7,10 +7,10 @@
 
 SceneManager::SceneManager(): actScene(Hub_)
 {
-	Hub* h_ = new Hub();
-	FrogScene* f_ = new FrogScene();
-	TreeScene* t_ = new TreeScene();
-	FinalBossScene* fin_ = new FinalBossScene();
+	//Hub* h_ = new Hub();
+	//FrogScene* f_ = new FrogScene();
+	//TreeScene* t_ = new TreeScene();
+	//FinalBossScene* fin_ = new FinalBossScene();
 }
 
 SceneManager::~SceneManager()
