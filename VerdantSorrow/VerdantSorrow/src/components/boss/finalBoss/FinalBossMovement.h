@@ -8,6 +8,7 @@ class Transform;
 class BossAtributos;
 class HandsManager;
 class CollisionManager;
+class WaveSpawner;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -33,5 +34,6 @@ private:
 	float eyeSpeed;
 	int lastTimeGround = 0, timeInGround = 1000;
 	Vector2D velocitySaved;
+	WaveSpawner* waveSp_;
 };
 
