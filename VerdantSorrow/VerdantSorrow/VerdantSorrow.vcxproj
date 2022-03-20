@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
+    <ClInclude Include="src\components\tutorial\TutorialFly.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\SceneManager.h" />
     <ClInclude Include="src\game\Scene.h" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
+    <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\SceneManager.cpp" />
     <ClCompile Include="src\game\Scene.cpp" />

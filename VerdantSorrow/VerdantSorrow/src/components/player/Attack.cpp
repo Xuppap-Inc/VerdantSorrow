@@ -8,6 +8,7 @@
 #include "../boss/frog_boss/FlyHp.h"
 #include "../../ecs/Manager.h"
 #include "../VFX.h"
+#include "../tutorial/TutorialFly.h"
 
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
@@ -100,6 +101,10 @@ void Attack::update()
 				FlyHp* fHP = ent->getComponent<FlyHp>();
 				if (fHP != nullptr) {
 					fHP->receiveHit();
+				}
+				TutorialFly* tFl = ent->getComponent<TutorialFly>();
+				if (tFl != nullptr) {
+					tFl->receiveHit();
 				}
 			}
 		}
