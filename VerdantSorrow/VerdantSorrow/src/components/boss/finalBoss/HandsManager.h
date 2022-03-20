@@ -34,7 +34,13 @@ public:
 
 	
 private:
+	void createHands();
+	void chooseAttack();
+	void clapAttack();
+	void punietazoAttack();
+	void hammerAttack();
 	float lastAttackDone = 0, attackCooldown;
+	int numeroAtaque;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
