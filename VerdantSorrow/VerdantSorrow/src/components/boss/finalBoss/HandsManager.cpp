@@ -9,6 +9,7 @@
 #include "Punietazo.h"
 #include "ClapAttack.h"
 #include "HammerArm.h"
+#include "../BossAtributos.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), state_(REPOSO)
@@ -22,8 +23,9 @@ HandsManager::~HandsManager()
 
 void HandsManager::initComponent()
 {
+	bA_ = ent_->getComponent<BossAtributos>();
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(playertr_ != nullptr);
+	assert(playertr_ != nullptr && bA_ != nullptr);
 
 	float handSize = 100;
 
@@ -53,6 +55,10 @@ void HandsManager::initComponent()
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
 	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
+
+	colliderLeftHand_ = manoIzCollider;
+	colliderRightHand_ = manoDrCollider;
+	assert(colliderLeftHand_ != nullptr && colliderRightHand_ != nullptr);
 
 	state_ = CLAP;
 }
@@ -179,5 +185,9 @@ void HandsManager::update()
 				}
 			}
 		}
+	}
+	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
+		colliderLeftHand_->setIsTrigger(true);
+		colliderRightHand_->setIsTrigger(true);
 	}
 }
