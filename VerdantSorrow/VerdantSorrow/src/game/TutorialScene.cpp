@@ -14,9 +14,9 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
-#include "../components/boss/tree_boss/Root/RootMovement.h"
 #include "CollisionManager.h"
 #include "../components/tutorial/TutorialFly.h"
+#include "../components/tutorial/TutorialSpawnRoot.h"
 
 void TutorialScene::init() 
 {
@@ -41,13 +41,16 @@ void TutorialScene::init()
 
 	createPlatform(700, sdlutils().height() - 100, 300, 100);
 
-	createRoot(900);
+	auto rootSpawner = mngr_->addEntity();
+	rootSpawner->addComponent<TutorialSpawnRoot>(colManager_);
 }
 
 void TutorialScene::background()
 {
 	Scene::background("fondoSuelo");
 }
+
+
 
 
 void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
@@ -112,27 +115,4 @@ void TutorialScene::createPlatform(int x, int y, int w, int h)
 	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager_->addCollider(col);
 	platform->addComponent<RectangleRenderer>();
-}
-
-void TutorialScene::createRoot(int x)
-{
-	//Se crea la raiz
-	auto Root = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-	auto RootAtribs = Root->addComponent<BossAtributos>();
-	auto RootTr = Root->addComponent<Transform>();
-	auto RootX = x;
-	auto RootY = sdlutils().height();
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 50, 800, 0.0f);
-	//Se le añade un color inicial a la raiz
-	Root->addComponent<Image>(&sdlutils().images().at("root"));
-
-	//Se añade un collider a la onda
-	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
-	RootCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
-	colManager_->addCollider(RootCollider);
-	//Se añade el movimiento horizontal
-	Root->addComponent<RootMovement>();
 }

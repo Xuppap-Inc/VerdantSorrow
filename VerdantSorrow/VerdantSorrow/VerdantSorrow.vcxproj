@@ -96,6 +96,7 @@
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
     <ClInclude Include="src\components\VFX.h" />
     <ClInclude Include="src\game\TutorialScene.h" />
+    <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="src\components\boss\wave\WaveMovement.cpp" />
     <ClCompile Include="src\components\VFX.cpp" />
     <ClCompile Include="src\game\TutorialScene.cpp" />
+    <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\resources.json" />
