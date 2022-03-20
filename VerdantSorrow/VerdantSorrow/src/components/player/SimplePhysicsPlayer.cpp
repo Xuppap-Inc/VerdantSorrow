@@ -88,8 +88,9 @@ void SimplePhysicsPlayer::update()
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
 				ClapAttack* cA = ent->getComponent<ClapAttack>();
+				WaveMovement* wave = ent->getComponent<WaveMovement>();
 
-				if (bA != nullptr || cA != nullptr) {
+				if (bA != nullptr || cA != nullptr || wave != nullptr) {
 
 					if (!invulnerable_ && !ctrl_->isRolling()) {
 						attrib_->damagePlayer(1);
@@ -105,16 +106,6 @@ void SimplePhysicsPlayer::update()
 					}
 
 				}
-
-				WaveMovement* wave = ent->getComponent<WaveMovement>();
-				if (wave != nullptr) {
-					if (!invulnerable_) {
-						attrib_->damagePlayer(1);
-						invulnerable_ = true;
-						invTimer = sdlutils().currRealTime();
-					}
-				}
-
 			}
 			else //collider no activo
 				onCollisionExit();
