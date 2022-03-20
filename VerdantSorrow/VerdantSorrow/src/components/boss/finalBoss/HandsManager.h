@@ -8,6 +8,8 @@ class CollisionManager;
 class Punietazo;
 class ClapAttack;
 class HammerArm;
+class BossAtributos;
+class RectangleCollider;
 
 class HandsManager :
 	public ecs::Component
@@ -32,6 +34,14 @@ public:
 
 	
 private:
+	void createHands();
+	void chooseAttack();
+	void clapAttack();
+	void punietazoAttack();
+	void hammerAttack();
+	float lastAttackDone = 0, attackCooldown;
+	int numeroAtaque;
+
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
 	Transform* tr_;
@@ -43,6 +53,9 @@ private:
 	ClapAttack* clapRight_;
 	HammerArm* hammerRight_;
 	HammerArm* hammerLeft_;
+	BossAtributos* bA_;
+	RectangleCollider* colliderRightHand_;
+	RectangleCollider* colliderLeftHand_;
 
 	State state_;
 };

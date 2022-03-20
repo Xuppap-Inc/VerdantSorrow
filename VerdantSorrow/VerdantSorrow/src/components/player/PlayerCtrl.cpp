@@ -81,6 +81,7 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
 			lastRoll_ = currentTime;
 			isRolling_ = true;
+			slide_ = false;
 		}	
 
 	}

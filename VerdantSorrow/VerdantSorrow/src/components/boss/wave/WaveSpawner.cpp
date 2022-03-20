@@ -3,6 +3,7 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../RectangleRenderer.h"
+#include "../../Image.h"
 #include "../../../game/CollisionManager.h"
 #include "WaveMovement.h"
 
@@ -14,40 +15,44 @@
 
 #include <cassert>
 
-WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(5), waveHeight_(50), waveWidth_(150)
+
+WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(5)
 {
 }
 
-void WaveSpawner::createWaves(Transform* tr)
+void WaveSpawner::createWaves(float width, float height, Vector2D dir, Transform* tr, Texture* tex)
 {
-	createWave(-1, tr);
-	createWave(1, tr);
+	createWave(width, height, dir, tr, tex);
+	createWave(width, height, Vector2D(-dir.getX(), -dir.getY()), tr, tex);
 }
 
-void WaveSpawner::createWave(int dir, Transform* tr)
+void WaveSpawner::createWave(float width, float height, Vector2D dir, Transform* tr, Texture* tex)
 {
-	//Se crea la onda expansiva
-	auto Wave = mngr_->addEntity();
+	auto wave = mngr_->addEntity();
 
 
-	float WaveY = sdlutils().height() - waveHeight_, WaveX;
-
-	if (dir > 0)
-		WaveX = tr->getPos().getX() + tr->getWidth();
+	float waveX, waveY = tr->getPos().getY() + tr->getHeight() - height;
+	if (dir.getX() > 0)
+		waveX = tr->getPos().getX() + tr->getWidth();
 	else
-		WaveX = tr->getPos().getX() - waveWidth_;
+		waveX = tr->getPos().getX() - width;
 
-	//Se anyade el transform
-	auto WaveTr = Wave->addComponent<Transform>(Vector2D(WaveX, WaveY), Vector2D(), waveWidth_, waveHeight_, 0.0f);
+	wave->addComponent<Transform>(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f);
 
-	//Se le anyade un color inicial a la onda
-	Wave->addComponent<RectangleRenderer>(SDL_Color());
+
+	if (tex == nullptr)
+		wave->addComponent<RectangleRenderer>(SDL_Color());
+
+	else
+		wave->addComponent<Image>(tex);
 
 	//Se anyade un collider a la onda
-	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
+	auto waveCollider = wave->addComponent<RectangleCollider>(width, height);
 	waveCollider->setIsTrigger(true);
 	colManager_->addCollider(waveCollider);
 
 	//Se anyade el movimiento horizontal
-	Wave->addComponent<WaveMovement>(dir, waveSpeed_);
+	wave->addComponent<WaveMovement>(dir, waveSpeed_);
 }
+
+

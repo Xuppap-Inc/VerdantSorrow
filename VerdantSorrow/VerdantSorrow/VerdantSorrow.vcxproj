@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
+    <ClInclude Include="src\components\tutorial\TutorialFly.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\SceneManager.h" />
     <ClInclude Include="src\game\Scene.h" />
@@ -95,9 +96,11 @@
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
     <ClInclude Include="src\components\VFX.h" />
     <ClInclude Include="src\game\TutorialScene.h" />
+    <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
+    <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\SceneManager.cpp" />
     <ClCompile Include="src\game\Scene.cpp" />
@@ -160,6 +163,7 @@
     <ClCompile Include="src\components\boss\wave\WaveMovement.cpp" />
     <ClCompile Include="src\components\VFX.cpp" />
     <ClCompile Include="src\game\TutorialScene.cpp" />
+    <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\resources.json" />
@@ -183,7 +187,6 @@
     <Media Include="resources\sound\sfx_rana_damage.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\assets\fondos\Suelo_Rana.png" />
     <Image Include="resources\images\BossBarArrow_Left.png" />
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />

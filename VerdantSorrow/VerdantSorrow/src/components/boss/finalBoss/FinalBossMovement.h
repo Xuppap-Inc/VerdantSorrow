@@ -8,6 +8,7 @@ class Transform;
 class BossAtributos;
 class HandsManager;
 class CollisionManager;
+class WaveSpawner;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -21,9 +22,9 @@ public:
 	void update() override;
 	void bounce();
 	void restartBouncing();
+	void fireBall();
 	void initComponent()override;
 private:
-	void createWave(int dir);
 	Transform* tr_;
 	BossAtributos* bA_;
 	HandsManager* handMngr_;
@@ -33,5 +34,10 @@ private:
 	float eyeSpeed;
 	int lastTimeGround = 0, timeInGround = 1000;
 	Vector2D velocitySaved;
+	WaveSpawner* waveSp_;
+	Transform* playerTr;
+
+	//random bola de fuego times
+	int lastFireBall_, fireBallCooldown_;
 };
 

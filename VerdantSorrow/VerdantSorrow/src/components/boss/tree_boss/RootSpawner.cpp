@@ -36,11 +36,11 @@ void RootSpawner::createRoot(int x)
 	//Se le añade un color inicial a la raiz
 	Root->addComponent<Image>(&sdlutils().images().at("root"));
 
-	//Se añade un collider a la onda
+	//Se añade un collider a la raiz
 	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
 	RootCollider->setIsTrigger(true);
 	//Se añade el collider al colliderGameManager
 	collManager_->addCollider(RootCollider);
-	//Se añade el movimiento horizontal
+	//Se añade el movimiento vertical
 	Root->addComponent<RootMovement>();
 }

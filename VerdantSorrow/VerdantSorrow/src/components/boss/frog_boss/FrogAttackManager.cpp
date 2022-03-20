@@ -16,17 +16,17 @@
 #include "../wave/WaveSpawner.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
-				frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1), 
-				jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(), 
-				tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
+frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
+jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(),
+tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
 {
 }
 
-FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(), 
-				fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
-				jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0), 
-				flySpacing_(0), tongueAttack_(), tongueDelay_(3000), animState_(ANIM_IDLE), 
-				animNewState_(ANIM_IDLE),waveSp_()
+FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
+fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
+jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0),
+flySpacing_(0), tongueAttack_(), tongueDelay_(3000), animState_(ANIM_IDLE),
+animNewState_(ANIM_IDLE), waveSp_()
 {
 }
 
@@ -53,7 +53,7 @@ void FrogAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_!=nullptr;	
+	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_ != nullptr;
 	assert(correct);
 }
 
@@ -64,66 +64,66 @@ void FrogAttackManager::update()
 	if (attr_->getLife() <= 0) {
 		std::cout << "Muerte" << std::endl;
 		animNewState_ = ANIM_DEATH;
-		if(anim_->getFrameNum()==16)
+		if (anim_->getFrameNum() == 16)
 			ent_->setAlive(false);
 		return;
 	}
 	flipOnBorders();
 	switch (frogState_) {
-		case JUMPING:
-			if (attr_->isOnGround()) {
-				onGrounded(jumping_, false);
-			}
-			break;
-		case JUMPING_BIG:
-			if (attr_->isOnGround()) {
-				onGrounded(jumpingBig_, true);
-			}
-			break;
-		case TONGUE:
-			if (tongueAttack_->finished()) 
-			{
-				frogState_ = WAITING;
-				
-				delay_ = rand.nextInt(1000, 3000);
-				lastUpdate_ = sdlutils().currRealTime();
-			}
-			
-			break;
-		case CALC_NEXT_ATTACK:
-			nextAttack();
-			break;
-		case WAITING:
-			//std::cout << "esperando" << std::endl;
-			if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
-				frogState_ = CALC_NEXT_ATTACK;
-			}
-			break; 
-		case WAITING_FOR_TONGUE:
-			//std::cout << "esperando" << std::endl;
-			if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
-				tongueAttack_->attack(!secondPhase_);
-				frogState_ = TONGUE;
-			}
-			break;
-		case FLY_DIED:
-			if (!jumping_ && !jumpingBig_) {
-				bigJump_->attack(0);
-				tongueAttack_->cancel();
-				jumpingBig_ = true;
-				frogState_ = JUMPING_BIG;
-				angry_ = true;
-				//Lanzar animacion de salto largo
-				animNewState_ = ANIM_BIG_JUMP;
-			}
-			else
-			{
-				if (jumping_) frogState_ = JUMPING;
-				else if (jumpingBig_) frogState_ = JUMPING_BIG;
-			}
-			break;
-		default:
-			break;
+	case JUMPING:
+		if (attr_->isOnGround()) {
+			onGrounded(jumping_, false);
+		}
+		break;
+	case JUMPING_BIG:
+		if (attr_->isOnGround()) {
+			onGrounded(jumpingBig_, true);
+		}
+		break;
+	case TONGUE:
+		if (tongueAttack_->finished())
+		{
+			frogState_ = WAITING;
+
+			delay_ = rand.nextInt(1000, 3000);
+			lastUpdate_ = sdlutils().currRealTime();
+		}
+
+		break;
+	case CALC_NEXT_ATTACK:
+		nextAttack();
+		break;
+	case WAITING:
+		//std::cout << "esperando" << std::endl;
+		if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
+			frogState_ = CALC_NEXT_ATTACK;
+		}
+		break;
+	case WAITING_FOR_TONGUE:
+		//std::cout << "esperando" << std::endl;
+		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
+			tongueAttack_->attack(!secondPhase_);
+			frogState_ = TONGUE;
+		}
+		break;
+	case FLY_DIED:
+		if (!jumping_ && !jumpingBig_) {
+			bigJump_->attack(0);
+			tongueAttack_->cancel();
+			jumpingBig_ = true;
+			frogState_ = JUMPING_BIG;
+			angry_ = true;
+			//Lanzar animacion de salto largo
+			animNewState_ = ANIM_BIG_JUMP;
+		}
+		else
+		{
+			if (jumping_) frogState_ = JUMPING;
+			else if (jumpingBig_) frogState_ = JUMPING_BIG;
+		}
+		break;
+	default:
+		break;
 	}if (animState_ != animNewState_) {
 		animState_ = animNewState_;
 		switch (animState_)
@@ -219,7 +219,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	lastUpdate_ = sdlutils().currRealTime();
 	if (isBig) {
 		if (secondPhase_) jumpsUntilNextTongue_--;
-		waveSp_->createWaves(tr_);
+		waveSp_->createWaves(200, 100, Vector2D(1, 0), tr_);
 		if (angry_) /*Volver a rana normal*/;
 	}
 	else {
@@ -231,7 +231,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 
 void FrogAttackManager::nextAttack()
 {
-	if(!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
+	if (!secondPhase_ && attr_->getLife() <= attr_->getMaxHp() * 0.5) {
 		//Lanzar animacion del cambio de fase
 		animNewState_ = ANIM_CHANGE_PHASE;
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
