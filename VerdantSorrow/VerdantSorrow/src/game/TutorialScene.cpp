@@ -36,11 +36,12 @@ void TutorialScene::init()
 	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
 
-	auto fly1 = createFly(400, sdlutils().height() - 200);
-	auto fly2 = createFly(700, sdlutils().height() - 600);
+	createFly(400, sdlutils().height() - 200);
+	createFly(700, sdlutils().height() - 600);
 
-	auto platform1 = createPlatform(700, sdlutils().height() - 100, 300, 100);
+	createPlatform(700, sdlutils().height() - 100, 300, 100);
 
+	createRoot(900);
 }
 
 void TutorialScene::background()
@@ -90,7 +91,7 @@ void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 }
 
-ecs::Entity* TutorialScene::createFly(int x, int y)
+void TutorialScene::createFly(int x, int y)
 {
 	auto fly = mngr_->addEntity();
 	auto fTr = fly->addComponent<Transform>();
@@ -102,10 +103,8 @@ ecs::Entity* TutorialScene::createFly(int x, int y)
 	colManager_->addCollider(col);
 	fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000/30)*31, 31, "mosca");
 	fly->addComponent<TutorialFly>();
-	
-	return fly;
 }
-ecs::Entity* TutorialScene::createPlatform(int x, int y, int w, int h)
+void TutorialScene::createPlatform(int x, int y, int w, int h)
 {
 	auto platform = mngr_->addEntity();
 	auto platformTr = platform->addComponent<Transform>();
@@ -113,6 +112,27 @@ ecs::Entity* TutorialScene::createPlatform(int x, int y, int w, int h)
 	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager_->addCollider(col);
 	platform->addComponent<RectangleRenderer>();
-	
-	return platform;
+}
+
+void TutorialScene::createRoot(int x)
+{
+	//Se crea la raiz
+	auto Root = mngr_->addEntity();
+	//Se añaden los atributos del boss que están junto al transform
+	auto RootAtribs = Root->addComponent<BossAtributos>();
+	auto RootTr = Root->addComponent<Transform>();
+	auto RootX = x;
+	auto RootY = sdlutils().height();
+	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
+	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 50, 800, 0.0f);
+	//Se le añade un color inicial a la raiz
+	Root->addComponent<Image>(&sdlutils().images().at("root"));
+
+	//Se añade un collider a la onda
+	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
+	RootCollider->setIsTrigger(true);
+	//Se añade el collider al colliderGameManager
+	colManager_->addCollider(RootCollider);
+	//Se añade el movimiento horizontal
+	Root->addComponent<RootMovement>();
 }

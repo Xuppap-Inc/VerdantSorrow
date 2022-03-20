@@ -15,8 +15,9 @@ public:
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
-	ecs::Entity* createFly(int x, int y);
-	ecs::Entity* createPlatform(int x, int y, int w, int h);
+	void createFly(int x, int y);
+	void createPlatform(int x, int y, int w, int h);
+	void createRoot(int x);
 private:
 	CollisionManager* colManager_;
 };
