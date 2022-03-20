@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr),scMngr_(nullptr)
+Game::Game() : mngr_(nullptr), scMngr_(nullptr), cambioEscenas(false)
 {
 }
 
@@ -20,19 +20,48 @@ Game::~Game()
 
 //Inicializa el juego y llama a las escenas
 void Game::start() {
+
 	int n = -1;
-
-	//Método temporal para poder acceder a todas las escenas
-	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" 
-		<< std::endl << "3. Escena Final" << std::endl << "4. Tutorial" << std::endl;
+	std::cout << "0.Cambio de escenas normal\n1.Elegir escena\n";
 	std::cin >> n;
-
+	SceneManager::scenes firstScene;
+	if (n == 1) {
+		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n";
+		std::cin >> n;
+		switch (n)
+		{
+		case 0:
+			firstScene = SceneManager::scenes::Hub_;
+			break;
+		case 1:
+			firstScene = SceneManager::scenes::Frog_;
+			break;
+		case 2:
+			firstScene = SceneManager::scenes::Tree_;
+			break;
+		case 3:
+			firstScene = SceneManager::scenes::Eye_;
+			break;
+		case 4:
+			firstScene = SceneManager::scenes::Tutorial_;
+		default:
+			break;
+		}
+	}
+	else {
+		firstScene = SceneManager::scenes::Hub_;
+	}
+	
 	//Crea el game Manager
 	mngr_ = new ecs::Manager();
-
+	scMngr_ = new SceneManager();
+	
 	SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
-	mngr_->changeScene(n);
+	scMngr_->changeScene(firstScene);
+	scMngr_->init();
 
+
+	//mngr_->changeScene(n);
 	//Aqui haces el bucle
 	//SceneManager->run()
 }
@@ -45,7 +74,6 @@ void Game::update()
 	//Imput handler
 	auto& ihdlr = ih();
 
-	scMngr_ = new SceneManager();
 
 	while (!exit) {
 		Uint32 startTime = sdlutils().currRealTime();

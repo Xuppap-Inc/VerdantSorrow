@@ -33,40 +33,40 @@ void Scene::init()
 	mngr_->setDebug(true); //activamos modo debug
 }
 
-void Scene::start()
-{
-	// a boolean to exit the loop
-	bool exit = false;
-
-	auto& ihdlr = ih();
-
-	while (!exit) {
-		Uint32 startTime = sdlutils().currRealTime();
-
-		// refresh the input handler
-		ihdlr.refresh();
-
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
-			continue;
-		}
-
-		mngr_->update();
-		mngr_->refresh();
-
-		sdlutils().clearRenderer();
-		mngr_->render();
-		mngr_->debug();
-		sdlutils().presentRenderer();
-
-		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
-		if (frameTime < 10)
-			SDL_Delay(10 - frameTime);
-	}
-
-	SDL_Quit();
-}
+//void Scene::start()
+//{
+//	// a boolean to exit the loop
+//	bool exit = false;
+//
+//	auto& ihdlr = ih();
+//
+//	while (!exit) {
+//		Uint32 startTime = sdlutils().currRealTime();
+//
+//		// refresh the input handler
+//		ihdlr.refresh();
+//
+//		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+//			exit = true;
+//			continue;
+//		}
+//
+//		mngr_->update();
+//		mngr_->refresh();
+//
+//		sdlutils().clearRenderer();
+//		mngr_->render();
+//		mngr_->debug();
+//		sdlutils().presentRenderer();
+//
+//		Uint32 frameTime = sdlutils().currRealTime() - startTime;
+//
+//		if (frameTime < 10)
+//			SDL_Delay(10 - frameTime);
+//	}
+//
+//	SDL_Quit();
+//}
 
 void Scene::update()
 {

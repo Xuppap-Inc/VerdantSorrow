@@ -12,6 +12,7 @@ public:
 	~TreeScene() {}
 	void init();
 
+	void update()override;
 	void treeGenerator(CollisionManager* colManager, Entity* player_);
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);

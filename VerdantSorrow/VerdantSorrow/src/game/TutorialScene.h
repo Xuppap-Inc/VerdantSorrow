@@ -12,6 +12,7 @@ public:
 	~TutorialScene() {};
 	void init();
 	void background();
+	void update()override;
 
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 

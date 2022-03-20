@@ -44,6 +44,17 @@ void TutorialScene::background()
 	Scene::background("fondoSuelo");
 }
 
+void TutorialScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 
 void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();

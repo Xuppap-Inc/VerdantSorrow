@@ -46,6 +46,17 @@ void FrogScene::init()
 
 }
 
+void FrogScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 {
 	//se crea wave spwner
@@ -129,4 +140,14 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+}
+
+bool FrogScene::getAble()
+{
+	return isAble;
+}
+
+void FrogScene::setAble(bool a)
+{
+	isAble = a;
 }

@@ -110,7 +110,7 @@ public:
 	//
 	void refresh();
 
-	void changeScene(int n);
+	//void changeScene(int n);
 
 	//changes boolean that says if debug mode is on
 	void setDebug(bool set) { debug_ = set; };

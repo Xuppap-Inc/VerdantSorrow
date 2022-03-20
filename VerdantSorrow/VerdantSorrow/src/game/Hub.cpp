@@ -35,7 +35,7 @@ void Hub::init()
 	EntryGenerator(colManager);
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
-	NPCGenerator(colManager,dialogBox);
+	NPCGenerator(colManager, dialogBox);
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)
@@ -45,6 +45,16 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<RectangleRenderer>();
 	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
+}
+
+bool Hub::getAble()
+{
+	return isAble;
+}
+
+void Hub::setAble(bool a)
+{
+	isAble = a;
 }
 
 
@@ -67,15 +77,15 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f,false);
-	
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f, false);
+
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(3,colManager);
+	player_->addComponent<PlayerHubControl>(3, colManager);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
@@ -106,7 +116,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f,false);
+	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().images().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);
@@ -114,5 +124,5 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 
 	npc->addComponent<RectangleRenderer>();
 
-	npc->addComponent<NpcCtrl>(colManager,dialogBox_);
+	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
 }

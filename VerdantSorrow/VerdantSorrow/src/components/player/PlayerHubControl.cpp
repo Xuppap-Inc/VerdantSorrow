@@ -44,8 +44,8 @@ void PlayerHubControl::update()
 			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
 			i++;
 		}
-		if (changeScene)
-			mngr_->changeScene(1);
+		//if (changeScene)
+			//mngr_->changeScene(1);
 	}
 }
 

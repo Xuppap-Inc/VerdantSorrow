@@ -1,6 +1,12 @@
 #pragma once
 #include "../utils/Singleton.h"
 #include "Scene.h"
+#include "FrogScene.h"
+#include "TreeScene.h"
+#include "FinalBossScene.h"
+#include "Hub.h"
+#include "TutorialScene.h"
+
 #include <stack>
 class SceneManager :public Singleton<SceneManager> {
 
@@ -10,11 +16,18 @@ public:
 	SceneManager();
 	~SceneManager();
 	void update();
+	//inicializa la escena en la que está
+	void init();
 	void render();
 	scenes getScene() { return actScene; }
-	void changeScene(scenes s_);
+	void changeScene(scenes s_=Hub_);
 private:
 	scenes actScene;
 	std::stack <Scene*> sceneList;
+	Hub* h_;
+	FrogScene* f_;
+	TreeScene* t_;
+	FinalBossScene* fin_;
+	TutorialScene* tut_;
 };
 

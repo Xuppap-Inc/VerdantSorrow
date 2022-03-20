@@ -45,6 +45,17 @@ void TreeScene::init()
 }
 
 
+void TreeScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto tree_ = mngr_->addEntity();

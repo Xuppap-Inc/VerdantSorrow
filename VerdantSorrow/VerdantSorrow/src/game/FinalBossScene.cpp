@@ -45,6 +45,17 @@ void FinalBossScene::init()
 
 }
 
+void FinalBossScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void FinalBossScene::waveSpawnerGenerator(CollisionManager*& colManager)
 {
 	//se crea wave spwner
@@ -122,4 +133,14 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+}
+
+bool FinalBossScene::getAble()
+{
+	return isAble;
+}
+
+void FinalBossScene::setAble(bool a)
+{
+	isAble = a;
 }
