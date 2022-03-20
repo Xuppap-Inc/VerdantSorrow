@@ -65,6 +65,24 @@ void HandsManager::initComponent()
 
 void HandsManager::update()
 {
+	if (state_ == REPOSO && sdlutils().currRealTime() > lastAttackDone + attackCooldown) {
+		auto numeroAtaque =  sdlutils().rand().nextInt(0, 3);
+		switch (numeroAtaque)
+		{
+		case 0:
+			state_ = CLAP;
+			break;
+		case 1:
+			state_ = PUNIETAZO;
+			break;
+		case 2:
+			state_ = MARTILLAZO;
+			break;
+		default:
+			break;
+		}
+	}
+
 	if (state_ == CLAP) {
 		if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
 			clapLeft_->changeState(ClapAttack::DIAGONAL);
@@ -90,7 +108,9 @@ void HandsManager::update()
 			clapLeft_->changeState(ClapAttack::REPOSO);
 			clapRight_->changeState(ClapAttack::REPOSO);
 
-			state_ = PUNIETAZO;
+			attackCooldown = sdlutils().rand().nextInt(1000, 2001);
+			lastAttackDone = sdlutils().currRealTime();
+			state_ = REPOSO;
 		}
 	}
 	else if (state_ == PUNIETAZO) { // primero el derecho luego el izdo
@@ -132,7 +152,9 @@ void HandsManager::update()
 			punietazoleft_->changeState(Punietazo::REPOSO);
 			punietazoright_->changeState(Punietazo::REPOSO);
 
-			state_ = MARTILLAZO;
+			attackCooldown = sdlutils().rand().nextInt(1000, 2001);
+			lastAttackDone = sdlutils().currRealTime();
+			state_ = REPOSO;
 		}
 
 	}
@@ -162,7 +184,10 @@ void HandsManager::update()
 			}
 			else if (hammerRight_->getstate() == HammerArm::FIN) {
 				hammerRight_->changeState(HammerArm::REPOSO);
-				state_ = CLAP;
+
+				attackCooldown = sdlutils().rand().nextInt(1000, 2001);
+				lastAttackDone = sdlutils().currRealTime();
+				state_ = REPOSO;
 			}
 		}
 		else {
@@ -181,7 +206,10 @@ void HandsManager::update()
 				}
 				else if (hammerLeft_->getstate() == HammerArm::FIN) {
 					hammerLeft_->changeState(HammerArm::REPOSO);
-					state_ = CLAP;
+
+					attackCooldown = sdlutils().rand().nextInt(1000, 2001);
+					lastAttackDone = sdlutils().currRealTime();
+					state_ = REPOSO;
 				}
 			}
 		}

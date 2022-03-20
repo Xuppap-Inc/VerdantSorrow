@@ -34,6 +34,8 @@ public:
 
 	
 private:
+	float lastAttackDone = 0, attackCooldown;
+
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
 	Transform* tr_;
