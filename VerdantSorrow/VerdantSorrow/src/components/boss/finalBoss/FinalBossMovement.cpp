@@ -8,9 +8,10 @@
 #include "../../Image.h"
 #include "../wave/WaveMovement.h"
 #include "../../../game/CollisionManager.h"
+#include "../wave/WaveSpawner.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager),  bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(6)
+	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(6), waveSp_()
 {
 }
 
@@ -23,7 +24,8 @@ void FinalBossMovement::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	bA_ = ent_->getComponent<BossAtributos>();
 	handMngr_ = ent_->getComponent<HandsManager>();
-	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr);
+	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
+	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr);
 }
 
 void FinalBossMovement::update()
@@ -45,7 +47,7 @@ void FinalBossMovement::bounce()
 	auto& vel_ = tr_->getVel();
 
 	if (vel_.magnitude() == 0)
-		vel_ = Vector2D(1,1);
+		vel_ = Vector2D(1, 1);
 
 
 	// bounce on top/bottom borders
@@ -56,15 +58,14 @@ void FinalBossMovement::bounce()
 	}
 	else if (pos_.getY() + tr_->getHeight() > sdlutils().height()) {
 		pos_.setY(sdlutils().height() - tr_->getHeight());
-		
+
 		//Guarda la velocidad y para el objeto actual
 		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
 		vel_ = Vector2D(0, 0);
 		//Inicia el contador
 		lastTimeGround = sdlutils().currRealTime();
 		//Crea las dos bolas de fuego
-		createWave(1);
-		createWave(-1);
+		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("bolaFuego"));
 		//Cambia el estado a suelo
 		eyeState_ = EyeState::GROUND;
 		//sdlutils().soundEffects().at("wall_hit").play();
@@ -78,8 +79,8 @@ void FinalBossMovement::bounce()
 		pos_.setX(0);
 		vel_.setX(-vel_.getX());
 	}
-	if(vel_.getX() != 0 && vel_.getY() != 0)
-	vel_ = vel_.normalize() * eyeSpeed;
+	if (vel_.magnitude() != 0)
+		vel_ = vel_.normalize() * eyeSpeed;
 }
 
 void FinalBossMovement::restartBouncing() {
@@ -88,33 +89,3 @@ void FinalBossMovement::restartBouncing() {
 		tr_->getVel().set(velocitySaved);
 	}
 }
-
-void FinalBossMovement::createWave(int dir)
-{
-	//Se crea la onda expansiva
-	auto Wave = mngr_->addEntity();
-	//Se anyade el transform
-	auto WaveTr = Wave->addComponent<Transform>();
-	auto WaveX = tr_->getPos().getX();
-	auto WaveY = sdlutils().height() - 80;
-	//dir = {-1, 1}
-	auto WaveDir = dir;
-	if (WaveDir == 1) {
-		WaveX += tr_->getWidth();
-	}
-	auto WaveSpeed = 5;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la onda
-	WaveTr->init(Vector2D(WaveX, WaveY), Vector2D(), 90, 80, 0.0f);
-	//Se le anyade un color inicial a la onda
-	Wave->addComponent<Image>(&sdlutils().images().at("bolaFuego"));
-
-	//Se anyade un collider a la onda
-	auto waveCollider = Wave->addComponent<RectangleCollider>(WaveTr->getWidth(), WaveTr->getHeight());
-	waveCollider->setIsTrigger(true);
-	//Se anyade el collider al colliderGameManager
-	colManager_->addCollider(waveCollider);
-	//Se anyade el movimiento horizontal
-	Wave->addComponent<WaveMovement>(WaveDir, WaveSpeed);
-}
-
-
