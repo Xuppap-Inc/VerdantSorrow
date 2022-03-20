@@ -16,26 +16,30 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/tree_boss/Root/RootMovement.h"
 #include "CollisionManager.h"
+#include "../components/tutorial/TutorialFly.h"
 
-
-
-void TutorialScene::init()
+void TutorialScene::init() 
 {
 
 	Scene::init();
 	//Para gestionar las colisiones
-	CollisionManager* colManager = new CollisionManager();
+	colManager_ = new CollisionManager();
 
 
 	background();
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
-	playerGenerator(colManager, player);
+	playerGenerator(colManager_, player);
 
 	auto particles = mngr_->addEntity();
 	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
+
+	auto fly1 = createFly(400, sdlutils().height() - 200);
+	auto fly2 = createFly(700, sdlutils().height() - 600);
+
+	auto platform1 = createPlatform(700, sdlutils().height() - 100, 300, 100);
 
 }
 
@@ -50,7 +54,7 @@ void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player
 
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = 0;
-	auto playerY = sdlutils().height() / 2 - 25;
+	auto playerY = 150;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 
@@ -84,4 +88,31 @@ void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+}
+
+ecs::Entity* TutorialScene::createFly(int x, int y)
+{
+	auto fly = mngr_->addEntity();
+	auto fTr = fly->addComponent<Transform>();
+	auto flyX = x;
+	auto flyY = y;
+	fTr->init(Vector2D(flyX, flyY), Vector2D(), 60, 50, 0.0f);
+	auto col = fly->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
+	col->setIsTrigger(true);
+	colManager_->addCollider(col);
+	fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000/30)*31, 31, "mosca");
+	fly->addComponent<TutorialFly>();
+	
+	return fly;
+}
+ecs::Entity* TutorialScene::createPlatform(int x, int y, int w, int h)
+{
+	auto platform = mngr_->addEntity();
+	auto platformTr = platform->addComponent<Transform>();
+	platformTr->init(Vector2D(x, y), Vector2D(), w, y, 0.0f);
+	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
+	colManager_->addCollider(col);
+	platform->addComponent<RectangleRenderer>();
+	
+	return platform;
 }
