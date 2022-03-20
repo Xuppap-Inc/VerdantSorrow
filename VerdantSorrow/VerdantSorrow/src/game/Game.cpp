@@ -23,7 +23,8 @@ void Game::start() {
 	int n = -1;
 
 	//Método temporal para poder acceder a todas las escenas
-	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" << std::endl << "3. Escena Final" << std::endl;
+	std::cout << "0. Escena Hub" << std::endl << "1. Escena Rana" << std::endl << "2. Escena Arbol" 
+		<< std::endl << "3. Escena Final" << std::endl << "4. Tutorial" << std::endl;
 	std::cin >> n;
 
 	//Crea el game Manager

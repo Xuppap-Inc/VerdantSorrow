@@ -30,6 +30,8 @@ void SceneManager::update()
 		break;
 	case SceneManager::Eye_:
 		break;
+	case SceneManager::Tutorial_:
+		break;
 	default:
 		break;
 	}

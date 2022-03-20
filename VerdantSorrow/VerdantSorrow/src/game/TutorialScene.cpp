@@ -1,4 +1,4 @@
-#include "FrogScene.h"
+#include "TutorialScene.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -14,90 +14,45 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
-#include "../components/boss/wave/WaveMovement.h"
-#include "../components/boss/frog_boss/FrogAttackManager.h"
-
-
+#include "../components/boss/tree_boss/Root/RootMovement.h"
 #include "CollisionManager.h"
-#include "../components/boss/wave/WaveSpawner.h"
 
 
 
-void FrogScene::init()
+void TutorialScene::init()
 {
-	
+
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 
-	
-	background();
 
-	waveSpawerGenerator(colManager);
+	background();
 
 	//Se crea el jugador 
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-	frogGenerator(colManager, player);
 	auto particles = mngr_->addEntity();
-	 particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
 
 }
 
-void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
-{
-	//se crea wave spwner
-	auto waveSp = mngr_->addEntity();
-	waveSp->addComponent<WaveSpawner>(colManager);
-	mngr_->setHandler(ecs::_WAVE_GENERATOR, waveSp);
-}
-
-
-void FrogScene::background()
+void TutorialScene::background()
 {
 	Scene::background("fondoSuelo");
 }
 
 
-void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
-
-	auto Frog = mngr_->addEntity();
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
-
-	auto FrogX = sdlutils().width() / 2 - 25;
-	auto FrogY = sdlutils().height();
-	auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), 250*2, 150*2, 0.0f);
-
-
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
-	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
-	
-	//Se aÃ±ade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight());
-	frogCollider->setIsTrigger(true);
-	colManager->addCollider(frogCollider);
-	
-	Frog->addComponent<SimpleGravity>(1.5);
-	Frog->addComponent<CollideWithBordersBoss>();
-
-	Frog->addComponent<FrogAttackManager>(colManager);
-	////Frog->addComponent<FrogJump>(30);
-	////Frog->addComponent<FrogBigJump>(40);
-
-	Frog->addComponent<BossHPBar>();
-
-}
-
-void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
+void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(),100, 200, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
@@ -107,18 +62,18 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>(100);
 
-	//Se aÃ±ade un collider al jugador
+	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
-	//IMPORTANTE :No poner estas fÃ­sicas detrÃ¡s del playerctrl
+	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(50,playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(50, playerTr->getHeight(), colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 

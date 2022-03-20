@@ -6,7 +6,7 @@ class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
 public:
-	enum scenes { Hub_, Frog_, Tree_, Eye_ };
+	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_ };
 	SceneManager();
 	~SceneManager();
 	void update();
