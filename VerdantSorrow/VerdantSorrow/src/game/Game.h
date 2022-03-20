@@ -14,6 +14,5 @@ public:
 private:
 	ecs::Manager *mngr_;
 	SceneManager* scMngr_;
-	bool cambioEscenas;
 };
 

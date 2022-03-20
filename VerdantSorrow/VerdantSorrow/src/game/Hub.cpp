@@ -18,19 +18,32 @@
 #include "../components/hub/DialogBoxMngr.h"
 
 #include "CollisionManager.h"
+#include "../game/SceneManager.h"
 
 
+
+Hub::Hub():Scene()
+{
+	colManager = nullptr;
+	player = nullptr;
+}
+
+Hub::~Hub()
+{
+	delete colManager;
+	//delete player;
+}
 
 void Hub::init()
 {
 	Scene::init();
 
 	//Para gestionar las colisiones
-	CollisionManager* colManager = new CollisionManager();
+	colManager = new CollisionManager();
 
-
+	changeSc = false;
 	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	EntryGenerator(colManager);
 	auto dialogBox = mngr_->addEntity();
@@ -57,16 +70,45 @@ void Hub::setAble(bool a)
 	isAble = a;
 }
 
+void Hub::changeScene_()
+{
+	changeSc = !changeSc;
+}
+
+void Hub::checkCollissions()
+{
+	auto playerCol_ = player->getComponent<RectangleCollider>();
+	if (colManager->hasCollisions(playerCol_)) {
+		std::vector<RectangleCollider*> colliders = colManager->getCollisions(playerCol_);
+
+		bool changeScene = false;
+		int i = 0;
+		while (!changeScene && i < colliders.size()) {
+			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
+			i++;
+		}
+		if (changeScene) changeScene_();
+	}
+}
+
 
 void Hub::update()
 {
-	mngr_->update();
-	mngr_->refresh();
+	if (!changeSc) {
+		mngr_->update();
+		mngr_->refresh();
 
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+
+		checkCollissions();
+	}
+	else {
+		
+		
+	}
 }
 
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {

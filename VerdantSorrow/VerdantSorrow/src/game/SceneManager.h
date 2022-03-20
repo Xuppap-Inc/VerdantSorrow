@@ -7,7 +7,7 @@
 #include "Hub.h"
 #include "TutorialScene.h"
 
-#include <stack>
+#include <vector>
 class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
@@ -23,7 +23,7 @@ public:
 	void changeScene(scenes s_=Hub_);
 private:
 	scenes actScene;
-	std::stack <Scene*> sceneList;
+	std::vector <Scene*> sceneList;
 	Hub* h_;
 	FrogScene* f_;
 	TreeScene* t_;

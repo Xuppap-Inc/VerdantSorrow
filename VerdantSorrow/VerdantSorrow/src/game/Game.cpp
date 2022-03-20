@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr), scMngr_(nullptr), cambioEscenas(false)
+Game::Game() : mngr_(nullptr), scMngr_(nullptr)
 {
 }
 

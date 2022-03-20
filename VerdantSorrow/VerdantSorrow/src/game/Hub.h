@@ -5,8 +5,8 @@
 class Hub :public Scene
 {
 public:
-	Hub() :Scene() {}
-	~Hub() {}
+	Hub();
+	~Hub();
 	void init();
 
 	virtual void update () override;
@@ -16,6 +16,11 @@ public:
 	void dialogBoxGenerator(Entity* dialogBox);
 	bool getAble();
 	void setAble(bool a);
+	void changeScene_();
+	void checkCollissions();
 private:
+	CollisionManager* colManager;
 	bool isAble;
+	bool changeSc;
+	Entity* player;
 };

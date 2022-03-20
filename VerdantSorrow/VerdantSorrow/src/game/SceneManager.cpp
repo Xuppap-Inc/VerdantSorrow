@@ -7,16 +7,17 @@
 
 SceneManager::SceneManager() : actScene(Hub_)
 {
-	h_ = new Hub();
-	f_ = new FrogScene();
-	t_ = new TreeScene();
-	fin_ = new FinalBossScene();
-	tut_ = new TutorialScene();
+	h_ = new Hub(); sceneList.push_back(h_);
+	f_ = new FrogScene(); sceneList.push_back(f_);
+	t_ = new TreeScene(); sceneList.push_back(t_);
+	fin_ = new FinalBossScene(); sceneList.push_back(fin_);
+	tut_ = new TutorialScene(); sceneList.push_back(tut_);
 }
 
 SceneManager::~SceneManager()
 {
 	delete h_; delete f_; delete t_; delete fin_; delete tut_;
+	sceneList.empty();
 }
 
 void SceneManager::update()
