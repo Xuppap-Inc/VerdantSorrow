@@ -25,7 +25,6 @@ void VFX::initComponent()
 
 
 void VFX::update() {
-	std::cout << anim_->getFrameNum() << std::endl;
 	if (anim_->getFrameNum() == frames_-2) {
 		ent_->setAlive(false);
 	}

@@ -11,7 +11,7 @@
 #include "../wave/WaveSpawner.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(6), waveSp_()
+	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(6), waveSp_(), fireBallCooldown_(), lastFireBall_()
 {
 }
 
@@ -25,7 +25,9 @@ void FinalBossMovement::initComponent()
 	bA_ = ent_->getComponent<BossAtributos>();
 	handMngr_ = ent_->getComponent<HandsManager>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
-	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr);
+	playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr != nullptr);
+
 }
 
 void FinalBossMovement::update()
@@ -34,10 +36,15 @@ void FinalBossMovement::update()
 		if (bA_->getLife() <= bA_->getMaxHp() / 2)
 			phase_ = PHASE2;
 
+		lastFireBall_ = sdlutils().currRealTime();
+		fireBallCooldown_ = 2000;
 	}
 	else if (phase_ == PHASE2) {
 		if (eyeState_ == EyeState::BOUNCE) bounce();
 		else restartBouncing();
+
+		if (sdlutils().currRealTime() > lastFireBall_ + fireBallCooldown_)
+			fireBall();
 	}
 }
 
@@ -88,4 +95,12 @@ void FinalBossMovement::restartBouncing() {
 		eyeState_ = EyeState::BOUNCE;
 		tr_->getVel().set(velocitySaved);
 	}
+}
+
+void FinalBossMovement::fireBall()
+{
+	waveSp_->createWave(100, 100, playerTr->getPos() - tr_->getPos(), tr_, &sdlutils().images().at("bolaFuego"));
+
+	fireBallCooldown_ = sdlutils().rand().nextInt(1000, 5001);
+	lastFireBall_ = sdlutils().currRealTime();
 }

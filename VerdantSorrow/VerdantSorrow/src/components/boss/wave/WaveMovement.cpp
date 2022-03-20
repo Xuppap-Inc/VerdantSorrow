@@ -23,9 +23,8 @@ void WaveMovement::update()
 	auto& vel = tr_->getVel();
 	auto pos = tr_->getPos();
 
-	vel = dir_;
-	if (vel.magnitude() != 0)
-		vel = vel.normalize() * speed_;
+	if (dir_.magnitude() != 0)
+		vel.set(dir_.normalize() * speed_);
 
 	if (pos.getX() < 0 - tr_->getWidth() || pos.getX() > sdlutils().width()
 		|| pos.getY() < -tr_->getHeight() || pos.getY() > sdlutils().height()) {
