@@ -272,6 +272,7 @@ void FrogAttackManager::nextAttack()
 			animNewState_ = ANIM_TONGUE;
 		}
 		frogState_ = WAITING_FOR_TONGUE;
+		tongue_->getComponent<TongueAttack>()->currentPos(!secondPhase_);
 		tongue_->setActive(true);
 	}
 	else {
