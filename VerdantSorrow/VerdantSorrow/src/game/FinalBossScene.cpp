@@ -45,6 +45,17 @@ void FinalBossScene::init()
 
 }
 
+void FinalBossScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void FinalBossScene::waveSpawnerGenerator(CollisionManager*& colManager)
 {
 	//se crea wave spwner
@@ -66,18 +77,17 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = (sdlutils().width() - 100) / 2;
-	auto BossY = sdlutils().height() / 2;
+	auto BossY = sdlutils().height() / 2 - 300;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 100, 100, 0.0f);
 
 
 	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<HandsManager>(colManager);
 	FinalBossFace->addComponent<FinalBossMovement>(colManager);
-	//Se añade un collider a la rana
+
 	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);
-
 
 	FinalBossFace->addComponent<BossHPBar>();
 }
@@ -101,12 +111,12 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
 
-	//Se añade un collider al jugador
+	//Se aï¿½ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 40, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
-	//IMPORTANTE :No poner estas físicas detrás del playerctrl
+	//IMPORTANTE :No poner estas fï¿½sicas detrï¿½s del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
@@ -122,4 +132,14 @@ void FinalBossScene::playerGenerator(CollisionManager* colManager, Entity* playe
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+}
+
+bool FinalBossScene::getAble()
+{
+	return isAble;
+}
+
+void FinalBossScene::setAble(bool a)
+{
+	isAble = a;
 }

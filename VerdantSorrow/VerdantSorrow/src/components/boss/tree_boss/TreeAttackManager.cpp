@@ -101,6 +101,10 @@ void TreeAttackManager::update()
 
 			if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
 
+				SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
+				s->play();
+				musicaFase2_->setMusicVolume(100);
+				musicaFase1_->pauseChannel(0);
 				phase = PHASE2;
 
 				rootAutoAim_->attack(true);
@@ -109,6 +113,7 @@ void TreeAttackManager::update()
 				lanternMov_->moveToSide();
 
 				lanternCols_->changeToSecondPhase();
+				rootAutoAim_->changeToSecondPhase();
 			}
 
 			else {

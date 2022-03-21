@@ -5,6 +5,7 @@
 #include "../game/Hub.h"
 #include "../game/TreeScene.h"
 #include "../game/FinalBossScene.h"
+#include "../game/TutorialScene.h"
 namespace ecs {
 
 Manager::Manager() :
@@ -61,38 +62,44 @@ void Manager::refresh() {
 
 }
 
-void Manager::changeScene(int n)
+/*void Manager::changeScene(int n)
 {
 	switch (n)
 	{
 	case 0: {
 		Hub h;
 		h.init() ;
-		h.start();
+		//h.start();
 		break;
 	}
 	case 1: {
 		FrogScene f;
 		f.init();
-		f.start();
+		//f.start();
 		break;
 	}
 	case 2: {
 		TreeScene t;
 		t.init();
-		t.start();
+		//t.start();
 		break;
 	}
 	case 3: {
 		FinalBossScene t;
 		t.init();
-		t.start();
+		//t.start();
+		break;
+	}
+	case 4: {
+		TutorialScene t;
+		t.init();
+		//t.start();
 		break;
 	}
 	default:
 		break;
 	}
 
-}
+}*/
 
 } // end of namespace

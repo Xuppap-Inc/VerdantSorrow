@@ -17,12 +17,15 @@ public:
 	void attack(bool infinite);
 	void cancelAttack();
 
+	void changeToSecondPhase();
 	bool hasFinished() { return !attacking_; };
 
 private:
 
-	int TIME_BETWEEN_ROOTS = 1000;
-	int DURATION = 7000;
+	const int TIME_BETWEEN_ROOTS = 1000;
+	const int DURATION = 7000;
+
+	const int LANTER_SECURE_SPACE = 100;
 
 	Transform* tr_;
 	RootSpawner* rootSpawner_;
@@ -30,6 +33,10 @@ private:
 
 	ecs::Entity* player_;
 	Transform* playerTr_;
+
+	Transform* lanternTr_;
+
+	bool secondPhase_;
 
 	Uint32 lastTime_;
 	int iniTime_;

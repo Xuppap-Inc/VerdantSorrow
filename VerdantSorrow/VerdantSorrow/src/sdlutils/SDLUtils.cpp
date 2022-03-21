@@ -59,8 +59,9 @@ void SDLUtils::initWindow() {
 			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	assert(renderer_ != nullptr);
 
-	// hide cursor by default
-	hideCursor();
+	// show cursor by default
+	//hideCursor();
+	showCursor();
 
 }
 
@@ -270,5 +271,14 @@ void SDLUtils::closeSDLExtensions() {
 	Mix_Quit(); // quit SDL_mixer
 	IMG_Quit(); // quit SDL_image
 	TTF_Quit(); // quit SDL_ttf
+}
+
+void SDLUtils::freeMemory()
+{
+	musics_.clear();
+	sounds_.clear();
+	msgs_.clear();
+	images_.clear();
+	fonts_.clear();
 }
 

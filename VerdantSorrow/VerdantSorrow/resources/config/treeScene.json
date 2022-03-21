@@ -9,38 +9,41 @@
 
   "images": [
     {
-      "id": "sdl_logo",
-      "file": "resources/images/SDL_logo.png"
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
     },
     {
-      "id": "matt",
-      "file": "resources/images/matt.jpg"
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
     },
     {
-      "id": "ojo",
-      "file": "resources/images/Ojo.png"
+      "id": "vfx_lantern",
+      "file": "resources/images/vfx_lantern.png"
     },
-
     {
-      "id": "ojo",
-      "file": "resources/images/Ojo.png"
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
     },
-
     {
-      "id": "mano",
-      "file": "resources/images/mano.png"
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
     },
-
     {
-      "id": "tennis_ball",
-      "file": "resources/images/tennis_ball.png"
+      "id": "groot",
+      "file": "resources/images/groot.png"
     },
-
     {
-      "id": "star",
-      "file": "resources/images/star.png"
+      "id": "lampara",
+      "file": "resources/images/lampara.png"
     },
-
+    {
+      "id": "root",
+      "file": "resources/images/root.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
+    },
     {
       "id": "chica",
       "file": "resources/images/chicafoto.png"

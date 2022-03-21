@@ -7,6 +7,7 @@
 #include "LanternMovement.h"
 #include "root/RootMovement.h"
 #include "../../player/Attack.h"
+#include "RootAutoAim.h"
 
 LanternCollisions::LanternCollisions(CollisionManager* colManager) : attrib_(), lanternTr_(), collider_(), colMan_(colManager), damaged_(false), 
 lanterMov_(), secondPhase_(false), contAttacks_(0), attacked_(false), playerAttack_()
@@ -51,6 +52,8 @@ void LanternCollisions::update()
 					std::cout << "daño" << std::endl;
 					attrib_->setDamage(3);
 					damaged_ = true;
+
+					mngr_->getHandler(ecs::_TREEBOSS)->getComponent<RootAutoAim>()->cancelAttack();
 				}
 
 				else if (secondPhase_ && !attacked_ && attack != nullptr) {

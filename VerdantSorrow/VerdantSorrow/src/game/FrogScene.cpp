@@ -16,7 +16,6 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/wave/WaveMovement.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
-#include "../components/boss/tree_boss/Root/RootMovement.h"
 
 
 #include "CollisionManager.h"
@@ -47,6 +46,17 @@ void FrogScene::init()
 
 }
 
+void FrogScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 {
 	//se crea wave spwner
@@ -58,7 +68,7 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 
 void FrogScene::background()
 {
-	Scene::background("fondo1");
+	Scene::background("fondoSuelo");
 }
 
 
@@ -106,7 +116,7 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>();
+	player_->addComponent<CollideWithBorders>(100);
 
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
@@ -130,4 +140,14 @@ void FrogScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
+}
+
+bool FrogScene::getAble()
+{
+	return isAble;
+}
+
+void FrogScene::setAble(bool a)
+{
+	isAble = a;
 }

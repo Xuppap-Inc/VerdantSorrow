@@ -9,7 +9,7 @@ public:
 	virtual ~Scene();
 	virtual void init();
 	//Método que hace update
-	virtual void start();
+	//virtual void start();
 	//updates the scene we are into
 	virtual void update();
 	//Dibuja el fondo

@@ -45,6 +45,17 @@ void TreeScene::init()
 }
 
 
+void TreeScene::update()
+{
+	mngr_->update();
+	mngr_->refresh();
+
+	sdlutils().clearRenderer();
+	mngr_->render();
+	mngr_->debug();
+	sdlutils().presentRenderer();
+}
+
 void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 
 	auto tree_ = mngr_->addEntity();
@@ -55,6 +66,8 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 360;
 	treeTr->init(Vector2D(treeX, treeY), Vector2D(), 160, 360, 0.0f);
+
+	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
 
 	tree_->addComponent<Image>(&sdlutils().images().at("groot"));
 
@@ -70,8 +83,6 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	tree_->addComponent<RootWave>();
 	tree_->addComponent<RootAutoAim>(player_);
 	tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
-
-	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
 	
 	//IMPORTANTE: attack manager al final
 	tree_->addComponent<TreeAttackManager>(colManager);

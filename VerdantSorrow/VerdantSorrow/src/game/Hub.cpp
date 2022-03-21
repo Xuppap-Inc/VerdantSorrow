@@ -18,24 +18,37 @@
 #include "../components/hub/DialogBoxMngr.h"
 
 #include "CollisionManager.h"
+#include "../game/SceneManager.h"
 
 
+
+Hub::Hub():Scene()
+{
+	colManager = nullptr;
+	player = nullptr;
+}
+
+Hub::~Hub()
+{
+	delete colManager;
+	//delete player;
+}
 
 void Hub::init()
 {
 	Scene::init();
 
 	//Para gestionar las colisiones
-	CollisionManager* colManager = new CollisionManager();
+	colManager = new CollisionManager();
 
-
+	changeSc = false;
 	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	EntryGenerator(colManager);
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
-	NPCGenerator(colManager,dialogBox);
+	NPCGenerator(colManager, dialogBox);
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)
@@ -47,16 +60,55 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
 }
 
+bool Hub::getAble()
+{
+	return isAble;
+}
+
+void Hub::setAble(bool a)
+{
+	isAble = a;
+}
+
+void Hub::changeScene_()
+{
+	changeSc = !changeSc;
+}
+
+void Hub::checkCollissions()
+{
+	auto playerCol_ = player->getComponent<RectangleCollider>();
+	if (colManager->hasCollisions(playerCol_)) {
+		std::vector<RectangleCollider*> colliders = colManager->getCollisions(playerCol_);
+
+		bool changeScene = false;
+		int i = 0;
+		while (!changeScene && i < colliders.size()) {
+			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
+			i++;
+		}
+		if (changeScene) changeScene_();
+	}
+}
+
 
 void Hub::update()
 {
-	mngr_->update();
-	mngr_->refresh();
+	if (!changeSc) {
+		mngr_->update();
+		mngr_->refresh();
 
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+
+		checkCollissions();
+	}
+	else {
+		
+		
+	}
 }
 
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
@@ -67,15 +119,15 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f,false);
-	
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f, false);
+
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se añade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(3,colManager);
+	player_->addComponent<PlayerHubControl>(3, colManager);
 
 	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
@@ -106,7 +158,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f,false);
+	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().images().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);
@@ -114,5 +166,5 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 
 	npc->addComponent<RectangleRenderer>();
 
-	npc->addComponent<NpcCtrl>(colManager,dialogBox_);
+	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
 }
