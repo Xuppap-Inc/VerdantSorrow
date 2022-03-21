@@ -113,6 +113,7 @@ void TreeAttackManager::update()
 				lanternMov_->moveToSide();
 
 				lanternCols_->changeToSecondPhase();
+				rootAutoAim_->changeToSecondPhase();
 			}
 
 			else {
