@@ -9,44 +9,8 @@
 
   "images": [
     {
-      "id": "bolaFuego",
-      "file": "resources/images/bola_fuego.png"
-    },
-    {
-      "id": "sdl_logo",
-      "file": "resources/images/SDL_logo.png"
-    },
-    {
-      "id": "matt",
-      "file": "resources/images/matt.jpg"
-    },
-    {
-      "id": "ojo",
-      "file": "resources/images/Ojo.png"
-    },
-    {
-      "id": "ojo",
-      "file": "resources/images/Ojo.png"
-    },
-    {
-      "id": "mano",
-      "file": "resources/images/mano.png"
-    },
-    {
-      "id": "tennis_ball",
-      "file": "resources/images/tennis_ball.png"
-    },
-    {
-      "id": "star",
-      "file": "resources/images/star.png"
-    },
-    {
       "id": "chica",
       "file": "resources/images/chicafoto.png"
-    },
-    {
-      "id": "ranajump",
-      "file": "resources/images/rana_jump.png"
     },
     {
       "id": "Chica_Idle",
@@ -99,62 +63,6 @@
     {
       "id": "Chica_AtkAir",
       "file": "resources/images/Chica_AtkAir.png"
-    },
-    {
-      "id": "ranacambiofase",
-      "file": "resources/images/rana_cambio_fase.png"
-    },
-    {
-      "id": "mosca",
-      "file": "resources/images/mosca.png"
-    },
-    {
-      "id": "lengua",
-      "file": "resources/images/lengua.png"
-    },
-    {
-      "id": "rana_cambio_fase",
-      "file": "resources/images/rana_cambio_fase.png"
-    },
-    {
-      "id": "rana_enfadada_idle",
-      "file": "resources/images/rana_enfadada_idle.png"
-    },
-    {
-      "id": "rana_enfadada_jump",
-      "file": "resources/images/rana_enfadada_jump.png"
-    },
-    {
-      "id": "rana_enfadada_lengua",
-      "file": "resources/images/rana_enfadada_lengua.png"
-    },
-    {
-      "id": "rana_enfadada_muerte",
-      "file": "resources/images/rana_enfadada_muerte.png"
-    },
-    {
-      "id": "rana_idle",
-      "file": "resources/images/rana_idle.png"
-    },
-    {
-      "id": "rana_jump",
-      "file": "resources/images/rana_jump.png"
-    },
-    {
-      "id": "rana_lengua",
-      "file": "resources/images/rana_lengua.png"
-    },
-    {
-      "id": "rana_salto_a_vulnerable",
-      "file": "resources/images/rana_salto_a_vulnerable.png"
-    },
-    {
-      "id": "rana_vulnerable",
-      "file": "resources/images/rana_vulnerable.png"
-    },
-    {
-      "id": "rana_vulnerable_a_idle",
-      "file": "resources/images/rana_vulnerable_a_idle.png"
     },
     {
       "id": "vfx_cloud",
