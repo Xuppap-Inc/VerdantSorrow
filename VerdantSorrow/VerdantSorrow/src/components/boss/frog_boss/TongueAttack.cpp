@@ -35,6 +35,7 @@ void TongueAttack::update()
 	if (sdlutils().currRealTime() - lastUpdate_ >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
 	{
 		setActive(false);
+		ent_->setActive(false);
 		finishedAttack_ = true;
 		lastUpdate_ = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
 		
@@ -69,6 +70,8 @@ void TongueAttack::attack(bool fly)
 	tongW = (finPos - iniPos).magnitude();
 	setCollider(iniPos,tongW,50); //Crea el collider y lo activa
 	setActive(true);
+	ent_->setActive(true);
+
 	finishedAttack_ = false; //El ataque no ha terminado aun
 
 	if (fly_)
@@ -86,6 +89,8 @@ bool TongueAttack::finished()
 void TongueAttack::cancel()
 {
 	setActive(false);
+	ent_->setActive(false);
+
 }
 
 void TongueAttack::setCollider(Vector2D pos, float w, float h)

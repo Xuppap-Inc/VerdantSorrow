@@ -35,6 +35,7 @@ public:
 	void initComponent() override;
 	void update() override;
 	ecs::Entity* createFly();
+	ecs::Entity* createTongue();
 	void onFlyDied();
 private:
 	enum AnimState {
@@ -53,8 +54,8 @@ private:
 	void nextAttack();
 	FrogJump* frogJump_;
 	FrogBigJump* bigJump_;
-	TongueAttack* tongueAttack_;
 	ecs::Entity* fly_;
+	ecs::Entity* tongue_;
 	Transform* player_;
 	Transform* tr_;
 	CollisionManager* collManager_;
