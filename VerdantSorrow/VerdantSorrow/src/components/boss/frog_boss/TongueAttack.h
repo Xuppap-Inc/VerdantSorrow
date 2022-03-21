@@ -17,6 +17,7 @@ public :
 	void attack(bool fly); //metodo que lanza la lengua hacia el jugador Transform * objective
 	bool finished();
 	void cancel();
+	void currentPos(bool fly);
 protected:
 
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
@@ -25,5 +26,7 @@ protected:
 	float lastUpdate_;
 	bool finishedAttack_;
 	bool fly_;
+
+	Transform* frogTr_;
 };
 

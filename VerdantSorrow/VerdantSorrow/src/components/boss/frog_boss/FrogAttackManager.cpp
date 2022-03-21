@@ -17,7 +17,7 @@
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
-jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(), tongueAttack_(),
+jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(),
 tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
 {
 }
@@ -25,7 +25,7 @@ tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
 jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0),
-flySpacing_(0), tongueAttack_(), tongueDelay_(3000), animState_(ANIM_IDLE),
+flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE),
 animNewState_(ANIM_IDLE), waveSp_()
 {
 }
@@ -38,7 +38,7 @@ void FrogAttackManager::initComponent()
 {
 	frogJump_ = ent_->addComponent<FrogJump>(30);
 	bigJump_ = ent_->addComponent<FrogBigJump>(40);
-	tongueAttack_ = ent_->addComponent<TongueAttack>(collManager_);
+	//tongueAttack_ = ent_->addComponent<TongueAttack>(collManager_);
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	attr_ = ent_->getComponent<BossAtributos>();
@@ -53,7 +53,9 @@ void FrogAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	bool correct = tr_ != nullptr && frogJump_ != nullptr && tongueAttack_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_ != nullptr;
+	createTongue();
+
+	bool correct = tr_ != nullptr && frogJump_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_ != nullptr;
 	assert(correct);
 }
 
@@ -62,7 +64,6 @@ void FrogAttackManager::update()
 {
 	auto& rand = sdlutils().rand();
 	if (attr_->getLife() <= 0) {
-		std::cout << "Muerte" << std::endl;
 		animNewState_ = ANIM_DEATH;
 		if (anim_->getFrameNum() == 16)
 			ent_->setAlive(false);
@@ -81,10 +82,11 @@ void FrogAttackManager::update()
 		}
 		break;
 	case TONGUE:
-		if (tongueAttack_->finished())
+		if (tongue_->getComponent<TongueAttack>()->finished())
 		{
 			frogState_ = WAITING;
-
+			tongue_->setActive(false);
+			
 			delay_ = rand.nextInt(1000, 3000);
 			lastUpdate_ = sdlutils().currRealTime();
 		}
@@ -100,16 +102,18 @@ void FrogAttackManager::update()
 		}
 		break;
 	case WAITING_FOR_TONGUE:
-		//std::cout << "esperando" << std::endl;
+
 		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
-			tongueAttack_->attack(!secondPhase_);
+			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
 			frogState_ = TONGUE;
+
 		}
 		break;
 	case FLY_DIED:
 		if (!jumping_ && !jumpingBig_) {
 			bigJump_->attack(0);
-			tongueAttack_->cancel();
+			tongue_->getComponent<TongueAttack>()->cancel();
+			tongue_->setActive(false);
 			jumpingBig_ = true;
 			frogState_ = JUMPING_BIG;
 			angry_ = true;
@@ -195,6 +199,21 @@ ecs::Entity* FrogAttackManager::createFly()
 	return fly_;
 }
 
+ecs::Entity* FrogAttackManager::createTongue()
+{
+	tongue_ = mngr_->addEntity();
+	auto tr = tongue_->addComponent<Transform>();
+	auto tongueY = tr_->getPos().getY();
+	auto tongueW = 100;
+	auto tongueH = 50;
+	auto tongueX = tr_->getPos().getX()-tongueW;
+	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueH, 0.0f);
+	tongue_->addComponent<TongueAttack>();
+	tongue_->addComponent<RectangleRenderer>(SDL_Color());
+	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
+	return tongue_;
+}
+
 void FrogAttackManager::onFlyDied() {
 	frogState_ = FLY_DIED;
 }
@@ -253,6 +272,8 @@ void FrogAttackManager::nextAttack()
 			animNewState_ = ANIM_TONGUE;
 		}
 		frogState_ = WAITING_FOR_TONGUE;
+		tongue_->getComponent<TongueAttack>()->currentPos(!secondPhase_);
+		tongue_->setActive(true);
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;

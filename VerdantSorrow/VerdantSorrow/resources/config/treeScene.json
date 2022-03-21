@@ -1,0 +1,90 @@
+{
+
+  "fonts" : [
+    { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
+    { "id" : "ARIAL24", "file" : "resources/fonts/ARIAL.ttf", "size": 24 },
+    { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
+  ],
+
+
+  "images": [
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_lantern",
+      "file": "resources/images/vfx_lantern.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
+    {
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
+    },
+    {
+      "id": "groot",
+      "file": "resources/images/groot.png"
+    },
+    {
+      "id": "lampara",
+      "file": "resources/images/lampara.png"
+    },
+    {
+      "id": "root",
+      "file": "resources/images/root.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/Chica_Idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/Chica_Run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/Chica_Jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/Chica_AtkFloor.png"
+    },
+    {
+
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
+    }
+  ],
+
+  "sounds" : [
+    { "id" : "musica_linterna_fase1", "file" : "resources/sound/musica_linterna_fase1.wav" },
+    { "id" : "sfx_arbol_attack", "file" : "resources/sound/sfx_arbol_attack.wav" },
+    { "id" : "sfx_arbol_damage", "file" : "resources/sound/sfx_arbol_damage.wav" },
+    { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
+    { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
+    { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" }
+  ],
+  "musics" : [
+    { "id" : "musica_linterna_fase2", "file" : "resources/sound/musica_linterna_fase2.wav" }
+  ]
+
+}
