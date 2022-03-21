@@ -23,12 +23,15 @@
         {
             "id": "newGame",
             "file": "resources/images/MenuPrincipal/newGameButton.png"
+        },
+        {
+            "id": "fondoMenu",
+            "file": "resources/images/MenuPrincipal/fondoMenu.jpg"
         }
     ],
 
     "messages": [
     ],
-
     "sounds": [
     ],
     "musics": [
