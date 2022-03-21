@@ -67,6 +67,7 @@ void Game::start() {
 		json = "resources/config/hub.json";
 	}
 	
+	SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 	//Crea el game Manager
 	SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 
