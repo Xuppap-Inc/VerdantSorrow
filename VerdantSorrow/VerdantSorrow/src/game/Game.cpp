@@ -37,7 +37,7 @@ void Game::start() {
 			break;
 		case 1:
 			firstScene = SceneManager::scenes::Frog_;
-			json = "resources/config/resources.json";
+			json = "resources/config/frog.json";
 			break;
 		case 2:
 			firstScene = SceneManager::scenes::Tree_;

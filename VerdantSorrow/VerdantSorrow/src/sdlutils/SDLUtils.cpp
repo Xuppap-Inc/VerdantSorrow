@@ -272,3 +272,12 @@ void SDLUtils::closeSDLExtensions() {
 	TTF_Quit(); // quit SDL_ttf
 }
 
+void SDLUtils::freeMemory()
+{
+	musics_.clear();
+	sounds_.clear();
+	msgs_.clear();
+	images_.clear();
+	fonts_.clear();
+}
+

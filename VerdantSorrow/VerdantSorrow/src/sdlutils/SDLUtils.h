@@ -148,6 +148,7 @@ private:
 	void closeWindow();
 	void initSDLExtensions(); // initialize resources (fonts, textures, audio, etc.)
 	void closeSDLExtensions(); // free resources the
+	void freeMemory();
 	void loadReasources(std::string filename); // load resources from the json file
 
 	std::string windowTitle_; // window title
