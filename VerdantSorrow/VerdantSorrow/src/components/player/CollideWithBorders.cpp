@@ -33,7 +33,7 @@ void CollideWithBorders::onBottom()
 	auto& pos = tr_->getPos();
 	auto& vel = tr_->getVel();
 
-	auto height = sdlutils().height();
+	auto height = sdlutils().height() - 50;
 	auto playerHeight = tr_->getHeight();
 	bool gr = tr_->getGravity();
 	if (!attrib_->isOnGround()||!gr) {
