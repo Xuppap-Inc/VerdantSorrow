@@ -25,5 +25,7 @@ protected:
 	float lastUpdate_;
 	bool finishedAttack_;
 	bool fly_;
+
+	Transform* frogTr_;
 };
 

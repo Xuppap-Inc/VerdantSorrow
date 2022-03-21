@@ -85,7 +85,8 @@ void FrogAttackManager::update()
 		if (tongue_->getComponent<TongueAttack>()->finished())
 		{
 			frogState_ = WAITING;
-
+			tongue_->setActive(false);
+			
 			delay_ = rand.nextInt(1000, 3000);
 			lastUpdate_ = sdlutils().currRealTime();
 		}
@@ -105,12 +106,14 @@ void FrogAttackManager::update()
 		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
 			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
 			frogState_ = TONGUE;
+
 		}
 		break;
 	case FLY_DIED:
 		if (!jumping_ && !jumpingBig_) {
 			bigJump_->attack(0);
 			tongue_->getComponent<TongueAttack>()->cancel();
+			tongue_->setActive(false);
 			jumpingBig_ = true;
 			frogState_ = JUMPING_BIG;
 			angry_ = true;
@@ -200,13 +203,14 @@ ecs::Entity* FrogAttackManager::createTongue()
 {
 	tongue_ = mngr_->addEntity();
 	auto tr = tongue_->addComponent<Transform>();
-	auto tongueY = tr_->getPos().getY()+ tr_->getHeight()/4;
+	auto tongueY = tr_->getPos().getY();
 	auto tongueW = 100;
+	auto tongueH = 50;
 	auto tongueX = tr_->getPos().getX()-tongueW;
-	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueW, 0.0f);
+	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueH, 0.0f);
 	tongue_->addComponent<TongueAttack>();
+	tongue_->addComponent<RectangleRenderer>(SDL_Color());
 	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
-	tongue_->setActive(false);
 	return tongue_;
 }
 
@@ -268,6 +272,7 @@ void FrogAttackManager::nextAttack()
 			animNewState_ = ANIM_TONGUE;
 		}
 		frogState_ = WAITING_FOR_TONGUE;
+		tongue_->setActive(true);
 	}
 	else {
 		int nextJump = secondPhase_ ? sdlutils().rand().nextInt(0, 100) : 100;
