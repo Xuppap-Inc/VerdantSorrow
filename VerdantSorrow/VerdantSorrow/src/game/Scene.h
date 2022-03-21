@@ -13,6 +13,7 @@ public:
 	//updates the scene we are into
 	virtual void update();
 	//Dibuja el fondo
+	virtual void backgroundmovement(std::string backgroundName);
 	virtual void background(std::string backgroundName);
 	virtual void playerGenerator(CollisionManager* colManager, Entity* player_);
 protected:

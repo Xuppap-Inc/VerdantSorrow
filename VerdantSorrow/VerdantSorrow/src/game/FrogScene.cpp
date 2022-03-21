@@ -68,7 +68,7 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 
 void FrogScene::background()
 {
-	Scene::background("fondoSuelo");
+	Scene::backgroundmovement("fondos1");
 }
 
 

@@ -143,6 +143,10 @@
     {
       "id": "particles",
       "file": "resources/images/particles.png"
+    },
+    {
+      "id": "fondos1",
+      "file": "resources/images/fondos1.png"
     }
   ],
 
