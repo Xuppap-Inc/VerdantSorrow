@@ -29,13 +29,14 @@ void TongueAttack::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	frogTr_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<Transform>();
+	assert(frogTr_ != nullptr);
 }
 void TongueAttack::update()
 {
 	if (sdlutils().currRealTime() - lastUpdate_ >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
 	{
 		setActive(false);
-		ent_->setActive(false);
 		finishedAttack_ = true;
 		lastUpdate_ = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
 		
@@ -44,33 +45,9 @@ void TongueAttack::update()
 }
 void TongueAttack::attack(bool fly)
 {
-	fly_ = fly;
-	//Compruebo si el objetivo es la mosca o el jugador 
-	auto entObjective = fly ? mngr_->getHandler(ecs::_FLY) : mngr_->getHandler(ecs::_PLAYER); 
-	auto objective = entObjective->getComponent<Transform>();
-	auto posFrog = tr_->getPos(); //Posicion rana
-	auto posObj = objective->getPos(); //Posicion mosca objetivo
-	Vector2D iniPos; //Posicion inicial para el collider
-	Vector2D finPos; //Posicion final para el collider
-	float tongW; //Ancho de la lengua
 
-
-	if (posObj.getX() < posFrog.getX()) //Si la mosca esta a su izq, el collider crece desde la mosca
-	{
-		iniPos = Vector2D(posObj.getX()+objective->getWidth(), posObj.getY());
-		finPos = posFrog;
-
-	}
-	else if (posObj.getX() > posFrog.getX()) //En este caso el collider crece desde la rana
-	{
-		iniPos = Vector2D(posFrog.getX() + tr_->getWidth(), posFrog.getY());
-		finPos=posObj;
-	}
-
-	tongW = (finPos - iniPos).magnitude();
-	setCollider(iniPos,tongW,50); //Crea el collider y lo activa
+	currentPos(fly);
 	setActive(true);
-	ent_->setActive(true);
 
 	finishedAttack_ = false; //El ataque no ha terminado aun
 
@@ -89,7 +66,34 @@ bool TongueAttack::finished()
 void TongueAttack::cancel()
 {
 	setActive(false);
-	ent_->setActive(false);
+
+}
+
+void TongueAttack::currentPos(bool fly)
+{
+	fly_ = fly;
+	//Compruebo si el objetivo es la mosca o el jugador 
+	auto entObjective = fly ? mngr_->getHandler(ecs::_FLY) : mngr_->getHandler(ecs::_PLAYER);
+	auto objective = entObjective->getComponent<Transform>();
+	auto posFrog = frogTr_->getPos(); //Posicion rana
+	auto posObj = objective->getPos(); //Posicion mosca objetivo
+
+	Vector2D iniPos; //Posicion inicial para el collider
+	float w;
+	if (posObj.getX() <= posFrog.getX()) //Si la mosca esta a su izq, el collider crece desde la mosca
+	{
+		iniPos = Vector2D(posObj.getX() + objective->getWidth(), posObj.getY());
+		w = posFrog.getX() - iniPos.getX();
+	}
+	else //En este caso el collider crece desde la rana
+	{
+		iniPos = Vector2D(posFrog.getX() + frogTr_->getWidth(), posFrog.getY());
+		w = posObj.getX() - iniPos.getX();
+	}
+
+	tr_->setWidth(w);
+	tr_->getPos().set(iniPos);
+	setCollider(iniPos, w, tr_->getHeight());
 
 }
 
