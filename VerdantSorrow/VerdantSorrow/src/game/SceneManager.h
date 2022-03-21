@@ -6,13 +6,14 @@
 #include "FinalBossScene.h"
 #include "Hub.h"
 #include "TutorialScene.h"
+#include "MenuScene.h"
 
 #include <vector>
 class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
 public:
-	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_ };
+	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_ };
 	SceneManager();
 	~SceneManager();
 	void update();
@@ -29,5 +30,6 @@ private:
 	TreeScene* t_;
 	FinalBossScene* fin_;
 	TutorialScene* tut_;
+	MenuScene* menu_;
 };
 

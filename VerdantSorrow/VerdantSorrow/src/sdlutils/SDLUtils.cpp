@@ -59,8 +59,9 @@ void SDLUtils::initWindow() {
 			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	assert(renderer_ != nullptr);
 
-	// hide cursor by default
-	hideCursor();
+	// show cursor by default
+	//hideCursor();
+	showCursor();
 
 }
 

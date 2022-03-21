@@ -3,6 +3,7 @@
 #include "TreeScene.h"
 #include "FinalBossScene.h"
 #include "Hub.h"
+#include "MenuScene.h"
 
 
 SceneManager::SceneManager() : actScene(Hub_)
@@ -12,11 +13,12 @@ SceneManager::SceneManager() : actScene(Hub_)
 	t_ = new TreeScene(); sceneList.push_back(t_);
 	fin_ = new FinalBossScene(); sceneList.push_back(fin_);
 	tut_ = new TutorialScene(); sceneList.push_back(tut_);
+	menu_ = new MenuScene(); sceneList.push_back(menu_);
 }
 
 SceneManager::~SceneManager()
 {
-	delete h_; delete f_; delete t_; delete fin_; delete tut_;
+	delete h_; delete f_; delete t_; delete fin_; delete tut_; delete menu_;
 	sceneList.empty();
 }
 
@@ -38,6 +40,9 @@ void SceneManager::update()
 		break;
 	case SceneManager::Tutorial_:
 		tut_->update();
+		break;
+	case SceneManager::Menu_:
+		menu_->update();
 		break;
 	default:
 		break;
@@ -62,6 +67,9 @@ void SceneManager::init()
 		break;
 	case SceneManager::Tutorial_:
 		tut_->init();
+		break;
+	case SceneManager::Menu_:
+		menu_->init();
 		break;
 	default:
 		break;
