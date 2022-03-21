@@ -1,0 +1,126 @@
+{
+
+  "fonts" : [
+    { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
+    { "id" : "ARIAL24", "file" : "resources/fonts/ARIAL.ttf", "size": 24 },
+    { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
+  ],
+
+
+  "images": [
+    {
+      "id": "ojo",
+      "file": "resources/images/Ojo.png"
+    },
+    {
+      "id": "mano",
+      "file": "resources/images/mano.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/Chica_Idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/Chica_Run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/Chica_Jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/Chica_AtkFloor.png"
+    },
+    {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "bossBarArrow_Left",
+      "file": "resources/images/BossBarArrow_Left.png"
+    },
+    {
+      "id": "bossBarArrow_Right",
+      "file": "resources/images/BossBarArrow_Right.png"
+    },
+    {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "fondoSuelo",
+      "file": "resources/images/fondoSuelo.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/Chica_AtkAir.png"
+    },
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
+    {
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
+    }
+  ],
+
+  "messages" : [
+    { "id" : "PressAnyKey", "text" : "Press Any Key", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id" : "HelloSDL", "text" : "Hello SDL!", "font" : "ARIAL48", "color" : "0x0000ffff" }
+  ],
+
+  "sounds" : [
+    { "id" : "musica_rana_fase1", "file" : "resources/sound/musica_rana_fase1.wav" },
+    { "id" : "musica_linterna_fase1", "file" : "resources/sound/musica_linterna_fase1.wav" },
+    { "id" : "sfx_arbol_attack", "file" : "resources/sound/sfx_arbol_attack.wav" },
+    { "id" : "sfx_arbol_damage", "file" : "resources/sound/sfx_arbol_damage.wav" },
+    { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
+    { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
+    { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
+    { "id" : "sfx_manos_attack", "file" : "resources/sound/sfx_manos_attack.wav" },
+    { "id" : "sfx_manos_damage", "file" : "resources/sound/sfx_manos_damage.wav" },
+    { "id" : "sfx_manos_fuego", "file" : "resources/sound/sfx_manos_fuego.wav" },
+    { "id" : "sfx_mosca_idle", "file" : "resources/sound/sfx_mosca_idle.wav" },
+    { "id" : "sfx_rana_damage", "file" : "resources/sound/sfx_rana_damage.wav" }
+  ],
+  "musics" : [
+    { "id" : "musica_hub", "file" : "resources/sound/musica_hub.wav" },
+    { "id" : "musica_rana_fase2", "file" : "resources/sound/musica_rana_fase2.wav" },
+    { "id" : "musica_linterna_fase2", "file" : "resources/sound/musica_linterna_fase2.wav" }
+  ]
+
+}

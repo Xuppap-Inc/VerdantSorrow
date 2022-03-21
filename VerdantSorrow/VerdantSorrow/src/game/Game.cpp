@@ -47,7 +47,7 @@ void Game::start() {
 			break;
 		case 3:
 			firstScene = SceneManager::scenes::Eye_;
-			json = "resources/config/finalBossScene.json";
+			json = "resources/config/finalBoss.json";
 			break;
 		case 4:
 			firstScene = SceneManager::scenes::Tutorial_;
