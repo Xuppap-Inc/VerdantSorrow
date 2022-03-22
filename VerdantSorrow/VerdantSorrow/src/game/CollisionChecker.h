@@ -9,6 +9,7 @@ public:
 	virtual ~CollisionChecker();
 	void collisionsFrogScene();
 	void collisionsGrootScene();
+	void collisionsFinalBossScene();
 private:
 	CollisionManager* colManager_;
 	ecs::Manager* mngr_;

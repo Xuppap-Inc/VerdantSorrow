@@ -24,6 +24,7 @@
 #include "../components/boss/wave/WaveSpawner.h"
 
 #include "SceneManager.h"
+#include "../game/CollisionChecker.h"
 
 
 void FinalBossScene::init()
@@ -44,6 +45,7 @@ void FinalBossScene::init()
 
 	finalBossGenerator(colManager, player);
 
+	colCheck_ = new CollisionChecker(colManager, mngr_);
 }
 
 void FinalBossScene::update()
@@ -52,6 +54,7 @@ void FinalBossScene::update()
 	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
+		colCheck_->collisionsFinalBossScene();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();

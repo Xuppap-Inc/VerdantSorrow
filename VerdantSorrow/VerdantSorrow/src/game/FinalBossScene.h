@@ -5,7 +5,7 @@
 
 #include "Scene.h"
 
-
+class CollisionChecker;
 class FinalBossScene: public Scene
 {
 public: 
@@ -27,5 +27,6 @@ private:
 	bool isAble;
 	Entity* player;
 	Entity* FinalBossFace;
+	CollisionChecker* colCheck_;
 };
 
