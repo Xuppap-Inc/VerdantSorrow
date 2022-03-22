@@ -7,6 +7,8 @@
 #include "../ecs/Entity.h"
 #include "../components/player/SimplePhysicsPlayer.h"
 #include "../components/Transform.h"
+#include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "../components/boss/frog_boss/TongueAttack.h"
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr): colManager_(colManager), mngr_(mngr)
 {
@@ -31,10 +33,10 @@ void CollisionChecker::collisionsFrogScene()
 
 				ecs::Entity* ent = c->getEntity();
 				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				ClapAttack* cA = ent->getComponent<ClapAttack>();
 				WaveMovement* wave = ent->getComponent<WaveMovement>();
+				TongueAttack* tA = ent->getComponent<TongueAttack>();
 
-				if (bA != nullptr || cA != nullptr || wave != nullptr) {
+				if (bA != nullptr || wave != nullptr || tA != nullptr) {
 
 					if (!player->getComponent<PlayerAttributes>()->getInvulnerable() && !player->getComponent<PlayerCtrl>()->isRolling()) {
 						player->getComponent<PlayerAttributes>()->damagePlayer(1);

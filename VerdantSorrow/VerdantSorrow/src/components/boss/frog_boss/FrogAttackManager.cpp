@@ -54,7 +54,7 @@ void FrogAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	createTongue();
+	createTongue(collManager_);
 
 	bool correct = tr_ != nullptr && frogJump_ != nullptr && bigJump_ != nullptr && player_ != nullptr && waveSp_ != nullptr;
 	assert(correct);
@@ -206,7 +206,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	return fly_;
 }
 
-ecs::Entity* FrogAttackManager::createTongue()
+ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 {
 	tongue_ = mngr_->addEntity();
 	auto tr = tongue_->addComponent<Transform>();
@@ -215,7 +215,8 @@ ecs::Entity* FrogAttackManager::createTongue()
 	auto tongueH = 50;
 	auto tongueX = tr_->getPos().getX()-tongueW;
 	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueH, 0.0f);
-	tongue_->addComponent<TongueAttack>();
+	auto tongueCollider = tongue_->addComponent<TongueAttack>();
+	colManager->addCollider(tongueCollider);
 	tongue_->addComponent<RectangleRenderer>(SDL_Color());
 	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	return tongue_;

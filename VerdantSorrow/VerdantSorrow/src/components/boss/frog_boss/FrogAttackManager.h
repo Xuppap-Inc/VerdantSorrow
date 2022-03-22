@@ -35,7 +35,7 @@ public:
 	void initComponent() override;
 	void update() override;
 	ecs::Entity* createFly();
-	ecs::Entity* createTongue();
+	ecs::Entity* createTongue(CollisionManager* colManager);
 	void onFlyDied();
 private:
 	enum AnimState {
