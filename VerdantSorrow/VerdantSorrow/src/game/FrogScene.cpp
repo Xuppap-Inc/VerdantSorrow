@@ -91,8 +91,8 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
 
-	auto frogH = 150 * 2;
-	auto frogW = 250 * 2;
+	auto frogH = 300;
+	auto frogW = frogH * 1.11f;
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height() - frogH;
 	auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);

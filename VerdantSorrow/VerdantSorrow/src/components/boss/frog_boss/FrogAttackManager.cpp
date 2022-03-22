@@ -138,17 +138,17 @@ void FrogAttackManager::update()
 			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_idle");
 			break;
 		case FrogAttackManager::ANIM_JUMP:
-			if (!secondPhase_) anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_jump");
-			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_enfadada_jump");
+			if (!secondPhase_) anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
+			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
 			if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
 			break;
 		case FrogAttackManager::ANIM_BIG_JUMP:
 			if (!secondPhase_) {
-				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_jump");
+				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
 				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_JUMP_TO_VULNERABLE;
 			}
 			else {
-				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 32, 32, "rana_enfadada_jump");
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
 				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
 			}
 
