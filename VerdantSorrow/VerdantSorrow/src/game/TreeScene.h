@@ -20,7 +20,8 @@ public:
 	void rootGenerator(CollisionManager* colManager, Entity* player_, float x);
 
 	void lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y);
-
+private:
+	Entity* player;
 
 };
 

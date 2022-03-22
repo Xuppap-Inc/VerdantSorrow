@@ -23,6 +23,7 @@
 
 #include "../components/boss/wave/WaveSpawner.h"
 
+#include "SceneManager.h"
 
 
 void FinalBossScene::init()
@@ -38,7 +39,7 @@ void FinalBossScene::init()
 	waveSpawnerGenerator(colManager);
 
 	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
 	finalBossGenerator(colManager, player);
@@ -47,13 +48,19 @@ void FinalBossScene::init()
 
 void FinalBossScene::update()
 {
-	mngr_->update();
-	mngr_->refresh();
+	auto health = player->getComponent<PlayerAttributes>()->getLives();
+	if (health > 0) {
+		mngr_->update();
+		mngr_->refresh();
 
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+	}
+	else {
+		sC().changeScene();
+	}
 }
 
 void FinalBossScene::waveSpawnerGenerator(CollisionManager*& colManager)

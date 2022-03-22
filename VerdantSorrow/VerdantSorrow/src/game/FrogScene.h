@@ -23,5 +23,6 @@ public:
 	void setAble(bool a);
 private:
 	bool isAble;
+	Entity* player;
 };
 

@@ -27,6 +27,7 @@
 
 
 #include "CollisionManager.h"
+#include "SceneManager.h"
 
 
 
@@ -36,10 +37,10 @@ void TreeScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-	
+
 
 	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 	treeGenerator(colManager, player);
 }
@@ -47,13 +48,19 @@ void TreeScene::init()
 
 void TreeScene::update()
 {
-	mngr_->update();
-	mngr_->refresh();
+	auto health = player->getComponent< PlayerAttributes>()->getLives();
+	if (health > 0) {
+		mngr_->update();
+		mngr_->refresh();
 
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+	}
+	else {
+		sC().changeScene();
+	}
 }
 
 void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
@@ -79,11 +86,11 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	//IMPORTANTE: movimiento y spawner antes de los ataques
 	tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
 	tree_->addComponent<RootSpawner>(colManager);
-	
+
 	tree_->addComponent<RootWave>();
 	tree_->addComponent<RootAutoAim>(player_);
 	tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
-	
+
 	//IMPORTANTE: attack manager al final
 	tree_->addComponent<TreeAttackManager>(colManager);
 }
@@ -112,7 +119,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(50,playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(50, playerTr->getHeight(), colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 
@@ -129,7 +136,7 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 	auto RootAtribs = Root->addComponent<BossAtributos>();
 	auto RootTr = Root->addComponent<Transform>();
 	auto RootX = x;
-	auto RootY = sdlutils().height()+200;
+	auto RootY = sdlutils().height() + 200;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
 	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 1000, 0.0f);
 	//Se le añade un color inicial a la raiz
@@ -144,7 +151,7 @@ void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, flo
 	Root->addComponent<RootMovement>();
 }
 
-void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y)
+void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x, float y)
 {
 	//distribucion random de intervalo variable en distintas llamadas
 	std::random_device seed;

@@ -20,6 +20,7 @@
 
 #include "CollisionManager.h"
 #include "../components/boss/wave/WaveSpawner.h"
+#include "SceneManager.h"
 
 
 
@@ -36,7 +37,7 @@ void FrogScene::init()
 	waveSpawerGenerator(colManager);
 
 	//Se crea el jugador 
-	auto player = mngr_->addEntity();
+	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
 	frogGenerator(colManager, player);
@@ -48,13 +49,19 @@ void FrogScene::init()
 
 void FrogScene::update()
 {
-	mngr_->update();
-	mngr_->refresh();
+	auto health = player->getComponent<PlayerAttributes>()->getLives();
+	if (health > 0) {
+		mngr_->update();
+		mngr_->refresh();
 
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+	}
+	else {
+		sC().changeScene();
+	}
 }
 
 void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)

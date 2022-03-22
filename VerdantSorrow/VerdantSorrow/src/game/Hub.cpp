@@ -108,7 +108,7 @@ void Hub::update()
 	else {
 		auto& scMngr_ = sC();
 		
-		scMngr_.changeScene(SceneManager::scenes::Eye_);
+		scMngr_.changeScene(SceneManager::scenes::Frog_);
 	}
 }
 
