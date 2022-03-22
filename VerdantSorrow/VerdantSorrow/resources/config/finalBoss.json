@@ -8,6 +8,10 @@
 
   "images": [
     {
+      "id": "bolaFuego",
+      "file": "resources/images/bola_fuego.png"
+    },
+    {
       "id": "ojo",
       "file": "resources/images/BossFinal_Cabeza.png"
     },
