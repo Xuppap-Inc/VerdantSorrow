@@ -78,7 +78,7 @@ void FinalBossMovement::bounce()
 		//sdlutils().soundEffects().at("wall_hit").play();
 	}
 	else if (pos_.getX() + tr_->getWidth() > sdlutils().width()) {
-		pos_.setX(sdlutils().width() - tr_->getHeight());
+		pos_.setX(sdlutils().width() - tr_->getWidth());
 		vel_.setX(-vel_.getX());
 		//sdlutils().soundEffects().at("wall_hit").play();
 	}
