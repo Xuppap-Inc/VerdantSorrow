@@ -151,6 +151,10 @@
     {
       "id": "fondos1",
       "file": "resources/images/fondos1.png"
+    },
+    {
+      "id": "chicaroll",
+      "file": "resources/images/Chicarueda.png"
     }
   ],
 
