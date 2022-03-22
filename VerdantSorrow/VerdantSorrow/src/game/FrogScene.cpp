@@ -21,7 +21,7 @@
 #include "CollisionManager.h"
 #include "../components/boss/wave/WaveSpawner.h"
 #include "SceneManager.h"
-
+#include "../game/CollisionChecker.h"
 
 
 void FrogScene::init()
@@ -30,7 +30,6 @@ void FrogScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-
 
 	background();
 
@@ -45,6 +44,7 @@ void FrogScene::init()
 	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
 
+	colCheck_ = new CollisionChecker(colManager, mngr_);
 }
 
 void FrogScene::update()
@@ -62,10 +62,11 @@ void FrogScene::update()
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
+		colCheck_->collisionsFrogScene();
 		sdlutils().presentRenderer();
 	}
 	else {
-		sC().changeScene();
+		sC().decideScene();
 	}
 }
 
@@ -90,8 +91,8 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
 
-	auto frogH = 150 * 2;
-	auto frogW = 250 * 2;
+	auto frogH = 300;
+	auto frogW = frogH * 1.11f;
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height() - frogH;
 	auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);

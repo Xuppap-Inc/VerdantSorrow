@@ -16,7 +16,7 @@ public:
 	void dialogBoxGenerator(Entity* dialogBox);
 	bool getAble();
 	void setAble(bool a);
-	void changeScene_();
+	void changeScene_(bool ch);
 	void checkCollissions();
 private:
 	CollisionManager* colManager;

@@ -42,7 +42,7 @@ void Game::start() {
 			break;
 		case 2:
 			firstScene = SceneManager::scenes::Tree_;
-			json = "resources/config/groot.json";
+			json = "resources/config/treeScene.json";
 			break;
 		case 3:
 			firstScene = SceneManager::scenes::Eye_;
@@ -64,6 +64,7 @@ void Game::start() {
 	else {
 		firstScene = SceneManager::scenes::Hub_;
 		json = "resources/config/hub.json";
+		sC().setFirstSceneAble();
 	}
 	
 	SDLUtils::init("Verdant Sorrow", 1280, 720, json);

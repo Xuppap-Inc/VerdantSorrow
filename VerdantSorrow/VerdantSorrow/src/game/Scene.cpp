@@ -77,6 +77,10 @@ void Scene::backgroundmovement(std::string backgroundName)
 	auto backgrs_ = mngr_->addEntity();
 	auto backgrs_Tr = backgrs_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	backgrs_->addComponent<FramedImage>(&sdlutils().images().at(backgroundName), 10, 8, 5000, 78, backgroundName);
+
+	auto suelo = mngr_->addEntity();
+	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 }
 
 void Scene::background(std::string backgroundName)

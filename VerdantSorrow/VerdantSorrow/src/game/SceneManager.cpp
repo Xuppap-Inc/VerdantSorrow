@@ -17,9 +17,12 @@ SceneManager::SceneManager() : actScene(Hub_)
 	menu_ = new MenuScene(); sceneList.push_back(menu_);
 }
 
+
 SceneManager::~SceneManager()
 {
-	delete h_; delete f_; delete t_; delete fin_; delete tut_; delete menu_;
+	for (auto s : sceneList) {
+		delete s;
+	}
 	sceneList.empty();
 }
 
@@ -62,14 +65,18 @@ void SceneManager::init()
 		break;
 	case SceneManager::Frog_:
 		sdlUtils_.loadReasources("resources/config/frog.json");
+		//desactiva la escena para que no se pueda volver a acceder 
+		f_->setAble(false);
 		f_->init();
 		break;
 	case SceneManager::Tree_:
 		sdlUtils_.loadReasources("resources/config/treeScene.json");
+		t_->setAble(false);
 		t_->init();
 		break;
 	case SceneManager::Eye_:
 		sdlUtils_.loadReasources("resources/config/finalBoss.json");
+		fin_->setAble(false);
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
@@ -96,4 +103,32 @@ void SceneManager::changeScene(scenes s_)
 {
 	actScene = s_;
 	init();
+}
+
+void SceneManager::decideScene()
+{
+
+	if (actScene != Hub_) {
+		actScene = Hub_;
+		h_->changeScene_(false);
+	}
+	else if (f_->getAble()) {
+		actScene = Frog_;
+		//activa la siguiente escena
+		f_->setAble(false);
+		t_->setAble(true);
+	}
+	else if (t_->getAble()) {
+		actScene = Tree_;
+		fin_->setAble(true);
+	}
+	else if (fin_->getAble()){
+		actScene = Eye_;
+	}
+	init();
+}
+
+void SceneManager::setFirstSceneAble()
+{
+	f_->setAble(true);
 }

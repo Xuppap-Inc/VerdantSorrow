@@ -21,12 +21,29 @@
 
     "images": [
         {
+            "id": "fondoMenu",
+            "file": "resources/images/MenuPrincipal/fondoMenu.jpg"
+        },
+        {
             "id": "newGame",
             "file": "resources/images/MenuPrincipal/newGameButton.png"
         },
         {
-            "id": "fondoMenu",
-            "file": "resources/images/MenuPrincipal/fondoMenu.jpg"
+            "id": "continue",
+            "file": "resources/images/MenuPrincipal/continueButton.png"
+        },
+        {
+            "id": "controls",
+            "file": "resources/images/MenuPrincipal/controlsButton.png"
+        },
+        {
+            "id": "settings",
+            "file": "resources/images/MenuPrincipal/settingsButton.png"
+
+        },
+        {
+            "id": "quit",
+            "file": "resources/images/MenuPrincipal/quitButton.png"
         }
     ],
 

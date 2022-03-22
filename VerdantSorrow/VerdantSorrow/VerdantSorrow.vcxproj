@@ -195,10 +195,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\images\BossBarArrow_Left.png" />
+    <Image Include="resources\images\BossFinal_Cabeza.png" />
+    <Image Include="resources\images\BossFinal_Mano.png" />
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />
+    <Image Include="resources\images\MenuPrincipal\continueButton.png" />
+    <Image Include="resources\images\MenuPrincipal\controlsButton.png" />
+    <Image Include="resources\images\MenuPrincipal\quitButton.png" />
+    <Image Include="resources\images\MenuPrincipal\settingsButton.png" />
     <Image Include="resources\images\middleBar.png" />
+    <Image Include="resources\images\Suelo.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

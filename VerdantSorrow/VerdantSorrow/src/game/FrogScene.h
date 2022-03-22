@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 #include "Scene.h"
 
-
+class CollisionChecker;
 class FrogScene: public Scene
 {
 public: 
@@ -25,5 +25,6 @@ private:
 	bool isAble;
 	Entity* player;
 	Entity* Frog;
+	CollisionChecker* colCheck_;
 };
 

@@ -1,7 +1,7 @@
 #include "PlayerAttributes.h"
 #include "../../ecs/Entity.h"
 
-PlayerAttributes::PlayerAttributes(): lives_(3), onGround(false), rightStop(false), leftStop(false)
+PlayerAttributes::PlayerAttributes(): lives_(3), invulnerableTimer_(0), onGround(false), rightStop(false), leftStop(false), invulnerable_(false)
 {
 }
 

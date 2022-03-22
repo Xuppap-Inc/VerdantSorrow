@@ -6,15 +6,18 @@
     { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
   ],
 
-
   "images": [
     {
+      "id": "bolaFuego",
+      "file": "resources/images/bola_fuego.png"
+    },
+    {
       "id": "ojo",
-      "file": "resources/images/Ojo.png"
+      "file": "resources/images/BossFinal_Cabeza.png"
     },
     {
       "id": "mano",
-      "file": "resources/images/mano.png"
+      "file": "resources/images/BossFinal_Mano.png"
     },
     {
       "id": "chica",

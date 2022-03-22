@@ -74,18 +74,31 @@ public:
     @return las vidas del jugador actuales
     */
     int getLives();
+
+    //Método que devuelve booleano invulnerable
+    bool getInvulnerable() { return invulnerable_; };
+
+    //Método para cambiar el estado de invulnerable
+    void setInvulnerable(bool invulnerable) { invulnerable_ = invulnerable; };
+
+    //Devuelve el timer de invulnerabilidad
+    int getInvulnerableTimer() { return invulnerableTimer_; };
+
+    //Cambia el tiempo del int invulnerableTimer_
+    void setInvulnerableTimer(int time) { invulnerableTimer_ = time; };
 protected:
-
+    int invulnerableTimer_;
+    //Vidas que posee el jugador
     int lives_;
-
     //Booleana que indica si el jugador está tocando el suelo
     bool onGround;
-
     //Booleana que indica si el jugador se puede mover hacia la derecha
     bool rightStop;
     //Booleana que indica si el jugador se puede mover hacia la izquierda
     bool leftStop;
     //Indica si se puede mover hacia abajo
     bool downStop;
+    //Indica si es invulnerable
+    bool invulnerable_;
 };
 

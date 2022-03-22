@@ -60,7 +60,7 @@ void FinalBossScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		sC().changeScene();
+		sC().decideScene();
 	}
 }
 
