@@ -61,6 +61,10 @@
       "file": "resources/images/fondo1.png"
     },
     {
+      "id": "Suelo",
+      "file": "resources/images/Suelo.png"
+    },
+    {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
     },
