@@ -49,8 +49,12 @@ void FrogScene::init()
 
 void FrogScene::update()
 {
-	auto health = player->getComponent<PlayerAttributes>()->getLives();
-	auto bossHealth = Frog->getComponent<BossAtributos>()->getLife();
+	auto health = 0;
+	auto bossHealth = 0;
+	if(player!=nullptr)
+	 health = player->getComponent<PlayerAttributes>()->getLives();
+	if(Frog!=nullptr)
+	 bossHealth = Frog->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		mngr_->refresh();

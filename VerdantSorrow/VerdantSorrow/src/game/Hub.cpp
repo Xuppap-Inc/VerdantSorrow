@@ -164,7 +164,6 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 	colManager->addCollider(col);
 	col->setIsTrigger(true);
 
-	npc->addComponent<RectangleRenderer>();
 
 	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
 }
