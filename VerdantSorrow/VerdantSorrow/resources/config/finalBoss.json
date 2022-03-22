@@ -10,11 +10,11 @@
   "images": [
     {
       "id": "ojo",
-      "file": "resources/images/Ojo.png"
+      "file": "resources/images/BossFinal_Cabeza.png"
     },
     {
       "id": "mano",
-      "file": "resources/images/mano.png"
+      "file": "resources/images/BossFinal_Mano.png"
     },
     {
       "id": "chica",
