@@ -23,6 +23,7 @@ public:
     void initComponent() override;
 
     void update() override;
+    void onCollisionExit();
 protected:
     Transform* tr_;
     CollisionManager* colMan_;
@@ -36,6 +37,5 @@ protected:
     //cuando se deja de colisionar, se resetea lo necesario
     bool exitCollision;
     std::vector <bool> lastCollision;
-    void onCollisionExit();
 };
 
