@@ -200,6 +200,10 @@
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />
+    <Image Include="resources\images\MenuPrincipal\continueButton.png" />
+    <Image Include="resources\images\MenuPrincipal\controlsButton.png" />
+    <Image Include="resources\images\MenuPrincipal\quitButton.png" />
+    <Image Include="resources\images\MenuPrincipal\settingsButton.png" />
     <Image Include="resources\images\middleBar.png" />
     <Image Include="resources\images\Suelo.png" />
   </ItemGroup>
