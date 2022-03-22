@@ -14,6 +14,7 @@
 #include "../../FramedImage.h"
 #include "FlyHp.h"
 #include "../wave/WaveSpawner.h"
+#include "FlyMovement.h"
 
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
@@ -188,13 +189,19 @@ ecs::Entity* FrogAttackManager::createFly()
 	fly_ = mngr_->addEntity();
 	auto fTr = fly_->addComponent<Transform>();
 	auto flyY = sdlutils().height() - tr_->getHeight();
-	auto flyX = player_->getPos().getX();
+	auto flyX = -50;
+	int dir = 1;
+		if (player_->getPos().getX() > sdlutils().width()) {
+			flyX = sdlutils().width() + 50;
+			dir = -1;
+		}
 	fTr->init(Vector2D(flyX, flyY), Vector2D(), 100, 100, 0.0f);
 	auto coll = fly_->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	fly_->addComponent<FlyHp>(this);
+	fly_->addComponent<FlyMovement>(dir);
 	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;
 }

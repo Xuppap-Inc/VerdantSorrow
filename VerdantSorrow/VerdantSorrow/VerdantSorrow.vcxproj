@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\frog_boss\FlyMovement.h" />
     <ClInclude Include="src\game\MenuScene.h" />
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
     <ClInclude Include="src\components\tutorial\TutorialFly.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\frog_boss\FlyMovement.cpp" />
     <ClCompile Include="src\game\MenuScene.cpp" />
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
