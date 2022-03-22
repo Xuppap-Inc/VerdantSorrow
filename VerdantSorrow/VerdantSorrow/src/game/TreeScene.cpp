@@ -28,7 +28,7 @@
 
 #include "CollisionManager.h"
 #include "SceneManager.h"
-
+#include "../game/CollisionChecker.h"
 
 
 void TreeScene::init()
@@ -43,6 +43,8 @@ void TreeScene::init()
 	player = mngr_->addEntity();
 	playerGenerator(colManager);
 	treeGenerator(colManager);
+
+	colCheck_ = new CollisionChecker(colManager, mngr_);
 }
 
 
@@ -52,6 +54,7 @@ void TreeScene::update()
 	auto bossHealth = tree_->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
+	/*	colCheck_->collisionsGrootScene();*/
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();

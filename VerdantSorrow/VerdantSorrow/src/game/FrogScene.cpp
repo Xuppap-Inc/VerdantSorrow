@@ -57,12 +57,12 @@ void FrogScene::update()
 	 bossHealth = Frog->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
+		colCheck_->collisionsFrogScene();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		colCheck_->collisionsFrogScene();
 		sdlutils().presentRenderer();
 	}
 	else {

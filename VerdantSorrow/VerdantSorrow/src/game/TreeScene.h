@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 #include "Scene.h"
 
-
+class CollisionChecker;
 class TreeScene :public Scene
 {
 public:
@@ -27,6 +27,6 @@ private:
 	Entity* player;
 	Entity* tree_;
 	bool isAble;
-
+	CollisionChecker* colCheck_;
 };
 

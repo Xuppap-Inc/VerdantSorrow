@@ -33,6 +33,10 @@
       "file": "resources/images/Chica_Run.png"
     },
     {
+      "id": "chicaroll",
+      "file": "resources/images/Chicarueda.png"
+    },
+    {
       "id": "Chica_Jump",
       "file": "resources/images/Chica_Jump.png"
     },
