@@ -22,6 +22,8 @@ public:
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_=Hub_);
 	void decideScene();
+	//activa la primera escena a la que se puede acceder desde el hub
+	void setFirstSceneAble();
 private:
 	SceneManager();
 	//decide a que escena hay que cambiar

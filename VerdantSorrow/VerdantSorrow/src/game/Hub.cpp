@@ -29,7 +29,7 @@ Hub::Hub():Scene()
 
 Hub::~Hub()
 {
-	//delete colManager;
+	
 }
 
 void Hub::init()
