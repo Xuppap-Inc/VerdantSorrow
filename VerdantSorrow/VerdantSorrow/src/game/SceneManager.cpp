@@ -4,6 +4,7 @@
 #include "FinalBossScene.h"
 #include "Hub.h"
 #include "MenuScene.h"
+#include "../sdlutils/SDLUtils.h"
 
 
 SceneManager::SceneManager() : actScene(Hub_)
@@ -51,24 +52,32 @@ void SceneManager::update()
 
 void SceneManager::init()
 {
+	auto& sdlUtils_ = sdlutils();
+	sdlUtils_.freeMemory();
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
+		sdlUtils_.loadReasources("resources/config/hub.json");
 		h_->init();
 		break;
 	case SceneManager::Frog_:
+		sdlUtils_.loadReasources("resources/config/frog.json");
 		f_->init();
 		break;
 	case SceneManager::Tree_:
+		sdlUtils_.loadReasources("resources/config/treeScene.json");
 		t_->init();
 		break;
 	case SceneManager::Eye_:
+		sdlUtils_.loadReasources("resources/config/finalBoss.json");
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
+		sdlUtils_.loadReasources("resources/config/tutorial.json");
 		tut_->init();
 		break;
 	case SceneManager::Menu_:
+		sdlUtils_.loadReasources("resources/config/menu.json");
 		menu_->init();
 		break;
 	default:
@@ -86,5 +95,5 @@ void SceneManager::render()
 void SceneManager::changeScene(scenes s_)
 {
 	actScene = s_;
-	//init();
+	init();
 }

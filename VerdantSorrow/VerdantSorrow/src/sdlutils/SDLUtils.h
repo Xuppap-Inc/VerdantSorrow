@@ -137,6 +137,9 @@ public:
 	inline Uint32 currRealTime() const {
 		return SDL_GetTicks();
 	}
+	
+	void freeMemory();
+	void loadReasources(std::string filename); // load resources from the json file
 
 private:
 	SDLUtils();
@@ -148,8 +151,6 @@ private:
 	void closeWindow();
 	void initSDLExtensions(); // initialize resources (fonts, textures, audio, etc.)
 	void closeSDLExtensions(); // free resources the
-	void freeMemory();
-	void loadReasources(std::string filename); // load resources from the json file
 
 	std::string windowTitle_; // window title
 	int width_; // window width

@@ -106,8 +106,9 @@ void Hub::update()
 		checkCollissions();
 	}
 	else {
+		auto& scMngr_ = sC();
 		
-		
+		scMngr_.changeScene(SceneManager::scenes::Eye_);
 	}
 }
 

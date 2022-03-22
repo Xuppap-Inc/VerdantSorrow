@@ -8,14 +8,13 @@
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr), scMngr_(nullptr)
+Game::Game() : mngr_(nullptr)
 {
 }
 
 Game::~Game()
 {
 	delete mngr_;
-	delete scMngr_;
 }
 
 //Inicializa el juego y llama a las escenas
@@ -69,12 +68,12 @@ void Game::start() {
 	
 	SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 	//Crea el game Manager
-	SDLUtils::init("Verdant Sorrow", 1280, 720, json);
+	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 
-	scMngr_ = new SceneManager();
+	auto& scMngr_ = sC();
 	
-	scMngr_->changeScene(firstScene);
-	scMngr_->init();
+	scMngr_.changeScene(firstScene);
+	//scMngr_.init();
 
 
 	//mngr_->changeScene(n);
@@ -90,7 +89,7 @@ void Game::update()
 	//Imput handler
 	auto& ihdlr = ih();
 
-
+	auto& scMngr_ = sC();
 	while (!exit) {
 		Uint32 startTime = sdlutils().currRealTime();
 
@@ -102,14 +101,7 @@ void Game::update()
 			continue;
 		}
 
-		scMngr_->update();
-		/*mngr_->update();
-		mngr_->refresh();
-
-		sdlutils().clearRenderer();
-		mngr_->render();
-		mngr_->debug();
-		sdlutils().presentRenderer();*/
+		scMngr_.update();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

@@ -14,7 +14,6 @@ class SceneManager :public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
 	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_ };
-	SceneManager();
 	~SceneManager();
 	void update();
 	//inicializa la escena en la que está
@@ -23,6 +22,7 @@ public:
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_=Hub_);
 private:
+	SceneManager();
 	scenes actScene;
 	std::vector <Scene*> sceneList;
 	Hub* h_;
@@ -32,4 +32,10 @@ private:
 	TutorialScene* tut_;
 	MenuScene* menu_;
 };
+	// This macro defines a compact way for using the singleton InputHandler, instead of
+// writing InputHandler::instance()->method() we write ih().method()
+//
+	inline SceneManager& sC() {
+		return *SceneManager::instance();
+	}
 
