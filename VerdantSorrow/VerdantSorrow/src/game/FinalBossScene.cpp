@@ -84,7 +84,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
-	auto BossX = (sdlutils().width() - 100) / 2;
+	auto BossX = (sdlutils().width() - 350) / 2;
 	auto BossY = sdlutils().height() / 2 - 300;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f);
 
