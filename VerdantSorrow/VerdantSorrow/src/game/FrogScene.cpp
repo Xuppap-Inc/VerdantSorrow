@@ -21,7 +21,7 @@
 #include "CollisionManager.h"
 #include "../components/boss/wave/WaveSpawner.h"
 #include "SceneManager.h"
-
+#include "../game/CollisionChecker.h"
 
 
 void FrogScene::init()
@@ -43,6 +43,8 @@ void FrogScene::init()
 	auto particles = mngr_->addEntity();
 	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
+
+	colCheck_ = new CollisionChecker(colManager, mngr_);
 }
 
 void FrogScene::update()
@@ -60,6 +62,7 @@ void FrogScene::update()
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
+		colCheck_->collisionsFrogScene();
 		sdlutils().presentRenderer();
 	}
 	else {
