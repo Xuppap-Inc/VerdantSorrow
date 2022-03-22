@@ -41,15 +41,16 @@ void TreeScene::init()
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
-	playerGenerator(colManager, player);
-	treeGenerator(colManager, player);
+	playerGenerator(colManager);
+	treeGenerator(colManager);
 }
 
 
 void TreeScene::update()
 {
-	auto health = player->getComponent< PlayerAttributes>()->getLives();
-	if (health > 0) {
+	auto health = player->getComponent<PlayerAttributes>()->getLives();
+	auto bossHealth = tree_->getComponent<BossAtributos>()->getLife();
+	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		mngr_->refresh();
 
@@ -63,9 +64,9 @@ void TreeScene::update()
 	}
 }
 
-void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
+void TreeScene::treeGenerator(CollisionManager* colManager) {
 
-	auto tree_ = mngr_->addEntity();
+	tree_ = mngr_->addEntity();
 
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
 
@@ -84,51 +85,51 @@ void TreeScene::treeGenerator(CollisionManager* colManager, Entity* player_) {
 	colManager->addCollider(treeCollider);
 
 	//IMPORTANTE: movimiento y spawner antes de los ataques
-	tree_->addComponent<TreeMovement>(player_->getComponent<Transform>(), 2.0f);
+	tree_->addComponent<TreeMovement>(player->getComponent<Transform>(), 2.0f);
 	tree_->addComponent<RootSpawner>(colManager);
 
 	tree_->addComponent<RootWave>();
-	tree_->addComponent<RootAutoAim>(player_);
-	tree_->addComponent<MeleeAttack>(50, player_->getComponent<Transform>()->getHeight(), colManager);
+	tree_->addComponent<RootAutoAim>(player);
+	tree_->addComponent<MeleeAttack>(50, player->getComponent<Transform>()->getHeight(), colManager);
 
 	//IMPORTANTE: attack manager al final
 	tree_->addComponent<TreeAttackManager>(colManager);
 }
 
-void TreeScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
-	player_->addComponent<PlayerAttributes>();
+void TreeScene::playerGenerator(CollisionManager* colManager) {
+	player->addComponent<PlayerAttributes>();
 
-	auto playerTr = player_->addComponent<Transform>();
+	auto playerTr = player->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 4 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
 
 
-	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");
+	player->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
-	player_->addComponent<SimpleGravity>(2.0);
+	player->addComponent<SimpleGravity>(2.0);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>();
+	player->addComponent<CollideWithBorders>();
 
 	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
+	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
+	player->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
-	player_->addComponent<SimplePhysicsPlayer>(colManager);
+	player->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(50, playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player->addComponent<Attack>(50, playerTr->getHeight(), colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 
 	//Componente ui jugador
-	player_->addComponent<PlayerUI>();
-	mngr_->setHandler(ecs::_PLAYER, player_);
+	player->addComponent<PlayerUI>();
+	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
-void TreeScene::rootGenerator(CollisionManager* colManager, Entity* player_, float x) {
+void TreeScene::rootGenerator(CollisionManager* colManager, float x) {
 
 	//Se crea la raiz
 	auto Root = mngr_->addEntity();

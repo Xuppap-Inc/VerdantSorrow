@@ -31,7 +31,6 @@ Hub::Hub():Scene()
 Hub::~Hub()
 {
 	delete colManager;
-	//delete player;
 }
 
 void Hub::init()

@@ -24,5 +24,6 @@ public:
 private:
 	bool isAble;
 	Entity* player;
+	Entity* Frog;
 };
 

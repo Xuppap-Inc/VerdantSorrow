@@ -49,7 +49,8 @@ void FinalBossScene::init()
 void FinalBossScene::update()
 {
 	auto health = player->getComponent<PlayerAttributes>()->getLives();
-	if (health > 0) {
+	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
+	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		mngr_->refresh();
 
@@ -79,7 +80,7 @@ void FinalBossScene::background()
 
 void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* player_) {
 
-	auto FinalBossFace = mngr_->addEntity();
+	FinalBossFace = mngr_->addEntity();
 	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();

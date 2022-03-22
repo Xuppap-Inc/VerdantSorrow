@@ -50,7 +50,8 @@ void FrogScene::init()
 void FrogScene::update()
 {
 	auto health = player->getComponent<PlayerAttributes>()->getLives();
-	if (health > 0) {
+	auto bossHealth = Frog->getComponent<BossAtributos>()->getLife();
+	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		mngr_->refresh();
 
@@ -81,7 +82,7 @@ void FrogScene::background()
 
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
-	auto Frog = mngr_->addEntity();
+	Frog = mngr_->addEntity();
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
 
