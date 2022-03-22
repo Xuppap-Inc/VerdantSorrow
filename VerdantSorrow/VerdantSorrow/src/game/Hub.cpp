@@ -25,7 +25,6 @@
 Hub::Hub():Scene()
 {
 	colManager = nullptr;
-	player = nullptr;
 }
 
 Hub::~Hub()
@@ -69,9 +68,9 @@ void Hub::setAble(bool a)
 	isAble = a;
 }
 
-void Hub::changeScene_()
+void Hub::changeScene_(bool ch)
 {
-	changeSc = !changeSc;
+	changeSc = ch;
 }
 
 void Hub::checkCollissions()
@@ -86,7 +85,7 @@ void Hub::checkCollissions()
 			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
 			i++;
 		}
-		if (changeScene) changeScene_();
+		if (changeScene) changeScene_(true);
 	}
 }
 
@@ -104,10 +103,8 @@ void Hub::update()
 
 		checkCollissions();
 	}
-	else {
-		auto& scMngr_ = sC();
-		
-		scMngr_.changeScene(SceneManager::scenes::Frog_);
+	else {	
+		sC().decideScene();
 	}
 }
 

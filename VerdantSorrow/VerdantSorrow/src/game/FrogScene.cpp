@@ -31,7 +31,6 @@ void FrogScene::init()
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 
-
 	background();
 
 	waveSpawerGenerator(colManager);
@@ -65,7 +64,7 @@ void FrogScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		sC().changeScene();
+		sC().decideScene();
 	}
 }
 

@@ -60,7 +60,7 @@ void TreeScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		sC().changeScene();
+		sC().decideScene();
 	}
 }
 
@@ -69,7 +69,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_ = mngr_->addEntity();
 
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
-
+	tree_->addComponent<BossAtributos>(10.0f);
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 360;
@@ -186,4 +186,14 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	lantern->addComponent<LanternMovement>();
 
 	lantern->addComponent<LanternCollisions>(colManager);
+}
+
+bool TreeScene::getAble()
+{
+	return isAble;
+}
+
+void TreeScene::setAble(bool a)
+{
+	isAble = a;
 }

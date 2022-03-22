@@ -42,7 +42,7 @@ void Game::start() {
 			break;
 		case 2:
 			firstScene = SceneManager::scenes::Tree_;
-			json = "resources/config/groot.json";
+			json = "resources/config/treeScene.json";
 			break;
 		case 3:
 			firstScene = SceneManager::scenes::Eye_;

@@ -21,8 +21,10 @@ public:
 	void render();
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_=Hub_);
+	void decideScene();
 private:
 	SceneManager();
+	//decide a que escena hay que cambiar
 	scenes actScene;
 	std::vector <Scene*> sceneList;
 	Hub* h_;
