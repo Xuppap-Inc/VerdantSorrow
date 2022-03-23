@@ -52,8 +52,6 @@ void CollisionChecker::collisionsFrogScene()
 
 				}
 			}
-			else //collider no activo
-				player->getComponent<SimplePhysicsPlayer>()->onCollisionExit();
 		}
 
 		if (player->getComponent<PlayerAttributes>()->getInvulnerableTimer() + 5000 > sdlutils().currRealTime()) return;
@@ -94,8 +92,6 @@ void CollisionChecker::collisionsGrootScene()
 
 				}
 			}
-			else //collider no activo
-				player->getComponent<SimplePhysicsPlayer>()->onCollisionExit();
 		}
 
 		if (player->getComponent<PlayerAttributes>()->getInvulnerableTimer() + 5000 > sdlutils().currRealTime()) return;
@@ -136,8 +132,6 @@ void CollisionChecker::collisionsFinalBossScene()
 
 				}
 			}
-			else //collider no activo
-				player->getComponent<SimplePhysicsPlayer>()->onCollisionExit();
 		}
 
 		if (player->getComponent<PlayerAttributes>()->getInvulnerableTimer() + 5000 > sdlutils().currRealTime()) return;
