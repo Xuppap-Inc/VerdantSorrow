@@ -34,14 +34,10 @@ void FramedImage::initComponent()
 
 void FramedImage::render()
 {
-	if (!repeating_)
-		select_sprite(i, j);
-
 	if (!repeating_ && sdlutils().currRealTime() - initime >= frametime/numframes) {
 
 		select_sprite(i, j);
 
-		currentnumframes++;
 		if (i < column_ - 1) { 
 			i++; 	
 		}
@@ -55,60 +51,44 @@ void FramedImage::render()
 			  repeating_ = true;
 			}
 
-			/*if (currentAnim == "Chica_AtkFloor")
-				currentAnim = "Chica_AtkFinished";*/
+			if (currentAnim == "Chica_AtkFloor")
+				currentAnim = "Chica_AtkFinished";
 			//repeating_ = false;
 		}
 
 		initime = sdlutils().currRealTime();
+		currentnumframes++;
 	}
 	SDL_RendererFlip flip= SDL_FLIP_NONE;
 	//flip the sprite
 	if (flipX_)
 		flip = SDL_FLIP_HORIZONTAL;
 
-
-	//SDL_Rect dest;
-	//SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
-	//	tr_->getHeight());
-
-	float multiplierX = 1;
-	float multiplierY = 1;
 	//float offset
 	float xOffset = 0;
 	float yOffset = 0;
 
 	if (currentAnim == "Chica_Idle") {
-		multiplierX = 1.4f;
-		multiplierY = 1.3f;
 		xOffset = -10;
 		yOffset = -20;
 		if (flipX_) { xOffset = -30; }
 	}
 	else if (currentAnim == "Chica_Jump") {
-		multiplierX = 1.5f;
-		multiplierY = 1.3f;
 		xOffset = -30;
 		yOffset = -20;
 		if (flipX_) { xOffset = -15; }
 	}
 	else if (currentAnim == "Chica_Run") {
-		multiplierX = 1.6f;
-		multiplierY = 1.3f;
 		xOffset = -40;
 		yOffset = -20;
 		if (flipX_) { xOffset = -20; }
 	}
 	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-		multiplierX = 1.7f;
-		multiplierY = 1.2f;
 		xOffset = -25;
 		yOffset = -7;
 		if (flipX_) { xOffset = -45; }
 	}
 	else if (currentAnim == "Chica_AtkAir") {
-		multiplierX = 1.6f;
-		multiplierY = 1.2f;
 		xOffset = 0;
 		yOffset = -7;
 		if (flipX_) { xOffset = -60; }
