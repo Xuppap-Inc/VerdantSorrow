@@ -55,8 +55,8 @@ void FramedImage::render()
 			  repeating_ = true;
 			}
 
-			if (currentAnim == "Chica_AtkFloor")
-				currentAnim = "Chica_AtkFinished";
+			/*if (currentAnim == "Chica_AtkFloor")
+				currentAnim = "Chica_AtkFinished";*/
 			//repeating_ = false;
 		}
 
@@ -115,8 +115,16 @@ void FramedImage::render()
 	}
 
 	// Aplicar propiedades
-	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth() * multiplierX,
-		tr_->getHeight() * multiplierY);
+
+	auto posX = tr_->getPos().getX();
+
+	auto yAdjustment = tr_->getHeight() - m_clip.h;
+	auto posY = tr_->getPos().getY() + yAdjustment;
+
+	Vector2D pos = new Vector2D(posX, posY);
+
+	SDL_Rect dest = build_sdlrect(pos, m_clip.w,
+		m_clip.h);
 	dest.x += xOffset;
 	dest.y += yOffset;
 

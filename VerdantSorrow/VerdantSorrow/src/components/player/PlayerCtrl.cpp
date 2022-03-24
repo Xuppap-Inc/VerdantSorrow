@@ -46,7 +46,7 @@ void PlayerCtrl::update()
 
 			// Animacion
 			anim_->repeat(true);
-			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 6, 300, 20, "Chica_Jump");
+			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
 		}
 
 		//moviemiento nulo
@@ -161,7 +161,7 @@ void PlayerCtrl::animationManagement()
 			else if (isRolling_) {
 				if (anim_->getCurrentAnimation() != "chicaroll") {
 
-					anim_->changeanim(&sdlutils().images().at("chicaroll"), 5, 5, rollDuration_, 25, "chicaroll");
+					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
 					anim_->repeat(false);
 
 				}

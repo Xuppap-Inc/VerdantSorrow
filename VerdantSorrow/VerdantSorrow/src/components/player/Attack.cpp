@@ -51,11 +51,11 @@ void Attack::update()
 
 					if (attrib_->isOnGround()) {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 150, 10, "Chica_AtkFloor");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 1000, 9, "Chica_AtkFloor");
 					}
 					else {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 2, 5, 100, 9, "Chica_AtkAir");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
 					}
 
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
