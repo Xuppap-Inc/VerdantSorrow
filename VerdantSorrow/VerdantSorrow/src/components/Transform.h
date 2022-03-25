@@ -21,19 +21,21 @@ public:
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
-		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r) {
+		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r), scale_(1) {
 	}
 
 	virtual ~Transform() {
 	}
 
-	void init(Vector2D pos, Vector2D vel, float w, float h, float r, bool g = true) {
+	void init(Vector2D pos, Vector2D vel, float w, float h, float r, float scale = 1, bool g = true) {
 		pos_ = pos;
 		vel_ = vel;
 		width_ = w;
 		height_ = h;
 		rot_ = r;
 		gravity_ = g;
+		
+		scale_ = scale;
 	}
 
 	Vector2D& getPos() {
@@ -70,8 +72,17 @@ public:
 	void update() override {
 		pos_ = pos_ + vel_;
 	}
+
 	bool getGravity() {
 		return gravity_;
+	}
+
+	void setScale(float scale) {
+		scale_ = scale;
+	}
+
+	float getScale() {
+		return scale_;
 	}
 
 protected:
@@ -81,5 +92,7 @@ protected:
 	float height_;
 	float rot_;
 	bool gravity_;
+
+	float scale_;
 };
 

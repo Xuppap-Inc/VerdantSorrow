@@ -105,7 +105,7 @@ void TreeScene::playerGenerator(CollisionManager* colManager) {
 	auto playerTr = player->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 4 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f, 0.7);
 
 
 	player->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");

@@ -43,8 +43,8 @@ private:
 	float initime = 0;
 	int numframes;
 	int currentnumframes = 0;
-	bool repeat_;
-	bool repeating_;
+	bool noRepeat_;
+	bool completed_;
 	std::string currentAnim;
 };
 

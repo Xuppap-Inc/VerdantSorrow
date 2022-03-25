@@ -51,7 +51,7 @@ void Attack::update()
 
 					if (attrib_->isOnGround()) {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 150, 9, "Chica_AtkFloor");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 300, 9, "Chica_AtkFloor");
 					}
 					else {
 						anim_->repeat(true);
@@ -76,7 +76,6 @@ void Attack::update()
 
 		for (auto c : colliders) {
 
-
 			if (c->isActive() && c->isTrigger() ) 
 			{
 				ecs::Entity* ent = c->getEntity();
@@ -86,11 +85,11 @@ void Attack::update()
 					s->setChannelVolume(70);
 					s->play();
 
-					auto VFXEnt = mngr_->addEntity();
+					/*auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();
 					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
 					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
-					VFXEnt->addComponent<VFX>(6);
+					VFXEnt->addComponent<VFX>(6);*/
 					 
 					bA->setDamage(0.6f);
 					tr_->getVel().setY(0);
