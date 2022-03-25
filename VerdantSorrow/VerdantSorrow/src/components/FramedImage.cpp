@@ -72,36 +72,38 @@ void FramedImage::render()
 	float yOffset = 0;
 
 	if (currentAnim == "Chica_Idle") {
-		xOffset = 0.25;
+		xOffset = -0.25;
 		yOffset = 0.08;
 	}
 	else if (currentAnim == "Chica_Jump") {
-		xOffset = 0.25;
+		xOffset = -0.25;
 		yOffset = 0.1;
 	}
 	else if (currentAnim == "Chica_Run") {
-		xOffset = 0.25;
+		xOffset = -0.25;
 		yOffset = 0.1;
 	}
 	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-		xOffset = 0.1;
+		xOffset = -0.45;
 		yOffset = 0.145;
 	}
 	else if (currentAnim == "Chica_AtkAir") {
-		xOffset = 0.25;
+		xOffset = -0.25;
 		yOffset = 0;
 	}
 	else if (currentAnim == "chicaroll") {
-		xOffset = 0.25;
+		xOffset = -0.25;
 		yOffset = 0.25;
 	}
 
 	// Aplicar propiedades
 
+	//ESCALA
 	float height = m_clip.h * tr_->getScale();
 	float width = m_clip.w * tr_->getScale();
 
-	auto posX = tr_->getPos().getX() - width/2 + xOffset*width;
+
+	auto posX = tr_->getPos().getX() + xOffset*width;
 
 	auto yAdjustment = tr_->getHeight() - height;
 	auto posY = tr_->getPos().getY() + yAdjustment + yOffset*height;
