@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../ecs/Component.h"
 class Transform;
@@ -25,6 +24,9 @@ public:
 	void flipX(bool h);
 	void repeat(bool h);
 
+	void slowAnimation(float factor, int nFrames = -1);
+	void cancelSlow();
+
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
 
 	int getFrameNum();
@@ -33,18 +35,23 @@ public:
 private:
 	Transform* tr_;
 	Texture* tex_;
-	float frametime;
+	float totalAnimationTime;
 	int row_;
 	int column_;
 	SDL_Rect m_clip;
 	int i = 0;
 	int j = 0;
 	bool flipX_;
-	float initime = 0;
 	int numframes;
 	int currentnumframes = 0;
 	bool noRepeat_;
 	bool completed_;
 	std::string currentAnim;
+
+	VirtualTimer timer_;
+
+	float slowFactor_;
+	bool slowed_;
+	int contFramesSlowed_;
 };
 

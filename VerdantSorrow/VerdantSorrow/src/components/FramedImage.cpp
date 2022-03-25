@@ -9,11 +9,12 @@
 #include "Transform.h"
 
 
-FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : frametime(time), tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false)
+FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime(time), 
+tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
+slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_()
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
-	initime = sdlutils().currRealTime();
 }
 
 FramedImage::~FramedImage()
@@ -38,7 +39,7 @@ void FramedImage::render()
 
 		select_sprite(i, j);
 
-		if (sdlutils().currRealTime() - initime >= frametime / numframes) {
+		if (timer_.currTime() >= totalAnimationTime / numframes) {
 			
 			if (i < column_ - 1) {
 				i++;
@@ -58,7 +59,7 @@ void FramedImage::render()
 					currentAnim = "Chica_AtkFinished";
 			}
 
-			initime = sdlutils().currRealTime();
+			timer_.reset();
 			currentnumframes++;
 		}
 	}
@@ -129,20 +130,38 @@ void FramedImage::repeat(bool h)
 	completed_ = false;
 }
 
+void FramedImage::slowAnimation(float factor, int nFrames)
+{
+	slowed_ = true;
+	slowFactor_ = factor;
+	contFramesSlowed_ = nFrames;
+
+	totalAnimationTime *= slowFactor_;
+}
+
+void FramedImage::cancelSlow()
+{
+	slowed_ = false;
+	slowFactor_ = 1;
+
+	totalAnimationTime *= slowFactor_;
+}
+
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
-	frametime = time;
+	totalAnimationTime = time;
 	tex_ = tex;
 	row_ = row;
 	column_ = column;
 	currentnumframes = 0;
 	numframes = numframes_;
 	i = j = 0;
-	initime = sdlutils().currRealTime();
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
 
 	currentAnim = newAnim;
+
+	timer_.reset();
 }
 int FramedImage::getFrameNum() 
 {
