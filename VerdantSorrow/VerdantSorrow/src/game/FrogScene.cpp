@@ -103,7 +103,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
 
-	Frog->addComponent<SimpleGravity>(1.5);
+	Frog->addComponent<SimpleGravity>(1.0);
 	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
