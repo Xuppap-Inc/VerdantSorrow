@@ -98,7 +98,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 70, 160, 0.0f, 0.5);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5);
 
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");

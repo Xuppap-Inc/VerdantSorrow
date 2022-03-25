@@ -9,7 +9,7 @@ using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
 	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
-	rollCooldown_(500), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
+	rollCooldown_(100), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
 	, isKnockback(false)
 {
 }
@@ -31,8 +31,6 @@ void PlayerCtrl::update()
 		slide_ = true;
 		isRolling_ = false;
 	}
-
-	cout << "isRolling_ = " << isRolling_ << endl;
 
 	//handle input
 	handleInput();
