@@ -115,6 +115,50 @@
     {
       "id": "particles",
       "file": "resources/images/particles.png"
+    },
+    {
+      "id": "arbol_attack",
+      "file": "resources/images/arbol_attack.png"
+    },
+    {
+      "id": "arbol_capa_attack",
+      "file": "resources/images/arbol_capa_attack.png"
+    },
+    {
+      "id": "arbol_capa_attack_combo",
+      "file": "resources/images/arbol_capa_attack_combo.png"
+    },
+    {
+      "id": "arbol_capa_background",
+      "file": "resources/images/arbol_capa_background.png"
+    },
+    {
+      "id": "arbol_capa_cambio_fase",
+      "file": "resources/images/arbol_capa_cambio_fase.png"
+    },
+    {
+      "id": "arbol_capa_idle",
+      "file": "resources/images/arbol_capa_idle.png"
+    },
+    {
+      "id": "arbol_capa_roots",
+      "file": "resources/images/arbol_capa_roots.png"
+    },
+    {
+      "id": "arbol_capa_walk",
+      "file": "resources/images/arbol_capa_walk.png"
+    },
+    {
+      "id": "arbol_idle",
+      "file": "resources/images/arbol_idle.png"
+    },
+    {
+      "id": "arbol_muerte",
+      "file": "resources/images/arbol_muerte.png"
+    },
+    {
+      "id": "arbol_walk",
+      "file": "resources/images/arbol_walk.png"
     }
   ],
 

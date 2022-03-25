@@ -85,11 +85,13 @@ void TreeAttackManager::update()
 
 	if (state == MOVING) {
 
+		animNewState_ = ANIM_WALK;
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (absDistance < MELEE_ATTACK_DISTANCE && newAtack_) {
 
+			animNewState_ = ANIM_ATTACK;
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
 			s->play();
 			meleeAttack_->attack(dir_);
@@ -101,6 +103,7 @@ void TreeAttackManager::update()
 
 			if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
 
+				animNewState_ = ANIM_CHANGE_PHASE;
 				SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 				s->play();
 				musicaFase2_->setMusicVolume(100);
@@ -129,6 +132,7 @@ void TreeAttackManager::update()
 		lanternCols_->setDamaged(true); //waves no hacen da�o
 		if (rootWave_->getMove()) {
 			
+			animNewState_ = ANIM_ROOTS;
 			state = MOVING;
 
 			movement_->setMoveActive(true);
@@ -145,6 +149,8 @@ void TreeAttackManager::update()
 		
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
 		
+			animNewState_ = ANIM_BACKGROUND;
+
 			//reactiva al arbol
 			img_->setVisible(true);
 			treeCol_->setActive(true);
@@ -183,6 +189,43 @@ void TreeAttackManager::update()
 			attackSpecial();
 		}
 	}
+
+	/*if (animState_ != animNewState_) {
+		animState_ = animNewState_;
+		switch (animState_)
+		{
+		case TreeAttackManager::ANIM_IDLE:
+			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
+			else anim_->changeanim(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
+			break;
+		case TreeAttackManager::ANIM_WALK:
+			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_walk"), 5, 6, (1000 / 30) * 28, 28, "arbol_walk");
+			else anim_->changeanim(&sdlutils().images().at("arbol_capa_walk"), 2, 6, (1000 / 30) * 12, 12, "arbol_capa_walk");
+			break;
+		case TreeAttackManager::ANIM_ATTACK:
+			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
+			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_capa_attack");
+			break;
+		case TreeAttackManager::ANIM_ATTACK_COMBO:
+			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
+			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack_combo"), 3, 6, (1000 / 30) * 13, 13, "arbol_capa_attack_combo");
+			break;
+		case TreeAttackManager::ANIM_ROOTS:
+			anim_->changeanim(&sdlutils().images().at("arbol_capa_roots"), 3, 6, (1000 / 30) * 16, 16, "arbol_capa_roots");
+			break;
+		case TreeAttackManager::ANIM_BACKGROUND:
+			anim_->changeanim(&sdlutils().images().at("arbol_capa_background"), 2, 6, (1000 / 30) * 9, 9, "arbol_capa_background");
+			break;
+		case TreeAttackManager::ANIM_CHANGE_PHASE:
+			anim_->changeanim(&sdlutils().images().at("arbol_capa_cambio_fase"), 3, 6, (1000 / 30) * 14, 14, "arbol_capa_cambio_fase");
+			break;
+		case TreeAttackManager::ANIM_DEATH:
+			anim_->changeanim(&sdlutils().images().at("arbol_muerte"), 3, 6, (1000 / 30) * 16, 16, "arbol_muerte");
+			break;
+		default:
+			break;
+		}
+	}*/
 }
 
 void TreeAttackManager::returnToIni()

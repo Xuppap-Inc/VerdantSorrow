@@ -39,6 +39,19 @@ public:
 
 	int getRootWidth() { return rootWidth_; }
 private:
+	enum AnimState {
+		ANIM_IDLE,
+		ANIM_WALK,
+		ANIM_ATTACK,
+		ANIM_ATTACK_COMBO,
+		ANIM_ROOTS,
+		ANIM_BACKGROUND,
+		ANIM_CHANGE_PHASE,
+		ANIM_DEATH,
+	};
+
+	AnimState animState_;
+	AnimState animNewState_;
 
 	const float MELEE_ATTACK_DISTANCE = 50.0;
 	const int TIME_BETWEEN_WAVES = 5000;
