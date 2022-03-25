@@ -17,7 +17,6 @@ void FrogBigJump::initComponent()
 	assert(tr_ != nullptr);
 }
 
-
 void FrogBigJump::update()
 {
 	//auto& RNG = sdlutils().rand();

@@ -28,7 +28,7 @@ void OnBorders::update()
 	auto entWidth = tr_->getWidth();
 	
 	//Borde inferior
-	if (pos.getY() > height - entHeight) {
+	if (pos.getY() > height - entHeight-60) {
 	
 		onBottom();
 	}
