@@ -18,19 +18,27 @@
     },
     {
       "id": "Chica_Idle",
-      "file": "resources/images/Chica_Idle.png"
+      "file": "resources/images/idle.png"
     },
     {
       "id": "Chica_Run",
-      "file": "resources/images/Chica_Run.png"
+      "file": "resources/images/run.png"
     },
     {
       "id": "Chica_Jump",
-      "file": "resources/images/Chica_Jump.png"
+      "file": "resources/images/jump.png"
     },
     {
       "id": "Chica_AtkFloor",
-      "file": "resources/images/Chica_AtkFloor.png"
+      "file": "resources/images/attack1.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/attackAir.png"
+    },
+    {
+      "id": "chicaroll",
+      "file": "resources/images/roll.png"
     },
     {
       "id": "heart",
@@ -67,10 +75,6 @@
     {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
-    },
-    {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/Chica_AtkAir.png"
     },
     {
       "id": "ranacambiofase",
@@ -151,10 +155,6 @@
     {
       "id": "fondos1",
       "file": "resources/images/fondos1.png"
-    },
-    {
-      "id": "chicaroll",
-      "file": "resources/images/Chicarueda.png"
     }
   ],
 
