@@ -9,10 +9,6 @@
 
   "images": [
     {
-      "id": "chica",
-      "file": "resources/images/chicafoto.png"
-    },
-    {
       "id": "ranajump",
       "file": "resources/images/rana_jump.png"
     },

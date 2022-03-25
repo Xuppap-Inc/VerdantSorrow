@@ -9,28 +9,24 @@
 
   "images": [
     {
-      "id": "chica",
-      "file": "resources/images/chicafoto.png"
-    },
-    {
       "id": "Chica_Idle",
-      "file": "resources/images/Chica_Idle.png"
+      "file": "resources/images/idle.png"
     },
     {
       "id": "Chica_Run",
-      "file": "resources/images/Chica_Run.png"
+      "file": "resources/images/run.png"
     },
     {
       "id": "chicaroll",
-      "file": "resources/images/Chicarueda.png"
+      "file": "resources/images/roll.png"
     },
     {
       "id": "Chica_Jump",
-      "file": "resources/images/Chica_Jump.png"
+      "file": "resources/images/jump.png"
     },
     {
       "id": "Chica_AtkFloor",
-      "file": "resources/images/Chica_AtkFloor.png"
+      "file": "resources/images/attack1.png"
     },
     {
       "id": "heart",
@@ -66,7 +62,7 @@
     },
     {
       "id": "Chica_AtkAir",
-      "file": "resources/images/Chica_AtkAir.png"
+      "file": "resources/images/attackAir.png"
     },
     {
       "id": "mosca",
