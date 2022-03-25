@@ -18,7 +18,7 @@
 #include "../BossAtributos.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
+timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
 }
 
@@ -28,7 +28,7 @@ TreeAttackManager::~TreeAttackManager()
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
-																	attacking_(false), timerSpecial_(), img_(), treeCol_(), waiting_(false), 
+																	attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), 
 																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
 }
@@ -37,9 +37,9 @@ void TreeAttackManager::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	img_ = ent_->getComponent<Image>();
 	treeCol_ = ent_->getComponent<RectangleCollider>();
 	movement_ = ent_->getComponent<TreeMovement>();
+	anim_ = ent_->getComponent<FramedImage>();
 
 	lantern_ = mngr_->getHandler(ecs::_LANTERN);
 	lanternTr_ = lantern_->getComponent<Transform>();
@@ -85,7 +85,6 @@ void TreeAttackManager::update()
 
 	if (state == MOVING) {
 
-		animNewState_ = ANIM_WALK;
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
 		//si se encuentra a distancia de ataque a melee, ataca
@@ -152,7 +151,6 @@ void TreeAttackManager::update()
 			animNewState_ = ANIM_BACKGROUND;
 
 			//reactiva al arbol
-			img_->setVisible(true);
 			treeCol_->setActive(true);
 			lanternMov_->setActive(true);
 
@@ -190,7 +188,7 @@ void TreeAttackManager::update()
 		}
 	}
 
-	/*if (animState_ != animNewState_) {
+	if (animState_ != animNewState_) {
 		animState_ = animNewState_;
 		switch (animState_)
 		{
@@ -225,7 +223,7 @@ void TreeAttackManager::update()
 		default:
 			break;
 		}
-	}*/
+	}
 }
 
 void TreeAttackManager::returnToIni()
@@ -255,7 +253,6 @@ void TreeAttackManager::attackSpecial()
 	lanternCols_->setDamaged(false);//raices especial si hacen da�o
 
 
-	img_->setVisible(false);
 	treeCol_->setActive(false);
 }
 

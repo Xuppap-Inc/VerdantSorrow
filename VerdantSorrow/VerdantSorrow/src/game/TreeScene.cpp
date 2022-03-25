@@ -78,14 +78,16 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 360;
-	treeTr->init(Vector2D(treeX, treeY), Vector2D(), 160, 360, 0.0f);
+	auto treeH = 360;
+	auto treeW = treeH * 1.105;
+	treeTr->init(Vector2D(treeX, treeY), Vector2D(), treeW, treeH, 0.0f);
 
 	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
 
-	tree_->addComponent<Image>(&sdlutils().images().at("groot"));
+	tree_->addComponent<FramedImage>(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
 
 	//Se añade un collider al arbol
-	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth(), treeTr->getHeight());
+	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth()/2, treeTr->getHeight());
 	treeCollider->setIsTrigger(true);
 	colManager->addCollider(treeCollider);
 

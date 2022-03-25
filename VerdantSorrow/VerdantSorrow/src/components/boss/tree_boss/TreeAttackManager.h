@@ -66,7 +66,6 @@ private:
 	Transform* tr_;
 	CollisionManager* collManager_;
 	FramedImage* anim_;
-	Image* img_;
 	RectangleCollider* treeCol_;
 
 	TreeMovement* movement_;
