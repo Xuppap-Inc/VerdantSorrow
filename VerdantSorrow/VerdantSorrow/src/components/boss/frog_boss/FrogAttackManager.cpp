@@ -37,8 +37,10 @@ FrogAttackManager::~FrogAttackManager()
 
 void FrogAttackManager::initComponent()
 {
-	frogJump_ = ent_->addComponent<FrogJump>(27);
-	bigJump_ = ent_->addComponent<FrogBigJump>(40);
+	//frogJump_ = ent_->addComponent<FrogJump>(27);
+	//	bigJump_ = ent_->addComponent<FrogBigJump>(40);
+	frogJump_ = ent_->addComponent<FrogJump>(17);
+	bigJump_ = ent_->addComponent<FrogBigJump>(28);
 	//tongueAttack_ = ent_->addComponent<TongueAttack>(collManager_);
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();

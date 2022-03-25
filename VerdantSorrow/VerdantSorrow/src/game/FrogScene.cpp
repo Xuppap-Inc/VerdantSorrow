@@ -92,8 +92,10 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto frogW = frogH * 1.11f;
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height() - frogH;
-	auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);
+	//auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);
+	auto FrogTr = Frog->addComponent<Transform>();
 
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 1);
 
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
 	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
@@ -102,8 +104,8 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight()-200);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
-
-	Frog->addComponent<SimpleGravity>(1.0);
+		
+	Frog->addComponent<SimpleGravity>(.5);
 	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
