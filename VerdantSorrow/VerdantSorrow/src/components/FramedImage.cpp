@@ -84,7 +84,7 @@ void FramedImage::render()
 		yOffset = 0.1;
 	}
 	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-		xOffset = -0.45;
+		xOffset = -0.4;
 		yOffset = 0.145;
 	}
 	else if (currentAnim == "Chica_AtkAir") {
