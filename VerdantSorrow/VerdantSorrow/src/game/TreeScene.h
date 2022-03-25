@@ -15,7 +15,7 @@ public:
 	void update()override;
 	void treeGenerator(CollisionManager* colManager);
 
-	void playerGenerator(CollisionManager* colManager);
+	//void playerGenerator(CollisionManager* colManager);
 
 	void rootGenerator(CollisionManager* colManager, float x);
 
@@ -23,6 +23,7 @@ public:
 
 	bool getAble();
 	void setAble(bool a);
+
 private:
 	Entity* player;
 	Entity* tree_;

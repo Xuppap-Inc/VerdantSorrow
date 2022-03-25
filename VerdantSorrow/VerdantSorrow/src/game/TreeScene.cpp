@@ -41,7 +41,9 @@ void TreeScene::init()
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
-	playerGenerator(colManager);
+	playerGenerator(colManager, player);
+
+
 	treeGenerator(colManager);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
@@ -97,39 +99,6 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 
 	//IMPORTANTE: attack manager al final
 	tree_->addComponent<TreeAttackManager>(colManager);
-}
-
-void TreeScene::playerGenerator(CollisionManager* colManager) {
-	player->addComponent<PlayerAttributes>();
-
-	auto playerTr = player->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 4 - 25;
-	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
-
-
-	player->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30, "Chica_Idle");
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre 
-	player->addComponent<SimpleGravity>(2.0);
-	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player->addComponent<CollideWithBorders>();
-
-	//Se añade un collider al jugador
-	auto playerCollider = player->addComponent<RectangleCollider>(playerTr->getWidth() - 16, playerTr->getHeight());
-	colManager->addCollider(playerCollider);
-	player->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
-
-	//IMPORTANTE :No poner estas físicas detrás del playerctrl
-	player->addComponent<SimplePhysicsPlayer>(colManager);
-
-	//Componente de ataque del jugador
-	auto playerAttackCollider = player->addComponent<Attack>(50, playerTr->getHeight(), colManager);
-	colManager->addCollider(playerAttackCollider);
-	playerAttackCollider->setIsTrigger(true);
-
-	//Componente ui jugador
-	player->addComponent<PlayerUI>();
-	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
 void TreeScene::rootGenerator(CollisionManager* colManager, float x) {

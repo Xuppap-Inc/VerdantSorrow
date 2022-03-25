@@ -17,8 +17,6 @@ public:
 	void background();
 	void frogGenerator(CollisionManager* colManager, Entity* player_);
 
-	void playerGenerator(CollisionManager* colManager, Entity* player_);
-
 	bool getAble();
 	void setAble(bool a);
 private:

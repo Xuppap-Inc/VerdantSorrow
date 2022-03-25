@@ -18,8 +18,6 @@ public:
 	//start lo hace scene directamente
 	void background();
 	void finalBossGenerator(CollisionManager* colManager, Entity* player_);
-	 
-	void playerGenerator(CollisionManager* colManager, Entity* player_);
 
 	bool getAble();
 	void setAble(bool a);
