@@ -10,7 +10,7 @@ RectangleRenderer::RectangleRenderer() :
 
 }
 
-RectangleRenderer::RectangleRenderer(SDL_Color color) :
+RectangleRenderer::RectangleRenderer(SDL_Color color):visible_(true) ,
 	tr_(nullptr), color_(color) {
 }
 
@@ -24,16 +24,23 @@ void RectangleRenderer::initComponent()
 	assert(tr_ != nullptr);
 }
 
+void RectangleRenderer::setVisible(bool set)
+{
+	visible_ = set;
+}
+
 void RectangleRenderer::render()
 {
-	auto& pos = tr_->getPos();
-	auto width = tr_->getWidth();
-	auto height = tr_->getHeight();
+	if (visible_) {
+		auto& pos = tr_->getPos();
+		auto width = tr_->getWidth();
+		auto height = tr_->getHeight();
 
-	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(color_));
+		SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(color_));
 
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), width, height);
+		SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), width, height);
 
-	SDL_RenderFillRect(sdlutils().renderer(), &rect);
+		SDL_RenderFillRect(sdlutils().renderer(), &rect);
+	}
 	
 }

@@ -10,11 +10,12 @@ public:
 	RectangleRenderer(SDL_Color color);
 	virtual ~RectangleRenderer();
 	void initComponent() override;
-
+	void setVisible(bool set);
 	virtual void render() override;
 
 private:
 	Transform* tr_;
 	SDL_Color color_;
+	bool visible_;
 };
 

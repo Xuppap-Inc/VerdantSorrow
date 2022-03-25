@@ -87,7 +87,7 @@ void FrogAttackManager::update()
 		{
 			frogState_ = WAITING;
 			tongue_->setActive(false);
-			
+
 			delay_ = rand.nextInt(1000, 3000);
 			lastUpdate_ = sdlutils().currRealTime();
 		}
@@ -107,6 +107,7 @@ void FrogAttackManager::update()
 		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
 			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
 			frogState_ = TONGUE;
+			tongue_->getComponent<RectangleRenderer>()->setVisible(true);
 		}
 		break;
 	case FLY_DIED:
@@ -187,7 +188,8 @@ ecs::Entity* FrogAttackManager::createFly()
 {
 	fly_ = mngr_->addEntity();
 	auto fTr = fly_->addComponent<Transform>();
-	auto flyY = sdlutils().height() - tr_->getHeight();
+	//hacer una variable de suelo (-60)
+	auto flyY = sdlutils().height() - player_->getHeight()-60;
 	auto flyX = -50;
 	int dir = 1;
 		if (player_->getPos().getX() > sdlutils().width()) {
@@ -209,14 +211,20 @@ ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 {
 	tongue_ = mngr_->addEntity();
 	auto tr = tongue_->addComponent<Transform>();
-	auto tongueY = tr_->getPos().getY();
+	auto tongueY = player_->getPos().getY();
 	auto tongueW = 100;
 	auto tongueH = 50;
 	auto tongueX = tr_->getPos().getX()-tongueW;
 	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueH, 0.0f);
 	auto tongueCollider = tongue_->addComponent<TongueAttack>();
 	colManager->addCollider(tongueCollider);
-	tongue_->addComponent<RectangleRenderer>(SDL_Color());
+	SDL_Color s;
+	s.r = 0xFF;
+	s.g = 0x0C;
+	s.b = 0x00;
+	s.a = 0xFF;
+	auto render_=tongue_->addComponent<RectangleRenderer>(s);
+	render_->setVisible(false);
 	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	return tongue_;
 }
@@ -299,4 +307,3 @@ void FrogAttackManager::nextAttack()
 
 	}
 }
-
