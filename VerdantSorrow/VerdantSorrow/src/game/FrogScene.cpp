@@ -65,6 +65,7 @@ void FrogScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (bossHealth <= 0) setAble(false);
 		sC().decideScene();
 	}
 }
