@@ -107,7 +107,6 @@ void FrogAttackManager::update()
 		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
 			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
 			frogState_ = TONGUE;
-
 		}
 		break;
 	case FLY_DIED:

@@ -13,8 +13,7 @@ BossHPBar::BossHPBar() :
 	bossBarArrow_left(&sdlutils().images().at("bossBarArrow_Left")),
 	bossBarArrow_right(&sdlutils().images().at("bossBarArrow_Right")),
 	middleBar(&sdlutils().images().at("middleBar"))
-{
-}
+{ }
 
 BossHPBar::~BossHPBar() {
 }
@@ -25,7 +24,7 @@ void BossHPBar::initComponent() {
 
 	lastHP = attrib_->getLife();
 	maxBarLength = sdlutils().width() * 0.5f;
-	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 75);
+	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 50);
 }
 
 void BossHPBar::render() {
@@ -36,21 +35,19 @@ void BossHPBar::render() {
 
 	accumulatedDamage += (lastHP - attrib_->getLife());
 
-
 	float xOffset = 350;
 	float xLeft = sdlutils().width() / 2 - xOffset - 5;
 	float xRight = sdlutils().width() / 2 + xOffset - 45;
-	// Fondo de las barras
-	bossBarArrow_left->render(build_sdlrect(xLeft, 628, 50, 50));
-	bossBarArrow_right->render(build_sdlrect(xRight, 628, 50, 50));
-	middleBar->render({ sdlutils().width() / 2 - 320, 638, 640, 25 });
 
+	// Fondo de las barras
+	bossBarArrow_left->render(build_sdlrect(xLeft, (int)pos.getY(), 50, 50)); // 50 grosor
+	bossBarArrow_right->render(build_sdlrect(xRight, (int) pos.getY(), 50, 50)); // 50 grosor
+	middleBar->render(build_sdlrect((xRight - xLeft)/2 - 10, ((int)pos.getY()) + 12, 640, 25)); // 25 grosor
 
 	//barra roja
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
+	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY() + 18, maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
 	//barra de daño acumulado
-	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY(), maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
-
+	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + rect.h / 2, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
 
 	//dibujar barras
 	SDL_SetRenderDrawColor(sdlutils().renderer(), 58, 2, 0, 255);

@@ -26,7 +26,6 @@
 
 void FrogScene::init()
 {
-
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
@@ -35,7 +34,7 @@ void FrogScene::init()
 
 	waveSpawerGenerator(colManager);
 
-	//Se crea el jugador 
+	//Se crea el jugador
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
@@ -78,12 +77,10 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 	mngr_->setHandler(ecs::_WAVE_GENERATOR, waveSp);
 }
 
-
 void FrogScene::background()
 {
 	Scene::backgroundmovement("fondos1");
 }
-
 
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
