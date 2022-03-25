@@ -47,7 +47,7 @@ void BossHPBar::render() {
 	//barra roja
 	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY() + 18, maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
 	//barra de daño acumulado
-	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + rect.h / 2, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
+	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + 18, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
 
 	//dibujar barras
 	SDL_SetRenderDrawColor(sdlutils().renderer(), 58, 2, 0, 255);
