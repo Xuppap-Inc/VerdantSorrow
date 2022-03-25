@@ -9,7 +9,7 @@ using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
 	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
-	rollCooldown_(1000), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
+	rollCooldown_(500), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
 	, isKnockback(false)
 {
 }
@@ -31,6 +31,8 @@ void PlayerCtrl::update()
 		slide_ = true;
 		isRolling_ = false;
 	}
+
+	cout << "isRolling_ = " << isRolling_ << endl;
 
 	//handle input
 	handleInput();
@@ -152,19 +154,18 @@ void PlayerCtrl::animationManagement()
 	// Animation
 	if (attrib_->isOnGround()) {
 		if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
-			if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
+			if (isRolling_) {
+				if (anim_->getCurrentAnimation() != "chicaroll") {
+
+					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
+					anim_->repeat(false);
+
+				}
+			} else if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
 				if (anim_->getCurrentAnimation() != "Chica_Run") {
 					anim_->repeat(false);
 					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
 				}			
-			}
-			else if (isRolling_) {
-				if (anim_->getCurrentAnimation() != "chicaroll") {
-
-					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_ , 25, "chicaroll");
-					anim_->repeat(false);
-
-				}
 			}
 			else {
 				if (anim_->getCurrentAnimation() != "Chica_Idle") {
