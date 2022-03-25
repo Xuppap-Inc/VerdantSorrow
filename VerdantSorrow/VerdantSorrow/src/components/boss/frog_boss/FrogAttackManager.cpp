@@ -37,7 +37,7 @@ FrogAttackManager::~FrogAttackManager()
 
 void FrogAttackManager::initComponent()
 {
-	frogJump_ = ent_->addComponent<FrogJump>(30);
+	frogJump_ = ent_->addComponent<FrogJump>(27);
 	bigJump_ = ent_->addComponent<FrogBigJump>(40);
 	//tongueAttack_ = ent_->addComponent<TongueAttack>(collManager_);
 	tr_ = ent_->getComponent<Transform>();
@@ -52,7 +52,7 @@ void FrogAttackManager::initComponent()
 
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
 	musicaFase1_->play(10, 0);
-	musicaFase1_->setChannelVolume(80, 0);
+	musicaFase1_->setChannelVolume(0, 0);
 
 	createTongue(collManager_);
 
@@ -263,7 +263,7 @@ void FrogAttackManager::nextAttack()
 		animNewState_ = ANIM_CHANGE_PHASE;
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 		s->play();
-		musicaFase2_->setMusicVolume(100);
+		musicaFase2_->setMusicVolume(60);
 		musicaFase1_->pauseChannel(0);
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
