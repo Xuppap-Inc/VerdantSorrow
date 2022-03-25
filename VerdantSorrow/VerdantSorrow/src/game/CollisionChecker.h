@@ -1,6 +1,6 @@
 #pragma once
-#include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
+using ecs::Entity;
 class CollisionManager;
 class CollisionChecker
 {
@@ -11,6 +11,7 @@ public:
 	void collisionsGrootScene();
 	void collisionsFinalBossScene();
 private:
+	void hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* ent);
 	CollisionManager* colManager_;
 	ecs::Manager* mngr_;
 };
