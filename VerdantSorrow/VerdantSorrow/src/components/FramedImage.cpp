@@ -5,7 +5,6 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/Texture.h"
 
-
 #include "Transform.h"
 
 
@@ -61,6 +60,22 @@ void FramedImage::render()
 
 			timer_.reset();
 			currentnumframes++;
+
+			//eventos
+			for (auto i = 0u; i < eventsInfo_.size(); i++) {
+			
+				//si la animación del evento es la actual y ha llegado al numero de frames llama al callback
+				if (currentAnim == eventsInfo_[i].second && currentnumframes == eventsInfo_[i].first) 
+					eventsCallbacks_[i]();
+			}
+
+			//disminuye el contador de frames ralentizados
+			if (contFramesSlowed_ > 0) {
+			
+				contFramesSlowed_--;
+
+				if (contFramesSlowed_ == 0) cancelSlow();
+			}
 		}
 	}
 	SDL_RendererFlip flip= SDL_FLIP_NONE;
@@ -103,7 +118,6 @@ void FramedImage::render()
 	float height = m_clip.h * tr_->getScale();
 	float width = m_clip.w * tr_->getScale();
 
-
 	auto posX = tr_->getPos().getX() + xOffset*width;
 
 	auto yAdjustment = tr_->getHeight() - height;
@@ -142,9 +156,8 @@ void FramedImage::slowAnimation(float factor, int nFrames)
 void FramedImage::cancelSlow()
 {
 	slowed_ = false;
-	slowFactor_ = 1;
 
-	totalAnimationTime *= slowFactor_;
+	totalAnimationTime /= slowFactor_;
 }
 
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
@@ -162,6 +175,11 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 	currentAnim = newAnim;
 
 	timer_.reset();
+}
+void FramedImage::registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback)
+{
+	eventsInfo_.push_back(eventInfo);
+	eventsCallbacks_.push_back(callback);
 }
 int FramedImage::getFrameNum() 
 {

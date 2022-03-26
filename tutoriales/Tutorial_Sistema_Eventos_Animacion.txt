@@ -1,0 +1,27 @@
+Como usar los eventos de animación:
+
+ 1. Creas el callback que quieras llamar.
+
+ 2. Creas una std::function que contenga el callback con una lambda function (importante poner el this), de esta forma:
+	
+	std::function<void()> callback = [this]() { callback(); };
+
+    La lambda function llama a la función como tal, así que en principio se pueden usar parámetros. Pero no se pueden pasar
+    desde el callback, ya que el vector de callbacks para los eventos está hecho con void(), sin parámetros.
+
+ 3. Llamas a la función registerEvent(eventInfo, callback) del FramedImage correspondiente. La función tiene 2 parámetros:
+
+	- El primero es un pair<int, string>. Siendo el primer parámetro el frame en el que se ejecuta el evento y 
+	  el segundo el nombre de la animación en la que se produce el evento.
+
+	- El segundo es el callback que hemos creado en el paso 2.
+
+Con esto el evento queda registrado, y FramedImage llama al callback cuando la animación registrada llegue al frame indicado.
+
+La declaración final queda algo así (ejemplo de attack):
+
+	//callback que llama a attack
+	std::function<void()> attackCallback = [this]() { attack(); };
+
+	//registra el evento en la animacion
+	anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);

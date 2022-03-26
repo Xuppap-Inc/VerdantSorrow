@@ -5,6 +5,8 @@ class Texture;
 
 
 #include "../sdlutils/SDLUtils.h"
+#include <vector>
+#include <functional>
 
 class FramedImage : public ecs::Component {
 public:
@@ -28,6 +30,8 @@ public:
 	void cancelSlow();
 
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
+
+	void registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback);
 
 	int getFrameNum();
 	std::string getCurrentAnimation() { return currentAnim; }
@@ -53,5 +57,8 @@ private:
 	float slowFactor_;
 	bool slowed_;
 	int contFramesSlowed_;
+
+	std::vector<std::pair<int, std::string>> eventsInfo_;
+	std::vector<std::function<void()>> eventsCallbacks_;
 };
 

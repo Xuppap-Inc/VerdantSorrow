@@ -47,14 +47,19 @@ void Attack::update()
 			if (ihdlr.isKeyDown(SDLK_j)) {
 				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
 
+					//callback que llama a attack
+					std::function<void()> attackCallback = [this]() { attack(); };
+
 					if (attrib_->isOnGround()) {
 						anim_->repeat(true);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 300, 9, "Chica_AtkFloor");
+						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 200, 9, "Chica_AtkFloor");
+
+						//registra el evento en la animacion
+						anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
 					}
 					else {
 						anim_->repeat(true);
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
-					}
 
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 					s->play();
@@ -63,6 +68,9 @@ void Attack::update()
 					setActive(true);
 					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
+						//registra el evento en la animacion
+						anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkAir"), attackCallback);
+					}
 				}
 			}
 		}
@@ -87,6 +95,17 @@ bool Attack::isNewAttack()
 void Attack::setNewAttack(bool set)
 {
 	newAttack_ = set;
+}
+
+void Attack::attack()
+{
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
+	s->play();
+	newAttack = true;
+
+	setActive(true);
+	lastAttack = sdlutils().currRealTime();
+	setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 }
 
 void Attack::setPosition()
