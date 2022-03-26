@@ -14,7 +14,7 @@ public:
 	__CMPID_DECL__(ecs::_FRAMEDIMAGE)
 
 
-		FramedImage(Texture* tex, int row, int column,float time,int numframes, std::string anim);
+	FramedImage(Texture* tex, int row, int column,float time,int numframes, std::string anim);
 	virtual ~FramedImage();
 
 	void setTexture(Texture* tex) {
@@ -39,7 +39,8 @@ public:
 private:
 	Transform* tr_;
 	Texture* tex_;
-	float totalAnimationTime;
+	float totalAnimationTime_;
+	float iniTotalAnimTime_;
 	int row_;
 	int column_;
 	SDL_Rect m_clip;
@@ -60,5 +61,11 @@ private:
 
 	std::vector<std::pair<int, std::string>> eventsInfo_;
 	std::vector<std::function<void()>> eventsCallbacks_;
+
+	void adjustAndRenderFrame();
+	void calculateOffset(float& xOffset, float& yOffset);
+	void checkAnimationFinished();
+	void checkEvents();
+	void clearEvents();
 };
 
