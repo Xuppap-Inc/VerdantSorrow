@@ -220,6 +220,7 @@ void PlayerCtrl::handleInput()
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {
 
 		// MOVEMENT
+		// Keyboard
 		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
 			moveLeft_ = true;
 		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
@@ -246,19 +247,15 @@ void PlayerCtrl::handleInput()
 		if (i < rollButtons.size()) roll_ = true;
 	}
 
-	cout << "jump_ = " << jump_;
+	// JOYSTICK MOVEMENT
+	float axisValue = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
+	if (axisValue < -.3f)
+		moveLeft_ = true;
+	if (axisValue > .3f)
+		moveRight_ = true;
 
-	//// Mando
-	//if (ihdlr.controllerDownEvent()) {
-	//	if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
-	//		cout << "SDL_CONTROLLER_BUTTON_A" << endl;
-	//	if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_B))
-	//}
-
-	//// Mando
-	//if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
-	//	cout << "SDL_CONTROLLER_BUTTON_A" << endl;
-	////else (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
+	if (axisValue < .3f && axisValue > -.3f)
+	{ moveLeft_ = false; moveRight_ = false; }
 }
 
 void PlayerCtrl::disableKnockback()
