@@ -7,6 +7,8 @@
 #include "PlayerAttributes.h"
 #include <SDL.h>
 
+#include <functional>
+
 class Transform;
 using ecs::Entity;
 
@@ -22,6 +24,8 @@ public:
     void update() override;
 
     bool hasFinished();
+
+    void attack();
     
 protected:
     Transform* tr_;
