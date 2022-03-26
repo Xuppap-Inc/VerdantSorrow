@@ -16,14 +16,14 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 
 	// Jump
 	jumpKey({ SDL_SCANCODE_W , SDL_SCANCODE_SPACE }),
-	jumpButton(SDL_CONTROLLER_BUTTON_A),
+	jumpButton({ SDL_CONTROLLER_BUTTON_A }),
 
 	// Attack
-	attackKey(SDL_SCANCODE_J),
-	attackButton({ SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER }),
+	//attackKey({ SDL_SCANCODE_J }),
+	//attackButton({ SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER }),
 
 	// Roll
-	rollKey(SDL_SCANCODE_LSHIFT),
+	rollKey({ SDL_SCANCODE_LSHIFT }),
 	rollButton({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
 {
 }
@@ -196,54 +196,59 @@ void PlayerCtrl::handleInput()
 
 	if (ihdlr.keyUpEvent() || ihdlr.controllerUpEvent()) {
 
-		// Movement
+		// MOVEMENT
 		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
 			moveLeft_ = false;
 		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
 			moveRight_ = false;
 
 		// Jump
+		// Keyboard
 		int i = 0;
 		while (i < jumpKey.size() && !ihdlr.isKeyUp(jumpKey[i])) i++;
 		if (i < jumpKey.size()) jump_ = false;
+		// Controller
+		i = 0;
+		while (i < jumpButton.size() && !ihdlr.isControllerButtonUp(jumpButton[i])) i++;
+		if (i < jumpButton.size()) jump_ = false;
 
-		if (ihdlr.isControllerButtonUp(jumpButton))
-			jump_ = false;
-
-		// Roll
-		if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
-			roll_ = false;
-
+		// ROLL
+		// Keyboard
+		i = 0;
+		while (i < rollKey.size() && !ihdlr.isKeyUp(rollKey[i])) i++;
+		if (i < rollKey.size()) roll_ = false;
+		// Controller
 		i = 0;
 		while (i < rollButton.size() && !ihdlr.isControllerButtonUp(rollButton[i])) i++;
 		if (i < rollButton.size()) roll_ = false;
 	}
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {
 
-		// Movement
+		// MOVEMENT
 		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
 			moveLeft_ = true;
 		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
 			moveRight_ = true;
 
-		// Jump
-		//if (ihdlr.isKeyDown(SDL_SCANCODE_W) || ihdlr.isKeyDown(jumpKey[0]) || ihdlr.isKeyDown(jumpKey[1])
-		//	|| ihdlr.isControllerButtonDown(jumpButton))
-		//	jump_ = true;
-
-		// Jump
+		// JUMP
+		// Keyboard
 		int i = 0;
 		while (i < jumpKey.size() && !ihdlr.isKeyDown(jumpKey[i])) i++;
 		if (i < jumpKey.size()) jump_ = true;
+		// Controller
+		i = 0;
+		while (i < jumpButton.size() && !ihdlr.isControllerButtonDown(jumpButton[i])) i++;
+		if (i < jumpButton.size()) jump_ = true;
 
-		if (ihdlr.isControllerButtonDown(jumpButton))
-			jump_ = true;
-
-
-		// Roll
-		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT)
-			|| ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_LEFTSHOULDER))
-			roll_ = true;
+		// ROLL
+		// Keyboard
+		i = 0;
+		while (i < rollKey.size() && !ihdlr.isKeyDown(rollKey[i])) i++;
+		if (i < rollKey.size()) roll_ = true;
+		// Controller
+		i = 0;
+		while (i < rollButton.size() && !ihdlr.isControllerButtonDown(rollButton[i])) i++;
+		if (i < rollButton.size()) roll_ = true;
 	}
 
 	cout << "jump_ = " << jump_;
