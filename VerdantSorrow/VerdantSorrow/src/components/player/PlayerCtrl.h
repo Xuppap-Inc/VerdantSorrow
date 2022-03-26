@@ -4,6 +4,9 @@
 #include "../RectangleCollider.h"
 #include "../FramedImage.h"
 #include <SDL.h>
+#include <vector>
+using namespace std;
+
 class Transform;
 class PlayerCtrl : public ecs::Component
 {
@@ -50,5 +53,16 @@ private:
 	//booleanas de control para manejar el input
 	bool moveLeft_, moveRight_, jump_, roll_;
 
+
+	// Input
+
+	vector<SDL_Scancode> jumpKey;
+	SDL_GameControllerButton jumpButton;
+
+	SDL_Scancode attackKey;
+	vector<SDL_GameControllerButton> attackButton;
+
+	SDL_Scancode rollKey;
+	vector<SDL_GameControllerButton> rollButton;
 };
 

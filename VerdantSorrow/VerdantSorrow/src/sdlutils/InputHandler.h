@@ -97,11 +97,13 @@ public:
 
 	// MANDO
 	
-	//inline bool isButtonDown(int controller, SDL_GameControllerButton button) {
-	//	//if (controllers_[controller] == nullptr)
-	//	//	return false;
-	//	return (isButtonDownEvent_ && buttonStates_[controller][button]);
-	//}
+	inline bool controllerDownEvent() {
+		return isButtonDownEvent_;
+	}
+
+	inline bool controllerUpEvent() {
+		return isButtonUpEvent_;
+	}
 
 	inline void onButtonDown(const SDL_Event& event) {
 
@@ -123,14 +125,14 @@ public:
 		if (found)
 			buttonStates_[i] = true;
 
-		cout << "buttonStates_ = " << endl;
-		for (size_t i = 0; i < buttonStates_.size(); i++)
-			cout << i << "= " << buttonStates_[i] << endl;
+		//cout << "buttonStates_ = " << endl;
+		//for (size_t i = 0; i < buttonStates_.size(); i++)
+		//	cout << i << "= " << buttonStates_[i] << endl;Wxº
 	}
 
 	inline void onButtonUp(const SDL_Event& event) {
 
-		isButtonDownEvent_ = true;
+		isButtonUpEvent_ = true;
 
 		Uint8 i = 0;
 		bool found = false;
@@ -148,15 +150,21 @@ public:
 		if (found)
 			buttonStates_[i] = false;
 
-		cout << "buttonStates_ = " << endl;
-		for (size_t i = 0; i < buttonStates_.size(); i++)
-			cout << i << "= " << buttonStates_[i] << endl;
+		//cout << "buttonStates_ = " << endl;
+		//for (size_t i = 0; i < buttonStates_.size(); i++)
+		//	cout << i << "= " << buttonStates_[i] << endl;
 	}
 
-	//inline bool isButtonDown(int controller, SDL_GameControllerButton button) {
-	//	if (!controller) return false;
-	//	return (isButtonDownEvent_ && buttonStates_[controller][button]);
-	//}
+
+	inline bool isControllerButtonDown(SDL_GameControllerButton button) {
+		if (!controller) return false;
+		return (isButtonDownEvent_ && buttonStates_[button]);
+	}
+
+	inline bool isControllerButtonUp(SDL_GameControllerButton button) {
+		if (!controller) return false;
+		return (isButtonUpEvent_ && !buttonStates_[button]);
+	}
 
 
 	SDL_GameController* controller;
@@ -280,6 +288,8 @@ private:
 	bool isKeyDownEvent_;
 	bool isMouseMotionEvent_;
 	bool isMouseButtonEvent_;
+
+	// Mando
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
 	bool isAxisMotionEvent_;
