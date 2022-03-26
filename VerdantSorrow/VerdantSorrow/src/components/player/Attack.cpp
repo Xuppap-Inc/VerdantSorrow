@@ -10,7 +10,11 @@
 
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
-	attackCoolDown(300), lastAttack(), newAttack_(false), finished_(true)
+	attackCoolDown(300), lastAttack(), newAttack_(false), finished_(true),
+
+	// INPUT
+	attackKeys({ SDL_SCANCODE_J }),
+	attackButtons({ SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -43,8 +47,20 @@ void Attack::update()
 		}
 	}
 	else {
-		if (ihdlr.keyDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
-			if (ihdlr.isKeyDown(SDLK_j)) {
+		if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
+
+			bool attackThisFrame = false;
+
+			// Keyboard
+			int i = 0;
+			while (i < attackKeys.size() && !ihdlr.isKeyDown(attackKeys[i])) i++;
+			if (i < attackKeys.size()) attackThisFrame = true;
+			// Controller
+			i = 0;
+			while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
+			if (i < attackButtons.size()) attackThisFrame = true;
+
+			if (attackThisFrame) {
 				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
 
 					//callback que llama a attack

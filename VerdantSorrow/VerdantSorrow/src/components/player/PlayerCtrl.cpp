@@ -13,18 +13,13 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 	, isKnockback(false),
 
 	// INPUT
-
 	// Jump
-	jumpKey({ SDL_SCANCODE_W , SDL_SCANCODE_SPACE }),
-	jumpButton({ SDL_CONTROLLER_BUTTON_A }),
-
-	// Attack
-	//attackKey({ SDL_SCANCODE_J }),
-	//attackButton({ SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER }),
+	jumpKeys({ SDL_SCANCODE_W , SDL_SCANCODE_SPACE }),
+	jumpButtons({ SDL_CONTROLLER_BUTTON_A }),
 
 	// Roll
-	rollKey({ SDL_SCANCODE_LSHIFT }),
-	rollButton({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
+	rollKeys({ SDL_SCANCODE_LSHIFT }),
+	rollButtons({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
 {
 }
 
@@ -205,22 +200,22 @@ void PlayerCtrl::handleInput()
 		// Jump
 		// Keyboard
 		int i = 0;
-		while (i < jumpKey.size() && !ihdlr.isKeyUp(jumpKey[i])) i++;
-		if (i < jumpKey.size()) jump_ = false;
+		while (i < jumpKeys.size() && !ihdlr.isKeyUp(jumpKeys[i])) i++;
+		if (i < jumpKeys.size()) jump_ = false;
 		// Controller
 		i = 0;
-		while (i < jumpButton.size() && !ihdlr.isControllerButtonUp(jumpButton[i])) i++;
-		if (i < jumpButton.size()) jump_ = false;
+		while (i < jumpButtons.size() && !ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
+		if (i < jumpButtons.size()) jump_ = false;
 
 		// ROLL
 		// Keyboard
 		i = 0;
-		while (i < rollKey.size() && !ihdlr.isKeyUp(rollKey[i])) i++;
-		if (i < rollKey.size()) roll_ = false;
+		while (i < rollKeys.size() && !ihdlr.isKeyUp(rollKeys[i])) i++;
+		if (i < rollKeys.size()) roll_ = false;
 		// Controller
 		i = 0;
-		while (i < rollButton.size() && !ihdlr.isControllerButtonUp(rollButton[i])) i++;
-		if (i < rollButton.size()) roll_ = false;
+		while (i < rollButtons.size() && !ihdlr.isControllerButtonUp(rollButtons[i])) i++;
+		if (i < rollButtons.size()) roll_ = false;
 	}
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {
 
@@ -233,22 +228,22 @@ void PlayerCtrl::handleInput()
 		// JUMP
 		// Keyboard
 		int i = 0;
-		while (i < jumpKey.size() && !ihdlr.isKeyDown(jumpKey[i])) i++;
-		if (i < jumpKey.size()) jump_ = true;
+		while (i < jumpKeys.size() && !ihdlr.isKeyDown(jumpKeys[i])) i++;
+		if (i < jumpKeys.size()) jump_ = true;
 		// Controller
 		i = 0;
-		while (i < jumpButton.size() && !ihdlr.isControllerButtonDown(jumpButton[i])) i++;
-		if (i < jumpButton.size()) jump_ = true;
+		while (i < jumpButtons.size() && !ihdlr.isControllerButtonDown(jumpButtons[i])) i++;
+		if (i < jumpButtons.size()) jump_ = true;
 
 		// ROLL
 		// Keyboard
 		i = 0;
-		while (i < rollKey.size() && !ihdlr.isKeyDown(rollKey[i])) i++;
-		if (i < rollKey.size()) roll_ = true;
+		while (i < rollKeys.size() && !ihdlr.isKeyDown(rollKeys[i])) i++;
+		if (i < rollKeys.size()) roll_ = true;
 		// Controller
 		i = 0;
-		while (i < rollButton.size() && !ihdlr.isControllerButtonDown(rollButton[i])) i++;
-		if (i < rollButton.size()) roll_ = true;
+		while (i < rollButtons.size() && !ihdlr.isControllerButtonDown(rollButtons[i])) i++;
+		if (i < rollButtons.size()) roll_ = true;
 	}
 
 	cout << "jump_ = " << jump_;

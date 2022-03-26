@@ -6,8 +6,10 @@
 #include "../FramedImage.h"
 #include "PlayerAttributes.h"
 #include <SDL.h>
-
 #include <functional>
+
+#include <vector>
+using namespace std;
 
 class Transform;
 using ecs::Entity;
@@ -44,9 +46,15 @@ protected:
 	CollisionManager* colMan_;
 	FramedImage* anim_;
 	PlayerAttributes* attrib_;
+
+	vector<SDL_Scancode> attackKeys;
+	vector<SDL_GameControllerButton> attackButtons;
+
 	/**
 	* Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
 	*/
 	void setPosition() override;
+
+
 };
 

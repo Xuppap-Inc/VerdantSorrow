@@ -55,14 +55,9 @@ private:
 
 
 	// Input
-
-	vector<SDL_Scancode> jumpKey;
-	vector<SDL_GameControllerButton> jumpButton;
-
-	//SDL_Scancode attackKey;
-	//vector<SDL_GameControllerButton> attackButton;
-
-	vector<SDL_Scancode> rollKey;
-	vector<SDL_GameControllerButton> rollButton;
+	vector<SDL_Scancode> jumpKeys;
+	vector<SDL_GameControllerButton> jumpButtons;
+	vector<SDL_Scancode> rollKeys;
+	vector<SDL_GameControllerButton> rollButtons;
 };
 
