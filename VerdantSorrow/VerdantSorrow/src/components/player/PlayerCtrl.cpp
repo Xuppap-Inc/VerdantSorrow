@@ -44,7 +44,8 @@ void PlayerCtrl::update()
 	//handle input
 	handleInput();
 
-	if (!isAttacking && !isRolling_ && !isKnockback) {
+	//!isAttacking
+	if ( !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -187,75 +188,95 @@ void PlayerCtrl::handleInput()
 {
 	auto& ihdlr = ih();
 
-	cout << "Controller X = " << ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A) << endl;
-
+	// BUTTON UP
 	if (ihdlr.keyUpEvent() || ihdlr.controllerUpEvent()) {
 
-		// MOVEMENT
-		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
-			moveLeft_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
-			moveRight_ = false;
+		// KEYBOARD
+		if (!ihdlr.controllerConnected()) {
 
-		// Jump
-		// Keyboard
-		int i = 0;
-		while (i < jumpKeys.size() && !ihdlr.isKeyUp(jumpKeys[i])) i++;
-		if (i < jumpKeys.size()) jump_ = false;
-		// Controller
-		i = 0;
-		while (i < jumpButtons.size() && !ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
-		if (i < jumpButtons.size()) jump_ = false;
+			// MOVEMENT
+			if (ihdlr.isKeyUp(SDL_SCANCODE_A))
+				moveLeft_ = false;
+			if (ihdlr.isKeyUp(SDL_SCANCODE_D))
+				moveRight_ = false;
 
-		// ROLL
-		// Keyboard
-		i = 0;
-		while (i < rollKeys.size() && !ihdlr.isKeyUp(rollKeys[i])) i++;
-		if (i < rollKeys.size()) roll_ = false;
-		// Controller
-		i = 0;
-		while (i < rollButtons.size() && !ihdlr.isControllerButtonUp(rollButtons[i])) i++;
-		if (i < rollButtons.size()) roll_ = false;
+			// JUMP
+			int i = 0;
+			while (i < jumpKeys.size() && !ihdlr.isKeyUp(jumpKeys[i])) i++;
+			if (i < jumpKeys.size()) jump_ = false;
+
+			// ROLL
+			i = 0;
+			while (i < rollKeys.size() && !ihdlr.isKeyUp(rollKeys[i])) i++;
+			if (i < rollKeys.size()) roll_ = false;
+		}
+
+		// CONTROLLER
+		else {
+
+			// JUMP
+			int i = 0;
+			while (i < jumpButtons.size() && !ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
+			if (i < jumpButtons.size()) jump_ = false;
+
+			// ROLL
+			i = 0;
+			while (i < rollButtons.size() && !ihdlr.isControllerButtonUp(rollButtons[i])) i++;
+			if (i < rollButtons.size()) roll_ = false;
+		}
 	}
+
+	// BUTTON DOWN
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {
 
-		// MOVEMENT
-		// Keyboard
-		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
-			moveLeft_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
-			moveRight_ = true;
+		// KEYBOARD
+		if (!ihdlr.controllerConnected()) {
+			// MOVEMENT
+			if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+				moveLeft_ = true;
+			if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+				moveRight_ = true;
 
-		// JUMP
-		// Keyboard
-		int i = 0;
-		while (i < jumpKeys.size() && !ihdlr.isKeyDown(jumpKeys[i])) i++;
-		if (i < jumpKeys.size()) jump_ = true;
-		// Controller
-		i = 0;
-		while (i < jumpButtons.size() && !ihdlr.isControllerButtonDown(jumpButtons[i])) i++;
-		if (i < jumpButtons.size()) jump_ = true;
+			// JUMP
+			int i = 0;
+			while (i < jumpKeys.size() && !ihdlr.isKeyDown(jumpKeys[i])) i++;
+			if (i < jumpKeys.size()) jump_ = true;
 
-		// ROLL
-		// Keyboard
-		i = 0;
-		while (i < rollKeys.size() && !ihdlr.isKeyDown(rollKeys[i])) i++;
-		if (i < rollKeys.size()) roll_ = true;
-		// Controller
-		i = 0;
-		while (i < rollButtons.size() && !ihdlr.isControllerButtonDown(rollButtons[i])) i++;
-		if (i < rollButtons.size()) roll_ = true;
+			// ROLL
+			i = 0;
+			while (i < rollKeys.size() && !ihdlr.isKeyDown(rollKeys[i])) i++;
+			if (i < rollKeys.size()) roll_ = true;
+		}
+
+		// CONTROLLER
+		else {
+			// JUMP
+			int i = 0;
+			while (i < jumpButtons.size() && !ihdlr.isControllerButtonDown(jumpButtons[i])) i++;
+			if (i < jumpButtons.size()) jump_ = true;
+
+			// ROLL
+			i = 0;
+			while (i < rollButtons.size() && !ihdlr.isControllerButtonDown(rollButtons[i])) i++;
+			if (i < rollButtons.size()) roll_ = true;
+		}
 	}
 
 	// JOYSTICK MOVEMENT
-	float axisValue = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
-	if (axisValue < -.3f)
-		moveLeft_ = true;
-	if (axisValue > .3f)
-		moveRight_ = true;
+	if (ihdlr.controllerConnected()) {
 
-	if (axisValue < .3f && axisValue > -.3f)
-	{ moveLeft_ = false; moveRight_ = false; }
+		float axisValue = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
+
+		if (axisValue < -.3f)
+			moveLeft_ = true;
+		if (axisValue > .3f)
+			moveRight_ = true;
+
+		if (axisValue < .3f && axisValue > -.3f)
+		{
+			moveLeft_ = false; moveRight_ = false;
+		}
+	}
 }
 
 void PlayerCtrl::disableKnockback()

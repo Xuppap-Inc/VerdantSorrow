@@ -106,6 +106,8 @@ public:
 			aux.push_back(0);
 		buttonStates_ = aux;
 	}
+
+	inline bool controllerConnected() { return controller; }
 	
 	inline bool controllerDownEvent() {
 		return isButtonDownEvent_;
