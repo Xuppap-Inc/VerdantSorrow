@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\game\CollisionChecker.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyMovement.h" />
+    <ClInclude Include="src\components\InputManager.h" />
     <ClInclude Include="src\game\MenuScene.h" />
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
     <ClInclude Include="src\components\tutorial\TutorialFly.h" />
@@ -104,6 +105,7 @@
   <ItemGroup>
     <ClCompile Include="src\game\CollisionChecker.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyMovement.cpp" />
+    <ClCompile Include="src\components\InputManager.cpp" />
     <ClCompile Include="src\game\MenuScene.cpp" />
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
