@@ -4,15 +4,13 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
-#include "../boss/BossAtributos.h"
-#include "../boss/frog_boss/FlyHp.h"
 #include "../../ecs/Manager.h"
 #include "../VFX.h"
-#include "../tutorial/TutorialFly.h"
+
 
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
-	attackCoolDown(300), lastAttack(), newAttack(false), finished_(true)
+	attackCoolDown(300), lastAttack(), newAttack_(false), finished_(true)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -60,50 +58,11 @@ void Attack::update()
 
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 					s->play();
-					newAttack = true;
+					newAttack_ = true;
 
 					setActive(true);
 					lastAttack = sdlutils().currRealTime();
 					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
-				}
-			}
-		}
-	}
-	//Colisiones (con boss)
-	if (isActive() && colMan_->hasCollisions(this)) {
-
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(this);
-
-		for (auto c : colliders) {
-
-			if (c->isActive() && c->isTrigger() ) 
-			{
-				ecs::Entity* ent = c->getEntity();
-				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				if (bA != nullptr && newAttack) {
-					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
-					s->setChannelVolume(70);
-					s->play();
-
-					/*auto VFXEnt = mngr_->addEntity();
-					auto VFXTr = VFXEnt->addComponent<Transform>();
-					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
-					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
-					VFXEnt->addComponent<VFX>(6);*/
-					 
-					bA->setDamage(0.6f);
-					tr_->getVel().setY(0);
-					newAttack = false;
-
-					finished_ = false;
-				}
-				FlyHp* fHP = ent->getComponent<FlyHp>();
-				if (fHP != nullptr) {
-					fHP->receiveHit();
-				}
-				TutorialFly* tFl = ent->getComponent<TutorialFly>();
-				if (tFl != nullptr) {
-					tFl->receiveHit();
 				}
 			}
 		}
@@ -113,6 +72,21 @@ void Attack::update()
 bool Attack::hasFinished()
 {
 	return finished_;
+}
+
+void Attack::setFinished(bool set)
+{
+	finished_ = set;
+}
+
+bool Attack::isNewAttack()
+{
+	return newAttack_;
+}
+
+void Attack::setNewAttack(bool set)
+{
+	newAttack_ = set;
 }
 
 void Attack::setPosition()

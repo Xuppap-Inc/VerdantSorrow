@@ -36,9 +36,7 @@ void SimplePhysicsPlayer::update()
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {
 
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
-
-		for (auto c : colliders) {
+		for (auto c : colMan_->getCollisions(collider_)) {
 
 			if (c->isActive() && !c->isTrigger()) {
 
@@ -82,40 +80,9 @@ void SimplePhysicsPlayer::update()
 				exitCollision = true;
 			}
 
-			//Queda hacer más colisiones si queréis que el árbol y el ojo hagan daño descomenten esto 
-			// 
-			//else if (c->isActive() && c->isTrigger()) {
-
-			//	onCollisionExit();
-
-			//	ecs::Entity* ent = c->getEntity();
-			//	BossAtributos* bA = ent->getComponent<BossAtributos>();
-			//	ClapAttack* cA = ent->getComponent<ClapAttack>();
-			//	WaveMovement* wave = ent->getComponent<WaveMovement>();
-
-			//	if (bA != nullptr || cA != nullptr || wave != nullptr) {
-
-			//		if (!invulnerable_ && !ctrl_->isRolling()) {
-			//			attrib_->damagePlayer(1);
-			//			invulnerable_ = true;
-			//			invTimer = sdlutils().currRealTime();
-
-
-			//			// Knock back
-			//			float enemyXpos = ent->getComponent<Transform>()->getPos().getX() + ent->getComponent<Transform>()->getWidth() / 2;
-			//			// Calcular la direccion en la que se realizara el knockback
-			//			// Informar al controlador
-			//			ctrl_->doKnockback(enemyXpos >= (tr_->getPos().getX() + tr_->getWidth() / 2) ? -1 : 1);
-			//		}
-
-			//	}
-			//}
 			else //collider no activo
 				onCollisionExit();
 		}
-
-		if (invTimer + 5000 > sdlutils().currRealTime()) return;
-		invulnerable_ = false;
 	}
 	else //no colisiones
 		onCollisionExit();

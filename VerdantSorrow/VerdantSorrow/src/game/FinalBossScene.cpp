@@ -54,7 +54,7 @@ void FinalBossScene::update()
 	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
-		colCheck_->collisionsFinalBossScene();
+		colCheck_->checkCollisions();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
