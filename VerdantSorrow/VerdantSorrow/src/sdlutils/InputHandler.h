@@ -49,11 +49,6 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event &event) {
 
-		//t++;
-
-		//cout << "update" << t << endl;
-		//cout << "event.type = " << event.type << endl;
-
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			onKeyDown(event);
@@ -74,14 +69,12 @@ public:
 			// CONTROLLER
 		case SDL_JOYAXISMOTION:
 			onAxisMotion(event);
-			//cout << "motion" << endl;
 			break;
 		case SDL_JOYBUTTONDOWN:
 			onButtonDown(event);
 			break;
 		case SDL_JOYBUTTONUP:
 			onButtonUp(event);
-			//cout << "up" << endl;
 			break;
 		case SDL_CONTROLLERDEVICEADDED:
 			InitController(event.cdevice.which);
@@ -106,16 +99,12 @@ public:
 
 		SDL_GameController* c = SDL_GameControllerOpen(id);
 		controller = c;
-		cout << SDL_GameControllerName(controller) << endl;
-		cout << "InitController" << endl;
 
 		// Crea los espacios para las teclas
 		vector<int> aux;
 		for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 			aux.push_back(0);
 		buttonStates_ = aux;
-
-		cout << "buttonStates_ = " << buttonStates_.size() << endl;
 	}
 	
 	inline bool controllerDownEvent() {
