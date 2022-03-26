@@ -101,7 +101,7 @@ void Attack::attack()
 {
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
-	newAttack = true;
+	newAttack_ = true;
 
 	setActive(true);
 	lastAttack = sdlutils().currRealTime();
