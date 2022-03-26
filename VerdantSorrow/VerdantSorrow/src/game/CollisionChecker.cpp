@@ -13,6 +13,7 @@
 #include "../components/boss/frog_boss/FlyHp.h"
 #include "../components/tutorial/TutorialFly.h"
 #include "SceneManager.h"
+#include "../components/FramedImage.h"
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr) : colManager_(colManager), mngr_(mngr)
 {
@@ -69,6 +70,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
 					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
 					VFXEnt->addComponent<VFX>(6);*/
+					player->getComponent<FramedImage>()->slowAnimation(10, 3);
 
 					bA->setDamage(0.6f);
 					player->getComponent<Transform>()->getVel().setY(0);
