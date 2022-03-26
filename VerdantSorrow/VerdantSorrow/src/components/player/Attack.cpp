@@ -86,7 +86,7 @@ void Attack::update()
 					s->setChannelVolume(70);
 					s->play();
 
-					anim_->slowAnimation(50, 1);
+					anim_->slowAnimation(10, 3);
 
 					/*auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();
