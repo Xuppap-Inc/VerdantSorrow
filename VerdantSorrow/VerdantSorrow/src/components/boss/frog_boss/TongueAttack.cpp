@@ -8,17 +8,16 @@
 #include "../../RectangleRenderer.h"
 
 TongueAttack::TongueAttack(CollisionManager *colMan):RectangleCollider(), 
-	colMan_(colMan),delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false)
+	colMan_(colMan),delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 	
 	setIsTrigger(true);
 	setActive(false);
 	colMan->addCollider(this);
-	
-	
 }
+
 TongueAttack::TongueAttack() :RectangleCollider(),
-	colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false)
+	colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 	setIsTrigger(true);
 	setActive(false);
@@ -34,22 +33,19 @@ void TongueAttack::initComponent()
 }
 void TongueAttack::update()
 {
-	if (sdlutils().currRealTime() - lastUpdate_ >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
+	if (!finishedAttack_ && timer_.currTime() >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
 	{
 		setActive(false);
 		finishedAttack_ = true;
-		lastUpdate_ = sdlutils().currRealTime(); //Actualiza al tiempo de juego actual
-		
 	}
-	
 }
 void TongueAttack::attack(bool fly)
 {
-
 	currentPos(fly);
 	setActive(true);
 
 	finishedAttack_ = false; //El ataque no ha terminado aun
+	timer_.reset();
 
 	if (fly_)
 	{
@@ -66,15 +62,22 @@ bool TongueAttack::finished()
 void TongueAttack::cancel()
 {
 	setActive(false);
-
 }
 
 void TongueAttack::currentPos(bool fly)
 {
 	fly_ = fly;
 	//Compruebo si el objetivo es la mosca o el jugador 
-	auto entObjective = fly ? mngr_->getHandler(ecs::_FLY) : mngr_->getHandler(ecs::_PLAYER);
-	auto objective = entObjective->getComponent<Transform>();
+	auto flyEnt_ = mngr_->getHandler(ecs::_FLY);
+	auto playerEnt_ = mngr_->getHandler(ecs::_PLAYER);
+
+	auto playerTr_ = playerEnt_->getComponent<Transform>();
+	auto flyTr_ = flyEnt_->getComponent<Transform>();
+
+	Transform* objective;
+	if (fly) objective = flyTr_;
+	else objective = playerTr_;
+
 	auto posFrog = frogTr_->getPos(); //Posicion rana
 	auto posObj = objective->getPos(); //Posicion mosca objetivo
 
@@ -82,12 +85,12 @@ void TongueAttack::currentPos(bool fly)
 	float w;
 	if (posObj.getX() <= posFrog.getX()) //Si la mosca esta a su izq, el collider crece desde la mosca
 	{
-		iniPos = Vector2D(posObj.getX() + objective->getWidth(), posObj.getY());
+		iniPos = Vector2D(posObj.getX() + objective->getWidth(), sdlutils().height() - playerTr_->getHeight() - 60);
 		w = posFrog.getX() - iniPos.getX();
 	}
 	else //En este caso el collider crece desde la rana
 	{
-		iniPos = Vector2D(posFrog.getX() + frogTr_->getWidth(), posFrog.getY());
+		iniPos = Vector2D(posFrog.getX() + frogTr_->getWidth(), sdlutils().height() - playerTr_->getHeight() - 60);
 		w = posObj.getX() - iniPos.getX();
 	}
 
@@ -102,5 +105,4 @@ void TongueAttack::setCollider(Vector2D pos, float w, float h)
 	pos_ = pos;
 	width_ = w;
 	height_ = h;
-
 }
