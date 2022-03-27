@@ -113,7 +113,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	colManager->addCollider(playerCollider);
 
 	// float jumpForce, float speed, float deceleration, float rollSpeed
-	player_->addComponent<PlayerCtrl>(10, 6, 0.7, 10);
+	player_->addComponent<PlayerCtrl>(16, 6, 0.7, 10);
 	// speed 18
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl

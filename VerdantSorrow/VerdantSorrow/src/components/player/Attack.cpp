@@ -41,27 +41,27 @@ void Attack::update()
 		setPosition();
 
 		if (sdlutils().currRealTime() >= lastAttack + attackDuration) {
-			
+
 			setActive(false);
 			finished_ = true;
 		}
 	}
 	else {
-		if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
+		if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
+			if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
 
-			bool attackThisFrame = false;
+				bool attackThisFrame = false;
 
-			// Keyboard
-			int i = 0;
-			while (i < attackKeys.size() && !ihdlr.isKeyDown(attackKeys[i])) i++;
-			if (i < attackKeys.size()) attackThisFrame = true;
-			// Controller
-			i = 0;
-			while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
-			if (i < attackButtons.size()) attackThisFrame = true;
+				// Keyboard
+				int i = 0;
+				while (i < attackKeys.size() && !ihdlr.isKeyDown(attackKeys[i])) i++;
+				if (i < attackKeys.size()) attackThisFrame = true;
+				// Controller
+				i = 0;
+				while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
+				if (i < attackButtons.size()) attackThisFrame = true;
 
-			if (attackThisFrame) {
-				if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
+				if (attackThisFrame) {
 
 					//callback que llama a attack
 					std::function<void()> attackCallback = [this]() { attack(); };
@@ -77,17 +77,12 @@ void Attack::update()
 						anim_->repeat(true);
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
 
-					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
-					s->play();
-					newAttack_ = true;
-
-					setActive(true);
-					lastAttack = sdlutils().currRealTime();
-					setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 						//registra el evento en la animacion
 						anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkAir"), attackCallback);
 					}
+					lastAttack = sdlutils().currRealTime();
 				}
+
 			}
 		}
 	}
@@ -132,6 +127,6 @@ void Attack::setPosition()
 
 	if (playerMovementDir >= 0)
 		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
-	else 
+	else
 		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());
 }
