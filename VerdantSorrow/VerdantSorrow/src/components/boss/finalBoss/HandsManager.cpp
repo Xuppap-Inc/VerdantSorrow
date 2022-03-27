@@ -14,7 +14,6 @@
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), state_(REPOSO)
 {
-
 }
 
 HandsManager::~HandsManager()
@@ -105,8 +104,8 @@ void HandsManager::chooseAttack() {
 	if (state_ == CLAP) {
 		attackCooldown = sdlutils().rand().nextInt(1500, 2501);
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
-		if (ataqueElegido <= 4) numeroAtaque = PUNIETAZO;
-		else if (ataqueElegido <= 8) numeroAtaque = MARTILLAZO;
+		if (ataqueElegido <= 2) numeroAtaque = PUNIETAZO;
+		else if (ataqueElegido <= 6) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 	else if (state_ == PUNIETAZO) {

@@ -43,22 +43,20 @@ void HammerArm::goDiagonal()
 	}
 }
 
-
 void HammerArm::attack()
 {
-
 	collider_->setActive(true);
 	collider_->setIsTrigger(true);
 
-	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight()) {
+	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() - 50) {
 		tr_->getVel().set(Vector2D(0, handSpeed * 2));
 	}
 	else {
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().setY(sdlutils().height() - tr_->getHeight());
+		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
 		lastTimeFloor = sdlutils().currRealTime();
 		changeState(REPOSOSUELO);
-		waveSp_->createWaves(200, 100, Vector2D(1, 0), tr_);
+		waveSp_->createWaves(50, 50, Vector2D(1, 0), tr_);
 	}
 }
 
