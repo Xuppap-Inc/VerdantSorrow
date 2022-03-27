@@ -98,6 +98,10 @@
     {
       "id": "particles",
       "file": "resources/images/particles.png"
+    },
+    {
+      "id": "wave",
+      "file": "resources/images/wave.png"
     }
   ],
 
