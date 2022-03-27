@@ -14,6 +14,7 @@
 #include "../../../ecs/Component.h"
 
 #include <cassert>
+#include "../../FramedImage.h"
 
 
 WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(5)
@@ -38,14 +39,7 @@ void WaveSpawner::createWave(float width, float height, Vector2D dir, Transform*
 		waveX = tr->getPos().getX() - width;
 
 	wave->addComponent<Transform>(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f);
-
-
-	if (tex == nullptr)
-		wave->addComponent<RectangleRenderer>(SDL_Color());
-
-	else
-		wave->addComponent<Image>(tex);
-
+	auto waveimg=wave->addComponent<FramedImage>(& sdlutils().images().at("wave"),3,3,2000,9,"wave");
 	//Se anyade un collider a la onda
 	auto waveCollider = wave->addComponent<RectangleCollider>(width, height);
 	waveCollider->setIsTrigger(true);
