@@ -203,13 +203,12 @@ ecs::Entity* FrogAttackManager::createFly()
 	//hacer una variable de suelo (-60)
 	auto flyY = sdlutils().height() - player_->getHeight()-60;
 	
-	auto flyX = -50;
-	int dir = 1;
+	auto flyX = player_->getPos().getX();
+	/*auto flyX = -50;
 
 	if (player_->getPos().getX() > tr_->getPos().getX()) {
 		flyX = sdlutils().width() + 50;
-		dir = -1;
-	}
+	}*/
 
 	fTr->init(Vector2D(flyX, flyY), Vector2D(), 100, 100, 0.0f);
 	auto coll = fly_->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
@@ -217,7 +216,8 @@ ecs::Entity* FrogAttackManager::createFly()
 	collManager_->addCollider(coll);
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	fly_->addComponent<FlyHp>(this);
-	fly_->addComponent<FlyMovement>(dir);
+	
+	//fly_->addComponent<FlyMovement>();
 	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;
 }

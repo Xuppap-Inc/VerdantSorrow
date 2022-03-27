@@ -85,13 +85,13 @@ void TongueAttack::currentPos(bool fly)
 	float w;
 	if (posObj.getX() <= posFrog.getX()) //Si la mosca esta a su izq, el collider crece desde la mosca
 	{
-		iniPos = Vector2D(posObj.getX() + objective->getWidth(), sdlutils().height() - playerTr_->getHeight() - 60);
+		iniPos = Vector2D(posObj.getX(), sdlutils().height() - playerTr_->getHeight() - 60);
 		w = posFrog.getX() - iniPos.getX();
 	}
 	else //En este caso el collider crece desde la rana
 	{
 		iniPos = Vector2D(posFrog.getX() + frogTr_->getWidth(), sdlutils().height() - playerTr_->getHeight() - 60);
-		w = posObj.getX() - iniPos.getX();
+		w = posObj.getX() + objective->getWidth() - iniPos.getX();
 	}
 
 	tr_->setWidth(w);
