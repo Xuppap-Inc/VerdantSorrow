@@ -77,7 +77,7 @@ void FinalBossScene::waveSpawnerGenerator(CollisionManager*& colManager)
 
 void FinalBossScene::background()
 {
-	Scene::background("fondo1");
+	Scene::background("fondoNegro");
 }
 
 

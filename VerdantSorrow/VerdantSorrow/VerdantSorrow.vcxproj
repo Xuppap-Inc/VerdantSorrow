@@ -201,8 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\images\BossBarArrow_Left.png" />
+    <Image Include="resources\images\BossFinal_ManoDer.png" />
+    <Image Include="resources\images\BossFinal_ManoIzq.png" />
     <Image Include="resources\images\FinalBoss_Fase1.png" />
     <Image Include="resources\images\FinalBoss_Fase2.png" />
+    <Image Include="resources\images\fondoNegro.png" />
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />

@@ -24,8 +24,16 @@
       "file": "resources/images/FinalBoss_Fase2.png"
     },
     {
-      "id": "mano",
-      "file": "resources/images/BossFinal_Mano.png"
+      "id": "fondoNegro",
+      "file": "resources/images/fondoNegro.png"
+    },
+    {
+      "id": "manoIzq",
+      "file": "resources/images/BossFinal_ManoIzq.png"
+    },
+    {
+      "id": "manoDer",
+      "file": "resources/images/BossFinal_ManoDer.png"
     },
     {
       "id": "chica",

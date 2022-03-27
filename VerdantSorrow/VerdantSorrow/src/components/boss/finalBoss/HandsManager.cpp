@@ -72,7 +72,7 @@ void HandsManager::createHands() {
 	tr_ = ent_->getComponent<Transform>();
 	auto manoIzTr = leftHand_->addComponent<Transform>();
 	manoIzTr->init(tr_->getPos() + Vector2D(150 + tr_->getWidth(), 150), Vector2D(), handSize, handSize, 0.0f, false);
-	leftHand_->addComponent<Image>(&sdlutils().images().at("mano"));
+	leftHand_->addComponent<Image>(&sdlutils().images().at("manoIzq"));
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>
 		(manoIzTr->getWidth() - width_colliderOffset, manoIzTr->getHeight() - height_colliderOffset);
@@ -82,10 +82,9 @@ void HandsManager::createHands() {
 	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
-
 	auto manoDrTr = rightHand_->addComponent<Transform>();
 	manoDrTr->init(tr_->getPos() + Vector2D(- handSize - 150, 150), Vector2D(), handSize, handSize, 0.0f, false);
-	rightHand_->addComponent<Image>(&sdlutils().images().at("mano"));
+	rightHand_->addComponent<Image>(&sdlutils().images().at("manoDer"));
 
 	//Se añade un collider a la rana
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>
