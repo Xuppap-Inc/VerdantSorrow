@@ -9,6 +9,7 @@ class BossAtributos;
 class HandsManager;
 class CollisionManager;
 class WaveSpawner;
+class FramedImage;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -28,6 +29,7 @@ private:
 	Transform* tr_;
 	BossAtributos* bA_;
 	HandsManager* handMngr_;
+	FramedImage* anim_;
 	Phase phase_;
 	EyeState eyeState_;
 	CollisionManager* colManager_;

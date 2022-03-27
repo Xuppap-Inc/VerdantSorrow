@@ -16,6 +16,14 @@
       "file": "resources/images/BossFinal_Cabeza.png"
     },
     {
+      "id": "FinalBoss_Fase1",
+      "file": "resources/images/FinalBoss_Fase1.png"
+    },
+    {
+      "id": "FinalBoss_Fase2",
+      "file": "resources/images/FinalBoss_Fase2.png"
+    },
+    {
       "id": "mano",
       "file": "resources/images/BossFinal_Mano.png"
     },

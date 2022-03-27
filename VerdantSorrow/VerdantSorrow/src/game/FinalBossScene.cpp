@@ -93,6 +93,8 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	//FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase1"), 10, 6, 2000, 60, "FinalBoss_Fase1");
+	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
+	//anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
 
 	FinalBossFace->addComponent<HandsManager>(colManager);
 	FinalBossFace->addComponent<FinalBossMovement>(colManager);

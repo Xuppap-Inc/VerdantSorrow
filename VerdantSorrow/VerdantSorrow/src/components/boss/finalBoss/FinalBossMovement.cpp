@@ -9,6 +9,7 @@
 #include "../wave/WaveMovement.h"
 #include "../../../game/CollisionManager.h"
 #include "../wave/WaveSpawner.h"
+#include "../../FramedImage.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(6), waveSp_(), fireBallCooldown_(), lastFireBall_()
@@ -24,6 +25,7 @@ void FinalBossMovement::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	bA_ = ent_->getComponent<BossAtributos>();
 	handMngr_ = ent_->getComponent<HandsManager>();
+	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 	playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr != nullptr);
@@ -33,8 +35,11 @@ void FinalBossMovement::initComponent()
 void FinalBossMovement::update()
 {
 	if (phase_ == PHASE1) {
-		if (bA_->getLife() <= bA_->getMaxHp() / 2)
+		if (bA_->getLife() <= bA_->getMaxHp() / 2) {
+			anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
 			phase_ = PHASE2;
+			tr_->setScale(.13);
+		}
 
 		lastFireBall_ = sdlutils().currRealTime();
 		fireBallCooldown_ = 2000;
