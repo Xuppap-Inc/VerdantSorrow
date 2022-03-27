@@ -101,33 +101,37 @@ void HandsManager::createHands() {
 }
 
 void HandsManager::chooseAttack() {
+
+	int punietazoProb = 2;
+	int martillazoProb = 5;
+
 	if (state_ == CLAP) {
 		attackCooldown = sdlutils().rand().nextInt(1500, 2501);
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
-		if (ataqueElegido <= 2) numeroAtaque = PUNIETAZO;
-		else if (ataqueElegido <= 6) numeroAtaque = MARTILLAZO;
+		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
+		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 	else if (state_ == PUNIETAZO) {
 		attackCooldown = sdlutils().rand().nextInt(500, 1501);
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
-		if (ataqueElegido <= 4) numeroAtaque = PUNIETAZO;
-		else if (ataqueElegido <= 7) numeroAtaque = MARTILLAZO;
+		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
+		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 	else if(state_ == MARTILLAZO){
 		attackCooldown = sdlutils().rand().nextInt(1000, 2001);
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
-		if (ataqueElegido <= 3) numeroAtaque = PUNIETAZO;
-		else if (ataqueElegido <= 6) numeroAtaque = MARTILLAZO;
+		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
+		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 	else {
 		attackCooldown = 1000;
 		lastAttackDone = sdlutils().currRealTime();
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
-		if (ataqueElegido <= 3) numeroAtaque = PUNIETAZO;
-		else if (ataqueElegido <= 6) numeroAtaque = MARTILLAZO;
+		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
+		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 }
