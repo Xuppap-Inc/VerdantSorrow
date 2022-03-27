@@ -91,12 +91,14 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height() / 2 - 200;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f);
 
-
 	FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<HandsManager>(colManager);
 	FinalBossFace->addComponent<FinalBossMovement>(colManager);
 
-	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth() - 50, BossTr->getHeight() - 50);
+	float colliderWidth = 100, colliderOffset_y = 100;
+	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>
+		(colliderWidth, colliderWidth);
+
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);
 
