@@ -23,7 +23,7 @@ SceneManager::~SceneManager()
 	for (auto s : sceneList) {
 		delete s;
 	}
-	sceneList.empty();
+	sceneList.clear();
 }
 
 void SceneManager::update()

@@ -98,20 +98,23 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
 	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 70, 160, 0.0f, 0.5);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5);
 
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
-	player_->addComponent<SimpleGravity>(2.0);
+	player_->addComponent<SimpleGravity>(1.5);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>(100);
 
 	//Se añade un collider al jugadordd
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	player_->addComponent<PlayerCtrl>(18, 8, 0.85, 12);
+
+	// float jumpForce, float speed, float deceleration, float rollSpeed
+	player_->addComponent<PlayerCtrl>(16, 6, 0.7, 10);
+	// speed 18
 
 	//IMPORTANTE :No poner estas físicas detrás del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
@@ -119,7 +122,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(50, playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(120, playerTr->getHeight(), colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 

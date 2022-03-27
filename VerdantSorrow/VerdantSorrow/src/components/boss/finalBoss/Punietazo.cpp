@@ -30,6 +30,9 @@ void Punietazo::initComponent()
 	initialwidth_ = tr_->getWidth();
 	initialheight_ = tr_->getHeight();
 	initialpos_ = tr_->getPos();
+	// Valores collider
+	col_initialwidth_ = col_->getWidth();
+	col_initialheight_ = col_->getHeight();
 
 	maxWidth_ = 2 * initialwidth_;
 	maxHeight_ = 2 * initialheight_;
@@ -137,12 +140,11 @@ void Punietazo::goBack()
 		if (isPos && isSize) {
 			changeState(FIN);
 
-			col_->setWidth(width);
-			col_->setHeight(height);
+			col_->setWidth(col_initialwidth_);	
+			col_->setHeight(col_initialheight_);
 			col_->setActive(true);
 			col_->setIsTrigger(false);
 		}
-
 	}
 
 }

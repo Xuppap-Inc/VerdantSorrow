@@ -9,8 +9,17 @@ using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
 	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
-	rollCooldown_(1000), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
-	, isKnockback(false)
+	rollCooldown_(100), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
+	, isKnockback(false),
+
+	// INPUT
+	// Jump
+	jumpKeys({ SDL_SCANCODE_W , SDL_SCANCODE_SPACE }),
+	jumpButtons({ SDL_CONTROLLER_BUTTON_A }),
+
+	// Roll
+	rollKeys({ SDL_SCANCODE_LSHIFT }),
+	rollButtons({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
 {
 }
 
@@ -35,7 +44,8 @@ void PlayerCtrl::update()
 	//handle input
 	handleInput();
 
-	if (!isAttacking && !isRolling_ && !isKnockback) {
+	//!isAttacking
+	if ( !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -152,23 +162,22 @@ void PlayerCtrl::animationManagement()
 	// Animation
 	if (attrib_->isOnGround()) {
 		if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
-			if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
-				if (anim_->getCurrentAnimation() != "Chica_Run") {
-					anim_->repeat(false);
-					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
-				}			
-			}
-			else if (isRolling_) {
+			if (isRolling_) {
 				if (anim_->getCurrentAnimation() != "chicaroll") {
 
-					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_ , 25, "chicaroll");
+					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
 					anim_->repeat(false);
 
 				}
+			} else if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
+				if (anim_->getCurrentAnimation() != "Chica_Run") {
+					anim_->repeat(true);
+					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
+				}			
 			}
 			else {
 				if (anim_->getCurrentAnimation() != "Chica_Idle") {
-					anim_->repeat(false);
+					anim_->repeat(true);
 					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
 				}
 			}
@@ -179,25 +188,94 @@ void PlayerCtrl::handleInput()
 {
 	auto& ihdlr = ih();
 
-	if (ihdlr.keyUpEvent()) {
-		if (ihdlr.isKeyUp(SDL_SCANCODE_A))
-			moveLeft_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_D))
-			moveRight_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_W) && ihdlr.isKeyUp(SDL_SCANCODE_SPACE))
-			jump_ = false;
-		if (ihdlr.isKeyUp(SDL_SCANCODE_LSHIFT))
-			roll_ = false;
+	// BUTTON UP
+	if (ihdlr.keyUpEvent() || ihdlr.controllerUpEvent()) {
+
+		// KEYBOARD
+		if (!ihdlr.controllerConnected()) {
+
+			// MOVEMENT
+			if (ihdlr.isKeyUp(SDL_SCANCODE_A))
+				moveLeft_ = false;
+			if (ihdlr.isKeyUp(SDL_SCANCODE_D))
+				moveRight_ = false;
+
+			// JUMP
+			int i = 0;
+			while (i < jumpKeys.size() && !ihdlr.isKeyUp(jumpKeys[i])) i++;
+			if (i < jumpKeys.size()) jump_ = false;
+
+			// ROLL
+			i = 0;
+			while (i < rollKeys.size() && !ihdlr.isKeyUp(rollKeys[i])) i++;
+			if (i < rollKeys.size()) roll_ = false;
+		}
+
+		// CONTROLLER
+		else {
+
+			// JUMP
+			int i = 0;
+			while (i < jumpButtons.size() && !ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
+			if (i < jumpButtons.size()) jump_ = false;
+
+			// ROLL
+			i = 0;
+			while (i < rollButtons.size() && !ihdlr.isControllerButtonUp(rollButtons[i])) i++;
+			if (i < rollButtons.size()) roll_ = false;
+		}
 	}
-	if (ihdlr.keyDownEvent()) {
-		if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+
+	// BUTTON DOWN
+	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {
+
+		// KEYBOARD
+		if (!ihdlr.controllerConnected()) {
+			// MOVEMENT
+			if (ihdlr.isKeyDown(SDL_SCANCODE_A))
+				moveLeft_ = true;
+			if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+				moveRight_ = true;
+
+			// JUMP
+			int i = 0;
+			while (i < jumpKeys.size() && !ihdlr.isKeyDown(jumpKeys[i])) i++;
+			if (i < jumpKeys.size()) jump_ = true;
+
+			// ROLL
+			i = 0;
+			while (i < rollKeys.size() && !ihdlr.isKeyDown(rollKeys[i])) i++;
+			if (i < rollKeys.size()) roll_ = true;
+		}
+
+		// CONTROLLER
+		else {
+			// JUMP
+			int i = 0;
+			while (i < jumpButtons.size() && !ihdlr.isControllerButtonDown(jumpButtons[i])) i++;
+			if (i < jumpButtons.size()) jump_ = true;
+
+			// ROLL
+			i = 0;
+			while (i < rollButtons.size() && !ihdlr.isControllerButtonDown(rollButtons[i])) i++;
+			if (i < rollButtons.size()) roll_ = true;
+		}
+	}
+
+	// JOYSTICK MOVEMENT
+	if (ihdlr.controllerConnected()) {
+
+		float axisValue = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
+
+		if (axisValue < -.3f)
 			moveLeft_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_D))
+		if (axisValue > .3f)
 			moveRight_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_W) || ihdlr.isKeyDown(SDL_SCANCODE_SPACE))
-			jump_ = true;
-		if (ihdlr.isKeyDown(SDL_SCANCODE_LSHIFT))
-			roll_ = true;
+
+		if (axisValue < .3f && axisValue > -.3f)
+		{
+			moveLeft_ = false; moveRight_ = false;
+		}
 	}
 }
 

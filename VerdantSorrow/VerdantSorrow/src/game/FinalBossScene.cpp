@@ -54,7 +54,7 @@ void FinalBossScene::update()
 	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
-		colCheck_->collisionsFinalBossScene();
+		colCheck_->checkCollisions();
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
@@ -88,7 +88,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = (sdlutils().width() - 350) / 2;
-	auto BossY = sdlutils().height() / 2 - 300;
+	auto BossY = sdlutils().height() / 2 - 200;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f);
 
 
@@ -96,7 +96,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	FinalBossFace->addComponent<HandsManager>(colManager);
 	FinalBossFace->addComponent<FinalBossMovement>(colManager);
 
-	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth(), BossTr->getHeight());
+	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(BossTr->getWidth() - 50, BossTr->getHeight() - 50);
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);
 

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\game\CollisionChecker.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyMovement.h" />
     <ClInclude Include="src\game\MenuScene.h" />
@@ -200,8 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\images\BossBarArrow_Left.png" />
-    <Image Include="resources\images\BossFinal_Cabeza.png" />
-    <Image Include="resources\images\BossFinal_Mano.png" />
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />
@@ -210,7 +209,9 @@
     <Image Include="resources\images\MenuPrincipal\quitButton.png" />
     <Image Include="resources\images\MenuPrincipal\settingsButton.png" />
     <Image Include="resources\images\middleBar.png" />
-    <Image Include="resources\images\Suelo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VerdantSorrow.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

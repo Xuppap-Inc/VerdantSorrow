@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../ecs/Component.h"
 class Transform;
@@ -6,6 +5,8 @@ class Texture;
 
 
 #include "../sdlutils/SDLUtils.h"
+#include <vector>
+#include <functional>
 
 class FramedImage : public ecs::Component {
 public:
@@ -13,7 +14,7 @@ public:
 	__CMPID_DECL__(ecs::_FRAMEDIMAGE)
 
 
-		FramedImage(Texture* tex, int row, int column,float time,int numframes, std::string anim);
+	FramedImage(Texture* tex, int row, int column,float time,int numframes, std::string anim);
 	virtual ~FramedImage();
 
 	void setTexture(Texture* tex) {
@@ -25,7 +26,12 @@ public:
 	void flipX(bool h);
 	void repeat(bool h);
 
+	void slowAnimation(float factor, int nFrames = -1);
+	void cancelSlow();
+
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
+
+	void registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback);
 
 	int getFrameNum();
 	std::string getCurrentAnimation() { return currentAnim; }
@@ -33,18 +39,33 @@ public:
 private:
 	Transform* tr_;
 	Texture* tex_;
-	float frametime;
+	float totalAnimationTime_;
+	float iniTotalAnimTime_;
 	int row_;
 	int column_;
 	SDL_Rect m_clip;
 	int i = 0;
 	int j = 0;
 	bool flipX_;
-	float initime = 0;
 	int numframes;
 	int currentnumframes = 0;
 	bool noRepeat_;
 	bool completed_;
 	std::string currentAnim;
+
+	VirtualTimer timer_;
+
+	float slowFactor_;
+	bool slowed_;
+	int contFramesSlowed_;
+
+	std::vector<std::pair<int, std::string>> eventsInfo_;
+	std::vector<std::function<void()>> eventsCallbacks_;
+
+	void adjustAndRenderFrame();
+	void calculateOffset(float& xOffset, float& yOffset);
+	void checkAnimationFinished();
+	void checkEvents();
+	void clearEvents();
 };
 

@@ -46,6 +46,9 @@ private:
 	//initial hand tr
 	float initialwidth_;
 	float initialheight_;
+	// Initial hand collider
+	float col_initialwidth_;
+	float col_initialheight_;
 	Vector2D initialpos_;
 	float dW, dH;
 

@@ -15,10 +15,8 @@ MenuScene::MenuScene():Scene()
 void MenuScene::init()
 {
 	Scene::init();
-	background();//Dibuja el fondo
 
-	//Vector con los nombres de los botones
-	std::vector<std::string> buttonNames = { "newGame", "continue", "settings", "controls","quit" };
+	background();//Dibuja el fondo
 
 	//Variables que definen caracteristicas de los botones
 	int offsetY = 40; int spacingX = 20; int spacingY = 100;
@@ -27,7 +25,8 @@ void MenuScene::init()
 	//Bucle que dibuja la primera columna (izq) de botones
 	for (int i = 0; i < 2; ++i) 
 	{
-		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2-offsetY+(i*spacingY), buttonW, buttonH, buttonNames[i]);
+		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2-offsetY+(i*spacingY),
+			buttonW, buttonH, buttonNames[i] );
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
@@ -35,7 +34,8 @@ void MenuScene::init()
 	for (int i = 2; i < buttonNames.size(); ++i)
 	{
 		
-		createButton(sdlutils().width() / 2+spacingX, sdlutils().height() / 2-offsetY+(j*spacingY), buttonW, buttonH, buttonNames[i]);
+		createButton(sdlutils().width() / 2+spacingX, sdlutils().height() / 2-offsetY+(j*spacingY), 
+			buttonW, buttonH, buttonNames[i]);
 		++j;
 	}
 
@@ -55,8 +55,7 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 	auto newButton = mngr_->addEntity();
 	auto tr = newButton->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
 	newButton->addComponent<Image>(&sdlutils().images().at(buttonImage));
-	buttonPositions.push_back(tr);
-	allButtons.push_back(newButton);
+	buttonPositions_.push_back(tr);
 }
 
 void MenuScene::update()
@@ -68,17 +67,17 @@ void MenuScene::update()
 		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
 		{
 			auto ratonPos = ihdlr.getMousePos();
-			for (auto buttonPos : buttonPositions) //Para todos los botones comprueba si el raton esta sobre ellos
+			for (int i = 0; i < buttonPositions_.size(); ++i) //Para todos los botones comprueba si el raton esta sobre ellos
 			{
-				auto pos = buttonPos->getPos();
-				if (ratonPos.first <=  pos.getX()+ buttonPos->getWidth() 
+				auto pos = buttonPositions_[i]->getPos();
+				if (ratonPos.first <=  pos.getX()+ buttonPositions_[i]->getWidth()
 					&& ratonPos.first >= pos.getX()&& ratonPos.second <= pos.getY() 
-					+ buttonPos->getHeight() && ratonPos.second >= pos.getY()) {
-
-					//onButtonClicked(pos);
+					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+					
+					onButtonClicked(i);
+				
 				}
 			}
-			
 		}
 	}
 
@@ -90,16 +89,36 @@ void MenuScene::update()
 	sdlutils().presentRenderer();
 }
 
-void MenuScene::onButtonClicked(Vector2D buttonPos)
+void MenuScene::onButtonClicked(int index)
 {
-	/*std::string name;
-	for (auto button : allButtons) 
+	/*Index indica la posicion en la que se encuentra el boton en el vector de transforms y de nombres
+	/Los botones se añaden en el orden indicado en el vector de nombres
+	/Cambiando el orden de los botones, cambiaria lo que hay que hacer en cada caso
+	/De la misma manera si se añade un nuevo boton habría que añadir el caso correspondiente*/
+
+	switch (index)
 	{
-		if (button->getComponent<Transform>()->getPos() == buttonPos) 
-		{
-			
-		}
-	}*/
+	case 0: //Boton new game
+		std::cout << "Has pulsado el boton de nuevo juego" << std::endl;
+		break;
+	case 1: //Boton continue
+		std::cout << "Has pulsado el boton de continuar" << std::endl;
+
+		break;
+	case 2://Boton settings
+		std::cout << "Has pulsado el boton de ajustes" << std::endl;
+
+		break;
+	case 3: //Boton controls
+		std::cout << "Has pulsado el boton de controles" << std::endl;
+
+		break;
+	case 4: //Boton quit
+		SDL_Quit();
+		break; 
+	
+	}
+	
 }
 	
 
