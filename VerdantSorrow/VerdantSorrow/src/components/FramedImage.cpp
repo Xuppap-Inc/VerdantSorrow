@@ -184,7 +184,7 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 
 	else if (ent_->getComponent<FinalBossMovement>() != nullptr) {
 
-		if (currentAnim == "FinalBoss_Fase1") {
+		if (currentAnim == "FinalBoss_Fase1" || currentAnim == "FinalBoss_Fase2") {
 			xOffset = -.17;
 			yOffset = .25;
 		}

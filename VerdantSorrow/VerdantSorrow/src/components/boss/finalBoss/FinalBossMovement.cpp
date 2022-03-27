@@ -38,7 +38,7 @@ void FinalBossMovement::update()
 		if (bA_->getLife() <= bA_->getMaxHp() / 2) {
 			anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
 			phase_ = PHASE2;
-			tr_->setScale(.13);
+			tr_->setScale(.33);
 		}
 
 		lastFireBall_ = sdlutils().currRealTime();

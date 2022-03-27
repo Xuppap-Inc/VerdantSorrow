@@ -91,6 +91,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height() / 2 - 250;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f, 0.55f);
 
+	//BossTr->setScale(.33);
 	//FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase1"), 10, 6, 2000, 60, "FinalBoss_Fase1");
 	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
