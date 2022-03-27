@@ -1,5 +1,6 @@
 #include "../../../ecs/Component.h"
 #include "../../../sdlutils/SDLUtils.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
 class FrogJump;
 class FrogBigJump;
@@ -82,5 +83,6 @@ private:
 	Uint32 lastUpdate_;
 	Uint32 tongueDelay_;
 
+	VirtualTimer tongueWaitTimer_;
 };
 

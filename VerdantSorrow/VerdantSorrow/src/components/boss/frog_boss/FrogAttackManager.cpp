@@ -19,7 +19,7 @@
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
 jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(),
-tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_()
+tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
 {
 }
 
@@ -27,7 +27,7 @@ FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
 jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0),
 flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE),
-animNewState_(ANIM_IDLE), waveSp_()
+animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
 {
 }
 
@@ -89,6 +89,7 @@ void FrogAttackManager::update()
 		{
 			frogState_ = WAITING;
 			tongue_->setActive(false);
+			tongue_->getComponent<RectangleRenderer>()->setVisible(false);
 
 			delay_ = rand.nextInt(1000, 3000);
 			lastUpdate_ = sdlutils().currRealTime();
@@ -106,7 +107,7 @@ void FrogAttackManager::update()
 		break;
 	case WAITING_FOR_TONGUE:
 
-		if (lastUpdate_ + tongueDelay_ < sdlutils().currRealTime()) {
+		if (tongueWaitTimer_.currTime() >= tongueDelay_) {
 			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
 			frogState_ = TONGUE;
 			tongue_->getComponent<RectangleRenderer>()->setVisible(true);
@@ -201,19 +202,22 @@ ecs::Entity* FrogAttackManager::createFly()
 	auto fTr = fly_->addComponent<Transform>();
 	//hacer una variable de suelo (-60)
 	auto flyY = sdlutils().height() - player_->getHeight()-60;
-	auto flyX = -50;
-	int dir = 1;
-		if (player_->getPos().getX() > sdlutils().width()) {
-			flyX = sdlutils().width() + 50;
-			dir = -1;
-		}
+	
+	auto flyX = player_->getPos().getX();
+	/*auto flyX = -50;
+
+	if (player_->getPos().getX() > tr_->getPos().getX()) {
+		flyX = sdlutils().width() + 50;
+	}*/
+
 	fTr->init(Vector2D(flyX, flyY), Vector2D(), 100, 100, 0.0f);
 	auto coll = fly_->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
 	coll->setIsTrigger(true);
 	collManager_->addCollider(coll);
 	fly_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	fly_->addComponent<FlyHp>(this);
-	fly_->addComponent<FlyMovement>(dir);
+	
+	//fly_->addComponent<FlyMovement>();
 	mngr_->setHandler(ecs::_FLY, fly_);
 	return fly_;
 }
@@ -221,12 +225,15 @@ ecs::Entity* FrogAttackManager::createFly()
 ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 {
 	tongue_ = mngr_->addEntity();
+
 	auto tr = tongue_->addComponent<Transform>();
-	auto tongueY = player_->getPos().getY();
+	//el -60 es la altura del suelo
+	auto tongueY = sdlutils().height() - player_->getHeight() - 60;
 	auto tongueW = 100;
 	auto tongueH = 50;
 	auto tongueX = tr_->getPos().getX()-tongueW;
 	tr->init(Vector2D(tongueX, tongueY), Vector2D(), tongueW, tongueH, 0.0f);
+
 	auto tongueCollider = tongue_->addComponent<TongueAttack>();
 	colManager->addCollider(tongueCollider);
 	SDL_Color s;
@@ -234,7 +241,7 @@ ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 	s.g = 0x0C;
 	s.b = 0x00;
 	s.a = 0xFF;
-	auto render_=tongue_->addComponent<RectangleRenderer>(s);
+	auto render_ = tongue_->addComponent<RectangleRenderer>(s);
 	render_->setVisible(false);
 	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
 	return tongue_;
@@ -264,7 +271,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	lastUpdate_ = sdlutils().currRealTime();
 	if (isBig) {
 		if (secondPhase_) jumpsUntilNextTongue_--;
-		waveSp_->createWaves(200, 100, Vector2D(1, 0), tr_);
+		waveSp_->createWaves(200, 70, Vector2D(1, 0), tr_);
 		if (angry_) /*Volver a rana normal*/;
 	}
 	else {
@@ -298,7 +305,8 @@ void FrogAttackManager::nextAttack()
 			animNewState_ = ANIM_TONGUE;
 		}
 		frogState_ = WAITING_FOR_TONGUE;
-		tongue_->getComponent<TongueAttack>()->currentPos(!secondPhase_);
+
+		tongueWaitTimer_.reset();
 		tongue_->setActive(true);
 	}
 	else {

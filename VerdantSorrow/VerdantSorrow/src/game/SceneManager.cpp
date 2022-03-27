@@ -66,12 +66,12 @@ void SceneManager::init()
 	case SceneManager::Frog_:
 		sdlUtils_.loadReasources("resources/config/frog.json");
 		//desactiva la escena para que no se pueda volver a acceder 
-		f_->setAble(false);
+		//f_->setAble(false);
 		f_->init();
 		break;
 	case SceneManager::Tree_:
 		sdlUtils_.loadReasources("resources/config/treeScene.json");
-		t_->setAble(false);
+		//t_->setAble(false);
 		t_->init();
 		break;
 	case SceneManager::Eye_:
@@ -115,7 +115,7 @@ void SceneManager::decideScene()
 	else if (f_->getAble()) {
 		actScene = Frog_;
 		//activa la siguiente escena
-		f_->setAble(false);
+		//f_->setAble(false);
 		t_->setAble(true);
 	}
 	else if (t_->getAble()) {

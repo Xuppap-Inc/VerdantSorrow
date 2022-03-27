@@ -108,15 +108,15 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>(100);
 
-	//Se añade un collider al jugadordd
+	//Se aï¿½ade un collider al jugadordd
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 
 	// float jumpForce, float speed, float deceleration, float rollSpeed
 	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
-	// speed 18
 
-	//IMPORTANTE :No poner estas físicas detrás del playerctrl
+
+	//IMPORTANTE :No poner estas fï¿½sicas detrï¿½s del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));

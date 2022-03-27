@@ -38,7 +38,7 @@ void TreeScene::init()
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 
-
+	Scene::background("fondo2");
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -65,6 +65,7 @@ void TreeScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (bossHealth <= 0) setAble(false);
 		sC().decideScene();
 	}
 }

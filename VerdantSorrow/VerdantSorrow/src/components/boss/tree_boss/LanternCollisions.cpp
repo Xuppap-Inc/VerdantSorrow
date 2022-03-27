@@ -37,9 +37,7 @@ void LanternCollisions::update()
 {
 	if (colMan_->hasCollisions(collider_)) {
 
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(collider_);
-
-		for (auto c : colliders) {
+		for (auto c : colMan_->getCollisions(collider_)) {
 
 			if (c->isActive() && c->isTrigger()) {
 
