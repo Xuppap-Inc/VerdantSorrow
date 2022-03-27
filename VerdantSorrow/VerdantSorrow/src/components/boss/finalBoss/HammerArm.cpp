@@ -56,7 +56,7 @@ void HammerArm::attack()
 		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
 		lastTimeFloor = sdlutils().currRealTime();
 		changeState(REPOSOSUELO);
-		waveSp_->createWaves(50, 50, Vector2D(1, 0), tr_);
+		waveSp_->createWaves(75, 50, Vector2D(1, 0), tr_);
 	}
 }
 
