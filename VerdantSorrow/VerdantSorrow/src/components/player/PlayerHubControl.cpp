@@ -84,4 +84,32 @@ void PlayerHubControl::handleInput()
 		if (ihdlr.isKeyDown(SDL_SCANCODE_S))
 			moveDown_ = true;
 	}
+	//Movimiento joystick
+	if (ihdlr.controllerConnected()) {
+
+		float axisValueX = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX);
+		float axisValueY = ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY);
+
+		//Movmiento x
+		if (axisValueX < -.3f)
+			moveLeft_ = true;
+		if (axisValueX > .3f)
+			moveRight_ = true;
+
+		if (axisValueX < .3f && axisValueX > -.3f)
+		{
+			moveLeft_ = false; moveRight_ = false;
+		}
+
+		//Movimiento y
+		if (axisValueY < -.3f)
+			moveUp_ = true;
+		if (axisValueY > .3f)
+			moveDown_ = true;
+
+		if (axisValueY < .3f && axisValueY > -.3f)
+		{
+			moveUp_ = false; moveDown_ = false;
+		}
+	}
 }
