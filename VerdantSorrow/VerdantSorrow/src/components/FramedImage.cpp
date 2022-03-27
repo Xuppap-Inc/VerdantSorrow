@@ -116,30 +116,58 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 {
 	if (ent_->getComponent<PlayerCtrl>() != nullptr) 
 	{
-		if (currentAnim == "Chica_Idle") {
-			xOffset = -0.25;
-			yOffset = 0.08;
+		if (flipX_) {
+			if (currentAnim == "Chica_Idle") {
+				xOffset = -0.40;
+				yOffset = 0.08;
+			}
+			else if (currentAnim == "Chica_Jump") {
+				xOffset = -0.35;
+				yOffset = 0.1;
+			}
+			else if (currentAnim == "Chica_Run") {
+				xOffset = -0.35;
+				yOffset = 0.1;
+			}
+			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
+				xOffset = -0.4;
+				yOffset = 0.145;
+			}
+			else if (currentAnim == "Chica_AtkAir") {
+				xOffset = -0.35;
+				yOffset = 0;
+			}
+			else if (currentAnim == "chicaroll") {
+				xOffset = -0.45;
+				yOffset = 0.25;
+			}
 		}
-		else if (currentAnim == "Chica_Jump") {
-			xOffset = -0.25;
-			yOffset = 0.1;
-		}
-		else if (currentAnim == "Chica_Run") {
-			xOffset = -0.25;
-			yOffset = 0.1;
-		}
-		else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-			xOffset = -0.4;
-			yOffset = 0.145;
-		}
-		else if (currentAnim == "Chica_AtkAir") {
-			xOffset = -0.25;
-			yOffset = 0;
-		}
-		else if (currentAnim == "chicaroll") {
-			xOffset = -0.25;
-			yOffset = 0.25;
-		}
+		else {
+			if (currentAnim == "Chica_Idle") {
+				xOffset = -0.25;
+				yOffset = 0.08;
+			}
+			else if (currentAnim == "Chica_Jump") {
+				xOffset = -0.25;
+				yOffset = 0.1;
+			}
+			else if (currentAnim == "Chica_Run") {
+				xOffset = -0.25;
+				yOffset = 0.1;
+			}
+			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
+				xOffset = -0.4;
+				yOffset = 0.145;
+			}
+			else if (currentAnim == "Chica_AtkAir") {
+				xOffset = -0.25;
+				yOffset = 0;
+			}
+			else if (currentAnim == "chicaroll") {
+				xOffset = -0.25;
+				yOffset = 0.25;
+			}
+		}	
 	}
 	
 	else if (ent_->getComponent<FrogJump>() != nullptr)
