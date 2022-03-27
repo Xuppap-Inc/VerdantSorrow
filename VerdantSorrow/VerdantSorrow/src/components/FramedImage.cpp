@@ -8,6 +8,12 @@
 #include "Transform.h"
 
 
+//includes para ajustar animaciones, quitarlos al cambiar a JSON
+#include "player/PlayerCtrl.h"
+#include "boss/frog_boss/FrogJump.h"
+#include "boss/tree_boss/RootWave.h"
+#include "boss/finalBoss/Punietazo.h"
+
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
 tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
 slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_()
@@ -105,31 +111,46 @@ void FramedImage::adjustAndRenderFrame()
 	tex_->render(m_clip, dest, tr_->getRot(), nullptr, flip);
 }
 
+//temporal: deberia ser sustituido por atributos de un JSON
 void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 {
-	if (currentAnim == "Chica_Idle") {
-		xOffset = -0.25;
-		yOffset = 0.08;
+	if (ent_->getComponent<PlayerCtrl>() != nullptr) 
+	{
+		if (currentAnim == "Chica_Idle") {
+			xOffset = -0.25;
+			yOffset = 0.08;
+		}
+		else if (currentAnim == "Chica_Jump") {
+			xOffset = -0.25;
+			yOffset = 0.1;
+		}
+		else if (currentAnim == "Chica_Run") {
+			xOffset = -0.25;
+			yOffset = 0.1;
+		}
+		else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
+			xOffset = -0.4;
+			yOffset = 0.145;
+		}
+		else if (currentAnim == "Chica_AtkAir") {
+			xOffset = -0.25;
+			yOffset = 0;
+		}
+		else if (currentAnim == "chicaroll") {
+			xOffset = -0.25;
+			yOffset = 0.25;
+		}
 	}
-	else if (currentAnim == "Chica_Jump") {
-		xOffset = -0.25;
-		yOffset = 0.1;
-	}
-	else if (currentAnim == "Chica_Run") {
-		xOffset = -0.25;
-		yOffset = 0.1;
-	}
-	else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
-		xOffset = -0.4;
-		yOffset = 0.145;
-	}
-	else if (currentAnim == "Chica_AtkAir") {
-		xOffset = -0.25;
-		yOffset = 0;
-	}
-	else if (currentAnim == "chicaroll") {
-		xOffset = -0.25;
-		yOffset = 0.25;
+	
+	else if (ent_->getComponent<FrogJump>() != nullptr)
+	{
+		if (currentAnim == "rana_idle" || currentAnim == "rana_enfadada_idle" || currentAnim == "rana_jump" || currentAnim == "rana_enfadada_jump" 
+			|| currentAnim == "rana_lengua" || currentAnim == "rana_enfadada_lengua" || currentAnim == "rana_cambio_fase" 
+			|| currentAnim == "rana_salto_a_vulnerable" || currentAnim == "rana_vulnerable" || currentAnim == "rana_vulnerable_a_idle" 
+			|| currentAnim == "rana_enfadada_muerte") {
+			xOffset = 0;
+			yOffset = 0.25;
+		}
 	}
 }
 
@@ -167,7 +188,7 @@ void FramedImage::flipX(bool s)
 
 void FramedImage::repeat(bool h)
 {
-	noRepeat_ = h;
+	noRepeat_ = !h;
 	completed_ = false;
 }
 
