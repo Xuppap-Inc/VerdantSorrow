@@ -13,6 +13,7 @@
 #include "boss/frog_boss/FrogJump.h"
 #include "boss/tree_boss/RootWave.h"
 #include "boss/finalBoss/Punietazo.h"
+#include "boss/finalBoss/FinalBossMovement.h"
 
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
 tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
@@ -178,6 +179,14 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 			|| currentAnim == "rana_enfadada_muerte") {
 			xOffset = 0;
 			yOffset = 0.25;
+		}
+	}
+
+	else if (ent_->getComponent<FinalBossMovement>() != nullptr) {
+
+		if (currentAnim == "FinalBoss_Fase1") {
+			xOffset = -.17;
+			yOffset = .25;
 		}
 	}
 }
