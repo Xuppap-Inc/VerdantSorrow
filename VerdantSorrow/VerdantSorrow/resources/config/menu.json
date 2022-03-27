@@ -44,6 +44,10 @@
         {
             "id": "quit",
             "file": "resources/images/MenuPrincipal/quitButton.png"
+        },
+        {
+            "id": "load",
+            "file": "resources/images/MenuPrincipal/loadButton.png"
         }
     ],
 

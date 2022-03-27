@@ -15,6 +15,7 @@ SceneManager::SceneManager() : actScene(Hub_)
 	fin_ = new FinalBossScene(); sceneList.push_back(fin_);
 	tut_ = new TutorialScene(); sceneList.push_back(tut_);
 	menu_ = new MenuScene(); sceneList.push_back(menu_);
+	controls_ = new ControlsScene(); sceneList.push_back(controls_);
 }
 
 
@@ -47,6 +48,9 @@ void SceneManager::update()
 		break;
 	case SceneManager::Menu_:
 		menu_->update();
+		break;
+	case SceneManager::Controls_:
+		controls_->update();
 		break;
 	default:
 		break;
@@ -86,6 +90,10 @@ void SceneManager::init()
 	case SceneManager::Menu_:
 		sdlUtils_.loadReasources("resources/config/menu.json");
 		menu_->init();
+		break;
+	case SceneManager::Controls_:
+		sdlUtils_.loadReasources("resources/config/controls.json");
+		controls_->init();
 		break;
 	default:
 		break;

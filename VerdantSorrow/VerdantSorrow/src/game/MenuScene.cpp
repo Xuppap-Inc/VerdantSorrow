@@ -18,27 +18,7 @@ void MenuScene::init()
 
 	background();//Dibuja el fondo
 
-	//Variables que definen caracteristicas de los botones
-	int offsetY = 40; int spacingX = 20; int spacingY = 100;
-	int buttonW = 200; int buttonH = 80;
-
-	//Bucle que dibuja la primera columna (izq) de botones
-	for (int i = 0; i < 2; ++i) 
-	{
-		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2-offsetY+(i*spacingY),
-			buttonW, buttonH, buttonNames[i] );
-	}
-	int j = 0; //Variable para separar los botones en su posicion Y
-
-	//Bucle que dibuja la columna de la derecha
-	for (int i = 2; i < buttonNames.size(); ++i)
-	{
-		
-		createButton(sdlutils().width() / 2+spacingX, sdlutils().height() / 2-offsetY+(j*spacingY), 
-			buttonW, buttonH, buttonNames[i]);
-		++j;
-	}
-
+	generateAllButtons(); //Genera todos los botones del menu (para ordenar mejor el codigo)
 
 
 
@@ -67,13 +47,14 @@ void MenuScene::update()
 		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
 		{
 			auto ratonPos = ihdlr.getMousePos();
-			for (int i = 0; i < buttonPositions_.size(); ++i) //Para todos los botones comprueba si el raton esta sobre ellos
+			for (int i = 0; i < buttonPositions_.size(); ++i) 
 			{
+				//Para todos los botones comprueba si el raton esta sobre ellos
 				auto pos = buttonPositions_[i]->getPos();
 				if (ratonPos.first <=  pos.getX()+ buttonPositions_[i]->getWidth()
 					&& ratonPos.first >= pos.getX()&& ratonPos.second <= pos.getY() 
 					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
-					
+
 					onButtonClicked(i);
 				
 				}
@@ -105,20 +86,48 @@ void MenuScene::onButtonClicked(int index)
 		std::cout << "Has pulsado el boton de continuar" << std::endl;
 
 		break;
-	case 2://Boton settings
+	case 2: //Boton load boss
+		std::cout << "Has pulsado el boton de load" << std::endl;
+
+		break;
+	case 3://Boton settings
 		std::cout << "Has pulsado el boton de ajustes" << std::endl;
 
 		break;
-	case 3: //Boton controls
+	case 4: //Boton controls
 		std::cout << "Has pulsado el boton de controles" << std::endl;
 
 		break;
-	case 4: //Boton quit
+	case 5: //Boton quit
 		SDL_Quit();
 		break; 
 	
 	}
 	
+}
+
+void MenuScene::generateAllButtons() 
+{
+	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
+	int offsetY = 40, spacingX = 20, spacingY = 100, buttonW = 200, buttonH = 80, rows = 3;
+
+	//Bucle que dibuja la primera columna (izq) de botones
+	for (int i = 0; i < rows; ++i)
+	{
+		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
+			buttonW, buttonH, buttonNames[i]);
+	}
+	int j = 0; //Variable para separar los botones en su posicion Y
+
+	//Bucle que dibuja la columna de la derecha
+	for (int i = rows; i < buttonNames.size(); ++i)
+	{
+
+		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
+			buttonW, buttonH, buttonNames[i]);
+		++j;
+	}
+
 }
 	
 

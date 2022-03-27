@@ -7,13 +7,14 @@
 #include "Hub.h"
 #include "TutorialScene.h"
 #include "MenuScene.h"
+#include "ControlsScene.h"
 
 #include <vector>
 class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
 public:
-	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_ };
+	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_, Controls_ };
 	~SceneManager();
 	void update();
 	//inicializa la escena en la que está
@@ -35,6 +36,7 @@ private:
 	FinalBossScene* fin_;
 	TutorialScene* tut_;
 	MenuScene* menu_;
+	ControlsScene* controls_;
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

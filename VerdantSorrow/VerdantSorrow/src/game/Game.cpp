@@ -28,7 +28,7 @@ void Game::start() {
 	std::cin >> n;
 	SceneManager::scenes firstScene;
 	if (n == 1) {
-		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n";
+		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n6. Controles\n";
 		std::cin >> n;
 		switch (n)
 		{
@@ -55,6 +55,10 @@ void Game::start() {
 		case 5:
 			firstScene = SceneManager::scenes::Menu_;
 			json = "resources/config/menu.json";
+			break;
+		case 6:
+			firstScene = SceneManager::scenes::Controls_;
+			json = "resources/config/controls.json";
 			break;
 
 		default:
