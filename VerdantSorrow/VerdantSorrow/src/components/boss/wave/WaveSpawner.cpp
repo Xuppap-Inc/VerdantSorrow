@@ -17,7 +17,7 @@
 #include "../../FramedImage.h"
 
 
-WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(5)
+WaveSpawner::WaveSpawner(CollisionManager* colMngr) : colManager_(colMngr), waveSpeed_(3)
 {
 }
 
