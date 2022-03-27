@@ -264,7 +264,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	lastUpdate_ = sdlutils().currRealTime();
 	if (isBig) {
 		if (secondPhase_) jumpsUntilNextTongue_--;
-		waveSp_->createWaves(200, 100, Vector2D(1, 0), tr_);
+		waveSp_->createWaves(200, 70, Vector2D(1, 0), tr_);
 		if (angry_) /*Volver a rana normal*/;
 	}
 	else {
