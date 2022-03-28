@@ -168,8 +168,9 @@ void Attack::activateRecoveryTimer()
 void Attack::recoverAnim()
 {
 	anim_->changeanim(&sdlutils().images().at("Attack1_Recovery"), 3, 2, 150, 5, "Attack1_Recovery");
+	anim_->repeat(false);
 
 	//desactiva recovery_ al terminar
-	std::function<void()> recoveryCallback = [this]() { deactivateRecovery(); };
-	anim_->registerEvent(std::pair<int, std::string>(4, "Attack1_Recovery"), recoveryCallback);
+	std::function<void()> endCallback = [this]() { deactivateRecovery(); };
+	anim_->registerEvent(std::pair<int, std::string>(4, "Attack1_Recovery"), endCallback);
 }
