@@ -16,6 +16,7 @@
 #include "../components/player/PlayerHubControl.h"
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
+#include "../components/Camera.h"
 
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
@@ -43,6 +44,11 @@ void Hub::init()
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+	auto camera = mngr_->addEntity();
+	auto cameraTr = camera->addComponent<Transform>();
+	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
+	auto cameraC = camera->addComponent<Camera>();
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 	EntryGenerator(colManager);
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
@@ -109,9 +115,9 @@ void Hub::update()
 }
 
 void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
-	//Se le añaden los atributos del player, no los del transform
+	//Se le aï¿½aden los atributos del player, no los del transform
 	player_->addComponent<PlayerAttributes>();
-	//Se le añade el transform
+	//Se le aï¿½ade el transform
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 - 25;
 	auto playerY = sdlutils().height() / 2 - 25;
@@ -119,20 +125,21 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 100, 0.0f, false);
 
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	//Se añade un collider al jugador
+	//Se aï¿½ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(3, colManager);
 
-	//No poner estas físicas detrás del playerctrl, se hunde y no funciona el salto
+	//No poner estas fï¿½sicas detrï¿½s del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
 	player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>();
+	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
 void Hub::EntryGenerator(CollisionManager* colManager)
