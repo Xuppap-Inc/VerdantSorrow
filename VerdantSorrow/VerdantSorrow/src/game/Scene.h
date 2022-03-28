@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "CollisionManager.h"
-
+#include "../sdlutils/SDLUtils.h"
 class Scene
 {
 public:
@@ -14,7 +14,7 @@ public:
 	virtual void update();
 	//Dibuja el fondo
 	virtual void backgroundmovement(std::string backgroundName);
-	virtual void background(std::string backgroundName);
+	virtual void background(std::string backgroundName,int height=sdlutils().height());
 	virtual void playerGenerator(CollisionManager* colManager, Entity* player_);
 protected:
 	ecs::Entity* camera_;

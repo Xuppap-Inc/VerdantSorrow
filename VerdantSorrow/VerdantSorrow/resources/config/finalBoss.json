@@ -95,10 +95,7 @@
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
     },
-    {
-      "id": "fondoSuelo",
-      "file": "resources/images/fondoSuelo.png"
-    },
+    
     {
       "id": "vfx_cloud",
       "file": "resources/images/vfx_cloud.png"
@@ -124,12 +121,16 @@
       "file": "resources/images/wave.png"
     },
     {
-      "id": "Suelo",
-      "file": "resources/images/Suelo.png"
-    },
-    {
       "id": "particle",
       "file": "resources/images/particlered.png"
+    },
+    {
+      "id": "fondodelante",
+      "file": "resources/images/fondodelante.png"
+    },
+    {
+      "id": "Suelo",
+      "file": "resources/images/fondofinal.png"
     }
   ],
 
