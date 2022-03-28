@@ -17,6 +17,7 @@ public:
 	virtual void background(std::string backgroundName);
 	virtual void playerGenerator(CollisionManager* colManager, Entity* player_);
 protected:
+	ecs::Entity* camera_;
 	ecs::Manager* mngr_;
 };
 

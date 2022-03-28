@@ -30,7 +30,10 @@ Scene::~Scene()
 void Scene::init()
 {	
 	mngr_ = new ecs::Manager();
-	mngr_->setDebug(true); //activamos modo debug
+	mngr_->setDebug(true);
+	camera_ = mngr_->addEntity();
+	auto camTr = camera_->addComponent<Transform>();
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);//activamos modo debug
 }
 
 //void Scene::start()

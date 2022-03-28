@@ -1,5 +1,6 @@
 #include "RectangleCollider.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
 
@@ -62,6 +63,9 @@ bool RectangleCollider::isActive()
 void RectangleCollider::drawCollider()
 {
 	SDL_Rect r = getCollider();
+	auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+	r.x -= cameraTr.getX();
+	r.y -= cameraTr.getY();
 	if (isTrigger())
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 255, 255);
 	else

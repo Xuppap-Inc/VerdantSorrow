@@ -9,6 +9,7 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/Texture.h"
 #include "Transform.h"
+#include "../ecs/Manager.h"
 
 Image::Image() :
 	tr_(), tex_(), visible_(true) {
@@ -16,9 +17,16 @@ Image::Image() :
 
 Image::Image(Texture* tex) :
 	tr_(), tex_(tex), visible_(true) {
+
 }
 
 Image::~Image() {
+}
+
+void Image::setAlpha(int num)
+{
+	assert(num >= 0 && num <= 255);
+	tex_->setAlpha(num);
 }
 
 void Image::initComponent() {
@@ -29,8 +37,8 @@ void Image::initComponent() {
 void Image::render() {
 
 	if (visible_) {
-		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(),
-			tr_->getHeight());
+		Vector2D v = tr_->getPos() - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+		SDL_Rect dest = build_sdlrect(v, tr_->getWidth(), tr_->getHeight());
 
 		assert(tex_ != nullptr);
 		tex_->render(dest, tr_->getRot());

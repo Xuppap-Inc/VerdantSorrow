@@ -3,6 +3,7 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
 #include "Transform.h"
 
 RectangleRenderer::RectangleRenderer() :
@@ -35,10 +36,13 @@ void RectangleRenderer::render()
 		auto& pos = tr_->getPos();
 		auto width = tr_->getWidth();
 		auto height = tr_->getHeight();
+		auto cameraPos = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+
 
 		SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(color_));
 
-		SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY(), width, height);
+		SDL_Rect rect = build_sdlrect(pos.getX() - cameraPos.getX(), pos.getY() - cameraPos.getY(), width, height);
+		
 
 		SDL_RenderFillRect(sdlutils().renderer(), &rect);
 	}
