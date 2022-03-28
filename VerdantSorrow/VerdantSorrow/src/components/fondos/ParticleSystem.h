@@ -2,21 +2,20 @@
 #include "../../ecs/Component.h"
 #include "../../sdlutils/Texture.h"
 #include<vector>
-class Entity;
-class Transform;
 
-class ParticleSystem : public ecs::Component
+class ecs::Manager;
+class ParticleSystem 
 {
 public:
-	__CMPID_DECL__(ecs::_PARTICLE_SYSTEM);
-	ParticleSystem(Texture* tex, int numpart);
-	void initComponent() override;
-	void update() override;
-	void render() override;
+
+	ParticleSystem(Texture* tex, int numpart,ecs::Manager*mngr);
+	void createParticles();
+
 private:
 	int numpart_;
 	Texture* tex_;
 	std::vector<ecs::Entity*>parts;
+	ecs::Manager* mngr_;
 	
 };
 

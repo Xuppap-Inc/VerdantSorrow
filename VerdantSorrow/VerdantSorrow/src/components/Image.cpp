@@ -17,9 +17,16 @@ Image::Image() :
 
 Image::Image(Texture* tex) :
 	tr_(), tex_(tex), visible_(true) {
+
 }
 
 Image::~Image() {
+}
+
+void Image::setAlpha(int num)
+{
+	assert(num >= 0 && num <= 255);
+	tex_->setAlpha(num);
 }
 
 void Image::initComponent() {

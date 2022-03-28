@@ -23,6 +23,7 @@ public:
 
 	// Construct from image
 	Texture(SDL_Renderer *renderer, const std::string &fileName);
+	Texture(SDL_Renderer* renderer, const std::string& fileName, Uint8 alpha);
 
 	// Construct from text
 	Texture(SDL_Renderer *renderer, const std::string &text, const Font &font,
@@ -90,6 +91,9 @@ public:
 		render(src, dest, rotation);
 	}
 
+	inline void setAlpha(Uint8 alpha) {
+		SDL_SetTextureAlphaMod(texture_, alpha);
+	}
 private:
 
 	// Construct from text

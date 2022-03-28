@@ -42,6 +42,29 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
 
 }
 
+Texture::Texture(SDL_Renderer* renderer, const std::string& fileName, Uint8 alpha)
+{
+	assert(renderer != nullptr);
+
+	SDL_Surface* surface = IMG_Load(fileName.c_str());
+	if (surface == nullptr)
+		throw "Couldn't load image: " + fileName;
+
+	
+	texture_ = SDL_CreateTextureFromSurface(renderer, surface);
+	if (texture_ == nullptr) {
+		SDL_FreeSurface(surface);
+		throw "Couldn't load image: " + fileName;
+	}
+
+	width_ = surface->w;
+	height_ = surface->h;
+	renderer_ = renderer;
+
+	SDL_SetTextureAlphaMod(texture_, alpha);
+
+}
+
 Texture::Texture(SDL_Renderer *renderer, const std::string &text,
 		const Font &font, const SDL_Color &fgColor) {
 	constructFromText(renderer, text, font, &fgColor);
