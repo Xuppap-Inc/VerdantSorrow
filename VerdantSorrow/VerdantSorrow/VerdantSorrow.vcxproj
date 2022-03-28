@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\fondos\ShowAtOppositeSide.h" />
     <ClInclude Include="src\components\fondos\ParticleSystem.h" />
     <ClInclude Include="src\game\ControlsScene.h" />
     <ClInclude Include="resource.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\fondos\ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\components\fondos\ParticleSystem.cpp" />
     <ClCompile Include="src\game\ControlsScene.cpp" />
     <ClCompile Include="src\game\CollisionChecker.cpp" />
