@@ -159,6 +159,10 @@
     {
       "id": "arbol_walk",
       "file": "resources/images/arbol_walk.png"
+    },
+    {
+      "id": "Suelo",
+      "file": "resources/images/Suelo.png"
     }
   ],
 

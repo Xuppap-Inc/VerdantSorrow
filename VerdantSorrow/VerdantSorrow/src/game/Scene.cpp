@@ -88,6 +88,10 @@ void Scene::background(std::string backgroundName)
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0,0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	backgr_->addComponent<Image>(&sdlutils().images().at(backgroundName));
+
+	auto suelo = mngr_->addEntity();
+	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 }
 
 void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
