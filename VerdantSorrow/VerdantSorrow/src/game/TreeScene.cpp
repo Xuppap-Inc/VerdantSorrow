@@ -29,6 +29,7 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
+#include "../components/fondos/ParticleSystem.h"
 
 
 void TreeScene::init()
@@ -102,6 +103,8 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 
 	//IMPORTANTE: attack manager al final
 	tree_->addComponent<TreeAttackManager>(colManager);
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
+	particlesys->createParticles();
 }
 
 void TreeScene::rootGenerator(CollisionManager* colManager, float x) {

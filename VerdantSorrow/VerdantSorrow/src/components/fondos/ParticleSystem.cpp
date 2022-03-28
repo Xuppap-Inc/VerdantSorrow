@@ -17,11 +17,11 @@ void ParticleSystem::createParticles()
 	
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width() + 1);
 		auto posy = sdlutils().rand().nextInt(0, sdlutils().height() + 1);
-		auto width= sdlutils().rand().nextInt(30,40);
-		auto vel = Vector2D(sdlutils().rand().nextInt(-5, 6), sdlutils().rand().nextInt(-5, 6));
+		auto width= sdlutils().rand().nextInt(3,11);
+		auto vel = Vector2D(sdlutils().rand().nextInt(-3, 4), sdlutils().rand().nextInt(-3, 4));
 		particle->addComponent<Transform>(Vector2D(posx,posy),vel,width,width,0.0f);
 		Image *imag=particle->addComponent<Image>(tex_);
-		imag->setAlpha(120);
+		imag->setAlpha(100);
 		particle->addComponent<ShowAtOpposideSide>();
 	}
 }

@@ -167,6 +167,10 @@
     {
       "id": "Suelo",
       "file": "resources/images/Suelo.png"
+    },
+    {
+      "id": "particle",
+      "file": "resources/images/particleyellow.png"
     }
   ],
 

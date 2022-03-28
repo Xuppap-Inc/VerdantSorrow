@@ -159,6 +159,10 @@
     {
       "id": "wave",
       "file": "resources/images/wave.png"
+    },
+    {
+      "id": "particle",
+      "file": "resources/images/particle.png"
     }
   ],
 

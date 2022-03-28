@@ -54,8 +54,7 @@ void Hub::init()
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("chica"), 100, mngr_);
-	particlesys->createParticles();
+
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)

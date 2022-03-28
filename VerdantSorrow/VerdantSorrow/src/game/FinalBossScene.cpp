@@ -25,6 +25,7 @@
 
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
+#include "../components/fondos/ParticleSystem.h"
 
 
 void FinalBossScene::init()
@@ -46,6 +47,8 @@ void FinalBossScene::init()
 	finalBossGenerator(colManager, player);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
+	particlesys->createParticles();
 }
 
 void FinalBossScene::update()
