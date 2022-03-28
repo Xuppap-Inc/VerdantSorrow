@@ -7,6 +7,7 @@
 #include "PlayerAttributes.h"
 #include <SDL.h>
 #include <functional>
+#include "../../sdlutils/VirtualTimer.h"
 
 #include <vector>
 using namespace std;
@@ -30,9 +31,15 @@ public:
 	bool isNewAttack();
 	void setNewAttack(bool set);
 
+	bool hasFinishedRecovery();
+	void deactivateRecovery();
+
     void attack();
     
 protected:
+
+	const int TIME_UNTIL_RECOVERY = 500;
+
 	Transform* tr_;
 
 	//Variables que controlan el timing del ataque
@@ -50,11 +57,16 @@ protected:
 	vector<SDL_Scancode> attackKeys;
 	vector<SDL_GameControllerButton> attackButtons;
 
+	VirtualTimer recoveryTimer_;
+	bool recovery_;
+	bool waitingForRecovery_;
+
 	/**
 	* Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
 	*/
 	void setPosition() override;
 
+	void activateRecoveryTimer();
 
+	void recoverAnim();
 };
-

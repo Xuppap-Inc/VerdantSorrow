@@ -134,6 +134,10 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.4;
 				yOffset = 0.145;
 			}
+			else if (currentAnim == "Attack1_Recovery") {
+				xOffset = -0.25;
+				yOffset = 0.1;
+			}
 			else if (currentAnim == "Chica_AtkAir") {
 				xOffset = -0.35;
 				yOffset = 0;
@@ -159,6 +163,10 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
 				xOffset = -0.4;
 				yOffset = 0.145;
+			}
+			else if (currentAnim == "Attack1_Recovery") {
+				xOffset = -0.25;
+				yOffset = 0.1;
 			}
 			else if (currentAnim == "Chica_AtkAir") {
 				xOffset = -0.25;
@@ -199,9 +207,6 @@ void FramedImage::checkAnimationFinished()
 		if (noRepeat_) {
 			completed_ = true;
 		}
-
-		if (currentAnim == "Chica_AtkFloor")
-			currentAnim = "Chica_AtkFinished";
 
 		//elimina los eventos registrados
 		clearEvents();

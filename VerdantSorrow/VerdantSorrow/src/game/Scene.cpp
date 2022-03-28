@@ -116,10 +116,6 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 
-	// float jumpForce, float speed, float deceleration, float rollSpeed
-	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
-
-
 	//IMPORTANTE :No poner estas f�sicas detr�s del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
@@ -129,6 +125,9 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	auto playerAttackCollider = player_->addComponent<Attack>(120, playerTr->getHeight(), colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
+
+	// float jumpForce, float speed, float deceleration, float rollSpeed
+	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
 
 	//Componente ui jugador
 	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));

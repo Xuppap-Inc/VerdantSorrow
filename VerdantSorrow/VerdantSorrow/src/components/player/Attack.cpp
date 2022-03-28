@@ -11,6 +11,7 @@
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
 	attackCoolDown(300), lastAttack(), newAttack_(false), finished_(true),
+	recoveryTimer_(), recovery_(false), waitingForRecovery_(false),
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
@@ -35,6 +36,13 @@ void Attack::initComponent()
 void Attack::update()
 {
 	auto& ihdlr = ih();
+
+	if (waitingForRecovery_ && recoveryTimer_.currTime() >= TIME_UNTIL_RECOVERY) {
+	
+		waitingForRecovery_ = false;
+
+		recoverAnim();
+	}
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
@@ -63,18 +71,25 @@ void Attack::update()
 
 				if (attackThisFrame) {
 
+					finished_ = false;
+
 					//callback que llama a attack
 					std::function<void()> attackCallback = [this]() { attack(); };
 
+					//callback recovery
+					std::function<void()> recoveryCallback = [this]() { activateRecoveryTimer(); };
+
 					if (attrib_->isOnGround()) {
-						anim_->repeat(true);
+						anim_->repeat(false);
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 200, 9, "Chica_AtkFloor");
 
 						//registra el evento en la animacion
 						anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
+
+						anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor"), recoveryCallback);
 					}
 					else {
-						anim_->repeat(true);
+						anim_->repeat(false);
 						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
 
 						//registra el evento en la animacion
@@ -108,6 +123,17 @@ void Attack::setNewAttack(bool set)
 	newAttack_ = set;
 }
 
+bool Attack::hasFinishedRecovery()
+{
+	return !recovery_;
+}
+
+void Attack::deactivateRecovery()
+{
+	recovery_ = false;
+	waitingForRecovery_ = false;
+}
+
 void Attack::attack()
 {
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
@@ -129,4 +155,21 @@ void Attack::setPosition()
 		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
 	else
 		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());
+}
+
+void Attack::activateRecoveryTimer()
+{
+	recoveryTimer_.reset();
+
+	recovery_ = true;
+	waitingForRecovery_ = true;
+}
+
+void Attack::recoverAnim()
+{
+	anim_->changeanim(&sdlutils().images().at("Attack1_Recovery"), 3, 2, 150, 5, "Attack1_Recovery");
+
+	//desactiva recovery_ al terminar
+	std::function<void()> recoveryCallback = [this]() { deactivateRecovery(); };
+	anim_->registerEvent(std::pair<int, std::string>(4, "Attack1_Recovery"), recoveryCallback);
 }

@@ -56,6 +56,10 @@
       "file": "resources/images/attack1.png"
     },
     {
+      "id": "Attack1_Recovery",
+      "file": "resources/images/attack1_recovery.png"
+    },
+    {
       "id": "Chica_AtkAir",
       "file": "resources/images/attackAir.png"
     },

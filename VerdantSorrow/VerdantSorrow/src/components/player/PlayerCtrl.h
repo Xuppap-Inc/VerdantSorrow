@@ -8,6 +8,7 @@
 using namespace std;
 
 class Transform;
+class Attack;
 class PlayerCtrl : public ecs::Component
 {
 public:
@@ -32,6 +33,7 @@ private:
 	Transform* tr_;
 	PlayerAttributes* attrib_;
 	FramedImage* anim_;
+	Attack* attack_;
 
 	//variables de velocidad
 	float jumpForce_, speed_, rollSpeed_, deceleration_;

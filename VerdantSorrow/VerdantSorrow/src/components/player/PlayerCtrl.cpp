@@ -32,7 +32,7 @@ void PlayerCtrl::update()
 	auto currentTime = sdlutils().currRealTime();
 
 	auto& vel = tr_->getVel();
-	bool isAttacking = ent_->getComponent<Attack>()->isActive();
+	bool isAttacking = attack_->isActive();
 
 	//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
 	//Se desactiva y se activa el deslizar
@@ -119,6 +119,8 @@ void PlayerCtrl::initComponent()
 	assert(playerCol_ != nullptr);
 	anim_ = ent_->getComponent<FramedImage>();
 	assert(anim_ != nullptr);
+	attack_ = ent_->getComponent<Attack>();
+	assert(attack_ != nullptr);
 }
 
 // Realiza un knockback en la direccion especificada
@@ -161,22 +163,27 @@ void PlayerCtrl::animationManagement()
 {
 	// Animation
 	if (attrib_->isOnGround()) {
-		if (anim_->getCurrentAnimation() != "Chica_AtkFloor")
+		if (anim_->getCurrentAnimation() != "Chica_AtkFloor" || attack_->hasFinished())
 			if (isRolling_) {
 				if (anim_->getCurrentAnimation() != "chicaroll") {
 
+					if (anim_->getCurrentAnimation() == "Chica_AtkFloor" || anim_->getCurrentAnimation() == "Attack1_Recovery") attack_->deactivateRecovery();
+
 					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
 					anim_->repeat(false);
-
 				}
-			} else if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
+			}
+			else if ((moveRight_ && !moveLeft_) || (!moveRight_ && moveLeft_)) {
+
+				if (anim_->getCurrentAnimation() == "Chica_AtkFloor" || anim_->getCurrentAnimation() == "Attack1_Recovery") attack_->deactivateRecovery();
+
 				if (anim_->getCurrentAnimation() != "Chica_Run") {
 					anim_->repeat(true);
 					anim_->changeanim(&sdlutils().images().at("Chica_Run"), 5, 6, 500, 30, "Chica_Run");
-				}			
+				}
 			}
-			else {
-				if (anim_->getCurrentAnimation() != "Chica_Idle") {
+			else if (attack_->hasFinishedRecovery()) {
+				if (anim_->getCurrentAnimation() != "Chica_Idle" ) {
 					anim_->repeat(true);
 					anim_->changeanim(&sdlutils().images().at("Chica_Idle"), 5, 6, 1500, 30, "Chica_Idle");
 				}
