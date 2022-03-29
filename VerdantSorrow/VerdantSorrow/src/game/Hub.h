@@ -18,6 +18,7 @@ public:
 	void setAble(bool a);
 	void changeScene_(bool ch);
 	void checkCollissions();
+	void backgroundHub();
 private:
 	CollisionManager* colManager;
 	bool isAble;

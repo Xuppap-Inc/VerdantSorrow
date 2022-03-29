@@ -24,14 +24,14 @@
 
 
 
-Hub::Hub():Scene()
+Hub::Hub() :Scene()
 {
 	colManager = nullptr;
 }
 
 Hub::~Hub()
 {
-	
+
 }
 
 void Hub::init()
@@ -42,6 +42,7 @@ void Hub::init()
 	colManager = new CollisionManager();
 
 	changeSc = false;
+	backgroundHub();
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -97,6 +98,13 @@ void Hub::checkCollissions()
 	}
 }
 
+void Hub::backgroundHub()
+{
+	auto backgr_ = mngr_->addEntity();
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().images().at("fondoHub"));
+}
+
 
 void Hub::update()
 {
@@ -111,7 +119,7 @@ void Hub::update()
 
 		checkCollissions();
 	}
-	else {	
+	else {
 		sC().decideScene();
 	}
 }

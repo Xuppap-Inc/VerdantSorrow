@@ -31,8 +31,12 @@
       "file": "resources/images/fondo1.png"
     },
     {
-      "id": "fondoSuelo",
-      "file": "resources/images/fondoSuelo.png"
+        "id": "fondoSuelo",
+        "file": "resources/images/fondoSuelo.png"
+    },
+    {
+        "id": "fondoHub",
+        "file": "resources/images/fondoHub.jpg"
     }
 
   ],
