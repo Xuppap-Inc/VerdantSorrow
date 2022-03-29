@@ -42,6 +42,8 @@ private:
 	float lastAttackDone = 0, attackCooldown;
 	int numeroAtaque;
 
+	int multFase_;
+
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
 	Transform* tr_;

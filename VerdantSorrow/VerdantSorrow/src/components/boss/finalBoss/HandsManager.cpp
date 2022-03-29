@@ -12,7 +12,7 @@
 #include "../BossAtributos.h"
 
 
-HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), state_(REPOSO)
+HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO)
 {
 }
 
@@ -58,11 +58,12 @@ void HandsManager::update()
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
 		colliderLeftHand_->setIsTrigger(true);
 		colliderRightHand_->setIsTrigger(true);
+		multFase_ = 4;
 	}
 }
 
 void HandsManager::createHands() {
-	float handSize = 170;
+	float handSize = 200;
 	float width_colliderOffset = 40;
 	float height_colliderOffset = 60;
 
@@ -86,7 +87,6 @@ void HandsManager::createHands() {
 	manoDrTr->init(tr_->getPos() + Vector2D(- handSize - 150, 150), Vector2D(), handSize, handSize, 0.0f, false);
 	rightHand_->addComponent<Image>(&sdlutils().images().at("manoDer"));
 
-	//Se añade un collider a la rana
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>
 		(manoDrTr->getWidth() - width_colliderOffset, manoDrTr->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoDrCollider);
@@ -102,17 +102,17 @@ void HandsManager::createHands() {
 void HandsManager::chooseAttack() {
 
 	int punietazoProb = 2;
-	int martillazoProb = 5;
+	int martillazoProb = 6;
 
 	if (state_ == CLAP) {
-		attackCooldown = sdlutils().rand().nextInt(1500, 2501);
+		attackCooldown = sdlutils().rand().nextInt(1500, 2501) * multFase_;
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
 		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
 		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
 		else numeroAtaque = CLAP;
 	}
 	else if (state_ == PUNIETAZO) {
-		attackCooldown = sdlutils().rand().nextInt(500, 1501);
+		attackCooldown = sdlutils().rand().nextInt(250, 501);
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
 		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
 		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;

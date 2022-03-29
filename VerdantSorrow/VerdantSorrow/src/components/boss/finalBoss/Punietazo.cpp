@@ -9,7 +9,7 @@
 
 
 
-Punietazo::Punietazo() :hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(6), dW(4), dH(4)
+Punietazo::Punietazo() :hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(8), dW(4), dH(4)
 {
 
 }
