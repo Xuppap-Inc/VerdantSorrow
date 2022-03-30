@@ -2,50 +2,55 @@
 #include "../../ecs/Entity.h"
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
+#include "../../sdlutils/VirtualTimer.h"
 #include "../Transform.h"
 #include "../../ecs/Manager.h"
 #include "../../sdlutils/macros.h"
 #include <sstream>
 #include <string>
 #include <iostream>
-#include "../player/PlayerHubControl.h"
+#include <vector>
+
+using namespace std;
 
 
-DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), conversationCooldown_(2500), lastConversation_(0)
+DialogBoxMngr::DialogBoxMngr(std::string font):tr_(),font_(font),index(),letterWidth_(13),letterHeight_(28),lineOffsetY_(2),letterTimer_(50)
 {
-	Texture text(sdlutils().renderer(), "a",sdlutils().fonts().at(font), build_sdlcolor(0x00000000));//cada letra tiene un tamaño distinto, ojo
-	letterWidth_ = text.width();
-	letterHeight_ = text.height();
 }
 
 void DialogBoxMngr::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	vt_ = new VirtualTimer();
 }
 
 void DialogBoxMngr::update()
 {
-	auto& ihdlr = ih();
+	//auto& ihdlr = ih();
 
-	if (ihdlr.keyDownEvent() && ihdlr.isKeyDown(SDL_SCANCODE_E)) {
-		next();
+	//if (ihdlr.keyDownEvent() && ihdlr.isKeyDown(SDL_SCANCODE_E)) {
+	//	next();
+	//}
+
+	if (vt_->currTime() > letterTimer_) {
+		if (finished_) {
+
+		}
+		else 
+			addLetter();
+
+		vt_->reset();
 	}
 }
 
 void DialogBoxMngr::render()
 {
-	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
-
-	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
-
-
-	SDL_RenderFillRect(sdlutils().renderer(), &rect);
-	int numberLines = (int)tr_->getHeight() / letterHeight_;
-	int i = index;
-	while (i < index + numberLines && i < dialogs_.size()) {
-		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + (dialogs_[i].height() * (i-index)), dialogs_[i].width(), dialogs_[i].height());
-		dialogs_[i].render(dest);
+	int i = 0;
+	while (i < lines_.size()) {
+		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff));
+		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_+ lineOffsetY_)* i), text.width(),text.height());
+		text.render(dest);
 		i++;
 	}
 }
@@ -53,8 +58,9 @@ void DialogBoxMngr::render()
 void DialogBoxMngr::activate(std::string dialog)
 {
 	if (!ent_->isActive()) {
-		index = 0;
-		divideText(dialog);
+		/*index = 0;
+		divideText(dialog);*/
+		dialog_ = dialog;
 		ent_->setActive(true);
 	}
 }
@@ -77,7 +83,7 @@ void DialogBoxMngr::divideText(std::string dialog)
 	while(std::getline(X,word,' '))
 		dividedDialog.push_back(word);
 
-	//divide el dialogo (ya dividido en palabras) en lineas de tamaño <= maxLettersRect
+	//divide el dialogo (ya dividido en palabras) en lineas de tamaï¿½o <= maxLettersRect
 	std::string line = "";
 	for (auto d : dividedDialog) {
 		if ((line.size() + d.size()) > lettersPerLine) {
@@ -107,4 +113,30 @@ void DialogBoxMngr::next()
 	else if (index >= dialogs_.size() - 1) {
 		lastConversation_ = sdlutils().currRealTime();
 	}
+}
+
+void DialogBoxMngr::addLetter()
+{
+	if (dialog_ == "") {
+		finished_ = true;
+		return;
+	}
+
+	if (lineNumber_ >=  lines_.size())
+		lines_.push_back("");
+
+
+	if (lines_[lineNumber_].size() * letterWidth_ > tr_->getWidth() - letterWidth_ && dialog_.size() > 1 && dialog_[1] != ' ') {
+		lines_[lineNumber_] += "-";
+
+		lineNumber_++;
+
+		if (lineNumber_ * (letterHeight_ + lineOffsetY_) > tr_->getHeight())
+			finished_ = true;
+	}
+	else {
+		lines_[lineNumber_] += dialog_[0];
+		dialog_.erase(0,1);
+	}
+	
 }

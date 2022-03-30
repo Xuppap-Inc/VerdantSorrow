@@ -56,7 +56,7 @@ void PlayerCtrl::update()
 			slide_ = false;
 
 			// Animacion
-			anim_->repeat(true);
+			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
 		}
 
