@@ -109,9 +109,32 @@ void FinalBossMovement::restartBouncing() {
 
 void FinalBossMovement::fireBall()
 {
-	//waveSp_->createWave(50, 50, playerTr->getPos() - tr_->getPos(), tr_, &sdlutils().images().at("bolaFuego"));
-	waveSp_->createWave(50, 50, Vector2D(0, 8), tr_, &sdlutils().images().at("bolaFuego"));
+	////waveSp_->createWave(50, 50, playerTr->getPos() - tr_->getPos(), tr_, &sdlutils().images().at("bolaFuego"));
+	//waveSp_->createWave(50, 50, Vector2D(0, 8), tr_, &sdlutils().images().at("bolaFuego"));
 
-	fireBallCooldown_ = sdlutils().rand().nextInt(1000, 5001);
-	lastFireBall_ = sdlutils().currRealTime();
+	//fireBallCooldown_ = sdlutils().rand().nextInt(1000, 5001);
+	//lastFireBall_ = sdlutils().currRealTime();
+
+	int height = 120;
+	int width = 100;
+	int fireballSpeed = 5;
+
+	auto wave = mngr_->addEntity();
+
+	float waveX, waveY = tr_->getPos().getY() + tr_->getHeight() - height;
+	waveX = tr_->getPos().getX() + tr_->getWidth() / 2;
+
+	//auto tr_ = wave->addComponent<Transform>(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f);
+	auto tr_ = wave->addComponent<Transform>();
+	tr_->init(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f, .4f);
+
+	//auto waveimg = wave->addComponent<FramedImage>(&sdlutils().images().at("bolaFuego"), 3, 3, 2000, 9, "bolaFuego");
+	auto waveimg = wave->addComponent<Image>(&sdlutils().images().at("bolaFuego"));
+	//Se anyade un collider a la onda
+	auto waveCollider = wave->addComponent<RectangleCollider>(width - 20, height - 20);
+	waveCollider->setIsTrigger(true);
+	colManager_->addCollider(waveCollider);
+
+	//Se anyade el movimiento horizontal
+	wave->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
 }
