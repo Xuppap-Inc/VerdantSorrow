@@ -1,6 +1,7 @@
 #include "PlayerCtrl.h"
 #include "../../sdlutils/InputHandler.h"
 #include "../../ecs/Entity.h"
+#include "../../ecs/Manager.h"
 #include "../Transform.h"
 #include "Attack.h"
 #include "../../sdlutils/SDLUtils.h"
@@ -45,7 +46,7 @@ void PlayerCtrl::update()
 	handleInput();
 
 	//!isAttacking
-	if (!isRolling_ && !isKnockback) {
+	if (!mngr_->getHandler(ecs::_PLAYER)->getComponent<Attack>()->isActive() && !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
