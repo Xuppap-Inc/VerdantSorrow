@@ -96,8 +96,6 @@ void FinalBossMovement::bounce()
 	}
 	if (vel_.magnitude() != 0)
 		vel_ = vel_.normalize() * eyeSpeed;
-
-	std::cout << pos_.getY() << std::endl;
 }
 
 void FinalBossMovement::restartBouncing() {
