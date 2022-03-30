@@ -2,6 +2,7 @@
 #include "../../ecs/Component.h"
 #include "../../game/CollisionManager.h"
 #include "../../sdlutils/Font.h"
+#include "../../sdlutils/VirtualTimer.h"
 #include "../../sdlutils/Texture.h"
 class Transform;
 class VirtualTimer;

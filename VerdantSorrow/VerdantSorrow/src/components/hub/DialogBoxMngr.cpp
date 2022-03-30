@@ -74,8 +74,11 @@ void DialogBoxMngr::activate(std::string dialog)
 
 void DialogBoxMngr::desactivate()
 {	
-	if (ent_->isActive())
+	if (ent_->isActive()) {
+		changeFinishedState(false);
 		ent_->setActive(false);
+		lastParagraph_ = false;
+	}
 }
 
 void DialogBoxMngr::divideText(std::string dialog)
