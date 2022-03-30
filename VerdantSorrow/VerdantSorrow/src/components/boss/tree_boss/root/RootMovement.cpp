@@ -4,7 +4,7 @@
 #include "../../../../ecs/Entity.h"
 
 
-RootMovement::RootMovement() : tr_(), col_(), speed_(0.25), lastTime_(0)
+RootMovement::RootMovement() : tr_(), col_(), speed_(0.1), lastTime_(0)
 {
 }
 RootMovement::~RootMovement()
