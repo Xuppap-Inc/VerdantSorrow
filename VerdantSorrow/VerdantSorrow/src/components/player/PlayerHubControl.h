@@ -14,7 +14,7 @@ public:
 	void update() override;
 	void initComponent() override;
 	void handleInput();
-
+	void changeStateTalk(bool talking) { isTalking_ = talking; };
 private:
 	RectangleCollider* playerCol_;
 	Transform* tr_;
@@ -22,5 +22,5 @@ private:
 	PlayerAttributes* attrib_;
 	CollisionManager* colMan_;
 
-	bool moveLeft_, moveRight_, moveUp_, moveDown_;
+	bool moveLeft_, moveRight_, moveUp_, moveDown_,isTalking_;
 };

@@ -3,12 +3,15 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../Transform.h"
+#include "../../ecs/Manager.h"
+#include "../../sdlutils/macros.h"
 #include <sstream>
 #include <string>
 #include <iostream>
+#include "../player/PlayerHubControl.h"
 
 
-DialogBoxMngr::DialogBoxMngr(std::string font):tr_(),font_(font),index()
+DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), conversationCooldown_(2500), lastConversation_(0)
 {
 	Texture text(sdlutils().renderer(), "a",sdlutils().fonts().at(font), build_sdlcolor(0x00000000));//cada letra tiene un tamaño distinto, ojo
 	letterWidth_ = text.width();
@@ -32,6 +35,12 @@ void DialogBoxMngr::update()
 
 void DialogBoxMngr::render()
 {
+	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
+
+	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
+
+
+	SDL_RenderFillRect(sdlutils().renderer(), &rect);
 	int numberLines = (int)tr_->getHeight() / letterHeight_;
 	int i = index;
 	while (i < index + numberLines && i < dialogs_.size()) {
@@ -81,10 +90,21 @@ void DialogBoxMngr::divideText(std::string dialog)
 	dialogs_.push_back({ sdlutils().renderer(), line, sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff) });
 }
 
+bool DialogBoxMngr::canTalk()
+{
+	return sdlutils().currRealTime() > lastConversation_ + conversationCooldown_;
+}
+
 void DialogBoxMngr::next()
 {
 	index += (int)tr_->getHeight() / letterHeight_;
 	
-	if(index >= dialogs_.size())
-		ent_->setActive(false);	
+	if (index >= dialogs_.size()) {
+		mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(false);
+		ent_->setActive(false);
+		lastConversation_ = sdlutils().currRealTime();
+	}
+	else if (index >= dialogs_.size() - 1) {
+		lastConversation_ = sdlutils().currRealTime();
+	}
 }
