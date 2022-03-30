@@ -51,7 +51,13 @@ void Hub::init()
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<Camera>();
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
-	EntryGenerator(colManager);
+	//Genera las entradas a los bosses
+		//entrada a la rana
+	EntryGenerator(colManager, 0, 250);
+	//Entrada al ojo
+	EntryGenerator(colManager, sdlutils().width() - 100, 100);
+	//Entrada al arbol
+	EntryGenerator(colManager, sdlutils().width()-100, sdlutils().height()-100);
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
@@ -152,14 +158,14 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
-void Hub::EntryGenerator(CollisionManager* colManager)
+void Hub::EntryGenerator(CollisionManager* colManager, float posX, float posY)
 {
 	auto frogEntry = mngr_->addEntity();
 
 	auto frogEntryTr = frogEntry->addComponent<Transform>();
-	auto frogEntryX = sdlutils().width() / 3 - 200;
+	auto frogEntryX = 0;
 	auto frogEntryY = sdlutils().height() / 4 * 3;
-	frogEntryTr->init(Vector2D(frogEntryX, frogEntryY), Vector2D(), 200, 50, 0.0f);
+	frogEntryTr->init(Vector2D(posX, posY), Vector2D(), 100, 100, 0.0f);
 
 	frogEntry->addComponent<RectangleRenderer>();
 

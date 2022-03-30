@@ -50,8 +50,8 @@ void FinalBossScene::init()
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
 	particlesys->createParticles();
 
-	auto height = (sdlutils().height() / 5)+40;
-	
+	auto height = (sdlutils().height() / 5) + 40;
+
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
@@ -73,6 +73,7 @@ void FinalBossScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (health > 0) setAble(false);
 		sC().decideScene();
 	}
 }

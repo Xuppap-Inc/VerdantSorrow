@@ -35,6 +35,8 @@ void FrogScene::init()
 
 	waveSpawerGenerator(colManager);
 
+	//Habilita la escena
+	setAble(true);
 	//Se crea el jugador
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -68,7 +70,7 @@ void FrogScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		if (bossHealth <= 0) setAble(false);
+		if (health > 0) setAble(false);
 		sC().decideScene();
 	}
 }
