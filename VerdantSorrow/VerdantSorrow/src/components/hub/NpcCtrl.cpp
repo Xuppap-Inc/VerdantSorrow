@@ -19,7 +19,6 @@ void NpcCtrl::initComponent()
 
 void NpcCtrl::update()
 {
-	if (dialogBox_->getComponent<DialogBoxMngr>()->canTalk()) canTalk = true;
 
 	if (canTalk && !dialogBox_->isActive()) {
 		auto& ihdlr = ih();
