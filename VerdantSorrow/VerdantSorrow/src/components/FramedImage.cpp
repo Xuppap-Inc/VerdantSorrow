@@ -132,7 +132,7 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.35;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
+			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
 				xOffset = -0.4;
 				yOffset = 0.145;
 			}
@@ -162,7 +162,7 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.25;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFinished") {
+			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
 				xOffset = -0.4;
 				yOffset = 0.145;
 			}

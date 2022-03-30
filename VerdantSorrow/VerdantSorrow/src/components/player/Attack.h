@@ -40,12 +40,20 @@ protected:
 
 	const int TIME_UNTIL_RECOVERY = 500;
 
+	const int MAX_COMBO = 3;
+
 	Transform* tr_;
 
 	//Variables que controlan el timing del ataque
 	int attackDuration;
 	int attackCoolDown;
-	int lastAttack;
+	VirtualTimer cooldownTimer_;
+	VirtualTimer attackTimer_;
+
+	//combo
+	bool comboFinished_;
+	int nCombo_;
+	bool doingCombo_;
 
 	bool newAttack_;
 	bool finished_;

@@ -56,6 +56,14 @@
       "file": "resources/images/attack1.png"
     },
     {
+      "id": "Chica_AtkFloor2",
+      "file": "resources/images/attack2.png"
+    },
+    {
+      "id": "Chica_AtkFloor3",
+      "file": "resources/images/attack3.png"
+    },
+    {
       "id": "Attack1_Recovery",
       "file": "resources/images/attack1_recovery.png"
     },
