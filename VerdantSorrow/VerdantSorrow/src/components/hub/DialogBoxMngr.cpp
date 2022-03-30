@@ -15,7 +15,7 @@
 using namespace std;
 
 
-DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), letterWidth_(13), letterHeight_(28), lineOffsetY_(2), letterTimer_(50), lastChar_("")
+DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), letterWidth_(13), letterHeight_(28), lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false)
 {
 }
 
@@ -72,6 +72,12 @@ void DialogBoxMngr::activate(std::string dialog)
 	}
 }
 
+void DialogBoxMngr::desactivate()
+{	
+	if (ent_->isActive())
+		ent_->setActive(false);
+}
+
 void DialogBoxMngr::divideText(std::string dialog)
 {
 	//limpia dialogs_
@@ -113,9 +119,15 @@ void DialogBoxMngr::next()
 	}
 }
 
+void DialogBoxMngr::changeFinishedState(bool state)
+{
+	finished_ = false; lines_.clear(); lineNumber_ = 0;
+}
+
 void DialogBoxMngr::addLetter()
 {
 	if (dialog_ == "") {
+		lastParagraph_ = true;
 		finished_ = true;
 		return;
 	}
