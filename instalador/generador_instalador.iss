@@ -33,31 +33,32 @@ WizardStyle=modern
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "espanol"; MessagesFile: "compiler:Languages/Spanish.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\bin\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\resources\*"; DestDir: "{app}\resources"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libFLAC-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libjpeg-9.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libmodplug-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libmpg123-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libogg-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libtiff-5.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libvorbis-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libvorbisfile-3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\libwebp-4.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\resource.h"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\SDL2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\SDL2_image.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\SDL2_mixer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\SDL2_net.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\SDL2_ttf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\2GDV_IICuatri\Proyectos2\VerdantSorrow\VerdantSorrow\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\bin\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\resources\*"; DestDir: "{app}\resources"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\VerdantSorrow\VerdantSorrow\libFLAC-8.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libjpeg-9.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libmodplug-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libmpg123-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libogg-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libtiff-5.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libvorbis-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libvorbisfile-3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\libwebp-4.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\resource.h"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\SDL2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\SDL2_image.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\SDL2_mixer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\SDL2_net.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\SDL2_ttf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\VerdantSorrow\VerdantSorrow\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
