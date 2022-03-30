@@ -69,7 +69,6 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	dialogBox->setActive(false);
 	auto tr = dialogBox->addComponent<Transform>();
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
-	dialogBox->addComponent<RectangleRenderer>();
 	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
 }
 

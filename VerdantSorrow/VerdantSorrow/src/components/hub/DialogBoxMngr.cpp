@@ -3,6 +3,7 @@
 #include "../../sdlutils/InputHandler.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../Transform.h"
+#include "../../sdlutils/macros.h"
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -32,6 +33,12 @@ void DialogBoxMngr::update()
 
 void DialogBoxMngr::render()
 {
+	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
+
+	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
+
+
+	SDL_RenderFillRect(sdlutils().renderer(), &rect);
 	int numberLines = (int)tr_->getHeight() / letterHeight_;
 	int i = index;
 	while (i < index + numberLines && i < dialogs_.size()) {
