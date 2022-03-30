@@ -55,7 +55,6 @@ void FinalBossScene::init()
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
-
 }
 
 void FinalBossScene::update()
@@ -95,7 +94,7 @@ void FinalBossScene::background()
 void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* player_) {
 
 	FinalBossFace = mngr_->addEntity();
-	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(10.0f);
+	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(2.0f);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = (sdlutils().width() - 350) / 2;

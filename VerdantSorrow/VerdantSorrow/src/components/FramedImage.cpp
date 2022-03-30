@@ -199,6 +199,10 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 			yOffset = .25;
 		}
 	}
+
+	if (currentAnim == "bolaFuego") {
+
+	}
 }
 
 void FramedImage::checkAnimationFinished()
