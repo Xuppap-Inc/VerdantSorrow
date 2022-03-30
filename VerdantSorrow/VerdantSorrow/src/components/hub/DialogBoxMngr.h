@@ -24,6 +24,8 @@ public:
 	//divide el dialogo para su render
 	void divideText(std::string dialog);
 
+	bool canTalk();
+
 	//muestra la parte del dialogo siguiente
 	void next();
 
@@ -38,7 +40,7 @@ protected:
 	//fuente
 	std::string font_;
 
-	//tamaño de letra
+	//tamaï¿½o de letra
 	int letterWidth_, letterHeight_;
 
 	//dialogo dividido para su render
