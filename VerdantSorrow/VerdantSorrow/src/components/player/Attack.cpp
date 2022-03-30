@@ -55,7 +55,7 @@ void Attack::update()
 		}
 	}
 	else {
-		if (sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
+		if (!mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->isRolling() && sdlutils().currRealTime() >= lastAttack + attackDuration + attackCoolDown) {
 			if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
 
 				bool attackThisFrame = false;
