@@ -44,7 +44,7 @@ void Attack::update()
 	
 		bool isRolling = mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->isRolling();
 
-		if (!isRolling) {
+		if (!isRolling && !comboFinished_) {
 		
 			auto& ihdlr = ih();
 
@@ -229,6 +229,7 @@ void Attack::attack()
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
 	finished_ = false;
+	newAttack_ = true;
 
 	setActive(true);
 	attackTimer_.reset();
