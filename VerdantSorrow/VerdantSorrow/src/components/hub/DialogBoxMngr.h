@@ -4,6 +4,7 @@
 #include "../../sdlutils/Font.h"
 #include "../../sdlutils/Texture.h"
 class Transform;
+class VirtualTimer;
 
 class DialogBoxMngr : public ecs::Component
 {
@@ -25,15 +26,34 @@ public:
 
 	//muestra la parte del dialogo siguiente
 	void next();
+
+
+
+	void addLetter();
 protected:
 
+	//posicion del dialog box
 	Transform* tr_;
+
+	//fuente
 	std::string font_;
 
+	//tamaño de letra
 	int letterWidth_, letterHeight_;
 
 	//dialogo dividido para su render
 	std::vector<Texture> dialogs_;
 	int index;
+
+	std::vector<std::string> lines_;
+	int lineNumber_;
+	bool finished_;
+
+	int lineOffsetY_;
+	int letterTimer_;
+
+	VirtualTimer* vt_;
+
+	std::string dialog_;
 };
 
