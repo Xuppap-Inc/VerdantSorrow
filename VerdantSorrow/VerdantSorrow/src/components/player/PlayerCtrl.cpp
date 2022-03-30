@@ -45,7 +45,7 @@ void PlayerCtrl::update()
 	handleInput();
 
 	//!isAttacking
-	if ( !isRolling_ && !isKnockback) {
+	if (!isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
