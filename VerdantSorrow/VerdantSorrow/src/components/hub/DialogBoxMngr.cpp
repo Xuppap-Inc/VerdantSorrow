@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "../player/PlayerHubControl.h"
 
 using namespace std;
 

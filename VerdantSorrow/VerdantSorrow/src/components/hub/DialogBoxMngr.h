@@ -40,8 +40,7 @@ protected:
 	//fuente
 	std::string font_;
 
-	//tama�o de letra
-	int letterWidth_, letterHeight_;
+	int letterWidth_, letterHeight_, lastConversation_, conversationCooldown_;
 
 	//dialogo dividido para su render
 	std::vector<Texture> dialogs_;

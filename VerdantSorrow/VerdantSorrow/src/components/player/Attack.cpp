@@ -20,6 +20,8 @@ Attack::Attack(float width, float height, CollisionManager* colManager) :
 {
 	setActive(false);
 	colMan_ = colManager;
+
+	state_ = WAITING;
 }
 
 Attack::~Attack()
@@ -76,7 +78,7 @@ void Attack::update()
 			}
 		}
 
-		if (WAITING_RECOVERY) {
+		if (state_ == WAITING_RECOVERY) {
 		
 			if (recoveryTimer_.currTime() >= TIME_UNTIL_RECOVERY) {
 
@@ -96,7 +98,7 @@ void Attack::update()
 
 	else if (state_ == ATTACKING) { //si esta activo, se coloca en la posicion correspondiente
 
-		setPosition();
+		
 	}
 
 	else if (state_ == COOLDOWN) {
@@ -109,10 +111,14 @@ void Attack::update()
 
 	if (!finished_) {
 	
+		setPosition();
+
 		if (attackTimer_.currTime() >= attackDuration) {
 
 			setActive(false);
 			finished_ = true;
+
+			if (state_ == ATTACKING) state_ = WAITING;
 		}
 	}
 }
@@ -174,6 +180,13 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		nCombo_ = 0;
 	}
+
+	else {
+	
+		comboFinished_ = false;
+
+		nCombo_ = 0;
+	}
 }
 
 bool Attack::hasFinished()
@@ -204,14 +217,18 @@ bool Attack::hasFinishedRecovery()
 void Attack::deactivateRecovery()
 {
 	recovery_ = false;
-	waitingForRecovery_ = false;
+}
+
+bool Attack::isAttacking()
+{
+	return state_ == ATTACKING;
 }
 
 void Attack::attack()
 {
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
-	newAttack_ = true;
+	finished_ = false;
 
 	setActive(true);
 	attackTimer_.reset();
@@ -235,6 +252,7 @@ void Attack::activateRecoveryTimer()
 	recoveryTimer_.reset();
 
 	recovery_ = true;
+	state_ = WAITING_RECOVERY;
 }
 
 void Attack::recoverAnim()

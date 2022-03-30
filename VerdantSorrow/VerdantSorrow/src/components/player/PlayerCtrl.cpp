@@ -56,7 +56,7 @@ void PlayerCtrl::update()
 			slide_ = false;
 
 			// Animacion
-			anim_->repeat(true);
+			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
 		}
 
@@ -164,7 +164,7 @@ void PlayerCtrl::animationManagement()
 {
 	// Animation
 	if (attrib_->isOnGround()) {
-		if (anim_->getCurrentAnimation() != "Chica_AtkFloor" || attack_->hasFinished())
+		if (!attack_->isAttacking())
 			if (isRolling_) {
 				if (anim_->getCurrentAnimation() != "chicaroll") {
 

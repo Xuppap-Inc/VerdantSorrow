@@ -40,6 +40,8 @@ public:
 	bool hasFinishedRecovery();
 	void deactivateRecovery();
 
+	bool isAttacking();
+
     void attack();
     
 protected:
