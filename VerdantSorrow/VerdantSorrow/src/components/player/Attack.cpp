@@ -11,8 +11,8 @@
 Attack::Attack(float width, float height, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height), attackDuration(300),
 	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
-	recovery_(false), waitingForRecovery_(false), cooldownTimer_(),
-	comboFinished_(false), attackTimer_(), anim_(), attrib_(), doingCombo_(false), nCombo_(0),
+	recovery_(false), cooldownTimer_(), comboFinished_(false), attackTimer_(), 
+	anim_(), attrib_(), nCombo_(0),
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
@@ -38,124 +38,141 @@ void Attack::initComponent()
 
 void Attack::update()
 {
-	auto& ihdlr = ih();
-
-	if (waitingForRecovery_ && recoveryTimer_.currTime() >= TIME_UNTIL_RECOVERY) {
+	if (state_ == WAITING || state_ == WAITING_RECOVERY) {
 	
-		waitingForRecovery_ = false;
+		bool isRolling = mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->isRolling();
 
-		recoverAnim();
+		if (!isRolling) {
+		
+			auto& ihdlr = ih();
 
-		//vars combo
-		doingCombo_ = false;
-		nCombo_ = 0;
-		comboFinished_ = false;
+			if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
 
-		//activa el cooldown
-		cooldownTimer_.reset();
+				bool attackButtonPressed = false;
+
+				// Keyboard
+				int i = 0;
+				while (i < attackKeys.size() && !ihdlr.isKeyDown(attackKeys[i])) i++;
+				if (i < attackKeys.size()) attackButtonPressed = true;
+				// Controller
+				i = 0;
+				while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
+				if (i < attackButtons.size()) attackButtonPressed = true;
+
+				if (attackButtonPressed) {
+
+					//callback que llama a attack
+					std::function<void()> attackCallback = [this]() { attack(); };
+
+					if (attrib_->isOnGround()) {
+
+						attackGround(attackCallback);
+					}
+					else {
+
+						attackAir(attackCallback);
+					}
+				}
+			}
+		}
+
+		if (WAITING_RECOVERY) {
+		
+			if (recoveryTimer_.currTime() >= TIME_UNTIL_RECOVERY) {
+
+				recoverAnim();
+
+				//vars combo
+				nCombo_ = 0;
+				comboFinished_ = false;
+
+				//activa el cooldown
+				cooldownTimer_.reset();
+
+				state_ = COOLDOWN;
+			}
+		}
 	}
 
-	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
+	else if (state_ == ATTACKING) { //si esta activo, se coloca en la posicion correspondiente
 
 		setPosition();
+	}
 
+	else if (state_ == COOLDOWN) {
+	
+		if (cooldownTimer_.currTime() >= attackCoolDown) {
+		
+			state_ = WAITING;
+		}
+	}
+
+	if (!finished_) {
+	
 		if (attackTimer_.currTime() >= attackDuration) {
 
 			setActive(false);
 			finished_ = true;
 		}
 	}
-	else {
+}
 
-		bool isRolling = mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->isRolling();
+void Attack::attackAir(std::function<void()>& attackCallback)
+{
+	state_ = ATTACKING;
 
-		if (doingCombo_ || (!isRolling && !comboFinished_ && attackTimer_.currTime() >= attackDuration + attackCoolDown)) {
+	anim_->repeat(false);
+	anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
 
-			if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
+	//registra el evento en la animacion
+	anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkAir"), attackCallback);
+}
 
-				bool attackThisFrame = false;
+void Attack::attackGround(std::function<void()>& attackCallback)
+{
+	state_ = ATTACKING;
 
-				// Keyboard
-				int i = 0;
-				while (i < attackKeys.size() && !ihdlr.isKeyDown(attackKeys[i])) i++;
-				if (i < attackKeys.size()) attackThisFrame = true;
-				// Controller
-				i = 0;
-				while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
-				if (i < attackButtons.size()) attackThisFrame = true;
+	//callback recovery
+	std::function<void()> recoveryCallback = [this]() { activateRecoveryTimer(); };
 
-				if (attackThisFrame) {
+	anim_->repeat(false);
 
-					finished_ = false;
-					doingCombo_ = false;
+	if (nCombo_ == 0) {
 
-					//callback que llama a attack
-					std::function<void()> attackCallback = [this]() { attack(); };
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 200, 9, "Chica_AtkFloor");
 
-					//callback recovery
-					std::function<void()> recoveryCallback = [this]() { activateRecoveryTimer(); };
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
 
-					if (attrib_->isOnGround()) {
+		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor"), recoveryCallback);
 
-						anim_->repeat(false);
-						recoveryTimer_.pause();
+		nCombo_++;
+	}
 
-						if (nCombo_ == 0) {
+	else if (nCombo_ == 1) {
 
-							anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 200, 9, "Chica_AtkFloor");
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 3, 160, 7, "Chica_AtkFloor2");
 
-							//registra el evento en la animacion
-							anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(1, "Chica_AtkFloor2"), attackCallback);
 
-							anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor"), recoveryCallback);
+		anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor2"), recoveryCallback);
 
-							nCombo_++;
-						}
+		nCombo_++;
+	}
 
-						else if (nCombo_ == 1) {
+	else if (nCombo_ == 2) {
 
-							anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 3, 160, 7, "Chica_AtkFloor2");
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 220, 10, "Chica_AtkFloor3");
 
-							//registra el evento en la animacion
-							anim_->registerEvent(std::pair<int, std::string>(1, "Chica_AtkFloor2"), attackCallback);
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor3"), attackCallback);
 
-							anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor2"), recoveryCallback);
+		anim_->registerEvent(std::pair<int, std::string>(9, "Chica_AtkFloor3"), recoveryCallback);
 
-							nCombo_++;
-						}
+		comboFinished_ = true;
 
-						else if (nCombo_ == 2) {
-
-							anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 220, 10, "Chica_AtkFloor3");
-
-							//registra el evento en la animacion
-							anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor3"), attackCallback);
-
-							anim_->registerEvent(std::pair<int, std::string>(9, "Chica_AtkFloor3"), recoveryCallback);
-
-							comboFinished_ = true;
-
-							nCombo_ = 0;
-						}
-
-						else {
-						
-							doingCombo_ = false;
-							nCombo_ = 0;
-							comboFinished_ = false;
-						}
-					}
-					else {
-						anim_->repeat(false);
-						anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
-
-						//registra el evento en la animacion
-						anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkAir"), attackCallback);
-					}
-				}
-
-			}
-		}
+		nCombo_ = 0;
 	}
 }
 
@@ -218,9 +235,6 @@ void Attack::activateRecoveryTimer()
 	recoveryTimer_.reset();
 
 	recovery_ = true;
-	waitingForRecovery_ = true;
-
-	doingCombo_ = true;
 }
 
 void Attack::recoverAnim()

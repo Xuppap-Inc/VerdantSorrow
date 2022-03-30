@@ -15,6 +15,8 @@ using namespace std;
 class Transform;
 using ecs::Entity;
 
+enum State { WAITING, ATTACKING, WAITING_RECOVERY, COOLDOWN };
+
 class Attack : public RectangleCollider
 {
 public:
@@ -25,6 +27,10 @@ public:
 
 	void initComponent() override;
 	void update() override;
+
+	void attackAir(std::function<void()>& attackCallback);
+
+	void attackGround(std::function<void()>& attackCallback);
 
 	bool hasFinished();
 	void setFinished(bool set);
@@ -37,6 +43,8 @@ public:
     void attack();
     
 protected:
+
+	State state_;
 
 	const int TIME_UNTIL_RECOVERY = 500;
 
@@ -53,7 +61,6 @@ protected:
 	//combo
 	bool comboFinished_;
 	int nCombo_;
-	bool doingCombo_;
 
 	bool newAttack_;
 	bool finished_;
@@ -67,7 +74,6 @@ protected:
 
 	VirtualTimer recoveryTimer_;
 	bool recovery_;
-	bool waitingForRecovery_;
 
 	/**
 	* Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento
