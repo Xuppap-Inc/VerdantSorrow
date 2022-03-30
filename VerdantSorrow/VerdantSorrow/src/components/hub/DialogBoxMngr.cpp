@@ -15,7 +15,7 @@
 using namespace std;
 
 
-DialogBoxMngr::DialogBoxMngr(std::string font):tr_(),font_(font),index(),letterWidth_(13),letterHeight_(28),lineOffsetY_(2),letterTimer_(50)
+DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), letterWidth_(13), letterHeight_(28), lineOffsetY_(2), letterTimer_(50), lastChar_("")
 {
 }
 
@@ -38,7 +38,7 @@ void DialogBoxMngr::update()
 		if (finished_) {
 
 		}
-		else 
+		else
 			addLetter();
 
 		vt_->reset();
@@ -47,10 +47,16 @@ void DialogBoxMngr::update()
 
 void DialogBoxMngr::render()
 {
+	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
+
+	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
+
+	SDL_RenderFillRect(sdlutils().renderer(), &rect);
+
 	int i = 0;
 	while (i < lines_.size()) {
 		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff));
-		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_+ lineOffsetY_)* i), text.width(),text.height());
+		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_ + lineOffsetY_) * i), text.width(), text.height());
 		text.render(dest);
 		i++;
 	}
@@ -81,7 +87,7 @@ void DialogBoxMngr::divideText(std::string dialog)
 	std::string word;
 	std::stringstream X(dialog);
 
-	while(std::getline(X,word,' '))
+	while (std::getline(X, word, ' '))
 		dividedDialog.push_back(word);
 
 	//divide el dialogo (ya dividido en palabras) en lineas de tama�o <= maxLettersRect
@@ -91,28 +97,19 @@ void DialogBoxMngr::divideText(std::string dialog)
 			dialogs_.push_back({ sdlutils().renderer(), line, sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff) });
 			line = "";
 		}
-		
-		line += " " + d ;
+
+		line += " " + d;
 	}
 	dialogs_.push_back({ sdlutils().renderer(), line, sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff) });
 }
 
-bool DialogBoxMngr::canTalk()
-{
-	return sdlutils().currRealTime() > lastConversation_ + conversationCooldown_;
-}
 
 void DialogBoxMngr::next()
 {
 	index += (int)tr_->getHeight() / letterHeight_;
-	
+
 	if (index >= dialogs_.size()) {
-		mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(false);
 		ent_->setActive(false);
-		lastConversation_ = sdlutils().currRealTime();
-	}
-	else if (index >= dialogs_.size() - 1) {
-		lastConversation_ = sdlutils().currRealTime();
 	}
 }
 
@@ -123,21 +120,31 @@ void DialogBoxMngr::addLetter()
 		return;
 	}
 
-	if (lineNumber_ >=  lines_.size())
-		lines_.push_back("");
+	if (lineNumber_ >= lines_.size())
+		lines_.push_back(" ");
 
+	//solo cabe una letra mas, hay más de una letra en el string
+	if (lines_[lineNumber_].size() * letterWidth_ >= tr_->getWidth() - letterWidth_ && dialog_.size() > 1) {//line width
 
-	if (lines_[lineNumber_].size() * letterWidth_ > tr_->getWidth() - letterWidth_ && dialog_.size() > 1 && dialog_[1] != ' ') {
-		lines_[lineNumber_] += "-";
+		if (dialog_[0] == ' ') {
+			lines_[lineNumber_] += " ";
+			dialog_.erase(0, 1);
+		}
+		else if(lastChar_ != " ")
+			lines_[lineNumber_] += "-";
+
 
 		lineNumber_++;
 
-		if (lineNumber_ * (letterHeight_ + lineOffsetY_) > tr_->getHeight())
+		if (lineNumber_ * (letterHeight_ + lineOffsetY_) >= tr_->getHeight())
 			finished_ = true;
+
+		lastChar_ = "";
 	}
 	else {
 		lines_[lineNumber_] += dialog_[0];
-		dialog_.erase(0,1);
+		dialog_.erase(0, 1);
+		lastChar_ = lines_[lineNumber_].back();
 	}
-	
+
 }

@@ -177,7 +177,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f, false);
+	npctr->init(Vector2D(sdlutils().width()/2, 360), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().images().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);
