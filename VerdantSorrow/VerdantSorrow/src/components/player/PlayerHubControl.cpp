@@ -7,7 +7,7 @@
 #include "../hub/NpcCtrl.h"
 using namespace std;
 PlayerHubControl::PlayerHubControl(float speed, CollisionManager* colManager) : playerCol_(), tr_(), speed_(speed), attrib_(), colMan_(colManager),
-moveDown_(false), moveLeft_(false), moveRight_(false), moveUp_(false)
+moveDown_(false), moveLeft_(false), moveRight_(false), moveUp_(false), isTalking_(false)
 {
 }
 
@@ -21,32 +21,34 @@ void PlayerHubControl::update()
 
 	//movimiento en 8 direcciones
 	vel.set(Vector2D(0, 0));
+	if (!isTalking_) {
+		if (moveUp_ && !moveDown_)
+			vel.setY(-speed_);
+		else if (!moveUp_ && moveDown_)
+			vel.setY(speed_);
 
-	if (moveUp_ && !moveDown_)
-		vel.setY(-speed_);
-	else if (!moveUp_ && moveDown_)
-		vel.setY(speed_);
+		if (moveLeft_ && !moveRight_)
+			vel.setX(-speed_);
+		else if (!moveLeft_ && moveRight_)
+			vel.setX(speed_);
 
-	if (moveLeft_ && !moveRight_)
-		vel.setX(-speed_);
-	else if (!moveLeft_ && moveRight_)
-		vel.setX(speed_);
+		if (vel.magnitude() != 0)
+			vel = vel.normalize() * speed_;
 
-	if (vel.magnitude() != 0)
-		vel = vel.normalize() * speed_;
+		if (colMan_->hasCollisions(playerCol_)) {
+			std::vector<RectangleCollider*> colliders = colMan_->getCollisions(playerCol_);
 
-	if (colMan_->hasCollisions(playerCol_)) {
-		std::vector<RectangleCollider*> colliders = colMan_->getCollisions(playerCol_);
-
-		bool changeScene = false;
-		int i = 0;
-		while (!changeScene && i < colliders.size()) {
-			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
-			i++;
+			bool changeScene = false;
+			int i = 0;
+			while (!changeScene && i < colliders.size()) {
+				changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
+				i++;
+			}
+			//if (changeScene)
+				//mngr_->changeScene(1);
 		}
-		//if (changeScene)
-			//mngr_->changeScene(1);
 	}
+	
 }
 
 void PlayerHubControl::initComponent()

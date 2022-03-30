@@ -23,6 +23,8 @@ public:
 	//divide el dialogo para su render
 	void divideText(std::string dialog);
 
+	bool canTalk();
+
 	//muestra la parte del dialogo siguiente
 	void next();
 protected:
@@ -30,7 +32,7 @@ protected:
 	Transform* tr_;
 	std::string font_;
 
-	int letterWidth_, letterHeight_;
+	int letterWidth_, letterHeight_, lastConversation_, conversationCooldown_;
 
 	//dialogo dividido para su render
 	std::vector<Texture> dialogs_;
