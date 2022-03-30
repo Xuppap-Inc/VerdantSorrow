@@ -47,8 +47,8 @@ void FinalBossMovement::update()
 		if (eyeState_ == EyeState::BOUNCE) bounce();
 		else restartBouncing();
 
-		if (sdlutils().currRealTime() > lastFireBall_ + fireBallCooldown_)
-			fireBall();
+		//if (sdlutils().currRealTime() > lastFireBall_ + fireBallCooldown_)
+		//	fireBall();
 	}
 }
 
@@ -90,8 +90,14 @@ void FinalBossMovement::bounce()
 		pos_.setX(0);
 		vel_.setX(-vel_.getX());
 	}
+	// Bola de fuego al tocar el techo
+	else if (pos_.getY() <= 1) {
+		fireBall();
+	}
 	if (vel_.magnitude() != 0)
 		vel_ = vel_.normalize() * eyeSpeed;
+
+	std::cout << pos_.getY() << std::endl;
 }
 
 void FinalBossMovement::restartBouncing() {
@@ -103,7 +109,8 @@ void FinalBossMovement::restartBouncing() {
 
 void FinalBossMovement::fireBall()
 {
-	waveSp_->createWave(50, 50, playerTr->getPos() - tr_->getPos(), tr_, &sdlutils().images().at("bolaFuego"));
+	//waveSp_->createWave(50, 50, playerTr->getPos() - tr_->getPos(), tr_, &sdlutils().images().at("bolaFuego"));
+	waveSp_->createWave(50, 50, Vector2D(0, 8), tr_, &sdlutils().images().at("bolaFuego"));
 
 	fireBallCooldown_ = sdlutils().rand().nextInt(1000, 5001);
 	lastFireBall_ = sdlutils().currRealTime();
