@@ -5,10 +5,16 @@
 #include "../sdlutils/SDLUtils.h"
 
 
-RectangleCollider::RectangleCollider() : tr_(nullptr), height_(), width_(), pos_(), isTrigger_(false), active_(true)
+RectangleCollider::RectangleCollider() : tr_(nullptr), height_(0), width_(0), pos_(), isTrigger_(false), active_(true), offsetX_(0), offsetY_(0)
 {
 }
-RectangleCollider::RectangleCollider(float width, float height) : tr_(nullptr), height_(height), width_(width), pos_(), isTrigger_(false), active_(true)
+RectangleCollider::RectangleCollider(float width, float height) : tr_(nullptr), height_(height), width_(width), pos_(), isTrigger_(false), active_(true),
+offsetX_(0), offsetY_(0)
+{
+}
+
+RectangleCollider::RectangleCollider(float width, float height, float offsetX, float offsetY) : tr_(nullptr), height_(height), width_(width), pos_(),
+isTrigger_(false), active_(true), offsetX_(offsetX), offsetY_(offsetY)
 {
 }
 
@@ -77,7 +83,7 @@ void RectangleCollider::drawCollider()
 void RectangleCollider::setPosition()
 {
 	Vector2D contPos = tr_->getPos();
-	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_) / 2, contPos.getY() + (tr_->getHeight() - height_) / 2);
+	pos_ = Vector2D(contPos.getX() + (tr_->getWidth() - width_) / 2 + offsetX_, contPos.getY() + (tr_->getHeight() - height_) / 2 + offsetY_);
 }
 
 Entity* RectangleCollider::getEntity() {

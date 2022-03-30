@@ -14,6 +14,7 @@ public:
 
     RectangleCollider();
     RectangleCollider(float width, float height);
+    RectangleCollider(float width, float height, float offsetX, float offsetY);
     ~RectangleCollider();
 
     void initComponent() override;
@@ -68,6 +69,8 @@ protected:
     Transform* tr_;
     float width_;
     float height_;
+    float offsetX_;
+    float offsetY_;
 
     Vector2D pos_;
 
