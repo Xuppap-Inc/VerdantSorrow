@@ -15,8 +15,10 @@
 using namespace std;
 
 
-DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), letterWidth_(13), letterHeight_(28), lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false)
+DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), index(), letterWidth_(14), letterHeight_(28), lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false), quickText(false)
 {
+	Texture text(sdlutils().renderer(), "a", sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff));
+
 }
 
 void DialogBoxMngr::initComponent()

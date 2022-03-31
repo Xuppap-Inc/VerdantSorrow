@@ -66,5 +66,7 @@ protected:
 	std::string dialog_;
 
 	std::string lastChar_;
+
+	bool quickText;
 };
 
