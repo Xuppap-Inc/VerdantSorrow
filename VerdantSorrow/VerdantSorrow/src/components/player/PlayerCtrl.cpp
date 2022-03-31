@@ -46,7 +46,7 @@ void PlayerCtrl::update()
 	handleInput();
 
 	//!isAttacking
-	if (!mngr_->getHandler(ecs::_PLAYER)->getComponent<Attack>()->isActive() && !isRolling_ && !isKnockback) {
+	if (!attack_->isAttacking() && !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
