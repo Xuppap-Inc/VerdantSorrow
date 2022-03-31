@@ -93,6 +93,8 @@ void PlayerCtrl::update()
 			lastRoll_ = currentTime;
 			isRolling_ = true;
 			slide_ = false;
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
+			s->play();
 		}	
 
 	}

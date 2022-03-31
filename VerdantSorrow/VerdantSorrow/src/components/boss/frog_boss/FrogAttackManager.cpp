@@ -54,7 +54,7 @@ void FrogAttackManager::initComponent()
 
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
 	musicaFase1_->play(10, 0);
-	musicaFase1_->setChannelVolume(0, 0);
+	musicaFase1_->setChannelVolume(60, 0);
 
 	createTongue(collManager_);
 

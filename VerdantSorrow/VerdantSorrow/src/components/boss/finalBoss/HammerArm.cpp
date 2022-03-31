@@ -52,6 +52,8 @@ void HammerArm::attack()
 		tr_->getVel().set(Vector2D(0, handSpeed * 2));
 	}
 	else {
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
+		s->play();
 		tr_->getVel().set(Vector2D(0, 0));
 		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
 		lastTimeFloor = sdlutils().currRealTime();

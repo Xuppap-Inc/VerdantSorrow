@@ -200,12 +200,12 @@
 
   "sounds": [
     {
-      "id": "musica_rana_fase1",
-      "file": "resources/sound/musica_rana_fase1.wav"
-    },
-    {
       "id": "musica_linterna_fase1",
       "file": "resources/sound/musica_linterna_fase1.wav"
+    },
+    {
+      "id": "sfx_cambio_fase",
+      "file": "resources/sound/sfx_cambio_fase.wav"
     },
     {
       "id": "sfx_arbol_attack",
@@ -216,8 +216,12 @@
       "file": "resources/sound/sfx_arbol_damage.wav"
     },
     {
-      "id": "sfx_cambio_fase",
-      "file": "resources/sound/sfx_cambio_fase.wav"
+      "id": "sfx_arbol_background",
+      "file": "resources/sound/sfx_arbol_background.wav"
+    },
+    {
+      "id": "sfx_arbol_raices",
+      "file": "resources/sound/sfx_arbol_raices.wav"
     },
     {
       "id": "sfx_chica_attack1",
@@ -228,24 +232,16 @@
       "file": "resources/sound/sfx_chica_attack2.wav"
     },
     {
-      "id": "sfx_manos_attack",
-      "file": "resources/sound/sfx_manos_attack.wav"
+      "id": "sfx_chica_roll",
+      "file": "resources/sound/sfx_chica_roll.wav"
     },
     {
-      "id": "sfx_manos_damage",
-      "file": "resources/sound/sfx_manos_damage.wav"
+      "id": "sfx_boss_defeated",
+      "file": "resources/sound/sfx_boss_defeated.wav"
     },
     {
-      "id": "sfx_manos_fuego",
-      "file": "resources/sound/sfx_manos_fuego.wav"
-    },
-    {
-      "id": "sfx_mosca_idle",
-      "file": "resources/sound/sfx_mosca_idle.wav"
-    },
-    {
-      "id": "sfx_rana_damage",
-      "file": "resources/sound/sfx_rana_damage.wav"
+      "id": "sfx_descubrir_arbol",
+      "file": "resources/sound/sfx_descubrir_arbol.wav"
     }
   ],
   "musics": [
