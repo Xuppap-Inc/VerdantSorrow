@@ -65,7 +65,6 @@ void FinalBossMovement::bounce()
 	if (pos_.getY() < 0) {
 		pos_.setY(0.0f);
 		vel_.setY(-vel_.getY());
-		//sdlutils().soundEffects().at("wall_hit").play();
 	}
 	else if (pos_.getY() + tr_->getHeight() > sdlutils().height()) {
 		pos_.setY(sdlutils().height() - tr_->getHeight());
@@ -123,17 +122,20 @@ void FinalBossMovement::fireBall()
 	float waveX, waveY = tr_->getPos().getY() + tr_->getHeight() - height;
 	waveX = tr_->getPos().getX() + tr_->getWidth() / 2;
 
-	//auto tr_ = wave->addComponent<Transform>(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f);
 	auto tr_ = wave->addComponent<Transform>();
 	tr_->init(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f, .4f);
+	
 
-	//auto waveimg = wave->addComponent<FramedImage>(&sdlutils().images().at("bolaFuego"), 3, 3, 2000, 9, "bolaFuego");
-	auto waveimg = wave->addComponent<Image>(&sdlutils().images().at("bolaFuego"));
-	//Se anyade un collider a la onda
+	auto waveImgEnt = mngr_->addEntity();
+	auto waveImgEntTr_ = waveImgEnt->addComponent<Transform>();
+	waveImgEntTr_->init(Vector2D(waveX-115, waveY), Vector2D(), width, height, 0.0f, .4f);
+	waveImgEntTr_->setScale(8);
+	waveImgEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_fuego"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_fuego");
+	waveImgEnt->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
+
 	auto waveCollider = wave->addComponent<RectangleCollider>(width - 20, height - 20);
 	waveCollider->setIsTrigger(true);
 	colManager_->addCollider(waveCollider);
 
-	//Se anyade el movimiento horizontal
 	wave->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
 }
