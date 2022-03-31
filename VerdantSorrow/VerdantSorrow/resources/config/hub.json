@@ -44,6 +44,9 @@
 
   "musics" : [
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.wav" }
+  ],
+  
+  "sounds" : [
+    { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
   ]
-
 }

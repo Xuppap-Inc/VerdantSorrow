@@ -46,7 +46,7 @@ void PlayerCtrl::update()
 	handleInput();
 
 	//!isAttacking
-	if (!mngr_->getHandler(ecs::_PLAYER)->getComponent<Attack>()->isActive() && !isRolling_ && !isKnockback) {
+	if (!attack_->isAttacking() && !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -93,6 +93,8 @@ void PlayerCtrl::update()
 			lastRoll_ = currentTime;
 			isRolling_ = true;
 			slide_ = false;
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
+			s->play();
 		}	
 
 	}
