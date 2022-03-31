@@ -139,6 +139,14 @@
     {
       "id": "Suelo",
       "file": "resources/images/fondofinal.png"
+    },
+    {
+      "id": "vfx_manos_hoguera",
+      "file": "resources/images/vfx_manos_hoguera.png"
+    },
+    {
+      "id": "vfx_manos_fuego",
+      "file": "resources/images/vfx_manos_fuego.png"
     }
   ],
 

@@ -46,6 +46,8 @@ private:
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
+	Transform* leftHandTr_;
+	Transform* rightHandTr_;
 	Transform* tr_;
 	Transform* playertr_;
 	CollisionManager* colmanager_;
@@ -58,6 +60,11 @@ private:
 	BossAtributos* bA_;
 	RectangleCollider* colliderRightHand_;
 	RectangleCollider* colliderLeftHand_;
+
+	ecs::Entity* leftFire_;
+	ecs::Entity* rightFire_;
+	Transform* leftFireTr_;
+	Transform* rightFireTr_;
 
 	State state_;
 };

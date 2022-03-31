@@ -10,6 +10,7 @@
 #include "ClapAttack.h"
 #include "HammerArm.h"
 #include "../BossAtributos.h"
+#include "FireFollow.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO)
@@ -56,10 +57,29 @@ void HandsManager::update()
 		hammerAttack();
 
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
-		colliderLeftHand_->setIsTrigger(true);
-		colliderRightHand_->setIsTrigger(true);
-		multFase_ = 4;
+		if (multFase_ == 1) {
+			colliderLeftHand_->setIsTrigger(true);
+			colliderRightHand_->setIsTrigger(true);
+			multFase_ = 4;
+
+			//Animaciones fuego
+			leftFire_ = mngr_->addEntity();
+			leftFireTr_ = leftFire_->addComponent<Transform>();
+			leftFireTr_->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+			leftFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
+
+			rightFire_ = mngr_->addEntity();
+			rightFireTr_ = rightFire_->addComponent<Transform>();
+			rightFireTr_->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+			rightFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
+		}
+		else
+		{
+			leftFireTr_->getPos().set(leftHandTr_->getPos().getX(), leftHandTr_->getPos().getY());
+			rightFireTr_->getPos().set(rightHandTr_->getPos().getX(), rightHandTr_->getPos().getY());
+		}
 	}
+	
 }
 
 void HandsManager::createHands() {
@@ -71,24 +91,24 @@ void HandsManager::createHands() {
 	rightHand_ = mngr_->addEntity();
 
 	tr_ = ent_->getComponent<Transform>();
-	auto manoIzTr = leftHand_->addComponent<Transform>();
-	manoIzTr->init(tr_->getPos() + Vector2D(150 + tr_->getWidth(), 150), Vector2D(), handSize, handSize, 0.0f, false);
+	leftHandTr_ = leftHand_->addComponent<Transform>();
+	leftHandTr_->init(tr_->getPos() + Vector2D(150 + tr_->getWidth(), 150), Vector2D(), handSize, handSize, 0.0f, false);
 	leftHand_->addComponent<Image>(&sdlutils().images().at("manoIzq"));
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>
-		(manoIzTr->getWidth() - width_colliderOffset, manoIzTr->getHeight() - height_colliderOffset);
+		(leftHandTr_->getWidth() - width_colliderOffset, leftHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
 	punietazoleft_ = leftHand_->addComponent<Punietazo>();
 	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
-	auto manoDrTr = rightHand_->addComponent<Transform>();
-	manoDrTr->init(tr_->getPos() + Vector2D(- handSize - 150, 150), Vector2D(), handSize, handSize, 0.0f, false);
+	rightHandTr_ = rightHand_->addComponent<Transform>();
+	rightHandTr_->init(tr_->getPos() + Vector2D(- handSize - 150, 150), Vector2D(), handSize, handSize, 0.0f, false);
 	rightHand_->addComponent<Image>(&sdlutils().images().at("manoDer"));
 
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>
-		(manoDrTr->getWidth() - width_colliderOffset, manoDrTr->getHeight() - height_colliderOffset);
+		(rightHandTr_->getWidth() - width_colliderOffset, rightHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
 	punietazoright_ = rightHand_->addComponent<Punietazo>();
