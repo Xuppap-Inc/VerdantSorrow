@@ -48,7 +48,7 @@ void LanternCollisions::update()
 
 				if (!damaged_ && rootMov != nullptr) {
 					std::cout << "daño" << std::endl;
-					attrib_->setDamage(3);
+					attrib_->setDamage(ROOT_DAMAGE_TO_LAMP);
 					damaged_ = true;
 
 					mngr_->getHandler(ecs::_TREEBOSS)->getComponent<RootAutoAim>()->cancelAttack();

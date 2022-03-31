@@ -78,7 +78,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 					anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);
 
-					bA->setDamage(0.6f);
+					bA->setDamage(PLAYER_ATTACK_DMG);
 					player->getComponent<Transform>()->getVel().setY(0);
 
 					playerAt->setNewAttack(false);
