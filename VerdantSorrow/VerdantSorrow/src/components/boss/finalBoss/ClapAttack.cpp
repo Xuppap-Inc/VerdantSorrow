@@ -38,7 +38,7 @@ void ClapAttack::goDiagonal()
 	}
 }
 
-void ClapAttack::goCenter()
+void ClapAttack::goCenter(bool quemado)
 {
 	int objectivePos;
 
@@ -56,6 +56,12 @@ void ClapAttack::goCenter()
 			tr_->getVel().set(Vector2D(0, 0));
 			tr_->getPos().setX(objectivePos);
 			changeState(REPOSOSUELO);
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack2");
+			s->play();
+			if (quemado) {
+				SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_fire_clap");
+				s2->play();
+			}
 		}
 	}
 	else {

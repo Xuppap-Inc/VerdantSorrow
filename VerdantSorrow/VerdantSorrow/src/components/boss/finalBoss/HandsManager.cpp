@@ -169,8 +169,16 @@ void HandsManager::clapAttack(){
 		clapRight_->goDiagonal();
 	}
 	else if (clapLeft_->getstate() == ClapAttack::CENTER || clapRight_->getstate() == ClapAttack::CENTER) {
-		clapLeft_->goCenter();
-		clapRight_->goCenter();
+		
+		if (multFase_ == 1) {
+			clapLeft_->goCenter(false);
+			clapRight_->goCenter(false);
+		}
+		else
+		{
+			clapLeft_->goCenter(true);
+			clapRight_->goCenter(true);
+		}
 	}
 	else if (clapLeft_->getstate() == ClapAttack::REPOSOSUELO || clapRight_->getstate() == ClapAttack::REPOSOSUELO) {
 		clapLeft_->stayFloor();
@@ -250,7 +258,10 @@ void HandsManager::hammerAttack() {
 			hammerRight_->goDiagonal();
 		}
 		else if (hammerRight_->getstate() == HammerArm::HIT) {
-			hammerRight_->attack();
+			if(multFase_== 1)
+				hammerRight_->attack(false);
+			else 
+				hammerRight_->attack(true);
 		}
 		else if (hammerRight_->getstate() == HammerArm::REPOSOSUELO) {
 			hammerRight_->stayFloor();
@@ -272,7 +283,10 @@ void HandsManager::hammerAttack() {
 				hammerLeft_->goDiagonal();
 			}
 			else if (hammerLeft_->getstate() == HammerArm::HIT) {
-				hammerLeft_->attack();
+				if (multFase_ == 1)
+					hammerLeft_->attack(false);
+				else
+					hammerLeft_->attack(true);
 			}
 			else if (hammerLeft_->getstate() == HammerArm::REPOSOSUELO) {
 				hammerLeft_->stayFloor();

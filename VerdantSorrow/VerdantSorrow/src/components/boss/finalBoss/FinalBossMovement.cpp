@@ -38,6 +38,10 @@ void FinalBossMovement::update()
 			anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
 			phase_ = PHASE2;
 			tr_->setScale(.33);
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_quemado");
+			s->play();
+			SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_damage");
+			s2->play();
 		}
 
 		lastFireBall_ = sdlutils().currRealTime();
@@ -132,6 +136,9 @@ void FinalBossMovement::fireBall()
 	waveImgEntTr_->setScale(8);
 	waveImgEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_fuego"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_fuego");
 	waveImgEnt->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
+
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_fuego");
+	s->play();
 
 	auto waveCollider = wave->addComponent<RectangleCollider>(width - 20, height - 20);
 	waveCollider->setIsTrigger(true);

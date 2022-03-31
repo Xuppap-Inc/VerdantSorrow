@@ -29,7 +29,7 @@ public:
 
     void initComponent() override;
 
-    void attack();
+    void attack(bool quemado);
     void goBack();
     void goDiagonal();
     void stayFloor();

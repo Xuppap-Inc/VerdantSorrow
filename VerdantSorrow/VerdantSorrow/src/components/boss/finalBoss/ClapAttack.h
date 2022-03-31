@@ -27,7 +27,7 @@ public:
 
     void initComponent() override;
 
-    void goCenter();
+    void goCenter(bool quemado);
     void goBack();
     void goDiagonal();
     void stayFloor();

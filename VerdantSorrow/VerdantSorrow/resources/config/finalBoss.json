@@ -156,9 +156,11 @@
     { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
     { "id" : "sfx_chica_roll", "file" : "resources/sound/sfx_chica_roll.wav" },
     { "id" : "sfx_manos_attack", "file" : "resources/sound/sfx_manos_attack.wav" },
+    { "id" : "sfx_manos_attack2", "file" : "resources/sound/sfx_manos_attack2.wav" },
     { "id" : "sfx_manos_damage", "file" : "resources/sound/sfx_manos_damage.wav" },
     { "id" : "sfx_manos_fuego", "file" : "resources/sound/sfx_manos_fuego.wav" },
     { "id" : "sfx_manos_quemado", "file" : "resources/sound/sfx_manos_quemado.wav" },
+    { "id" : "sfx_manos_fire_clap", "file" : "resources/sound/sfx_manos_fire_clap.wav" },
     { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
     ],
   "musics" : [

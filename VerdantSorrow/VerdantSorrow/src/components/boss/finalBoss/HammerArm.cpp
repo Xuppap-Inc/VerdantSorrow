@@ -8,6 +8,7 @@
 #include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
 #include "../wave/WaveSpawner.h"
+#include "../BossAtributos.h"
 
 HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_()
 {
@@ -43,7 +44,7 @@ void HammerArm::goDiagonal()
 	}
 }
 
-void HammerArm::attack()
+void HammerArm::attack(bool quemado)
 {
 	collider_->setActive(true);
 	collider_->setIsTrigger(true);
@@ -54,6 +55,12 @@ void HammerArm::attack()
 	else {
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
 		s->play();
+		if (quemado)
+		{
+			SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_quemado");
+			s2->play();
+		}
+		
 		tr_->getVel().set(Vector2D(0, 0));
 		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
 		lastTimeFloor = sdlutils().currRealTime();
