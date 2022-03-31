@@ -44,7 +44,8 @@ void TreeScene::init()
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-
+	//habilita la escena
+	setAble(true);
 	treeGenerator(colManager);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
@@ -66,7 +67,7 @@ void TreeScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		if (bossHealth <= 0) setAble(false);
+		if (health > 0) setAble(false);
 		sC().decideScene();
 	}
 }
@@ -76,7 +77,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_ = mngr_->addEntity();
 
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
-	tree_->addComponent<BossAtributos>(10.0f);
+	tree_->addComponent<BossAtributos>(30);
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 360;

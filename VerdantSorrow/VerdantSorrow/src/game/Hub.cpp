@@ -24,14 +24,14 @@
 
 
 
-Hub::Hub():Scene()
+Hub::Hub() :Scene()
 {
 	colManager = nullptr;
 }
 
 Hub::~Hub()
 {
-	
+
 }
 
 void Hub::init()
@@ -42,6 +42,7 @@ void Hub::init()
 	colManager = new CollisionManager();
 
 	changeSc = false;
+	backgroundHub();
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -50,7 +51,13 @@ void Hub::init()
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<Camera>();
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
-	EntryGenerator(colManager);
+	//Genera las entradas a los bosses
+		//entrada a la rana
+	EntryGenerator(colManager, 0, 250);
+	//Entrada al ojo
+	EntryGenerator(colManager, sdlutils().width() - 100, 100);
+	//Entrada al arbol
+	EntryGenerator(colManager, sdlutils().width()-100, sdlutils().height()-100);
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
@@ -62,8 +69,7 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	dialogBox->setActive(false);
 	auto tr = dialogBox->addComponent<Transform>();
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
-	dialogBox->addComponent<RectangleRenderer>();
-	dialogBox->addComponent<DialogBoxMngr>("ARIAL24");
+	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
 }
 
 bool Hub::getAble()
@@ -97,6 +103,13 @@ void Hub::checkCollissions()
 	}
 }
 
+void Hub::backgroundHub()
+{
+	auto backgr_ = mngr_->addEntity();
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().images().at("fondoHub"));
+}
+
 
 void Hub::update()
 {
@@ -111,7 +124,7 @@ void Hub::update()
 
 		checkCollissions();
 	}
-	else {	
+	else {
 		sC().decideScene();
 	}
 }
@@ -144,14 +157,14 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
-void Hub::EntryGenerator(CollisionManager* colManager)
+void Hub::EntryGenerator(CollisionManager* colManager, float posX, float posY)
 {
 	auto frogEntry = mngr_->addEntity();
 
 	auto frogEntryTr = frogEntry->addComponent<Transform>();
-	auto frogEntryX = sdlutils().width() / 3 - 200;
+	auto frogEntryX = 0;
 	auto frogEntryY = sdlutils().height() / 4 * 3;
-	frogEntryTr->init(Vector2D(frogEntryX, frogEntryY), Vector2D(), 200, 50, 0.0f);
+	frogEntryTr->init(Vector2D(posX, posY), Vector2D(), 100, 100, 0.0f);
 
 	frogEntry->addComponent<RectangleRenderer>();
 
@@ -164,7 +177,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(800, 400), Vector2D(), 50, 100, 0.0f, false);
+	npctr->init(Vector2D(sdlutils().width()/2, 360), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().images().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);

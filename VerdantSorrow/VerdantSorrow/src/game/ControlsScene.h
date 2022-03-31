@@ -15,7 +15,8 @@ public:
 	ControlsScene();
 	~ControlsScene() {};
 	void init();
-	void background();
+	//void background();
+	void update() override;
 	//Se sobreescribe onButtonClicked, ya que los botones de este menu tienen una funcion diferente
 	void onButtonClicked(int index)override; 
 	void createImages(float x, float y, float w, float h, std::string controlsImage);

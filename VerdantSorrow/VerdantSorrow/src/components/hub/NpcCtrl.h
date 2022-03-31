@@ -2,6 +2,9 @@
 #include "../../ecs/Component.h"
 #include "../../game/CollisionManager.h"
 #include "../../ecs/Entity.h"
+
+class VirtualTimer;
+
 class NpcCtrl : public ecs::Component
 {
 
@@ -18,6 +21,8 @@ protected:
 	CollisionManager* colMan_;
 	RectangleCollider* col_;
 
+	VirtualTimer* vt_;
+	int dialogTimer;
 	bool canTalk;
 };
 

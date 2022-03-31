@@ -14,5 +14,7 @@ private:
 	void hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* ent);
 	CollisionManager* colManager_;
 	ecs::Manager* mngr_;
+
+	const int PLAYER_ATTACK_DMG = 1;
 };
 

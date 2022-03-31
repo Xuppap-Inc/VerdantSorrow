@@ -1,6 +1,7 @@
 #include "PlayerCtrl.h"
 #include "../../sdlutils/InputHandler.h"
 #include "../../ecs/Entity.h"
+#include "../../ecs/Manager.h"
 #include "../Transform.h"
 #include "Attack.h"
 #include "../../sdlutils/SDLUtils.h"
@@ -45,7 +46,7 @@ void PlayerCtrl::update()
 	handleInput();
 
 	//!isAttacking
-	if ( !isRolling_ && !isKnockback) {
+	if (!attack_->isAttacking() && !isRolling_ && !isKnockback) {
 
 		//salto
 		if (jump_ && attrib_->isOnGround()) {
@@ -55,7 +56,7 @@ void PlayerCtrl::update()
 			slide_ = false;
 
 			// Animacion
-			anim_->repeat(true);
+			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
 		}
 
@@ -92,6 +93,8 @@ void PlayerCtrl::update()
 			lastRoll_ = currentTime;
 			isRolling_ = true;
 			slide_ = false;
+			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
+			s->play();
 		}	
 
 	}
@@ -163,7 +166,7 @@ void PlayerCtrl::animationManagement()
 {
 	// Animation
 	if (attrib_->isOnGround()) {
-		if (anim_->getCurrentAnimation() != "Chica_AtkFloor" || attack_->hasFinished())
+		if (!attack_->isAttacking())
 			if (isRolling_) {
 				if (anim_->getCurrentAnimation() != "chicaroll") {
 

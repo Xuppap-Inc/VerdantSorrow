@@ -2,8 +2,10 @@
 #include "../../ecs/Component.h"
 #include "../../game/CollisionManager.h"
 #include "../../sdlutils/Font.h"
+#include "../../sdlutils/VirtualTimer.h"
 #include "../../sdlutils/Texture.h"
 class Transform;
+class VirtualTimer;
 
 class DialogBoxMngr : public ecs::Component
 {
@@ -19,21 +21,48 @@ public:
 
 	//activa el cuadro de dialogo
 	void activate(std::string dialog);
+	void desactivate();
 
-	//divide el dialogo para su render
-	void divideText(std::string dialog);
+	void changeFinishedState();
 
-	//muestra la parte del dialogo siguiente
-	void next();
+	bool isFinished() { return finished_; }
+
+	bool isLastParagraph() { return lastParagraph_; }
+
+	void addLetter();
+
+	void changeTextSpeed(bool set) { quickText_ = set; };
 protected:
 
+	//posicion del dialog box
 	Transform* tr_;
+
+	//fuente
 	std::string font_;
 
+	//tamaño de letra
 	int letterWidth_, letterHeight_;
 
-	//dialogo dividido para su render
-	std::vector<Texture> dialogs_;
-	int index;
+	//dialogo dividido en lineas
+	std::vector<std::string> lines_;
+	int lineNumber_;
+
+	//flags para controlar la escritura del dialogo
+	bool finished_, lastParagraph_;
+
+	int lineOffsetY_;
+
+	//timer de aparicion de letra
+	int letterTimer_;
+	VirtualTimer* vt_;
+
+	//dialogo
+	std::string dialog_;
+
+	//ultimo caracter escrito
+	std::string lastChar_;
+
+	//texto rapido (0 cooldown)
+	bool quickText_;
 };
 

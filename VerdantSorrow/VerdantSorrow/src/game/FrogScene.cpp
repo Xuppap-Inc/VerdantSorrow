@@ -35,6 +35,8 @@ void FrogScene::init()
 
 	waveSpawerGenerator(colManager);
 
+	//Habilita la escena
+	setAble(true);
 	//Se crea el jugador
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -68,7 +70,7 @@ void FrogScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		if (bossHealth <= 0) setAble(false);
+		if (health > 0) setAble(false);
 		sC().decideScene();
 	}
 }
@@ -90,7 +92,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	Frog = mngr_->addEntity();
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(10.0f);
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(40);
 
 	auto frogH = 300;
 	auto frogW = frogH * 1.11f;
@@ -102,10 +104,9 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 1);
 
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
-	//Frog->addComponent<FramedImage>(&sdlutils().images().at("ranaidle"), 6, 4,150,24);
 
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight()-200);
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight()-200, 0, 75);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
 		

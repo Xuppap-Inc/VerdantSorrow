@@ -24,6 +24,7 @@ public:
 
 private:
 
+	const int ROOT_DAMAGE_TO_LAMP = 6;
 	const int NUM_ATTACKS_TO_REPOSITION = 3;
 
 	Transform* lanternTr_;
