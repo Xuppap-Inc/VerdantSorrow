@@ -42,7 +42,7 @@ void NpcCtrl::update()
 						}
 
 						//Si ha terminado y es el último párrafo se desactiva
-						else if (dialogMngr->isFinished() && dialogMngr ->isLastParagraph()) {
+						else if (dialogMngr->isFinished() && dialogMngr->isLastParagraph()) {
 							canTalk = false;
 							mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(false);
 							dialogMngr->desactivate();
@@ -53,8 +53,13 @@ void NpcCtrl::update()
 						else if (dialogMngr->isFinished()) {
 							dialogMngr->changeFinishedState();
 						}
-						else
-							dialogMngr->changeTextSpeed(true);
+
+						else {
+							if (dialogMngr->isQuick())
+								dialogMngr->changeSkip(true);
+							else
+								dialogMngr->changeTextSpeed(true);
+						}
 					}
 				}
 			}

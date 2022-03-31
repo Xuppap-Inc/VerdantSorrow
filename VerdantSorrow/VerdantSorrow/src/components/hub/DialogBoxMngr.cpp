@@ -17,6 +17,7 @@ using namespace std;
 
 DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), letterWidth_(14), letterHeight_(28),
 												lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false), quickText_(false), finished_(false), lineNumber_(0)
+												,skip_(false)
 {
 }
 
@@ -30,7 +31,12 @@ void DialogBoxMngr::initComponent()
 void DialogBoxMngr::update()
 {
 
-	if (!finished_ && (quickText_ || vt_->currTime() > letterTimer_)) {
+	if (skip_) {
+		while (!finished_)
+			addLetter();
+	}
+
+	else if (!finished_ && (quickText_ || vt_->currTime() > letterTimer_)) {
 
 		addLetter();
 
@@ -72,7 +78,7 @@ void DialogBoxMngr::desactivate()
 
 void DialogBoxMngr::changeFinishedState()
 {
-	finished_ = false; lines_.clear(); lineNumber_ = 0; changeTextSpeed(false);
+	finished_ = false; lines_.clear(); lineNumber_ = 0; quickText_ = false; skip_ = false;
 }
 
 void DialogBoxMngr::addLetter()

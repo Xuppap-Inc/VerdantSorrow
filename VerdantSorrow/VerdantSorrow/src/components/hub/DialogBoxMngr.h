@@ -29,9 +29,12 @@ public:
 
 	bool isLastParagraph() { return lastParagraph_; }
 
+	bool isQuick() { return quickText_; };
+
 	void addLetter();
 
 	void changeTextSpeed(bool set) { quickText_ = set; };
+	void changeSkip(bool set) { skip_ = true; }
 protected:
 
 	//posicion del dialog box
@@ -63,6 +66,6 @@ protected:
 	std::string lastChar_;
 
 	//texto rapido (0 cooldown)
-	bool quickText_;
+	bool quickText_, skip_;
 };
 
