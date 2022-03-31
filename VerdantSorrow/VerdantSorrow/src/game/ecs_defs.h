@@ -57,16 +57,15 @@
 	_TUTORIAL_ROOTSPAWNER, \
 	_BUTTON_ATTRIBUTES, \
 	_SHOWATOPPOSIDESIDE, \
-	_CAMERA, \
-	_FIREFOLLOW
+	_CAMERA
 
 
 
 // Groups list - must have at least one element
 //
-#define _GRPS_LIST_ \
-	_STAR_GRP_, \
-	_ASTEROID_GRP
+//#define _GRPS_LIST_ \
+//	_STAR_GRP_, \
+//	_ASTEROID_GRP
 
 // Handlers list - must have at least one element
 //

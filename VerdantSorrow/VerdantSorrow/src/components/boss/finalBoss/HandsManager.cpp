@@ -5,12 +5,12 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../Image.h"
+#include "../../FramedImage.h"
 #include "../CollideWithBordersBoss.h"
 #include "Punietazo.h"
 #include "ClapAttack.h"
 #include "HammerArm.h"
 #include "../BossAtributos.h"
-#include "FireFollow.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO)
@@ -58,25 +58,29 @@ void HandsManager::update()
 
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
 		if (multFase_ == 1) {
-			colliderLeftHand_->setIsTrigger(true);
-			colliderRightHand_->setIsTrigger(true);
 			multFase_ = 4;
 
 			//Animaciones fuego
 			leftFire_ = mngr_->addEntity();
 			leftFireTr_ = leftFire_->addComponent<Transform>();
-			leftFireTr_->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+			leftFireTr_->init(Vector2D(leftHandTr_->getPos().getX() + leftHandTr_->getWidth() / 2,
+				leftHandTr_->getPos().getY() - leftHandTr_->getHeight()), Vector2D(),rightHandTr_->getWidth(), rightHandTr_->getHeight(), 0.0f);
+			leftFireTr_->setScale(5);
 			leftFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
 
 			rightFire_ = mngr_->addEntity();
 			rightFireTr_ = rightFire_->addComponent<Transform>();
-			rightFireTr_->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+			rightFireTr_->init(Vector2D(rightHandTr_->getPos().getX() + rightHandTr_->getWidth() / 2,
+				rightHandTr_->getPos().getY() - rightHandTr_->getHeight()), Vector2D(), leftHandTr_->getWidth(), leftHandTr_->getHeight(), 0.0f);
+			rightFireTr_->setScale(5);
 			rightFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
 		}
 		else
 		{
-			leftFireTr_->getPos().set(leftHandTr_->getPos().getX(), leftHandTr_->getPos().getY());
-			rightFireTr_->getPos().set(rightHandTr_->getPos().getX(), rightHandTr_->getPos().getY());
+			colliderLeftHand_->setIsTrigger(true);
+			colliderRightHand_->setIsTrigger(true);
+			leftFireTr_->getPos().set(Vector2D(leftHandTr_->getPos().getX(), leftHandTr_->getPos().getY() - leftHandTr_->getHeight()+40));
+			rightFireTr_->getPos().set(Vector2D(rightHandTr_->getPos().getX(), rightHandTr_->getPos().getY() - rightHandTr_->getHeight()+40));
 		}
 	}
 	
