@@ -38,7 +38,7 @@ void NpcCtrl::update()
 						//Activa el diálogo si está desactivado e inmoviliza al jugador
 						if (!dialogBox_->isActive()) {
 							mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(true);
-							dialogMngr->activate("Al comenzar el juego, se le mostrará al jugador el grueso de la historia, el por qué está ahí y cual es el argumento que lo rodea. Decimos que se le cuenta el grueso pero no el total, puesto que a lo largo del juego a medida que hable con los NPCs del Hub estos, le informarán de manera progresiva de todo lo que ha pasado, qué fue lo que llevó al mundo de Arven a su estado actual, qué se espera de él y distintos detalles argumentales para dar sensación de una historia de la que el jugador es partícipe y pieza clave.");
+							dialogMngr->activate(sdlutils().dialogs().at("npc1"));
 						}
 
 						//Si ha terminado y es el último párrafo se desactiva

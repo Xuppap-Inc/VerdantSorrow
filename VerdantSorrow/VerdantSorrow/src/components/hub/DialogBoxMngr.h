@@ -4,6 +4,7 @@
 #include "../../sdlutils/Font.h"
 #include "../../sdlutils/VirtualTimer.h"
 #include "../../sdlutils/Texture.h"
+
 class Transform;
 class VirtualTimer;
 
@@ -35,6 +36,8 @@ public:
 
 	void changeTextSpeed(bool set) { quickText_ = set; };
 	void changeSkip(bool set) { skip_ = true; }
+
+
 protected:
 
 	//posicion del dialog box

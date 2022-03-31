@@ -49,5 +49,9 @@
   
   "sounds" : [
     { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
+  ],
+
+  "dialogs" : [
+    { "id" : "npc1", "file" : "a"}
   ]
 }
