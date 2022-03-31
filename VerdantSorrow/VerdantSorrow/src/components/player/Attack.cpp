@@ -48,9 +48,9 @@ void Attack::update()
 		
 			auto& ihdlr = ih();
 
-			if (true ||ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
+			if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent()) {//si no esta activo, comprueba si se puede activar (cooldown y j presionada)
 
-				bool attackButtonPressed = true;
+				bool attackButtonPressed = false;
 
 				// Keyboard
 				int i = 0;

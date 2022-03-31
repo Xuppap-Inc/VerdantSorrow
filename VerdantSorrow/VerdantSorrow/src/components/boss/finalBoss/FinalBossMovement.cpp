@@ -94,6 +94,7 @@ void FinalBossMovement::bounce()
 	else if (pos_.getY() <= 1) {
 		fireBall();
 	}
+
 	if (vel_.magnitude() != 0)
 		vel_ = vel_.normalize() * eyeSpeed;
 }
