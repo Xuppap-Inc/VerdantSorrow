@@ -44,13 +44,15 @@ public:
 	inline SDL_Surface* renderText(const std::string &text,
 			SDL_Color fgColor) const {
 		assert(font_ != nullptr);
-		return TTF_RenderUTF8_Solid(font_, text.c_str(), fgColor);
+		return TTF_RenderText_Solid(font_, text.c_str(), fgColor);
+		//return TTF_RenderUTF8_Solid(font_, text.c_str(), fgColor);
 	}
 
 	inline SDL_Surface* renderText(const std::string &text, SDL_Color fgColor,
 			SDL_Color bgColor) const {
 		assert(font_ != nullptr);
-		return TTF_RenderUTF8_Shaded(font_, text.c_str(), fgColor, bgColor);
+		return TTF_RenderText_Shaded(font_, text.c_str(), fgColor, bgColor);
+		//return TTF_RenderUTF8_Shaded(font_, text.c_str(), fgColor, bgColor);
 	}
 
 private:
