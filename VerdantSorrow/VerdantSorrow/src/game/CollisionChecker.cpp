@@ -11,9 +11,11 @@
 #include "../components/boss/frog_boss/TongueAttack.h"
 #include "../components/player/Attack.h"
 #include "../components/boss/frog_boss/FlyHp.h"
+#include "../components/boss/tree_boss/LanternMovement.h"
 #include "../components/tutorial/TutorialFly.h"
 #include "SceneManager.h"
 #include "../components/FramedImage.h"
+
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr) : colManager_(colManager), mngr_(mngr)
 {
@@ -37,7 +39,9 @@ void CollisionChecker::checkCollisions()
 			TongueAttack* tA = ent->getComponent<TongueAttack>();
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
 
-			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) || wave != nullptr || tA != nullptr || cA != nullptr)
+			LanternMovement* lantern = ent->getComponent<LanternMovement>();
+
+			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}

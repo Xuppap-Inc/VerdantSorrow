@@ -55,7 +55,7 @@ void TreeScene::init()
 void TreeScene::update()
 {
 	auto health = player->getComponent<PlayerAttributes>()->getLives();
-	auto bossHealth = tree_->getComponent<BossAtributos>()->getLife();
+	auto bossHealth = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		colCheck_->checkCollisions();
@@ -77,7 +77,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_ = mngr_->addEntity();
 
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
-	tree_->addComponent<BossAtributos>(30);
+	tree_->addComponent<BossAtributos>(100);
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
 	auto treeY = sdlutils().height() - 360;
@@ -144,7 +144,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto lanternAtribs = lantern->addComponent<BossAtributos>(10.0f);
+	auto lanternAtribs = lantern->addComponent<BossAtributos>(30);
 	lantern->addComponent<BossHPBar>();
 	auto lanternTr = lantern->addComponent<Transform>();
 	auto lanternX = x;

@@ -87,10 +87,15 @@ void TreeAttackManager::update()
 
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
+		if (!attacking_) animNewState_ = ANIM_WALK;
+		anim_->repeat(true);
+
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (absDistance < MELEE_ATTACK_DISTANCE && newAtack_) {
 
 			animNewState_ = ANIM_ATTACK;
+			anim_->repeat(false);
+
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
 			s->play();
 			meleeAttack_->attack(dir_);
@@ -103,6 +108,12 @@ void TreeAttackManager::update()
 			if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
 
 				animNewState_ = ANIM_CHANGE_PHASE;
+				anim_->repeat(false);
+
+				//callback que llama al cambio de estado al acabar la animacion de cambio de fase
+				std::function<void()> changePhaseCallback = [this]() { state = MOVING; };
+				anim_->registerEvent(std::pair<int, std::string>(13, "arbol_capa_cambio_fase"), changePhaseCallback);
+
 				SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 				s->play();
 				musicaFase2_->setMusicVolume(100);
@@ -116,11 +127,13 @@ void TreeAttackManager::update()
 
 				lanternCols_->changeToSecondPhase();
 				rootAutoAim_->changeToSecondPhase();
+
+				state = CHANGING_PHASE;
 			}
 
 			else {
 
-				if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave(dir_);
+				if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave();
 
 				if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 			}
@@ -131,7 +144,6 @@ void TreeAttackManager::update()
 		lanternCols_->setDamaged(true); //waves no hacen da�o
 		if (rootWave_->getMove()) {
 			
-			animNewState_ = ANIM_ROOTS;
 			state = MOVING;
 
 			movement_->setMoveActive(true);
@@ -147,12 +159,12 @@ void TreeAttackManager::update()
 	else if (state == SPECIAL_ATTACK) {
 		
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
-		
-			animNewState_ = ANIM_BACKGROUND;
 
 			//reactiva al arbol
-			treeCol_->setActive(true);
 			lanternMov_->setActive(true);
+			anim_->setVisible(true);
+
+			lanternCols_->setDamaged(true);
 
 			//lo devuelve al centro
 			returnToIni();
@@ -173,7 +185,7 @@ void TreeAttackManager::update()
 			attacking_ = false;
 			movement_->setMoveActive(true);
 			lanternMov_->setActive(true);
-			
+			treeCol_->setActive(true);
 
 			waitTimer_.reset();
 			waitTimer_.pause();
@@ -184,7 +196,13 @@ void TreeAttackManager::update()
 	
 		if (movement_->hasFinishedMovingToCenter()) {
 		
-			attackSpecial();
+			animNewState_ = ANIM_BACKGROUND;
+			anim_->repeat(false);
+
+			//callback que llama al ataque especial al acabar la animacion
+			std::function<void()> attackCallback = [this]() { attackSpecial(); };
+
+			anim_->registerEvent(std::pair<int, std::string>(8, "arbol_capa_background"), attackCallback);
 		}
 	}
 
@@ -233,15 +251,22 @@ void TreeAttackManager::returnToIni()
 	tr_->getPos().set(Vector2D(treeX, treeY));
 }
 
-void TreeAttackManager::attackWave(int dir)
+void TreeAttackManager::attackWave()
 {
 	if (!attacking_) {
 
+		animNewState_ = ANIM_ROOTS;
+		anim_->repeat(false);
+
 		//pausa el timer del otro ataque
 		timerSpecial_.pause();
+		
+		//callback que llama al ataque de raices al acabar la animacion
+		std::function<void()> attackCallback = [this]() { rootWave_->attack(dir_); };
+
+		anim_->registerEvent(std::pair<int, std::string>(15, "arbol_capa_roots"), attackCallback);
 
 		state = WAVE;
-		rootWave_->attack(dir);
 	}
 }
 
@@ -252,7 +277,7 @@ void TreeAttackManager::attackSpecial()
 	rootAutoAim_->attack(false);
 	lanternCols_->setDamaged(false);//raices especial si hacen da�o
 
-
+	anim_->setVisible(false);
 	treeCol_->setActive(false);
 }
 

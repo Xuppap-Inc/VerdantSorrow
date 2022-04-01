@@ -18,7 +18,7 @@
 
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
 tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
-slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_()
+slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -44,39 +44,42 @@ void FramedImage::initComponent()
 
 void FramedImage::render()
 {
-	if (!completed_) {
+	if (visible_) {
 
-		select_sprite(i, j);
+		if (!completed_) {
 
-		if (timer_.currTime() >= totalAnimationTime_ / numframes) {
-			
-			if (i < column_ - 1) {
-				i++;
+			select_sprite(i, j);
+
+			if (timer_.currTime() >= totalAnimationTime_ / numframes) {
+
+				if (i < column_ - 1) {
+					i++;
+				}
+				else {
+					i = 0;
+					j++;
+				}
+
+				checkAnimationFinished();
+
+				timer_.reset();
+				currentnumframes++;
+
+				//disminuye el contador de frames ralentizados
+				if (contFramesSlowed_ > 0) {
+
+					contFramesSlowed_--;
+
+					if (contFramesSlowed_ == 0) cancelSlow();
+				}
+
+				//eventos
+				checkEvents();
 			}
-			else {
-				i = 0;
-				j++;
-			}
-
-			checkAnimationFinished();
-
-			timer_.reset();
-			currentnumframes++;
-
-			//disminuye el contador de frames ralentizados
-			if (contFramesSlowed_ > 0) {
-
-				contFramesSlowed_--;
-
-				if (contFramesSlowed_ == 0) cancelSlow();
-			}
-
-			//eventos
-			checkEvents();
 		}
-	}
 
-	adjustAndRenderFrame();
+		adjustAndRenderFrame();
+	}
 }
 
 void FramedImage::adjustAndRenderFrame()
@@ -254,6 +257,16 @@ void FramedImage::cancelSlow()
 	slowed_ = false;
 
 	totalAnimationTime_  = iniTotalAnimTime_;
+}
+
+void FramedImage::setVisible(bool set)
+{
+	visible_ = set;
+}
+
+bool FramedImage::isVisible()
+{
+	return visible_;
 }
 
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)

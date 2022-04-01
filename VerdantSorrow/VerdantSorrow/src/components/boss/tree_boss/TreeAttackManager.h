@@ -24,7 +24,8 @@ public:
 		MOVING,
 		WAVE,
 		SPECIAL_ATTACK,
-		MOVING_TO_CENTER
+		MOVING_TO_CENTER,
+		CHANGING_PHASE
 	};
 	enum Phase {
 		PHASE1,
@@ -96,7 +97,7 @@ private:
 
 	void returnToIni();
 
-	void attackWave(int dir);
+	void attackWave();
 	void attackSpecial();
 	void prepareToSpecial();
 };

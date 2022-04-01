@@ -29,6 +29,9 @@ public:
 	void slowAnimation(float factor, int nFrames = -1);
 	void cancelSlow();
 
+	void setVisible(bool set);
+	bool isVisible();
+
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
 
 	void registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback);
@@ -52,6 +55,8 @@ private:
 	bool noRepeat_;
 	bool completed_;
 	std::string currentAnim;
+
+	bool visible_;
 
 	VirtualTimer timer_;
 
