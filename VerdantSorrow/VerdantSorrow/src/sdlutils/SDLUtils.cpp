@@ -315,7 +315,7 @@ void SDLUtils::loadReasources(std::string filename) {
 			}
 		}
 		else {
-			throw "'images' is not an array in '" + filename + "'";
+			throw "'dialogs' is not an array in '" + filename + "'";
 		}
 	}
 }
