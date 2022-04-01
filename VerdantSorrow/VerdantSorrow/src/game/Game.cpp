@@ -23,7 +23,6 @@ void Game::start() {
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
 	int n = -1;
-	std::string json;
 	std::cout << "0.Cambio de escenas normal\n1.Elegir escena\n";
 	std::cin >> n;
 	SceneManager::scenes firstScene;
@@ -34,31 +33,24 @@ void Game::start() {
 		{
 		case 0:
 			firstScene = SceneManager::scenes::Hub_;
-			json = "resources/config/hub.json";
 			break;
 		case 1:
 			firstScene = SceneManager::scenes::Frog_;
-			json = "resources/config/frog.json";
 			break;
 		case 2:
 			firstScene = SceneManager::scenes::Tree_;
-			json = "resources/config/treeScene.json";
 			break;
 		case 3:
 			firstScene = SceneManager::scenes::Eye_;
-			json = "resources/config/finalBoss.json";
 			break;
 		case 4:
 			firstScene = SceneManager::scenes::Tutorial_;
-			json = "resources/config/tutorial.json";
 			break;
 		case 5:
 			firstScene = SceneManager::scenes::Menu_;
-			json = "resources/config/menu.json";
 			break;
 		case 6:
 			firstScene = SceneManager::scenes::Controls_;
-			json = "resources/config/controls.json";
 			break;
 
 		default:
@@ -67,11 +59,10 @@ void Game::start() {
 	}
 	else {
 		firstScene = SceneManager::scenes::Hub_;
-		json = "resources/config/hub.json";
 		sC().setFirstSceneAble();
 	}
 	
-	SDLUtils::init("Verdant Sorrow", 1280, 720, json);
+	SDLUtils::init("Verdant Sorrow", 1280, 720);
 	//Crea el game Manager
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 

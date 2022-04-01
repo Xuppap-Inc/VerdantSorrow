@@ -173,6 +173,9 @@ private:
 
 	RandomNumberGenerator random_; // (pseudo) random numbers generator
 	VirtualTimer timer_; // virtual timer
+
+	int assetsNumber_;
+	void renderProgressBar(int assetsLoaded);
 };
 
 
