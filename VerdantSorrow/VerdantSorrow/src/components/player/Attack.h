@@ -21,7 +21,7 @@ class Attack : public RectangleCollider
 {
 public:
 	__CMPID_DECL__(ecs::_ATTACK)
-		Attack(float width, float height, CollisionManager* colManager);
+	Attack(float width, float height, float offsetY, CollisionManager* colManager);
 	//Attack(float width, float height, CollisionManager* colManager, FramedImage* anim);
 	~Attack();
 

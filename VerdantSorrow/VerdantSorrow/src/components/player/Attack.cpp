@@ -8,8 +8,8 @@
 #include "../VFX.h"
 
 
-Attack::Attack(float width, float height, CollisionManager* colManager) :
-	tr_(nullptr), RectangleCollider(width, height), attackDuration(200),
+Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
+	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
 	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
 	recovery_(false), cooldownTimer_(), comboFinished_(false), attackTimer_(), 
 	anim_(), attrib_(), nCombo_(0), comboTimer_(),
@@ -260,9 +260,9 @@ void Attack::setPosition()
 	Vector2D contPos = tr_->getPos();
 
 	if (playerMovementDir >= 0)
-		pos_ = Vector2D(contPos.getX() + tr_->getWidth(), contPos.getY());
+		pos_ = Vector2D(contPos.getX() + tr_->getWidth() + offsetX_, contPos.getY() + offsetY_);
 	else
-		pos_ = Vector2D(contPos.getX() - width_, contPos.getY());
+		pos_ = Vector2D(contPos.getX() - width_ + offsetX_, contPos.getY() + offsetY_);
 }
 
 void Attack::activateRecoveryTimer()

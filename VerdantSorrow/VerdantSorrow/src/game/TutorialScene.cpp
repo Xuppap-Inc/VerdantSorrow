@@ -92,7 +92,7 @@ void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(50, playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr->getHeight() * 2, -playerTr->getHeight() * 1.5 / 3, colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 

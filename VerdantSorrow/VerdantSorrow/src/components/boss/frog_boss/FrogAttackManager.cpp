@@ -105,13 +105,11 @@ void FrogAttackManager::update()
 			frogState_ = CALC_NEXT_ATTACK;
 		}
 		break;
-	case WAITING_FOR_TONGUE:
+	case CASTING_TONGUE:
 
-		if (tongueWaitTimer_.currTime() >= tongueDelay_) {
-			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
-			frogState_ = TONGUE;
-			tongue_->getComponent<RectangleRenderer>()->setVisible(true);
-		}
+		tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
+		frogState_ = TONGUE;
+		tongue_->getComponent<RectangleRenderer>()->setVisible(true);
 		break;
 	case FLY_DIED:
 		if (!jumping_ && !jumpingBig_) {
@@ -134,6 +132,9 @@ void FrogAttackManager::update()
 		break;
 	}if (animState_ != animNewState_) {
 		animState_ = animNewState_;
+
+		std::function<void()> attackCallback;
+
 		switch (animState_)
 		{
 		case FrogAttackManager::ANIM_IDLE:
@@ -161,8 +162,22 @@ void FrogAttackManager::update()
 			break;
 		case FrogAttackManager::ANIM_TONGUE:
 			anim_->repeat(false);
-			if (!secondPhase_)anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
-			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana__enfadada_lengua");
+
+			//callback del ataque de la lengua
+			attackCallback = [this]() { frogState_ = CASTING_TONGUE; };
+
+			if (!secondPhase_) {
+
+				anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
+				anim_->registerEvent(std::pair<int, std::string>(23, "rana_lengua"), attackCallback);
+			}
+			
+			else {
+
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana__enfadada_lengua");
+				anim_->registerEvent(std::pair<int, std::string>(23, "rana_enfadada_lengua"), attackCallback);
+			}
+
 			if (anim_->getFrameNum() == 24) anim_->select_sprite(6, 4);
 			break;
 		case FrogAttackManager::ANIM_CHANGE_PHASE:
@@ -298,13 +313,13 @@ void FrogAttackManager::nextAttack()
 	}
 	if (jumpsUntilNextTongue_ == 0) {
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
-		frogState_ = TONGUE;
-		//No tengo ni idea de como se lanzara la animacion aqui
+		
+		animNewState_ = ANIM_TONGUE;
+
 		if (!secondPhase_) {
 			createFly();
-			animNewState_ = ANIM_TONGUE;
 		}
-		frogState_ = WAITING_FOR_TONGUE;
+		frogState_ = DOING_ANIMATION;
 
 		tongueWaitTimer_.reset();
 		tongue_->setActive(true);

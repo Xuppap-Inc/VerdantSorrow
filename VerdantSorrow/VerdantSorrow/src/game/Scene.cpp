@@ -111,7 +111,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
-	player_->addComponent<SimpleGravity>(1); // 2
+	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>(100);
 
@@ -125,7 +125,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(120, playerTr->getHeight(), colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr->getHeight() * 1.8, -playerTr->getHeight() * 1.5 / 3, colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 
