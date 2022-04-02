@@ -61,6 +61,7 @@ void ControlsScene::createText(std::string message)
 
 void ControlsScene::update()
 {
+	handleInput();
 	mngr_->update();
 	mngr_->refresh();
 	sdlutils().clearRenderer();

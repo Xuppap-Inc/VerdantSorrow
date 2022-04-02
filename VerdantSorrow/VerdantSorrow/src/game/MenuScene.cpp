@@ -7,7 +7,7 @@
 #include "../components/Transform.h"
 
 
-MenuScene::MenuScene():Scene()
+MenuScene::MenuScene() :Scene()
 {
 
 }
@@ -16,11 +16,9 @@ void MenuScene::init()
 {
 	Scene::init();
 
-	background();//Dibuja el fondo
+	//background();//Dibuja el fondo
 
 	generateAllButtons(); //Genera todos los botones del menu (para ordenar mejor el codigo)
-
-
 
 }
 
@@ -40,27 +38,8 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 
 void MenuScene::update()
 {
-	auto& ihdlr = ih();
-	
-	if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
-	
-		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
-		{
-			auto ratonPos = ihdlr.getMousePos();
-			for (int i = 0; i < buttonPositions_.size(); ++i) 
-			{
-				//Para todos los botones comprueba si el raton esta sobre ellos
-				auto pos = buttonPositions_[i]->getPos();
-				if (ratonPos.first <=  pos.getX()+ buttonPositions_[i]->getWidth()
-					&& ratonPos.first >= pos.getX()&& ratonPos.second <= pos.getY() 
-					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-					onButtonClicked(i);
-				
-				}
-			}
-		}
-	}
+	handleInput();
 
 	mngr_->update();
 	mngr_->refresh();
@@ -100,13 +79,13 @@ void MenuScene::onButtonClicked(int index)
 		break;
 	case 5: //Boton quit
 		SDL_Quit();
-		break; 
-	
+		break;
+
 	}
-	
+
 }
 
-void MenuScene::generateAllButtons() 
+void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
 	int offsetY = 40, spacingX = 20, spacingY = 100, buttonW = 200, buttonH = 80, rows = 3;
@@ -129,5 +108,70 @@ void MenuScene::generateAllButtons()
 	}
 
 }
-	
+
+void MenuScene::handleInput()
+{
+	auto& ihdlr = ih();
+	if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
+
+		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
+		{
+			auto ratonPos = ihdlr.getMousePos();
+			for (int i = 0; i < buttonPositions_.size(); ++i)
+			{
+				//Para todos los botones comprueba si el raton esta sobre ellos
+				auto pos = buttonPositions_[i]->getPos();
+				if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
+					&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
+					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+
+					onButtonClicked(i);
+
+				}
+			}
+		}
+	}
+	if (ihdlr.controllerConnected())
+	{
+		if (ihdlr.isAxisMotionEvent())
+		{
+		
+			if(ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+			{
+				changeButton(1);
+			}
+			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
+			{
+				changeButton(3);
+
+			}
+			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
+			{
+				changeButton(-1);
+			}
+			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
+			{
+				changeButton(-3);
+			}
+			/*if(controllerIndex_ < buttonNames.size() && controllerIndex_ != -1) 
+				std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;*/
+
+		}
+		if (controllerIndex_ != -1 && ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
+		{
+			onButtonClicked(controllerIndex_);
+		}
+	}
+}
+
+void MenuScene::changeButton(int moves)
+{
+	if (controllerIndex_ < buttonNames.size() || controllerIndex_ == -1)
+	{
+		controllerIndex_ += moves;
+	}
+	else controllerIndex_ = -1;
+
+}
+
 
