@@ -75,7 +75,8 @@ private:
 	bool secondPhase_;
 	bool angry_;
 	bool jumping_;
-	int jumpDirection_;	
+	int jumpDirection_;
+	int oldJumpDirection_;
 	int jumpsUntilNextTongue_;
 	int flySpacing_;
 	bool attacking_;

@@ -113,11 +113,13 @@ void FrogAttackManager::update()
 		break;
 	case FLY_DIED:
 		if (!jumping_ && !jumpingBig_) {
-			bigJump_->attack(0);
+			
+			oldJumpDirection_ = jumpDirection_;
+			jumpDirection_ = 0;
 			tongue_->getComponent<TongueAttack>()->cancel();
 			tongue_->setActive(false);
 			jumpingBig_ = true;
-			frogState_ = JUMPING_BIG;
+			frogState_ = DOING_ANIMATION;
 			angry_ = true;
 			//Lanzar animacion de salto largo
 			animNewState_ = ANIM_BIG_JUMP;
@@ -133,7 +135,8 @@ void FrogAttackManager::update()
 	}if (animState_ != animNewState_) {
 		animState_ = animNewState_;
 
-		std::function<void()> attackCallback;
+		std::function<void()> callback;
+		std::function<void()> jumpCallback;
 
 		switch (animState_)
 		{
@@ -144,38 +147,51 @@ void FrogAttackManager::update()
 			break;
 		case FrogAttackManager::ANIM_JUMP:
 			anim_->repeat(false);
-			if (!secondPhase_) anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
-			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
-			if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
-			break;
-		case FrogAttackManager::ANIM_BIG_JUMP:
-			anim_->repeat(false);
+
+			jumpCallback = [this]() { frogState_ = JUMPING; frogJump_->attack(jumpDirection_); };
+
 			if (!secondPhase_) {
 				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
-				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_JUMP_TO_VULNERABLE;
+
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), jumpCallback);
 			}
 			else {
 				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
-				if (anim_->getFrameNum() == 32) animNewState_ = ANIM_IDLE;
+				
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), jumpCallback);
 			}
+			break;
+		case FrogAttackManager::ANIM_BIG_JUMP:
+			
+			anim_->repeat(false);
 
+			jumpCallback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
+
+			if (!secondPhase_) {
+				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), jumpCallback);
+			}
+			else {
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), jumpCallback);
+			}
 			break;
 		case FrogAttackManager::ANIM_TONGUE:
 			anim_->repeat(false);
 
 			//callback del ataque de la lengua
-			attackCallback = [this]() { frogState_ = CASTING_TONGUE; };
+			callback = [this]() { frogState_ = CASTING_TONGUE; };
 
 			if (!secondPhase_) {
 
 				anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
-				anim_->registerEvent(std::pair<int, std::string>(23, "rana_lengua"), attackCallback);
+				anim_->registerEvent(std::pair<int, std::string>(23, "rana_lengua"), callback);
 			}
 			
 			else {
 
 				anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana__enfadada_lengua");
-				anim_->registerEvent(std::pair<int, std::string>(23, "rana_enfadada_lengua"), attackCallback);
+				anim_->registerEvent(std::pair<int, std::string>(23, "rana_enfadada_lengua"), callback);
 			}
 
 			if (anim_->getFrameNum() == 24) anim_->select_sprite(6, 4);
@@ -183,22 +199,26 @@ void FrogAttackManager::update()
 		case FrogAttackManager::ANIM_CHANGE_PHASE:
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_cambio_fase"), 4, 6, (1000 / 30) * 23, 23, "rana_cambio_fase");
-			if (anim_->getFrameNum() == 23) animNewState_ = ANIM_IDLE;
+			callback = [this]() { animNewState_ = ANIM_IDLE; };
+			anim_->registerEvent(std::pair<int, std::string>(22, "rana_cambio_fase"), callback);
 			break;
 		case FrogAttackManager::ANIM_JUMP_TO_VULNERABLE:
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_salto_a_vulnerable"), 2, 6, (1000 / 30) * 10, 10, "rana_salto_a_vulnerable");
-			if (anim_->getFrameNum() == 10) animNewState_ = ANIM_VULNERABLE;
+			callback = [this]() { animNewState_ = ANIM_VULNERABLE; };
+			anim_->registerEvent(std::pair<int, std::string>(9, "rana_salto_a_vulnerable"), callback);
 			break;
 		case FrogAttackManager::ANIM_VULNERABLE:
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_vulnerable"), 4, 6, (1000 / 30) * 21, 21, "rana_vulnerable");
-			if (anim_->getFrameNum() == 10) animNewState_ = ANIM_VULNERABLE_TO_IDLE;
+			callback = [this]() { animNewState_ = ANIM_VULNERABLE_TO_IDLE; };
+			anim_->registerEvent(std::pair<int, std::string>(10, "rana_vulnerable"), callback);
 			break;
 		case FrogAttackManager::ANIM_VULNERABLE_TO_IDLE:
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_vulnerable_a_idle"), 1, 5, (1000 / 30) * 5, 5, "rana_vulnerable_a_idle");
-			if (anim_->getFrameNum() == 5) animNewState_ = ANIM_IDLE;
+			callback = [this]() { animNewState_ = ANIM_IDLE; frogState_ = CALC_NEXT_ATTACK; };
+			anim_->registerEvent(std::pair<int, std::string>(4, "rana_vulnerable_a_idle"), callback);
 			break;
 		case FrogAttackManager::ANIM_DEATH:
 			anim_->repeat(false);
@@ -285,15 +305,23 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	delay_ = sdlutils().rand().nextInt(1000, 2500);
 	lastUpdate_ = sdlutils().currRealTime();
 	if (isBig) {
-		if (secondPhase_) jumpsUntilNextTongue_--;
+		if (secondPhase_) {
+			jumpsUntilNextTongue_--;
+			animNewState_ = ANIM_IDLE;
+		}
+		else {
+			animNewState_ = ANIM_JUMP_TO_VULNERABLE; 
+			frogState_ = DOING_ANIMATION;
+		}
 		waveSp_->createWaves(200, 70, Vector2D(1, 0), tr_);
 		if (angry_) /*Volver a rana normal*/;
+
+		if (jumpDirection_ == 0) jumpDirection_ = oldJumpDirection_;
 	}
 	else {
 		jumpsUntilNextTongue_--;
+		animNewState_ = ANIM_IDLE;
 	}
-	//Iniciar animaci�n Idle y ponerla en repeticii�n, si esta en segunda fase poner idle de segunda fase -> !MIRIAM EL REPEAT DE FRAMED IMAGE ESTA INVERTIDO!
-	animNewState_ = ANIM_IDLE;
 }
 
 void FrogAttackManager::nextAttack()
@@ -329,13 +357,11 @@ void FrogAttackManager::nextAttack()
 		if (nextJump >= 30) {
 			//lanzar animacion de salto en el metodo attack
 			animNewState_ = ANIM_JUMP;
-			frogJump_->attack(jumpDirection_);
-			frogState_ = JUMPING;
+			frogState_ = DOING_ANIMATION;
 		}
 		else {
-			bigJump_->attack(jumpDirection_);
 			//lanzar animavion de salto en el metodo attack
-			frogState_ = JUMPING_BIG;
+			frogState_ = DOING_ANIMATION;
 			animNewState_ = ANIM_BIG_JUMP;
 		}
 
