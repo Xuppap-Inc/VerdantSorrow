@@ -78,9 +78,9 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					auto anim = player->getComponent<FramedImage>();
 
 					//slow de la animacion
-					std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
+					/*std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
 
-					anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);
+					anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
 
 					bA->setDamage(PLAYER_ATTACK_DMG);
 					player->getComponent<Transform>()->getVel().setY(0);

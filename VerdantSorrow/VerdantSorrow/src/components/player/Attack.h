@@ -28,6 +28,8 @@ public:
 	void initComponent() override;
 	void update() override;
 
+	void checkInput();
+
 	void attackAir(std::function<void()>& attackCallback);
 
 	void attackGround(std::function<void()>& attackCallback);
@@ -48,7 +50,9 @@ protected:
 
 	State state_;
 
-	const int TIME_UNTIL_RECOVERY = 500;
+	const int TIME_UNTIL_RECOVERY = 200;
+
+	const int COMBO_WINDOW = 2000;
 
 	const int MAX_COMBO = 3;
 
@@ -59,6 +63,7 @@ protected:
 	int attackCoolDown;
 	VirtualTimer cooldownTimer_;
 	VirtualTimer attackTimer_;
+	VirtualTimer comboTimer_;
 
 	//combo
 	bool comboFinished_;

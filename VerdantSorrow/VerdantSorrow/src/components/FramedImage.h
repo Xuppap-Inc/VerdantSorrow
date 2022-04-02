@@ -26,6 +26,8 @@ public:
 	void flipX(bool h);
 	void repeat(bool h);
 
+	bool hasFinished();
+
 	void slowAnimation(float factor, int nFrames = -1);
 	void cancelSlow();
 

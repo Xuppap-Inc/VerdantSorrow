@@ -243,6 +243,11 @@ void FramedImage::repeat(bool h)
 	completed_ = false;
 }
 
+bool FramedImage::hasFinished()
+{
+	return completed_;
+}
+
 void FramedImage::slowAnimation(float factor, int nFrames)
 {
 	slowed_ = true;
