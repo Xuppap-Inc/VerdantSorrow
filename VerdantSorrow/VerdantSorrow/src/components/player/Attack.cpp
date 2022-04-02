@@ -16,7 +16,7 @@ Attack::Attack(float width, float height, CollisionManager* colManager) :
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
-	attackButtons({ SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
+	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
 	setActive(false);
 	colMan_ = colManager;
