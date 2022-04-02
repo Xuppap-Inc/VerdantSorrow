@@ -92,7 +92,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	Frog = mngr_->addEntity();
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(40);
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(30);
 
 	auto frogH = 300;
 	auto frogW = frogH * 1.11f;
@@ -114,8 +114,6 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
-	////Frog->addComponent<FrogJump>(30);
-	////Frog->addComponent<FrogBigJump>(40);
 
 	Frog->addComponent<BossHPBar>();
 }
