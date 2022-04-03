@@ -9,10 +9,14 @@ private:
 	//Vector con los nombres de los botones aignados en "menu.json"
 	std::vector<std::string> buttonNames = {  "new_Game","continue","load", "settings", "controls","quit" };
 	std::vector<Transform *> buttonPositions_;
+	std::vector<Entity*> buttonPoperties_;
+	int mouseIndex_ = -1;
 	int controllerIndex_=-1;
-	bool allowChange_=true;
+	bool canMoveBack_=false;
 	float delay_=250;
 	float lastUpdate_=0;
+	int buttonW_=200, buttonH_=80;
+	int offsetX_ = 50;
 public:
 	MenuScene();
 	~MenuScene() {};
@@ -24,7 +28,8 @@ public:
 	//virtual void onButtonSelected(int index); //Version joystick
 	void generateAllButtons();
 	void handleInput();
-	void changeStyle();
+	void selectButton(int index);
 	void changeButton(int numMoves);
+	void deselectButton(int index);
 };
 

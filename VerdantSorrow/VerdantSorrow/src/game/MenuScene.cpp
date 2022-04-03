@@ -34,6 +34,7 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 	auto tr = newButton->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
 	newButton->addComponent<Image>(&sdlutils().images().at(buttonImage));
 	buttonPositions_.push_back(tr);
+	buttonPoperties_.push_back(newButton);
 }
 
 void MenuScene::update()
@@ -88,13 +89,13 @@ void MenuScene::onButtonClicked(int index)
 void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
-	int offsetY = 40, spacingX = 20, spacingY = 100, buttonW = 200, buttonH = 80, rows = 3;
+	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 3;
 
 	//Bucle que dibuja la primera columna (izq) de botones
 	for (int i = 0; i < rows; ++i)
 	{
-		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
-			buttonW, buttonH, buttonNames[i]);
+		createButton(sdlutils().width() / 2 - buttonW_, sdlutils().height() / 2 - offsetY + (i * spacingY),
+			buttonW_, buttonH_, buttonNames[i]);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
@@ -103,7 +104,7 @@ void MenuScene::generateAllButtons()
 	{
 
 		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
-			buttonW, buttonH, buttonNames[i]);
+			buttonW_, buttonH_, buttonNames[i]);
 		++j;
 	}
 
@@ -121,7 +122,7 @@ void MenuScene::handleInput()
 			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
 			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-			std::cout << "Sobre el boton: " + buttonNames[i] << std::endl;
+			selectButton(i);
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
@@ -131,13 +132,14 @@ void MenuScene::handleInput()
 				}
 			}
 		}
+		else  deselectButton(i);
 	}
-	
+
 	if (ihdlr.controllerConnected())
 	{
 		if (ihdlr.isAxisMotionEvent())
 		{
-			if (delay_ + lastUpdate_ < sdlutils().currRealTime()) 
+			if (delay_ + lastUpdate_ < sdlutils().currRealTime())
 			{
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
 				{
@@ -156,19 +158,27 @@ void MenuScene::handleInput()
 				{
 					changeButton(-3);
 				}
+				
+
 			}
 		}
-		if (controllerIndex_ != -1 && ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonPositions_.size())
 		{
-			onButtonClicked(controllerIndex_);
+			if(ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
+
+			selectButton(controllerIndex_);
 		}
 	}
 }
 
-void MenuScene::changeStyle()
+void MenuScene::selectButton(int index)
 {
+	mouseIndex_ = index;
+	auto image=buttonPoperties_[index]->getComponent<Image>();
+	image->setAlpha(127);
 
 }
+
 
 void MenuScene::changeButton(int moves)
 {
@@ -177,9 +187,14 @@ void MenuScene::changeButton(int moves)
 		controllerIndex_ += moves;
 	}
 	else controllerIndex_ = -1;
+
 	lastUpdate_ = sdlutils().currRealTime();
-	if (controllerIndex_ < buttonNames.size() && controllerIndex_ != -1)
-		std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;
+}
+
+void MenuScene::deselectButton(int index)
+{
+	auto image = buttonPoperties_[index]->getComponent<Image>();
+	image->setAlpha(255);
 }
 
 
