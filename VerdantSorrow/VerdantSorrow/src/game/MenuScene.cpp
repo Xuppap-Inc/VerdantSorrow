@@ -112,25 +112,27 @@ void MenuScene::generateAllButtons()
 void MenuScene::handleInput()
 {
 	auto& ihdlr = ih();
-	if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
+	auto ratonPos = ihdlr.getMousePos();
+	for (int i = 0; i < buttonPositions_.size(); ++i)
+	{
+		//Para todos los botones comprueba si el raton esta sobre ellos
+		auto pos = buttonPositions_[i]->getPos();
+		if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
+			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
+			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
-		{
-			auto ratonPos = ihdlr.getMousePos();
-			for (int i = 0; i < buttonPositions_.size(); ++i)
-			{
-				//Para todos los botones comprueba si el raton esta sobre ellos
-				auto pos = buttonPositions_[i]->getPos();
-				if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
-					&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
-					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+			std::cout << "Sobre el boton: " + buttonNames[i] << std::endl;
 
+			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
+
+				if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
+				{
 					onButtonClicked(i);
-
 				}
 			}
 		}
 	}
+	
 	if (ihdlr.controllerConnected())
 	{
 		if (ihdlr.isAxisMotionEvent())
