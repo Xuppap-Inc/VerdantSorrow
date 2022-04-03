@@ -62,6 +62,9 @@ void Hub::init()
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
 
+	musica_ = &sdlutils().musics().at("musica_hub");
+	musica_->play();
+	musica_->setMusicVolume(60);
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)

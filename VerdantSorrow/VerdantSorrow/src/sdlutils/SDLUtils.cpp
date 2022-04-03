@@ -336,7 +336,7 @@ void SDLUtils::closeSDLExtensions() {
 
 void SDLUtils::renderProgressBar(int assetsLoaded)
 {
-	SDL_RenderClear(renderer_);
+	clearRenderer(build_sdlcolor(0x000000FF));
 
 	float maxBarLength = width_ * 0.6f;
 	Vector2D pos = Vector2D((width_ - maxBarLength) / 2, height_ * 0.8);
@@ -348,8 +348,8 @@ void SDLUtils::renderProgressBar(int assetsLoaded)
 	SDL_RenderFillRect(renderer_, &r);
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
 	SDL_RenderFillRect(renderer_, &r2);
-
-	SDL_RenderPresent(renderer_);
+	
+	presentRenderer();
 }
 
 void SDLUtils::freeMemory()
