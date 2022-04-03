@@ -1,6 +1,6 @@
 {
 
-  "assets" : 16,
+  "assets" : 18,
   
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -53,10 +53,22 @@
     { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
   ],
 
-  "dialogs" : [
+  "dialogs": [
     {
-      "id": "npc1",
-      "file": "The guardians lost their mind when the   wave of magic arrived, it had strongly   impacts on them. I remember when they    fell off screaming out loud things       completely meaningless, and then...then.. changed, they...now...no...they are...   other...thing."
+      "id": "npc1_dialogue1",
+      "file": "The guardians lost their mind when the   wave of magic arrived, it had strongly   impacts on them. I remember when they    fell off screaming out loud things       completely meaningless, and then...then.. changed, they...now...no...they are...   other...thing"
+    },
+    {
+      "id": "npc1_dialogue2",
+      "file": "Is it true what they say? Have you       finished with that... thing? I cannot    believe it, how did we end up in this    situation? A frog, an enormous frog and  before...before it was the guardian Gustav"
+    },
+    {
+      "id": "npc1_dialogue3",
+      "file": "Two! You have killed two of them! That   means that Lumine is free again. When the guardian transformed himself into that   sinister tree, he started to repeat 'I am root...I am root...I am root!'"
+    },
+    {
+      "id": "npc1_dialogue4",
+      "file": "Unbelievable! You escaped without injury and nothing but Etheria in your hands.   After all, we can say that you have 'Good eye and good hands for this situations'  hahahaha, do you get it?                 Because of the guardian...the hands...the ey...it doesn't matter"
     }
   ]
 }
