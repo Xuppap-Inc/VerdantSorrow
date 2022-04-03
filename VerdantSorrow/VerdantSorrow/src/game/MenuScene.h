@@ -11,6 +11,8 @@ private:
 	std::vector<Transform *> buttonPositions_;
 	int controllerIndex_=-1;
 	bool allowChange_=true;
+	float delay_=250;
+	float lastUpdate_=0;
 public:
 	MenuScene();
 	~MenuScene() {};

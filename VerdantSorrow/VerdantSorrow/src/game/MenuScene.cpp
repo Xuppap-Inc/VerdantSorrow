@@ -112,56 +112,62 @@ void MenuScene::generateAllButtons()
 void MenuScene::handleInput()
 {
 	auto& ihdlr = ih();
-	if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
+	auto ratonPos = ihdlr.getMousePos();
+	for (int i = 0; i < buttonPositions_.size(); ++i)
+	{
+		//Para todos los botones comprueba si el raton esta sobre ellos
+		auto pos = buttonPositions_[i]->getPos();
+		if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
+			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
+			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-		if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
-		{
-			auto ratonPos = ihdlr.getMousePos();
-			for (int i = 0; i < buttonPositions_.size(); ++i)
-			{
-				//Para todos los botones comprueba si el raton esta sobre ellos
-				auto pos = buttonPositions_[i]->getPos();
-				if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
-					&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
-					+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+			std::cout << "Sobre el boton: " + buttonNames[i] << std::endl;
 
+			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
+
+				if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
+				{
 					onButtonClicked(i);
-
 				}
 			}
 		}
 	}
+	
 	if (ihdlr.controllerConnected())
 	{
 		if (ihdlr.isAxisMotionEvent())
 		{
-		
-			if(ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+			if (delay_ + lastUpdate_ < sdlutils().currRealTime()) 
 			{
-				changeButton(1);
-			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
-			{
-				changeButton(3);
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+				{
+					changeButton(1);
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
+				{
+					changeButton(3);
 
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
+				{
+					changeButton(-1);
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
+				{
+					changeButton(-3);
+				}
 			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
-			{
-				changeButton(-1);
-			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
-			{
-				changeButton(-3);
-			}
-			/*if(controllerIndex_ < buttonNames.size() && controllerIndex_ != -1) 
-				std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;*/
-
 		}
 		if (controllerIndex_ != -1 && ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
 		{
 			onButtonClicked(controllerIndex_);
 		}
 	}
+}
+
+void MenuScene::changeStyle()
+{
+
 }
 
 void MenuScene::changeButton(int moves)
@@ -171,7 +177,9 @@ void MenuScene::changeButton(int moves)
 		controllerIndex_ += moves;
 	}
 	else controllerIndex_ = -1;
-
+	lastUpdate_ = sdlutils().currRealTime();
+	if (controllerIndex_ < buttonNames.size() && controllerIndex_ != -1)
+		std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;
 }
 
 
