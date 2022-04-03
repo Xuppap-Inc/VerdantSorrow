@@ -1,6 +1,6 @@
 {
 
-  "assets" : 18,
+  "assets" : 23,
   
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -69,6 +69,26 @@
     {
       "id": "npc1_dialogue4",
       "file": "Unbelievable! You escaped without injury and nothing but Etheria in your hands.   After all, we can say that you have 'Good eye and good hands for this situations'  hahahaha, do you get it?                 Because of the guardian...the hands...the ey...it doesn't matter"
+    },
+
+    {
+      "id": "npc2_dialogue1",
+      "file": "We arrived at this clearing a few months ago, before the magic disappeared, before the guardians arrived. Daddy was so      afraid and told me to come here, that    essences would protect us, and the       guardians would too"
+    },
+    {
+      "id": "npc2_dialogue2",
+      "file": "That thick and ugly and unpleasant frog  scared me, and as well she made that     everything was full of  flies  that came to my food"
+
+    },
+    {
+      "id": "npc2_dialogue3",
+      "file": "You have ended with that stupid tree, and you took his lantern. From now on I won't be scared of looking for fireflies"
+    },
+    {
+      "id": "npc2_dialogue4",
+      "file": "The ground doesn't tremble anymore, so... you ended with that nasty monster! His   hands were enormous and they made PLOM    PLOM PLOM how did you do it?"
     }
+
+
   ]
 }
