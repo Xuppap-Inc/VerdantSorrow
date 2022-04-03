@@ -90,12 +90,13 @@ void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
 	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 3;
+	int buttonW = 200, buttonH = 80; // Width y Height de los botones
 
 	//Bucle que dibuja la primera columna (izq) de botones
 	for (int i = 0; i < rows; ++i)
 	{
-		createButton(sdlutils().width() / 2 - buttonW_, sdlutils().height() / 2 - offsetY + (i * spacingY),
-			buttonW_, buttonH_, buttonNames[i]);
+		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
+			buttonW, buttonH, buttonNames[i]);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
@@ -104,7 +105,7 @@ void MenuScene::generateAllButtons()
 	{
 
 		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
-			buttonW_, buttonH_, buttonNames[i]);
+			buttonW, buttonH, buttonNames[i]);
 		++j;
 	}
 

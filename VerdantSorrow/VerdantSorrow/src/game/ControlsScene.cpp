@@ -20,7 +20,7 @@ void ControlsScene::init()
 
 	int buttonWH = 50, imageW=800,imageH=300; //Ancho y alto del boton e imagen
 	createButton(0, sdlutils().height()-buttonWH, buttonWH, buttonWH, "back");
-	//createImages(sdlutils().width() / 2-(imageW/2), sdlutils().height() / 2 - (imageH/ 2), imageW, imageH, "keyboardControls");
+	createImages(sdlutils().width() / 2-(imageW/2), sdlutils().height() / 2 - (imageH/ 2), imageW, imageH, "keyboardControls");
 
 }
 //
@@ -54,7 +54,7 @@ void ControlsScene::createText(std::string message)
 		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
 	SDL_Rect dest = build_sdlrect(
-		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height() - 200.0f, text.width(), text.height());
+		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());
 
 	text.render(dest);
 }

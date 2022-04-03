@@ -16,6 +16,7 @@ SceneManager::SceneManager() : actScene(Hub_)
 	tut_ = new TutorialScene(); sceneList.push_back(tut_);
 	menu_ = new MenuScene(); sceneList.push_back(menu_);
 	controls_ = new ControlsScene(); sceneList.push_back(controls_);
+	pauseMenu_ = new PauseMenu(); sceneList.push_back(pauseMenu_);
 }
 
 
@@ -51,6 +52,9 @@ void SceneManager::update()
 		break;
 	case SceneManager::Controls_:
 		controls_->update();
+		break; 
+	case SceneManager::PauseMenu_:
+		pauseMenu_->update();
 		break;
 	default:
 		break;
@@ -91,6 +95,10 @@ void SceneManager::init()
 		sdlUtils_.loadReasources("resources/config/controls.json");
 		controls_->init();
 		break;
+	case SceneManager::PauseMenu_:
+		sdlUtils_.loadReasources("resources/config/pauseMenu.json");
+		pauseMenu_->init();
+		break;
 	default:
 		break;
 	}
@@ -124,7 +132,7 @@ void SceneManager::decideScene()
 		actScene = Tree_;
 		fin_->setAble(true);
 	}
-	else if (fin_->getAble()){
+	else if (fin_->getAble()) {
 		actScene = Eye_;
 	}
 	init();
