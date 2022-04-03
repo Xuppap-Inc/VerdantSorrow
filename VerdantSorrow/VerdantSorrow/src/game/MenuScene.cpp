@@ -40,7 +40,7 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 void MenuScene::update()
 {
 
-	handleInput();
+	handleInput(); //Metodo para control de input
 
 	mngr_->update();
 	mngr_->refresh();
@@ -122,7 +122,7 @@ void MenuScene::handleInput()
 			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
 			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-			selectButton(i);
+			selectButton(i); 
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
@@ -135,26 +135,26 @@ void MenuScene::handleInput()
 		else  deselectButton(i);
 	}
 
-	if (ihdlr.controllerConnected())
+	if (ihdlr.controllerConnected()) //Input con el mando
 	{
 		if (ihdlr.isAxisMotionEvent())
 		{
 			if (delay_ + lastUpdate_ < sdlutils().currRealTime())
 			{
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9) //Movimiento hacia abajo
 				{
-					changeButton(1);
+					changeButton(1); //Suma una posicion
 				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
 				{
-					changeButton(3);
+					changeButton(3); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
 
 				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba
 				{
 					changeButton(-1);
 				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
 				{
 					changeButton(-3);
 				}
@@ -171,27 +171,30 @@ void MenuScene::handleInput()
 	}
 }
 
-void MenuScene::selectButton(int index)
+void MenuScene::selectButton(int index) //Metodo que cambia aspecto del boton cuando el cursor o mando estan sobre éste
 {
+	//Mouse index guarda el indice del boton sobre el que se encuentra el raton
 	mouseIndex_ = index;
 	auto image=buttonPoperties_[index]->getComponent<Image>();
-	image->setAlpha(127);
+	image->setAlpha(127); //Baja la opacidad del boton
 
 }
 
 
-void MenuScene::changeButton(int moves)
+void MenuScene::changeButton(int moves) //Controla la lógica entre el cambio de botones seleccionados con el mando
 {
+	//Controller index guarda el indice del boton sobre el que se encuentra el raton
+
 	if (controllerIndex_ < buttonNames.size() || controllerIndex_ == -1)
 	{
-		controllerIndex_ += moves;
+		controllerIndex_ += moves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
 	}
 	else controllerIndex_ = -1;
 
-	lastUpdate_ = sdlutils().currRealTime();
+	lastUpdate_ = sdlutils().currRealTime(); //Para controlar el delay entre cambio de botones con mando
 }
 
-void MenuScene::deselectButton(int index)
+void MenuScene::deselectButton(int index) //Devuelve el aspecto original al boton cuando el cursor o mando dejan de estar sobre éste
 {
 	auto image = buttonPoperties_[index]->getComponent<Image>();
 	image->setAlpha(255);
