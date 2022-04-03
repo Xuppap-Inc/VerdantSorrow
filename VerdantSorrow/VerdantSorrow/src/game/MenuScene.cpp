@@ -135,33 +135,37 @@ void MenuScene::handleInput()
 	{
 		if (ihdlr.isAxisMotionEvent())
 		{
-		
-			if(ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+			if (delay_ + lastUpdate_ < sdlutils().currRealTime()) 
 			{
-				changeButton(1);
-			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
-			{
-				changeButton(3);
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9)
+				{
+					changeButton(1);
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9)
+				{
+					changeButton(3);
 
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
+				{
+					changeButton(-1);
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
+				{
+					changeButton(-3);
+				}
 			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9)
-			{
-				changeButton(-1);
-			}
-			if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9)
-			{
-				changeButton(-3);
-			}
-			/*if(controllerIndex_ < buttonNames.size() && controllerIndex_ != -1) 
-				std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;*/
-
 		}
 		if (controllerIndex_ != -1 && ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A))
 		{
 			onButtonClicked(controllerIndex_);
 		}
 	}
+}
+
+void MenuScene::changeStyle()
+{
+
 }
 
 void MenuScene::changeButton(int moves)
@@ -171,7 +175,9 @@ void MenuScene::changeButton(int moves)
 		controllerIndex_ += moves;
 	}
 	else controllerIndex_ = -1;
-
+	lastUpdate_ = sdlutils().currRealTime();
+	if (controllerIndex_ < buttonNames.size() && controllerIndex_ != -1)
+		std::cout << "Sobre el boton: " + buttonNames[controllerIndex_] << std::endl;
 }
 
 
