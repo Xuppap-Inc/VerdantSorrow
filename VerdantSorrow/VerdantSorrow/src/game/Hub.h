@@ -9,9 +9,9 @@ public:
 	~Hub();
 	void init();
 
-	virtual void update () override;
+	virtual void update() override;
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
-	void EntryGenerator(CollisionManager* colManager,float posX, float posY);
+	void EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY);
 	void NPCGenerator(CollisionManager* colManager, Entity* dialogBox_);
 	void dialogBoxGenerator(Entity* dialogBox);
 	bool getAble();
@@ -24,6 +24,9 @@ private:
 	bool isAble;
 	bool changeSc;
 	Entity* player;
+	Entity* entryFrog;
+	Entity* entryTree;
+	Entity* entryEye;
 
 	Music* musica_;
 };

@@ -53,11 +53,12 @@ void Hub::init()
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 	//Genera las entradas a los bosses
 		//entrada a la rana
-	EntryGenerator(colManager, 0, 250);
+	EntryGenerator(entryFrog, colManager, 0, 250);
 	//Entrada al ojo
-	EntryGenerator(colManager, sdlutils().width() - 100, 100);
+	EntryGenerator(entryTree, colManager, sdlutils().width() - 100, 100);
 	//Entrada al arbol
-	EntryGenerator(colManager, sdlutils().width()-100, sdlutils().height()-100);
+	EntryGenerator(entryEye, colManager, sdlutils().width() - 100, sdlutils().height() - 100);
+
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
@@ -160,27 +161,27 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_PLAYER, player);
 }
 
-void Hub::EntryGenerator(CollisionManager* colManager, float posX, float posY)
+void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY)
 {
-	auto frogEntry = mngr_->addEntity();
+	entry = mngr_->addEntity();
 
-	auto frogEntryTr = frogEntry->addComponent<Transform>();
-	auto frogEntryX = 0;
-	auto frogEntryY = sdlutils().height() / 4 * 3;
-	frogEntryTr->init(Vector2D(posX, posY), Vector2D(), 100, 100, 0.0f);
+	auto entryTr = entry->addComponent<Transform>();
+	auto entryX = 0;
+	auto entryY = sdlutils().height() / 4 * 3;
+	entryTr->init(Vector2D(posX, posY), Vector2D(), 100, 100, 0.0f);
 
-	frogEntry->addComponent<RectangleRenderer>();
+	entry->addComponent<RectangleRenderer>();
 
-	auto frogEntryCollider = frogEntry->addComponent<RectangleCollider>(frogEntryTr->getWidth(), frogEntryTr->getHeight());
-	colManager->addCollider(frogEntryCollider);
-	frogEntryCollider->setIsTrigger(true);
+	auto entryCollider = entry->addComponent<RectangleCollider>(entryTr->getWidth(), entryTr->getHeight());
+	colManager->addCollider(entryCollider);
+	entryCollider->setIsTrigger(true);
 }
 
 void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(sdlutils().width()/2, 360), Vector2D(), 50, 100, 0.0f, false);
+	npctr->init(Vector2D(sdlutils().width() / 2, 360), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().images().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);
