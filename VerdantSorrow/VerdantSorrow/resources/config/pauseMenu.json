@@ -1,5 +1,5 @@
 {
-    "assets" : 10,
+    "assets": 10,
 
     "fonts": [
         {
@@ -37,6 +37,10 @@
         {
             "id": "quit",
             "file": "resources/images/MenuPrincipal/quitButton.png"
+        },
+        {
+            "id": "volume",
+            "file": "resources/images/MenuPausa/audioButton.png"
         }
     ],
 
@@ -45,6 +49,10 @@
     "sounds": [
     ],
     "musics": [
+        {
+            "id": "musica_rana_fase2",
+            "file": "resources/sound/musica_rana_fase2.wav"
+        }
     ]
 
 }
