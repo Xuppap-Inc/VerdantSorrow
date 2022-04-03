@@ -16,7 +16,7 @@
 #include "../components/player/PlayerHubControl.h"
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
-#include "../components/Camera.h"
+#include "../components/ScrollCamera.h"
 
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
@@ -49,7 +49,7 @@ void Hub::init()
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
-	auto cameraC = camera->addComponent<Camera>();
+	auto cameraC = camera->addComponent<ScrollCamera>(2);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 	//Genera las entradas a los bosses
 		//entrada a la rana
@@ -61,7 +61,7 @@ void Hub::init()
 
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
-	NPCGenerator(colManager, dialogBox);
+	//NPCGenerator(colManager, dialogBox);
 
 	musica_ = &sdlutils().musics().at("musica_hub");
 	musica_->play();
@@ -144,8 +144,8 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 	//Se le a�ade el transform
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 - 25;
-	auto playerY = sdlutils().height() / 2 - 25;
+	auto playerX = sdlutils().width() / 2 ;
+	auto playerY = sdlutils().height() / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, false);
 
@@ -164,7 +164,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>();
-	mngr_->setHandler(ecs::_PLAYER, player);
+	mngr_->setHandler(ecs::_PLAYER, player_);
 }
 
 void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY)
