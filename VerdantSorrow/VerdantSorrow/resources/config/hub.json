@@ -42,6 +42,11 @@
         "id": "fondoHub",
         "file": "resources/images/fondoHub.jpg"
     }
+    ,
+    {
+      "id": "spritesheet_hoguera",
+      "file": "resources/images/spritesheet_hoguera.png"
+    }
 
   ],
 

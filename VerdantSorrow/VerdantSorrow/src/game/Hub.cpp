@@ -66,6 +66,12 @@ void Hub::init()
 	musica_ = &sdlutils().musics().at("musica_hub");
 	musica_->play();
 	musica_->setMusicVolume(60);
+
+	auto hoguera = mngr_->addEntity();
+	auto hogueraTr = hoguera->addComponent<Transform>();
+	hogueraTr->init(Vector2D(100, 300), Vector2D(), 10, 20, 0.0f);
+	hogueraTr->setScale(0.25);
+	hoguera->addComponent<FramedImage>(&sdlutils().images().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)
