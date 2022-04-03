@@ -24,4 +24,6 @@ private:
 	bool isAble;
 	bool changeSc;
 	Entity* player;
+
+	Music* musica_;
 };
