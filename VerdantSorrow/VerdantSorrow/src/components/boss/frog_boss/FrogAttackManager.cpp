@@ -91,7 +91,7 @@ void FrogAttackManager::update()
 			tongue_->setActive(false);
 			tongue_->getComponent<RectangleRenderer>()->setVisible(false);
 
-			delay_ = rand.nextInt(1000, 3000);
+			delay_ = 500;
 			lastUpdate_ = sdlutils().currRealTime();
 		}
 
@@ -136,7 +136,7 @@ void FrogAttackManager::update()
 		animState_ = animNewState_;
 
 		std::function<void()> callback;
-		std::function<void()> jumpCallback;
+		std::function<void()> callback2;
 
 		switch (animState_)
 		{
@@ -148,32 +148,32 @@ void FrogAttackManager::update()
 		case FrogAttackManager::ANIM_JUMP:
 			anim_->repeat(false);
 
-			jumpCallback = [this]() { frogState_ = JUMPING; frogJump_->attack(jumpDirection_); };
+			callback = [this]() { frogState_ = JUMPING; frogJump_->attack(jumpDirection_); };
 
 			if (!secondPhase_) {
 				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
 
-				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), jumpCallback);
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), callback);
 			}
 			else {
 				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
 				
-				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), jumpCallback);
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), callback);
 			}
 			break;
 		case FrogAttackManager::ANIM_BIG_JUMP:
 			
 			anim_->repeat(false);
 
-			jumpCallback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
+			callback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
 
 			if (!secondPhase_) {
 				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
-				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), jumpCallback);
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), callback);
 			}
 			else {
 				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
-				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), jumpCallback);
+				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), callback);
 			}
 			break;
 		case FrogAttackManager::ANIM_TONGUE:
@@ -181,16 +181,19 @@ void FrogAttackManager::update()
 
 			//callback del ataque de la lengua
 			callback = [this]() { frogState_ = CASTING_TONGUE; };
+			callback2 = [this]() { anim_->slowAnimation(30, 1); };
 
 			if (!secondPhase_) {
 
 				anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
+				anim_->registerEvent(std::pair<int, std::string>(22, "rana_lengua"), callback2);
 				anim_->registerEvent(std::pair<int, std::string>(23, "rana_lengua"), callback);
 			}
 			
 			else {
 
-				anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana__enfadada_lengua");
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_lengua");
+				anim_->registerEvent(std::pair<int, std::string>(22, "rana_enfadada_lengua"), callback2);
 				anim_->registerEvent(std::pair<int, std::string>(23, "rana_enfadada_lengua"), callback);
 			}
 
@@ -212,7 +215,7 @@ void FrogAttackManager::update()
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_vulnerable"), 4, 6, (1000 / 30) * 21, 21, "rana_vulnerable");
 			callback = [this]() { animNewState_ = ANIM_VULNERABLE_TO_IDLE; };
-			anim_->registerEvent(std::pair<int, std::string>(10, "rana_vulnerable"), callback);
+			anim_->registerEvent(std::pair<int, std::string>(20, "rana_vulnerable"), callback);
 			break;
 		case FrogAttackManager::ANIM_VULNERABLE_TO_IDLE:
 			anim_->repeat(false);

@@ -27,4 +27,6 @@ private:
 	Entity* entryFrog;
 	Entity* entryTree;
 	Entity* entryEye;
+
+	Music* musica_;
 };
