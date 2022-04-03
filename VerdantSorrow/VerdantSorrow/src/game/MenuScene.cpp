@@ -40,7 +40,7 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 void MenuScene::update()
 {
 
-	handleInput(); //Metodo para control de input
+	handleInput(); //Metodo para control de input 
 
 	mngr_->update();
 	mngr_->refresh();
@@ -113,6 +113,12 @@ void MenuScene::generateAllButtons()
 
 void MenuScene::handleInput()
 {
+	handleMouseInput();
+	handleControllerInput();
+}
+
+void MenuScene::handleMouseInput()
+{
 	auto& ihdlr = ih();
 	auto ratonPos = ihdlr.getMousePos();
 	for (int i = 0; i < buttonPositions_.size(); ++i)
@@ -123,7 +129,7 @@ void MenuScene::handleInput()
 			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
 			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-			selectButton(i); 
+			selectButton(i);
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
@@ -135,7 +141,11 @@ void MenuScene::handleInput()
 		}
 		else  deselectButton(i);
 	}
+}
 
+void MenuScene::handleControllerInput()
+{
+	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
 	{
 		if (ihdlr.isAxisMotionEvent())
@@ -159,13 +169,13 @@ void MenuScene::handleInput()
 				{
 					changeButton(-3);
 				}
-				
+
 
 			}
 		}
-		if (controllerIndex_ != -1 && controllerIndex_ < buttonPositions_.size())
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames.size())
 		{
-			if(ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
+			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
 
 			selectButton(controllerIndex_);
 		}

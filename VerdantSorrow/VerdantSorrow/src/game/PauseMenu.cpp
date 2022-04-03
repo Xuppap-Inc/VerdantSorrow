@@ -1,4 +1,6 @@
 #include "PauseMenu.h"
+#include "../sdlutils/InputHandler.h"
+
 
 PauseMenu::PauseMenu()
 {
@@ -39,4 +41,46 @@ void PauseMenu::generateAllButtons()
 	{
 		createButton((sdlutils().width() / 2)-iniX +(i*spacingX), sdlutils().height()/2, buttonW, buttonH, buttonNames[i]);
 	}
+}
+
+void PauseMenu::handleControllerInput()
+{
+	auto& ihdlr = ih();
+	if (ihdlr.controllerConnected()) //Input con el mando
+	{
+		if (ihdlr.isAxisMotionEvent())
+		{
+			if (delay_ + lastUpdate_ < sdlutils().currRealTime())
+			{
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
+				{
+					changeButton(1); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
+
+				}
+				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
+				{
+					changeButton(-1);
+				}
+
+			}
+		}
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames.size())
+		{
+			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
+
+			selectButton(controllerIndex_);
+		}
+	}
+}
+void PauseMenu::changeButton(int moves) //Controla la lógica entre el cambio de botones seleccionados con el mando
+{
+	//Controller index guarda el indice del boton sobre el que se encuentra el raton
+
+	if (controllerIndex_ < buttonNames.size() || controllerIndex_ == -1)
+	{
+		controllerIndex_ += moves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
+	}
+	else controllerIndex_ = -1;
+
+	lastUpdate_ = sdlutils().currRealTime(); //Para controlar el delay entre cambio de botones con mando
 }
