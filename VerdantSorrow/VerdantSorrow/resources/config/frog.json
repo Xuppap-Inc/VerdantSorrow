@@ -184,6 +184,7 @@
     { "id" : "sfx_mosca_idle", "file" : "resources/sound/sfx_mosca_idle.wav" },
     { "id" : "sfx_rana_attack", "file" : "resources/sound/sfx_rana_attack.wav" },
     { "id" : "sfx_rana_lengua", "file" : "resources/sound/sfx_rana_lengua.wav" },
+    { "id" : "sfx_rana_damage", "file" : "resources/sound/sfx_rana_damage.wav" },
     { "id" : "sfx_boss_defeated", "file" : "resources/sound/sfx_boss_defeated.wav" },
     { "id" : "sfx_descubrir_rana", "file" : "resources/sound/sfx_descubrir_rana.wav" }
   ],
