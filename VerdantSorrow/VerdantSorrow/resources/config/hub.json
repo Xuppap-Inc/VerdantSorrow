@@ -54,6 +54,9 @@
   ],
 
   "dialogs" : [
-    { "id" : "npc1", "file" : "a"}
+    {
+      "id": "npc1",
+      "file": "The guardians lost their mind when the   wave of magic arrived, it had strongly   impacts on them. I remember when they    fell off screaming out loud things       completely meaningless, and then...then.. changed, they...now...no...they are...   other...thing."
+    }
   ]
 }
