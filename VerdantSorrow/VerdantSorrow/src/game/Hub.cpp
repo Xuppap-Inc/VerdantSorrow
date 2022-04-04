@@ -163,7 +163,6 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 25, 25, "walk_Kyna");
 	player_->addComponent<FramedImage>(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 
-
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>();
 	mngr_->setHandler(ecs::_PLAYER, player_);

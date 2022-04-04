@@ -60,6 +60,9 @@ void PlayerHubControl::initComponent()
 	assert(attrib_ != nullptr);
 	playerCol_ = ent_->getComponent<RectangleCollider>();
 	assert(playerCol_ != nullptr);
+
+	anim_ = ent_->getComponent<FramedImage>();
+	assert(anim_ != nullptr);
 }
 
 void PlayerHubControl::handleInput()
@@ -114,4 +117,11 @@ void PlayerHubControl::handleInput()
 			moveUp_ = false; moveDown_ = false;
 		}
 	}
+
+
+	//if (moveDown_)
+	//	anim_->changeanim(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 30, 30, "walk_Kyna");
+
+	//if (!moveUp_ && !moveDown_ && !moveLeft_ && !moveRight_)
+	//	anim_->changeanim(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 30, 30, "walk_Kyna");
 }

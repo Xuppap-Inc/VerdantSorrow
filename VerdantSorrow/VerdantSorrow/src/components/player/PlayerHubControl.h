@@ -3,6 +3,7 @@
 #include "PlayerAttributes.h"
 #include "../RectangleCollider.h"
 #include "../../game/CollisionManager.h"
+#include "../FramedImage.h"
 #include <SDL.h>
 class Transform;
 class PlayerHubControl: public ecs::Component
@@ -21,6 +22,7 @@ private:
 	float speed_;
 	PlayerAttributes* attrib_;
 	CollisionManager* colMan_;
+	FramedImage* anim_;
 
 	bool moveLeft_, moveRight_, moveUp_, moveDown_,isTalking_;
 };
