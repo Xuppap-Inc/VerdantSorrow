@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\Fondos\Capas.h" />
+    <ClInclude Include="src\components\fondos\Parallax.h" />
     <ClInclude Include="src\components\fondos\Light.h" />
     <ClInclude Include="src\game\PauseMenu.h" />
     <ClInclude Include="src\components\fondos\ShowAtOppositeSide.h" />
@@ -109,6 +111,8 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\Fondos\Capas.cpp" />
+    <ClCompile Include="src\components\fondos\Parallax.cpp" />
     <ClCompile Include="src\components\fondos\Light.cpp" />
     <ClCompile Include="src\game\PauseMenu.cpp" />
     <ClCompile Include="src\components\fondos\ShowAtOppositeSide.cpp" />
