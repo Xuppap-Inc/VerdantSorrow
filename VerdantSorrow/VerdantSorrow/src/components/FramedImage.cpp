@@ -276,6 +276,8 @@ bool FramedImage::isVisible()
 
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
+	if (currentAnim == newAnim) return;
+
 	totalAnimationTime_ = time;
 	iniTotalAnimTime_ = totalAnimationTime_;
 	tex_ = tex;
