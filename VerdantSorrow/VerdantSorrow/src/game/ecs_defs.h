@@ -63,9 +63,11 @@
 
 // Groups list - must have at least one element
 //
-//#define _GRPS_LIST_ \
-//	_STAR_GRP_, \
-//	_ASTEROID_GRP
+#define _GRPS_LIST_ \
+	_BACKGROUND_GRP, \
+	_HUB_DECORATION_GRP, \
+	_BOSS_GRP,\
+	_BOSSELEMENTS_GRP
 
 // Handlers list - must have at least one element
 //

@@ -118,6 +118,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	colManager->addCollider(bossCollider);
 
 	FinalBossFace->addComponent<BossHPBar>();
+	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
 }
 
 bool FinalBossScene::getAble()

@@ -9,6 +9,7 @@
 #include "Component.h"
 #include "ecs.h"
 #include "Entity.h"
+#include "../game/SceneManager.h"
 
 namespace ecs {
 
@@ -90,9 +91,38 @@ public:
 	// call render of all entities
 	//
 	void render() {
-		auto n = ents_.size();
-		for (auto i = 0u; i < n; i++)
-			ents_[i]->render();
+		if (SceneManager::scenes::Eye_ == sC().getScene()|| SceneManager::scenes::Tree_ == sC().getScene() || SceneManager::scenes::Eye_ == sC().getScene()) {
+			auto entitiesBackground = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
+			auto e = entitiesBackground.size();
+			for (auto i = 0; i < e; i++)
+			{
+				entitiesBackground[i]->render();
+			}
+			auto entitiesHubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
+			e = entitiesHubDecoration.size();
+			for (auto i = 0; i < e; i++)
+			{
+				entitiesHubDecoration[i]->render();
+			}
+			auto entitiesBoss = getEntitiesByGroup(ecs::_BOSS_GRP);
+			e = entitiesBoss.size();
+			for (auto i = 0; i < e; i++)
+			{
+				entitiesBoss[i]->render();
+			}
+			auto entities = getEntitiesByGroup(ecs::_BOSSELEMENTS_GRP);
+			e = entities.size();
+			for (auto i = 0; i < e; i++)
+			{
+				entities[i]->render();
+			}
+			getHandler(ecs::_PLAYER)->render();
+		}
+		else{
+			auto n = ents_.size();
+			for (auto i = 0u; i < n; i++)
+				ents_[i]->render();
+		}
 	}
 
 	//call debug of all entities

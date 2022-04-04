@@ -43,4 +43,5 @@ void RootSpawner::createRoot(int x)
 	collManager_->addCollider(RootCollider);
 	//Se añade el movimiento vertical
 	Root->addComponent<RootMovement>();
+	Root->addToGroup(ecs::_BOSS_GRP);
 }

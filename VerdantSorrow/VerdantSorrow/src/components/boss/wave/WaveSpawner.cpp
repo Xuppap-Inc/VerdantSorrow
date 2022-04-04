@@ -47,6 +47,7 @@ void WaveSpawner::createWave(float width, float height, Vector2D dir, Transform*
 	colManager_->addCollider(waveCollider);
 
 	//Se anyade el movimiento horizontal
+	wave->addToGroup(ecs::_BOSSELEMENTS_GRP);
 	wave->addComponent<WaveMovement>(dir, waveSpeed_);
 }
 

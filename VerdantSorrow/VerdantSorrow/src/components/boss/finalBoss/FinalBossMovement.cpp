@@ -144,5 +144,7 @@ void FinalBossMovement::fireBall()
 	waveCollider->setIsTrigger(true);
 	colManager_->addCollider(waveCollider);
 
+	waveImgEnt->addToGroup(ecs::_BOSSELEMENTS_GRP);
 	wave->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
+	
 }

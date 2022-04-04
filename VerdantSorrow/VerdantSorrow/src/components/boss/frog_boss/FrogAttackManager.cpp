@@ -257,6 +257,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	
 	//fly_->addComponent<FlyMovement>();
 	mngr_->setHandler(ecs::_FLY, fly_);
+	fly_->addToGroup(ecs::_BOSS_GRP);
 	return fly_;
 }
 
@@ -282,6 +283,7 @@ ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 	auto render_ = tongue_->addComponent<RectangleRenderer>(s);
 	render_->setVisible(false);
 	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
+	tongue_->addToGroup(ecs::_BOSS_GRP);
 	return tongue_;
 }
 

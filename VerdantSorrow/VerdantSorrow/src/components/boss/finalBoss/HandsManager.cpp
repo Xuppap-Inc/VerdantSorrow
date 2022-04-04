@@ -121,6 +121,8 @@ void HandsManager::createHands() {
 	colliderLeftHand_ = manoIzCollider;
 	colliderRightHand_ = manoDrCollider;
 	assert(colliderLeftHand_ != nullptr && colliderRightHand_ != nullptr);
+	leftHand_->addToGroup(ecs::_BOSS_GRP);
+	rightHand_->addToGroup(ecs::_BOSS_GRP);
 }
 
 void HandsManager::chooseAttack() {

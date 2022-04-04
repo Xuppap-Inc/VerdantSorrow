@@ -54,6 +54,7 @@ void MeleeAttack::attack(int dir)
 	auto currentTime = sdlutils().currRealTime();
 
 	setActive(true);
+	setIsTrigger(true);
 	lastAttack = currentTime;
 	setPosition(dir);
 	std::cout << "attack called" << std::endl;

@@ -81,6 +81,7 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 	auto waveSp = mngr_->addEntity();
 	waveSp->addComponent<WaveSpawner>(colManager);
 	mngr_->setHandler(ecs::_WAVE_GENERATOR, waveSp);
+	waveSp->addToGroup(ecs::_BOSS_GRP);
 }
 
 void FrogScene::background()
@@ -116,6 +117,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<FrogAttackManager>(colManager);
 
 	Frog->addComponent<BossHPBar>();
+	Frog->addToGroup(ecs::_BOSS_GRP);
 }
 
 bool FrogScene::getAble()

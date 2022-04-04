@@ -106,6 +106,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addComponent<TreeAttackManager>(colManager);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
 	particlesys->createParticles();
+	tree_->addToGroup(ecs::_BOSS_GRP);
 }
 
 void TreeScene::rootGenerator(CollisionManager* colManager, float x) {
@@ -129,6 +130,7 @@ void TreeScene::rootGenerator(CollisionManager* colManager, float x) {
 	colManager->addCollider(RootCollider);
 	//Se añade el movimiento horizontal
 	Root->addComponent<RootMovement>();
+	Root->addToGroup(ecs::_BOSS_GRP);
 }
 
 void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x, float y)
@@ -165,6 +167,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	lantern->addComponent<LanternMovement>();
 
 	lantern->addComponent<LanternCollisions>(colManager);
+	lantern->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }
 
 bool TreeScene::getAble()
