@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\PauseMenu.h" />
     <ClInclude Include="src\components\fondos\ShowAtOppositeSide.h" />
     <ClInclude Include="src\components\fondos\ParticleSystem.h" />
     <ClInclude Include="src\game\ControlsScene.h" />
@@ -26,7 +27,7 @@
     <ClInclude Include="src\game\CollisionChecker.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyMovement.h" />
     <ClInclude Include="src\game\MenuScene.h" />
-    <ClInclude Include="src\components\Camera.h" />
+    <ClInclude Include="src\components\ScrollCamera.h" />
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
     <ClInclude Include="src\components\tutorial\TutorialFly.h" />
     <ClInclude Include="src\game\Game.h" />
@@ -107,13 +108,14 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\PauseMenu.cpp" />
     <ClCompile Include="src\components\fondos\ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\components\fondos\ParticleSystem.cpp" />
     <ClCompile Include="src\game\ControlsScene.cpp" />
     <ClCompile Include="src\game\CollisionChecker.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyMovement.cpp" />
     <ClCompile Include="src\game\MenuScene.cpp" />
-    <ClCompile Include="src\components\Camera.cpp" />
+    <ClCompile Include="src\components\ScrollCamera.cpp" />
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
@@ -185,6 +187,7 @@
     <None Include="resources\config\frog.json" />
     <None Include="resources\config\hub.json" />
     <None Include="resources\config\menu.json" />
+    <None Include="resources\config\pauseMenu.json" />
     <None Include="resources\config\resources.json" />
     <None Include="resources\config\treeScene.json" />
     <None Include="resources\config\tutorial.json" />
