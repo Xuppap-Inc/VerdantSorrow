@@ -61,7 +61,7 @@ void Hub::init()
 
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
-	//NPCGenerator(colManager, dialogBox);
+	NPCGenerator(colManager, dialogBox);
 
 	musica_ = &sdlutils().musics().at("musica_hub");
 	musica_->play();
