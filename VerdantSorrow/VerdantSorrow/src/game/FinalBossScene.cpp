@@ -26,6 +26,7 @@
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "../components/fondos/Light.h"
 
 
 void FinalBossScene::init()
@@ -129,4 +130,9 @@ bool FinalBossScene::getAble()
 void FinalBossScene::setAble(bool a)
 {
 	isAble = a;
+}
+
+void FinalBossScene::createLights() {
+	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
+
 }

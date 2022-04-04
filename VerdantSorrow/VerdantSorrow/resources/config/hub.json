@@ -49,11 +49,14 @@
     {
         "id": "fondoHub",
         "file": "resources/images/fondoHub.jpg"
-    }
-    ,
+    },
     {
       "id": "spritesheet_hoguera",
       "file": "resources/images/spritesheet_hoguera.png"
+    },
+    {
+      "id": "luz_naranja",
+      "file": "resources/images/luz_naranja.png"
     }
 
   ],

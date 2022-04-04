@@ -21,6 +21,7 @@
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "../components/fondos/Light.h"
 
 
 
@@ -72,6 +73,8 @@ void Hub::init()
 	hogueraTr->init(Vector2D(100, 300), Vector2D(), 10, 20, 0.0f);
 	hogueraTr->setScale(0.25);
 	hoguera->addComponent<FramedImage>(&sdlutils().images().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
+
+	createLights();
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)
@@ -206,4 +209,8 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 	colManager->addCollider(col_2);
 	col_2->setIsTrigger(true);
 	npc_2->addComponent<NpcCtrl>(colManager, dialogBox_);
+}
+
+void Hub::createLights() {
+	new Light(&sdlutils().images().at("luz_naranja"), -200, -100, 800, 100, mngr_);
 }

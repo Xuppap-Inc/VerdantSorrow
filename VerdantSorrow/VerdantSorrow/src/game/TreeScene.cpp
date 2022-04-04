@@ -30,6 +30,7 @@
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "../components/fondos/Light.h"
 
 
 void TreeScene::init()
@@ -49,6 +50,8 @@ void TreeScene::init()
 	treeGenerator(colManager);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
+
+	createLights();
 }
 
 
@@ -178,4 +181,9 @@ bool TreeScene::getAble()
 void TreeScene::setAble(bool a)
 {
 	isAble = a;
+}
+
+void TreeScene::createLights() {
+	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 100, 100, mngr_);
+													   
 }
