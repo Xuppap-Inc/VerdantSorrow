@@ -40,7 +40,7 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 void MenuScene::update()
 {
 
-	handleInput(); //Metodo para control de input
+	handleInput(); //Metodo para control de input 
 
 	mngr_->update();
 	mngr_->refresh();
@@ -90,12 +90,13 @@ void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
 	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 3;
+	int buttonW = 200, buttonH = 80; // Width y Height de los botones
 
 	//Bucle que dibuja la primera columna (izq) de botones
 	for (int i = 0; i < rows; ++i)
 	{
-		createButton(sdlutils().width() / 2 - buttonW_, sdlutils().height() / 2 - offsetY + (i * spacingY),
-			buttonW_, buttonH_, buttonNames[i]);
+		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
+			buttonW, buttonH, buttonNames[i]);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
@@ -104,13 +105,19 @@ void MenuScene::generateAllButtons()
 	{
 
 		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
-			buttonW_, buttonH_, buttonNames[i]);
+			buttonW, buttonH, buttonNames[i]);
 		++j;
 	}
 
 }
 
 void MenuScene::handleInput()
+{
+	handleMouseInput();
+	handleControllerInput();
+}
+
+void MenuScene::handleMouseInput()
 {
 	auto& ihdlr = ih();
 	auto ratonPos = ihdlr.getMousePos();
@@ -122,7 +129,7 @@ void MenuScene::handleInput()
 			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
 			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-			selectButton(i); 
+			selectButton(i);
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
@@ -134,7 +141,11 @@ void MenuScene::handleInput()
 		}
 		else  deselectButton(i);
 	}
+}
 
+void MenuScene::handleControllerInput()
+{
+	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
 	{
 		if (ihdlr.isAxisMotionEvent())
@@ -158,13 +169,13 @@ void MenuScene::handleInput()
 				{
 					changeButton(-3);
 				}
-				
+
 
 			}
 		}
-		if (controllerIndex_ != -1 && controllerIndex_ < buttonPositions_.size())
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames.size())
 		{
-			if(ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
+			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
 
 			selectButton(controllerIndex_);
 		}
