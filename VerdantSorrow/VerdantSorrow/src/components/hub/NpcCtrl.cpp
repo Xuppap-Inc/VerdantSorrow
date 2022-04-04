@@ -38,7 +38,7 @@ void NpcCtrl::update()
 						//Activa el diálogo si está desactivado e inmoviliza al jugador
 						if (!dialogBox_->isActive()) {
 							mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(true);
-							dialogMngr->activate(sdlutils().dialogs().at("npc7_dialogue3"));
+							dialogMngr->activate(sdlutils().dialogs().at("npc8_dialogue4"));
 						}
 
 						//Si ha terminado y es el último párrafo se desactiva
