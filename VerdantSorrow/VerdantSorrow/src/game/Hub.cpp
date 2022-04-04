@@ -148,7 +148,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerY = sdlutils().height() / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, 0.25f, false);
-
+	player_->addComponent<FramedImage>(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
@@ -161,7 +161,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
 	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 25, 25, "walk_Kyna");
-	player_->addComponent<FramedImage>(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+
 
 	//Componente ui jugador
 	player_->addComponent<PlayerUI>();
