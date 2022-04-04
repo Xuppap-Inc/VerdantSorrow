@@ -90,8 +90,9 @@ void TreeAttackManager::update()
 		if (!attacking_) animNewState_ = ANIM_WALK;
 		anim_->repeat(true);
 
+		std::cout << absDistance << std::endl;
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (((absDistance < MELEE_ATTACK_DISTANCE&&dir_<0) || (absDistance<tr_->getWidth()+MELEE_ATTACK_DISTANCE && dir_>0) )&& newAtack_) {
+		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0&&absDistance<tr_->getWidth()+MELEE_ATTACK_DISTANCE ))&& newAtack_) {
 
 			animNewState_ = ANIM_ATTACK;
 			anim_->repeat(false);
@@ -292,7 +293,7 @@ void TreeAttackManager::prepareToSpecial()
 
 		lanternMov_->setActive(false);
 
-		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 3));
+		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 8));
 
 		state = MOVING_TO_CENTER;
 
