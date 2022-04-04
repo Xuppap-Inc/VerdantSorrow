@@ -23,6 +23,7 @@
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "../components/fondos/Light.h"
 
 
 void FrogScene::init()
@@ -49,6 +50,8 @@ void FrogScene::init()
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
 	particlesys->createParticles();
+
+	createLights();
 }
 
 void FrogScene::update()
@@ -128,4 +131,8 @@ bool FrogScene::getAble()
 void FrogScene::setAble(bool a)
 {
 	isAble = a;
+}
+
+void FrogScene::createLights() {
+	new Light(&sdlutils().images().at("luz_verde"), 100, 500, 500, mngr_);
 }
