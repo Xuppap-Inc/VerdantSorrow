@@ -104,7 +104,7 @@
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
     },
-    
+
     {
       "id": "vfx_cloud",
       "file": "resources/images/vfx_cloud.png"
@@ -148,6 +148,14 @@
     {
       "id": "vfx_manos_fuego",
       "file": "resources/images/vfx_manos_fuego.png"
+    },
+    {
+      "id": "luz_roja",
+      "file": "resources/images/luz_roja.png"
+    },
+    {
+      "id": "luz_rosa",
+      "file": "resources/images/luz_rosa.png"
     }
   ],
 

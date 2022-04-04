@@ -188,6 +188,14 @@
     {
       "id": "luz_verde",
       "file": "resources/images/luz_verde.png"
+    },
+    {
+      "id": "luz_negro",
+      "file": "resources/images/luz_negro.png"
+    },
+    {
+      "id": "luz_cyan",
+      "file": "resources/images/luz_cyan.png"
     }
   ],
 

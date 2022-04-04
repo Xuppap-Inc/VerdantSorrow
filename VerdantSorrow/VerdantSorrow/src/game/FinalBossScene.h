@@ -21,6 +21,7 @@ public:
 
 	bool getAble();
 	void setAble(bool a);
+	void createLights();
 private:
 	bool isAble;
 	Entity* player;

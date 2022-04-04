@@ -13,6 +13,7 @@ public:
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
 	void EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY);
 	void NPCGenerator(CollisionManager* colManager, Entity* dialogBox_);
+	void createLights();
 	void dialogBoxGenerator(Entity* dialogBox);
 	bool getAble();
 	void setAble(bool a);

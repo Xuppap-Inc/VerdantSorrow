@@ -134,5 +134,24 @@ void FrogScene::setAble(bool a)
 }
 
 void FrogScene::createLights() {
-	new Light(&sdlutils().images().at("luz_verde"), 100, 500, 500, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"), 100, sdlutils().height() - 200, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"),  300, sdlutils().height() - 200, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"), 500, sdlutils().height() - 200, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"),  700, sdlutils().height() - 200, 500, 100, mngr_);
+
+	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 200, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 400, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 600, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 800, 400, 100, mngr_);
+
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 200, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 400, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 600, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 800, 400, 100, mngr_);
+
+	new Light(&sdlutils().images().at("luz_verde"), 1100, 300, 300, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_verde"), 50, 200, 350, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_verde"), 400, 100, 200, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_verde"), 850, 50, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_verde"), 600, 150, 350, 100, mngr_);
 }

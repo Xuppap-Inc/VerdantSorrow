@@ -110,6 +110,12 @@ public:
 			{
 				entitiesBoss[i]->render();
 			}
+			auto lights = getEntitiesByGroup(ecs::_LIGHTS_GRP);
+			e = lights.size();
+			for (auto i = 0; i < e; i++)
+			{
+				lights[i]->render();
+			}
 			auto entities = getEntitiesByGroup(ecs::_BOSSELEMENTS_GRP);
 			e = entities.size();
 			for (auto i = 0; i < e; i++)
