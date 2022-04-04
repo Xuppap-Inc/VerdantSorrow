@@ -12,5 +12,6 @@ Light::Light(Texture* tex, int x, int y, int w, int alpha, ecs::Manager* mngr) :
 		light->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, w, 0.0f);
 		Image* imag = light->addComponent<Image>(tex_);
 		imag->setAlpha(alpha);
+		light->addToGroup(ecs::_LIGHTS_GRP);
 }
 
