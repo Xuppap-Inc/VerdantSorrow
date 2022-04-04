@@ -184,6 +184,10 @@
     {
       "id": "particle",
       "file": "resources/images/particle.png"
+    },
+    {
+      "id": "luz_verde",
+      "file": "resources/images/luz_verde.png"
     }
   ],
 
