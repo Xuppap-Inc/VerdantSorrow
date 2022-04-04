@@ -147,7 +147,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 ;
 	auto playerY = sdlutils().height() / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, false);
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, 0.25f, false);
 
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
@@ -155,11 +155,13 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(3, colManager);
+	player_->addComponent<PlayerHubControl>(2, colManager);
 
 	//No poner estas f�sicas detr�s del playerctrl, se hunde y no funciona el salto
 	//player_->addComponent<SimplePhysicsPlayer>(colManager);
-	player_->addComponent<Image>(&sdlutils().images().at("chica"));
+	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
+	//player_->addComponent<FramedImage>(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 25, 25, "walk_Kyna");
+	player_->addComponent<FramedImage>(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 
 
 	//Componente ui jugador

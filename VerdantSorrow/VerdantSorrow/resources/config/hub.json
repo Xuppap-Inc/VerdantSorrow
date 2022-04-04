@@ -19,6 +19,14 @@
       "file": "resources/images/topdownchicafrente.png"
     },
     {
+      "id": "idle_Kyna",
+      "file": "resources/images/idle_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_Kyna",
+      "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
+    },
+    {
       "id": "heart",
       "file": "resources/images/heart.png"
     },
