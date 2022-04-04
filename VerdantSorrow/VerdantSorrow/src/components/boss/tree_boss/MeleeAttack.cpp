@@ -6,7 +6,7 @@
 #include "../../boss/tree_boss/TreeMovement.h"
 #include "../../player/PlayerAttributes.h"
 
-MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(200), attackCoolDown(300), lastAttack(), attacking_(false)
+MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(1200), attackCoolDown(800), lastAttack(), attacking_(false)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -56,6 +56,7 @@ void MeleeAttack::attack(int dir)
 	setActive(true);
 	lastAttack = currentTime;
 	setPosition(dir);
+	std::cout << "attack called" << std::endl;
 
 	attacking_ = true;
 }
@@ -64,10 +65,16 @@ void MeleeAttack::setPosition(int dir)
 {
 	Vector2D pos = tr_->getPos();
 
-	if (dir > 0)
+	if (dir > 0) {
+		pos_ = Vector2D(pos.getX() + tr_->getWidth()/1.35, pos.getY());
+		std::cout << tr_->getWidth() << std::endl;
+	}
+		
+	else {
 		pos_ = Vector2D(pos.getX(), pos.getY());
-	else
-		pos_ = Vector2D(pos.getX(), pos.getY());
+		std::cout << tr_->getWidth() << std::endl;
+	}
+		
 
 	treeMovement_->setMoveActive(false);
 }
