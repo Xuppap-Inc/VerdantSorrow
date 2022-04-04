@@ -24,6 +24,8 @@ public:
 	bool getAble();
 	void setAble(bool a);
 
+	void createLights();
+
 private:
 	Entity* player;
 	Entity* tree_;
