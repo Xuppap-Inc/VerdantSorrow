@@ -133,11 +133,14 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 
 	// float jumpForce, float speed, float deceleration, float rollSpeed
 	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
-
+	mngr_->setHandler(ecs::_PLAYER, player_);
 	//Componente ui jugador
 	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));
-	player_->addComponent<PlayerUI>();
-	mngr_->setHandler(ecs::_PLAYER, player_);
+
+	auto playerLife_ = mngr_->addEntity();
+	playerLife_->addComponent<PlayerUI>();
+	playerLife_->addToGroup(ecs::_UI_GRP);
+	
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);

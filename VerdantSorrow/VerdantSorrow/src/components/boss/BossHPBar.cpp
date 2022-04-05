@@ -3,9 +3,11 @@
 #include <cassert>
 
 #include "../../ecs/Entity.h"
+#include "../../ecs/Manager.h"
 #include "../../sdlutils/macros.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../Transform.h"
+#include "../../game/SceneManager.h"
 
 BossHPBar::BossHPBar() :
 	attrib_(), maxBarLength(), pos(), accumulatedDamage(),
@@ -19,7 +21,9 @@ BossHPBar::~BossHPBar() {
 }
 
 void BossHPBar::initComponent() {
-	attrib_ = ent_->getComponent<BossAtributos>();
+	if(SceneManager::scenes::Frog_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
+	else if (SceneManager::scenes::Tree_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
+	else if (SceneManager::scenes::Eye_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_EYE)->getComponent<BossAtributos>();
 	assert(attrib_ != nullptr);
 
 	lastHP = attrib_->getLife();

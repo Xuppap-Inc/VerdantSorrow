@@ -95,6 +95,8 @@ void FinalBossScene::background()
 void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* player_) {
 
 	FinalBossFace = mngr_->addEntity();
+	mngr_->setHandler(ecs::_EYE, FinalBossFace);
+	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
 	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(20);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
@@ -118,8 +120,9 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);
 
-	FinalBossFace->addComponent<BossHPBar>();
-	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
+	auto finalBossHPBar = mngr_->addEntity();
+	finalBossHPBar->addComponent<BossHPBar>();
+	finalBossHPBar->addToGroup(ecs::_UI_GRP);
 }
 
 bool FinalBossScene::getAble()

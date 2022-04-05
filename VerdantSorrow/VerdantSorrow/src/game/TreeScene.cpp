@@ -150,7 +150,6 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 
 	//atributos de linterna
 	auto lanternAtribs = lantern->addComponent<BossAtributos>(30);
-	lantern->addComponent<BossHPBar>();
 	auto lanternTr = lantern->addComponent<Transform>();
 	auto lanternX = x;
 	auto lanternY = y;
@@ -171,6 +170,9 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 
 	lantern->addComponent<LanternCollisions>(colManager);
 	lantern->addToGroup(ecs::_BOSSELEMENTS_GRP);
+	auto lanternHPBar = mngr_->addEntity();
+	lanternHPBar->addComponent<BossHPBar>();
+	lanternHPBar->addToGroup(ecs::_UI_GRP);
 }
 
 bool TreeScene::getAble()

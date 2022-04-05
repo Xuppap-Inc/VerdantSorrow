@@ -167,8 +167,10 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 
 	//Componente ui jugador
-	player_->addComponent<PlayerUI>();
 	mngr_->setHandler(ecs::_PLAYER, player_);
+	auto playerLife_ = mngr_->addEntity();
+	playerLife_->addComponent<PlayerUI>();
+	playerLife_->addToGroup(ecs::_UI_GRP);
 }
 
 void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY)

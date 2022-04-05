@@ -1,6 +1,7 @@
 #include "PlayerUI.h"
 
 #include "../../ecs/Entity.h"
+#include "../../ecs/Manager.h"
 #include "../../sdlutils/Texture.h"
 #include "../../sdlutils/SDLUtils.h"
 
@@ -18,7 +19,7 @@ PlayerUI::~PlayerUI()
 
 void PlayerUI::initComponent()
 {
-	attrib_ = ent_->getComponent<PlayerAttributes>();
+	attrib_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerAttributes>();
 	assert(attrib_ != nullptr);
 }
 

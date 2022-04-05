@@ -91,19 +91,19 @@ public:
 	// call render of all entities
 	//
 	void render() {
-		if (SceneManager::scenes::Eye_ == sC().getScene()|| SceneManager::scenes::Tree_ == sC().getScene() || SceneManager::scenes::Eye_ == sC().getScene()) {
+		if (SceneManager::scenes::Frog_ == sC().getScene()|| SceneManager::scenes::Tree_ == sC().getScene() || SceneManager::scenes::Eye_ == sC().getScene()) {
 			auto entitiesBackground = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
 			auto e = entitiesBackground.size();
 			for (auto i = 0; i < e; i++)
 			{
 				entitiesBackground[i]->render();
 			}
-			auto entitiesHubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
+			/*auto entitiesHubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
 			e = entitiesHubDecoration.size();
 			for (auto i = 0; i < e; i++)
 			{
 				entitiesHubDecoration[i]->render();
-			}
+			}*/
 			auto entitiesBoss = getEntitiesByGroup(ecs::_BOSS_GRP);
 			e = entitiesBoss.size();
 			for (auto i = 0; i < e; i++)
@@ -123,6 +123,12 @@ public:
 				entities[i]->render();
 			}
 			getHandler(ecs::_PLAYER)->render();
+			auto entitiesUI = getEntitiesByGroup(ecs::_UI_GRP);
+			e = entitiesUI.size();
+			for (auto i = 0; i < e; i++)
+			{
+				entitiesUI[i]->render();
+			}
 		}
 		else{
 			auto n = ents_.size();

@@ -69,8 +69,8 @@
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
-	_LIGHTS_GRP
-
+	_LIGHTS_GRP ,\
+	_UI_GRP
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \
@@ -79,6 +79,7 @@
 	_FLY, \
 	_LANTERN, \
 	_TREEBOSS, \
+	_EYE, \
 	_WAVE_GENERATOR, \
 	_hdlr_CAMERA
 
