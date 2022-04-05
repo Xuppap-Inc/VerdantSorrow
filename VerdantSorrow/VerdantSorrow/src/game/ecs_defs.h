@@ -69,6 +69,7 @@
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
+	_PARTICLES_GRP ,\
 	_LIGHTS_GRP ,\
 	_UI_GRP
 // Handlers list - must have at least one element

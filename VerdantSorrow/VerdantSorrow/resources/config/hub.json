@@ -1,6 +1,6 @@
 {
 
-  "assets" : 55,
+  "assets" : 59,
   
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },

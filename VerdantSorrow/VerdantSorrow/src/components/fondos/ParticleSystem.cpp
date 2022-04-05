@@ -23,6 +23,7 @@ void ParticleSystem::createParticles()
 		Image *imag=particle->addComponent<Image>(tex_);
 		imag->setAlpha(100);
 		particle->addComponent<ShowAtOpposideSide>();
+		particle->addToGroup(ecs::_PARTICLES_GRP);
 	}
 }
 

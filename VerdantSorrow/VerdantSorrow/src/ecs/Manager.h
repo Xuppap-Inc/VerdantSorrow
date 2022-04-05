@@ -92,36 +92,49 @@ public:
 	//
 	void render() {
 		if (SceneManager::scenes::Frog_ == sC().getScene()|| SceneManager::scenes::Tree_ == sC().getScene() || SceneManager::scenes::Eye_ == sC().getScene()) {
-			auto entitiesBackground = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
-			auto e = entitiesBackground.size();
+			//Renderización de todos los elementos del background
+			auto background = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
+			auto e = background.size();
 			for (auto i = 0; i < e; i++)
 			{
-				entitiesBackground[i]->render();
+				background[i]->render();
 			}
-			/*auto entitiesHubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
-			e = entitiesHubDecoration.size();
+			//Renderización de todos los elementos de la decoración del hub
+			auto hubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
+			e = hubDecoration.size();
 			for (auto i = 0; i < e; i++)
 			{
-				entitiesHubDecoration[i]->render();
-			}*/
-			auto entitiesBoss = getEntitiesByGroup(ecs::_BOSS_GRP);
-			e = entitiesBoss.size();
-			for (auto i = 0; i < e; i++)
-			{
-				entitiesBoss[i]->render();
+				hubDecoration[i]->render();
 			}
+			//Renderización de los bosses
+			auto boss = getEntitiesByGroup(ecs::_BOSS_GRP);
+			e = boss.size();
+			for (auto i = 0; i < e; i++)
+			{
+				boss[i]->render();
+			}
+			//Renderización de todos los elementos adjuntados al boss ej:lámpara
+			auto bossElements = getEntitiesByGroup(ecs::_BOSSELEMENTS_GRP);
+			e = bossElements.size();
+			for (auto i = 0; i < e; i++)
+			{
+				bossElements[i]->render();
+			}
+			//Renderización de todos los elementos que sean luces
+			auto particles = getEntitiesByGroup(ecs::_PARTICLES_GRP);
+			e = particles.size();
+			for (auto i = 0; i < e; i++)
+			{
+				particles[i]->render();
+			}
+			//Renderización de todos los elementos que sean luces
 			auto lights = getEntitiesByGroup(ecs::_LIGHTS_GRP);
 			e = lights.size();
 			for (auto i = 0; i < e; i++)
 			{
 				lights[i]->render();
 			}
-			auto entities = getEntitiesByGroup(ecs::_BOSSELEMENTS_GRP);
-			e = entities.size();
-			for (auto i = 0; i < e; i++)
-			{
-				entities[i]->render();
-			}
+			//Renderización de todos los elementos de la UI
 			getHandler(ecs::_PLAYER)->render();
 			auto entitiesUI = getEntitiesByGroup(ecs::_UI_GRP);
 			e = entitiesUI.size();
