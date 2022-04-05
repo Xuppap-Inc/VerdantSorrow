@@ -6,18 +6,25 @@
 
 class ecs::Manager;
 class Capas;
+class Transform;
 
-class Parallax : public ecs::Component {
+class RenderParallax : public ecs::Component {
 public:
 
 	__CMPID_DECL__(ecs::_PARALLAX)
 
-		Parallax();
-	virtual ~Parallax();
+		RenderParallax(Texture* tex);
+	virtual ~RenderParallax();
 	void initComponent() override;
-	void newLayer(Texture* tex, float vel);
-	void update() override;
+	void render()override;
+
+
 private:
-	std::vector<Capas*>layer;
+
+	Texture* tex_;
+	Transform* tr_;
+
+
+
 };
 
