@@ -40,6 +40,8 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
 	height_ = surface->h;
 	renderer_ = renderer;
 
+	SDL_FreeSurface(surface);
+
 }
 
 Texture::Texture(SDL_Renderer* renderer, const std::string& fileName, Uint8 alpha)
@@ -62,6 +64,7 @@ Texture::Texture(SDL_Renderer* renderer, const std::string& fileName, Uint8 alph
 	renderer_ = renderer;
 
 	SDL_SetTextureAlphaMod(texture_, alpha);
+	SDL_FreeSurface(surface);
 
 }
 
@@ -96,5 +99,7 @@ void Texture::constructFromText(SDL_Renderer *renderer, const std::string &text,
 	width_ = textSurface->w;
 	height_ = textSurface->h;
 	renderer_ = renderer;
+
+	SDL_FreeSurface(textSurface);
 
 }
