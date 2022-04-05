@@ -92,7 +92,8 @@ public:
 	//
 	void render() {
 		if (SceneManager::scenes::Frog_ == sC().getScene()|| SceneManager::scenes::Tree_ == sC().getScene() 
-			|| SceneManager::scenes::Eye_ == sC().getScene() || SceneManager::scenes::Hub_ == sC().getScene()) {
+			|| SceneManager::scenes::Eye_ == sC().getScene() || SceneManager::scenes::Hub_ == sC().getScene()
+			|| SceneManager::scenes::Tutorial_ == sC().getScene()) {
 			//Renderización de todos los elementos del background
 			auto background = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
 			auto e = background.size();

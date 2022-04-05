@@ -35,6 +35,7 @@ void TutorialScene::init()
 	auto particles = mngr_->addEntity();
 	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
+	particles->addToGroup(ecs::_PARTICLES_GRP);
 
 	createFly(400, sdlutils().height() - 200);
 	createFly(700, sdlutils().height() - 600);
@@ -75,6 +76,7 @@ void TutorialScene::createFly(int x, int y)
 	colManager_->addCollider(col);
 	fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000/30)*31, 31, "mosca");
 	fly->addComponent<TutorialFly>();
+	fly->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }
 void TutorialScene::createPlatform(int x, int y, int w, int h)
 {
@@ -84,4 +86,5 @@ void TutorialScene::createPlatform(int x, int y, int w, int h)
 	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager_->addCollider(col);
 	platform->addComponent<RectangleRenderer>();
+	platform->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }

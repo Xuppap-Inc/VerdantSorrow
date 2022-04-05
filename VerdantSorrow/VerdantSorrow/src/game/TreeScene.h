@@ -8,7 +8,7 @@ class CollisionChecker;
 class TreeScene :public Scene
 {
 public:
-	TreeScene() :Scene() {}
+	TreeScene() :Scene(), isAble(false) {}
 	~TreeScene() {}
 	void init();
 

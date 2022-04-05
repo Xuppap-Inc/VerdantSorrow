@@ -9,7 +9,7 @@ class CollisionChecker;
 class FinalBossScene: public Scene
 {
 public: 
-	FinalBossScene() :Scene() {}
+	FinalBossScene() :Scene(), isAble(false) {}
 	~FinalBossScene() {};
 	void init();
 

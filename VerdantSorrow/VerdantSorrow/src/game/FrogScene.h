@@ -8,7 +8,7 @@ class CollisionChecker;
 class FrogScene: public Scene
 {
 public: 
-	FrogScene() :Scene() {};
+	FrogScene() :Scene(), isAble(false) {};
 	~FrogScene() {};
 	void init();
 

@@ -22,6 +22,9 @@ public:
 	void render();
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_=Hub_);
+	void FrogSceneState(bool active);
+	void TreeSceneState(bool active);
+	void EyeSceneState(bool active);
 	void decideScene();
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();

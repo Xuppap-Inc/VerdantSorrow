@@ -56,4 +56,5 @@ void TutorialSpawnRoot::createRoot(int x)
 	colManager_->addCollider(RootCollider);
 	//Se añade el movimiento vertical
 	Root->addComponent<RootMovement>();
+	Root->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }

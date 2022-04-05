@@ -102,6 +102,9 @@ void SceneManager::init()
 	default:
 		break;
 	}
+	FrogSceneState(false);
+	TreeSceneState(false);
+	EyeSceneState(false);
 }
 
 void SceneManager::render()
@@ -115,6 +118,18 @@ void SceneManager::changeScene(scenes s_)
 {
 	actScene = s_;
 	init();
+}
+
+void SceneManager::FrogSceneState(bool active) {
+	f_->setAble(active);
+}
+
+void SceneManager::TreeSceneState(bool active) {
+	t_->setAble(active);
+}
+
+void SceneManager::EyeSceneState(bool active) {
+	fin_->setAble(active);
 }
 
 void SceneManager::decideScene()

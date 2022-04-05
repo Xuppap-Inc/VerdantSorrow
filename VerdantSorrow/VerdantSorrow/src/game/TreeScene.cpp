@@ -45,8 +45,6 @@ void TreeScene::init()
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-	//habilita la escena
-	setAble(true);
 	treeGenerator(colManager);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
@@ -70,7 +68,7 @@ void TreeScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		if (health > 0) setAble(false);
+		setAble(false);
 		sC().decideScene();
 	}
 }

@@ -22,6 +22,7 @@
 #include "../game/SceneManager.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
+#include "../components/hub/PlatformAtribsForHub.h"
 
 
 
@@ -54,11 +55,11 @@ void Hub::init()
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 	//Genera las entradas a los bosses
 		//entrada a la rana
-	EntryGenerator(entryFrog, colManager, 0, 250);
+	EntryGenerator(entryFrog, colManager, 0, 250, "frog");
 	//Entrada al ojo
-	EntryGenerator(entryTree, colManager, sdlutils().width() - 100, 100);
+	EntryGenerator(entryTree, colManager, sdlutils().width() - 100, 100, "tree");
 	//Entrada al arbol
-	EntryGenerator(entryEye, colManager, sdlutils().width() - 100, sdlutils().height() - 100);
+	EntryGenerator(entryEye, colManager, sdlutils().width() - 100, sdlutils().height() - 100, "eye");
 
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
@@ -106,14 +107,20 @@ void Hub::checkCollissions()
 	auto playerCol_ = player->getComponent<RectangleCollider>();
 	if (colManager->hasCollisions(playerCol_)) {
 		std::vector<RectangleCollider*> colliders = colManager->getCollisions(playerCol_);
-
 		bool changeScene = false;
 		int i = 0;
+		Entity* entWithName = new Entity();
 		while (!changeScene && i < colliders.size()) {
 			changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
+			if (changeScene) entWithName = colliders[i]->getEntity();
 			i++;
 		}
-		if (changeScene) changeScene_(true);
+		if (changeScene){
+			if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "frog") sC().FrogSceneState(true);
+			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "tree") sC().TreeSceneState(true);
+			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "eye") sC().EyeSceneState(true);
+			changeScene_(true);
+		}
 	}
 }
 
@@ -175,7 +182,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerLife_->addToGroup(ecs::_UI_GRP);
 }
 
-void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY)
+void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY, std::string name)
 {
 	entry = mngr_->addEntity();
 
@@ -189,6 +196,7 @@ void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX
 	auto entryCollider = entry->addComponent<RectangleCollider>(entryTr->getWidth(), entryTr->getHeight());
 	colManager->addCollider(entryCollider);
 	entryCollider->setIsTrigger(true);
+	entry->addComponent<PlatformAtribsForHub>(name);
 	entry->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 

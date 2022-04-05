@@ -11,7 +11,7 @@ public:
 
 	virtual void update() override;
 	void playerGenerator(CollisionManager* colManager, Entity* player_);
-	void EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY);
+	void EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY, std::string name);
 	void NPCGenerator(CollisionManager* colManager, Entity* dialogBox_);
 	void createLights();
 	void dialogBoxGenerator(Entity* dialogBox);

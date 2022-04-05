@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\hub\PlatformAtribsForHub.h" />
     <ClInclude Include="src\game\Fondos\Parallax.h" />
     <ClInclude Include="src\components\fondos\Renderparallax.h" />
     <ClInclude Include="src\components\fondos\Light.h" />

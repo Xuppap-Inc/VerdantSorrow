@@ -46,7 +46,7 @@ void FinalBossScene::init()
 	playerGenerator(colManager, player);
 
 	finalBossGenerator(colManager, player);
-	setAble(true);
+
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
 	particlesys->createParticles();
@@ -73,7 +73,7 @@ void FinalBossScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
-		if (health > 0) setAble(false);
+		setAble(false);
 		sC().decideScene();
 	}
 }
