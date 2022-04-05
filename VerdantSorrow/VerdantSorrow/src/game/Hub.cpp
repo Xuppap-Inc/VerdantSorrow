@@ -75,6 +75,7 @@ void Hub::init()
 	hoguera->addComponent<FramedImage>(&sdlutils().images().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
 
 	createLights();
+	hoguera->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void Hub::dialogBoxGenerator(Entity* dialogBox)
@@ -121,6 +122,7 @@ void Hub::backgroundHub()
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	backgr_->addComponent<Image>(&sdlutils().images().at("fondoHub"));
+	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
 }
 
 
@@ -187,6 +189,7 @@ void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX
 	auto entryCollider = entry->addComponent<RectangleCollider>(entryTr->getWidth(), entryTr->getHeight());
 	colManager->addCollider(entryCollider);
 	entryCollider->setIsTrigger(true);
+	entry->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
@@ -200,17 +203,17 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 	col->setIsTrigger(true);
 	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
 
+	//Por que haceis un segundo npc
+	//auto npc_2 = mngr_->addEntity();
+	//auto npctr_2 = npc_2->addComponent<Transform>();
+	//npctr_2->init(Vector2D(sdlutils().width() / 2, 100), Vector2D(), 50, 100, 0.0f, false);
+	//npc_2->addComponent<Image>(&sdlutils().images().at("matt"));
+	//auto col_2 = npc_2->addComponent<RectangleCollider>(npctr_2->getWidth() + 100, npctr_2->getHeight() + 100);
+	//colManager->addCollider(col_2);
+	//col_2->setIsTrigger(true);
+	//npc_2->addComponent<NpcCtrl>(colManager, dialogBox_);
 
-
-
-	auto npc_2 = mngr_->addEntity();
-	auto npctr_2 = npc_2->addComponent<Transform>();
-	npctr_2->init(Vector2D(sdlutils().width() / 2, 100), Vector2D(), 50, 100, 0.0f, false);
-	npc_2->addComponent<Image>(&sdlutils().images().at("matt"));
-	auto col_2 = npc_2->addComponent<RectangleCollider>(npctr_2->getWidth() + 100, npctr_2->getHeight() + 100);
-	colManager->addCollider(col_2);
-	col_2->setIsTrigger(true);
-	npc_2->addComponent<NpcCtrl>(colManager, dialogBox_);
+	npc->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void Hub::createLights() {
