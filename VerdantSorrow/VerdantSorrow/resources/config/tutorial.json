@@ -1,5 +1,5 @@
 {
-  "assets" : 49,
+  "assets" : 25,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -48,6 +48,14 @@
     {
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "Suelo",
+      "file": "resources/images/Suelo.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
     },
     {
       "id": "fondoSuelo",

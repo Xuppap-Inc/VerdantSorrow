@@ -63,48 +63,6 @@ void TutorialScene::update()
 
 
 
-
-void TutorialScene::playerGenerator(CollisionManager* colManager, Entity* player_) {
-	player_->addComponent<PlayerAttributes>();
-
-	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = 0;
-	auto playerY = 150;
-	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 100, 200, 0.0f);
-
-	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
-	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
-
-	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
-	player_->addComponent<SimpleGravity>(2.0);
-	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>(100);
-
-	//Se añade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth() - 30, playerTr->getHeight());
-	colManager->addCollider(playerCollider);
-	player_->addComponent<PlayerCtrl>(23, 8, 0.85, 12);
-
-	//IMPORTANTE :No poner estas físicas detrás del playerctrl
-	player_->addComponent<SimplePhysicsPlayer>(colManager);
-
-	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
-
-	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr->getHeight() * 2, -playerTr->getHeight() * 1.5 / 3, colManager);
-	colManager->addCollider(playerAttackCollider);
-	playerAttackCollider->setIsTrigger(true);
-
-	//Componente ui jugador
-	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));
-	player_->addComponent<PlayerUI>();
-	mngr_->setHandler(ecs::_PLAYER, player_);
-
-	// Animacion del jugador
-	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-}
-
 void TutorialScene::createFly(int x, int y)
 {
 	auto fly = mngr_->addEntity();
