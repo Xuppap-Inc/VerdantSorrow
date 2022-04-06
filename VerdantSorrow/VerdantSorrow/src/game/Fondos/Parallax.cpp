@@ -16,10 +16,9 @@ Parallax::Parallax(ecs::Manager* mngr):mngr_(mngr)
 {
 }
 
-void Parallax::AddLayer(Texture* tex, float scrollratio,int height,int width)
+void Parallax::AddLayer(Texture* tex, float scrollratio,int height,int width,int y)
 {
 	auto e=mngr_->addEntity();
-	e->addComponent<Transform>(Vector2D(0,sdlutils().height()),Vector2D(scrollratio,0),width,height,0);
-	e->addComponent<ShowAtOpposideSide>();
-	e->addComponent<RenderParallax>(tex);
+	e->addComponent<Transform>(Vector2D(0,y),Vector2D(0,0),width,height,0);
+	e->addComponent<RenderParallax>(tex,scrollratio);
 }
