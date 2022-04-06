@@ -68,6 +68,7 @@ void TreeScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (health <= 0) sC().changeTreeEssenceState(true);
 		setAble(false);
 		sC().decideScene();
 	}

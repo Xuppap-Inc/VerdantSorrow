@@ -73,6 +73,7 @@ void FinalBossScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (health <= 0) sC().changeEyeEssenceState(true);
 		setAble(false);
 		sC().decideScene();
 	}

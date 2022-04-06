@@ -71,6 +71,7 @@ void FrogScene::update()
 		sdlutils().presentRenderer();
 	}
 	else {
+		if (health <= 0) sC().changeFrogEssenceState(true);
 		setAble(false);
 		sC().decideScene();
 	}

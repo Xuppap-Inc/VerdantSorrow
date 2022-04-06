@@ -7,7 +7,7 @@
 #include "../sdlutils/SDLUtils.h"
 
 
-SceneManager::SceneManager() : actScene(Hub_)
+SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
@@ -118,6 +118,21 @@ void SceneManager::changeScene(scenes s_)
 {
 	actScene = s_;
 	init();
+}
+
+void SceneManager::changeFrogEssenceState(bool active)
+{
+	frogEssenceObtained_ = active;
+}
+
+void SceneManager::changeTreeEssenceState(bool active)
+{
+	treeEssenceObtained_ = active;
+}
+
+void SceneManager::changeEyeEssenceState(bool active)
+{
+	eyeEssenceObtained_ = active;
 }
 
 void SceneManager::FrogSceneState(bool active) {

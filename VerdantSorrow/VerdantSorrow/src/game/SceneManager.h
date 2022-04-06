@@ -22,6 +22,9 @@ public:
 	void render();
 	scenes getScene() { return actScene; }
 	void changeScene(scenes s_=Hub_);
+	void changeFrogEssenceState(bool active);
+	void changeTreeEssenceState(bool active);
+	void changeEyeEssenceState(bool active);
 	void FrogSceneState(bool active);
 	void TreeSceneState(bool active);
 	void EyeSceneState(bool active);
@@ -41,6 +44,7 @@ private:
 	MenuScene* menu_;
 	ControlsScene* controls_;
 	PauseMenu* pauseMenu_;
+	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()
