@@ -13,6 +13,15 @@ PlayerUI::PlayerUI() :
 {
 }
 
+PlayerUI::PlayerUI(bool hub) :
+	heart(&sdlutils().imagesHub().at("heart")),
+	heartBlack(&sdlutils().imagesHub().at("heartBlack")),
+	healthDetailTexture(&sdlutils().imagesHub().at("healthDetail")),
+	attrib_(nullptr)
+{
+}
+
+
 PlayerUI::~PlayerUI()
 {
 }

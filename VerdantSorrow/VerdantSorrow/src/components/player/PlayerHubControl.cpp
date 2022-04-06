@@ -120,8 +120,8 @@ void PlayerHubControl::handleInput()
 
 
 	if (moveDown_)
-		anim_->changeanim(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_Kyna");
+		anim_->changeanim(&sdlutils().imagesHub().at("walk_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_Kyna");
 
 	if (!moveUp_ && !moveDown_ && !moveLeft_ && !moveRight_)
-		anim_->changeanim(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+		anim_->changeanim(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 }

@@ -100,14 +100,17 @@ public:
 		return fonts_;
 	}
 
+	inline sdl_resource_table<Font>& fontsHub() {
+		return fonts_hub;
+	}
+
 	// images map
 	inline sdl_resource_table<Texture>& images() {
 		return images_;
 	}
 
-	// messages map
-	inline sdl_resource_table<Texture>& msgs() {
-		return msgs_;
+	inline sdl_resource_table<Texture>& imagesHub() {
+		return images_hub;
 	}
 
 	// sound effects map
@@ -115,9 +118,17 @@ public:
 		return sounds_;
 	}
 
+	inline sdl_resource_table<SoundEffect>& soundEffectsHub() {
+		return sounds_hub;
+	}
+
 	// musics maps
 	inline sdl_resource_table<Music>& musics() {
 		return musics_;
+	}
+
+	inline sdl_resource_table<Music>& musicsHub() {
+		return musics_hub;
 	}
 
 	//dialogs maps
@@ -145,6 +156,7 @@ public:
 	
 	void freeMemory();
 	void loadReasources(std::string filename); // load resources from the json file
+	void loadReasourcesHub(std::string filename); // load resources from the json file
 
 private:
 	SDLUtils();
@@ -164,11 +176,16 @@ private:
 	SDL_Window *window_; // the window
 	SDL_Renderer *renderer_; // the renderer
 
+	sdl_resource_table<Font> fonts_hub; // fonts map (string -> font)
+	sdl_resource_table<Texture> images_hub; // textures map (string -> texture)
+	sdl_resource_table<SoundEffect> sounds_hub; // sounds map (string -> sound)
+	sdl_resource_table<Music> musics_hub; // musics map (string -> music)
+
 	sdl_resource_table<Font> fonts_; // fonts map (string -> font)
 	sdl_resource_table<Texture> images_; // textures map (string -> texture)
-	sdl_resource_table<Texture> msgs_; // textures map (string -> texture)
 	sdl_resource_table<SoundEffect> sounds_; // sounds map (string -> sound)
 	sdl_resource_table<Music> musics_; // musics map (string -> music)
+
 	sdl_resource_table<std::string> dialogs_; // musics map (string -> string)
 
 	RandomNumberGenerator random_; // (pseudo) random numbers generator

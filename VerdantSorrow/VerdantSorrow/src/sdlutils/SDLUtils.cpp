@@ -198,46 +198,6 @@ void SDLUtils::loadReasources(std::string filename) {
 		}
 	}
 
-	// load messages
-	jValue = root["messages"];
-	if (jValue != nullptr) {
-		if (jValue->IsArray()) {
-			for (auto& v : jValue->AsArray()) {
-				if (v->IsObject()) {
-					JSONObject vObj = v->AsObject();
-					std::string key = vObj["id"]->AsString();
-					std::string txt = vObj["text"]->AsString();
-					auto& font = fonts_.at(vObj["font"]->AsString());
-#ifdef _DEBUG
-					std::cout << "Loading message with id: " << key
-						<< std::endl;
-#endif
-					if (vObj["bg"] == nullptr)
-						msgs_.emplace(key,
-							Texture(renderer(), txt, font,
-								build_sdlcolor(
-									vObj["color"]->AsString())));
-					else
-						msgs_.emplace(key,
-							Texture(renderer(), txt, font,
-								build_sdlcolor(
-									vObj["color"]->AsString()),
-								build_sdlcolor(
-									vObj["bg"]->AsString())));
-				}
-				else {
-					throw "'messages' array in '" + filename
-						+ "' includes and invalid value";
-				}
-
-				renderProgressBar(loadedAssets++);
-			}
-		}
-		else {
-			throw "'messages' is not an array in '" + filename + "'";
-		}
-	}
-
 	// load sounds
 	jValue = root["sounds"];
 	if (jValue != nullptr) {
@@ -292,6 +252,155 @@ void SDLUtils::loadReasources(std::string filename) {
 			throw "'musics' is not an array";
 		}
 	}
+}
+
+void SDLUtils::loadReasourcesHub(std::string filename)
+{
+	// TODO check the correctness of values and issue a corresponding
+	// exception. Now we just do some simple checks, and assume input
+	// is correct.
+
+	// Load JSON configuration file. We use a unique pointer since we
+	// can exit the method in different ways, this way we guarantee that
+	// it is always deleted
+	std::unique_ptr<JSONValue> jValueRoot(JSON::ParseFromFile(filename));
+
+	// check it was loaded correctly
+	// the root must be a JSON object
+	if (jValueRoot == nullptr || !jValueRoot->IsObject()) {
+		throw "Something went wrong while load/parsing '" + filename + "'";
+	}
+
+	// we know the root is JSONObject
+	JSONObject root = jValueRoot->AsObject();
+	JSONValue* jValue = nullptr;
+
+	// TODO improve syntax error checks below, now we do not check
+	//      validity of keys with values as sting or integer
+
+
+	jValue = root["assets"];
+	if (jValue != __nullptr) {
+		if (jValue->IsNumber())
+			assetsNumber_ = jValue->AsNumber();
+		else
+			throw "'assets' in '" + filename + "' is not a number";
+	}
+	else
+		throw "'assets' in '" + filename + "' is not defined";
+
+	int loadedAssets = 0;
+
+	// load fonts
+	jValue = root["fonts_hub"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					std::string file = vObj["file"]->AsString();
+					uint8_t size =
+						static_cast<uint8_t>(vObj["size"]->AsNumber());
+#ifdef _DEBUG
+					std::cout << "Loading font with id: " << key << std::endl;
+#endif
+					fonts_hub.emplace(key, Font(file, size));
+				}
+				else {
+					throw "'fonts' array in '" + filename
+						+ "' includes and invalid value";
+				}
+
+				renderProgressBar(loadedAssets++);
+			}
+		}
+		else {
+			throw "'fonts' is not an array in '" + filename + "'";
+		}
+	}
+
+	// load images
+	jValue = root["images_hub"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					std::string file = vObj["file"]->AsString();
+#ifdef _DEBUG
+					std::cout << "Loading image with id: " << key << std::endl;
+#endif
+					images_hub.emplace(key, Texture(renderer(), file));
+				}
+				else {
+					throw "'images' array in '" + filename
+						+ "' includes and invalid value";
+				}
+
+				renderProgressBar(loadedAssets++);
+			}
+		}
+		else {
+			throw "'images' is not an array in '" + filename + "'";
+		}
+	}
+
+	// load sounds
+	jValue = root["sounds_hub"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					std::string file = vObj["file"]->AsString();
+#ifdef _DEBUG
+					std::cout << "Loading sound effect with id: " << key
+						<< std::endl;
+#endif
+					sounds_hub.emplace(key, SoundEffect(file));
+				}
+				else {
+					throw "'sounds' array in '" + filename
+						+ "' includes and invalid value";
+				}
+
+				renderProgressBar(loadedAssets++);
+			}
+		}
+		else {
+			throw "'sounds' is not an array";
+		}
+	}
+
+	// load musics
+	jValue = root["musics_hub"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					std::string file = vObj["file"]->AsString();
+#ifdef _DEBUG
+					std::cout << "Loading music with id: " << key << std::endl;
+#endif
+					musics_hub.emplace(key, Music(file));
+				}
+				else {
+					throw "'musics' array in '" + filename
+						+ "' includes and invalid value";
+				}
+
+				renderProgressBar(loadedAssets++);
+			}
+		}
+		else {
+			throw "'musics' is not an array";
+		}
+	}
 
 	// load dialogs
 	jValue = root["dialogs"];
@@ -324,9 +433,13 @@ void SDLUtils::closeSDLExtensions() {
 
 	musics_.clear();
 	sounds_.clear();
-	msgs_.clear();
 	images_.clear();
 	fonts_.clear();
+
+	musics_hub.clear();
+	sounds_hub.clear();
+	images_hub.clear();
+	fonts_hub.clear();
 	dialogs_.clear();
 
 	Mix_Quit(); // quit SDL_mixer
@@ -356,9 +469,7 @@ void SDLUtils::freeMemory()
 {
 	musics_.clear();
 	sounds_.clear();
-	msgs_.clear();
 	images_.clear();
 	fonts_.clear();
-	dialogs_.clear();
 }
 

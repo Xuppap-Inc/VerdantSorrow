@@ -69,6 +69,8 @@ void TreeScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeTreeEssenceState(true);
+		if(bossHealth<=0)sC().changeStatePlayerInBoss(false);
+			
 		setAble(false);
 		sC().decideScene();
 	}
