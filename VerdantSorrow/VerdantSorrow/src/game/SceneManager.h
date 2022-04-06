@@ -29,6 +29,7 @@ public:
 	void FrogSceneState(bool active);
 	void TreeSceneState(bool active);
 	void EyeSceneState(bool active);
+	void changeStatePlayerInBoss(bool active);
 	void decideScene();
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();

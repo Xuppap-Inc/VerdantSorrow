@@ -169,6 +169,11 @@ void SceneManager::EyeSceneState(bool active) {
 	fin_->setAble(active);
 }
 
+void SceneManager::changeStatePlayerInBoss(bool active)
+{
+	playerInBossFight = active;
+}
+
 void SceneManager::decideScene()
 {
 
