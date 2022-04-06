@@ -8,7 +8,8 @@ class Texture;
 class PlayerUI : public ecs::Component{
 public:
         __CMPID_DECL__(ecs::_PLAYERUI)
-        PlayerUI();
+         PlayerUI();
+        PlayerUI(bool hub);
         virtual ~PlayerUI();
 
         void initComponent() override;

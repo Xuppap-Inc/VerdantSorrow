@@ -47,6 +47,7 @@ private:
 	PauseMenu* pauseMenu_;
 	EscapeScene* ecapesc_;
 	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
+	bool hubAssetsChargeds_, playerInBossFight;
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

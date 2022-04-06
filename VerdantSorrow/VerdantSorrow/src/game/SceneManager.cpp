@@ -11,7 +11,8 @@
 #include "EscapeScene.h"
 
 
-SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false)
+SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
+playerInBossFight(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
@@ -72,23 +73,32 @@ void SceneManager::update()
 void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
-	sdlUtils_.freeMemory();
+	if(!playerInBossFight) sdlUtils_.freeMemory();
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
-		sdlUtils_.loadReasources("resources/config/hub.json");
+		if (!hubAssetsChargeds_) {
+			sdlUtils_.loadReasourcesHub("resources/config/hub.json");
+			hubAssetsChargeds_ = true;
+		}
 		h_->init();
 		break;
 	case SceneManager::Frog_:
+		if(!playerInBossFight)
 		sdlUtils_.loadReasources("resources/config/frog.json");
+		playerInBossFight = true;
 		f_->init();
 		break;
 	case SceneManager::Tree_:
+		if (!playerInBossFight)
 		sdlUtils_.loadReasources("resources/config/treeScene.json");
+		playerInBossFight = true;
 		t_->init();
 		break;
 	case SceneManager::Eye_:
+		if (!playerInBossFight)
 		sdlUtils_.loadReasources("resources/config/finalBoss.json");
+		playerInBossFight = true;
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
