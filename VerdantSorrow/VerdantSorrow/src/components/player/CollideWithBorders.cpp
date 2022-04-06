@@ -46,21 +46,21 @@ void CollideWithBorders::onBottom()
 
 void CollideWithBorders::onLeft()
 {
-	/*auto& pos = tr_->getPos();
+	auto& pos = tr_->getPos();
 
 	pos.set(Vector2D(0, pos.getY()));
-	attrib_->setLeftStop(true);*/
+	attrib_->setLeftStop(true);
 }
 
 void CollideWithBorders::onRight()
 {
-	/*auto& pos = tr_->getPos();
+	auto& pos = tr_->getPos();
 
 	auto width = sdlutils().width();
 	auto playerWidth = tr_->getWidth();
 
 	pos.set(Vector2D(width - playerWidth, pos.getY()));
-	attrib_->setRightStop(true);*/
+	attrib_->setRightStop(true);
 }
 
 void CollideWithBorders::onTop()
