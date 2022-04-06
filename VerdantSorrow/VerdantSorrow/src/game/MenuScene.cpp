@@ -5,7 +5,8 @@
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
-
+#include "SceneManager.h"
+#include "Scene.h"
 
 MenuScene::MenuScene() :Scene()
 {
@@ -15,7 +16,7 @@ MenuScene::MenuScene() :Scene()
 void MenuScene::init()
 {
 	Scene::init();
-
+	changeSc_ = false;
 	//background();//Dibuja el fondo
 
 	generateAllButtons(); //Genera todos los botones del menu (para ordenar mejor el codigo)
@@ -39,15 +40,15 @@ void MenuScene::createButton(float x, float y, float w, float h, std::string but
 
 void MenuScene::update()
 {
-
 	handleInput(); //Metodo para control de input 
-
-	mngr_->update();
-	mngr_->refresh();
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	sdlutils().presentRenderer();
+	if (!changeSc_) {
+			mngr_->update();
+			mngr_->refresh();
+			sdlutils().clearRenderer();
+			mngr_->render();
+			mngr_->debug();
+			sdlutils().presentRenderer();	
+	}
 }
 
 void MenuScene::onButtonClicked(int index)
@@ -56,29 +57,32 @@ void MenuScene::onButtonClicked(int index)
 	/Los botones se añaden en el orden indicado en el vector de nombres
 	/Cambiando el orden de los botones, cambiaria lo que hay que hacer en cada caso
 	/De la misma manera si se añade un nuevo boton habría que añadir el caso correspondiente*/
-
+	changeSc_ = true;
 	switch (index)
 	{
 	case 0: //Boton new game
 		std::cout << "Has pulsado el boton de nuevo juego" << std::endl;
+		sC().changeScene(SceneManager::Hub_);
+		
 		break;
 	case 1: //Boton continue
 		std::cout << "Has pulsado el boton de continuar" << std::endl;
 
-		break;
-	case 2: //Boton load boss
-		std::cout << "Has pulsado el boton de load" << std::endl;
 
 		break;
-	case 3://Boton settings
-		std::cout << "Has pulsado el boton de ajustes" << std::endl;
+		//case 2: //Boton load boss
+		//	std::cout << "Has pulsado el boton de load" << std::endl;
 
-		break;
-	case 4: //Boton controls
+		//	break;
+		//case 3://Boton settings
+		//	std::cout << "Has pulsado el boton de ajustes" << std::endl;
+
+		//	break;
+	case 2: //Boton controls
 		std::cout << "Has pulsado el boton de controles" << std::endl;
-
+		sC().changeScene(SceneManager::Controls_);
 		break;
-	case 5: //Boton quit
+	case 3: //Boton quit
 		SDL_Quit();
 		break;
 
@@ -89,7 +93,7 @@ void MenuScene::onButtonClicked(int index)
 void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
-	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 3;
+	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 2;
 	int buttonW = 200, buttonH = 80; // Width y Height de los botones
 
 	//Bucle que dibuja la primera columna (izq) de botones
@@ -121,7 +125,8 @@ void MenuScene::handleMouseInput()
 {
 	auto& ihdlr = ih();
 	auto ratonPos = ihdlr.getMousePos();
-	for (int i = 0; i < buttonPositions_.size(); ++i)
+	int i = 0;
+	while (i < buttonPositions_.size())
 	{
 		//Para todos los botones comprueba si el raton esta sobre ellos
 		auto pos = buttonPositions_[i]->getPos();
@@ -140,6 +145,7 @@ void MenuScene::handleMouseInput()
 			}
 		}
 		else  deselectButton(i);
+		i++;
 	}
 }
 
@@ -158,7 +164,7 @@ void MenuScene::handleControllerInput()
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
 				{
-					changeButton(3); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
+					changeButton(2); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
 
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba
@@ -167,9 +173,8 @@ void MenuScene::handleControllerInput()
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
 				{
-					changeButton(-3);
+					changeButton(-2);
 				}
-
 
 			}
 		}
@@ -186,7 +191,7 @@ void MenuScene::selectButton(int index) //Metodo que cambia aspecto del boton cu
 {
 	//Mouse index guarda el indice del boton sobre el que se encuentra el raton
 	mouseIndex_ = index;
-	auto image=buttonPoperties_[index]->getComponent<Image>();
+	auto image = buttonPoperties_[index]->getComponent<Image>();
 	image->setAlpha(127); //Baja la opacidad del boton
 
 }

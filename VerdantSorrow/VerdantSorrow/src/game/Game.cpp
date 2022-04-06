@@ -64,7 +64,7 @@ void Game::start() {
 		}
 	}
 	else {
-		firstScene = SceneManager::scenes::Hub_;
+		firstScene = SceneManager::scenes::Menu_;
 		sC().setFirstSceneAble();
 	}
 	
