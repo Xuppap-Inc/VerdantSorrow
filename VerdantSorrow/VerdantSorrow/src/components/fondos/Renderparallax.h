@@ -17,6 +17,7 @@ public:
 	virtual ~RenderParallax();
 	void initComponent() override;
 	void render()override;
+	void update() override;
 
 
 private:
@@ -24,6 +25,7 @@ private:
 	Texture* tex_;
 	Transform* tr_;
 	float scrollratio_;
+	float startpos;
 
 
 };
