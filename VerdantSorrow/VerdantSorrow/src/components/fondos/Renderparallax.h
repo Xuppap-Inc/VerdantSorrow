@@ -13,7 +13,7 @@ public:
 
 	__CMPID_DECL__(ecs::_PARALLAX)
 
-		RenderParallax(Texture* tex);
+		RenderParallax(Texture* tex,float scrollratio);
 	virtual ~RenderParallax();
 	void initComponent() override;
 	void render()override;
@@ -23,7 +23,7 @@ private:
 
 	Texture* tex_;
 	Transform* tr_;
-
+	float scrollratio_;
 
 
 };
