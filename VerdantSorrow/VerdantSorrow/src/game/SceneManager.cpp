@@ -108,7 +108,7 @@ void SceneManager::init()
 		pauseMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
-		sdlUtils_.loadReasources("resources/config/finalBoss.json");
+		sdlUtils_.loadReasources("resources/config/escapeScene.json");
 		ecapesc_->init();
 		break;
 	default:

@@ -1,0 +1,164 @@
+{
+  "assets" : 53,
+
+  "fonts" : [
+    { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
+    { "id" : "ARIAL24", "file" : "resources/fonts/ARIAL.ttf", "size": 24 },
+    { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
+  ],
+
+  "images": [
+     
+    {
+      "id": "fondoNegro",
+      "file": "resources/images/fondoNegro.png"
+    },
+    {
+      "id": "manoIzq",
+      "file": "resources/images/BossFinal_ManoIzq.png"
+    },
+    {
+      "id": "manoDer",
+      "file": "resources/images/BossFinal_ManoDer.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor",
+      "file": "resources/images/attack1.png"
+    },
+    {
+      "id": "Chica_AtkFloor2",
+      "file": "resources/images/attack2.png"
+    },
+    {
+      "id": "Chica_AtkFloor3",
+      "file": "resources/images/attack3.png"
+    },
+    {
+      "id": "Attack1_Recovery",
+      "file": "resources/images/attack1_recovery.png"
+    },
+    {
+      "id": "Chica_AtkAir",
+      "file": "resources/images/attackAir.png"
+    },
+    {
+      "id": "chicaroll",
+      "file": "resources/images/roll.png"
+    },
+    {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "bossBarArrow_Left",
+      "file": "resources/images/BossBarArrow_Left.png"
+    },
+    {
+      "id": "bossBarArrow_Right",
+      "file": "resources/images/BossBarArrow_Right.png"
+    },
+    {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+
+    {
+      "id": "vfx_cloud",
+      "file": "resources/images/vfx_cloud.png"
+    },
+    {
+      "id": "vfx_smoke",
+      "file": "resources/images/vfx_smoke.png"
+    },
+    {
+      "id": "vfx_attack",
+      "file": "resources/images/vfx_attack.png"
+    },
+    {
+      "id": "vfx_star",
+      "file": "resources/images/vfx_star.png"
+    },
+    {
+      "id": "particles",
+      "file": "resources/images/particles.png"
+    },
+    {
+      "id": "wave",
+      "file": "resources/images/wave.png"
+    },
+    {
+      "id": "particle",
+      "file": "resources/images/particlered.png"
+    },
+    {
+      "id": "fondodelante",
+      "file": "resources/images/fondodelante.png"
+    },
+    {
+      "id": "Suelo",
+      "file": "resources/images/fondofinal.png"
+    },
+    {
+      "id": "vfx_manos_hoguera",
+      "file": "resources/images/vfx_manos_hoguera.png"
+    },
+    {
+      "id": "vfx_manos_fuego",
+      "file": "resources/images/vfx_manos_fuego.png"
+    },
+    {
+      "id": "luz_roja",
+      "file": "resources/images/luz_roja.png"
+    },
+    {
+      "id": "luz_rosa",
+      "file": "resources/images/luz_rosa.png"
+    }
+  ],
+
+  "sounds" : [
+    { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
+    { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
+    { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
+    { "id" : "sfx_chica_roll", "file" : "resources/sound/sfx_chica_roll.wav" },
+    { "id" : "sfx_manos_attack", "file" : "resources/sound/sfx_manos_attack.wav" },
+    { "id" : "sfx_manos_attack2", "file" : "resources/sound/sfx_manos_attack2.wav" },
+    { "id" : "sfx_manos_damage", "file" : "resources/sound/sfx_manos_damage.wav" },
+    { "id" : "sfx_manos_fuego", "file" : "resources/sound/sfx_manos_fuego.wav" },
+    { "id" : "sfx_manos_quemado", "file" : "resources/sound/sfx_manos_quemado.wav" },
+    { "id" : "sfx_manos_fire_clap", "file" : "resources/sound/sfx_manos_fire_clap.wav" },
+    { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
+    ],
+  "musics" : [
+
+  ]
+
+}

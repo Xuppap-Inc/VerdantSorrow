@@ -47,6 +47,7 @@ void EscapeScene::init()
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
+	cameraC->setScrollX(true);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);

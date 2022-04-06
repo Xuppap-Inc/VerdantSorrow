@@ -192,6 +192,7 @@
     <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\config\escapeScene.json" />
     <None Include="resources\config\finalBoss.json" />
     <None Include="resources\config\frog.json" />
     <None Include="resources\config\hub.json" />
