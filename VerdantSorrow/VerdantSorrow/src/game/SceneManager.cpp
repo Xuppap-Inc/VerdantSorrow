@@ -5,6 +5,10 @@
 #include "Hub.h"
 #include "MenuScene.h"
 #include "../sdlutils/SDLUtils.h"
+#include "TutorialScene.h"
+#include "ControlsScene.h"
+#include "PauseMenu.h"
+#include "EscapeScene.h"
 
 
 SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false)
@@ -17,6 +21,7 @@ SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), tree
 	menu_ = new MenuScene(); sceneList.push_back(menu_);
 	controls_ = new ControlsScene(); sceneList.push_back(controls_);
 	pauseMenu_ = new PauseMenu(); sceneList.push_back(pauseMenu_);
+	ecapesc_ = new EscapeScene(); sceneList.push_back(ecapesc_);
 }
 
 
@@ -55,6 +60,9 @@ void SceneManager::update()
 		break; 
 	case SceneManager::PauseMenu_:
 		pauseMenu_->update();
+		break;
+	case SceneManager::EscapeScene_:
+		ecapesc_->update();
 		break;
 	default:
 		break;
@@ -98,6 +106,10 @@ void SceneManager::init()
 	case SceneManager::PauseMenu_:
 		sdlUtils_.loadReasources("resources/config/pauseMenu.json");
 		pauseMenu_->init();
+		break;
+	case SceneManager::EscapeScene_:
+		sdlUtils_.loadReasources("resources/config/finalBoss.json");
+		ecapesc_->init();
 		break;
 	default:
 		break;

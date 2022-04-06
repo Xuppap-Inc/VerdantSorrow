@@ -27,7 +27,7 @@ void Game::start() {
 	std::cin >> n;
 	SceneManager::scenes firstScene;
 	if (n == 1) {
-		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n6. Controles\n7.Pausa\n";
+		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n6. Controles\n7.Pausa\n8.EscapeScene\n";
 		std::cin >> n;
 		switch (n)
 		{
@@ -54,6 +54,9 @@ void Game::start() {
 			break;
 		case 7:
 			firstScene = SceneManager::scenes::PauseMenu_;
+			break;
+		case 8:
+			firstScene = SceneManager::scenes::EscapeScene_;
 			break;
 
 		default:
