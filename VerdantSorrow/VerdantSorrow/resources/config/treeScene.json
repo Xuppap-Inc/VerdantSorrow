@@ -184,6 +184,10 @@
     {
       "id": "luz_amarilla",
       "file": "resources/images/luz_amarilla.png"
+    },
+    {
+      "id": "luz_naranja",
+      "file": "resources/images/luz_amarilla.png"
     }
   ],
 
