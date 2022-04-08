@@ -56,6 +56,8 @@ void FinalBossScene::init()
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
+
+	createLights();
 }
 
 void FinalBossScene::update()
@@ -138,6 +140,8 @@ void FinalBossScene::setAble(bool a)
 }
 
 void FinalBossScene::createLights() {
-	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), -200, sdlutils().height() - 300, 600, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()-300, sdlutils().height()-200, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()/2 - 500, sdlutils().height()-500, 1000, 100, mngr_);
 
 }
