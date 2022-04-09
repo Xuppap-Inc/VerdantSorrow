@@ -73,6 +73,8 @@ void Game::start() {
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 
 	auto& scMngr_ = sC();
+
+	sdlutils().toggleFullScreen();
 	
 	scMngr_.changeScene(firstScene);
 	//scMngr_.init();
