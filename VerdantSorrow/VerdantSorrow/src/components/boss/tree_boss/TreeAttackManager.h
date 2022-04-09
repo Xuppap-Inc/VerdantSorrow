@@ -59,6 +59,7 @@ private:
 
 	const int TIME_FOR_SPECIAL = 10000;
 	const int WAIT_AFTER_SPECIAL = 1000;
+	const int ATTACK_CD = 2000;
 
 	State state;
 	Phase phase;
@@ -85,9 +86,11 @@ private:
 	Music* musicaFase2_;
 
 	int rootWidth_;
+	
 	VirtualTimer timerWave_;
 	VirtualTimer timerSpecial_;
 	VirtualTimer waitTimer_;
+	VirtualTimer timerCd_;
 
 	bool attacking_;
 	bool waiting_;

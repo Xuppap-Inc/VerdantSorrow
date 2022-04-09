@@ -18,7 +18,7 @@
 #include "../BossAtributos.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
+timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
 {
 }
 
@@ -29,7 +29,7 @@ TreeAttackManager::~TreeAttackManager()
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
 																	attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), 
-																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
+																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
 {
 }
 
@@ -67,6 +67,8 @@ void TreeAttackManager::initComponent()
 
 	timerWave_.reset();
 	timerSpecial_.reset();
+	timerCd_.reset();
+	
 }
 
 void TreeAttackManager::update()
@@ -91,17 +93,24 @@ void TreeAttackManager::update()
 		anim_->repeat(true);
 
 		
+		
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) /* || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE)*/)  && newAtack_) {
+		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
+			std::cout << timerCd_.currTime() << std::endl;
 
-			animNewState_ = ANIM_ATTACK;
-			anim_->repeat(false);
+			
+			if(timerCd_.currTime() >= ATTACK_CD) {
+				animNewState_ = ANIM_ATTACK;
+				anim_->repeat(false);
 
-			SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
-			s->play();
-			meleeAttack_->attack(dir_);
-			attacking_ = true;
-			newAtack_ = false;
+				SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
+				s->play();
+				meleeAttack_->attack(dir_);
+				attacking_ = true;
+				newAtack_ = false;
+				timerCd_.reset();
+			}
+			
 		}
 
 		if (phase == PHASE1) {
