@@ -67,11 +67,11 @@ void MeleeAttack::setPosition(int dir)
 	Vector2D pos = tr_->getPos();
 
 	if (dir > 0) {
-		pos_ = Vector2D(pos.getX() + tr_->getWidth()/1.35, pos.getY());		
+		pos_ = Vector2D(pos.getX() + tr_->getWidth()/1.5, pos.getY());		
 	}
 		
 	else {
-		pos_ = Vector2D(pos.getX(), pos.getY());		
+		pos_ = Vector2D(pos.getX() + tr_->getWidth() / 5, pos.getY());
 	}		
 
 	treeMovement_->setMoveActive(false);
