@@ -16,6 +16,8 @@
 #include "SceneManager.h"
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
+#include "../components/boss/tree_boss/MeleeAttack.h"
+
 
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr) : colManager_(colManager), mngr_(mngr)
@@ -39,10 +41,10 @@ void CollisionChecker::checkCollisions()
 			WaveMovement* wave = ent->getComponent<WaveMovement>();
 			TongueAttack* tA = ent->getComponent<TongueAttack>();
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
-
+			MeleeAttack* mA = ent->getComponent<MeleeAttack>();
 			LanternMovement* lantern = ent->getComponent<LanternMovement>();
 
-			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr)
+			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
