@@ -92,7 +92,7 @@ void TreeAttackManager::update()
 
 		
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0&&absDistance<tr_->getWidth()+MELEE_ATTACK_DISTANCE ))&& newAtack_) {
+		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) /* || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE)*/)  && newAtack_) {
 
 			animNewState_ = ANIM_ATTACK;
 			anim_->repeat(false);
