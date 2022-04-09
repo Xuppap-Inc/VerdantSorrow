@@ -129,11 +129,14 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 	PlayerAttributes* attrib = player->getComponent<PlayerAttributes>();
 	PlayerCtrl* playerCtrl = player->getComponent<PlayerCtrl>();
 	Transform* playerTr = player->getComponent<Transform>();
+	FramedImage* playerFImg = player->getComponent<FramedImage>();
 
 	if (!attrib->getInvulnerable() && !playerCtrl->isRolling()) {
 		attrib->damagePlayer(1);
 		attrib->setInvulnerable(true);
 		attrib->setInvulnerableTimer(sdlutils().currRealTime());
+
+		playerFImg->setColor(200, 50, 50, 1000);
 
 		// Knock back
 		float enemyXpos = ent->getComponent<Transform>()->getPos().getX() + ent->getComponent<Transform>()->getWidth() / 2;
