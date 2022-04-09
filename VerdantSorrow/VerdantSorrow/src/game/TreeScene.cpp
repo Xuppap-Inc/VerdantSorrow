@@ -69,6 +69,8 @@ void TreeScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeTreeEssenceState(true);
+		if(bossHealth<=0)sC().changeStatePlayerInBoss(false);
+			
 		setAble(false);
 		sC().decideScene();
 	}
@@ -185,6 +187,9 @@ void TreeScene::setAble(bool a)
 }
 
 void TreeScene::createLights() {
-	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 100, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_amarilla"), 300, sdlutils().height()-350, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 100, sdlutils().height() - 300, 600, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 200, 100, 500, 100, mngr_);
 													   
 }

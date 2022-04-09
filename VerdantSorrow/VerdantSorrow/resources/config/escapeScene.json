@@ -8,7 +8,7 @@
   ],
 
   "images": [
-     
+
     {
       "id": "fondoNegro",
       "file": "resources/images/fondoNegro.png"
@@ -141,6 +141,18 @@
     {
       "id": "luz_rosa",
       "file": "resources/images/luz_rosa.png"
+    },
+    {
+      "id": "capa1",
+      "file": "resources/images/capa1.png"
+    },
+    {
+      "id": "capa2",
+      "file": "resources/images/capa2.png"
+    },
+    {
+      "id": "capa3",
+      "file": "resources/images/capa3.png"
     }
   ],
 

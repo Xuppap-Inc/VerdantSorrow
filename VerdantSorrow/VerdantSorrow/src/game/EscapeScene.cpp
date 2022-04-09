@@ -16,7 +16,7 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/tree_boss/Root/RootMovement.h"
 #include "../components/ScrollCamera.h"
-
+#include "Fondos/Parallax.h"
 #include "CollisionManager.h"
 
 #include "../components/boss/wave/WaveSpawner.h"
@@ -78,7 +78,14 @@ void EscapeScene::update()
 
 void EscapeScene::background()
 {
-	Scene::background("fondoNegro", sdlutils().height() / 5);
+	auto parallax_ = new Parallax(mngr_);
+	
+	parallax_->AddLayer(&sdlutils().images().at("capa3"), 0, sdlutils().height(), sdlutils().width(),0);
+	parallax_->AddLayer(&sdlutils().images().at("capa2"), -1.2f, sdlutils().height(),  sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("capa1"), -1.4f, sdlutils().height(), sdlutils().width(),80);
+	
+	
+	
 }
 
 

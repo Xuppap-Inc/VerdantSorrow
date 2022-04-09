@@ -29,6 +29,7 @@ public:
 	void FrogSceneState(bool active);
 	void TreeSceneState(bool active);
 	void EyeSceneState(bool active);
+	void changeStatePlayerInBoss(bool active);
 	void decideScene();
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
@@ -47,6 +48,7 @@ private:
 	PauseMenu* pauseMenu_;
 	EscapeScene* ecapesc_;
 	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
+	bool hubAssetsChargeds_, playerInBossFight;
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

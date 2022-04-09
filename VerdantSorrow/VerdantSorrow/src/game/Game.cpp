@@ -64,7 +64,7 @@ void Game::start() {
 		}
 	}
 	else {
-		firstScene = SceneManager::scenes::Hub_;
+		firstScene = SceneManager::scenes::Menu_;
 		sC().setFirstSceneAble();
 	}
 	
@@ -73,6 +73,8 @@ void Game::start() {
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 
 	auto& scMngr_ = sC();
+
+	sdlutils().toggleFullScreen();
 	
 	scMngr_.changeScene(firstScene);
 	//scMngr_.init();
