@@ -76,7 +76,8 @@ void TreeAttackManager::update()
 	Vector2D playerPos = player_->getPos();
 	Vector2D treePos = tr_->getPos();
 
-	float distance = playerPos.getX() - treePos.getX();
+	//el arbol es más ancho que su collider, se ajusta jugando con su ancho
+	float distance = playerPos.getX() - treePos.getX()-tr_->getWidth()/7;
 
 	float absDistance = abs(distance);
 
@@ -97,9 +98,11 @@ void TreeAttackManager::update()
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
 			std::cout << timerCd_.currTime() << std::endl;
-
+			std::cout << distance << std::endl;
+			std::cout << tr_->getWidth() << std::endl;
 			
 			if(timerCd_.currTime() >= ATTACK_CD) {
+				std::cout << dir_ << std::endl;
 				animNewState_ = ANIM_ATTACK;
 				anim_->repeat(false);
 
