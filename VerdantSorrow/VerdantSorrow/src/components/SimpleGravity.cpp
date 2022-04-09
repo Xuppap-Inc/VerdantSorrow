@@ -3,8 +3,11 @@
 #include "../ecs/Entity.h"
 #include "Transform.h"
 
-SimpleGravity::SimpleGravity(float gravity) : tr_(nullptr), gravity_(gravity), active_(true)
+SimpleGravity::SimpleGravity(float gravity) : tr_(nullptr), active_(true)
 {
+	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+
+	gravity_ = gravity * windowScaleHeight_;
 }
 
 SimpleGravity::~SimpleGravity()

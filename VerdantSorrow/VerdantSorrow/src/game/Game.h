@@ -13,5 +13,7 @@ public:
 	void update();
 private:
 	ecs::Manager *mngr_;
-};
 
+	int winHeight_;
+	int winWidth_;
+};

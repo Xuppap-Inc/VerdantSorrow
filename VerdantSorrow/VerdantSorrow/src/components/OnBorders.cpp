@@ -6,6 +6,9 @@
 
 OnBorders::OnBorders(): tr_(nullptr)
 {
+	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+
+	floorOffset_ = 60 * windowScaleHeight_;
 }
 
 OnBorders::~OnBorders()
@@ -28,7 +31,7 @@ void OnBorders::update()
 	auto entWidth = tr_->getWidth();
 	
 	//Borde inferior
-	if (pos.getY() > height - entHeight-60) {
+	if (pos.getY() > height - entHeight - floorOffset_) {
 	
 		onBottom();
 	}

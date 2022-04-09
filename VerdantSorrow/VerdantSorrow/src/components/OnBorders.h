@@ -43,5 +43,7 @@ public:
 
 protected:
     Transform* tr_;
+
+    float floorOffset_;
 };
 
