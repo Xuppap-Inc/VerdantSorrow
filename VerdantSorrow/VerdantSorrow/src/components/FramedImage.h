@@ -20,6 +20,9 @@ public:
 	void setTexture(Texture* tex) {
 		tex_ = tex;
 	}
+	Texture* getTexture() {
+		return tex_;
+	}
 	void select_sprite(int x, int y);
 	void initComponent() override;
 	void render() override;
@@ -40,6 +43,10 @@ public:
 
 	int getFrameNum();
 	std::string getCurrentAnimation() { return currentAnim; }
+
+	void setColor(Uint8 r, Uint8 g, Uint8 b, int duration = -1);
+
+	void update() override;
 
 private:
 	Transform* tr_;
@@ -74,5 +81,9 @@ private:
 	void checkAnimationFinished();
 	void checkEvents();
 	void clearEvents();
+
+	VirtualTimer colorTimer_;
+	int colorDuration_ = 0;
+	int red_ = 255, green_ = 255, blue_ = 255;
 };
 

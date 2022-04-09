@@ -36,12 +36,12 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
 		throw "Couldn't load image: " + fileName;
 	}
 
+
 	width_ = surface->w;
 	height_ = surface->h;
 	renderer_ = renderer;
 
 	SDL_FreeSurface(surface);
-
 }
 
 Texture::Texture(SDL_Renderer* renderer, const std::string& fileName, Uint8 alpha)
