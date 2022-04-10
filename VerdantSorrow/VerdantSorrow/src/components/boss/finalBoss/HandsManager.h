@@ -1,6 +1,8 @@
 #pragma once
 #include "../../../ecs/Component.h"
 #include "../../../game/CollisionManager.h"
+#include "../../../sdlutils/VirtualTimer.h"
+
 using ecs::Manager;
 class Entity;
 class Tranform;
@@ -10,6 +12,7 @@ class ClapAttack;
 class HammerArm;
 class BossAtributos;
 class RectangleCollider;
+class Image;
 
 class HandsManager :
 	public ecs::Component
@@ -43,6 +46,7 @@ private:
 	int numeroAtaque;
 
 	int multFase_;
+	VirtualTimer tiempoColor_;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
@@ -61,10 +65,8 @@ private:
 	RectangleCollider* colliderRightHand_;
 	RectangleCollider* colliderLeftHand_;
 
-	ecs::Entity* leftFire_;
-	ecs::Entity* rightFire_;
-	Transform* leftFireTr_;
-	Transform* rightFireTr_;
+	Image* leftHandImg_;
+	Image* rightHandImg_;
 
 	State state_;
 };

@@ -232,14 +232,17 @@ void TreeAttackManager::update()
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_walk"), 2, 6, (1000 / 30) * 12, 12, "arbol_capa_walk");
 			break;
 		case TreeAttackManager::ANIM_ATTACK:
+			anim_->setColor(255, 200, 20, 200);
 			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_capa_attack");
 			break;
 		case TreeAttackManager::ANIM_ATTACK_COMBO:
+			anim_->setColor(255, 200, 20, 200);
 			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack_combo"), 3, 6, (1000 / 30) * 13, 13, "arbol_capa_attack_combo");
 			break;
 		case TreeAttackManager::ANIM_ROOTS:
+			anim_->setColor(255, 200, 20, 500);
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_roots"), 3, 6, (1000 / 30) * 16, 16, "arbol_capa_roots");
 			break;
 		case TreeAttackManager::ANIM_BACKGROUND:
