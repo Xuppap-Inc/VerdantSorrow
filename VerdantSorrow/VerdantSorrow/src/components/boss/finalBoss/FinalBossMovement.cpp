@@ -64,6 +64,10 @@ void FinalBossMovement::bounce()
 	if (vel_.magnitude() == 0)
 		vel_ = Vector2D(1, 1);
 
+	//Aviso ataques
+	if ((pos_.getY() < 150 && vel_.getY() < 0) || (pos_.getY() > sdlutils().height() - 300 && vel_.getY() > 0)) {
+		anim_->setColor(200, 200, 20, 100);
+	}
 
 	// bounce on top/bottom borders
 	if (pos_.getY() < 0) {

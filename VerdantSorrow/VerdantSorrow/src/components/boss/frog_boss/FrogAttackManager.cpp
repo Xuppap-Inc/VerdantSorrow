@@ -146,6 +146,7 @@ void FrogAttackManager::update()
 			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_idle");
 			break;
 		case FrogAttackManager::ANIM_JUMP:
+			anim_->setColor(255, 200, 20, 200);
 			anim_->repeat(false);
 
 			callback = [this]() { frogState_ = JUMPING; frogJump_->attack(jumpDirection_); };
@@ -162,7 +163,7 @@ void FrogAttackManager::update()
 			}
 			break;
 		case FrogAttackManager::ANIM_BIG_JUMP:
-			
+			anim_->setColor(255, 200, 20, 500);
 			anim_->repeat(false);
 
 			callback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
@@ -177,6 +178,7 @@ void FrogAttackManager::update()
 			}
 			break;
 		case FrogAttackManager::ANIM_TONGUE:
+			anim_->setColor(255, 200, 20, 500);
 			anim_->repeat(false);
 
 			//callback del ataque de la lengua
