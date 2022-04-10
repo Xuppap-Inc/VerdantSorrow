@@ -27,6 +27,10 @@
       "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
     },
     {
+      "id": "walk_side_Kyna",
+      "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
+    },
+    {
       "id": "heart",
       "file": "resources/images/heart.png"
     },
