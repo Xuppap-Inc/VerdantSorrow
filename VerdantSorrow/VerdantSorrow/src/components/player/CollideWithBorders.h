@@ -10,7 +10,6 @@ class CollideWithBorders :
 {
 public:
     CollideWithBorders();
-    CollideWithBorders(float downOffset);
     ~CollideWithBorders();
     void initComponent() override;
 
@@ -24,8 +23,5 @@ public:
 protected:
 
     PlayerAttributes* attrib_;
-
-    // Cambia el limite inferior con el que se collisiona
-    float downOffset;
 };
 

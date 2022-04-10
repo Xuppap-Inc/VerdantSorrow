@@ -10,13 +10,6 @@ CollideWithBorders::CollideWithBorders(): OnBorders()
 	tr_ = nullptr;
 }
 
-CollideWithBorders::CollideWithBorders(float downOffset_) : OnBorders()
-{
-	downOffset = downOffset_;
-	attrib_ = nullptr;
-	tr_ = nullptr;
-}
-
 CollideWithBorders::~CollideWithBorders()
 {
 }

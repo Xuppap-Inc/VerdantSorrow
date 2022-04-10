@@ -100,23 +100,26 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
 	auto FrogAtribs = Frog->addComponent<BossAtributos>(40);
 
-	auto frogH = 300;
+	auto frogH = 400;
 	auto frogW = frogH * 1.11f;
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height() - frogH;
 	//auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);
 	auto FrogTr = Frog->addComponent<Transform>();
 
-	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 1);
+	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 400.0/300.0);
 
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
 
+	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+	auto windowScaleWidth_ = sdlutils().width() / 1920.0f;
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight()-200, 0, 75);
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - (150 * windowScaleWidth_), 
+		FrogTr->getHeight() - (200 * windowScaleHeight_), 0, 75*windowScaleHeight_);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
 		
-	Frog->addComponent<SimpleGravity>(.5);
+	Frog->addComponent<SimpleGravity>(1);
 	Frog->addComponent<CollideWithBordersBoss>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);

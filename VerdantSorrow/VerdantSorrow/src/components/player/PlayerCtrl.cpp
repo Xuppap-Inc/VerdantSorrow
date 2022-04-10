@@ -22,6 +22,9 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 	rollKeys({ SDL_SCANCODE_LSHIFT }),
 	rollButtons({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
 {
+	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+
+	jumpForce *= windowScaleHeight_;
 }
 
 PlayerCtrl::~PlayerCtrl()
@@ -172,7 +175,7 @@ void PlayerCtrl::animationManagement()
 
 					if (anim_->getCurrentAnimation() == "Chica_AtkFloor" || anim_->getCurrentAnimation() == "Attack1_Recovery") attack_->deactivateRecovery();
 
-					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
+					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_/2, 25, "chicaroll");
 					anim_->repeat(false);
 				}
 			}

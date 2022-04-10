@@ -9,6 +9,9 @@ FrogBigJump::FrogBigJump() : tr_(), isJumping_(false), jumpForce_(), lastJump_()
 
 FrogBigJump::FrogBigJump(float jumpForce) : tr_(), isJumping_(false), jumpForce_(jumpForce), lastJump_(), jumpCd_(2000)
 {
+	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+
+	jumpForce_ = jumpForce * windowScaleHeight_;
 }
 
 void FrogBigJump::initComponent()
