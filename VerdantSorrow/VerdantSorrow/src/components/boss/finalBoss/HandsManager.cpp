@@ -92,7 +92,7 @@ void HandsManager::createHands() {
 		(leftHandTr_->getWidth() - width_colliderOffset, leftHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
-	punietazoleft_ = leftHand_->addComponent<Punietazo>();
+	punietazoleft_ = leftHand_->addComponent<Punietazo>(false);
 	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
@@ -104,7 +104,7 @@ void HandsManager::createHands() {
 		(rightHandTr_->getWidth() - width_colliderOffset, rightHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
-	punietazoright_ = rightHand_->addComponent<Punietazo>();
+	punietazoright_ = rightHand_->addComponent<Punietazo>(true);
 	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
 
 	colliderLeftHand_ = manoIzCollider;
