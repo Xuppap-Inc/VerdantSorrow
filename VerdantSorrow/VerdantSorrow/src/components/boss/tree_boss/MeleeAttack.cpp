@@ -52,7 +52,9 @@ void MeleeAttack::render()
 void MeleeAttack::attack(int dir)
 {
 	auto currentTime = sdlutils().currRealTime();
-
+	
+	//añade el propio collider porque meleeAttack ya es un RectangleCollider
+	colMan_->addCollider(this);
 	setActive(true);
 	setIsTrigger(true);
 	lastAttack = currentTime;
