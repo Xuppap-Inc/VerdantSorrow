@@ -4,6 +4,7 @@
 using ecs::Manager;
 class Entity;
 class CollisionManager;
+class Image;
 
 class Punietazo :
 	public ecs::Component
@@ -18,7 +19,7 @@ public:
 		FIN
 	};
 	__CMPID_DECL__(ecs::_PUNIETAZO)
-		Punietazo();
+		Punietazo(bool manoDerecha);
 	~Punietazo();
 	void initComponent()override;
 
@@ -36,6 +37,7 @@ private:
 	CollisionManager* colmanager_;
 	RectangleCollider* col_;
 	Transform* playertr_;
+	Image* img_;
 
 	State state_;
 
@@ -59,7 +61,7 @@ private:
 	//hand speed
 	int handSpeed_;
 
-
+	bool manoDerecha_;
 
 };
 

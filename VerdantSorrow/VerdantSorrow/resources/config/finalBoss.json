@@ -1,5 +1,5 @@
 {
-  "assets" : 53,
+  "assets" : 52,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -35,6 +35,14 @@
     {
       "id": "manoDer",
       "file": "resources/images/BossFinal_ManoDer.png"
+    },
+    {
+      "id": "manoIzq_fondo",
+      "file": "resources/images/BossFinal_ManoIzq_fondo.png"
+    },
+    {
+      "id": "manoDer_fondo",
+      "file": "resources/images/BossFinal_ManoDer_fondo.png"
     },
     {
       "id": "chica",
@@ -140,10 +148,6 @@
     {
       "id": "Suelo",
       "file": "resources/images/fondofinal.png"
-    },
-    {
-      "id": "vfx_manos_hoguera",
-      "file": "resources/images/vfx_manos_hoguera.png"
     },
     {
       "id": "vfx_manos_fuego",
