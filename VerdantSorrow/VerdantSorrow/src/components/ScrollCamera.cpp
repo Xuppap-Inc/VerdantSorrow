@@ -82,8 +82,18 @@ void ScrollCamera::calculateDirection()
 void ScrollCamera::debug() 
 {
 	auto pos = Vector2D(sdlutils().width() / 2.0 - deadzoneX_/2.0, sdlutils().height() / 2.0 - deadzoneY_/2.0);
-	auto rect = build_sdlrect(pos, deadzoneX_, deadzoneY_);
-	SDL_RenderDrawRect(sdlutils().renderer(), &rect);
+	auto dest = build_sdlrect(pos, deadzoneX_, deadzoneY_);
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
+
+	SDL_RenderDrawRect(sdlutils().renderer(), &dest);
 }
 
 

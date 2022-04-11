@@ -53,10 +53,19 @@ void ControlsScene::createText(std::string message)
 	Texture text(sdlutils().renderer(), message,
 		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
-	SDL_Rect dest = build_sdlrect(
+	SDL_Rect rect = build_sdlrect(
 		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());
 
-	text.render(dest);
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect.x *= sW;
+	rect.w *= sW;
+	rect.y *= sH;
+	rect.h *= sH;
+
+	text.render(rect);
 }
 
 void ControlsScene::update()

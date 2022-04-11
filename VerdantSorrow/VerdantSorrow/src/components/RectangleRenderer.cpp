@@ -43,6 +43,14 @@ void RectangleRenderer::render()
 
 		SDL_Rect rect = build_sdlrect(pos.getX() - cameraPos.getX(), pos.getY() - cameraPos.getY(), width, height);
 		
+		//escalado pantalla
+		auto sW = mngr_->getWindowScaleWidth();
+		auto sH = mngr_->getWindowScaleHeight();
+
+		rect.x *= sW;
+		rect.w *= sW;
+		rect.y *= sH;
+		rect.h *= sH;
 
 		SDL_RenderFillRect(sdlutils().renderer(), &rect);
 	}

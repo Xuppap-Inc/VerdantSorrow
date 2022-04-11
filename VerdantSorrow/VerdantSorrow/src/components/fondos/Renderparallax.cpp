@@ -46,6 +46,15 @@ void RenderParallax::render()
 	Vector2D v = tr_->getPos() - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
 	SDL_Rect dest = build_sdlrect(v, tr_->getWidth(), tr_->getHeight());
 
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
+
 	assert(tex_ != nullptr);
 	tex_->render(dest, tr_->getRot());
 }

@@ -68,16 +68,24 @@ bool RectangleCollider::isActive()
 
 void RectangleCollider::drawCollider()
 {
-	SDL_Rect r = getCollider();
+	SDL_Rect dest = getCollider();
 	auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
-	r.x -= cameraTr.getX();
-	r.y -= cameraTr.getY();
+	dest.x -= cameraTr.getX();
+	dest.y -= cameraTr.getY();
 	if (isTrigger())
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 255, 255);
 	else
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
 
-	SDL_RenderDrawRect(sdlutils().renderer(), &r);
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
+
+	SDL_RenderDrawRect(sdlutils().renderer(), &dest);
 }
 
 void RectangleCollider::setPosition()
