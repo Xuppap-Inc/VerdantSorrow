@@ -41,6 +41,14 @@
         {
             "id": "volume",
             "file": "resources/images/MenuPausa/audioButton.png"
+        },
+        {
+            "id": "rightVolume",
+            "file": "resources/images/MenuPausa/rightVolume.png"
+        },
+        {
+            "id": "leftVolume",
+            "file": "resources/images/MenuPausa/leftVolume.png"
         }
     ],
 
