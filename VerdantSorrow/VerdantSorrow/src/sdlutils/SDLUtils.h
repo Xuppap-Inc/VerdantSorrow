@@ -193,6 +193,8 @@ private:
 
 	int assetsNumber_;
 	void renderProgressBar(int assetsLoaded);
+
+	Texture* logoCargando_;
 };
 
 
