@@ -84,40 +84,48 @@ void SceneManager::init()
 		h_->init();
 		break;
 	case SceneManager::Frog_:
-		if(!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/frog.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/frog.json");
+			playerInBossFight = true;
+		}
 		f_->init();
 		break;
 	case SceneManager::Tree_:
-		if (!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/treeScene.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/treeScene.json");
+			playerInBossFight = true;
+		}
 		t_->init();
 		break;
 	case SceneManager::Eye_:
-		if (!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/finalBoss.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/finalBoss.json");
+			playerInBossFight = true;
+		}	
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/tutorial.json");
 		tut_->init();
 		break;
 	case SceneManager::Menu_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/menu.json");
 		menu_->init();
 		break;
 	case SceneManager::Controls_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/controls.json");
 		controls_->init();
 		break;
 	case SceneManager::PauseMenu_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/pauseMenu.json");
 		pauseMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/escapeScene.json");
 		ecapesc_->init();
 		break;
