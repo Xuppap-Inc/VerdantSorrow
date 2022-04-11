@@ -3,7 +3,6 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
-#include "../sdlutils/SDLUtils.h"
 #include <cassert>
 
 class Transform : public ecs::Component {
@@ -15,27 +14,21 @@ public:
 	//    constexpr static ecs::cmpId_type id = ecs::_TRANSFORM
 	//
 	__CMPID_DECL__(ecs::_TRANSFORM)
-
-	/* g establece si hay gravedad en el jugador para las colisiones en la parte 
-	baja de la pantalla en el hub*/
-	Transform() :
-	pos_(), vel_(), width_(), height_(), rot_(), gravity_(), scale_(1) {
-
-		windowScaleHeight_ = sdlutils().height() / 1080.0f;
-		windowScaleWidth_ = sdlutils().width() / 1920.0f;
+		/* g establece si hay gravedad en el jugador para las colisiones en la parte 
+		baja de la pantalla en el hub*/
+		Transform() :
+		pos_(), vel_(), width_(), height_(), rot_(), gravity_() {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
-		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r), scale_(1), gravity_() {
-
-		windowScaleHeight_ = sdlutils().height() / 1080.0f;
-		windowScaleWidth_ = sdlutils().width() / 1920.0f;
+		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r), scale_(1) {
 	}
 
 	virtual ~Transform() {
 	}
 
 	void init(Vector2D pos, Vector2D vel, float w, float h, float r, float scale = 1, bool g = true) {
+<<<<<<< HEAD
 		
 		auto x = pos.getX() * windowScaleWidth_;
 		auto y = pos.getY() * windowScaleHeight_;
@@ -48,10 +41,16 @@ public:
 		width_ = w * windowScaleWidth_;
 		height_ = h * windowScaleHeight_;
 
+=======
+		pos_ = pos;
+		vel_ = vel;
+		width_ = w;
+		height_ = h;
+>>>>>>> parent of 6bfe2f3 (primera parte reescalado)
 		rot_ = r;
 		gravity_ = g;
 		
-		scale_ = scale * windowScaleWidth_;
+		scale_ = scale;
 	}
 
 	Vector2D& getPos() {
@@ -66,7 +65,7 @@ public:
 	}
 
 	void setWidth(float w) {
-		width_ = w * windowScaleWidth_;
+		width_ = w;
 	}
 
 	float getHeight() {
@@ -74,7 +73,7 @@ public:
 	}
 
 	void setHeight(float h) {
-		height_ = h * windowScaleHeight_;
+		height_ = h;
 	}
 
 	float getRot() {
@@ -94,7 +93,7 @@ public:
 	}
 
 	void setScale(float scale) {
-		scale_ = scale * windowScaleWidth_;
+		scale_ = scale;
 	}
 
 	float getScale() {
@@ -110,8 +109,5 @@ protected:
 	bool gravity_;
 
 	float scale_;
-
-	float windowScaleHeight_;
-	float windowScaleWidth_;
 };
 

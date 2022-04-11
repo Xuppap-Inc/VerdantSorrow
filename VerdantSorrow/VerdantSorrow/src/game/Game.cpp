@@ -22,25 +22,6 @@ void Game::start() {
 
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
-	int q = -1;
-	std::cout << "0. 1080p\n1. 720p\n";
-
-	while (q != 0 && q != 1)
-	{
-		std::cin >> q;
-	}
-
-	if (q == 0) {
-	
-		winHeight_ = 1080;
-		winWidth_ = 1920;
-	}
-	else if (q == 1) {
-	
-		winHeight_ = 720;
-		winWidth_ = 1280;
-	}
-
 	int n = -1;
 	std::cout << "0.Cambio de escenas normal\n1.Elegir escena\n";
 	std::cin >> n;
@@ -87,7 +68,7 @@ void Game::start() {
 		sC().setFirstSceneAble();
 	}
 	
-	SDLUtils::init("Verdant Sorrow", winWidth_, winHeight_);
+	SDLUtils::init("Verdant Sorrow", 1280, 720);
 	//Crea el game Manager
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
 

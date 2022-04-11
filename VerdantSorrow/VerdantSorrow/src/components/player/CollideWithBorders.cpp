@@ -32,7 +32,7 @@ void CollideWithBorders::onBottom()
 	if (!attrib_->isOnGround()||!gr) {
 
 		attrib_->setOnGround(true);
-		pos.set(Vector2D(pos.getX(), height - playerHeight - floorOffset_));
+		pos.set(Vector2D(pos.getX(), height - playerHeight-60));
 		vel.set(Vector2D(vel.getX(), 0));
 	}
 }

@@ -30,7 +30,7 @@ void CollideWithBordersBoss::onBottom()
 	vel.set(Vector2D(0,0));
 	auto height = sdlutils().height();
 	auto bossHeight = tr_->getHeight();	
-	pos.set(Vector2D(pos.getX(), height - bossHeight - floorOffset_));
+	pos.set(Vector2D(pos.getX(), height - bossHeight-60));
 	attr_->setOnGround(true);
 }
 
