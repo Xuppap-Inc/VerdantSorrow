@@ -73,6 +73,9 @@ void SceneManager::update()
 void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
+
+	sdlUtils_.soundEffects().clear();
+
 	if(!playerInBossFight) sdlUtils_.freeMemory();
 	switch (actScene)
 	{
