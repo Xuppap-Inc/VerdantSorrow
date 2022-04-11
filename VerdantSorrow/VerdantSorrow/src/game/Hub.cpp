@@ -85,6 +85,7 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	auto tr = dialogBox->addComponent<Transform>();
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
+	dialogBox->addToGroup(ecs::_UI_GRP);
 }
 
 bool Hub::getAble()
