@@ -4,8 +4,8 @@
 class PauseMenu :public MenuScene
 {
 private:
-	std::vector<std::string> buttonNames_ = { "volume","resume","menu","quit" };
-	//std::vector<std::string> imagesNames = { "keyboardControls" };
+	std::vector<std::string> buttonNames_ = { "leftVolume","rightVolume","resume","menu","quit" };
+	std::vector<std::string> imagesNames_ = { "volume" };
 	std::vector<Transform*> buttonPositions_;
 	int controllerIndex_;
 	float delay_; //Delay del mando
@@ -13,6 +13,7 @@ private:
 	Music* musicaTest_;
 	int currentVolume_;
 	bool changeSc_;
+	float varVolume_; //Cuanto varia el volumen respecto al volumen total al bajarlo o subirlo
 
 public:
 	PauseMenu();
@@ -24,6 +25,8 @@ public:
 	void generateAllButtons() override;
 	void handleControllerInput() override;
 	void changeButton(int numMoves) override;
-	void controlVolume();
+	void controlVolume(bool turnUp); //Booleano para ver si sube o baja el volumen
+	void createImages(float x, float y, float w, float h, std::string imageName);
+
 };
 
