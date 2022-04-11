@@ -6,7 +6,7 @@
 #include "../../boss/tree_boss/TreeMovement.h"
 #include "../../player/PlayerAttributes.h"
 
-MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(1200), attackCoolDown(800), lastAttack(), attacking_(false)
+MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(800), attackCoolDown(800), lastAttack(), attacking_(false)
 {
 	setActive(false);
 	colMan_ = colManager;
