@@ -8,7 +8,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-MenuScene::MenuScene() :Scene()
+MenuScene::MenuScene():Scene(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),changeSc_(false)
 {
 
 }
@@ -100,16 +100,16 @@ void MenuScene::generateAllButtons()
 	for (int i = 0; i < rows; ++i)
 	{
 		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
-			buttonW, buttonH, buttonNames[i]);
+			buttonW, buttonH, buttonNames_[i]);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
 	//Bucle que dibuja la columna de la derecha
-	for (int i = rows; i < buttonNames.size(); ++i)
+	for (int i = rows; i < buttonNames_.size(); ++i)
 	{
 
 		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
-			buttonW, buttonH, buttonNames[i]);
+			buttonW, buttonH, buttonNames_[i]);
 		++j;
 	}
 
@@ -134,7 +134,7 @@ void MenuScene::handleMouseInput()
 			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
 			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
 
-			selectButton(i);
+			//selectButton(i);
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
@@ -144,7 +144,7 @@ void MenuScene::handleMouseInput()
 				}
 			}
 		}
-		else  deselectButton(i);
+		//else  deselectButton(i);
 		i++;
 	}
 }
@@ -178,7 +178,7 @@ void MenuScene::handleControllerInput()
 
 			}
 		}
-		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames.size())
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames_.size())
 		{
 			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
 
@@ -201,7 +201,7 @@ void MenuScene::changeButton(int moves) //Controla la lógica entre el cambio de 
 {
 	//Controller index guarda el indice del boton sobre el que se encuentra el raton
 
-	if (controllerIndex_ < buttonNames.size() || controllerIndex_ == -1)
+	if (controllerIndex_ < buttonNames_.size() || controllerIndex_ == -1)
 	{
 		controllerIndex_ += moves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
 	}

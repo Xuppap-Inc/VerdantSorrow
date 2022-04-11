@@ -1,8 +1,7 @@
 #include "PauseMenu.h"
 #include "../sdlutils/InputHandler.h"
 
-
-PauseMenu::PauseMenu()
+PauseMenu::PauseMenu():MenuScene(), controllerIndex_(-1), delay_(250), lastUpdate_(0),musicaTest_(nullptr),currentVolume_(180), changeSc_(false)
 {
 }
 
@@ -17,6 +16,8 @@ void PauseMenu::init()
 
 void PauseMenu::onButtonClicked(int index)
 {
+	changeSc_ = true;
+
 	switch (index)
 	{
 	case 0: 
@@ -42,12 +43,12 @@ void PauseMenu::generateAllButtons()
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
 	int spacingX = 250; int buttonW = 200, buttonH = 80, iniX = 350, smallButtonWH = 80;
 
-	createButton((sdlutils().width() / 2) - iniX, sdlutils().height() / 2 - smallButtonWH, smallButtonWH, smallButtonWH, buttonNames[0]);
+	createButton((sdlutils().width() / 2) - iniX, sdlutils().height() / 2 - smallButtonWH, smallButtonWH, smallButtonWH, buttonNames_[0]);
 	//Bucle que dibuja la fila de botones
 	int j = 0;
-	for (int i = 1; i < buttonNames.size(); ++i)
+	for (int i = 1; i < buttonNames_.size(); ++i)
 	{
-		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, buttonNames[i]);
+		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, buttonNames_[i]);
 		++j;
 	}
 }
@@ -81,7 +82,7 @@ void PauseMenu::handleControllerInput()
 
 			}
 		}
-		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames.size())
+		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames_.size())
 		{
 			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
 
@@ -93,7 +94,7 @@ void PauseMenu::changeButton(int moves) //Controla la lógica entre el cambio de 
 {
 	//Controller index guarda el indice del boton sobre el que se encuentra el raton
 
-	if (controllerIndex_ < buttonNames.size() || controllerIndex_ == -1)
+	if (controllerIndex_ < buttonNames_.size() || controllerIndex_ == -1)
 	{
 		controllerIndex_ += moves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
 	}
@@ -109,3 +110,4 @@ void PauseMenu::controlVolume()
 	if(newVolume>=0) currentVolume_ = newVolume;
 	musicaTest_->setMusicVolume(currentVolume_);
 }
+
