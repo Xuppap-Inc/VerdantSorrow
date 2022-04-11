@@ -58,5 +58,14 @@ void PlayerUI::render()
 
 	SDL_Rect rect2 = { 10, 10, 450, 125 };
 
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect2.x *= sW;
+	rect2.w *= sW;
+	rect2.y *= sH;
+	rect2.h *= sH;
+
 	healthDetailTexture->render(rect2);
 }
