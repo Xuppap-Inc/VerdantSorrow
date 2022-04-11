@@ -23,8 +23,12 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 	rollButtons({ SDL_CONTROLLER_BUTTON_B , SDL_CONTROLLER_BUTTON_LEFTSHOULDER })
 {
 	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
+	auto windowScaleWidth_ = sdlutils().width() / 1920.0f;
 
-	jumpForce *= windowScaleHeight_;
+	jumpForce_ *= windowScaleHeight_;
+	speed_ *= windowScaleWidth_;
+	rollSpeed_ *= windowScaleWidth_;
+	deceleration_ *= windowScaleWidth_;
 }
 
 PlayerCtrl::~PlayerCtrl()

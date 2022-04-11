@@ -7,7 +7,7 @@ SimpleGravity::SimpleGravity(float gravity) : tr_(nullptr), active_(true)
 {
 	auto windowScaleHeight_ = sdlutils().height() / 1080.0f;
 
-	gravity_ = gravity;
+	gravity_ = gravity * windowScaleHeight_;
 }
 
 SimpleGravity::~SimpleGravity()

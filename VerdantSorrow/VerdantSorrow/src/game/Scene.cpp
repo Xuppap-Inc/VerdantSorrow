@@ -113,7 +113,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
-	player_->addComponent<SimpleGravity>(1);
+	player_->addComponent<SimpleGravity>(1.2);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	player_->addComponent<CollideWithBorders>();
 
@@ -132,7 +132,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	playerAttackCollider->setIsTrigger(true);
 
 	// float jumpForce, float speed, float deceleration, float rollSpeed
-	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 15);
+	player_->addComponent<PlayerCtrl>(17, 8, 0.7, 20);
 	mngr_->setHandler(ecs::_PLAYER, player_);
 	//Componente ui jugador
 	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));

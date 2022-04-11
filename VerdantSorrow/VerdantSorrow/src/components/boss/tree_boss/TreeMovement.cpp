@@ -9,7 +9,8 @@ TreeMovement::TreeMovement() :
 	movementDir_(),
 	isNextToPlayer_(),
 	moveActive_(true),
-	movingToCenter_(false)
+	movingToCenter_(false),
+	followVel_(0)
 {
 }
 TreeMovement::TreeMovement(Transform* playerTransform_, float followVelocity) :

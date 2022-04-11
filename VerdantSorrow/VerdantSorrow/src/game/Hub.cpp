@@ -83,7 +83,7 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 {
 	dialogBox->setActive(false);
 	auto tr = dialogBox->addComponent<Transform>();
-	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
+	tr->init(Vector2D((1920 - 600) / 2, (1080 - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
 }
 
@@ -156,8 +156,8 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	player_->addComponent<PlayerAttributes>();
 	//Se le a�ade el transform
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 ;
-	auto playerY = sdlutils().height() / 2 ;
+	auto playerX = 1920 / 2 ;
+	auto playerY = 1080 / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, 0.25f, false);
 	player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
@@ -204,7 +204,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 {
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(sdlutils().width() / 2, 360), Vector2D(), 50, 100, 0.0f, false);
+	npctr->init(Vector2D(1920 / 2, 360), Vector2D(), 50, 100, 0.0f, false);
 	npc->addComponent<Image>(&sdlutils().imagesHub().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);

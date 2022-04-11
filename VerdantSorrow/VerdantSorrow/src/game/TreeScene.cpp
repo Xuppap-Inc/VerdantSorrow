@@ -83,10 +83,12 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
 	tree_->addComponent<BossAtributos>(100);
 	auto treeTr = tree_->addComponent<Transform>();
-	auto treeX = sdlutils().width() / 4 * 3 - 80;
-	auto treeY = sdlutils().height() - 360;
 	auto treeH = 360;
 	auto treeW = treeH * 1.105;
+
+	//suponemos resolucion nativa (1920x1080p)
+	auto treeX = 1920 / 4 * 3 - 80;
+	auto treeY = 1080 - treeH;
 	treeTr->init(Vector2D(treeX, treeY), Vector2D(), treeW, treeH, 0.0f);
 
 	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
@@ -121,7 +123,7 @@ void TreeScene::rootGenerator(CollisionManager* colManager, float x) {
 	auto RootAtribs = Root->addComponent<BossAtributos>();
 	auto RootTr = Root->addComponent<Transform>();
 	auto RootX = x;
-	auto RootY = sdlutils().height() + 200;
+	auto RootY = 1080 + 200;
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
 	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 1000, 0.0f);
 	//Se le añade un color inicial a la raiz
@@ -188,8 +190,8 @@ void TreeScene::setAble(bool a)
 
 void TreeScene::createLights() {
 	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 400, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_amarilla"), 300, sdlutils().height()-350, 500, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 100, sdlutils().height() - 300, 600, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 200, 100, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_amarilla"), 300, 1080 - 350, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), 1920 - 100, 1080 - 300, 600, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), 1920 - 200, 100, 500, 100, mngr_);
 													   
 }

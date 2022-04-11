@@ -247,8 +247,8 @@ void TreeAttackManager::update()
 
 void TreeAttackManager::returnToIni()
 {
-	auto treeX = sdlutils().width() / 2 - 80;
-	auto treeY = sdlutils().height() - 360;
+	auto treeX = sdlutils().width() / 2 - tr_->getWidth() / 2;
+	auto treeY = sdlutils().height() - tr_->getHeight();
 	tr_->getPos().set(Vector2D(treeX, treeY));
 }
 

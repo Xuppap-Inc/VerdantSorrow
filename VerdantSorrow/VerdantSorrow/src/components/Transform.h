@@ -42,7 +42,7 @@ public:
 		pos_ = Vector2D(x, y);
 
 		auto velX = vel.getX() * windowScaleWidth_;
-		auto velY = vel.getY();
+		auto velY = vel.getY() * windowScaleHeight_;
 		vel_ = Vector2D(velX, velY);
 
 		width_ = w * windowScaleWidth_;
