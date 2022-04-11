@@ -5,9 +5,14 @@
 #include "Hub.h"
 #include "MenuScene.h"
 #include "../sdlutils/SDLUtils.h"
+#include "TutorialScene.h"
+#include "ControlsScene.h"
+#include "PauseMenu.h"
+#include "EscapeScene.h"
 
 
-SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false)
+SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
+playerInBossFight(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
@@ -17,6 +22,7 @@ SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), tree
 	menu_ = new MenuScene(); sceneList.push_back(menu_);
 	controls_ = new ControlsScene(); sceneList.push_back(controls_);
 	pauseMenu_ = new PauseMenu(); sceneList.push_back(pauseMenu_);
+	ecapesc_ = new EscapeScene(); sceneList.push_back(ecapesc_);
 }
 
 
@@ -56,6 +62,9 @@ void SceneManager::update()
 	case SceneManager::PauseMenu_:
 		pauseMenu_->update();
 		break;
+	case SceneManager::EscapeScene_:
+		ecapesc_->update();
+		break;
 	default:
 		break;
 	}
@@ -64,40 +73,64 @@ void SceneManager::update()
 void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
-	sdlUtils_.freeMemory();
+
+	sdlUtils_.soundEffects().clear();
+
+	if(!playerInBossFight) sdlUtils_.freeMemory();
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
-		sdlUtils_.loadReasources("resources/config/hub.json");
+		if (!hubAssetsChargeds_) {
+			sdlUtils_.loadReasourcesHub("resources/config/hub.json");
+			hubAssetsChargeds_ = true;
+		}
 		h_->init();
 		break;
 	case SceneManager::Frog_:
-		sdlUtils_.loadReasources("resources/config/frog.json");
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/frog.json");
+			playerInBossFight = true;
+		}
 		f_->init();
 		break;
 	case SceneManager::Tree_:
-		sdlUtils_.loadReasources("resources/config/treeScene.json");
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/treeScene.json");
+			playerInBossFight = true;
+		}
 		t_->init();
 		break;
 	case SceneManager::Eye_:
-		sdlUtils_.loadReasources("resources/config/finalBoss.json");
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/finalBoss.json");
+			playerInBossFight = true;
+		}	
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/tutorial.json");
 		tut_->init();
 		break;
 	case SceneManager::Menu_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/menu.json");
 		menu_->init();
 		break;
 	case SceneManager::Controls_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/controls.json");
 		controls_->init();
 		break;
 	case SceneManager::PauseMenu_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/pauseMenu.json");
 		pauseMenu_->init();
+		break;
+	case SceneManager::EscapeScene_:
+		playerInBossFight = false;
+		sdlUtils_.loadReasources("resources/config/escapeScene.json");
+		ecapesc_->init();
 		break;
 	default:
 		break;
@@ -145,6 +178,11 @@ void SceneManager::TreeSceneState(bool active) {
 
 void SceneManager::EyeSceneState(bool active) {
 	fin_->setAble(active);
+}
+
+void SceneManager::changeStatePlayerInBoss(bool active)
+{
+	playerInBossFight = active;
 }
 
 void SceneManager::decideScene()

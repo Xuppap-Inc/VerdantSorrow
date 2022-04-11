@@ -15,6 +15,9 @@
 #include "../components/tutorial/TutorialFly.h"
 #include "SceneManager.h"
 #include "../components/FramedImage.h"
+#include "../components/Image.h"
+#include "../components/boss/tree_boss/MeleeAttack.h"
+
 
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr) : colManager_(colManager), mngr_(mngr)
@@ -38,10 +41,10 @@ void CollisionChecker::checkCollisions()
 			WaveMovement* wave = ent->getComponent<WaveMovement>();
 			TongueAttack* tA = ent->getComponent<TongueAttack>();
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
-
+			MeleeAttack* mA = ent->getComponent<MeleeAttack>();
 			LanternMovement* lantern = ent->getComponent<LanternMovement>();
 
-			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr)
+			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
@@ -63,8 +66,14 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 			if (c->isActive() && c->isTrigger())
 			{
 				ecs::Entity* ent = c->getEntity();
-				BossAtributos* bA = ent->getComponent<BossAtributos>();
-				if (bA != nullptr && playerAt->isNewAttack()) {
+
+				BossAtributos* bA = nullptr;
+
+				if (SceneManager::scenes::Frog_ == sC().getScene()) bA = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
+				else if (SceneManager::scenes::Tree_ == sC().getScene()) bA = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
+				else if (SceneManager::scenes::Eye_ == sC().getScene()) bA = mngr_->getHandler(ecs::_EYE)->getComponent<BossAtributos>();
+
+				if (bA != nullptr && bA == ent->getComponent<BossAtributos>() && playerAt->isNewAttack()) {
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 					s->setChannelVolume(70);
 					s->play();
@@ -83,6 +92,20 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
 
 					bA->setDamage(PLAYER_ATTACK_DMG);
+
+
+					FramedImage* bFImg = ent->getComponent<FramedImage>();
+					if (bFImg != nullptr) {
+						bFImg->setColor(200, 50, 50, 500);
+					}
+					else
+					{
+						Image* bImg = ent->getComponent<Image>();
+						if (bImg != nullptr) {
+							bImg->setColor(200, 50, 50, 500);
+						}
+					}
+
 					player->getComponent<Transform>()->getVel().setY(0);
 
 					playerAt->setNewAttack(false);
@@ -106,11 +129,14 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 	PlayerAttributes* attrib = player->getComponent<PlayerAttributes>();
 	PlayerCtrl* playerCtrl = player->getComponent<PlayerCtrl>();
 	Transform* playerTr = player->getComponent<Transform>();
+	FramedImage* playerFImg = player->getComponent<FramedImage>();
 
 	if (!attrib->getInvulnerable() && !playerCtrl->isRolling()) {
 		attrib->damagePlayer(1);
 		attrib->setInvulnerable(true);
 		attrib->setInvulnerableTimer(sdlutils().currRealTime());
+
+		playerFImg->setColor(200, 50, 50, 1000);
 
 		// Knock back
 		float enemyXpos = ent->getComponent<Transform>()->getPos().getX() + ent->getComponent<Transform>()->getWidth() / 2;

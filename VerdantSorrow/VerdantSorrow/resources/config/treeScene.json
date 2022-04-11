@@ -1,5 +1,5 @@
 {
-  "assets" : 67,
+  "assets" : 61,
 
   "fonts": [
     {
@@ -183,6 +183,10 @@
     },
     {
       "id": "luz_amarilla",
+      "file": "resources/images/luz_amarilla.png"
+    },
+    {
+      "id": "luz_naranja",
       "file": "resources/images/luz_amarilla.png"
     }
   ],

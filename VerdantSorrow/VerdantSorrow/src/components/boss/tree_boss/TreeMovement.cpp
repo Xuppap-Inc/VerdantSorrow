@@ -34,7 +34,7 @@ void TreeMovement::initComponent()
 	auto playerWidth = playerTr_->getWidth();
 	auto treeWidth = tr_->getWidth();
 
-	offsetX_ = playerWidth / 2 + treeWidth / 2 + 10;
+	offsetX_ = playerWidth / 2 + treeWidth / 4;
 }
 
 void TreeMovement::update()

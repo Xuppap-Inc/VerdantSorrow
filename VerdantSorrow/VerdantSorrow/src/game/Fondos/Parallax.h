@@ -11,9 +11,10 @@ class Parallax
 {
 public:
 	Parallax(ecs::Manager *mngr);
-	void AddLayer(Texture* tex, float scrollratio, int height, int width);
+	void AddLayer(Texture* tex, float scrollratio, int height, int width,int y);
 
 private:
 	ecs::Manager* mngr_;
+
 };
 

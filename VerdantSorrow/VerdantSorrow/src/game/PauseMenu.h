@@ -4,14 +4,15 @@
 class PauseMenu :public MenuScene
 {
 private:
-	std::vector<std::string> buttonNames = { "volume","resume","menu","quit" };
+	std::vector<std::string> buttonNames_ = { "volume","resume","menu","quit" };
 	//std::vector<std::string> imagesNames = { "keyboardControls" };
 	std::vector<Transform*> buttonPositions_;
-	int controllerIndex_ = -1;
-	float delay_ = 250; //Delay del mando
-	float lastUpdate_ = 0;
+	int controllerIndex_;
+	float delay_; //Delay del mando
+	float lastUpdate_;
 	Music* musicaTest_;
-	int currentVolume_=0;
+	int currentVolume_;
+	bool changeSc_;
 
 public:
 	PauseMenu();

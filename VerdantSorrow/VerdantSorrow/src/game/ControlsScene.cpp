@@ -7,7 +7,7 @@
 #include "../components/Transform.h"
 #include "../sdlutils/Texture.h"
 
-ControlsScene::ControlsScene()
+ControlsScene::ControlsScene():MenuScene(),changeSc_(false)
 {
 }
 
@@ -32,10 +32,13 @@ void ControlsScene::init()
 
 void ControlsScene::onButtonClicked(int index)
 {
+	changeSc_ = true;
+
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal
-		std::cout << "Has pulsado el boton de vuelta al menu" << std::endl;
+		sC().changeScene(SceneManager::Menu_);
+
 		break;
 	}
 }
@@ -62,11 +65,15 @@ void ControlsScene::createText(std::string message)
 void ControlsScene::update()
 {
 	handleInput();
-	mngr_->update();
-	mngr_->refresh();
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	createText("Explicacion de prueba");
-	sdlutils().presentRenderer();
+	if(!changeSc_)
+	{
+		mngr_->update();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		createText("Explicacion de prueba");
+		sdlutils().presentRenderer();
+	}
+	
 }

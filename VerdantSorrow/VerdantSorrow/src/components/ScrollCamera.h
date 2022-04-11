@@ -14,11 +14,15 @@ public:
 	void update() override;
 	void initComponent() override;
 	void debug() override;
+	void setScrollX(bool x) {
+		scrollX_ = x;
+	}
 protected:
 	void calculateDirection();
 	Transform* tr_;
 	Transform* player_;
 	float cameraSpeed_;
 	float deadzoneX_, deadzoneY_;
+	bool scrollX_;
 };
 

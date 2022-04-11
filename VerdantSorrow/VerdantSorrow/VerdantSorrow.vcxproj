@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\hub\PlatformAtribsForHub.h" />
+    <ClInclude Include="src\game\EscapeScene.h" />
     <ClInclude Include="src\game\Fondos\Parallax.h" />
     <ClInclude Include="src\components\fondos\Renderparallax.h" />
     <ClInclude Include="src\components\fondos\Light.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\EscapeScene.cpp" />
     <ClCompile Include="src\game\Fondos\Parallax.cpp" />
     <ClCompile Include="src\components\fondos\Renderparallax.cpp" />
     <ClCompile Include="src\components\fondos\Light.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\config\escapeScene.json" />
     <None Include="resources\config\finalBoss.json" />
     <None Include="resources\config\frog.json" />
     <None Include="resources\config\hub.json" />
