@@ -7,6 +7,7 @@
 #include "../components/Transform.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "../utils/Vector2D.h"
 
 MenuScene::MenuScene():Scene(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),changeSc_(false)
 {
@@ -125,9 +126,18 @@ void MenuScene::handleMouseInput()
 	{
 		//Para todos los botones comprueba si el raton esta sobre ellos
 		auto pos = buttonPositions_[i]->getPos();
-		if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
-			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
-			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+		auto x = pos.getX() * mngr_->getWindowScaleWidth();
+		auto y = pos.getY() * mngr_->getWindowScaleHeight();
+
+		pos = Vector2D(x, y);
+
+		auto width = buttonPositions_[i]->getWidth() * mngr_->getWindowScaleWidth();
+		auto height = buttonPositions_[i]->getHeight() * mngr_->getWindowScaleHeight();
+
+		if (ratonPos.first <= pos.getX() + width
+			&& ratonPos.first >= pos.getX() 
+			&& ratonPos.second <= pos.getY() + height 
+			&& ratonPos.second >= pos.getY()) {
 
 			//selectButton(i);
 
