@@ -23,7 +23,7 @@
     "images": [
         {
             "id": "fondoMenu",
-            "file": "resources/images/MenuPrincipal/fondoMenu.jpg"
+            "file": "resources/images/MenuPrincipal/fondoMenu.png"
         },
         {
             "id": "resume",
