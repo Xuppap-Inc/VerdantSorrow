@@ -145,4 +145,6 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
 
+
+	player_->addToGroup(ecs::_PLAYER_GRP);
 }

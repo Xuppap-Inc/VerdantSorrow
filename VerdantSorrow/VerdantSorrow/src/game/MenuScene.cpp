@@ -7,6 +7,7 @@
 #include "../components/Transform.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "../utils/Vector2D.h"
 
 MenuScene::MenuScene():Scene(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),changeSc_(false)
 {
@@ -61,25 +62,20 @@ void MenuScene::onButtonClicked(int index)
 	switch (index)
 	{
 	case 0: //Boton new game
-		std::cout << "Has pulsado el boton de nuevo juego" << std::endl;
 		sC().changeScene(SceneManager::Hub_);
 		
 		break;
 	case 1: //Boton continue
-		std::cout << "Has pulsado el boton de continuar" << std::endl;
 
 
 		break;
 		//case 2: //Boton load boss
-		//	std::cout << "Has pulsado el boton de load" << std::endl;
 
 		//	break;
 		//case 3://Boton settings
-		//	std::cout << "Has pulsado el boton de ajustes" << std::endl;
 
 		//	break;
 	case 2: //Boton controls
-		std::cout << "Has pulsado el boton de controles" << std::endl;
 		sC().changeScene(SceneManager::Controls_);
 		break;
 	case 3: //Boton quit
@@ -130,9 +126,18 @@ void MenuScene::handleMouseInput()
 	{
 		//Para todos los botones comprueba si el raton esta sobre ellos
 		auto pos = buttonPositions_[i]->getPos();
-		if (ratonPos.first <= pos.getX() + buttonPositions_[i]->getWidth()
-			&& ratonPos.first >= pos.getX() && ratonPos.second <= pos.getY()
-			+ buttonPositions_[i]->getHeight() && ratonPos.second >= pos.getY()) {
+		auto x = pos.getX() * mngr_->getWindowScaleWidth();
+		auto y = pos.getY() * mngr_->getWindowScaleHeight();
+
+		pos = Vector2D(x, y);
+
+		auto width = buttonPositions_[i]->getWidth() * mngr_->getWindowScaleWidth();
+		auto height = buttonPositions_[i]->getHeight() * mngr_->getWindowScaleHeight();
+
+		if (ratonPos.first <= pos.getX() + width
+			&& ratonPos.first >= pos.getX() 
+			&& ratonPos.second <= pos.getY() + height 
+			&& ratonPos.second >= pos.getY()) {
 
 			//selectButton(i);
 

@@ -1,5 +1,5 @@
 {
-  "assets" : 62,
+  "assets" : 58,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -152,30 +152,6 @@
     {
       "id": "rana_enfadada_vulnerable_a_idle",
       "file": "resources/images/rana_enfadada_vulnerable_a_idle.png"
-    },
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
-    },
-    {
-      "id": "fondos1",
-      "file": "resources/images/fondos1.png"
     },
     {
       "id": "wave",

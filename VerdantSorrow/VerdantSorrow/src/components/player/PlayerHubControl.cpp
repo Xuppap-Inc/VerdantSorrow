@@ -117,12 +117,6 @@ void PlayerHubControl::handleInput()
 		}
 	}
 
-
-	std::cout << "moveDown_ = " << moveDown_ << std::endl;
-	std::cout << "moveUp_ = " << moveUp_ << std::endl;
-	std::cout << "moveRight_ = " << moveRight_ << std::endl;
-	std::cout << "moveLeft_ = " << moveLeft_ << std::endl;
-
 	if (moveDown_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_Kyna");
 		anim_->flipX(false);

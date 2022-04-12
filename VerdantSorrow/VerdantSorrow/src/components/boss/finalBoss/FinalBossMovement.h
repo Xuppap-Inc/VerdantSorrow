@@ -1,6 +1,7 @@
 #pragma once
 #pragma once
 #include "../../../ecs/Component.h"
+#include "../../../sdlutils/SDLUtils.h"
 #include "../../../utils/Vector2D.h"
 #include <SDL.h>
 
@@ -38,6 +39,8 @@ private:
 	Vector2D velocitySaved;
 	WaveSpawner* waveSp_;
 	Transform* playerTr;
+	SoundEffect* musicaFase1_;
+	Music* musicaFase2_;
 
 	//random bola de fuego times
 	int lastFireBall_, fireBallCooldown_;

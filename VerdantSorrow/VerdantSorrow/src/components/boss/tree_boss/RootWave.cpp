@@ -27,7 +27,6 @@ void RootWave::initComponent()
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
 	nextTime_ = sdlutils().currRealTime();
-	std::cout <<"init nexttime: "<< nextTime_ << std::endl;
 	
 
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr;
@@ -36,7 +35,6 @@ void RootWave::initComponent()
 
 void RootWave::update()
 {
-	//std::cout << movingTime_ << std::endl;
 	//si ha pasado el tiempo entre raices
 	if (attacking_ && sdlutils().currRealTime() - lastTime_ > TIME_BETWEEN_ROOTS) {
 	

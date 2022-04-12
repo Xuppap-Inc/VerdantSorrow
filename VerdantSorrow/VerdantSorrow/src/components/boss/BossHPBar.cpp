@@ -21,14 +21,14 @@ BossHPBar::~BossHPBar() {
 }
 
 void BossHPBar::initComponent() {
-	if(SceneManager::scenes::Frog_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
+	if (SceneManager::scenes::Frog_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
 	else if (SceneManager::scenes::Tree_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
 	else if (SceneManager::scenes::Eye_ == sC().getScene()) attrib_ = mngr_->getHandler(ecs::_EYE)->getComponent<BossAtributos>();
 	assert(attrib_ != nullptr);
 
 	lastHP = attrib_->getLife();
 	maxBarLength = sdlutils().width() * 0.5f;
-	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 50);
+	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 80);
 }
 
 void BossHPBar::render() {
@@ -39,19 +39,18 @@ void BossHPBar::render() {
 
 	accumulatedDamage += (lastHP - attrib_->getLife());
 
-	float xOffset = 350;
-	float xLeft = sdlutils().width() / 2 - xOffset - 5;
-	float xRight = sdlutils().width() / 2 + xOffset - 45;
-
 	// Fondo de las barras
-	SDL_Rect left = build_sdlrect(xLeft, (int)pos.getY(), 50, 50);
-	SDL_Rect right = build_sdlrect(xRight, (int)pos.getY(), 50, 50);
-	SDL_Rect middle = build_sdlrect((xRight - xLeft) / 2 - 10, ((int)pos.getY()) + 12, 640, 25);
+	int size = 52;
+	SDL_Rect left = build_sdlrect(pos.getX() - size, pos.getY() - size/4, size, size);
+	SDL_Rect right = build_sdlrect(pos.getX() + maxBarLength, pos.getY() - size/4, size, size);
+	SDL_Rect middle = build_sdlrect(pos.getX(), pos.getY(), maxBarLength, size/2);
 
+
+	size = 15;
 	//barra roja
-	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY() + 18, maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
+	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY() + (middle.h - size)/2, maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), size);
 	//barra de daño acumulado
-	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + 18, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
+	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + (middle.h - size) / 2, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
 
 	//escalado pantalla
 	auto sW = mngr_->getWindowScaleWidth();

@@ -53,9 +53,11 @@ void FinalBossScene::init()
 
 	auto height = (sdlutils().height() / 5) + 40;
 
+
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
+	suelo->addToGroup(ecs::_FIRST_GRP);
 
 	createLights();
 }
