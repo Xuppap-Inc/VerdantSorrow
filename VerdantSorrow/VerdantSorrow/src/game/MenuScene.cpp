@@ -61,25 +61,20 @@ void MenuScene::onButtonClicked(int index)
 	switch (index)
 	{
 	case 0: //Boton new game
-		std::cout << "Has pulsado el boton de nuevo juego" << std::endl;
 		sC().changeScene(SceneManager::Hub_);
 		
 		break;
 	case 1: //Boton continue
-		std::cout << "Has pulsado el boton de continuar" << std::endl;
 
 
 		break;
 		//case 2: //Boton load boss
-		//	std::cout << "Has pulsado el boton de load" << std::endl;
 
 		//	break;
 		//case 3://Boton settings
-		//	std::cout << "Has pulsado el boton de ajustes" << std::endl;
 
 		//	break;
 	case 2: //Boton controls
-		std::cout << "Has pulsado el boton de controles" << std::endl;
 		sC().changeScene(SceneManager::Controls_);
 		break;
 	case 3: //Boton quit

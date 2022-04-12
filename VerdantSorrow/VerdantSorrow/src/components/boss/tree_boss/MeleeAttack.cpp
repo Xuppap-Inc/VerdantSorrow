@@ -68,7 +68,6 @@ void MeleeAttack::attack(int dir)
 	setIsTrigger(true);
 	lastAttack = currentTime;
 	setPosition(dir);
-	std::cout << "attack called" << std::endl;
 
 	attacking_ = true;
 }

@@ -34,13 +34,11 @@ void PauseMenu::onButtonClicked(int index)
 		controlVolume(true);
 		break;
 	case 2:
-		std::cout << "Has pulsado el boton de volver al juego" << std::endl;
 		break;
 	case 3:
 		sC().changeScene(SceneManager::Menu_);
 		break;
 	case 4:
-		std::cout << "Has pulsado el boton de salir" << std::endl;
 		SDL_Quit();
 		break;
 

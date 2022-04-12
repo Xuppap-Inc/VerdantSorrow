@@ -100,7 +100,6 @@ void FrogAttackManager::update()
 		nextAttack();
 		break;
 	case WAITING:
-		//std::cout << "esperando" << std::endl;
 		if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
 			frogState_ = CALC_NEXT_ATTACK;
 		}

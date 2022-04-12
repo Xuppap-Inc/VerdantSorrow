@@ -23,9 +23,6 @@ void LanternMovement::update()
 	auto treePos = treeTr_->getPos();
 	
 	if (active) lanternTr_->getPos().set(Vector2D(treePos.getX() + treeTr_->getWidth() / 2 - lanternTr_->getWidth() / 2, treePos.getY() + treeTr_->getHeight() / 2 - lanternTr_->getHeight()));
-
-	//std::cout << "lantern tr: " << lanternTr_ << std::endl;
-	//std::cout << "tree tr: " << treeTr_ << std::endl;
 }
 
 bool LanternMovement::isActive()
