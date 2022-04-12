@@ -1,5 +1,5 @@
 {
-  "assets" : 52,
+  "assets" : 46,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -9,16 +9,12 @@
 
   "images": [
     {
-      "id": "bolaFuego",
-      "file": "resources/images/bola_fuego.png"
-    },
-    {
       "id": "ojo",
       "file": "resources/images/BossFinal_Cabeza.png"
     },
     {
-        "id": "FinalBoss_Fase1",
-        "file": "resources/images/FinalBoss_Fase1_def.png"
+      "id": "FinalBoss_Fase1",
+      "file": "resources/images/FinalBoss_Fase1_def.png"
     }, 
     {
       "id": "FinalBoss_Fase2",
@@ -111,27 +107,6 @@
     {
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
-    },
-
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
     },
     {
       "id": "wave",

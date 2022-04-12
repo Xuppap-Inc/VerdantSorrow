@@ -122,7 +122,13 @@ public:
 			{
 				bossElements[i]->render();
 			}
-			//Renderización de todos los elementos que sean luces
+			//Renderización del player
+			auto player = getEntitiesByGroup(ecs::_PLAYER_GRP);
+			e = player.size();
+			for (auto i = 0; i < e; i++)
+			{
+				player[i]->render();
+			}//Renderización de todos los elementos que sean luces
 			auto particles = getEntitiesByGroup(ecs::_PARTICLES_GRP);
 			e = particles.size();
 			for (auto i = 0; i < e; i++)
@@ -135,9 +141,14 @@ public:
 			for (auto i = 0; i < e; i++)
 			{
 				lights[i]->render();
+			}//Renderización de todos los elementos del escenario que estén en primer plano
+			auto elems = getEntitiesByGroup(ecs::_FIRST_GRP);
+			e = elems.size();
+			for (auto i = 0; i < e; i++)
+			{
+				elems[i]->render();
 			}
 			//Renderización de todos los elementos de la UI
-			getHandler(ecs::_PLAYER)->render();
 			auto entitiesUI = getEntitiesByGroup(ecs::_UI_GRP);
 			e = entitiesUI.size();
 			for (auto i = 0; i < e; i++)

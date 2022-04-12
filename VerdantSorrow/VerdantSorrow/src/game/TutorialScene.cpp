@@ -32,11 +32,6 @@ void TutorialScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager_, player);
 
-	auto particles = mngr_->addEntity();
-	particles->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	particles->addComponent<FramedImage>(&sdlutils().images().at("particles"), 14, 5, 2000, 32, "particles");
-	particles->addToGroup(ecs::_PARTICLES_GRP);
-
 	createFly(400, sdlutils().height() - 200);
 	createFly(700, sdlutils().height() - 600);
 
