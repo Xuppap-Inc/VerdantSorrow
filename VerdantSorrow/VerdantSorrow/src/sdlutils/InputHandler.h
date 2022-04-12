@@ -90,7 +90,7 @@ public:
 			break;
 		}
 
-		if (isQuitEvent_) SDL_Quit();
+	
 	}
 
 	// CONTROLLER
@@ -314,6 +314,9 @@ public:
 		return mbState_[b];
 	}
 
+	inline bool isQuitPressed() {
+		return isQuitEvent_;
+	}
 	// TODO add support for Joystick, see Chapter 4 of
 	// the book 'SDL Game Development'
 
