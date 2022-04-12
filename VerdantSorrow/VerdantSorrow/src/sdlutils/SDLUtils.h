@@ -64,14 +64,21 @@ public:
 
 	// the window's width
 	inline int width() {
+		return 1920;
+	}
+
+	inline int windowWidth() {
 		return width_;
 	}
 
 	// the window's height
 	inline int height() {
-		return height_;
+		return 1080;
 	}
 
+	inline int windowHeight() {
+		return height_;
+	}
 	// toggle to full-screen/window mode
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(window_);

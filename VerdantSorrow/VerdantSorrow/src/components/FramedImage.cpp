@@ -116,6 +116,15 @@ void FramedImage::adjustAndRenderFrame()
 	dest.x += xOffset;
 	dest.y += yOffset;
 
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
+
 	assert(tex_ != nullptr);
 	tex_->render(m_clip, dest, tr_->getRot(), nullptr, flip);
 }

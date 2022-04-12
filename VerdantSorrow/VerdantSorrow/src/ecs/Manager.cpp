@@ -19,6 +19,9 @@ Manager::Manager() :
 	//
 	ents_.reserve(100);
 
+	windowScaleHeight_ = sdlutils().windowHeight() / 1080.0f;
+	windowScaleWidth_ = sdlutils().windowWidth() / 1920.0f;
+
 	// for each group we reserve space for 100 entities,
 	// just to avoid copies
 	//

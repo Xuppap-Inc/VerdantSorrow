@@ -172,6 +172,16 @@ public:
 	//changes boolean that says if debug mode is on
 	void setDebug(bool set) { debug_ = set; };
 
+	float getWindowScaleHeight() {
+	
+		return windowScaleHeight_;
+	};
+
+	float getWindowScaleWidth() {
+
+		return windowScaleWidth_;
+	};
+
 private:
 
 	// class Entity is a friend so it can access addToGroup and removeFromGroup
@@ -195,6 +205,9 @@ private:
 
 	//bool that says if debug mode is on
 	bool debug_;
+
+	float windowScaleHeight_;
+	float windowScaleWidth_;
 };
 
 } // end of namespace
