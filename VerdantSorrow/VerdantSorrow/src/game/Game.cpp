@@ -116,7 +116,7 @@ void Game::update()
 			exit = true;
 			continue;
 		}*/
-		if (ihdlr.isQuitPressed()) {
+		if (ihdlr.isQuitPressed() || ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE) ) {
 			exit = true;
 			continue;
 		}
