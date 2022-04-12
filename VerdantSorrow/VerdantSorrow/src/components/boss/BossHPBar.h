@@ -15,6 +15,8 @@ public:
 	void initComponent() override;
 	void render() override;
 
+	void scaleRect(SDL_Rect& rect, float sW, float sH);
+
 private:
 	//atributos del boss
 	BossAtributos* attrib_;

@@ -11,6 +11,8 @@ private:
 	//std::vector<std::string> buttonNames = { "back" };
 	//std::vector<std::string> imagesNames = { "keyboardControls" };
 	std::vector<Transform*> buttonPositions_;
+	std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
+	bool changeSc_;
 public:
 	ControlsScene();
 	~ControlsScene() {};

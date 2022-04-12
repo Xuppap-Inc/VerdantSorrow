@@ -1,6 +1,7 @@
 
 #pragma once
 #include "../ecs/Component.h"
+#include "../sdlutils/VirtualTimer.h"
 
 class Transform;
 class Texture;
@@ -22,6 +23,9 @@ public:
 	void setTexture(Texture* tex) {
 		tex_ = tex;
 	}
+	Texture* getTexture() {
+		return tex_;
+	}
 	void setAlpha(int num);
 
 	void initComponent() override;
@@ -30,10 +34,16 @@ public:
 	void setVisible(bool set);
 	bool isVisible();
 
+	void setColor(Uint8 r, Uint8 g, Uint8 b, int duration = -1);
+	void update() override;
 private:
 	Transform* tr_;
 	Texture* tex_;
 
 	bool visible_;
+
+	VirtualTimer colorTimer_;
+	int colorDuration_ = 0;
+	int red_ = 255, green_ = 255, blue_ = 255;
 };
 

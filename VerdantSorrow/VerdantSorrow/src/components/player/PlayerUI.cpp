@@ -13,6 +13,15 @@ PlayerUI::PlayerUI() :
 {
 }
 
+PlayerUI::PlayerUI(bool hub) :
+	heart(&sdlutils().imagesHub().at("heart")),
+	heartBlack(&sdlutils().imagesHub().at("heartBlack")),
+	healthDetailTexture(&sdlutils().imagesHub().at("healthDetail")),
+	attrib_(nullptr)
+{
+}
+
+
 PlayerUI::~PlayerUI()
 {
 }
@@ -28,13 +37,35 @@ void PlayerUI::render()
 	int x = 100, y = 40, size = 70;
 	for (int i = 0; i < 3; i++) {
 
+		SDL_Rect rect = { x, y, size, size };
+
+		//escalado pantalla
+		auto sW = mngr_->getWindowScaleWidth();
+		auto sH = mngr_->getWindowScaleHeight();
+
+		rect.x *= sW;
+		rect.w *= sW;
+		rect.y *= sH;
+		rect.h *= sH;
+
 		if (i < attrib_->getLives())
-			heart->render({ x,y,size,size });
+			heart->render(rect);
 		else
-			heartBlack->render({ x,y,size,size });
+			heartBlack->render(rect);
 
 		x += size + 15;
 	}
 
-	healthDetailTexture->render({ 10, 10, 450, 125 });
+	SDL_Rect rect2 = { 10, 10, 450, 125 };
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect2.x *= sW;
+	rect2.w *= sW;
+	rect2.y *= sH;
+	rect2.h *= sH;
+
+	healthDetailTexture->render(rect2);
 }

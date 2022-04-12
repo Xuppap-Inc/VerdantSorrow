@@ -24,6 +24,7 @@ slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true)
 	m_clip.h = tex_->height() / row;
 
 	iniTotalAnimTime_ = totalAnimationTime_;
+
 }
 
 FramedImage::~FramedImage()
@@ -40,6 +41,8 @@ void FramedImage::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	colorTimer_.reset();
 }
 
 void FramedImage::render()
@@ -112,6 +115,15 @@ void FramedImage::adjustAndRenderFrame()
 	SDL_Rect dest = build_sdlrect(pos, width, height);
 	dest.x += xOffset;
 	dest.y += yOffset;
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
 
 	assert(tex_ != nullptr);
 	tex_->render(m_clip, dest, tr_->getRot(), nullptr, flip);
@@ -307,4 +319,25 @@ void FramedImage::clearEvents()
 {
 	eventsInfo_.clear();
 	eventsCallbacks_.clear();
+}
+
+void FramedImage::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
+	red_ = r;
+	green_ = g;
+	blue_ = b;
+	colorDuration_ = duration;
+	colorTimer_.reset();
+}
+
+void FramedImage::update() {
+
+	if (colorDuration_ != -1)
+	{
+		if (colorTimer_.currTime() >= colorDuration_) {
+			red_ = 255;
+			green_ = 255;
+			blue_ = 255;
+		}
+	}
+	getTexture()->setColor(red_, green_, blue_);
 }

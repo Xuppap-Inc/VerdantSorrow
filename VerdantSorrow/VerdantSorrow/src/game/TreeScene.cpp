@@ -69,6 +69,8 @@ void TreeScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeTreeEssenceState(true);
+		if(bossHealth<=0)sC().changeStatePlayerInBoss(false);
+			
 		setAble(false);
 		sC().decideScene();
 	}
@@ -92,7 +94,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addComponent<FramedImage>(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
 
 	//Se añade un collider al arbol
-	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth()/2, treeTr->getHeight());
+	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth()/3, treeTr->getHeight()/1.2);
 	treeCollider->setIsTrigger(true);
 	colManager->addCollider(treeCollider);
 
@@ -185,6 +187,9 @@ void TreeScene::setAble(bool a)
 }
 
 void TreeScene::createLights() {
-	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 100, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_amarilla"), 200, 100, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_amarilla"), 300, sdlutils().height()-350, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 100, sdlutils().height() - 300, 600, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_naranja"), sdlutils().width() - 200, 100, 500, 100, mngr_);
 													   
 }

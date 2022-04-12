@@ -28,6 +28,7 @@ void HandsManager::initComponent()
 	assert(playertr_ != nullptr && bA_ != nullptr);
 	createHands();
 	chooseAttack();
+	tiempoColor_.reset();
 }
 
 void HandsManager::update()
@@ -59,28 +60,16 @@ void HandsManager::update()
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
 		if (multFase_ == 1) {
 			multFase_ = 4;
-
-			//Animaciones fuego
-			leftFire_ = mngr_->addEntity();
-			leftFireTr_ = leftFire_->addComponent<Transform>();
-			leftFireTr_->init(Vector2D(leftHandTr_->getPos().getX() + leftHandTr_->getWidth() / 2,
-				leftHandTr_->getPos().getY() - leftHandTr_->getHeight()), Vector2D(),rightHandTr_->getWidth(), rightHandTr_->getHeight(), 0.0f);
-			leftFireTr_->setScale(5);
-			leftFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
-
-			rightFire_ = mngr_->addEntity();
-			rightFireTr_ = rightFire_->addComponent<Transform>();
-			rightFireTr_->init(Vector2D(rightHandTr_->getPos().getX() + rightHandTr_->getWidth() / 2,
-				rightHandTr_->getPos().getY() - rightHandTr_->getHeight()), Vector2D(), leftHandTr_->getWidth(), leftHandTr_->getHeight(), 0.0f);
-			rightFireTr_->setScale(5);
-			rightFire_->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_hoguera"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_hoguera");
 		}
 		else
 		{
 			colliderLeftHand_->setIsTrigger(true);
 			colliderRightHand_->setIsTrigger(true);
-			leftFireTr_->getPos().set(Vector2D(leftHandTr_->getPos().getX(), leftHandTr_->getPos().getY() - leftHandTr_->getHeight()+40));
-			rightFireTr_->getPos().set(Vector2D(rightHandTr_->getPos().getX(), rightHandTr_->getPos().getY() - rightHandTr_->getHeight()+40));
+
+			if (tiempoColor_.currTime() >= 500) {
+				rightHandImg_->setColor(200, 20, 200);
+				leftHandImg_->setColor(200, 20, 200);
+			}
 		}
 	}
 	
@@ -97,25 +86,25 @@ void HandsManager::createHands() {
 	tr_ = ent_->getComponent<Transform>();
 	leftHandTr_ = leftHand_->addComponent<Transform>();
 	leftHandTr_->init(tr_->getPos() + Vector2D(150 + tr_->getWidth(), 150), Vector2D(), handSize, handSize, 0.0f, false);
-	leftHand_->addComponent<Image>(&sdlutils().images().at("manoIzq"));
+	leftHandImg_ = leftHand_->addComponent<Image>(&sdlutils().images().at("manoIzq"));
 
 	auto manoIzCollider = leftHand_->addComponent<RectangleCollider>
 		(leftHandTr_->getWidth() - width_colliderOffset, leftHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
-	punietazoleft_ = leftHand_->addComponent<Punietazo>();
+	punietazoleft_ = leftHand_->addComponent<Punietazo>(false);
 	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
 	rightHandTr_ = rightHand_->addComponent<Transform>();
 	rightHandTr_->init(tr_->getPos() + Vector2D(- handSize - 150, 150), Vector2D(), handSize, handSize, 0.0f, false);
-	rightHand_->addComponent<Image>(&sdlutils().images().at("manoDer"));
+	rightHandImg_ = rightHand_->addComponent<Image>(&sdlutils().images().at("manoDer"));
 
 	auto manoDrCollider = rightHand_->addComponent<RectangleCollider>
 		(rightHandTr_->getWidth() - width_colliderOffset, rightHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
-	punietazoright_ = rightHand_->addComponent<Punietazo>();
+	punietazoright_ = rightHand_->addComponent<Punietazo>(true);
 	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
 
 	colliderLeftHand_ = manoIzCollider;
@@ -164,7 +153,10 @@ void HandsManager::chooseAttack() {
 void HandsManager::clapAttack(){
 	if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
 		clapLeft_->changeState(ClapAttack::DIAGONAL);
-		clapRight_->changeState(ClapAttack::DIAGONAL);
+		clapRight_->changeState(ClapAttack::DIAGONAL); 
+		leftHandImg_->setColor(200, 200, 20, 500);
+		rightHandImg_->setColor(200, 200, 20, 500);
+		tiempoColor_.reset();
 	}
 	else if (clapLeft_->getstate() == ClapAttack::DIAGONAL || clapRight_->getstate() == ClapAttack::DIAGONAL) {
 		clapLeft_->goDiagonal();
@@ -257,6 +249,8 @@ void HandsManager::hammerAttack() {
 	}
 	else if (hammerLeft_->getstate() == HammerArm::REPOSO) {
 		if (hammerRight_->getstate() == HammerArm::DIAGONAL) {
+			rightHandImg_->setColor(200, 200, 20, 500);
+			tiempoColor_.reset();
 			hammerRight_->goDiagonal();
 		}
 		else if (hammerRight_->getstate() == HammerArm::HIT) {
@@ -283,8 +277,11 @@ void HandsManager::hammerAttack() {
 		if (hammerRight_->getstate() == HammerArm::REPOSO) {
 			if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
 				hammerLeft_->goDiagonal();
+				leftHandImg_->setColor(200, 200, 20, 500);
+				tiempoColor_.reset();
 			}
 			else if (hammerLeft_->getstate() == HammerArm::HIT) {
+				
 				if (multFase_ == 1)
 					hammerLeft_->attack(false);
 				else

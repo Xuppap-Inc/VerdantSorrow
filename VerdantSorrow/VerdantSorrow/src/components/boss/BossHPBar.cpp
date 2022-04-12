@@ -44,14 +44,29 @@ void BossHPBar::render() {
 	float xRight = sdlutils().width() / 2 + xOffset - 45;
 
 	// Fondo de las barras
-	bossBarArrow_left->render(build_sdlrect(xLeft, (int)pos.getY(), 50, 50)); // 50 grosor
-	bossBarArrow_right->render(build_sdlrect(xRight, (int) pos.getY(), 50, 50)); // 50 grosor
-	middleBar->render(build_sdlrect((xRight - xLeft)/2 - 10, ((int)pos.getY()) + 12, 640, 25)); // 25 grosor
+	SDL_Rect left = build_sdlrect(xLeft, (int)pos.getY(), 50, 50);
+	SDL_Rect right = build_sdlrect(xRight, (int)pos.getY(), 50, 50);
+	SDL_Rect middle = build_sdlrect((xRight - xLeft) / 2 - 10, ((int)pos.getY()) + 12, 640, 25);
 
 	//barra roja
 	SDL_Rect rect = build_sdlrect(pos.getX(), pos.getY() + 18, maxBarLength * (attrib_->getLife() / attrib_->getMaxHp()), 10);
 	//barra de daño acumulado
 	SDL_Rect rect2 = build_sdlrect(pos.getX() + rect.w, pos.getY() + 18, maxBarLength * (accumulatedDamage / attrib_->getMaxHp()), rect.h);
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	scaleRect(left, sW, sH);
+	scaleRect(right, sW, sH);
+	scaleRect(middle, sW, sH);
+	scaleRect(rect, sW, sH);
+	scaleRect(rect2, sW, sH);
+
+	//dibujar interfaz barra
+	bossBarArrow_left->render(left); // 50 grosor
+	bossBarArrow_right->render(right); // 50 grosor
+	middleBar->render(middle); // 25 grosor
 
 	//dibujar barras
 	SDL_SetRenderDrawColor(sdlutils().renderer(), 58, 2, 0, 255);
@@ -69,4 +84,12 @@ void BossHPBar::render() {
 	}
 
 	lastHP = attrib_->getLife();
+}
+
+void BossHPBar::scaleRect(SDL_Rect& rect, float sW, float sH)
+{
+	rect.x *= sW;
+	rect.w *= sW;
+	rect.y *= sH;
+	rect.h *= sH;
 }

@@ -56,6 +56,8 @@ void FinalBossScene::init()
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
+
+	createLights();
 }
 
 void FinalBossScene::update()
@@ -74,6 +76,7 @@ void FinalBossScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeEyeEssenceState(true);
+		if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);
 		setAble(false);
 		sC().decideScene();
 	}
@@ -108,6 +111,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	//BossTr->setScale(.33);
 	//FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase1"), 10, 6, 2000, 60, "FinalBoss_Fase1");
+	//BossTr->setScale(BossTr->getScale() * 3);
 	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
 	//anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
 
@@ -137,6 +141,8 @@ void FinalBossScene::setAble(bool a)
 }
 
 void FinalBossScene::createLights() {
-	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), -200, sdlutils().height() - 300, 600, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()-300, sdlutils().height()-200, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()/2 - 500, sdlutils().height()-500, 1000, 100, mngr_);
 
 }

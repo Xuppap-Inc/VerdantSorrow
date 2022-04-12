@@ -65,7 +65,7 @@ void Hub::init()
 	dialogBoxGenerator(dialogBox);
 	NPCGenerator(colManager, dialogBox);
 
-	musica_ = &sdlutils().musics().at("musica_hub");
+	musica_ = &sdlutils().musicsHub().at("musica_hub");
 	musica_->play();
 	musica_->setMusicVolume(60);
 
@@ -73,7 +73,7 @@ void Hub::init()
 	auto hogueraTr = hoguera->addComponent<Transform>();
 	hogueraTr->init(Vector2D(100, 300), Vector2D(), 10, 20, 0.0f);
 	hogueraTr->setScale(0.25);
-	hoguera->addComponent<FramedImage>(&sdlutils().images().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
+	hoguera->addComponent<FramedImage>(&sdlutils().imagesHub().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
 
 	createLights();
 	hoguera->addToGroup(ecs::_HUB_DECORATION_GRP);
@@ -85,6 +85,7 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	auto tr = dialogBox->addComponent<Transform>();
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
+	dialogBox->addToGroup(ecs::_UI_GRP);
 }
 
 bool Hub::getAble()
@@ -128,7 +129,7 @@ void Hub::backgroundHub()
 {
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().images().at("fondoHub"));
+	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("fondoHub"));
 	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
 }
 
@@ -160,7 +161,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerY = sdlutils().height() / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, 0.25f, false);
-	player_->addComponent<FramedImage>(&sdlutils().images().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+	player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
@@ -177,8 +178,8 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 
 	//Componente ui jugador
 	mngr_->setHandler(ecs::_PLAYER, player_);
-	auto playerLife_ = mngr_->addEntity();
-	playerLife_->addComponent<PlayerUI>();
+	auto* playerLife_ = mngr_->addEntity();
+	playerLife_->addComponent<PlayerUI>(true);
 	playerLife_->addToGroup(ecs::_UI_GRP);
 }
 
@@ -205,7 +206,7 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 	auto npc = mngr_->addEntity();
 	auto npctr = npc->addComponent<Transform>();
 	npctr->init(Vector2D(sdlutils().width() / 2, 360), Vector2D(), 50, 100, 0.0f, false);
-	npc->addComponent<Image>(&sdlutils().images().at("matt"));
+	npc->addComponent<Image>(&sdlutils().imagesHub().at("matt"));
 	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
 	colManager->addCollider(col);
 	col->setIsTrigger(true);
@@ -225,5 +226,5 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 }
 
 void Hub::createLights() {
-	new Light(&sdlutils().images().at("luz_naranja"), -200, -100, 800, 100, mngr_);
+	new Light(&sdlutils().imagesHub().at("luz_naranja"), -200, -100, 800, 100, mngr_);
 }

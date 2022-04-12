@@ -1,15 +1,15 @@
 {
 
-  "assets" : 59,
+  "assets" : 61,
   
-  "fonts" : [
+  "fonts_hub" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
     { "id" : "ARIAL24", "file" : "resources/fonts/ARIAL.ttf", "size": 24 },
     { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 },
     { "id" : "PTMONO24", "file" : "resources/fonts/PTMono-Regular.ttf", "size": 24 },
     { "id": "SOURCESERIF24", "file": "resources/fonts/SourceSerifPro-Regular.ttf", "size": 24}
   ],
-  "images": [
+  "images_hub": [
     {
       "id": "matt",
       "file": "resources/images/matt.jpg"
@@ -25,6 +25,14 @@
     {
       "id": "walk_Kyna",
       "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_side_Kyna",
+      "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_up_Kyna",
+      "file": "resources/images/walk_Back_Kyna_TopDown_Spritesheet.png"
     },
     {
       "id": "heart",
@@ -61,11 +69,11 @@
 
   ],
 
-  "musics" : [
+  "musics_hub" : [
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.wav" }
   ],
   
-  "sounds" : [
+  "sounds_hub" : [
     { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
   ],
 

@@ -7,7 +7,7 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 
-ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_()
+ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_(),scrollX_(false)
 {
 	
 }
@@ -46,7 +46,7 @@ void ScrollCamera::calculateDirection()
 
 	//Movimiento en X
 	if (diff.getX() > deadzoneX_) {
-		cout << cameraSpeed_ << endl;
+	
 		vel.setX(cameraSpeed_);
 	}
 	if (diff.getX() + player_->getWidth() < 0) {
@@ -59,19 +59,22 @@ void ScrollCamera::calculateDirection()
 		}
 	}
 
-	//Movimiento en Y
-	if (diff.getY() > deadzoneY_) {
-		cout << cameraSpeed_ << endl;
-		vel.setY(cameraSpeed_);
-	}
-	if (diff.getY() + player_->getHeight() < 0) {
-		vel.setY(-cameraSpeed_);
-	}
-	else if (diff.getY() <= deadzoneY_ && diff.getX() + player_->getHeight() >= 0) {
-		vel.setY(vel.getY() * 0.995);
-		if (abs(diff.getY()) < 10 && abs(diff.getY())>0) {
-			vel.setY(0);
+	if (!scrollX_) {
+		//Movimiento en Y
+		if (diff.getY() > deadzoneY_) {
+
+			vel.setY(cameraSpeed_);
 		}
+		if (diff.getY() + player_->getHeight() < 0) {
+			vel.setY(-cameraSpeed_);
+		}
+		else if (diff.getY() <= deadzoneY_ && diff.getX() + player_->getHeight() >= 0) {
+			vel.setY(vel.getY() * 0.995);
+			if (abs(diff.getY()) < 10 && abs(diff.getY()) > 0) {
+				vel.setY(0);
+			}
+		}
+
 	}
 	
 }
@@ -79,8 +82,18 @@ void ScrollCamera::calculateDirection()
 void ScrollCamera::debug() 
 {
 	auto pos = Vector2D(sdlutils().width() / 2.0 - deadzoneX_/2.0, sdlutils().height() / 2.0 - deadzoneY_/2.0);
-	auto rect = build_sdlrect(pos, deadzoneX_, deadzoneY_);
-	SDL_RenderDrawRect(sdlutils().renderer(), &rect);
+	auto dest = build_sdlrect(pos, deadzoneX_, deadzoneY_);
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
+
+	SDL_RenderDrawRect(sdlutils().renderer(), &dest);
 }
 
 
