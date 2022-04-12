@@ -12,7 +12,8 @@
 #include "../../FramedImage.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
+	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), 
+	eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
 {
 }
 
@@ -29,6 +30,14 @@ void FinalBossMovement::initComponent()
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 	playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr != nullptr);
+
+	musicaFase2_ = &sdlutils().musics().at("musica_manos_fase2");
+	musicaFase2_->play();
+	musicaFase2_->setMusicVolume(0);
+
+	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
+	musicaFase1_->play(10, 0);
+	musicaFase1_->setChannelVolume(60, 0);
 }
 
 void FinalBossMovement::update()
@@ -42,6 +51,8 @@ void FinalBossMovement::update()
 			s->play();
 			SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_damage");
 			s2->play();
+			musicaFase2_->setMusicVolume(60);
+			musicaFase1_->pauseChannel(0);
 		}
 
 		lastFireBall_ = sdlutils().currRealTime();

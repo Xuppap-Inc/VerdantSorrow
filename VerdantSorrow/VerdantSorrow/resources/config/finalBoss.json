@@ -1,5 +1,5 @@
 {
-  "assets" : 46,
+  "assets" : 48,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -139,6 +139,7 @@
   ],
 
   "sounds" : [
+    { "id": "musica_manos_fase1", "file": "resources/sound/musica_rana_fase1.wav" },
     { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
     { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
     { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
@@ -152,7 +153,7 @@
     { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
     ],
   "musics" : [
-
+    { "id" : "musica_manos_fase2", "file" : "resources/sound/musica_rana_fase2.wav" }
   ]
 
 }
