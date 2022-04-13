@@ -172,7 +172,7 @@ void PlayerCtrl::animationManagement()
 
 					if (anim_->getCurrentAnimation() == "Chica_AtkFloor" || anim_->getCurrentAnimation() == "Attack1_Recovery") attack_->deactivateRecovery();
 
-					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, rollDuration_, 25, "chicaroll");
+					anim_->changeanim(&sdlutils().images().at("chicaroll"), 3, 9, 2*rollDuration_/3, 25, "chicaroll");
 					anim_->repeat(false);
 				}
 			}
