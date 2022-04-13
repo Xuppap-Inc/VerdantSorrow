@@ -94,7 +94,7 @@ void FinalBossMovement::bounce()
 		//Inicia el contador
 		lastTimeGround = sdlutils().currRealTime();
 		//Crea las dos bolas de fuego
-		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("bolaFuego"));
+		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("wave"));
 		//Cambia el estado a suelo
 		eyeState_ = EyeState::GROUND;
 		//sdlutils().soundEffects().at("wall_hit").play();
