@@ -20,6 +20,7 @@ public:
 	~PauseMenu() {};
 	void init();
 	//void background();
+	void update() override;
 	//Se sobreescribe onButtonClicked, ya que los botones de este menu tienen una funcion diferente
 	void onButtonClicked(int index) override;
 	void generateAllButtons() override;

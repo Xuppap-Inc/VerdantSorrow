@@ -69,12 +69,6 @@ void MenuScene::onButtonClicked(int index)
 
 
 		break;
-		//case 2: //Boton load boss
-
-		//	break;
-		//case 3://Boton settings
-
-		//	break;
 	case 2: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
 		break;
