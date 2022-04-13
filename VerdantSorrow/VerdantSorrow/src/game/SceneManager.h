@@ -22,6 +22,7 @@ public:
 	void init();
 	void render();
 	scenes getScene() { return actScene; }
+	scenes getPreviousScene() { return previousScene_; }
 	void changeScene(scenes s_=Hub_);
 	void changeFrogEssenceState(bool active);
 	void changeTreeEssenceState(bool active);
@@ -30,6 +31,7 @@ public:
 	void TreeSceneState(bool active);
 	void EyeSceneState(bool active);
 	void changeStatePlayerInBoss(bool active);
+	void activatePause();
 	void decideScene();
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
@@ -37,6 +39,7 @@ private:
 	SceneManager();
 	//decide a que escena hay que cambiar
 	scenes actScene;
+	scenes previousScene_;
 	std::vector <Scene*> sceneList;
 	Hub* h_;
 	FrogScene* f_;
@@ -49,6 +52,7 @@ private:
 	EscapeScene* ecapesc_;
 	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
 	bool hubAssetsChargeds_, playerInBossFight;
+	bool isPauseActive_;
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

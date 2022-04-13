@@ -21,6 +21,19 @@ void PauseMenu::init()
 	currentVolume_ = musicaTest_->setMusicVolume(128);
 }
 
+void PauseMenu::update()
+{
+	handleInput(); //Metodo para control de input 
+	if (!changeSc_) {
+		mngr_->update();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+	}
+}
+
 void PauseMenu::onButtonClicked(int index)
 {
 	changeSc_ = true;
@@ -34,6 +47,7 @@ void PauseMenu::onButtonClicked(int index)
 		controlVolume(true);
 		break;
 	case 2:
+		sC().activatePause();
 		break;
 	case 3:
 		sC().changeScene(SceneManager::Menu_);
@@ -118,7 +132,11 @@ void PauseMenu::controlVolume(bool turnUp)
 	if (turnUp) newVolume = currentVolume_ + varVolume_; 
 	else newVolume = currentVolume_ - varVolume_; 
 
+	if (newVolume > 128) newVolume = 128;
+	else if (newVolume < 0) newVolume = 0;
+
 	if (newVolume <= 128 && newVolume >= 0) currentVolume_ = newVolume;
+
 
 	musicaTest_->setMusicVolume(currentVolume_);
 
