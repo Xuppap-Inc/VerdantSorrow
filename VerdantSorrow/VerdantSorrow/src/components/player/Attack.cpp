@@ -158,7 +158,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 	if (nCombo_ == 0) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 3, 3, 100, 9, "Chica_AtkFloor");
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 100, 9, "Chica_AtkFloor");
 
 		//registra el evento en la animacion
 		anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
@@ -172,12 +172,12 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 	else if (nCombo_ == 1) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 3, 60, 7, "Chica_AtkFloor2");
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 2, 60, 6, "Chica_AtkFloor2");
 
 		//registra el evento en la animacion
 		anim_->registerEvent(std::pair<int, std::string>(1, "Chica_AtkFloor2"), attackCallback);
 
-		anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor2"), recoveryCallback);
+		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor2"), recoveryCallback);
 
 		nCombo_++;
 
@@ -186,12 +186,12 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 	else if (nCombo_ == 2) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 80, 10, "Chica_AtkFloor3");
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 100, 9, "Chica_AtkFloor3");
 
 		//registra el evento en la animacion
 		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor3"), attackCallback);
 
-		anim_->registerEvent(std::pair<int, std::string>(9, "Chica_AtkFloor3"), recoveryCallback);
+		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor3"), recoveryCallback);
 
 		comboFinished_ = true;
 
