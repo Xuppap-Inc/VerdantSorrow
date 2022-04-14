@@ -1,16 +1,15 @@
 #pragma once
 
 #include <vector>
-#include "Scene.h"
+#include "BaseMenu.h"
 
-class MenuScene : public Scene
+class MenuScene : public BaseMenu
 {
 private:
 	//Vector con los nombres de los botones aignados en "menu.json"
-	//std::vector<std::string> buttonNames = {  "new_Game","continue","load", "settings", "controls","quit" };
 	std::vector<std::string> buttonNames_= {  "new_Game","continue","controls","quit" };
 	std::vector<Transform *> buttonPositions_; //Vector que guarda los transforms de los botones
-	std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
+	//std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
 	int mouseIndex_;
 	int controllerIndex_;
 	float delay_; //Delay del mando
@@ -19,18 +18,13 @@ private:
 public:
 	MenuScene();
 	~MenuScene() {};
-	void init();
-	void background();
-	virtual void createButton(float x, float y,float w, float  h, std::string buttonImage);
-	void update()override;
-	virtual void onButtonClicked(int index); //Versión raton
-	virtual void generateAllButtons();
-	void handleInput();
-	void handleMouseInput();
-	virtual void handleControllerInput();
-	void selectButton(int index);
-	virtual void changeButton(int numMoves);
-	void deselectButton(int index);
 	
+	void update()override;
+	void onButtonClicked(int index)override; //Versión raton
+	void generateAllButtons() override;
+	void init() override;
+	//void selectButton(int index);
+	//void deselectButton(int index);
+	//void background();
 };
 

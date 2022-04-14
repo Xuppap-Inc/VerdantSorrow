@@ -1,7 +1,7 @@
 #pragma once
-#include "MenuScene.h"
+#include "BaseMenu.h"
 #include "../sdlutils/SDLUtils.h"
-class PauseMenu :public MenuScene
+class PauseMenu :public BaseMenu
 {
 private:
 	std::vector<std::string> buttonNames_ = { "leftVolume","rightVolume","resume","menu","quit" };
@@ -18,15 +18,14 @@ private:
 public:
 	PauseMenu();
 	~PauseMenu() {};
-	void init();
-	//void background();
-	//Se sobreescribe onButtonClicked, ya que los botones de este menu tienen una funcion diferente
-	void onButtonClicked(int index) override;
+	void init() override;
+	void update()override;
+	void onButtonClicked(int index)override; //Versión raton
 	void generateAllButtons() override;
-	void handleControllerInput() override;
-	void changeButton(int numMoves) override;
+
 	void controlVolume(bool turnUp); //Booleano para ver si sube o baja el volumen
 	void createImages(float x, float y, float w, float h, std::string imageName);
+	
 
 };
 

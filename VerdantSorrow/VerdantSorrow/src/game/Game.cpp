@@ -112,7 +112,12 @@ void Game::update()
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+			exit = true;
+			continue;
+		}*/
+		if (ihdlr.isQuitPressed()) 
+		{
 			exit = true;
 			continue;
 		}

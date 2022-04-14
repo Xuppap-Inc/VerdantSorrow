@@ -7,7 +7,7 @@
 
 
 
-PauseMenu::PauseMenu() :MenuScene(), controllerIndex_(-1), delay_(250), lastUpdate_(0), musicaTest_(nullptr), currentVolume_(180), changeSc_(false),varVolume_(128 / 8)
+PauseMenu::PauseMenu() :BaseMenu(), controllerIndex_(-1), delay_(250), lastUpdate_(0), musicaTest_(nullptr), currentVolume_(180), changeSc_(false),varVolume_(128 / 8)
 {
 }
 
@@ -19,6 +19,19 @@ void PauseMenu::init()
 	musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaTest_->play();
 	currentVolume_ = musicaTest_->setMusicVolume(128);
+}
+
+void PauseMenu::update()
+{
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_); //Metodo para control de input 
+	if (!changeSc_) {
+		mngr_->update();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
+	}
 }
 
 void PauseMenu::onButtonClicked(int index)
@@ -34,6 +47,7 @@ void PauseMenu::onButtonClicked(int index)
 		controlVolume(true);
 		break;
 	case 2:
+		sC().activatePause();
 		break;
 	case 3:
 		sC().changeScene(SceneManager::Menu_);
@@ -51,65 +65,16 @@ void PauseMenu::generateAllButtons()
 	int spacingX = 250; int buttonW = 200, buttonH = 80, iniX = 350, smallButtonWH = 80;
 	for (int i = 0; i < 2; ++i)
 	{
-		createButton(sdlutils().width() / 2 + (i * spacingX), sdlutils().height() / 2 - (smallButtonWH*2), smallButtonWH, smallButtonWH, buttonNames_[i]);
+		createButton(sdlutils().width() / 2 + (i * spacingX), sdlutils().height() / 2 - (smallButtonWH*2),
+			smallButtonWH, smallButtonWH, buttonNames_[i],buttonPositions_);
 	}
 	//Bucle que dibuja la fila de botones
 	int j = 0;
 	for (int i = 2; i < buttonNames_.size(); ++i)
 	{
-		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, buttonNames_[i]);
+		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, buttonNames_[i],buttonPositions_);
 		++j;
 	}
-}
-
-void PauseMenu::handleControllerInput()
-{
-	auto& ihdlr = ih();
-	if (ihdlr.controllerConnected()) //Input con el mando
-	{
-		if (ihdlr.isAxisMotionEvent())
-		{
-			if (delay_ + lastUpdate_ < sdlutils().currRealTime())
-			{
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9) //Movimiento hacia abajo
-				{
-					if (controllerIndex_ == -1 || controllerIndex_ == 0) changeButton(1);
-				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
-				{
-					changeButton(1); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
-
-				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
-				{
-					changeButton(-1);
-				}
-				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba
-				{
-					if (controllerIndex_ == 1)changeButton(-1);
-				}
-
-			}
-		}
-		if (controllerIndex_ != -1 && controllerIndex_ < buttonNames_.size())
-		{
-			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) onButtonClicked(controllerIndex_);
-
-			selectButton(controllerIndex_);
-		}
-	}
-}
-void PauseMenu::changeButton(int moves) //Controla la lógica entre el cambio de botones seleccionados con el mando
-{
-	//Controller index guarda el indice del boton sobre el que se encuentra el raton
-
-	if (controllerIndex_ < buttonNames_.size() || controllerIndex_ == -1)
-	{
-		controllerIndex_ += moves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
-	}
-	else controllerIndex_ = -1;
-
-	lastUpdate_ = sdlutils().currRealTime(); //Para controlar el delay entre cambio de botones con mando
 }
 
 void PauseMenu::controlVolume(bool turnUp)
@@ -118,7 +83,11 @@ void PauseMenu::controlVolume(bool turnUp)
 	if (turnUp) newVolume = currentVolume_ + varVolume_; 
 	else newVolume = currentVolume_ - varVolume_; 
 
+	if (newVolume > 128) newVolume = 128;
+	else if (newVolume < 0) newVolume = 0;
+
 	if (newVolume <= 128 && newVolume >= 0) currentVolume_ = newVolume;
+
 
 	musicaTest_->setMusicVolume(currentVolume_);
 
