@@ -78,12 +78,24 @@
       "file": "resources/images/fondo1.png"
     },
     {
+      "id": "fondodel",
+      "file": "resources/images/fondodel.png"
+    },
+    {
+      "id": "nubes",
+      "file": "resources/images/nubes.png"
+    },
+    {
       "id": "Suelo",
       "file": "resources/images/Suelo.png"
     },
     {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
+    },
+    {
+      "id": "fondoNegro",
+      "file": "resources/images/fondoNegro.png"
     },
     {
       "id": "ranacambiofase",
