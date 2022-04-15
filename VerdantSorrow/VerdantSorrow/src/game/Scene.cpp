@@ -115,8 +115,8 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	player_->addComponent<CollideWithBorders>(100);
-
+	auto collide=player_->addComponent<CollideWithBorders>(100);
+	collide->collisionx(false);
 	//Se a�ade un collider al jugadordd
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);

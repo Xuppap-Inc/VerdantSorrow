@@ -8,6 +8,7 @@ CollideWithBorders::CollideWithBorders(): OnBorders()
 {
 	attrib_ = nullptr;
 	tr_ = nullptr;
+	collsionx_ = true;
 }
 
 CollideWithBorders::CollideWithBorders(float downOffset_) : OnBorders()
@@ -15,6 +16,7 @@ CollideWithBorders::CollideWithBorders(float downOffset_) : OnBorders()
 	downOffset = downOffset_;
 	attrib_ = nullptr;
 	tr_ = nullptr;
+	collsionx_ = true;
 }
 
 CollideWithBorders::~CollideWithBorders()
@@ -46,21 +48,27 @@ void CollideWithBorders::onBottom()
 
 void CollideWithBorders::onLeft()
 {
-	/*auto& pos = tr_->getPos();
+	if (collsionx_) {
+		auto& pos = tr_->getPos();
 
-	pos.set(Vector2D(0, pos.getY()));
-	attrib_->setLeftStop(true);*/
+		pos.set(Vector2D(0, pos.getY()));
+		attrib_->setLeftStop(true);
+	}
+	
 }
 
 void CollideWithBorders::onRight()
 {
-	/*auto& pos = tr_->getPos();
+	if (collsionx_) {
+		auto& pos = tr_->getPos();
 
-	auto width = sdlutils().width();
-	auto playerWidth = tr_->getWidth();
+		auto width = sdlutils().width();
+		auto playerWidth = tr_->getWidth();
 
-	pos.set(Vector2D(width - playerWidth, pos.getY()));
-	attrib_->setRightStop(true);*/
+		pos.set(Vector2D(width - playerWidth, pos.getY()));
+		attrib_->setRightStop(true);
+	}
+	
 }
 
 void CollideWithBorders::onTop()
@@ -75,4 +83,9 @@ void CollideWithBorders::onNoLeftAndRight()
 {
 	if (attrib_->isRightStop()) attrib_->setRightStop(false);
 	if (attrib_->isLeftStop()) attrib_->setLeftStop(false);
+}
+
+void CollideWithBorders::collisionx(bool col)
+{
+	collsionx_ = col;
 }
