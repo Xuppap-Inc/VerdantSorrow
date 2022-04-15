@@ -98,6 +98,10 @@
       "file": "resources/images/particlered.png"
     },
     {
+      "id": "fondodelante",
+      "file": "resources/images/fondodelante.png"
+    },
+    {
       "id": "Suelo",
       "file": "resources/images/fondofinal.png"
     },

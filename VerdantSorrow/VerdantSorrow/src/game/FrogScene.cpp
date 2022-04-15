@@ -16,8 +16,7 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/wave/WaveMovement.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
-#include "../components/fondos/ShowAtOppositeSide.h"
-#include "Fondos/Parallax.h"
+
 
 #include "CollisionManager.h"
 #include "../components/boss/wave/WaveSpawner.h"
@@ -88,31 +87,7 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 
 void FrogScene::background()
 {
-	auto blCK = mngr_->addEntity();
-	blCK->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	blCK->addComponent<Image>(&sdlutils().images().at("fondoNegro"));
-	auto backgr_ = mngr_->addEntity();
-	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
-
-	auto parallax_ = new Parallax(mngr_);
-	parallax_->AddLayer(&sdlutils().images().at("nubes"), 14, sdlutils().height(), sdlutils().width(), 0);
-	/*auto nubes = mngr_->addEntity();
-	auto nubestr = nubes->addComponent<Transform>(Vector2D(0, 0), Vector2D(-5,0), sdlutils().width(), sdlutils().height()/2, 0.0f);
-	nubes->addComponent<Image>(&sdlutils().images().at("nubes"));
-	nubes->addComponent<ShowAtOpposideSide>();*/
-	auto fondodel = mngr_->addEntity();
-	auto fondotr = fondodel->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	fondodel->addComponent<Image>(&sdlutils().images().at("fondodel"));
-
-	auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height()), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
-	blCK->addToGroup(ecs::_BACKGROUND_GRP);
-	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
-	//nubes->addToGroup(ecs::_BACKGROUND_GRP);
-	fondodel->addToGroup(ecs::_BACKGROUND_GRP);
-	suelo->addToGroup(ecs::_BACKGROUND_GRP);
+	Scene::background("fondo1");
 }
 
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {

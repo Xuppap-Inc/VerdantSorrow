@@ -20,17 +20,11 @@ void Parallax::AddLayer(Texture* tex, float scrollratio,int height,int width,int
 {
 	auto e=mngr_->addEntity();
 	e->addComponent<Transform>(Vector2D(0,y),Vector2D(0,0),width,height,0);
-	auto s=e->addComponent<RenderParallax>(tex,scrollratio);
-
-	e->addToGroup(ecs::_BACKGROUND_GRP);
+	e->addComponent<RenderParallax>(tex,scrollratio);
 	auto es = mngr_->addEntity();
 	es->addComponent<Transform>(Vector2D(-width, y), Vector2D(0, 0), width, height, 0);
-	auto l=es->addComponent<RenderParallax>(tex, scrollratio);
-
-	es->addToGroup(ecs::_BACKGROUND_GRP);
+	es->addComponent<RenderParallax>(tex, scrollratio);
 	auto ed = mngr_->addEntity();
 	ed->addComponent<Transform>(Vector2D(width, y), Vector2D(0, 0), width, height, 0);
-	auto v=ed->addComponent<RenderParallax>(tex, scrollratio);
-	ed->addToGroup(ecs::_BACKGROUND_GRP);
-	
+	ed->addComponent<RenderParallax>(tex, scrollratio);
 }
