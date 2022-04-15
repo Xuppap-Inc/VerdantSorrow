@@ -18,7 +18,7 @@
 #include "../BossAtributos.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
+timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_(),animDir_(-1)
 {
 }
 
@@ -29,7 +29,7 @@ TreeAttackManager::~TreeAttackManager()
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
 																	attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), 
-																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
+																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_(), animDir_(-1)
 {
 }
 
@@ -217,11 +217,21 @@ void TreeAttackManager::update()
 
 	if (animState_ != animNewState_) {
 		animState_ = animNewState_;
+		if (animDir_ != dir_){
+			anim_->flipX(animDir_!=dir_);
+			std::cout << "cambio de direccion" << std::endl;
+			animDir_ = dir_;
+		}
+		
+		
 		switch (animState_)
 		{
 		case TreeAttackManager::ANIM_IDLE:
-			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
+			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
+			
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
+			
+			
 			break;
 		case TreeAttackManager::ANIM_WALK:
 			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_walk"), 5, 6, (1000 / 30) * 28, 28, "arbol_walk");

@@ -97,6 +97,7 @@ private:
 
 	bool newAtack_;
 	int dir_;
+	int animDir_;
 
 	void returnToIni();
 
