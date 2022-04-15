@@ -56,9 +56,9 @@ void EscapeScene::init()
 
 	auto height = (sdlutils().height() / 5) + 40;
 
-	auto suelo = mngr_->addEntity();
+	/*auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
-	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
+	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));*/
 }
 
 void EscapeScene::update()
