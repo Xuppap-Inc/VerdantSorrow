@@ -155,9 +155,9 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.4;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkAir") {
-				xOffset = -0.35;
-				yOffset = 0;
+			else if (currentAnim == "Chica_AtkAir1" || currentAnim == "Chica_AtkAir2" || currentAnim == "Chica_AtkAir3") {
+				xOffset = -0.4;
+				yOffset = 0.145;
 			}
 			else if (currentAnim == "chicaroll") {
 				xOffset = -0.45;
@@ -185,9 +185,9 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
  				xOffset = -0.35;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkAir") {
-				xOffset = -0.25;
-				yOffset = 0;
+			else if (currentAnim == "Chica_AtkAir1" || currentAnim == "Chica_AtkAir2" || currentAnim == "Chica_AtkAir3") {
+				xOffset = -0.4;
+				yOffset = 0.145;
 			}
 			else if (currentAnim == "chicaroll") {
 				xOffset = -0.25;

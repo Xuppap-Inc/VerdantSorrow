@@ -11,8 +11,8 @@
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
 	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
-	recovery_(false), cooldownTimer_(), comboFinished_(false), attackTimer_(), 
-	anim_(), attrib_(), nCombo_(0), comboTimer_(),
+	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), attackTimer_(), 
+	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
@@ -61,18 +61,25 @@ void Attack::update()
 		
 			if (recovery_) deactivateRecovery();
 
-			if (comboFinished_ || comboTimer_.currTime() > COMBO_WINDOW) {
+			if (comboFinishedGround_ || comboTimerGround_.currTime() > COMBO_WINDOW) {
 			
 				//vars combo
-				nCombo_ = 0;
-				comboFinished_ = false;
+				nComboGround_ = 0;
+				comboFinishedGround_ = false;
+			}
+
+			if (attrib_->isOnGround() || comboFinishedAir_ || comboTimerAir_.currTime() > COMBO_WINDOW) {
+
+				//vars combo
+				nComboAir_ = 0;
+				comboFinishedAir_ = false;
 			}
 		}
 	}
 
 	else if (state_ == COOLDOWN) {
 	
-		if (!comboFinished_ && comboTimer_.currTime() < COMBO_WINDOW) {
+		if (!comboFinishedGround_ && comboTimerGround_.currTime() < COMBO_WINDOW) {
 		
 			checkInput();
 		}
@@ -118,16 +125,16 @@ void Attack::checkInput()
 			while (i < attackButtons.size() && !ihdlr.isControllerButtonDown(attackButtons[i])) i++;
 			if (i < attackButtons.size()) attackButtonPressed = true;
 
-			if (attackButtonPressed && finished_ && !comboFinished_) {
+			if (attackButtonPressed && finished_) {
 
 				//callback que llama a attack
 				std::function<void()> attackCallback = [this]() { attack(); };
 
-				if (attrib_->isOnGround()) {
+				if (attrib_->isOnGround() && !comboFinishedGround_) {
 
 					attackGround(attackCallback);
 				}
-				else {
+				else if (!attrib_->isOnGround() && !comboFinishedAir_) {
 
 					attackAir(attackCallback);
 				}
@@ -141,10 +148,49 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 	state_ = ATTACKING;
 
 	anim_->repeat(false);
-	anim_->changeanim(&sdlutils().images().at("Chica_AtkAir"), 3, 5, 100, 15, "Chica_AtkAir");
 
-	//registra el evento en la animacion
-	anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkAir"), attackCallback);
+	if (nComboAir_ == 0) {
+
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir1"), 3, 3, 100, 8, "Chica_AtkAir1");
+
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir1"), attackCallback);
+
+		nComboAir_++;
+
+		comboTimerAir_.reset();
+	}
+
+	else if (nComboAir_ == 1) {
+
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir2"), 3, 3, 100, 9, "Chica_AtkAir2");
+
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir2"), attackCallback);
+
+		nComboAir_++;
+
+		comboTimerAir_.reset();
+	}
+
+	else if (nComboAir_ == 2) {
+
+		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir3"), 2, 6, 300, 11, "Chica_AtkAir3");
+
+		//registra el evento en la animacion
+		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir3"), attackCallback);
+
+		comboFinishedAir_ = true;
+
+		nComboAir_ = 0;
+	}
+
+	else {
+
+		comboFinishedAir_ = false;
+
+		nComboAir_ = 0;
+	}
 }
 
 void Attack::attackGround(std::function<void()>& attackCallback)
@@ -156,7 +202,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 	anim_->repeat(false);
 
-	if (nCombo_ == 0) {
+	if (nComboGround_ == 0) {
 
 		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 100, 9, "Chica_AtkFloor");
 
@@ -165,12 +211,12 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor"), recoveryCallback);
 
-		nCombo_++;
+		nComboGround_++;
 
-		comboTimer_.reset();
+		comboTimerGround_.reset();
 	}
 
-	else if (nCombo_ == 1) {
+	else if (nComboGround_ == 1) {
 
 		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 2, 60, 6, "Chica_AtkFloor2");
 
@@ -179,12 +225,12 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor2"), recoveryCallback);
 
-		nCombo_++;
+		nComboGround_++;
 
-		comboTimer_.reset();
+		comboTimerGround_.reset();
 	}
 
-	else if (nCombo_ == 2) {
+	else if (nComboGround_ == 2) {
 
 		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 100, 9, "Chica_AtkFloor3");
 
@@ -193,16 +239,16 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor3"), recoveryCallback);
 
-		comboFinished_ = true;
+		comboFinishedGround_ = true;
 
-		nCombo_ = 0;
+		nComboGround_ = 0;
 	}
 
 	else {
 	
-		comboFinished_ = false;
+		comboFinishedGround_ = false;
 
-		nCombo_ = 0;
+		nComboGround_ = 0;
 	}
 }
 
