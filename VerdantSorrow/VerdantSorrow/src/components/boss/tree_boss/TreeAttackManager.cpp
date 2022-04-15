@@ -178,6 +178,7 @@ void TreeAttackManager::update()
 
 	else if (state == SPECIAL_ATTACK) {
 		
+		std::cout << "comienza special" << std::endl;
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
 
 			//reactiva al arbol
@@ -196,6 +197,8 @@ void TreeAttackManager::update()
 
 		else if (waiting_ && waitTimer_.currTime() > WAIT_AFTER_SPECIAL) {
 
+			std::cout << "sale de special" << std::endl;
+
 			state = MOVING;
 
 			//timers
@@ -209,6 +212,8 @@ void TreeAttackManager::update()
 
 			waitTimer_.reset();
 			waitTimer_.pause();
+
+			waiting_ = false;
 		}
 	}
 
