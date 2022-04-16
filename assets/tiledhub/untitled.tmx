@@ -90,7 +90,7 @@
   <object id="8" gid="6" x="594.545" y="177.273" width="600" height="180"/>
  </objectgroup>
  <objectgroup id="6" name="npcs">
-  <object id="139" gid="28" x="375" y="275.667" width="21.3333" height="46"/>
+  <object id="139" gid="28" x="375" y="275.667" width="27.3333" height="53.3333"/>
   <object id="140" gid="29" x="596" y="483.667" width="47" height="68.6667"/>
   <object id="141" gid="30" x="210.667" y="407" width="28.3333" height="66"/>
  </objectgroup>
