@@ -84,18 +84,6 @@ void TreeAttackManager::update()
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
-
-		if (dir_ < 0) {
-			anim_->flipX(false);
-			std::cout << "izquierda" << std::endl;
-			//animDir_ = dir_;
-		}
-		else if (dir_ > 0)
-		{
-			anim_->flipX(true);
-			std::cout << "derecha" << std::endl;
-			//animDir_ = dir_;
-		}
 	}
 
 	if (state == MOVING) {
@@ -228,7 +216,13 @@ void TreeAttackManager::update()
 	}
 
 	if (animState_ != animNewState_) {
-		animState_ = animNewState_;			
+		animState_ = animNewState_;
+		if (animDir_ != dir_){
+			anim_->flipX(animDir_!=dir_);
+			std::cout << "cambio de direccion" << std::endl;
+			animDir_ = dir_;
+		}
+		
 		
 		switch (animState_)
 		{
