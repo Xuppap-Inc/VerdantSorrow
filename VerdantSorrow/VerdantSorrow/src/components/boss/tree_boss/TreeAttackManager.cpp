@@ -85,15 +85,16 @@ void TreeAttackManager::update()
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
 
-		//cambio de sentido en las animaciones de groot
-		//se hace aquí porque en si se hace en el cambio de animaciones 
-		//hay mucho retardo
 		if (dir_ < 0) {
-			anim_->flipX(false);			
+			anim_->flipX(false);
+			std::cout << "izquierda" << std::endl;
+			//animDir_ = dir_;
 		}
 		else if (dir_ > 0)
 		{
-			anim_->flipX(true);		
+			anim_->flipX(true);
+			std::cout << "derecha" << std::endl;
+			//animDir_ = dir_;
 		}
 	}
 
