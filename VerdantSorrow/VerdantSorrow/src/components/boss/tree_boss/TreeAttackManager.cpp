@@ -84,6 +84,15 @@ void TreeAttackManager::update()
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
+
+		//cambio de sentido en las animaciones de groot
+		//se hace aquí porque si se hace en el cambio de animaciones
+		//hay mucho delay 
+
+		if (dir_ < 0) {
+			anim_->flipX(false);
+		}
+		else anim_->flipX(true);
 	}
 
 	if (state == MOVING) {
