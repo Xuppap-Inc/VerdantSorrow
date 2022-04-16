@@ -207,6 +207,8 @@ void TreeAttackManager::update()
 
 			waitTimer_.reset();
 			waitTimer_.pause();
+
+			waiting_ = false;
 		}
 	}
 
