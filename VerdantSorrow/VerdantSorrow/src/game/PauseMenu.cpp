@@ -17,9 +17,9 @@ void PauseMenu::init()
 	isChangingScene(changeSc_);
 	generateAllButtons();
 	createImages((sdlutils().width() / 2) - 350, sdlutils().height() / 2 - (80 * 2), 80, 80, imagesNames_[0]);
-	musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
+	/*musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaTest_->play();
-	currentVolume_ = musicaTest_->setMusicVolume(128);
+	currentVolume_ = musicaTest_->setMusicVolume(128);*/
 }
 
 void PauseMenu::update()
@@ -98,6 +98,6 @@ void PauseMenu::createImages(float x, float y, float w, float h, std::string ima
 {
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
-	newImage->addComponent<Image>(&sdlutils().images().at(image));
+	newImage->addComponent<Image>(&sdlutils().imagesHub().at(image));
 
 }

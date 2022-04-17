@@ -64,6 +64,7 @@ private:
 	CollisionManager* collManager_;
 	BossAtributos* attr_;
 	FramedImage* anim_;
+	FramedImage* tongueAnim_;
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
 

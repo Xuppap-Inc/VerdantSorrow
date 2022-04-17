@@ -19,6 +19,7 @@ private:
 public:
 	PauseMenu();
 	~PauseMenu() {};
+	void changeScState(bool state) { changeSc_ = state; };
 	void init() override;
 	void update()override;
 	void onButtonClicked(int index)override; //Versión raton
