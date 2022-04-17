@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\nivelHuida\Mushroom.h" />
+    <ClInclude Include="src\components\boss\nivelHuida\Spikes.h" />
+    <ClInclude Include="src\components\boss\nivelHuida\Mushroom.h" />
     <ClInclude Include="src\game\BaseMenu.h" />
     <ClInclude Include="src\components\hub\PlatformAtribsForHub.h" />
     <ClInclude Include="src\game\EscapeScene.h" />
@@ -115,7 +116,8 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\nivelHuida\Mushroom.cpp" />
+    <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
+    <ClCompile Include="src\components\boss\nivelHuida\Mushroom.cpp" />
     <ClCompile Include="src\game\BaseMenu.cpp" />
     <ClCompile Include="src\game\EscapeScene.cpp" />
     <ClCompile Include="src\game\Fondos\Parallax.cpp" />

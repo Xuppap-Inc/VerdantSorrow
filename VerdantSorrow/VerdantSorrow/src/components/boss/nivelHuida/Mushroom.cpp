@@ -1,10 +1,10 @@
 #include "Mushroom.h"
-#include "../boss/BossAtributos.h"
-#include "../../ecs/Entity.h"
-#include "../Transform.h"
-#include "../boss/wave/WaveMovement.h"
-#include "../boss/frog_boss/TongueAttack.h"
-#include "../boss/finalBoss/ClapAttack.h"
+#include "../../../ecs/Entity.h"
+#include "../../Transform.h"
+#include "../wave/WaveMovement.h"
+#include "../frog_boss/TongueAttack.h"
+#include "../finalBoss/ClapAttack.h"
+#include "../../player/PlayerAttributes.h"
 
 
 Mushroom::Mushroom(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr)
@@ -30,8 +30,7 @@ void Mushroom::update()
 	if (colMan_->hasCollisions(collider_)) {
 
 		for (auto c : colMan_->getCollisions(collider_)) {
-
-			if (c->isActive() && !c->isTrigger()) {
+			if (c->isActive() && !c->isTrigger() && c->getEntity()->getComponent<PlayerAttributes>()) {
 
 				//colisiones
 				auto playerPos = c->getEntity()->getComponent<RectangleCollider>()->getPos(); //jugador
