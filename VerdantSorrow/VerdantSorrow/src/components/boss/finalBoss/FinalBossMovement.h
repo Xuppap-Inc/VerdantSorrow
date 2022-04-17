@@ -11,6 +11,7 @@ class HandsManager;
 class CollisionManager;
 class WaveSpawner;
 class FramedImage;
+class VirtualTimer;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -35,14 +36,15 @@ private:
 	EyeState eyeState_;
 	CollisionManager* colManager_;
 	float eyeSpeed;
-	int lastTimeGround = 0, timeInGround = 1000;
 	Vector2D velocitySaved;
 	WaveSpawner* waveSp_;
 	Transform* playerTr;
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
 
+	VirtualTimer* lastTimeInGround_;
 	//random bola de fuego times
-	int lastFireBall_, fireBallCooldown_;
+	//int lastFireBall_;//, fireBallCooldown_;
+	int /*lastTimeGround = 0,*/ timeInGround = 1000;
 };
 

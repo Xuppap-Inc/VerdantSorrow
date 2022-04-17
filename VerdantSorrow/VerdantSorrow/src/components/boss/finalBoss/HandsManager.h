@@ -13,6 +13,7 @@ class HammerArm;
 class BossAtributos;
 class RectangleCollider;
 class Image;
+class VirtualTimer;
 
 class HandsManager :
 	public ecs::Component
@@ -42,11 +43,12 @@ private:
 	void clapAttack();
 	void punietazoAttack();
 	void hammerAttack();
-	float lastAttackDone = 0, attackCooldown;
+	VirtualTimer* lastAttackDone_;
+	float  attackCooldown;//lastAttackDone = 0,
 	int numeroAtaque;
 
 	int multFase_;
-	VirtualTimer tiempoColor_;
+	VirtualTimer *tiempoColor_;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;

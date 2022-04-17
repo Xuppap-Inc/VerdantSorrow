@@ -1,10 +1,12 @@
 #pragma once
 #include "../../../ecs/Component.h"
 #include "../../../game/CollisionManager.h"
+#include "../../../sdlutils/VirtualTimer.h"
 using ecs::Manager;
 class Entity;
 class CollisionManager;
 class Image;
+class VirtualTimer;
 
 class Punietazo :
 	public ecs::Component
@@ -41,9 +43,10 @@ private:
 
 	State state_;
 
-
-	float hitTime_;
-	float goBackTime_;
+	VirtualTimer* hitTime_;
+	VirtualTimer* goBackTime_;
+	/*float hitTime_;
+	float goBackTime_;*/
 
 	//initial hand tr
 	float initialwidth_;

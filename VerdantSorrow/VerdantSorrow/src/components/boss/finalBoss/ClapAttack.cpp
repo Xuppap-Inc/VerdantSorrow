@@ -4,6 +4,7 @@
 #include "../../RectangleCollider.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../sdlutils/VirtualTimer.h"
+#include "../../../ecs/Manager.h"
 
 
 

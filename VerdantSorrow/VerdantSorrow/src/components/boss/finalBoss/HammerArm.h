@@ -3,11 +3,13 @@
 #include "../../../utils/Vector2D.h"
 #include "../../RectangleCollider.h"
 #include "../../../game/CollisionManager.h"
+#include "../../../sdlutils/VirtualTimer.h"
 #include <SDL.h>
 
 class Transform;
 class CollisionManager;
 class WaveSpawner;
+class VirtualTimer;
 
 class HammerArm : public ecs::Component
 {
@@ -41,7 +43,7 @@ public:
 protected:
     Transform* tr_;
     RectangleCollider* collider_;
-    int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
+    int handSpeed = 6, cooldoownInFloor = 1500;
     Transform* playertr_;
     int playerXPos;
     CollisionManager* colManager_;
@@ -50,5 +52,6 @@ protected:
     State state_;
 
     WaveSpawner* waveSp_;
+    VirtualTimer* lastTimeFloor_;
 };
 

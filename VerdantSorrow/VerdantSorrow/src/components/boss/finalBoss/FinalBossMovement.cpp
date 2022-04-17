@@ -10,10 +10,11 @@
 #include "../../../game/CollisionManager.h"
 #include "../wave/WaveSpawner.h"
 #include "../../FramedImage.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), 
-	eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
+	eyeSpeed(3), waveSp_(),lastTimeInGround_()//, lastFireBall_()
 {
 }
 
@@ -38,6 +39,8 @@ void FinalBossMovement::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
+	lastTimeInGround_ = new VirtualTimer();
+	mngr_->addTimer(lastTimeInGround_);
 }
 
 void FinalBossMovement::update()
@@ -55,8 +58,8 @@ void FinalBossMovement::update()
 			musicaFase1_->pauseChannel(0);
 		}
 
-		lastFireBall_ = sdlutils().currRealTime();
-		fireBallCooldown_ = 2000;
+		//lastFireBall_ = sdlutils().currRealTime();
+		//fireBallCooldown_ = 2000;
 	}
 	else if (phase_ == PHASE2) {
 		if (eyeState_ == EyeState::BOUNCE) bounce();
@@ -92,7 +95,8 @@ void FinalBossMovement::bounce()
 		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
 		vel_ = Vector2D(0, 0);
 		//Inicia el contador
-		lastTimeGround = sdlutils().currRealTime();
+		//lastTimeGround = sdlutils().currRealTime();
+		lastTimeInGround_->reset();
 		//Crea las dos bolas de fuego
 		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("wave"));
 		//Cambia el estado a suelo
@@ -118,7 +122,7 @@ void FinalBossMovement::bounce()
 }
 
 void FinalBossMovement::restartBouncing() {
-	if (sdlutils().currRealTime() > lastTimeGround + timeInGround) {
+	if (lastTimeInGround_->currTime() > +timeInGround) {
 		eyeState_ = EyeState::BOUNCE;
 		tr_->getVel().set(velocitySaved);
 	}
