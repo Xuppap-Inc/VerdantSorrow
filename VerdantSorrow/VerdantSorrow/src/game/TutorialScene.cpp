@@ -17,6 +17,7 @@
 #include "CollisionManager.h"
 #include "../components/tutorial/TutorialFly.h"
 #include "../components/tutorial/TutorialSpawnRoot.h"
+#include "../components/nivelHuida/Mushroom.h"
 
 void TutorialScene::init() 
 {
@@ -81,5 +82,6 @@ void TutorialScene::createPlatform(int x, int y, int w, int h)
 	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager_->addCollider(col);
 	platform->addComponent<RectangleRenderer>();
+	platform->addComponent<Mushroom>(colManager_);
 	platform->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }
