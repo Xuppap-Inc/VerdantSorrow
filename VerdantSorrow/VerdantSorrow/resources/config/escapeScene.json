@@ -133,6 +133,27 @@
     {
       "id": "capa3",
       "file": "resources/images/capa3.png"
+    },
+
+    {
+      "id": "Parallax_Layer1",
+      "file": "resources/images/Parallax_Layer1.png"
+    },
+    {
+      "id": "Parallax_Layer2",
+      "file": "resources/images/Parallax_Layer2.png"
+    },
+    {
+      "id": "Parallax_Layer3",
+      "file": "resources/images/Parallax_Layer3.png"
+    },
+    {
+      "id": "Parallax_Layer4",
+      "file": "resources/images/Parallax_Layer4.png"
+    },
+    {
+      "id": "Parallax_Layer5",
+      "file": "resources/images/Parallax_Layer5.png"
     }
   ],
 
