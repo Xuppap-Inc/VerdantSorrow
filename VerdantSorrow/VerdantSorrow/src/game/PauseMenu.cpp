@@ -14,16 +14,17 @@ PauseMenu::PauseMenu() :BaseMenu(), controllerIndex_(-1), delay_(250), lastUpdat
 void PauseMenu::init()
 {
 	Scene::init();
+	isChangingScene(changeSc_);
 	generateAllButtons();
 	createImages((sdlutils().width() / 2) - 350, sdlutils().height() / 2 - (80 * 2), 80, 80, imagesNames_[0]);
-	musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
+	/*musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaTest_->play();
-	currentVolume_ = musicaTest_->setMusicVolume(128);
+	currentVolume_ = musicaTest_->setMusicVolume(128);*/
 }
 
 void PauseMenu::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_); //Metodo para control de input 
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
 	if (!changeSc_) {
 		mngr_->update();
 		mngr_->refresh();
@@ -37,7 +38,7 @@ void PauseMenu::update()
 void PauseMenu::onButtonClicked(int index)
 {
 	changeSc_ = true;
-
+	isChangingScene(changeSc_);
 	switch (index)
 	{
 	case 0:
@@ -66,13 +67,14 @@ void PauseMenu::generateAllButtons()
 	for (int i = 0; i < 2; ++i)
 	{
 		createButton(sdlutils().width() / 2 + (i * spacingX), sdlutils().height() / 2 - (smallButtonWH*2),
-			smallButtonWH, smallButtonWH, buttonNames_[i],buttonPositions_);
+			smallButtonWH, smallButtonWH, buttonNames_[i],buttonPositions_, buttonPoperties_);
 	}
 	//Bucle que dibuja la fila de botones
 	int j = 0;
 	for (int i = 2; i < buttonNames_.size(); ++i)
 	{
-		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, buttonNames_[i],buttonPositions_);
+		createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH, 
+			buttonNames_[i],buttonPositions_, buttonPoperties_);
 		++j;
 	}
 }
@@ -96,6 +98,6 @@ void PauseMenu::createImages(float x, float y, float w, float h, std::string ima
 {
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
-	newImage->addComponent<Image>(&sdlutils().images().at(image));
+	newImage->addComponent<Image>(&sdlutils().imagesHub().at(image));
 
 }

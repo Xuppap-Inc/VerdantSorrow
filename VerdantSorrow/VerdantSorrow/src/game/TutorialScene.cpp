@@ -1,4 +1,4 @@
-#include "TutorialScene.h"
+﻿#include "TutorialScene.h"
 
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -17,6 +17,8 @@
 #include "CollisionManager.h"
 #include "../components/tutorial/TutorialFly.h"
 #include "../components/tutorial/TutorialSpawnRoot.h"
+#include "../components/boss/nivelHuida/Mushroom.h"
+#include "../components/boss/nivelHuida/Spikes.h"
 
 void TutorialScene::init() 
 {
@@ -36,6 +38,7 @@ void TutorialScene::init()
 	createFly(700, sdlutils().height() - 600);
 
 	createPlatform(700, sdlutils().height() - 100, 300, 100);
+	createSpike();
 
 	auto rootSpawner = mngr_->addEntity();
 	rootSpawner->addComponent<TutorialSpawnRoot>(colManager_);
@@ -81,5 +84,22 @@ void TutorialScene::createPlatform(int x, int y, int w, int h)
 	auto col = platform->addComponent<RectangleCollider>(platformTr->getWidth(), platformTr->getHeight());
 	colManager_->addCollider(col);
 	platform->addComponent<RectangleRenderer>();
+	platform->addComponent<Mushroom>(colManager_);
 	platform->addToGroup(ecs::_BOSSELEMENTS_GRP);
+}
+
+void TutorialScene::createSpike()
+{
+	auto spike = mngr_->addEntity();
+
+	auto spikeTr = spike->addComponent<Transform>();
+	spikeTr->init(Vector2D(400, 0), Vector2D(), 50, 140, 0.0f, 0.5f);
+
+
+	auto spikeCollider = spike->addComponent<RectangleCollider>(spikeTr->getWidth(), spikeTr->getHeight());
+	colManager_->addCollider(spikeCollider);
+	spike->addComponent<RectangleRenderer>();
+	spike->addComponent<SimpleGravity>(0.4);
+	spike->addComponent<Spikes>(colManager_);
+	spike->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }

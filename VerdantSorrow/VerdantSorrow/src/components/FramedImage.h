@@ -37,6 +37,11 @@ public:
 	void setVisible(bool set);
 	bool isVisible();
 
+	//Establece si la animación se ajusta al transform de la entidad
+	void adjustToTransform(bool set);
+
+	void reset();
+
 	void changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim);
 
 	void registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback);
@@ -66,6 +71,7 @@ private:
 	std::string currentAnim;
 
 	bool visible_;
+	bool adjustToTransform_;
 
 	VirtualTimer timer_;
 

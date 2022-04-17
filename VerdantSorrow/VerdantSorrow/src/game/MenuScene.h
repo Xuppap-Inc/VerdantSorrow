@@ -9,7 +9,7 @@ private:
 	//Vector con los nombres de los botones aignados en "menu.json"
 	std::vector<std::string> buttonNames_= {  "new_Game","continue","controls","quit" };
 	std::vector<Transform *> buttonPositions_; //Vector que guarda los transforms de los botones
-	//std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
+	std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
 	int mouseIndex_;
 	int controllerIndex_;
 	float delay_; //Delay del mando

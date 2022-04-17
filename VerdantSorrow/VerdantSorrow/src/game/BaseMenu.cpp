@@ -11,7 +11,7 @@
 #include "Scene.h"
 #include "../utils/Vector2D.h"
 
-BaseMenu::BaseMenu() :Scene() 
+BaseMenu::BaseMenu() :Scene(), changeSc_(false)
 {
 
 }
@@ -21,22 +21,22 @@ void BaseMenu::background(std::string backgroundName)
 	Scene::background(backgroundName);
 }
 
-void BaseMenu::createButton(float x, float y, float w, float h, std::string buttImg, std::vector<Transform *>&buttPos/*, std::vector<Entity*>buttProps*/)
+void BaseMenu::createButton(float x, float y, float w, float h, std::string buttImg, std::vector<Transform *>&buttPos, std::vector<Entity*>&buttProps)
 {
 	auto newButton = mngr_->addEntity();
 	auto tr = newButton->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
-	newButton->addComponent<Image>(&sdlutils().images().at(buttImg));
+	newButton->addComponent<Image>(&sdlutils().imagesHub().at(buttImg));
 	buttPos.push_back(tr);
-	//buttProps.push_back(newButton);
+	buttProps.push_back(newButton);
 }
 
-void BaseMenu::handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames)
+void BaseMenu::handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
 {
-	handleMouseInput(buttPos);
-	handleControllerInput(delay, lastUpdate, controllerIndex,buttNames);
+	handleMouseInput(buttPos,buttProps);
+	handleControllerInput(delay, lastUpdate, controllerIndex,buttNames,buttProps);
 }
 
-void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos)
+void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos, std::vector<Entity*>buttProps)
 {
 	auto& ihdlr = ih();
 	auto ratonPos = ihdlr.getMousePos();
@@ -58,22 +58,24 @@ void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos)
 			&& ratonPos.second <= pos.getY() + height
 			&& ratonPos.second >= pos.getY()) {
 
-			//selectButton(i);
+			selectButton(buttProps[i]);
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
 				if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
 				{
+			
 					onButtonClicked(i);
+				
 				}
 			}
 		}
-		//else  deselectButton(i);
+		else  deselectButton(buttProps[i]);
 		i++;
 	}
 }
 
-void BaseMenu::handleControllerInput(float delay, float lastUpdate,int &controllerIndex, std::vector<std::string>buttNames)
+void BaseMenu::handleControllerInput(float delay, float lastUpdate,int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
 {
 	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
@@ -107,15 +109,26 @@ void BaseMenu::handleControllerInput(float delay, float lastUpdate,int &controll
 		{
 
 			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) 
+			{
+		
 				onButtonClicked(controllerIndex);
+			
+			}
 
-			selectButton(controllerIndex);
+			selectButton(buttProps[controllerIndex]);
 		}
 	}
 }
 
-void BaseMenu::selectButton(int index)
+void BaseMenu::selectButton(Entity*buttProps)
 {
+	if(!changeSc_)
+	{
+		auto img =buttProps->getComponent<Image>();
+		img->setAlpha(127);
+	}
+	
+	
 }
 
 void BaseMenu::changeButton(int &controllerIndex, std::vector<std::string>buttNames, float &lastUpdate,int numMoves)//Controla la lógica entre el cambio de botones seleccionados con el mando
@@ -133,6 +146,12 @@ void BaseMenu::changeButton(int &controllerIndex, std::vector<std::string>buttNa
 
 }
 
-void BaseMenu::deselectButton(int index)
+void BaseMenu::deselectButton( Entity*buttProps)
 {
+	if(!changeSc_)
+	{
+		auto img = buttProps->getComponent<Image>();
+		img->setAlpha(255);
+	}
+
 }

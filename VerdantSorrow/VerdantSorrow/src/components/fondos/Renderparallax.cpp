@@ -55,6 +55,7 @@ void RenderParallax::render()
 	dest.w *= sW;
 	dest.y *= sH;
 	dest.h *= sH;
+	dest.y -= 50;
 
 	assert(tex_ != nullptr);
 	tex_->render(dest, tr_->getRot());
