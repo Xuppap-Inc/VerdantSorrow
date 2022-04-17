@@ -1,8 +1,10 @@
 #pragma once
 #include "../../../ecs/Component.h"
 #include "RootSpawner.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
 class TreeMovement;
+class VirtualTimer;
 
 class RootAutoAim : public ecs::Component
 {
@@ -38,8 +40,8 @@ private:
 
 	bool secondPhase_;
 
-	Uint32 lastTime_;
-	int iniTime_;
+	VirtualTimer * lastTime_;
+	VirtualTimer* iniTime_;
 	bool attacking_;
 	float rootPos_;
 	int rootW_;

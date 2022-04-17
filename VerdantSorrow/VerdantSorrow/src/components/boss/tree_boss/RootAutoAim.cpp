@@ -10,7 +10,7 @@
 #include "../BossAtributos.h"
 #include "TreeMovement.h"
 
-RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), player_(player), playerTr_(), iniTime_(0), movement_(), infiniteDuration_(false),
+RootAutoAim::RootAutoAim(ecs::Entity* player) : tr_(), lastTime_(), rootSpawner_(), attacking_(false), rootPos_(-1), rootW_(0), player_(player), playerTr_(), iniTime_(), movement_(), infiniteDuration_(false),
 												secondPhase_(false), lanternTr_()
 {
 }
@@ -29,13 +29,18 @@ void RootAutoAim::initComponent()
 
 	lanternTr_ = mngr_->getHandler(ecs::_LANTERN)->getComponent<Transform>();
 
+	lastTime_ = new VirtualTimer();
+	mngr_->addTimer(lastTime_);
+	iniTime_ = new VirtualTimer();
+	mngr_->addTimer(iniTime_);
+
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && playerTr_ != nullptr && movement_	!= nullptr && lanternTr_ != nullptr;
 	assert(comps);
 }
 
 void RootAutoAim::update()
 {
-	if (attacking_ && sdlutils().currRealTime() - lastTime_ > TIME_BETWEEN_ROOTS) {
+	if (attacking_ && lastTime_->currTime() > TIME_BETWEEN_ROOTS) {
 	
 		rootPos_ = playerTr_->getPos().getX() + playerTr_->getWidth() / 2 - rootW_ / 2;
 
@@ -45,11 +50,11 @@ void RootAutoAim::update()
 			
 			rootSpawner_->createRoot(rootPos_);
 
-			lastTime_ = sdlutils().currRealTime();
+			lastTime_->reset();
 		}
 	}
 
-	if (!infiniteDuration_ && attacking_ && sdlutils().currRealTime() - iniTime_ > DURATION) cancelAttack();
+	if (!infiniteDuration_ && attacking_ &&  iniTime_->currTime() > DURATION) cancelAttack();
 }
 
 void RootAutoAim::cancelAttack()
@@ -67,7 +72,7 @@ void RootAutoAim::attack(bool infinite)
 	attacking_ = true;
 	infiniteDuration_ = infinite;
 
-	iniTime_ = sdlutils().currRealTime();
+	iniTime_->reset();
 	rootW_ = rootSpawner_->getRootWidth();
 
 	movement_->setMoveActive(false);
