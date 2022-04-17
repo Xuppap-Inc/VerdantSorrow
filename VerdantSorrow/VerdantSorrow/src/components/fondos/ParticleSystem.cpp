@@ -6,13 +6,13 @@
 #include "../Image.h"
 #include "ShowAtOppositeSide.h"
 
-ParticleSystem::ParticleSystem(Texture* tex, int numpart,ecs::Manager* mngr):numpart_(numpart),tex_(tex),mngr_(mngr)
+ParticleSystem::ParticleSystem(Texture* tex, ecs::Manager* mngr):tex_(tex),mngr_(mngr)
 {
 }
 
-void ParticleSystem::createParticles()
+void ParticleSystem::createParticlesSnow(int numpart)
 {
-	for (int i = 0; i < numpart_; i++) {
+	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
 	
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width() + 1);

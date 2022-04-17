@@ -8,11 +8,10 @@ class ParticleSystem
 {
 public:
 
-	ParticleSystem(Texture* tex, int numpart,ecs::Manager*mngr);
-	void createParticles();
+	ParticleSystem(Texture* tex,ecs::Manager*mngr);
+	void createParticlesSnow(int numpart);
 
 private:
-	int numpart_;
 	Texture* tex_;
 	std::vector<ecs::Entity*>parts;
 	ecs::Manager* mngr_;

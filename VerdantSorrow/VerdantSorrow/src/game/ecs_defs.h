@@ -67,7 +67,9 @@
 // Groups list - must have at least one element
 //
 #define _GRPS_LIST_ \
-	_BACKGROUND_GRP, \
+	_BACKGROUND_1_GRP, \
+	_PARTICLES_BACKGROUND, \
+	_BACKGROUND_2_GRP, \
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
@@ -75,7 +77,8 @@
 	_PARTICLES_GRP ,\
 	_LIGHTS_GRP ,\
 	_FIRST_GRP ,\
-	_UI_GRP
+	_UI_GRP,\
+	_PARTICLES_UI 
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \

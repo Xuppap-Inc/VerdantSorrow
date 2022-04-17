@@ -44,8 +44,8 @@ void FrogScene::init()
 	frogGenerator(colManager, player);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
-	particlesys->createParticles();
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
+	particlesys->createParticlesSnow(100);
 
 	createLights();
 }
