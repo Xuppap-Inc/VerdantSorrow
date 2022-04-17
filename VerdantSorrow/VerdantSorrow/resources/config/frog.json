@@ -118,6 +118,10 @@
       "file": "resources/images/lengua.png"
     },
     {
+      "id": "lenguaRecoger",
+      "file": "resources/images/lenguaRecoger.png"
+    },
+    {
       "id": "rana_cambio_fase",
       "file": "resources/images/rana_cambio_fase.png"
     },
