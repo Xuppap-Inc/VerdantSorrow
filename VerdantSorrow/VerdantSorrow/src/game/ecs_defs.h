@@ -68,8 +68,9 @@
 //
 #define _GRPS_LIST_ \
 	_BACKGROUND_1_GRP, \
-	_PARTICLES_BACKGROUND, \
+	_PARTICLES_BACKGROUND_1, \
 	_BACKGROUND_2_GRP, \
+	_PARTICLES_BACKGROUND_2, \
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
@@ -77,6 +78,7 @@
 	_PARTICLES_GRP ,\
 	_LIGHTS_GRP ,\
 	_FIRST_GRP ,\
+	_PARTICLES_FRONT, \
 	_UI_GRP,\
 	_PARTICLES_UI 
 // Handlers list - must have at least one element
