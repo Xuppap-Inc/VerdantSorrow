@@ -7,6 +7,7 @@ private:
 	std::vector<std::string> buttonNames_ = { "leftVolume","rightVolume","resume","menu","quit" };
 	std::vector<std::string> imagesNames_ = { "volume" };
 	std::vector<Transform*> buttonPositions_;
+	std::vector<Entity*> buttonPoperties_;
 	int controllerIndex_;
 	float delay_; //Delay del mando
 	float lastUpdate_;

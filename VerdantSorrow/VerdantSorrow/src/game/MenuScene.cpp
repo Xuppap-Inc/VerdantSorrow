@@ -17,7 +17,7 @@ MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(25
 void MenuScene::init()
 {
 	Scene::init();
-	changeSc_ = false;
+	isChangingScene(changeSc_);
 	//background();//Dibuja el fondo
 
 	generateAllButtons(); //Genera todos los botones del menu (para ordenar mejor el codigo)
@@ -31,7 +31,7 @@ void MenuScene::init()
 
 void MenuScene::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_); //Metodo para control de input 
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
 	if (!changeSc_) {
 			mngr_->update();
 			mngr_->refresh();
@@ -49,10 +49,11 @@ void MenuScene::onButtonClicked(int index)
 	/Cambiando el orden de los botones, cambiaria lo que hay que hacer en cada caso
 	/De la misma manera si se añade un nuevo boton habría que añadir el caso correspondiente*/
 	changeSc_ = true;
+	isChangingScene(changeSc_);
 	switch (index)
 	{
 	case 0: //Boton new game
-		std::cout << "new game";
+
 		sC().changeScene(SceneManager::Hub_);
 		
 		break;
@@ -61,15 +62,12 @@ void MenuScene::onButtonClicked(int index)
 
 		break;
 	case 2: //Boton controls
-		std::cout << "controles";
-
 		sC().changeScene(SceneManager::Controls_);
 		break;
 	case 3: //Boton quit
 		SDL_Quit();
 		break;
 	default:
-		std::cout << "nada" << std::endl;
 		break;
 
 	}
@@ -86,7 +84,7 @@ void MenuScene::generateAllButtons()
 	for (int i = 0; i < rows; ++i)
 	{
 		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
-			buttonW, buttonH, buttonNames_[i], buttonPositions_);
+			buttonW, buttonH, buttonNames_[i], buttonPositions_,buttonPoperties_);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
 
@@ -95,26 +93,11 @@ void MenuScene::generateAllButtons()
 	{
 
 		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
-			buttonW, buttonH, buttonNames_[i],buttonPositions_);
+			buttonW, buttonH, buttonNames_[i],buttonPositions_, buttonPoperties_);
 		++j;
 	}
 
 }
 
-//void MenuScene::selectButton(int index) //Metodo que cambia aspecto del boton cuando el cursor o mando estan sobre éste
-//{
-//	//Mouse index guarda el indice del boton sobre el que se encuentra el raton
-//	mouseIndex_ = index;
-//	auto image = buttonPoperties_[index]->getComponent<Image>();
-//	image->setAlpha(127); //Baja la opacidad del boton
-//
-//}
-
-
-//void MenuScene::deselectButton(int index) //Devuelve el aspecto original al boton cuando el cursor o mando dejan de estar sobre éste
-//{
-//	auto image = buttonPoperties_[index]->getComponent<Image>();
-//	image->setAlpha(255);
-//}
 
 
