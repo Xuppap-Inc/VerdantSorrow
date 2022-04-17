@@ -19,8 +19,8 @@
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED), attr_(), angry_(false),
 jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), delay_(0), musicaFase1_(), musicaFase2_(),
-flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
-animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_(), anim_(), tongueAnim_(), lastUpdate_(0), oldJumpDirection_(0)
+flySpacing_(0), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
+animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0)
 {
 }
 
