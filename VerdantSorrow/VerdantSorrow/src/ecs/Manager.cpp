@@ -36,6 +36,11 @@ Manager::~Manager() {
 	//
 	for (auto e : ents_)
 		delete e;
+
+
+	////delete all timers
+	//for (auto e : allTimers_)
+	//	delete e;
 }
 
 void Manager::refresh() {

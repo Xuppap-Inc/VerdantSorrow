@@ -3,8 +3,11 @@
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
 #include "../../../sdlutils/SDLUtils.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
-ClapAttack::ClapAttack(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO), initialPos()
+
+
+ClapAttack::ClapAttack(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO),vt_(), initialPos()
 {
 }
 
@@ -19,6 +22,8 @@ void ClapAttack::initComponent()
 	assert(tr_ != nullptr, collider_ != nullptr);
 
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
+	vt_ = new VirtualTimer();
+	mngr_->addTimer(vt_);
 }
 
 void ClapAttack::goDiagonal()
@@ -73,7 +78,7 @@ void ClapAttack::goCenter(bool quemado)
 		else {
 			tr_->getVel().set(Vector2D(0, 0));
 			tr_->getPos().setX(objectivePos);
-			lastTimeFloor = sdlutils().currRealTime();
+			vt_->reset();
 			changeState(REPOSOSUELO);
 		}
 	}
@@ -94,6 +99,6 @@ void ClapAttack::goBack()
 
 void ClapAttack::stayFloor() {
 	collider_->setIsTrigger(false);
-	if(sdlutils().currRealTime() > lastTimeFloor + cooldoownInFloor)
+	if(vt_->currTime() >  cooldoownInFloor)
 		changeState(BACK);
 }

@@ -6,6 +6,7 @@
 #include <SDL.h>
 
 class Transform;
+class VirtualTimer;
 
 class ClapAttack : public ecs::Component
 {
@@ -40,7 +41,9 @@ protected:
     Transform* tr_;
     RectangleCollider* collider_;
     bool leftHand_;
-    int handSpeed = 6, cooldoownInFloor = 1500, lastTimeFloor;
+    int handSpeed = 6, cooldoownInFloor = 1500;
+
+    VirtualTimer* vt_;
 
 
     Vector2D initialPos;
