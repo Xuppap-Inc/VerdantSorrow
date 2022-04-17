@@ -12,7 +12,7 @@
 
 
 TutorialSpawnRoot::TutorialSpawnRoot(CollisionManager* colManager) : colManager_(colManager), framedImg_(), 
-								rootWidth_(60), rootPos_(900),lastTime_(0)
+								rootWidth_(60), rootPos_(900),lastTime_()
 {
 }
 
@@ -22,16 +22,19 @@ TutorialSpawnRoot::~TutorialSpawnRoot()
 
 void TutorialSpawnRoot::initComponent()
 {
+	lastTime_ = new VirtualTimer();
+	mngr_->addTimer(lastTime_);
 }
 
 
 void TutorialSpawnRoot::update() {
-	if (sdlutils().currRealTime() - lastTime_ > 200) {
+
+	if (lastTime_->currTime() > 200) {
 
 		if (rootPos_ <= 900) createRoot(rootPos_);
 		rootPos_ -= 50;
 		if (rootPos_ <= 500) rootPos_ = 1100;
-		lastTime_ = sdlutils().currRealTime();
+		lastTime_->reset();
 	}
 }
 

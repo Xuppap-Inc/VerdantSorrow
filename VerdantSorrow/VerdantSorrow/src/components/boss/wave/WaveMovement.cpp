@@ -2,8 +2,9 @@
 
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
 
-WaveMovement::WaveMovement(Vector2D dir, float speed) : tr_(), dir_(dir), speed_(speed), lastTime_(0)
+WaveMovement::WaveMovement(Vector2D dir, float speed) : tr_(), dir_(dir), speed_(speed)//, lastTime_()
 {
 }
 WaveMovement::~WaveMovement()
@@ -14,7 +15,9 @@ void WaveMovement::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	lastTime_ = sdlutils().currRealTime();
+	//lastTime_ = sdlutils().currRealTime();
+	/*lastTime_ = new VirtualTimer();
+	mngr_->addTimer(lastTime_);*/
 }
 
 
