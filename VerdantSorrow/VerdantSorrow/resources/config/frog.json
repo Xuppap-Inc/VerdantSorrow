@@ -42,8 +42,16 @@
       "file": "resources/images/attack1_recovery.png"
     },
     {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/attackAir.png"
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
     },
     {
       "id": "chicaroll",
@@ -108,6 +116,10 @@
     {
       "id": "lengua",
       "file": "resources/images/lengua.png"
+    },
+    {
+      "id": "lenguaRecoger",
+      "file": "resources/images/lenguaRecoger.png"
     },
     {
       "id": "rana_cambio_fase",

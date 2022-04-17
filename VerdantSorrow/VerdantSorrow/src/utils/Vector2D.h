@@ -39,6 +39,7 @@ public:
 	~Vector2D() {
 	}
 
+
 	// various getters
 	inline float getX() const {
 		return x_;
@@ -56,7 +57,10 @@ public:
 	inline void setY(float y) {
 		y_ = y;
 	}
-
+	inline void translate(float x, float y) {
+		x_ += x;
+		y_ += y;
+	}
 	inline void set(float x, float y) {
 		x_ = x;
 		y_ = y;

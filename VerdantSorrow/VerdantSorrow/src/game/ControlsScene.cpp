@@ -14,7 +14,7 @@ ControlsScene::ControlsScene():BaseMenu(),changeSc_(false),delay_(250),lastUpdat
 void ControlsScene::init()
 {
 	Scene::init();
-	
+	isChangingScene(changeSc_);
 
 	//background();//Dibuja el fondo
 
@@ -32,6 +32,7 @@ void ControlsScene::init()
 void ControlsScene::onButtonClicked(int index)
 {
 	changeSc_ = true;
+	isChangingScene(changeSc_);
 
 	switch (index)
 	{
@@ -73,12 +74,12 @@ void ControlsScene::createText(std::string message)
 void ControlsScene::generateAllButtons()
 {
 	int buttonWH = 50;
-	createButton(0, sdlutils().height() - buttonWH, buttonWH, buttonWH, buttonNames_[0], buttonPositions_);
+	createButton(0, sdlutils().height() - buttonWH, buttonWH, buttonWH, buttonNames_[0], buttonPositions_, buttonPoperties_);
 }
 
 void ControlsScene::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIdex_,buttonNames_);
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIdex_,buttonNames_, buttonPoperties_);
 	if(!changeSc_)
 	{
 		mngr_->update();

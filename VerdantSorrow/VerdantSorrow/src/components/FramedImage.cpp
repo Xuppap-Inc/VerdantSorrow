@@ -18,7 +18,7 @@
 
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
 tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
-slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true)
+slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true), adjustToTransform_(false)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -92,29 +92,48 @@ void FramedImage::adjustAndRenderFrame()
 	if (flipX_)
 		flip = SDL_FLIP_HORIZONTAL;
 
-	//float offset
-	float xOffset = 0;
-	float yOffset = 0;
-
-	calculateOffset(xOffset, yOffset);
-
 	// Aplicar propiedades
 
+	SDL_Rect dest;
+
 	//ESCALA
-	float height = m_clip.h * tr_->getScale();
-	float width = m_clip.w * tr_->getScale();
+	if (!adjustToTransform_) {
 
-	auto posX = tr_->getPos().getX() + xOffset * width;
+		//float offset
+		float xOffset = 0;
+		float yOffset = 0;
 
-	auto yAdjustment = tr_->getHeight() - height;
-	auto posY = tr_->getPos().getY() + yAdjustment + yOffset * height;
+		calculateOffset(xOffset, yOffset);
 
-	Vector2D pos = new Vector2D(posX, posY);
-	pos = pos - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+		float height = m_clip.h * tr_->getScale();
+		float width = m_clip.w * tr_->getScale();
 
-	SDL_Rect dest = build_sdlrect(pos, width, height);
-	dest.x += xOffset;
-	dest.y += yOffset;
+		auto posX = tr_->getPos().getX() + xOffset * width;
+
+		auto yAdjustment = tr_->getHeight() - height;
+		auto posY = tr_->getPos().getY() + yAdjustment + yOffset * height;
+
+		Vector2D pos = new Vector2D(posX, posY);
+		pos = pos - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+
+		dest = build_sdlrect(pos, width, height);
+		dest.x += xOffset;
+		dest.y += yOffset;
+	}
+
+	else {
+	
+		auto posX = tr_->getPos().getX();
+		auto posY = tr_->getPos().getY();
+
+		float height = tr_->getHeight();
+		float width = tr_->getWidth();
+
+		Vector2D pos = new Vector2D(posX, posY);
+		pos = pos - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+
+		dest = build_sdlrect(pos, width, height);
+	}
 
 	//escalado pantalla
 	auto sW = mngr_->getWindowScaleWidth();
@@ -155,9 +174,9 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.4;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkAir") {
-				xOffset = -0.35;
-				yOffset = 0;
+			else if (currentAnim == "Chica_AtkAir1" || currentAnim == "Chica_AtkAir2" || currentAnim == "Chica_AtkAir3") {
+				xOffset = -0.4;
+				yOffset = 0.145;
 			}
 			else if (currentAnim == "chicaroll") {
 				xOffset = -0.45;
@@ -185,9 +204,9 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
  				xOffset = -0.35;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkAir") {
-				xOffset = -0.25;
-				yOffset = 0;
+			else if (currentAnim == "Chica_AtkAir1" || currentAnim == "Chica_AtkAir2" || currentAnim == "Chica_AtkAir3") {
+				xOffset = -0.4;
+				yOffset = 0.145;
 			}
 			else if (currentAnim == "chicaroll") {
 				xOffset = -0.25;
@@ -286,6 +305,22 @@ bool FramedImage::isVisible()
 	return visible_;
 }
 
+void FramedImage::adjustToTransform(bool set)
+{
+	adjustToTransform_ = set;
+}
+
+void FramedImage::reset()
+{
+	j = 0;
+	i = 0;
+	currentnumframes = 0;
+	completed_ = false;
+
+	cancelSlow();
+	clearEvents();
+}
+
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
 	if (currentAnim == newAnim) return;
@@ -302,6 +337,8 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 	m_clip.h = tex_->height() / row;
 
 	currentAnim = newAnim;
+
+	completed_ = false;
 
 	timer_.reset();
 }

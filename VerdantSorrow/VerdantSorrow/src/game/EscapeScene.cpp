@@ -81,8 +81,10 @@ void EscapeScene::background()
 	auto parallax_ = new Parallax(mngr_);
 	
 	parallax_->AddLayer(&sdlutils().images().at("capa3"), 0, sdlutils().height(), sdlutils().width(),0);
-	parallax_->AddLayer(&sdlutils().images().at("capa2"), -1.2f, sdlutils().height(),  sdlutils().width(),80);
-	parallax_->AddLayer(&sdlutils().images().at("capa1"), -1.4f, sdlutils().height(), sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("nubescapa"),- 0.2f, sdlutils().height(), sdlutils().width(), 80);
+	parallax_->AddLayer(&sdlutils().images().at("capa2"), -0.2f, sdlutils().height(),  sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("capa1"),- 0.4f, sdlutils().height(), sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("capa"), 0, sdlutils().height(), sdlutils().width(), 80);
 	
 	
 	
