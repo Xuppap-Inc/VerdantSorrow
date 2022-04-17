@@ -43,18 +43,12 @@ void Mushroom::update()
 				float lastPositionY = playerPos.getY() - velPlayer.getY();
 				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
 				float colliderDiffY = (tr_->getHeight() - collider_->getHeight()) / 2;
-				if (lastPositionY + c->getEntity()->getComponent<RectangleCollider>()->getHeight() <= mushroomPos.getY()) {//arriba
+				if (lastPositionY + c->getEntity()->getComponent<RectangleCollider>()->getHeight() <= mushroomPos.getY() || lastPositionY >= mushroomPos.getY() + c->getHeight()) //arriba
 					velPlayer.setY(velPlayer.getY() * -1);
-				}
-				else if (lastPositionX + c->getEntity()->getComponent<RectangleCollider>()->getWidth() <= mushroomPos.getX()) {//colision por la izda
+				
+				else if (lastPositionX + c->getEntity()->getComponent<RectangleCollider>()->getWidth() <= mushroomPos.getX() || lastPositionX >= mushroomPos.getX() + c->getWidth()) //colision por la izda
 					velPlayer.setX(velPlayer.getX() * -1);
-				}
-				else if (lastPositionX >= mushroomPos.getX() + c->getWidth()) {//colision por la derecha
-					velPlayer.setX(velPlayer.getX() * -1);
-				}
-				else if (lastPositionY >= mushroomPos.getY() + c->getHeight()) {//abajo
-					velPlayer.setY(velPlayer.getY() * -1);
-				}
+				
 			}
 		}
 	}
