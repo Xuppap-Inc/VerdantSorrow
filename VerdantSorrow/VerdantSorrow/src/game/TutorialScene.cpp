@@ -99,6 +99,7 @@ void TutorialScene::createSpike()
 	auto spikeCollider = spike->addComponent<RectangleCollider>(spikeTr->getWidth(), spikeTr->getHeight());
 	colManager_->addCollider(spikeCollider);
 	spike->addComponent<RectangleRenderer>();
+	spike->addComponent<SimpleGravity>(0.4);
 	spike->addComponent<Spikes>(colManager_);
 	spike->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }

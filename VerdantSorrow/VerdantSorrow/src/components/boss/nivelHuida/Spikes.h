@@ -9,6 +9,7 @@
 #include <SDL_stdinc.h>
 
 class Transform;
+class SimpleGravity;
 class Spikes :
     public ecs::Component
 {
@@ -21,6 +22,7 @@ public:
     void update() override;
 protected:
     Transform* tr_;
+    SimpleGravity* gr_;
     CollisionManager* colMan_;
     RectangleCollider* collider_;
     bool moving_;
