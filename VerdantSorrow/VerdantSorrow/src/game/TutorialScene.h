@@ -18,6 +18,7 @@ public:
 
 	void createFly(int x, int y);
 	void createPlatform(int x, int y, int w, int h);
+	void createSpike();
 private:
 	CollisionManager* colManager_;
 };

@@ -5,8 +5,9 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../boss/tree_boss/TreeMovement.h"
 #include "../../player/PlayerAttributes.h"
+#include "../../../ecs/Manager.h"
 
-MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(1200), attackCoolDown(800), lastAttack(), attacking_(false)
+MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(800), attackCoolDown(800), lastAttack(), attacking_(false)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -45,6 +46,14 @@ void MeleeAttack::render()
 
 		SDL_Rect dest = getCollider();
 
+		auto sW = mngr_->getWindowScaleWidth();
+		auto sH = mngr_->getWindowScaleHeight();
+
+		dest.x *= sW;
+		dest.w *= sW;
+		dest.y *= sH;
+		dest.h *= sH;
+
 		SDL_RenderFillRect(sdlutils().renderer(), &dest);
 	}
 }
@@ -52,12 +61,13 @@ void MeleeAttack::render()
 void MeleeAttack::attack(int dir)
 {
 	auto currentTime = sdlutils().currRealTime();
-
+	
+	//añade el propio collider porque meleeAttack ya es un RectangleCollider
+	colMan_->addCollider(this);
 	setActive(true);
 	setIsTrigger(true);
 	lastAttack = currentTime;
 	setPosition(dir);
-	std::cout << "attack called" << std::endl;
 
 	attacking_ = true;
 }

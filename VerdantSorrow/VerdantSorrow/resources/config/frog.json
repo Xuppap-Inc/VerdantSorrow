@@ -1,5 +1,5 @@
 {
-  "assets" : 67,
+  "assets" : 58,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -42,8 +42,16 @@
       "file": "resources/images/attack1_recovery.png"
     },
     {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/attackAir.png"
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
     },
     {
       "id": "chicaroll",
@@ -78,12 +86,24 @@
       "file": "resources/images/fondo1.png"
     },
     {
+      "id": "fondodel",
+      "file": "resources/images/fondodel.png"
+    },
+    {
+      "id": "nubes",
+      "file": "resources/images/nubes.png"
+    },
+    {
       "id": "Suelo",
       "file": "resources/images/Suelo.png"
     },
     {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
+    },
+    {
+      "id": "fondoNegro",
+      "file": "resources/images/fondoNegro.png"
     },
     {
       "id": "ranacambiofase",
@@ -96,6 +116,10 @@
     {
       "id": "lengua",
       "file": "resources/images/lengua.png"
+    },
+    {
+      "id": "lenguaRecoger",
+      "file": "resources/images/lenguaRecoger.png"
     },
     {
       "id": "rana_cambio_fase",
@@ -152,30 +176,6 @@
     {
       "id": "rana_enfadada_vulnerable_a_idle",
       "file": "resources/images/rana_enfadada_vulnerable_a_idle.png"
-    },
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
-    },
-    {
-      "id": "fondos1",
-      "file": "resources/images/fondos1.png"
     },
     {
       "id": "wave",

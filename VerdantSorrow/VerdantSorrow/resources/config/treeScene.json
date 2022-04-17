@@ -1,5 +1,5 @@
 {
-  "assets" : 67,
+  "assets" : 55,
 
   "fonts": [
     {
@@ -54,8 +54,16 @@
       "file": "resources/images/attack1_recovery.png"
     },
     {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/attackAir.png"
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
     },
     {
       "id": "chicaroll",
@@ -87,31 +95,7 @@
     },
     {
       "id": "fondo2",
-      "file": "resources/images/fondo arbol.jpg"
-    },
-    {
-      "id": "fondoSuelo",
-      "file": "resources/images/fondoSuelo.png"
-    },
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_lantern",
-      "file": "resources/images/vfx_lantern.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
+      "file": "resources/images/fondo arbol.png"
     },
     {
       "id": "groot",
@@ -124,10 +108,6 @@
     {
       "id": "root",
       "file": "resources/images/root.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
     },
     {
       "id": "arbol_attack",

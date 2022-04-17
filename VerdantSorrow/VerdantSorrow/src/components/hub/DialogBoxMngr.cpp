@@ -49,12 +49,29 @@ void DialogBoxMngr::render()
 	//render sprite
 	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
 	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect.x *= sW;
+	rect.w *= sW;
+	rect.y *= sH;
+	rect.h *= sH;
+
 	SDL_RenderFillRect(sdlutils().renderer(), &rect);
 
 	//render text
 	for (int i = 0; i < lines_.size(); i++) {
-		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fonts().at(font_), build_sdlcolor(0x444444ff));
+		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0x444444ff));
 		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_ + lineOffsetY_) * i), text.width(), text.height());
+
+		//escalado pantalla
+		dest.x *= sW;
+		dest.w *= sW;
+		dest.y *= sH;
+		dest.h *= sH;
+
 		text.render(dest);
 	}
 }

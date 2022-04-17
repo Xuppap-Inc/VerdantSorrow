@@ -85,6 +85,7 @@ void Hub::dialogBoxGenerator(Entity* dialogBox)
 	auto tr = dialogBox->addComponent<Transform>();
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
+	dialogBox->addToGroup(ecs::_UI_GRP);
 }
 
 bool Hub::getAble()
@@ -180,6 +181,8 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto* playerLife_ = mngr_->addEntity();
 	playerLife_->addComponent<PlayerUI>(true);
 	playerLife_->addToGroup(ecs::_UI_GRP);
+
+	player_->addToGroup(ecs::_PLAYER_GRP);
 }
 
 void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY, std::string name)

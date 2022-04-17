@@ -6,10 +6,11 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../Transform.h"
 #include "../../RectangleCollider.h"
+#include "../../Image.h"
 
 
 
-Punietazo::Punietazo() :hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(8), dW(4), dH(4)
+Punietazo::Punietazo(bool manoDerecha) : hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(8), dW(4), dH(4), manoDerecha_(manoDerecha)
 {
 
 }
@@ -24,6 +25,7 @@ void Punietazo::initComponent()
 	assert(tr_ != nullptr);
 	col_ = ent_->getComponent<RectangleCollider>();
 	assert(col_ != nullptr);
+	img_ = ent_->getComponent<Image>();
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(playertr_ != nullptr);
 
@@ -36,14 +38,18 @@ void Punietazo::initComponent()
 
 	maxWidth_ = 2 * initialwidth_;
 	maxHeight_ = 2 * initialheight_;
+
 }
 
 void Punietazo::goDown()
 {
 	int objectivePos = sdlutils().height() - tr_->getHeight();
+	
 
 	if (tr_->getPos().getY() < objectivePos) {
 
+		if(manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer_fondo"));
+		else img_->setTexture(&sdlutils().images().at("manoIzq_fondo"));
 		tr_->getVel().setY(handSpeed_);
 		col_->setActive(false);
 	}
@@ -75,6 +81,9 @@ void Punietazo::hit()
 	auto height = tr_->getHeight();
 	tr_->getVel().set(Vector2D(0, 0));
 
+	if (manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer"));
+	else img_->setTexture(&sdlutils().images().at("manoIzq"));
+
 	if (sdlutils().currRealTime() - hitTime_ >= 350) {
 		col_->setIsTrigger(true);
 		col_->setActive(true);
@@ -83,7 +92,6 @@ void Punietazo::hit()
 		col_->setHeight(height);
 
 		changeState(BACK);
-
 		goBackTime_ = sdlutils().currRealTime();
 	}
 	else {
@@ -108,6 +116,9 @@ void Punietazo::goBack()
 		col_->setActive(false);
 
 		bool isSize = false, isPos = false;
+
+		if (manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer_fondo"));
+		else img_->setTexture(&sdlutils().images().at("manoIzq_fondo"));
 
 		if (abs(tr_->getPos().getX() - initialpos_.getX()) > 5 || abs(tr_->getPos().getY() - initialpos_.getY()) > 5) {
 			Vector2D dir = initialpos_ - tr_->getPos();
@@ -139,6 +150,9 @@ void Punietazo::goBack()
 
 		if (isPos && isSize) {
 			changeState(FIN);
+
+			if (manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer"));
+			else img_->setTexture(&sdlutils().images().at("manoIzq"));
 
 			col_->setWidth(col_initialwidth_);	
 			col_->setHeight(col_initialheight_);

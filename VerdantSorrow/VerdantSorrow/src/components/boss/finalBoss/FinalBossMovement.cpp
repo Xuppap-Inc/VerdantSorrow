@@ -12,7 +12,8 @@
 #include "../../FramedImage.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
+	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), 
+	eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
 {
 }
 
@@ -29,6 +30,14 @@ void FinalBossMovement::initComponent()
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 	playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr != nullptr);
+
+	musicaFase2_ = &sdlutils().musics().at("musica_manos_fase2");
+	musicaFase2_->play();
+	musicaFase2_->setMusicVolume(0);
+
+	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
+	musicaFase1_->play(10, 0);
+	musicaFase1_->setChannelVolume(60, 0);
 }
 
 void FinalBossMovement::update()
@@ -42,6 +51,8 @@ void FinalBossMovement::update()
 			s->play();
 			SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_damage");
 			s2->play();
+			musicaFase2_->setMusicVolume(60);
+			musicaFase1_->pauseChannel(0);
 		}
 
 		lastFireBall_ = sdlutils().currRealTime();
@@ -64,6 +75,10 @@ void FinalBossMovement::bounce()
 	if (vel_.magnitude() == 0)
 		vel_ = Vector2D(1, 1);
 
+	//Aviso ataques
+	if ((pos_.getY() < 150 && vel_.getY() < 0) || (pos_.getY() > sdlutils().height() - 300 && vel_.getY() > 0)) {
+		anim_->setColor(200, 200, 20, 100);
+	}
 
 	// bounce on top/bottom borders
 	if (pos_.getY() < 0) {
@@ -79,7 +94,7 @@ void FinalBossMovement::bounce()
 		//Inicia el contador
 		lastTimeGround = sdlutils().currRealTime();
 		//Crea las dos bolas de fuego
-		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("bolaFuego"));
+		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("wave"));
 		//Cambia el estado a suelo
 		eyeState_ = EyeState::GROUND;
 		//sdlutils().soundEffects().at("wall_hit").play();

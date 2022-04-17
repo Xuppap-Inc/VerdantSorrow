@@ -7,21 +7,20 @@
 #include "../components/Transform.h"
 #include "../sdlutils/Texture.h"
 
-ControlsScene::ControlsScene()
+ControlsScene::ControlsScene():BaseMenu(),changeSc_(false),delay_(250),lastUpdate_(0),controllerIdex_(-1)
 {
 }
 
 void ControlsScene::init()
 {
 	Scene::init();
-	
+	isChangingScene(changeSc_);
 
 	//background();//Dibuja el fondo
 
-	int buttonWH = 50, imageW=800,imageH=300; //Ancho y alto del boton e imagen
-	createButton(0, sdlutils().height()-buttonWH, buttonWH, buttonWH, "back");
+	int imageW = 800, imageH = 300; //Ancho y alto e imagen
 	createImages(sdlutils().width() / 2-(imageW/2), sdlutils().height() / 2 - (imageH/ 2), imageW, imageH, "keyboardControls");
-
+	generateAllButtons();
 }
 //
 //void ControlsScene::background()
@@ -32,10 +31,14 @@ void ControlsScene::init()
 
 void ControlsScene::onButtonClicked(int index)
 {
+	changeSc_ = true;
+	isChangingScene(changeSc_);
+
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal
-		std::cout << "Has pulsado el boton de vuelta al menu" << std::endl;
+		sC().changeScene(SceneManager::Menu_);
+
 		break;
 	}
 }
@@ -53,20 +56,39 @@ void ControlsScene::createText(std::string message)
 	Texture text(sdlutils().renderer(), message,
 		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
-	SDL_Rect dest = build_sdlrect(
+	SDL_Rect rect = build_sdlrect(
 		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());
 
-	text.render(dest);
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect.x *= sW;
+	rect.w *= sW;
+	rect.y *= sH;
+	rect.h *= sH;
+
+	text.render(rect);
+}
+
+void ControlsScene::generateAllButtons()
+{
+	int buttonWH = 50;
+	createButton(0, sdlutils().height() - buttonWH, buttonWH, buttonWH, buttonNames_[0], buttonPositions_, buttonPoperties_);
 }
 
 void ControlsScene::update()
 {
-	handleInput();
-	mngr_->update();
-	mngr_->refresh();
-	sdlutils().clearRenderer();
-	mngr_->render();
-	mngr_->debug();
-	createText("Explicacion de prueba");
-	sdlutils().presentRenderer();
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIdex_,buttonNames_, buttonPoperties_);
+	if(!changeSc_)
+	{
+		mngr_->update();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		createText("Explicacion de prueba");
+		sdlutils().presentRenderer();
+	}
+	
 }

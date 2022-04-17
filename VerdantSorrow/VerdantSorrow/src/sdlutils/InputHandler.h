@@ -39,6 +39,7 @@ public:
 		isButtonUpEvent_ = false;
 		isAxisMotionEvent_ = false;
 
+		isQuitEvent_ = false;
 		for (auto i = 0u; i < 3; i++) {
 			mbState_[i] = false;
 		}
@@ -82,11 +83,14 @@ public:
 		case SDL_CONTROLLERDEVICEREMOVED:
 			//onControllerRemoved(event);
 			break;
+
 		case SDL_QUIT:
-			//isQuitEvent_ = true;
+			isQuitEvent_ = true;
 		default:
 			break;
 		}
+
+	
 	}
 
 	// CONTROLLER
@@ -310,6 +314,9 @@ public:
 		return mbState_[b];
 	}
 
+	inline bool isQuitPressed() {
+		return isQuitEvent_;
+	}
 	// TODO add support for Joystick, see Chapter 4 of
 	// the book 'SDL Game Development'
 
@@ -351,6 +358,7 @@ private:
 		}
 	}
 
+	bool isQuitEvent_;
 	// Keyboard
 	bool isKeyUpEvent_;
 	bool isKeyDownEvent_;

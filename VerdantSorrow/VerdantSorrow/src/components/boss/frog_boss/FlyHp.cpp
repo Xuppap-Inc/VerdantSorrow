@@ -19,5 +19,4 @@ void FlyHp::receiveHit()
 {
 	fAM_->onFlyDied();
 	ent_->setAlive(false);
-	//std::cout << "Golpiado" << std::endl;
 }

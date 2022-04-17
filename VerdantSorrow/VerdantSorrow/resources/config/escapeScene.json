@@ -1,5 +1,5 @@
 {
-  "assets" : 53,
+  "assets" : 44,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -89,27 +89,6 @@
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
     },
-
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
-    },
     {
       "id": "wave",
       "file": "resources/images/wave.png"
@@ -119,16 +98,8 @@
       "file": "resources/images/particlered.png"
     },
     {
-      "id": "fondodelante",
-      "file": "resources/images/fondodelante.png"
-    },
-    {
       "id": "Suelo",
       "file": "resources/images/fondofinal.png"
-    },
-    {
-      "id": "vfx_manos_hoguera",
-      "file": "resources/images/vfx_manos_hoguera.png"
     },
     {
       "id": "vfx_manos_fuego",
@@ -141,6 +112,15 @@
     {
       "id": "luz_rosa",
       "file": "resources/images/luz_rosa.png"
+    },
+    {
+      "id": "capa",
+      "file": "resources/images/capa.png"
+    },
+
+    {
+      "id": "nubescapa",
+      "file": "resources/images/nubescapa.png"
     },
     {
       "id": "capa1",

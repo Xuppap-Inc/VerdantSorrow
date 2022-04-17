@@ -63,11 +63,14 @@ protected:
 	int attackCoolDown;
 	VirtualTimer cooldownTimer_;
 	VirtualTimer attackTimer_;
-	VirtualTimer comboTimer_;
+	VirtualTimer comboTimerGround_;
+	VirtualTimer comboTimerAir_;
 
 	//combo
-	bool comboFinished_;
-	int nCombo_;
+	bool comboFinishedGround_;
+	bool comboFinishedAir_;
+	int nComboGround_;
+	int nComboAir_;
 
 	bool newAttack_;
 	bool finished_;

@@ -53,9 +53,11 @@ void FinalBossScene::init()
 
 	auto height = (sdlutils().height() / 5) + 40;
 
+
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
+	suelo->addToGroup(ecs::_FIRST_GRP);
 
 	createLights();
 }
@@ -108,9 +110,11 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height() / 2 - 250;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f, 0.55f);
 
-	//BossTr->setScale(.33);
 	//FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase1"), 10, 6, 2000, 60, "FinalBoss_Fase1");
+	BossTr->setScale(1);
+
+	//BossTr->setScale(BossTr->getScale() * 3);
 	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
 	//anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
 

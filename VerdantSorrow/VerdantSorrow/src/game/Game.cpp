@@ -22,12 +22,34 @@ void Game::start() {
 
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 
+	int w = 0, h = 0;
+
+	int r = -1;
+	std::cout << "Resolucion:\n0. 1080p\n1. 720p\n2. 480p\n";
+	
+	while (r != 0 && r != 1 && r != 2) std::cin >> r;
+
+	switch (r)
+	{
+	case 0: w = 1920;
+		h = 1080;
+		break;
+	case 1: w = 1280;
+		h = 720;
+		break;
+	case 2: w = 850;
+		h = 480;
+		break;
+	default:
+		break;
+	}
+
 	int n = -1;
 	std::cout << "0.Cambio de escenas normal\n1.Elegir escena\n";
 	std::cin >> n;
 	SceneManager::scenes firstScene;
 	if (n == 1) {
-		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n6. Controles\n7.Pausa\n8.EscapeScene\n";
+		std::cout << "0. Escena Hub\n1. Escena Rana\n2. Escena Arbol\n3. Escena Final\n4. Tutorial\n5. Menu\n6. Controles\n7. Pausa\n8. EscapeScene\n";
 		std::cin >> n;
 		switch (n)
 		{
@@ -68,19 +90,11 @@ void Game::start() {
 		sC().setFirstSceneAble();
 	}
 	
-	SDLUtils::init("Verdant Sorrow", 1280, 720);
-	//Crea el game Manager
-	//SDLUtils::init("Verdant Sorrow", 1280, 720, json);
+	SDLUtils::init("Verdant Sorrow", w, h);
 
 	auto& scMngr_ = sC();
 	
 	scMngr_.changeScene(firstScene);
-	//scMngr_.init();
-
-
-	//mngr_->changeScene(n);
-	//Aqui haces el bucle
-	//SceneManager->run()
 }
 
 void Game::update()
@@ -98,7 +112,12 @@ void Game::update()
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+			exit = true;
+			continue;
+		}*/
+		if (ihdlr.isQuitPressed()) 
+		{
 			exit = true;
 			continue;
 		}

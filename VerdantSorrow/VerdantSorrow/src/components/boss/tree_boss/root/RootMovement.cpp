@@ -28,7 +28,7 @@ void RootMovement::update()
 		}
 	}
 	else {
-		if (tr_->getPos().getY() < 100) {
+		if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() + 100) {
 			speed_ = 0;
 			lastTime_ = sdlutils().currRealTime();
 		}

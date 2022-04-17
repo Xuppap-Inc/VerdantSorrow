@@ -1,5 +1,5 @@
 {
-  "assets" : 53,
+  "assets" : 48,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -9,17 +9,13 @@
 
   "images": [
     {
-      "id": "bolaFuego",
-      "file": "resources/images/bola_fuego.png"
-    },
-    {
       "id": "ojo",
       "file": "resources/images/BossFinal_Cabeza.png"
     },
     {
       "id": "FinalBoss_Fase1",
-      "file": "resources/images/FinalBoss_Fase1.png"
-    },
+      "file": "resources/images/FinalBoss_Fase1_def.png"
+    }, 
     {
       "id": "FinalBoss_Fase2",
       "file": "resources/images/FinalBoss_Fase2.png"
@@ -35,6 +31,14 @@
     {
       "id": "manoDer",
       "file": "resources/images/BossFinal_ManoDer.png"
+    },
+    {
+      "id": "manoIzq_fondo",
+      "file": "resources/images/BossFinal_ManoIzq_fondo.png"
+    },
+    {
+      "id": "manoDer_fondo",
+      "file": "resources/images/BossFinal_ManoDer_fondo.png"
     },
     {
       "id": "chica",
@@ -69,8 +73,16 @@
       "file": "resources/images/attack1_recovery.png"
     },
     {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/attackAir.png"
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
     },
     {
       "id": "chicaroll",
@@ -104,27 +116,6 @@
       "id": "fondo1",
       "file": "resources/images/fondo1.png"
     },
-
-    {
-      "id": "vfx_cloud",
-      "file": "resources/images/vfx_cloud.png"
-    },
-    {
-      "id": "vfx_smoke",
-      "file": "resources/images/vfx_smoke.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
-    },
-    {
-      "id": "particles",
-      "file": "resources/images/particles.png"
-    },
     {
       "id": "wave",
       "file": "resources/images/wave.png"
@@ -142,10 +133,6 @@
       "file": "resources/images/fondofinal.png"
     },
     {
-      "id": "vfx_manos_hoguera",
-      "file": "resources/images/vfx_manos_hoguera.png"
-    },
-    {
       "id": "vfx_manos_fuego",
       "file": "resources/images/vfx_manos_fuego.png"
     },
@@ -160,6 +147,7 @@
   ],
 
   "sounds" : [
+    { "id": "musica_manos_fase1", "file": "resources/sound/musica_rana_fase1.wav" },
     { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
     { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
     { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
@@ -173,7 +161,7 @@
     { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
     ],
   "musics" : [
-
+    { "id" : "musica_manos_fase2", "file" : "resources/sound/musica_rana_fase2.wav" }
   ]
 
 }

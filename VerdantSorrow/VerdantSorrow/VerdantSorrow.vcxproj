@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\nivelHuida\Spikes.h" />
+    <ClInclude Include="src\components\boss\nivelHuida\Mushroom.h" />
+    <ClInclude Include="src\game\BaseMenu.h" />
     <ClInclude Include="src\components\hub\PlatformAtribsForHub.h" />
     <ClInclude Include="src\game\EscapeScene.h" />
     <ClInclude Include="src\game\Fondos\Parallax.h" />
@@ -113,6 +116,9 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
+    <ClCompile Include="src\components\boss\nivelHuida\Mushroom.cpp" />
+    <ClCompile Include="src\game\BaseMenu.cpp" />
     <ClCompile Include="src\game\EscapeScene.cpp" />
     <ClCompile Include="src\game\Fondos\Parallax.cpp" />
     <ClCompile Include="src\components\fondos\Renderparallax.cpp" />
@@ -348,6 +354,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\TMXLite\lib\DebugStatic;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libtmxlite-s-d.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

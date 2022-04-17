@@ -84,6 +84,15 @@ void TreeAttackManager::update()
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
+
+		//cambio de sentido en las animaciones de groot
+		//se hace aquí porque si se hace en el cambio de animaciones
+		//hay mucho delay 
+
+		if (dir_ < 0) {
+			anim_->flipX(false);
+		}
+		else anim_->flipX(true);
 	}
 
 	if (state == MOVING) {
@@ -97,12 +106,8 @@ void TreeAttackManager::update()
 		
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
-			std::cout << timerCd_.currTime() << std::endl;
-			std::cout << distance << std::endl;
-			std::cout << tr_->getWidth() << std::endl;
 			
 			if(timerCd_.currTime() >= ATTACK_CD) {
-				std::cout << dir_ << std::endl;
 				animNewState_ = ANIM_ATTACK;
 				anim_->repeat(false);
 
@@ -202,6 +207,8 @@ void TreeAttackManager::update()
 
 			waitTimer_.reset();
 			waitTimer_.pause();
+
+			waiting_ = false;
 		}
 	}
 
@@ -232,14 +239,17 @@ void TreeAttackManager::update()
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_walk"), 2, 6, (1000 / 30) * 12, 12, "arbol_capa_walk");
 			break;
 		case TreeAttackManager::ANIM_ATTACK:
+			anim_->setColor(255, 200, 20, 200);
 			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_capa_attack");
 			break;
 		case TreeAttackManager::ANIM_ATTACK_COMBO:
+			anim_->setColor(255, 200, 20, 200);
 			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack_combo"), 3, 6, (1000 / 30) * 13, 13, "arbol_capa_attack_combo");
 			break;
 		case TreeAttackManager::ANIM_ROOTS:
+			anim_->setColor(255, 200, 20, 500);
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_roots"), 3, 6, (1000 / 30) * 16, 16, "arbol_capa_roots");
 			break;
 		case TreeAttackManager::ANIM_BACKGROUND:

@@ -5,14 +5,15 @@
 #include "Hub.h"
 #include "MenuScene.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../sdlutils/InputHandler.h"
 #include "TutorialScene.h"
 #include "ControlsScene.h"
 #include "PauseMenu.h"
 #include "EscapeScene.h"
 
 
-SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
-playerInBossFight(false)
+SceneManager::SceneManager() : actScene(Menu_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
+playerInBossFight(false),previousScene_(Menu_),isPauseActive_(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
@@ -25,7 +26,6 @@ playerInBossFight(false)
 	ecapesc_ = new EscapeScene(); sceneList.push_back(ecapesc_);
 }
 
-
 SceneManager::~SceneManager()
 {
 	for (auto s : sceneList) {
@@ -36,6 +36,18 @@ SceneManager::~SceneManager()
 
 void SceneManager::update()
 {
+	auto& ihdlr = ih();
+
+	if (ihdlr.keyDownEvent())
+	{
+		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) 
+		{
+			if(actScene!=Controls_ && actScene != Menu_)
+			{
+				activatePause();
+			}
+		}
+	}
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
@@ -58,7 +70,7 @@ void SceneManager::update()
 		break;
 	case SceneManager::Controls_:
 		controls_->update();
-		break; 
+		break;
 	case SceneManager::PauseMenu_:
 		pauseMenu_->update();
 		break;
@@ -68,56 +80,68 @@ void SceneManager::update()
 	default:
 		break;
 	}
+	
 }
 
 void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
+
+	sdlUtils_.soundEffects().clear();
+
+	if (!hubAssetsChargeds_) {
+		sdlUtils_.loadReasourcesHub("resources/config/hub.json");
+		hubAssetsChargeds_ = true;
+	}
+	
+
 	if(!playerInBossFight) sdlUtils_.freeMemory();
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
-		if (!hubAssetsChargeds_) {
-			sdlUtils_.loadReasourcesHub("resources/config/hub.json");
-			hubAssetsChargeds_ = true;
-		}
 		h_->init();
 		break;
 	case SceneManager::Frog_:
-		if(!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/frog.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/frog.json");
+			playerInBossFight = true;
+		}
 		f_->init();
 		break;
 	case SceneManager::Tree_:
-		if (!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/treeScene.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/treeScene.json");
+			playerInBossFight = true;
+		}
 		t_->init();
 		break;
 	case SceneManager::Eye_:
-		if (!playerInBossFight)
-		sdlUtils_.loadReasources("resources/config/finalBoss.json");
-		playerInBossFight = true;
+		if (!playerInBossFight) {
+			sdlUtils_.loadReasources("resources/config/finalBoss.json");
+			playerInBossFight = true;
+		}	
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/tutorial.json");
 		tut_->init();
 		break;
 	case SceneManager::Menu_:
-		sdlUtils_.loadReasources("resources/config/menu.json");
+		playerInBossFight = false;
 		menu_->init();
 		break;
 	case SceneManager::Controls_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/controls.json");
 		controls_->init();
 		break;
 	case SceneManager::PauseMenu_:
-		sdlUtils_.loadReasources("resources/config/pauseMenu.json");
+		playerInBossFight = false;
 		pauseMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
+		playerInBossFight = false;
 		sdlUtils_.loadReasources("resources/config/escapeScene.json");
 		ecapesc_->init();
 		break;
@@ -172,6 +196,25 @@ void SceneManager::EyeSceneState(bool active) {
 void SceneManager::changeStatePlayerInBoss(bool active)
 {
 	playerInBossFight = active;
+}
+
+void SceneManager::activatePause()
+{
+	if (isPauseActive_) //Si se le ha dado a esc y la pausa estaba ya activa
+	{
+		changeScene(previousScene_); //cambia a la escena en la que estabas antes de la pausa
+		pauseMenu_->changeScState(true);
+	}
+	else //si la pausa no estaba activa al darle a esc
+	{
+		pauseMenu_->changeScState(false);
+		previousScene_ = getScene(); //guarda la escena en la que estas
+		changeScene(PauseMenu_); //cambia a la pausa
+	}
+
+	isPauseActive_ =!isPauseActive_;
+
+
 }
 
 void SceneManager::decideScene()

@@ -32,9 +32,9 @@ void RootSpawner::createRoot(int x)
 	auto RootX = x;
 	auto RootY = sdlutils().height();
 	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), rootWidth_, 800, 0.0f);
+	RootTr->init(Vector2D(RootX, RootY), Vector2D(), rootWidth_, sdlutils().height() - 50, 0.0f);
 	//Se le añade un color inicial a la raiz
-	Root->addComponent<Image>(&sdlutils().images().at("root"));
+	auto RootImg = Root->addComponent<Image>(&sdlutils().images().at("root"));
 
 	//Se añade un collider a la raiz
 	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());

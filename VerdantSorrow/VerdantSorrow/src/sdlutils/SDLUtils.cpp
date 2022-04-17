@@ -65,6 +65,7 @@ void SDLUtils::initWindow() {
 	//hideCursor();
 	showCursor();
 
+	logoCargando_ = new Texture(renderer_, "resources/images/pantalla_carga.png");
 }
 
 void SDLUtils::closeWindow() {
@@ -445,23 +446,29 @@ void SDLUtils::closeSDLExtensions() {
 	Mix_Quit(); // quit SDL_mixer
 	IMG_Quit(); // quit SDL_image
 	TTF_Quit(); // quit SDL_ttf
+
+	//delete logoCargando_; logoCargando_ = nullptr;
 }
 
 void SDLUtils::renderProgressBar(int assetsLoaded)
 {
 	clearRenderer(build_sdlcolor(0x000000FF));
 
-	float maxBarLength = width_ * 0.6f;
-	Vector2D pos = Vector2D((width_ - maxBarLength) / 2, height_ * 0.8);
+	float maxBarLength = width_ * 0.1f;
+	Vector2D pos = Vector2D(width_ - maxBarLength - width_ * 0.1, height_ * 0.8);
 
-	SDL_Rect r = build_sdlrect(pos.getX() - 5, pos.getY() - 5, maxBarLength + 10, 110);
-	SDL_Rect r2 = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * assetsLoaded / assetsNumber_, 100);
+	SDL_Rect r = build_sdlrect(pos.getX(), pos.getY(), maxBarLength, maxBarLength);
+	SDL_Rect r2 = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * assetsLoaded / assetsNumber_, maxBarLength);
 
-	SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer_, 50, 50, 50, 255);
 	SDL_RenderFillRect(renderer_, &r);
-	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
 	SDL_RenderFillRect(renderer_, &r2);
 	
+	SDL_Rect r3 = build_sdlrect(pos.getX(), pos.getY(), maxBarLength, maxBarLength);
+
+	logoCargando_->render(r3);
+
 	presentRenderer();
 }
 

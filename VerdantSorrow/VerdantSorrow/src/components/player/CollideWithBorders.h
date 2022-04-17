@@ -19,7 +19,7 @@ public:
     void onRight() override;
     void onTop() override;
     void onNoLeftAndRight() override;
-    
+    void collisionx(bool col);
 
 protected:
 
@@ -27,5 +27,6 @@ protected:
 
     // Cambia el limite inferior con el que se collisiona
     float downOffset;
+    bool collsionx_;
 };
 

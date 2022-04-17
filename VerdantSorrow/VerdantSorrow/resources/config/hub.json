@@ -1,6 +1,6 @@
 {
 
-  "assets" : 59,
+  "assets" : 73,
   
   "fonts_hub" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -10,62 +10,112 @@
     { "id": "SOURCESERIF24", "file": "resources/fonts/SourceSerifPro-Regular.ttf", "size": 24}
   ],
   "images_hub": [
-    {
-      "id": "matt",
-      "file": "resources/images/matt.jpg"
-    },
-    {
-      "id": "chica",
-      "file": "resources/images/topdownchicafrente.png"
-    },
-    {
-      "id": "idle_Kyna",
-      "file": "resources/images/idle_Kyna_TopDown_Spritesheet.png"
-    },
-    {
-      "id": "walk_Kyna",
-      "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
-    },
-    {
-      "id": "walk_side_Kyna",
-      "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
-    },
-    {
-      "id": "walk_up_Kyna",
-      "file": "resources/images/walk_Back_Kyna_TopDown_Spritesheet.png"
-    },
-    {
-      "id": "heart",
-      "file": "resources/images/heart.png"
-    },
-    {
-      "id": "heartBlack",
-      "file": "resources/images/heartBlack.png"
-    },
-    {
-      "id": "healthDetail",
-      "file": "resources/images/HealthDetail.png"
-    },
-    {
-      "id": "fondo1",
-      "file": "resources/images/fondo1.png"
-    },
-    {
-        "id": "fondoSuelo",
-        "file": "resources/images/fondoSuelo.png"
-    },
-    {
-        "id": "fondoHub",
-        "file": "resources/images/fondoHub.jpg"
-    },
-    {
-      "id": "spritesheet_hoguera",
-      "file": "resources/images/spritesheet_hoguera.png"
-    },
-    {
-      "id": "luz_naranja",
-      "file": "resources/images/luz_naranja.png"
-    }
+  {
+      "id": "resume",
+      "file": "resources/images/MenuPausa/resumeButton.png"
+  },
+  {
+      "id": "menu",
+      "file": "resources/images/MenuPausa/menuButton.png"
+
+  },
+  {
+      "id": "volume",
+      "file": "resources/images/MenuPausa/audioButton.png"
+  },
+  {
+      "id": "rightVolume",
+      "file": "resources/images/MenuPausa/rightVolume.png"
+  },
+  {
+      "id": "leftVolume",
+      "file": "resources/images/MenuPausa/leftVolume.png"
+  },
+  {
+      "id": "fondoMenu",
+      "file": "resources/images/MenuPrincipal/fondoMenu.png"
+  },
+  {
+      "id": "new_Game",
+      "file": "resources/images/MenuPrincipal/newGameButton.png"
+  },
+  {
+      "id": "continue",
+      "file": "resources/images/MenuPrincipal/continueButton.png"
+  },
+  {
+      "id": "controls",
+      "file": "resources/images/MenuPrincipal/controlsButton.png"
+  },
+  {
+      "id": "settings",
+      "file": "resources/images/MenuPrincipal/settingsButton.png"
+
+  },
+  {
+      "id": "quit",
+      "file": "resources/images/MenuPrincipal/quitButton.png"
+  },
+  {
+      "id": "load",
+      "file": "resources/images/MenuPrincipal/loadButton.png"
+  },
+  {
+    "id": "matt",
+    "file": "resources/images/matt.png"
+  },
+  {
+    "id": "chica",
+    "file": "resources/images/topdownchicafrente.png"
+  },
+  {
+    "id": "idle_Kyna",
+    "file": "resources/images/idle_Kyna_TopDown_Spritesheet.png"
+  },
+  {
+    "id": "walk_Kyna",
+    "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
+  },
+  {
+    "id": "walk_side_Kyna",
+    "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
+  },
+  {
+    "id": "walk_up_Kyna",
+    "file": "resources/images/walk_Back_Kyna_TopDown_Spritesheet.png"
+  },
+  {
+    "id": "heart",
+    "file": "resources/images/heart.png"
+  },
+  {
+    "id": "heartBlack",
+    "file": "resources/images/heartBlack.png"
+  },
+  {
+    "id": "healthDetail",
+    "file": "resources/images/HealthDetail.png"
+  },
+  {
+    "id": "fondo1",
+    "file": "resources/images/fondo1.png"
+  },
+  {
+      "id": "fondoSuelo",
+      "file": "resources/images/fondoSuelo.png"
+  },
+  {
+      "id": "fondoHub",
+      "file": "resources/images/fondoHub.png"
+  },
+  {
+    "id": "spritesheet_hoguera",
+    "file": "resources/images/spritesheet_hoguera.png"
+  },
+  {
+    "id": "luz_naranja",
+    "file": "resources/images/luz_naranja.png"
+  }
 
   ],
 

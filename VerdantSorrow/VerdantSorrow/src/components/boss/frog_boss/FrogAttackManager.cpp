@@ -7,7 +7,6 @@
 #include "../../Transform.h"
 #include "../wave/WaveMovement.h"
 #include "../../RectangleCollider.h"
-#include "../../RectangleRenderer.h"
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
 #include "../../../sdlutils/SDLUtils.h"
@@ -15,19 +14,13 @@
 #include "FlyHp.h"
 #include "../wave/WaveSpawner.h"
 #include "FlyMovement.h"
-
-FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
-frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
-jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(),
-tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
-{
-}
+#include "../../Image.h"
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
-fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
-jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0),
-flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE),
-animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
+fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED), attr_(), angry_(false),
+jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), delay_(0), musicaFase1_(), musicaFase2_(),
+flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
+animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_(), anim_(), tongueAnim_(), lastUpdate_(0), oldJumpDirection_(0)
 {
 }
 
@@ -73,6 +66,9 @@ void FrogAttackManager::update()
 		return;
 	}
 	flipOnBorders();
+
+	std::function<void()> callback;
+
 	switch (frogState_) {
 	case JUMPING:
 		if (attr_->isOnGround()) {
@@ -87,29 +83,52 @@ void FrogAttackManager::update()
 	case TONGUE:
 		if (tongue_->getComponent<TongueAttack>()->finished())
 		{
-			frogState_ = WAITING;
-			tongue_->setActive(false);
-			tongue_->getComponent<RectangleRenderer>()->setVisible(false);
+			frogState_ = DOING_ANIMATION;
 
-			delay_ = 500;
-			lastUpdate_ = sdlutils().currRealTime();
+			callback = [this] {
+				frogState_ = WAITING;
+
+				tongueAnim_->setVisible(false);
+
+				tongue_->setActive(false);
+
+				delay_ = 0;
+				lastUpdate_ = sdlutils().currRealTime();
+			};
+
+			//animacion de recoger la lengua
+			tongueAnim_->changeanim(&sdlutils().images().at("lenguaRecoger"), 2, 2, (1000 / 20) * 4, 4, "lenguaRecoger");
+
+			tongueAnim_->registerEvent(std::pair<int, std::string>(3, "lenguaRecoger"), callback);
 		}
-
 		break;
 	case CALC_NEXT_ATTACK:
 		nextAttack();
 		break;
 	case WAITING:
-		//std::cout << "esperando" << std::endl;
 		if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
 			frogState_ = CALC_NEXT_ATTACK;
 		}
 		break;
 	case CASTING_TONGUE:
 
-		tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
-		frogState_ = TONGUE;
-		tongue_->getComponent<RectangleRenderer>()->setVisible(true);
+		callback = [this] {
+			tongue_->getComponent<TongueAttack>()->attack(!secondPhase_);
+			frogState_ = TONGUE;
+		};
+		
+		frogState_ = DOING_ANIMATION;
+
+		tongueAnim_->changeanim(&sdlutils().images().at("lengua"), 2, 2, (1000 / 20) * 4, 4, "lengua");
+		tongueAnim_->repeat(false);
+		tongueAnim_->adjustToTransform(true);
+
+		if (jumpDirection_ == 1) tongueAnim_->flipX(true);
+		else tongueAnim_->flipX(false);
+
+		tongueAnim_->registerEvent(std::pair<int, std::string>(3, "lengua"), callback);
+		tongueAnim_->setVisible(true);
+
 		break;
 	case FLY_DIED:
 		if (!jumping_ && !jumpingBig_) {
@@ -146,6 +165,7 @@ void FrogAttackManager::update()
 			else anim_->changeanim(&sdlutils().images().at("rana_enfadada_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_idle");
 			break;
 		case FrogAttackManager::ANIM_JUMP:
+			anim_->setColor(255, 200, 20, 200);
 			anim_->repeat(false);
 
 			callback = [this]() { frogState_ = JUMPING; frogJump_->attack(jumpDirection_); };
@@ -162,7 +182,7 @@ void FrogAttackManager::update()
 			}
 			break;
 		case FrogAttackManager::ANIM_BIG_JUMP:
-			
+			anim_->setColor(255, 200, 20, 500);
 			anim_->repeat(false);
 
 			callback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
@@ -177,6 +197,7 @@ void FrogAttackManager::update()
 			}
 			break;
 		case FrogAttackManager::ANIM_TONGUE:
+			anim_->setColor(255, 200, 20, 500);
 			anim_->repeat(false);
 
 			//callback del ataque de la lengua
@@ -238,8 +259,9 @@ ecs::Entity* FrogAttackManager::createFly()
 {
 	fly_ = mngr_->addEntity();
 	auto fTr = fly_->addComponent<Transform>();
+
 	//hacer una variable de suelo (-60)
-	auto flyY = sdlutils().height() - player_->getHeight()-60;
+	auto flyY = sdlutils().height() - player_->getHeight() - 60;
 	
 	auto flyX = player_->getPos().getX();
 	/*auto flyX = -50;
@@ -275,14 +297,12 @@ ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 
 	auto tongueCollider = tongue_->addComponent<TongueAttack>();
 	colManager->addCollider(tongueCollider);
-	SDL_Color s;
-	s.r = 0xFF;
-	s.g = 0x0C;
-	s.b = 0x00;
-	s.a = 0xFF;
-	auto render_ = tongue_->addComponent<RectangleRenderer>(s);
-	render_->setVisible(false);
-	//tongue_->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, 2000, 31, "mosca");
+
+	tongueAnim_ = tongue_->addComponent<FramedImage>(&sdlutils().images().at("lengua"), 2, 2, (1000/20)*4, 4, "lengua");
+	tongueAnim_->repeat(false);
+	tongueAnim_->setVisible(false);
+	tongueAnim_->adjustToTransform(true);
+
 	tongue_->addToGroup(ecs::_BOSS_GRP);
 	return tongue_;
 }

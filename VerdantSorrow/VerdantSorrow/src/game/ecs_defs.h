@@ -59,7 +59,8 @@
 	_SHOWATOPPOSIDESIDE, \
 	_CAMERA,\
 	_PARALLAX,\
-    _PLATFORMATRIBSFORHUB
+    _PLATFORMATRIBSFORHUB ,\
+	_MUSHROOM
 
 
 
@@ -70,8 +71,10 @@
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
+	_PLAYER_GRP,\
 	_PARTICLES_GRP ,\
 	_LIGHTS_GRP ,\
+	_FIRST_GRP ,\
 	_UI_GRP
 // Handlers list - must have at least one element
 //

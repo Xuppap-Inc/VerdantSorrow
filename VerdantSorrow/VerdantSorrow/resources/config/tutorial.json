@@ -1,5 +1,5 @@
 {
-  "assets" : 25,
+  "assets" : 22,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -30,6 +30,30 @@
       "file": "resources/images/attack1.png"
     },
     {
+      "id": "Chica_AtkFloor2",
+      "file": "resources/images/attack2.png"
+    },
+    {
+      "id": "Chica_AtkFloor3",
+      "file": "resources/images/attack3.png"
+    },
+    {
+      "id": "Attack1_Recovery",
+      "file": "resources/images/attack1_recovery.png"
+    },
+    {
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
+    },
+    {
       "id": "heart",
       "file": "resources/images/heart.png"
     },
@@ -54,28 +78,12 @@
       "file": "resources/images/Suelo.png"
     },
     {
-      "id": "particles",
-      "file": "resources/images/particles.png"
-    },
-    {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
     },
     {
-      "id": "Chica_AtkAir",
-      "file": "resources/images/attackAir.png"
-    },
-    {
       "id": "mosca",
       "file": "resources/images/mosca.png"
-    },
-    {
-      "id": "vfx_attack",
-      "file": "resources/images/vfx_attack.png"
-    },
-    {
-      "id": "vfx_star",
-      "file": "resources/images/vfx_star.png"
     },
     {
       "id": "root",
