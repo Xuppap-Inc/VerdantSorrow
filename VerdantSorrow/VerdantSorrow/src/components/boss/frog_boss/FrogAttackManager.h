@@ -10,6 +10,7 @@ class CollisionManager;
 class BossAtributos;
 class FramedImage;
 class WaveSpawner;
+class VitualTimer;
 
 #pragma once
 class FrogAttackManager : public ecs::Component
@@ -82,9 +83,8 @@ private:
 	bool attacking_;
 	bool jumpingBig_;
 	Uint32 delay_;
-	Uint32 lastUpdate_;
-	Uint32 tongueDelay_;
+	//Uint32 tongueDelay_;
 
-	VirtualTimer tongueWaitTimer_;
+	VirtualTimer* vt_;
 };
 

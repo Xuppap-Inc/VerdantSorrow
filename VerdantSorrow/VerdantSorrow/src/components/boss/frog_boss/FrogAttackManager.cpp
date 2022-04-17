@@ -19,15 +19,15 @@
 FrogAttackManager::FrogAttackManager() : frogJump_(), bigJump_(), fly_(), player_(), tr_(),
 frogState_(FLY_DIED), jumping_(false), jumpingBig_(false), jumpDirection_(-1),
 jumpsUntilNextTongue_(0), flySpacing_(0), collManager_(),
-tongueDelay_(3000), animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
+ animState_(ANIM_IDLE), animNewState_(ANIM_IDLE), waveSp_(),vt_() //tongueWaitTimer_()tongueDelay_(3000),
 {
 }
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED),
 jumping_(false), jumpingBig_(false), jumpDirection_(1), jumpsUntilNextTongue_(0),
-flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE),
-animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_()
+flySpacing_(0), animState_(ANIM_IDLE),
+animNewState_(ANIM_IDLE), waveSp_(),vt_()// tongueWaitTimer_(), tongueDelay_(3000)
 {
 }
 
@@ -47,6 +47,11 @@ void FrogAttackManager::initComponent()
 	attr_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
+
+	/*tongueWaitTimer_ = new VirtualTimer();
+	mngr_->addTimer(tongueWaitTimer_);*/
+	vt_ = new VirtualTimer();
+	mngr_->addTimer(vt_);
 
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaFase2_->play();
@@ -92,7 +97,7 @@ void FrogAttackManager::update()
 			tongue_->getComponent<RectangleRenderer>()->setVisible(false);
 
 			delay_ = 500;
-			lastUpdate_ = sdlutils().currRealTime();
+			vt_->reset();
 		}
 
 		break;
@@ -100,7 +105,8 @@ void FrogAttackManager::update()
 		nextAttack();
 		break;
 	case WAITING:
-		if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
+		
+		if (delay_< vt_->currTime()) {
 			frogState_ = CALC_NEXT_ATTACK;
 		}
 		break;
@@ -309,7 +315,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	frogState_ = WAITING;
 	jump = false;
 	delay_ = sdlutils().rand().nextInt(1000, 2500);
-	lastUpdate_ = sdlutils().currRealTime();
+	vt_->reset();
 	if (isBig) {
 		if (secondPhase_) {
 			jumpsUntilNextTongue_--;
@@ -341,7 +347,7 @@ void FrogAttackManager::nextAttack()
 		musicaFase1_->pauseChannel(0);
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
-		lastUpdate_ = sdlutils().currRealTime();
+		vt_->reset();
 		secondPhase_ = true;
 		return;
 	}
@@ -355,7 +361,7 @@ void FrogAttackManager::nextAttack()
 		}
 		frogState_ = DOING_ANIMATION;
 
-		tongueWaitTimer_.reset();
+		//tongueWaitTimer_.reset();
 		tongue_->setActive(true);
 	}
 	else {
