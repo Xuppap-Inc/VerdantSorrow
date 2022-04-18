@@ -80,17 +80,13 @@ void EscapeScene::background()
 {
 	auto parallax_ = new Parallax(mngr_);
 	
-	parallax_->AddLayer(&sdlutils().images().at("capa3"), 0, sdlutils().height(), sdlutils().width(),0);
-	parallax_->AddLayer(&sdlutils().images().at("nubescapa"),- 0.2f, sdlutils().height(), sdlutils().width(), 80);
-	parallax_->AddLayer(&sdlutils().images().at("capa2"), -0.2f, sdlutils().height(),  sdlutils().width(),80);
-	parallax_->AddLayer(&sdlutils().images().at("capa1"),- 0.4f, sdlutils().height(), sdlutils().width(),80);
-	parallax_->AddLayer(&sdlutils().images().at("capa"), 0, sdlutils().height(), sdlutils().width(), 80);
-	
-	
-	
+	////parallax_->AddLayer(&sdlutils().images().at("nubescapa"),- 0.2f, sdlutils().height(), sdlutils().width(), 80);
+	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer5"), 1, sdlutils().height(), sdlutils().width(),0);
+	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer4"), 0.3f, sdlutils().height(), sdlutils().width(),0);
+	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer3"), 0.2f, sdlutils().height(),  sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer2"), 0.1f, sdlutils().height(), sdlutils().width(),80);
+	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer1"), 0, sdlutils().height() , sdlutils().width(), 80);
 }
-
-
 
 
 bool EscapeScene::getAble()

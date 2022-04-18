@@ -119,6 +119,8 @@ void FrogAttackManager::update()
 		
 		frogState_ = DOING_ANIMATION;
 
+		tongue_->getComponent<TongueAttack>()->currentPos(!secondPhase_);
+
 		tongueAnim_->changeanim(&sdlutils().images().at("lengua"), 2, 2, (1000 / 20) * 4, 4, "lengua");
 		tongueAnim_->repeat(false);
 		tongueAnim_->adjustToTransform(true);
@@ -202,19 +204,16 @@ void FrogAttackManager::update()
 
 			//callback del ataque de la lengua
 			callback = [this]() { frogState_ = CASTING_TONGUE; };
-			callback2 = [this]() { anim_->slowAnimation(30, 1); };
 
 			if (!secondPhase_) {
 
 				anim_->changeanim(&sdlutils().images().at("rana_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_lengua");
-				anim_->registerEvent(std::pair<int, std::string>(22, "rana_lengua"), callback2);
 				anim_->registerEvent(std::pair<int, std::string>(23, "rana_lengua"), callback);
 			}
 			
 			else {
 
 				anim_->changeanim(&sdlutils().images().at("rana_enfadada_lengua"), 4, 6, (1000 / 30) * 24, 24, "rana_enfadada_lengua");
-				anim_->registerEvent(std::pair<int, std::string>(22, "rana_enfadada_lengua"), callback2);
 				anim_->registerEvent(std::pair<int, std::string>(23, "rana_enfadada_lengua"), callback);
 			}
 
