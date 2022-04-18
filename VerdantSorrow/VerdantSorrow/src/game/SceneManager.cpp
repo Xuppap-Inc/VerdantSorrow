@@ -124,8 +124,10 @@ void SceneManager::init()
 		fin_->init();
 		break;
 	case SceneManager::Tutorial_:
-		playerInBossFight = false;
-		sdlUtils_.loadReasources("resources/config/tutorial.json");
+		if (!playerInBossFight) {
+			playerInBossFight = false;
+			sdlUtils_.loadReasources("resources/config/tutorial.json");
+		}
 		tut_->init();
 		break;
 	case SceneManager::Menu_:
