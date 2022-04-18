@@ -119,6 +119,8 @@ void FrogAttackManager::update()
 		
 		frogState_ = DOING_ANIMATION;
 
+		tongue_->getComponent<TongueAttack>()->currentPos(!secondPhase_);
+
 		tongueAnim_->changeanim(&sdlutils().images().at("lengua"), 2, 2, (1000 / 20) * 4, 4, "lengua");
 		tongueAnim_->repeat(false);
 		tongueAnim_->adjustToTransform(true);
