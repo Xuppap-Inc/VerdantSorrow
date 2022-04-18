@@ -116,7 +116,6 @@
     "id": "luz_naranja",
     "file": "resources/images/luz_naranja.png"
   }
-
   ],
 
   "musics_hub" : [
@@ -127,6 +126,35 @@
     { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
   ],
 
+
+  "Npcs" : [
+    { "id" : "Chema_Npc", 
+    "file" : "resources/images/Npcs/Chema_Npc.png" },
+
+    { "id" : "Daniel_Npc",
+    "file" : "resources/images/Npcs/Daniel_Npc.png" },
+
+    { "id" : "Javier_Npc",
+    "file" : "resources/images/Npcs/Javier_Npc.png" },
+
+    { "id" : "Laura_Npc",
+    "file" : "resources/images/Npcs/Laura_Npc.png" },
+
+    { "id" : "Miriam_Npc",
+    "file" : "resources/images/Npcs/Miriam_Npc.png" },
+
+    { "id" : "Nacho_Npc",
+    "file" : "resources/images/Npcs/Nacho_Npc.png" },
+
+    { "id" : "Paula_Npc",
+    "file" : "resources/images/Npcs/ComboBox.png" },
+
+    { "id" : "Rodrigo_Npc",
+    "file" : "resources/images/Npcs/Rodrigo_Npc.png" },
+
+    { "id" : "Sergio_Npc",
+    "file" : "resources/images/Npcs/Sergio_Npc.png" }
+  ],
 
   "dialogs": [
 
