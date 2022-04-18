@@ -62,6 +62,10 @@
       "file": "resources/images/roll.png"
     },
     {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
       "id": "heart",
       "file": "resources/images/heart.png"
     },

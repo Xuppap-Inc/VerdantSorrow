@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\fondos\Disolve.h" />
     <ClInclude Include="src\components\boss\nivelHuida\Spikes.h" />
     <ClInclude Include="src\components\boss\nivelHuida\Mushroom.h" />
     <ClInclude Include="src\game\BaseMenu.h" />
@@ -116,6 +117,7 @@
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\fondos\Disolve.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Mushroom.cpp" />
     <ClCompile Include="src\game\BaseMenu.cpp" />

@@ -194,6 +194,10 @@
       "file": "resources/images/luz_negro.png"
     },
     {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
       "id": "luz_cyan",
       "file": "resources/images/luz_cyan.png"
     }

@@ -95,11 +95,32 @@ public:
 			|| SceneManager::scenes::Eye_ == sC().getScene() || SceneManager::scenes::Hub_ == sC().getScene()
 			|| SceneManager::scenes::Tutorial_ == sC().getScene()) {
 			//Renderización de todos los elementos del background
-			auto background = getEntitiesByGroup(ecs::_BACKGROUND_GRP);
+			auto background = getEntitiesByGroup(ecs::_BACKGROUND_1_GRP);
 			auto e = background.size();
 			for (auto i = 0; i < e; i++)
 			{
 				background[i]->render();
+			}
+			//Renderización de las particulas del fondo
+			auto background1 = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_1);
+			e = background1.size();
+			for (auto i = 0; i < e; i++)
+			{
+				background1[i]->render();
+			//Renderización de todos los elementos del background
+			auto background2 = getEntitiesByGroup(ecs::_BACKGROUND_2_GRP);
+			e = background2.size();
+			for (auto i = 0; i < e; i++)
+			{
+				background2[i]->render();
+			}
+			}
+			//Renderización de las particulas del fondo
+			auto background3 = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_2);
+			e = background3.size();
+			for (auto i = 0; i < e; i++)
+			{
+				background3[i]->render();
 			}
 			//Renderización de todos los elementos de la decoración del hub
 			auto hubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
@@ -128,7 +149,8 @@ public:
 			for (auto i = 0; i < e; i++)
 			{
 				player[i]->render();
-			}//Renderización de todos los elementos que sean luces
+			}
+			//Renderización de las particulas a la profundidad del jugador
 			auto particles = getEntitiesByGroup(ecs::_PARTICLES_GRP);
 			e = particles.size();
 			for (auto i = 0; i < e; i++)
@@ -141,12 +163,20 @@ public:
 			for (auto i = 0; i < e; i++)
 			{
 				lights[i]->render();
-			}//Renderización de todos los elementos del escenario que estén en primer plano
+			}
+			//Renderización de todos los elementos del escenario que estén en primer plano
 			auto elems = getEntitiesByGroup(ecs::_FIRST_GRP);
 			e = elems.size();
 			for (auto i = 0; i < e; i++)
 			{
 				elems[i]->render();
+			}
+			//Renderización de las particulas del primer plano
+			auto particles2 = getEntitiesByGroup(ecs::_PARTICLES_FRONT);
+			e = particles2.size();
+			for (auto i = 0; i < e; i++)
+			{
+				particles2[i]->render();
 			}
 			//Renderización de todos los elementos de la UI
 			auto entitiesUI = getEntitiesByGroup(ecs::_UI_GRP);
@@ -154,6 +184,13 @@ public:
 			for (auto i = 0; i < e; i++)
 			{
 				entitiesUI[i]->render();
+			}
+			//Renderización de las particulas de la UI
+			auto particles3 = getEntitiesByGroup(ecs::_PARTICLES_GRP);
+			e = particles3.size();
+			for (auto i = 0; i < e; i++)
+			{
+				particles3[i]->render();
 			}
 		}
 		else{
