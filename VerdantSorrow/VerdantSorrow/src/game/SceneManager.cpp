@@ -87,7 +87,7 @@ void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
 
-	sdlUtils_.soundEffects().clear();
+	//sdlUtils_.soundEffects().clear();
 
 	if (!hubAssetsChargeds_) {
 		sdlUtils_.loadReasourcesHub("resources/config/hub.json");
@@ -95,7 +95,8 @@ void SceneManager::init()
 	}
 	
 
-	if(!playerInBossFight) sdlUtils_.freeMemory();
+	if(!playerInBossFight) 
+		sdlUtils_.freeMemory();
 	switch (actScene)
 	{
 	case SceneManager::Hub_:
@@ -137,7 +138,6 @@ void SceneManager::init()
 		controls_->init();
 		break;
 	case SceneManager::PauseMenu_:
-		playerInBossFight = false;
 		pauseMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
@@ -202,7 +202,8 @@ void SceneManager::activatePause()
 {
 	if (isPauseActive_) //Si se le ha dado a esc y la pausa estaba ya activa
 	{
-		changeScene(previousScene_); //cambia a la escena en la que estabas antes de la pausa
+		//changeScene(previousScene_); //cambia a la escena en la que estabas antes de la pausa
+		actScene = previousScene_;
 		pauseMenu_->changeScState(true);
 	}
 	else //si la pausa no estaba activa al darle a esc
