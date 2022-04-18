@@ -88,9 +88,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 					Transform* playerTr = player->getComponent<Transform>();
 
-					ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);	
-                    particlesys->createParticlesEssence(5, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
-
+					
 					/*auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();
 					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
@@ -104,6 +102,10 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(70);
 						s->play();
+
+						ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);	
+						particlesys->createParticlesEssence(50, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
+
 
 						/*auto VFXEnt = mngr_->addEntity();
 						auto VFXTr = VFXEnt->addComponent<Transform>();
