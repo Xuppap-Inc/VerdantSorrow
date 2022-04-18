@@ -81,9 +81,11 @@ void FinalBossMovement::bounce()
 	}
 
 	// bounce on top/bottom borders
+	// Bola de fuego al tocar el techo
 	if (pos_.getY() < 0) {
 		pos_.setY(0.0f);
 		vel_.setY(-vel_.getY());
+		fireBall();
 	}
 	else if (pos_.getY() + tr_->getHeight() > sdlutils().height()) {
 		pos_.setY(sdlutils().height() - tr_->getHeight());
@@ -108,10 +110,7 @@ void FinalBossMovement::bounce()
 		pos_.setX(0);
 		vel_.setX(-vel_.getX());
 	}
-	// Bola de fuego al tocar el techo
-	else if (pos_.getY() <= 1) {
-		fireBall();
-	}
+	
 
 	if (vel_.magnitude() != 0)
 		vel_ = vel_.normalize() * eyeSpeed;
