@@ -89,7 +89,7 @@ void PlayerCtrl::update()
 			slide_ = true;
 
 		//Roll
-		if (roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
+		if (attrib_->isOnGround() && roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
 			lastRoll_ = currentTime;
 			isRolling_ = true;
