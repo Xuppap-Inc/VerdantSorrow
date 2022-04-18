@@ -11,6 +11,8 @@ public:
 	ParticleSystem(Texture* tex,ecs::Manager*mngr);
 	void createParticlesSnow(int numpart);
 
+	void createParticlesDirt(int numpart, int dir, int x, int y);
+
 private:
 	Texture* tex_;
 	std::vector<ecs::Entity*>parts;

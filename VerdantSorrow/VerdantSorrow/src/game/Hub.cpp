@@ -130,7 +130,7 @@ void Hub::backgroundHub()
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("fondoHub"));
-	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
 

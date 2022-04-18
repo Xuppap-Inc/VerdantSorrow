@@ -102,25 +102,25 @@ public:
 				background[i]->render();
 			}
 			//Renderización de las particulas del fondo
-			auto background = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_1);
-			auto e = background.size();
+			auto background1 = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_1);
+			e = background1.size();
 			for (auto i = 0; i < e; i++)
 			{
-				background[i]->render();
+				background1[i]->render();
 			//Renderización de todos los elementos del background
-			auto background = getEntitiesByGroup(ecs::_BACKGROUND_2_GRP);
-			auto e = background.size();
+			auto background2 = getEntitiesByGroup(ecs::_BACKGROUND_2_GRP);
+			e = background2.size();
 			for (auto i = 0; i < e; i++)
 			{
-				background[i]->render();
+				background2[i]->render();
 			}
 			}
 			//Renderización de las particulas del fondo
-			auto background = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_2);
-			auto e = background.size();
+			auto background3 = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_2);
+			e = background3.size();
 			for (auto i = 0; i < e; i++)
 			{
-				background[i]->render();
+				background3[i]->render();
 			}
 			//Renderización de todos los elementos de la decoración del hub
 			auto hubDecoration = getEntitiesByGroup(ecs::_HUB_DECORATION_GRP);
@@ -172,11 +172,11 @@ public:
 				elems[i]->render();
 			}
 			//Renderización de las particulas del primer plano
-			auto particles = getEntitiesByGroup(ecs::_PARTICLES_FRONT);
-			e = particles.size();
+			auto particles2 = getEntitiesByGroup(ecs::_PARTICLES_FRONT);
+			e = particles2.size();
 			for (auto i = 0; i < e; i++)
 			{
-				particles[i]->render();
+				particles2[i]->render();
 			}
 			//Renderización de todos los elementos de la UI
 			auto entitiesUI = getEntitiesByGroup(ecs::_UI_GRP);
@@ -186,11 +186,11 @@ public:
 				entitiesUI[i]->render();
 			}
 			//Renderización de las particulas de la UI
-			auto particles = getEntitiesByGroup(ecs::_PARTICLES_GRP);
-			e = particles.size();
+			auto particles3 = getEntitiesByGroup(ecs::_PARTICLES_GRP);
+			e = particles3.size();
 			for (auto i = 0; i < e; i++)
 			{
-				particles[i]->render();
+				particles3[i]->render();
 			}
 		}
 		else{

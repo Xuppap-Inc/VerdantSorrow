@@ -108,11 +108,11 @@ void FrogScene::background()
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height()), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
-	blCK->addToGroup(ecs::_BACKGROUND_GRP);
-	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
-	//nubes->addToGroup(ecs::_BACKGROUND_GRP);
-	fondodel->addToGroup(ecs::_BACKGROUND_GRP);
-	suelo->addToGroup(ecs::_BACKGROUND_GRP);
+	blCK->addToGroup(ecs::_BACKGROUND_1_GRP);
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
+	//nubes->addToGroup(ecs::_BACKGROUND_1_GRP);
+	fondodel->addToGroup(ecs::_BACKGROUND_1_GRP);
+	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
