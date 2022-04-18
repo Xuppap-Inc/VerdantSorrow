@@ -84,10 +84,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					bTr = mngr_->getHandler(ecs::_EYE)->getComponent<Transform>();
 				}
 
-				if (bA != nullptr && bA == ent->getComponent<BossAtributos>() && playerAt->isNewAttack()) {
-					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
-					s->setChannelVolume(70);
-					s->play();
+				if (bA != nullptr && bA == ent->getComponent<BossAtributos>()) {
 
 					Transform* playerTr = player->getComponent<Transform>();
 
@@ -99,33 +96,45 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
 					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
 					VFXEnt->addComponent<VFX>(6);*/
-
-					auto anim = player->getComponent<FramedImage>();
-
-					//slow de la animacion
-					/*std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
-
-					anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
-
-					bA->setDamage(PLAYER_ATTACK_DMG);
-
-
-					FramedImage* bFImg = ent->getComponent<FramedImage>();
-					if (bFImg != nullptr) {
-						bFImg->setColor(200, 50, 50, 500);
-					}
-					else
-					{
-						Image* bImg = ent->getComponent<Image>();
-						if (bImg != nullptr) {
-							bImg->setColor(200, 50, 50, 500);
-						}
-					}
-
+					//set velocidad a 0
 					player->getComponent<Transform>()->getVel().setY(0);
 
-					playerAt->setNewAttack(false);
-					playerAt->setFinished(false);
+					if (playerAt->isNewAttack()) {
+
+						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
+						s->setChannelVolume(70);
+						s->play();
+
+						/*auto VFXEnt = mngr_->addEntity();
+						auto VFXTr = VFXEnt->addComponent<Transform>();
+						VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
+						VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
+						VFXEnt->addComponent<VFX>(6);*/
+
+						auto anim = player->getComponent<FramedImage>();
+
+						//slow de la animacion
+						/*std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
+
+						anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
+
+						bA->setDamage(PLAYER_ATTACK_DMG);
+
+						FramedImage* bFImg = ent->getComponent<FramedImage>();
+						if (bFImg != nullptr) {
+							bFImg->setColor(200, 50, 50, 500);
+						}
+						else
+						{
+							Image* bImg = ent->getComponent<Image>();
+							if (bImg != nullptr) {
+								bImg->setColor(200, 50, 50, 500);
+							}
+						}
+
+						playerAt->setNewAttack(false);
+						playerAt->setFinished(false);
+					}
 				}
 				FlyHp* fHP = ent->getComponent<FlyHp>();
 				if (fHP != nullptr)
