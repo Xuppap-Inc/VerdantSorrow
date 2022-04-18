@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr)
+Game::Game() : mngr_(nullptr), exit(false)
 {
 }
 
@@ -21,6 +21,7 @@ Game::~Game()
 void Game::start() {
 
 	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
+	exit = false;
 
 	int w = 0, h = 0;
 
@@ -98,12 +99,12 @@ void Game::start() {
 	auto& scMngr_ = sC();
 	
 	scMngr_.changeScene(firstScene);
+
+	update();
 }
 
 void Game::update()
 {
-	// a boolean to exit the loop
-	bool exit = false;
 
 	//Imput handler
 	auto& ihdlr = ih();
@@ -115,10 +116,6 @@ void Game::update()
 		// refresh the input handler
 		ihdlr.refresh();
 
-		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
-			continue;
-		}*/
 		if (ihdlr.isQuitPressed()) 
 		{
 			exit = true;
@@ -133,4 +130,9 @@ void Game::update()
 			SDL_Delay(10 - frameTime);
 	}
 	SDL_Quit();
+}
+
+void Game::setExit(bool set)
+{
+	exit = set;
 }
