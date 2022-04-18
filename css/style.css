@@ -356,7 +356,7 @@ ul.service-list li i
     display:block;
     position:relative;
     z-index:10;
-    margin:-15px 0
+    /* margin:-15px 0; */
 }
 .portfolio-item figure figcaption {
     display:block;
@@ -385,7 +385,7 @@ ul.service-list li i
     left:0;
     width:100%;
     height:100%;
-    padding: 59px 30px;
+    padding: 20px 20px;
     background-color: #BE9E21;
     backface-visibility:hidden;
     -webkit-transform:rotateY(-180deg);
@@ -463,7 +463,7 @@ TESTIMONIAL
 }
 .testimonial-item ul li blockquote::before {
     content: '“';
-    left: 30px;
+    left: 50px;
 }
 .testimonial-item ul li blockquote::before, .testimonial-item ul li blockquote::after {
     position: absolute;
@@ -475,7 +475,7 @@ TESTIMONIAL
 }
 .testimonial-item ul li blockquote::after {
     content: '”';
-    right: 30px;
+    right: 50px;
 }
 
 /*footer*/
