@@ -356,7 +356,7 @@ ul.service-list li i
     display:block;
     position:relative;
     z-index:10;
-    margin:-15px 0
+    /* margin:-15px 0; */
 }
 .portfolio-item figure figcaption {
     display:block;
