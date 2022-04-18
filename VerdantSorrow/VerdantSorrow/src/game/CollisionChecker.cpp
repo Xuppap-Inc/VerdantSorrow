@@ -89,7 +89,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 					Transform* playerTr = player->getComponent<Transform>();
 
 					ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);	
-                    particlesys->createParticlesEssence(50, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
+                    particlesys->createParticlesEssence(5, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
 
 					/*auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();
