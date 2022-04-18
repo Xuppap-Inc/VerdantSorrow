@@ -463,7 +463,7 @@ TESTIMONIAL
 }
 .testimonial-item ul li blockquote::before {
     content: '“';
-    left: 30px;
+    left: 50px;
 }
 .testimonial-item ul li blockquote::before, .testimonial-item ul li blockquote::after {
     position: absolute;
@@ -475,7 +475,7 @@ TESTIMONIAL
 }
 .testimonial-item ul li blockquote::after {
     content: '”';
-    right: 30px;
+    right: 50px;
 }
 
 /*footer*/
