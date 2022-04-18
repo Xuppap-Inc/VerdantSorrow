@@ -25,9 +25,9 @@ void Game::start() {
 	int w = 0, h = 0;
 
 	int r = -1;
-	std::cout << "Resolucion:\n0. 1080p\n1. 720p\n2. 480p\n";
+	std::cout << "Resolucion:\n0. 1080p\n1. 720p\n2. 480p\n3. 144p\n";
 	
-	while (r != 0 && r != 1 && r != 2) std::cin >> r;
+	while (r != 0 && r != 1 && r != 2 && r != 3) std::cin >> r;
 
 	switch (r)
 	{
@@ -39,6 +39,9 @@ void Game::start() {
 		break;
 	case 2: w = 850;
 		h = 480;
+		break;
+	case 3: w = 16 * 16;
+		h = 9 * 16;
 		break;
 	default:
 		break;
