@@ -162,6 +162,10 @@
       "file": "resources/images/particleyellow.png"
     },
     {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
       "id": "luz_amarilla",
       "file": "resources/images/luz_amarilla.png"
     },

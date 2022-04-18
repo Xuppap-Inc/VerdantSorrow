@@ -15,7 +15,7 @@
     {
       "id": "FinalBoss_Fase1",
       "file": "resources/images/FinalBoss_Fase1_def.png"
-    }, 
+    },
     {
       "id": "FinalBoss_Fase2",
       "file": "resources/images/FinalBoss_Fase2.png"
@@ -123,6 +123,10 @@
     {
       "id": "particle",
       "file": "resources/images/particlered.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
     },
     {
       "id": "fondodelante",
