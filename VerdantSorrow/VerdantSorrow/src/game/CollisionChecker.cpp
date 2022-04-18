@@ -17,6 +17,7 @@
 #include "../components/FramedImage.h"
 #include "../components/Image.h"
 #include "../components/boss/tree_boss/MeleeAttack.h"
+#include "../components/fondos/ParticleSystem.h"
 
 
 
@@ -68,15 +69,30 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 				ecs::Entity* ent = c->getEntity();
 
 				BossAtributos* bA = nullptr;
+				Transform* bTr = nullptr;
 
-				if (SceneManager::scenes::Frog_ == sC().getScene()) bA = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
-				else if (SceneManager::scenes::Tree_ == sC().getScene()) bA = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
-				else if (SceneManager::scenes::Eye_ == sC().getScene()) bA = mngr_->getHandler(ecs::_EYE)->getComponent<BossAtributos>();
+				if (SceneManager::scenes::Frog_ == sC().getScene()) {
+					bA = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<BossAtributos>();
+					bTr = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<Transform>();
+				}
+				else if (SceneManager::scenes::Tree_ == sC().getScene()){
+					bA = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>(); 
+					bTr = mngr_->getHandler(ecs::_LANTERN)->getComponent<Transform>();
+				}
+				else if (SceneManager::scenes::Eye_ == sC().getScene()){
+					bA = mngr_->getHandler(ecs::_EYE)->getComponent<BossAtributos>(); 
+					bTr = mngr_->getHandler(ecs::_EYE)->getComponent<Transform>();
+				}
 
 				if (bA != nullptr && bA == ent->getComponent<BossAtributos>() && playerAt->isNewAttack()) {
 					SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 					s->setChannelVolume(70);
 					s->play();
+
+					Transform* playerTr = player->getComponent<Transform>();
+
+					ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);	
+                    particlesys->createParticlesEssence(50, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
 
 					/*auto VFXEnt = mngr_->addEntity();
 					auto VFXTr = VFXEnt->addComponent<Transform>();

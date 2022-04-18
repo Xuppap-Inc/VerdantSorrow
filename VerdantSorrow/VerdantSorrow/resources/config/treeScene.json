@@ -166,6 +166,10 @@
       "file": "resources/images/particula_tierra.png"
     },
     {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
+    },
+    {
       "id": "luz_amarilla",
       "file": "resources/images/luz_amarilla.png"
     },

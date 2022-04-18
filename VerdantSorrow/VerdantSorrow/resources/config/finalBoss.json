@@ -129,6 +129,10 @@
       "file": "resources/images/particula_tierra.png"
     },
     {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
+    },
+    {
       "id": "fondodelante",
       "file": "resources/images/fondodelante.png"
     },

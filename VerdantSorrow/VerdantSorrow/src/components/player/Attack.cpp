@@ -5,7 +5,6 @@
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
 #include "../../ecs/Manager.h"
-#include "../VFX.h"
 
 
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
@@ -291,6 +290,8 @@ void Attack::attack()
 {
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
+
+	
 	finished_ = false;
 	newAttack_ = true;
 

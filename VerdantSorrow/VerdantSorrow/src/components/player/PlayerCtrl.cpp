@@ -97,7 +97,7 @@ void PlayerCtrl::update()
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
 			s->play();
 			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
-			particlesys->createParticlesDirt(10, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
+			particlesys->createParticlesDirt(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
 		}	
 
 	}

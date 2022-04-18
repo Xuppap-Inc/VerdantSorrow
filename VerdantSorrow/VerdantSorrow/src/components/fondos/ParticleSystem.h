@@ -4,6 +4,8 @@
 #include<vector>
 
 class ecs::Manager;
+class Transform;
+
 class ParticleSystem 
 {
 public:
@@ -12,6 +14,8 @@ public:
 	void createParticlesSnow(int numpart);
 
 	void createParticlesDirt(int numpart, int dir, int x, int y);
+
+	void createParticlesEssence(int numpart, int x, int y, Transform* target);
 
 private:
 	Texture* tex_;
