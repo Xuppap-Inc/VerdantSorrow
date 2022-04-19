@@ -1,5 +1,5 @@
 {
-  "assets" : 58,
+  "assets" : 64,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -192,6 +192,14 @@
     {
       "id": "luz_negro",
       "file": "resources/images/luz_negro.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
     },
     {
       "id": "luz_cyan",

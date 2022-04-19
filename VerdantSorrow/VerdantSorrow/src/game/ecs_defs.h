@@ -52,11 +52,13 @@
 	_CLAP_ATTACK, \
 	_HAMMER_ARM, \
 	_VFX, \
+	_TARGET, \
 	_WAVE_SPAWNER, \
 	_TUTORIAL_FLY, \
 	_TUTORIAL_ROOTSPAWNER, \
 	_BUTTON_ATTRIBUTES, \
 	_SHOWATOPPOSIDESIDE, \
+	_DISOLVE, \
 	_CAMERA,\
 	_PARALLAX,\
     _PLATFORMATRIBSFORHUB ,\
@@ -67,7 +69,10 @@
 // Groups list - must have at least one element
 //
 #define _GRPS_LIST_ \
-	_BACKGROUND_GRP, \
+	_BACKGROUND_1_GRP, \
+	_PARTICLES_BACKGROUND_1, \
+	_BACKGROUND_2_GRP, \
+	_PARTICLES_BACKGROUND_2, \
 	_HUB_DECORATION_GRP, \
 	_BOSS_GRP,\
 	_BOSSELEMENTS_GRP,\
@@ -75,7 +80,9 @@
 	_PARTICLES_GRP ,\
 	_LIGHTS_GRP ,\
 	_FIRST_GRP ,\
-	_UI_GRP
+	_PARTICLES_FRONT, \
+	_UI_GRP,\
+	_PARTICLES_UI 
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \

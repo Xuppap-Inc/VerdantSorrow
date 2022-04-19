@@ -4,15 +4,20 @@
 #include<vector>
 
 class ecs::Manager;
+class Transform;
+
 class ParticleSystem 
 {
 public:
 
-	ParticleSystem(Texture* tex, int numpart,ecs::Manager*mngr);
-	void createParticles();
+	ParticleSystem(Texture* tex,ecs::Manager*mngr);
+	void createParticlesSnow(int numpart);
+
+	void createParticlesDirt(int numpart, int dir, int x, int y);
+
+	void createParticlesEssence(int numpart, int x, int y, Transform* target);
 
 private:
-	int numpart_;
 	Texture* tex_;
 	std::vector<ecs::Entity*>parts;
 	ecs::Manager* mngr_;

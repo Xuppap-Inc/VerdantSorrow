@@ -1,5 +1,5 @@
 {
-  "assets" : 22,
+  "assets" : 29,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -52,6 +52,14 @@
     {
       "id": "Chica_AtkAir3",
       "file": "resources/images/attackAir3.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
     },
     {
       "id": "heart",

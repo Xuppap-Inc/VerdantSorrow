@@ -53,7 +53,7 @@ void HammerArm::attack(bool quemado)
 	collider_->setIsTrigger(true);
 
 	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() - 50) {
-		tr_->getVel().set(Vector2D(0, handSpeed * 2));
+		tr_->getVel().set(Vector2D(0, handSpeed * 4));
 	}
 	else {
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");

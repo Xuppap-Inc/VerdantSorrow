@@ -1,5 +1,5 @@
 {
-  "assets" : 48,
+  "assets" : 52,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -15,7 +15,7 @@
     {
       "id": "FinalBoss_Fase1",
       "file": "resources/images/FinalBoss_Fase1_def.png"
-    }, 
+    },
     {
       "id": "FinalBoss_Fase2",
       "file": "resources/images/FinalBoss_Fase2.png"
@@ -123,6 +123,14 @@
     {
       "id": "particle",
       "file": "resources/images/particlered.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
     },
     {
       "id": "fondodelante",

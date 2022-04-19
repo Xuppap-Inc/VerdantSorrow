@@ -3,6 +3,7 @@
 #include "../components/Image.h"
 #include "../ecs/Manager.h"
 #include "../components/Transform.h"
+#include "Game.h"
 
 
 
@@ -54,9 +55,8 @@ void PauseMenu::onButtonClicked(int index)
 		sC().changeScene(SceneManager::Menu_);
 		break;
 	case 4:
-		SDL_Quit();
+		Game::instance()->setExit(true);
 		break;
-
 	}
 }
 

@@ -19,6 +19,7 @@
 #include "../components/tutorial/TutorialSpawnRoot.h"
 #include "../components/boss/nivelHuida/Mushroom.h"
 #include "../components/boss/nivelHuida/Spikes.h"
+#include "../components/boss/frog_boss/FlyMovement.h"
 
 void TutorialScene::init() 
 {
@@ -34,7 +35,7 @@ void TutorialScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager_, player);
 
-	createFly(400, sdlutils().height() - 200);
+	//createFly(400, sdlutils().height() - 200);
 	createFly(700, sdlutils().height() - 600);
 
 	createPlatform(700, sdlutils().height() - 100, 300, 100);
@@ -58,6 +59,7 @@ void TutorialScene::update()
 	mngr_->render();
 	mngr_->debug();
 	sdlutils().presentRenderer();
+	/*if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);*/
 }
 
 
@@ -74,6 +76,7 @@ void TutorialScene::createFly(int x, int y)
 	colManager_->addCollider(col);
 	fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000/30)*31, 31, "mosca");
 	fly->addComponent<TutorialFly>();
+	fly->addComponent<FlyMovement>();
 	fly->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }
 void TutorialScene::createPlatform(int x, int y, int w, int h)
