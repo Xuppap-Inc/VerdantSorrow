@@ -50,7 +50,7 @@ void ClapAttack::goCenter(bool quemado)
 		objectivePos = sdlutils().width() / 2;
 
 		if (tr_->getPos().getX() > objectivePos) {
-			tr_->getVel().set(Vector2D(-handSpeed * 2, 0));
+			tr_->getVel().set(Vector2D(-handSpeed * 4, 0));
 		}
 		else {
 			tr_->getVel().set(Vector2D(0, 0));
@@ -68,7 +68,7 @@ void ClapAttack::goCenter(bool quemado)
 		objectivePos = sdlutils().width() / 2 - tr_->getWidth();
 
 		if (tr_->getPos().getX() < objectivePos) {
-			tr_->getVel().set(Vector2D(handSpeed * 2, 0));
+			tr_->getVel().set(Vector2D(handSpeed * 4, 0));
 		}
 		else {
 			tr_->getVel().set(Vector2D(0, 0));

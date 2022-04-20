@@ -16,6 +16,7 @@ private:
 
 	Transform* tr_;
 	Transform* playerTr_;
-	int dir_;
+	int dirX_, dirY_;
+	int spaceWhereExplotes;
 };
 

@@ -5,6 +5,7 @@
 #include "../Transform.h"
 #include "Attack.h"
 #include "../../sdlutils/SDLUtils.h"
+#include "../fondos/ParticleSystem.h"
 
 using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
@@ -88,13 +89,15 @@ void PlayerCtrl::update()
 			slide_ = true;
 
 		//Roll
-		if (roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
+		if (attrib_->isOnGround() && roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
 			lastRoll_ = currentTime;
 			isRolling_ = true;
 			slide_ = false;
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
 			s->play();
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+			particlesys->createParticlesDirt(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
 		}	
 
 	}

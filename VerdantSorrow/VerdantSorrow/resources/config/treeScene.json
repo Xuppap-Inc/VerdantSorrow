@@ -1,5 +1,5 @@
 {
-  "assets" : 55,
+  "assets" : 58,
 
   "fonts": [
     {
@@ -160,6 +160,14 @@
     {
       "id": "particle",
       "file": "resources/images/particleyellow.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
     },
     {
       "id": "luz_amarilla",

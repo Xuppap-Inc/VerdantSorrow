@@ -51,8 +51,8 @@ void EscapeScene::init()
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
-	particlesys->createParticles();
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
+	particlesys->createParticlesSnow(100);
 
 	auto height = (sdlutils().height() / 5) + 40;
 
@@ -70,7 +70,9 @@ void EscapeScene::update()
 
 	sdlutils().clearRenderer();
 	mngr_->render();
+#ifdef _DEBUG
 	mngr_->debug();
+#endif
 	sdlutils().presentRenderer();
 }
 

@@ -44,8 +44,8 @@ void FrogScene::init()
 	frogGenerator(colManager, player);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), 100, mngr_);
-	particlesys->createParticles();
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
+	particlesys->createParticlesSnow(100);
 
 	createLights();
 }
@@ -54,10 +54,10 @@ void FrogScene::update()
 {
 	auto health = 0;
 	auto bossHealth = 0;
-	if(player!=nullptr)
-	 health = player->getComponent<PlayerAttributes>()->getLives();
-	if(Frog!=nullptr)
-	 bossHealth = Frog->getComponent<BossAtributos>()->getLife();
+	if (player != nullptr)
+		health = player->getComponent<PlayerAttributes>()->getLives();
+	if (Frog != nullptr)
+		bossHealth = Frog->getComponent<BossAtributos>()->getLife();
 	if (health > 0 && bossHealth > 0) {
 		mngr_->update();
 		colCheck_->checkCollisions();
@@ -65,13 +65,15 @@ void FrogScene::update()
 
 		sdlutils().clearRenderer();
 		mngr_->render();
+#ifdef _DEBUG
 		mngr_->debug();
+#endif		
 		sdlutils().presentRenderer();
 	}
 	else {
 		if (health <= 0) sC().changeFrogEssenceState(true);
 		if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);
-			
+
 		setAble(false);
 		sC().decideScene();
 	}
@@ -108,11 +110,11 @@ void FrogScene::background()
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height()), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
-	blCK->addToGroup(ecs::_BACKGROUND_GRP);
-	backgr_->addToGroup(ecs::_BACKGROUND_GRP);
-	//nubes->addToGroup(ecs::_BACKGROUND_GRP);
-	fondodel->addToGroup(ecs::_BACKGROUND_GRP);
-	suelo->addToGroup(ecs::_BACKGROUND_GRP);
+	blCK->addToGroup(ecs::_BACKGROUND_1_GRP);
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
+	//nubes->addToGroup(ecs::_BACKGROUND_1_GRP);
+	fondodel->addToGroup(ecs::_BACKGROUND_1_GRP);
+	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
 void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
@@ -134,10 +136,10 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
 
 	//Se añade un collider a la rana
-	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth()-150, FrogTr->getHeight()-200, 0, 75);
+	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 150, FrogTr->getHeight() - 200, 0, 75);
 	frogCollider->setIsTrigger(true);
 	colManager->addCollider(frogCollider);
-		
+
 	Frog->addComponent<SimpleGravity>(.5);
 	Frog->addComponent<CollideWithBordersBoss>();
 
@@ -161,19 +163,19 @@ void FrogScene::setAble(bool a)
 
 void FrogScene::createLights() {
 	new Light(&sdlutils().images().at("luz_cyan"), 100, sdlutils().height() - 200, 500, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_cyan"),  300, sdlutils().height() - 200, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"), 300, sdlutils().height() - 200, 500, 100, mngr_);
 	new Light(&sdlutils().images().at("luz_cyan"), 500, sdlutils().height() - 200, 500, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_cyan"),  700, sdlutils().height() - 200, 500, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_cyan"), 700, sdlutils().height() - 200, 500, 100, mngr_);
 
 	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 200, 400, 100, mngr_);
 	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 400, 400, 100, mngr_);
 	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 600, 400, 100, mngr_);
 	new Light(&sdlutils().images().at("luz_negro"), -200, sdlutils().height() - 800, 400, 100, mngr_);
 
-	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 200, 400, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 400, 400, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 600, 400, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width()-200, sdlutils().height() - 800, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width() - 200, sdlutils().height() - 200, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width() - 200, sdlutils().height() - 400, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width() - 200, sdlutils().height() - 600, 400, 100, mngr_);
+	new Light(&sdlutils().images().at("luz_negro"), sdlutils().width() - 200, sdlutils().height() - 800, 400, 100, mngr_);
 
 	new Light(&sdlutils().images().at("luz_verde"), 1100, 300, 300, 100, mngr_);
 	new Light(&sdlutils().images().at("luz_verde"), 50, 200, 350, 100, mngr_);
