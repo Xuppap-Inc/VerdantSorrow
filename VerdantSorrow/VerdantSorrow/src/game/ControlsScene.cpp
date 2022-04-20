@@ -47,14 +47,14 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 {
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
-	newImage->addComponent<Image>(&sdlutils().images().at(controlsImage));
+	newImage->addComponent<Image>(&sdlutils().imagesHub().at(controlsImage));
 
 }
 
 void ControlsScene::createText(std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
-		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
+		sdlutils().fontsHub().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
 	SDL_Rect rect = build_sdlrect(
 		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());
