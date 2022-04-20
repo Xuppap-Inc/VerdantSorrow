@@ -15,7 +15,7 @@
   </objectgroup>
  </tile>
  <tile id="2">
-  <image width="885" height="2186" source="../HUB/npcs/javi/javideverdad/javi_0001_javi.png"/>
+  <image width="445" height="568" source="../../VerdantSorrow/VerdantSorrow/resources/Hub/assets/javi_0001_Layer17.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="-48" y="-52" width="884" height="2244"/>
   </objectgroup>
@@ -33,7 +33,7 @@
   </objectgroup>
  </tile>
  <tile id="6">
-  <image width="445" height="568" source="../HUB/npcs/javis/javi_0001_Layer17.png"/>
+  <image width="885" height="2186" source="../../VerdantSorrow/VerdantSorrow/resources/Hub/assets/javi_0001_javi.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="9.19992" y="-4.59996" width="413.997" height="574.995"/>
   </objectgroup>

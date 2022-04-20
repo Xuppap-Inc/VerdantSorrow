@@ -2,6 +2,7 @@
 #include "../OnBorders.h"
 
 #include "PlayerAttributes.h"
+#include "tmxlite/Layer.hpp"
 
 class Transform;
 
