@@ -14,7 +14,6 @@ private:
 	int controllerIndex_;
 	float delay_; //Delay del mando
 	float lastUpdate_;
-	bool changeSc_;
 public:
 	MenuScene();
 	~MenuScene() {};

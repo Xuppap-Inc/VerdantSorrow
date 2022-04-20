@@ -163,6 +163,7 @@ void SceneManager::render()
 
 void SceneManager::changeScene(scenes s_)
 {
+	previousScene_ = getScene();
 	actScene = s_;
 	init();
 }

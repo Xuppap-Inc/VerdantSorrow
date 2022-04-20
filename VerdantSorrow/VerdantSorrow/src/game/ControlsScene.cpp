@@ -6,8 +6,9 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../sdlutils/Texture.h"
+#include "MenuScene.h"
 
-ControlsScene::ControlsScene():BaseMenu(),changeSc_(false),delay_(250),lastUpdate_(0),controllerIdex_(-1)
+ControlsScene::ControlsScene():BaseMenu(),delay_(250),lastUpdate_(0),controllerIdex_(-1)
 {
 }
 
@@ -37,8 +38,10 @@ void ControlsScene::onButtonClicked(int index)
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal
-		sC().changeScene(SceneManager::Menu_);
-
+		if (sC().getPreviousScene() == SceneManager::Menu_) {
+			sC().changeScene(SceneManager::Menu_);
+			sC().getMenuScene()->isChangingScene(false);
+		}
 		break;
 	}
 }
