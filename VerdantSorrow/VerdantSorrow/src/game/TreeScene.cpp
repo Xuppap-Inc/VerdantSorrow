@@ -67,7 +67,9 @@ void TreeScene::update()
 
 		sdlutils().clearRenderer();
 		mngr_->render();
+#ifdef _DEBUG
 		mngr_->debug();
+#endif
 		sdlutils().presentRenderer();
 	}
 	else {
