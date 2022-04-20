@@ -1,0 +1,36 @@
+{
+    "tilesets": [
+        {
+          "id": "FloorTileset",
+          "file": "./resources/hub/Spritesheets/TilesetFloor.png"
+        },
+        {
+          "id": "NatureTileset",
+          "file": "./resources/hub/Spritesheets/TilesetNature.png"
+        },
+        {
+          "id": "TilesetElement",
+          "file": "./resources/hub/Spritesheets/TilesetElement.png"
+        },
+        {
+          "id": "TilesetFloorDetail",
+          "file": "./resources/hub/Spritesheets/TilesetFloorDetail.png"
+        },
+        {
+          "id": "TilesetHouse",
+          "file": "./resources/hub/Spritesheets/TilesetHouse.png"
+        },
+        {
+          "id": "TilesetRelief",
+          "file": "./resources/hub/Spritesheets/TilesetRelief.png"
+        },
+        {
+          "id": "TilesetReliefDetail",
+          "file": "./resources/hub/Spritesheets/TilesetReliefDetail.png"
+        },
+        {
+          "id": "WaterTileset",
+          "file": "./resources/hub/Spritesheets/TilesetWater.png"
+        }
+    ]
+}

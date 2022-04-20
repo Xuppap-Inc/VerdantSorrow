@@ -9,7 +9,7 @@ class ScrollCamera : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::_CAMERA)
 	ScrollCamera();
-	ScrollCamera(float cameraSpeed, float deadzoneX = 240, float deadzoneY = 135);
+	ScrollCamera(float cameraSpeed, float deadzoneX = 120, float deadzoneY = 60);
 	virtual ~ScrollCamera();
 	void update() override;
 	void initComponent() override;
