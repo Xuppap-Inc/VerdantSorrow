@@ -439,7 +439,7 @@ TESTIMONIAL
     text-shadow: 1px 1px 2px #333;
     text-align: center;
     display: inline-block;
-    width: 100%;
+    width: 95%;
     margin: 20px 0;
     padding: 0 80px;
     position: relative;
@@ -452,7 +452,7 @@ TESTIMONIAL
     text-shadow: 1px 1px 2px #333;
     text-align: center;
     display: inline-block;
-    width: 100%;
+    width: 95%;
 }
 .bx-viewport
 {

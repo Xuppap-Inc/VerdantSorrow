@@ -57,7 +57,9 @@ void TutorialScene::update()
 
 	sdlutils().clearRenderer();
 	mngr_->render();
+#ifdef _DEBUG
 	mngr_->debug();
+#endif
 	sdlutils().presentRenderer();
 	/*if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);*/
 }

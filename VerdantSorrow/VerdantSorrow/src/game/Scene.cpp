@@ -18,7 +18,7 @@
 
 #include "CollisionManager.h"
 
-Scene::Scene(): mngr_(nullptr)
+Scene::Scene() : mngr_(nullptr)
 {
 }
 
@@ -28,12 +28,14 @@ Scene::~Scene()
 }
 
 void Scene::init()
-{	
+{
 	mngr_ = new ecs::Manager();
+#ifdef _DEBUG
 	mngr_->setDebug(true);
+#endif
 	camera_ = mngr_->addEntity();
 	auto camTr = camera_->addComponent<Transform>();
-	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);//activamos modo debug
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 }
 
 //void Scene::start()
@@ -82,18 +84,18 @@ void Scene::backgroundmovement(std::string backgroundName)
 	backgrs_->addComponent<FramedImage>(&sdlutils().images().at(backgroundName), 10, 8, 5000, 78, backgroundName);
 
 	auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height()/5, 0.0f);
+	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height() / 5, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 }
 
-void Scene::background(std::string backgroundName,int height)
+void Scene::background(std::string backgroundName, int height)
 {
 	auto backgr_ = mngr_->addEntity();
-	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0,0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	backgr_->addComponent<Image>(&sdlutils().images().at(backgroundName));
 
 	auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height()- height), Vector2D(), sdlutils().width(), height, 0.0f);
+	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
@@ -115,7 +117,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	auto collide=player_->addComponent<CollideWithBorders>(100);
+	auto collide = player_->addComponent<CollideWithBorders>(100);
 	collide->collisionx(false);
 	//Se a�ade un collider al jugadordd
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
@@ -140,7 +142,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	auto playerLife_ = mngr_->addEntity();
 	playerLife_->addComponent<PlayerUI>();
 	playerLife_->addToGroup(ecs::_UI_GRP);
-	
+
 
 	// Animacion del jugador
 	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
