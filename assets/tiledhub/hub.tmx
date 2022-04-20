@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="60" tileheight="60" infinite="0" nextlayerid="6" nextobjectid="8">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="60" tileheight="60" infinite="0" nextlayerid="6" nextobjectid="34">
  <tileset firstgid="1" source="../../VerdantSorrow/VerdantSorrow/resources/Hub/tileset1/colinas.tsx"/>
+ <tileset firstgid="2" source="../../VerdantSorrow/VerdantSorrow/resources/Hub/tileset1/arboles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="60" height="40" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
