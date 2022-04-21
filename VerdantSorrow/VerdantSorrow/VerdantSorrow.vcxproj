@@ -116,6 +116,7 @@
     <ClInclude Include="src\game\TutorialScene.h" />
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
     <ClInclude Include="src\components\fondos\Target.h" />
+    <ClInclude Include="src\game\TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="src\game\TutorialScene.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
     <ClCompile Include="src\components\fondos\Target.cpp" />
+    <ClCompile Include="src\game\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\escapeScene.json" />

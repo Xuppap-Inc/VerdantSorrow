@@ -6,8 +6,9 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../sdlutils/Texture.h"
+#include "MenuScene.h"
 
-ControlsScene::ControlsScene():BaseMenu(),changeSc_(false),delay_(250),lastUpdate_(0),controllerIdex_(-1)
+ControlsScene::ControlsScene():BaseMenu(),delay_(250),lastUpdate_(0),controllerIdex_(-1)
 {
 }
 
@@ -37,8 +38,10 @@ void ControlsScene::onButtonClicked(int index)
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal
-		sC().changeScene(SceneManager::Menu_);
-
+		if (sC().getPreviousScene() == SceneManager::Menu_) {
+			sC().changeScene(SceneManager::Menu_);
+			sC().getMenuScene()->isChangingScene(false);
+		}
 		break;
 	}
 }
@@ -47,14 +50,14 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 {
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
-	newImage->addComponent<Image>(&sdlutils().images().at(controlsImage));
+	newImage->addComponent<Image>(&sdlutils().imagesHub().at(controlsImage));
 
 }
 
 void ControlsScene::createText(std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
-		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
+		sdlutils().fontsHub().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
 	SDL_Rect rect = build_sdlrect(
 		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());

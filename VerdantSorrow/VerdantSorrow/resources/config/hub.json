@@ -1,6 +1,6 @@
 {
 
-  "assets" : 73,
+  "assets" : 75,
   
   "fonts_hub" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -13,6 +13,14 @@
   {
       "id": "resume",
       "file": "resources/images/MenuPausa/resumeButton.png"
+  },
+  {
+    "id": "back",
+    "file": "resources/images/MenuControles/backButton.png"
+  },
+  {
+      "id": "keyboardControls",
+      "file": "resources/images/MenuControles/controles.png"
   },
   {
       "id": "menu",

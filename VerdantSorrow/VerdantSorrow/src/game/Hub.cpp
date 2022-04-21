@@ -23,6 +23,10 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
 #include "../components/hub/PlatformAtribsForHub.h"
+#include "../sdlutils/Texture.h"
+#include "../json/JSONValue.h"
+#include "TileMap.h"
+
 
 
 
@@ -33,7 +37,7 @@ Hub::Hub() :Scene()
 
 Hub::~Hub()
 {
-
+	delete tileMap;
 }
 
 void Hub::init()
@@ -43,8 +47,12 @@ void Hub::init()
 	//Para gestionar las colisiones
 	colManager = new CollisionManager();
 
+	tileMap = new TileMap(mngr_, "resources/hub/tileset.json"
+		, "resources/hub/MainMap.tmx");
+
+
 	changeSc = false;
-	backgroundHub();
+	//backgroundHub();
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
@@ -141,6 +149,8 @@ void Hub::update()
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
+		
+		tileMap->render();
 		mngr_->render();
 #ifdef _DEBUG
 		mngr_->debug();
@@ -172,12 +182,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(2, colManager);
 
-	//No poner estas f�sicas detr�s del playerctrl, se hunde y no funciona el salto
-	//player_->addComponent<SimplePhysicsPlayer>(colManager);
-	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
-	//player_->addComponent<FramedImage>(&sdlutils().images().at("walk_Kyna"), 3, 9, (1000 / 30) * 25, 25, "walk_Kyna");
-
-
+	
 	//Componente ui jugador
 	mngr_->setHandler(ecs::_PLAYER, player_);
 	auto* playerLife_ = mngr_->addEntity();
@@ -216,15 +221,6 @@ void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
 	col->setIsTrigger(true);
 	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
 
-	//Por que haceis un segundo npc
-	//auto npc_2 = mngr_->addEntity();
-	//auto npctr_2 = npc_2->addComponent<Transform>();
-	//npctr_2->init(Vector2D(sdlutils().width() / 2, 100), Vector2D(), 50, 100, 0.0f, false);
-	//npc_2->addComponent<Image>(&sdlutils().images().at("matt"));
-	//auto col_2 = npc_2->addComponent<RectangleCollider>(npctr_2->getWidth() + 100, npctr_2->getHeight() + 100);
-	//colManager->addCollider(col_2);
-	//col_2->setIsTrigger(true);
-	//npc_2->addComponent<NpcCtrl>(colManager, dialogBox_);
 
 	npc->addToGroup(ecs::_HUB_DECORATION_GRP);
 }

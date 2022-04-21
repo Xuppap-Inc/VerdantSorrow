@@ -8,7 +8,7 @@
 
 
 
-PauseMenu::PauseMenu() :BaseMenu(), controllerIndex_(-1), delay_(250), lastUpdate_(0), musicaTest_(nullptr), currentVolume_(180), changeSc_(false),varVolume_(128 / 8)
+PauseMenu::PauseMenu() :BaseMenu(), controllerIndex_(-1), delay_(250), lastUpdate_(0), musicaTest_(nullptr), currentVolume_(180), varVolume_(128 / 8)
 {
 }
 

@@ -98,6 +98,10 @@ public:
 	inline void setColor(Uint8 r, Uint8 g, Uint8 b) {
 		SDL_SetTextureColorMod(texture_, r, g, b);
 	}
+
+	inline SDL_Texture* getTexture() {
+		return texture_;
+	}
 private:
 
 	// Construct from text

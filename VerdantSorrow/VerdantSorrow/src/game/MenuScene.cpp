@@ -8,8 +8,9 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "../utils/Vector2D.h"
+#include "ControlsScene.h"
 
-MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),changeSc_(false)
+MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0)
 {
 
 }
@@ -63,6 +64,7 @@ void MenuScene::onButtonClicked(int index)
 		break;
 	case 2: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
+		sC().getControlScene()->isChangingScene(false);
 		break;
 	case 3: //Boton quit
 		SDL_Quit();
