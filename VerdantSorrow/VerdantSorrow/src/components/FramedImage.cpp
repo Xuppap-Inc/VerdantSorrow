@@ -25,6 +25,11 @@ slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true),
 
 	iniTotalAnimTime_ = totalAnimationTime_;
 
+	timer_ = new VirtualTimer();
+	mngr_->addTimer(timer_);
+
+	colorTimer_ = new VirtualTimer();
+	mngr_->addTimer(colorTimer_);
 }
 
 FramedImage::~FramedImage()
@@ -42,7 +47,7 @@ void FramedImage::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	colorTimer_.reset();
+	colorTimer_->reset();
 }
 
 void FramedImage::render()
@@ -53,7 +58,7 @@ void FramedImage::render()
 
 			select_sprite(i, j);
 
-			if (timer_.currTime() >= totalAnimationTime_ / numframes) {
+			if (timer_->currTime() >= totalAnimationTime_ / numframes) {
 
 				if (i < column_ - 1) {
 					i++;
@@ -65,7 +70,7 @@ void FramedImage::render()
 
 				checkAnimationFinished();
 
-				timer_.reset();
+				timer_->reset();
 				currentnumframes++;
 
 				//disminuye el contador de frames ralentizados
@@ -340,7 +345,7 @@ void FramedImage::changeanim(Texture* tex, int row, int column, float time, int 
 
 	completed_ = false;
 
-	timer_.reset();
+	timer_->reset();
 }
 void FramedImage::registerEvent(std::pair<int, std::string> eventInfo, std::function<void()> callback)
 {
@@ -363,14 +368,14 @@ void FramedImage::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
 	green_ = g;
 	blue_ = b;
 	colorDuration_ = duration;
-	colorTimer_.reset();
+	colorTimer_->reset();
 }
 
 void FramedImage::update() {
 
 	if (colorDuration_ != -1)
 	{
-		if (colorTimer_.currTime() >= colorDuration_) {
+		if (colorTimer_->currTime() >= colorDuration_) {
 			red_ = 255;
 			green_ = 255;
 			blue_ = 255;

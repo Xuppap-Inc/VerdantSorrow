@@ -48,7 +48,7 @@ private:
 	int numeroAtaque;
 
 	int multFase_;
-	VirtualTimer *tiempoColor_;
+	VirtualTimer* tiempoColor_;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;

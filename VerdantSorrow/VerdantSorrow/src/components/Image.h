@@ -42,7 +42,7 @@ private:
 
 	bool visible_;
 
-	VirtualTimer colorTimer_;
+	VirtualTimer* colorTimer_;
 	int colorDuration_ = 0;
 	int red_ = 255, green_ = 255, blue_ = 255;
 };

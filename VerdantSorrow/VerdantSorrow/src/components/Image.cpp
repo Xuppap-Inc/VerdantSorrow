@@ -13,11 +13,16 @@
 
 Image::Image() :
 	tr_(), tex_(), visible_(true) {
+
+	colorTimer_ = new VirtualTimer();
+	mngr_->addTimer(colorTimer_);
 }
 
 Image::Image(Texture* tex) :
 	tr_(), tex_(tex), visible_(true) {
 
+	colorTimer_ = new VirtualTimer();
+	mngr_->addTimer(colorTimer_);
 }
 
 Image::~Image() {
@@ -33,7 +38,7 @@ void Image::initComponent() {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	colorTimer_.reset();
+	colorTimer_->reset();
 }
 
 void Image::render() {
@@ -71,13 +76,13 @@ void Image::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
 	green_ = g;
 	blue_ = b;
 	colorDuration_ = duration;
-	colorTimer_.reset();
+	colorTimer_->reset();
 }
 
 void Image::update() {
 	if (colorDuration_ != -1)
 	{
-		if (colorTimer_.currTime() >= colorDuration_) {
+		if (colorTimer_->currTime() >= colorDuration_) {
 			red_ = 255;
 			green_ = 255;
 			blue_ = 255;

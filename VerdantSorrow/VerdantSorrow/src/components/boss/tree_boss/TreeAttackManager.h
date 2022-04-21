@@ -87,10 +87,10 @@ private:
 
 	int rootWidth_;
 	
-	VirtualTimer timerWave_;
-	VirtualTimer timerSpecial_;
-	VirtualTimer waitTimer_;
-	VirtualTimer timerCd_;
+	VirtualTimer* timerWave_;
+	VirtualTimer* timerSpecial_;
+	VirtualTimer* waitTimer_;
+	VirtualTimer* timerCd_;
 
 	bool attacking_;
 	bool waiting_;

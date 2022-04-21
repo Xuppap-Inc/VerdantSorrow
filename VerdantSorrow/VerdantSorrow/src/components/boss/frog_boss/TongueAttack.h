@@ -25,7 +25,7 @@ protected:
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
 	CollisionManager* colMan_;
 	float delay_;
-	VirtualTimer timer_;
+	VirtualTimer* timer_;
 	float lastUpdate_;
 	bool finishedAttack_;
 	bool fly_;

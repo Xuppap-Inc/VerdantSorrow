@@ -23,7 +23,7 @@ private:
 	int startFadingTime_;
 
 	Image* img_;
-	VirtualTimer timer_;
+	VirtualTimer* timer_;
 };
 
 

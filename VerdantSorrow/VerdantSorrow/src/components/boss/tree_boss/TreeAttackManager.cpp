@@ -17,9 +17,20 @@
 #include "LanternCollisions.h"
 #include "../BossAtributos.h"
 
-TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
-timerWave_(), attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
+TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), 
+attacking_(false), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
+	timerCd_ = new VirtualTimer();
+	mngr_->addTimer(timerCd_);
+
+	timerSpecial_ = new VirtualTimer();
+	mngr_->addTimer(timerSpecial_);
+
+	timerWave_ = new VirtualTimer();
+	mngr_->addTimer(timerWave_);
+
+	waitTimer_ = new VirtualTimer();
+	mngr_->addTimer(waitTimer_);
 }
 
 TreeAttackManager::~TreeAttackManager()
@@ -27,10 +38,21 @@ TreeAttackManager::~TreeAttackManager()
 }
 
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
-																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), timerWave_(), 
-																	attacking_(false), timerSpecial_(), treeCol_(), waiting_(false), 
-																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_(),timerCd_()
+																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
+																	attacking_(false), treeCol_(), waiting_(false), 
+																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
+	timerCd_ = new VirtualTimer();
+	mngr_->addTimer(timerCd_);
+
+	timerSpecial_ = new VirtualTimer();
+	mngr_->addTimer(timerSpecial_);
+
+	timerWave_ = new VirtualTimer();
+	mngr_->addTimer(timerWave_);
+
+	waitTimer_ = new VirtualTimer();
+	mngr_->addTimer(waitTimer_);
 }
 
 void TreeAttackManager::initComponent()
@@ -65,9 +87,9 @@ void TreeAttackManager::initComponent()
 	phase = PHASE1;
 	state = MOVING;
 
-	timerWave_.reset();
-	timerSpecial_.reset();
-	timerCd_.reset();
+	timerWave_->reset();
+	timerSpecial_->reset();
+	timerCd_->reset();
 	
 }
 
@@ -107,7 +129,7 @@ void TreeAttackManager::update()
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
 			
-			if(timerCd_.currTime() >= ATTACK_CD) {
+			if(timerCd_->currTime() >= ATTACK_CD) {
 				animNewState_ = ANIM_ATTACK;
 				anim_->repeat(false);
 
@@ -116,7 +138,7 @@ void TreeAttackManager::update()
 				meleeAttack_->attack(dir_);
 				attacking_ = true;
 				newAtack_ = false;
-				timerCd_.reset();
+				timerCd_->reset();
 			}
 			
 		}
@@ -151,9 +173,9 @@ void TreeAttackManager::update()
 
 			else {
 
-				if (timerWave_.currTime() > TIME_BETWEEN_WAVES) attackWave();
+				if (timerWave_->currTime() > TIME_BETWEEN_WAVES) attackWave();
 
-				if (timerSpecial_.currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
+				if (timerSpecial_->currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 			}
 		}
 	}
@@ -167,8 +189,8 @@ void TreeAttackManager::update()
 			movement_->setMoveActive(true);
 
 			//timers
-			timerWave_.reset();
-			timerSpecial_.resume();
+			timerWave_->reset();
+			timerSpecial_->resume();
 
 			attacking_ = false;
 		}
@@ -187,26 +209,26 @@ void TreeAttackManager::update()
 			//lo devuelve al centro
 			returnToIni();
 
-			waitTimer_.reset();
+			waitTimer_->reset();
 
 			waiting_ = true;
 		}
 
-		else if (waiting_ && waitTimer_.currTime() > WAIT_AFTER_SPECIAL) {
+		else if (waiting_ && waitTimer_->currTime() > WAIT_AFTER_SPECIAL) {
 
 			state = MOVING;
 
 			//timers
-			timerSpecial_.reset();
-			timerWave_.resume();
+			timerSpecial_->reset();
+			timerWave_->resume();
 
 			attacking_ = false;
 			movement_->setMoveActive(true);
 			lanternMov_->setActive(true);
 			treeCol_->setActive(true);
 
-			waitTimer_.reset();
-			waitTimer_.pause();
+			waitTimer_->reset();
+			waitTimer_->pause();
 
 			waiting_ = false;
 		}
@@ -282,7 +304,7 @@ void TreeAttackManager::attackWave()
 		anim_->repeat(false);
 
 		//pausa el timer del otro ataque
-		timerSpecial_.pause();
+		timerSpecial_->pause();
 		
 		//callback que llama al ataque de raices al acabar la animacion
 		std::function<void()> attackCallback = [this]() { rootWave_->attack(dir_); };
@@ -311,7 +333,7 @@ void TreeAttackManager::prepareToSpecial()
 		attacking_ = true;
 
 		//pausa el timer del otro ataque y crea la lampara en el medio suspendida
-		timerWave_.pause();
+		timerWave_->pause();
 
 		lanternMov_->setActive(false);
 
