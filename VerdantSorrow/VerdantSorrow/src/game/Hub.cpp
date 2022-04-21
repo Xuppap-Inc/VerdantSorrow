@@ -48,7 +48,7 @@ void Hub::init()
 	colManager = new CollisionManager();
 
 	tileMap = new TileMap(mngr_, "resources/hub/tileset.json"
-		, "resources/hub/MainMap.tmx");
+		, "resources/hub/Hub.tmx");
 
 
 	changeSc = false;

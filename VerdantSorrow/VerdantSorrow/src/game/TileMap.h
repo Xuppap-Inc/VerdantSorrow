@@ -5,6 +5,10 @@
 #include "./tmxlite/TileLayer.hpp"
 #include "./tmxlite/ObjectGroup.hpp"
 #include "./tmxlite/Tileset.hpp"
+
+#include "./tmxlite/LayerGroup.hpp"
+#include "./tmxlite/Object.hpp"
+
 #include <map>
 
 #include <SDL.h>
@@ -33,7 +37,7 @@ private:
 	string path, jsPath;
 	int rows, cols;
 	int tileWidth, tileHeight;
-	map<Uint, Texture*> tilesets;
+	map<Uint, map<Uint,Texture*>> tilesets;//tilemapid -> img id->texture
 	tmx::Map* tmxTileMap;
 	ecs::Manager* mngr_;
 };

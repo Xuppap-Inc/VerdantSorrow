@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="199">
+ <tileset firstgid="1" source="Tilesets/Tree.tsx"/>
+ <tileset firstgid="9" source="Tilesets/Tree2.tsx"/>
+ <tileset firstgid="21" source="Tilesets/Tumba.tsx"/>
+ <tileset firstgid="22" source="Tilesets/NPC.tsx"/>
+ <tileset firstgid="28" source="Tilesets/Colina.tsx"/>
+ <imagelayer id="12" name="Suelo">
+  <image source="assets/hola.png" width="960" height="640"/>
+ </imagelayer>
+ <objectgroup id="13" name="Colina">
+  <object id="190" gid="28" x="0" y="181" width="600" height="180"/>
+  <object id="193" gid="28" x="600" y="182" width="600" height="180"/>
+ </objectgroup>
+ <objectgroup id="14" name="Npcs">
+  <object id="196" gid="24" x="218" y="411" width="61" height="75"/>
+ </objectgroup>
+ <objectgroup id="15" name="Objetos">
+  <object id="198" gid="8" x="439.5" y="372" width="95" height="94"/>
+ </objectgroup>
+</map>
