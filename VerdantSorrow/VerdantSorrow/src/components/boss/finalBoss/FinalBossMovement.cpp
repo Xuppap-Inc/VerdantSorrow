@@ -10,10 +10,11 @@
 #include "../../../game/CollisionManager.h"
 #include "../wave/WaveSpawner.h"
 #include "../../FramedImage.h"
+#include "../../fondos/ParticleSystem.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), 
-	eyeSpeed(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
+	eyeSpeed_(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
 {
 }
 
@@ -28,8 +29,8 @@ void FinalBossMovement::initComponent()
 	handMngr_ = ent_->getComponent<HandsManager>();
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
-	playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr != nullptr);
+	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
 
 	musicaFase2_ = &sdlutils().musics().at("musica_manos_fase2");
 	musicaFase2_->play();
@@ -38,6 +39,10 @@ void FinalBossMovement::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
+
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
+	particlesys->createParticlesAsh(100);
+
 }
 
 void FinalBossMovement::update()
@@ -53,6 +58,12 @@ void FinalBossMovement::update()
 			s2->play();
 			musicaFase2_->setMusicVolume(60);
 			musicaFase1_->pauseChannel(0);
+
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+			particlesys->createParticlesDandellion(20);
+
+			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo2_frente"), mngr_);
+			particlesys2->createBackgroundParticlesSymbols(6);
 		}
 
 		lastFireBall_ = sdlutils().currRealTime();
@@ -64,6 +75,11 @@ void FinalBossMovement::update()
 
 		//if (sdlutils().currRealTime() > lastFireBall_ + fireBallCooldown_)
 		//	fireBall();
+	}
+
+	if (deadBoss_) {
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
 	}
 }
 
@@ -94,7 +110,7 @@ void FinalBossMovement::bounce()
 		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
 		vel_ = Vector2D(0, 0);
 		//Inicia el contador
-		lastTimeGround = sdlutils().currRealTime();
+		lastTimeGround_ = sdlutils().currRealTime();
 		//Crea las dos bolas de fuego
 		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("wave"));
 		//Cambia el estado a suelo
@@ -113,11 +129,11 @@ void FinalBossMovement::bounce()
 	
 
 	if (vel_.magnitude() != 0)
-		vel_ = vel_.normalize() * eyeSpeed;
+		vel_ = vel_.normalize() * eyeSpeed_;
 }
 
 void FinalBossMovement::restartBouncing() {
-	if (sdlutils().currRealTime() > lastTimeGround + timeInGround) {
+	if (sdlutils().currRealTime() > lastTimeGround_ + timeInGround_) {
 		eyeState_ = EyeState::BOUNCE;
 		tr_->getVel().set(velocitySaved);
 	}
@@ -149,7 +165,7 @@ void FinalBossMovement::fireBall()
 	waveImgEntTr_->init(Vector2D(waveX-115, waveY), Vector2D(), width, height, 0.0f, .4f);
 	waveImgEntTr_->setScale(8);
 	waveImgEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_manos_fuego"), 6, 6, (1000 / 30) * 30, 30, "vfx_manos_fuego");
-	waveImgEnt->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
+	waveImgEnt->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed, false);
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_fuego");
 	s->play();

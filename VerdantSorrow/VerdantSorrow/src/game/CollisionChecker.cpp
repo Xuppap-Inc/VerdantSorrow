@@ -88,13 +88,6 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 					Transform* playerTr = player->getComponent<Transform>();
 
-					
-					/*auto VFXEnt = mngr_->addEntity();
-					auto VFXTr = VFXEnt->addComponent<Transform>();
-					VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
-					VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
-					VFXEnt->addComponent<VFX>(6);*/
-					//set velocidad a 0
 					player->getComponent<Transform>()->getVel().setY(0);
 
 					if (playerAt->isNewAttack()) {
@@ -103,20 +96,10 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						s->setChannelVolume(70);
 						s->play();
 
-						ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);	
-						particlesys->createParticlesEssence(50, playerTr->getPos().getX() - playerTr->getWidth() / 2, playerTr->getPos().getY() + playerTr->getHeight() / 2, playerTr);
-
-
-						/*auto VFXEnt = mngr_->addEntity();
-						auto VFXTr = VFXEnt->addComponent<Transform>();
-						VFXTr->init(Vector2D(tr_->getPos().getX() - 125, tr_->getPos().getY()), Vector2D(), 400, 200, 0.0f);
-						VFXEnt->addComponent<FramedImage>(&sdlutils().images().at("vfx_attack"), 1, 6, (1000 / 30) * 6, 6, "vfx");
-						VFXEnt->addComponent<VFX>(6);*/
-
-						auto anim = player->getComponent<FramedImage>();
-
 						//slow de la animacion
-						/*std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
+						/*auto anim = player->getComponent<FramedImage>();
+
+						std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
 
 						anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
 

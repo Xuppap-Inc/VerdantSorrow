@@ -15,12 +15,13 @@
 #include "../wave/WaveSpawner.h"
 #include "FlyMovement.h"
 #include "../../Image.h"
+#include "../../fondos/ParticleSystem.h"
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED), attr_(), angry_(false),
 jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), delay_(0), musicaFase1_(), musicaFase2_(),
 flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
-animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_(), anim_(), tongueAnim_(), lastUpdate_(0), oldJumpDirection_(0)
+animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_(), anim_(), tongueAnim_(), lastUpdate_(0), oldJumpDirection_(0), deadBoss_(false)
 {
 }
 
@@ -48,6 +49,13 @@ void FrogAttackManager::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
+
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
+	particlesys->createParticlesDandellion(50);
+
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_dandellion_frente"), mngr_);
+	particlesys2->createOverlayParticlesDandellion(3);
+
 
 	createTongue(collManager_);
 
@@ -252,6 +260,11 @@ void FrogAttackManager::update()
 			break;
 		}
 	}
+
+	if (deadBoss_) {
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
+	}
 }
 
 ecs::Entity* FrogAttackManager::createFly()
@@ -357,6 +370,10 @@ void FrogAttackManager::nextAttack()
 		s->play();
 		musicaFase2_->setMusicVolume(60);
 		musicaFase1_->pauseChannel(0);
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_lluvia"), mngr_);
+		particlesys->createParticlesRain(120);
+
 		frogState_ = WAITING;
 		//delay_  = duracion de la animacion de cambio de fase
 		lastUpdate_ = sdlutils().currRealTime();

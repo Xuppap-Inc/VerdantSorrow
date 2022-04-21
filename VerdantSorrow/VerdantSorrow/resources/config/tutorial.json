@@ -62,6 +62,10 @@
       "file": "resources/images/particula_esencia.png"
     },
     {
+      "id": "particula_hoja",
+      "file": "resources/images/particula_hoja.png"
+    },
+    {
       "id": "heart",
       "file": "resources/images/heart.png"
     },

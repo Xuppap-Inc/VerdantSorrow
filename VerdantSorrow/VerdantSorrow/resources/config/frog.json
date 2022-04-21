@@ -202,6 +202,18 @@
       "file": "resources/images/particula_esencia.png"
     },
     {
+      "id": "particula_dandellion",
+      "file": "resources/images/particula_dandellion.png"
+    },
+    {
+      "id": "particula_dandellion_frente",
+      "file": "resources/images/particula_dandellion_frente.png"
+    },
+    {
+      "id": "particula_lluvia",
+      "file": "resources/images/particula_lluvia.png"
+    },
+    {
       "id": "luz_cyan",
       "file": "resources/images/luz_cyan.png"
     }

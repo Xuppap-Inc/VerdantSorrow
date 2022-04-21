@@ -103,5 +103,7 @@ private:
 	void attackWave();
 	void attackSpecial();
 	void prepareToSpecial();
+
+	bool deadBoss_;
 };
 

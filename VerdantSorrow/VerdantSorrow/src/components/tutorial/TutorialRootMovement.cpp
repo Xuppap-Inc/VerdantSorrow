@@ -1,18 +1,18 @@
-#include "RootMovement.h"
+#include "TutorialRootMovement.h"
 
-#include "../../../Transform.h"
-#include "../../../../ecs/Entity.h"
-#include "../../../fondos/ParticleSystem.h"
+#include "../Transform.h"
+#include "../../ecs/Entity.h"
+#include "../fondos/ParticleSystem.h"
 
 
-RootMovement::RootMovement() : tr_(), col_(), speed_(0.25), lastTime_(0)
+TutorialRootMovement::TutorialRootMovement() : tr_(), col_(), speed_(0.25), lastTime_(0)
 {
 }
-RootMovement::~RootMovement()
+TutorialRootMovement::~TutorialRootMovement()
 {
 }
 
-void RootMovement::initComponent()
+void TutorialRootMovement::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -20,15 +20,11 @@ void RootMovement::initComponent()
 	col_->setActive(false);
 }
 
-void RootMovement::update()
+void TutorialRootMovement::update()
 {
 	if (speed_ == 0) {
-		col_->setActive(false);	
+		col_->setActive(false);
 		if (sdlutils().currRealTime() - lastTime_ > 700) {
-			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
-			particlesys->createParticlesRootsDie(3, tr_->getPos().getX() + (tr_->getWidth() / 2));
-			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
-			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));
 			ent_->setAlive(false);
 		}
 	}

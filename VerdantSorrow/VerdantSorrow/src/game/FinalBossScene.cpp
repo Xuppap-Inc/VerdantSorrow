@@ -48,8 +48,7 @@ void FinalBossScene::init()
 	finalBossGenerator(colManager, player);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
-	particlesys->createParticlesSnow(100);
+
 
 	auto height = (sdlutils().height() / 5) + 40;
 
@@ -59,7 +58,6 @@ void FinalBossScene::init()
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
 	suelo->addToGroup(ecs::_FIRST_GRP);
 
-	createLights();
 }
 
 void FinalBossScene::update()
@@ -145,9 +143,3 @@ void FinalBossScene::setAble(bool a)
 	isAble = a;
 }
 
-void FinalBossScene::createLights() {
-	new Light(&sdlutils().images().at("luz_rosa"), -200, sdlutils().height() - 300, 600, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()-300, sdlutils().height()-200, 400, 100, mngr_);
-	new Light(&sdlutils().images().at("luz_rosa"), sdlutils().width()/2 - 500, sdlutils().height()-500, 1000, 100, mngr_);
-
-}

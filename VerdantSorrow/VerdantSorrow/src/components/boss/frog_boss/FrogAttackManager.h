@@ -87,5 +87,7 @@ private:
 	Uint32 tongueDelay_;
 
 	VirtualTimer tongueWaitTimer_;
+
+	bool deadBoss_;
 };
 

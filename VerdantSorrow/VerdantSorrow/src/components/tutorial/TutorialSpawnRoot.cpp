@@ -7,7 +7,7 @@
 #include "../RectangleCollider.h"
 #include "../../game/CollisionManager.h"
 #include "../Image.h"
-#include "../boss/tree_boss/root/RootMovement.h"
+#include "../tutorial/TutorialRootMovement.h"
 #include "../boss/bossAtributos.h"
 
 
@@ -55,6 +55,6 @@ void TutorialSpawnRoot::createRoot(int x)
 	//Se añade el collider al colliderGameManager
 	colManager_->addCollider(RootCollider);
 	//Se añade el movimiento vertical
-	Root->addComponent<RootMovement>();
+	Root->addComponent<TutorialRootMovement>();
 	Root->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }

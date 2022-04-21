@@ -170,6 +170,26 @@
       "file": "resources/images/particula_esencia.png"
     },
     {
+      "id": "particula_hoja",
+      "file": "resources/images/particula_hoja.png"
+    },
+    {
+      "id": "particula_simbolo2",
+      "file": "resources/images/particula_simbolo2.png"
+    },
+    {
+      "id": "particula_simbolo1",
+      "file": "resources/images/particula_simbolo1.png"
+    },
+    {
+      "id": "particula_mariposa",
+      "file": "resources/images/particula_mariposa.png"
+    },
+    {
+      "id": "particula_simbolo1_frente",
+      "file": "resources/images/particula_simbolo1_frente.png"
+    },
+    {
       "id": "luz_amarilla",
       "file": "resources/images/luz_amarilla.png"
     },
