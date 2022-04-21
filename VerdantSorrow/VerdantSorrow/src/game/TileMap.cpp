@@ -3,10 +3,9 @@
 #include "../json/JSON.h"
 #include "../components/Transform.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string jsonPath, string tileMapPath)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath)
 {
 	path = tileMapPath;
-	jsPath = jsonPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
 
@@ -81,7 +80,7 @@ void TileMap::loadMap(string path)
 				cur_gid -= tset_gid;
 
 				auto aabb = object.getAABB();
-				tilesets[tset_gid][cur_gid]->render(build_sdlrect(aabb.left,aabb.top,aabb.width,aabb.height));
+				tilesets[tset_gid][cur_gid]->render(build_sdlrect(aabb.left, aabb.top, aabb.width, aabb.height));
 
 			}
 		}
@@ -117,7 +116,7 @@ void TileMap::render()
 
 	SDL_Rect src = { a->getPos().getX(), a->getPos().getY(),
 			 sdlutils().width() * 0.5,
-			 sdlutils().height() * 0.5};
+			 sdlutils().height() * 0.5 };
 
 	auto sW = mngr_->getWindowScaleWidth();
 	auto sH = mngr_->getWindowScaleHeight();

@@ -23,7 +23,7 @@ class Texture;
 class TileMap
 {
 public:
-	TileMap(ecs::Manager* mngr,string jsonPath,string tileMapPath);
+	TileMap(ecs::Manager* mngr,string tileMapPath);
 	~TileMap();
 	
 	void render();
@@ -34,7 +34,7 @@ private:
 	void loadTilesetsTextures();
 
 	SDL_Texture* tileMap;
-	string path, jsPath;
+	string path;
 	int rows, cols;
 	int tileWidth, tileHeight;
 	map<Uint, map<Uint,Texture*>> tilesets;//tilemapid -> img id->texture
