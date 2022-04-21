@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="npcs" tilewidth="1513" tileheight="2386" tilecount="6" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="NPC" tilewidth="1513" tileheight="2386" tilecount="6" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="847" height="2009" source="../assets/paula_0001_cuerpo.png"/>
@@ -26,13 +26,13 @@
    <object id="1" x="9.19992" y="13.7999" width="482.996" height="906.192"/>
   </objectgroup>
  </tile>
- <tile id="5">
+ <tile id="4">
   <image width="391" height="866" source="../assets/cementerio_0001_Layer9.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="4.59996" y="4.59996" width="377.197" height="855.593"/>
   </objectgroup>
  </tile>
- <tile id="6">
+ <tile id="5">
   <image width="885" height="2186" source="../assets/javi_0001_javi.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="9.19992" y="-4.59996" width="413.997" height="574.995"/>
