@@ -58,7 +58,7 @@ void Hub::init()
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
-	auto cameraC = camera->addComponent<ScrollCamera>(2);
+	auto cameraC = camera->addComponent<ScrollCamera>(3);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 	//Genera las entradas a los bosses
 		//entrada a la rana
@@ -149,7 +149,7 @@ void Hub::update()
 
 		sdlutils().clearRenderer();
 		
-		//tileMap->render();
+		tileMap->render();
 		mngr_->render();
 #ifdef _DEBUG
 		mngr_->debug();
