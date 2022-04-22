@@ -49,13 +49,12 @@ void FrogAttackManager::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
+	
+	dandellions1_ = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
+	dandellions1_->createParticlesDandellion(50);
 
-	//particulas
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
-	particlesys->createParticlesDandellion(50);
-
-	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_dandellion_frente"), mngr_);
-	particlesys2->createOverlayParticlesDandellion(3);
+	dandellions2_ = new ParticleSystem(&sdlutils().images().at("particula_dandellion_frente"), mngr_);
+	dandellions2_->createOverlayParticlesDandellion(3);
 
 	//lengua
 	createTongue(collManager_);
