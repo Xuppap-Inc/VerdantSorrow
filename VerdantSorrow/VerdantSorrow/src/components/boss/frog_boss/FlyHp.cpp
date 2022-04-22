@@ -15,6 +15,7 @@ FlyHp::~FlyHp()
 	
 }
 
+// Metodo que mata a la mosca y notifica al FrogAttackManager
 void FlyHp::receiveHit()
 {
 	fAM_->onFlyDied();

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../../../ecs/Component.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../sdlutils/VirtualTimer.h"
@@ -11,7 +13,6 @@ class BossAtributos;
 class FramedImage;
 class WaveSpawner;
 
-#pragma once
 class FrogAttackManager : public ecs::Component
 {
 
@@ -31,15 +32,19 @@ public:
 		DOING_ANIMATION
 	};
 
-	FrogAttackManager();
+	FrogAttackManager(CollisionManager* collManager); 
 	~FrogAttackManager();
-	FrogAttackManager(CollisionManager* collManager);
+
 	void initComponent() override;
 	void update() override;
 	ecs::Entity* createFly();
 	ecs::Entity* createTongue(CollisionManager* colManager);
 	void onFlyDied();
+
 private:
+
+	const int FLOOR_HEIGHT = 60;
+
 	enum AnimState {
 		ANIM_IDLE,
 		ANIM_JUMP,
@@ -51,9 +56,17 @@ private:
 		ANIM_VULNERABLE_TO_IDLE,
 		ANIM_DEATH,
 	};
+
 	void flipOnBorders();
 	void onGrounded(bool &jump, bool isBig);
 	void nextAttack();
+
+	void checkPhaseChange();
+	void checkAnimationState();
+	void checkFrogState();
+	void checkIfDead();
+
+
 	FrogJump* frogJump_;
 	FrogBigJump* bigJump_;
 	ecs::Entity* fly_;
@@ -74,7 +87,6 @@ private:
 	AnimState animState_;
 	AnimState animNewState_;
 	bool secondPhase_;
-	bool angry_;
 	bool jumping_;
 	int jumpDirection_;
 	int oldJumpDirection_;

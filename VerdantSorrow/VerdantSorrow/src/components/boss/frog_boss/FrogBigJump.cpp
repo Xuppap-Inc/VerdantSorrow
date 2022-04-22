@@ -17,27 +17,12 @@ void FrogBigJump::initComponent()
 	assert(tr_ != nullptr);
 }
 
-void FrogBigJump::update()
-{
-	//auto& RNG = sdlutils().rand();
-	//auto& vel = tr_->getVel();
-
-	//if (lastJump_ + jumpCd_ <= sdlutils().currRealTime() && !isJumping_) {
-	//	isJumping_ = true;
-	//	int x = 0;
-	//	vel = new Vector2D(x, -jumpForce_);
-	//	vel = vel.normalize() * jumpForce_;
-	//	//fr_->changeanim(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-	//}
-
-	//if (isJumping_ && tr_->getPos().getY() >= sdlutils().height() - tr_->getHeight()) {
-	//	isJumping_ = false;
-	//	lastJump_ = sdlutils().currRealTime();
-	//};
-}
-
+/*
+* Metodo que salta en la direccion especificada una distancia aleatoria
+* @param dir: dirección del salto (-1: izquierda, 1: derecha)
+*/
 void FrogBigJump::attack(int dir) {
-	//Habrá que esperar los frames de anticipación de la animación cuando haya
+
 	auto& vel = tr_->getVel();
 
 	//x = {-1, 0, 1} 
