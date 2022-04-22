@@ -133,6 +133,14 @@
       "file": "resources/images/particula_esencia.png"
     },
     {
+      "id": "particula_mariposa",
+      "file": "resources/images/particula_mariposa.png"
+    },
+    {
+      "id": "particula_simbolo2_frente",
+      "file": "resources/images/particula_simbolo2_frente.png"
+    },
+    {
       "id": "fondodelante",
       "file": "resources/images/fondodelante.png"
     },
@@ -151,6 +159,10 @@
     {
       "id": "luz_rosa",
       "file": "resources/images/luz_rosa.png"
+    },
+    {
+      "id": "luz_morado",
+      "file": "resources/images/luz_morado.png"
     }
   ],
 

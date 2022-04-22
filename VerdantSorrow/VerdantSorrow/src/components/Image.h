@@ -34,6 +34,8 @@ public:
 	void setVisible(bool set);
 	bool isVisible();
 
+	void fadeIn();
+	void fadeOut();
 	void setColor(Uint8 r, Uint8 g, Uint8 b, int duration = -1);
 	void update() override;
 private:
@@ -41,6 +43,10 @@ private:
 	Texture* tex_;
 
 	bool visible_;
+
+	bool isFadingIn_;
+	bool isFadingOut_;
+	int alpha_;
 
 	VirtualTimer colorTimer_;
 	int colorDuration_ = 0;

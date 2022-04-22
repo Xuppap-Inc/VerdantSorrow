@@ -25,8 +25,9 @@ Image::~Image() {
 
 void Image::setAlpha(int num)
 {
-	assert(num >= 0 && num <= 255);
-	tex_->setAlpha(num);
+	alpha_ = num;
+	assert(alpha_ >= 0 && alpha_ <= 255);
+	tex_->setAlpha(alpha_);
 }
 
 void Image::initComponent() {
@@ -66,6 +67,18 @@ bool Image::isVisible()
 	return visible_;
 }
 
+void Image::fadeIn()
+{
+	isFadingOut_ = false;
+	isFadingIn_ = true;
+}
+
+void Image::fadeOut()
+{
+	isFadingIn_ = false;
+	isFadingOut_ = true;
+}
+
 void Image::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
 	red_ = r;
 	green_ = g;
@@ -84,4 +97,9 @@ void Image::update() {
 		}
 	}
 	getTexture()->setColor(red_, green_, blue_);
+
+	if (isFadingIn_) {
+		alpha_++;
+		setAlpha(alpha_);
+	}
 }

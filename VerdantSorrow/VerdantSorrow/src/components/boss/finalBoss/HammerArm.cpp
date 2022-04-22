@@ -9,6 +9,7 @@
 #include "../../../game/CollisionManager.h"
 #include "../wave/WaveSpawner.h"
 #include "../BossAtributos.h"
+#include "../../fondos/ParticleSystem.h"
 
 HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_()
 {
@@ -59,8 +60,13 @@ void HammerArm::attack(bool quemado)
 		{
 			SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_quemado");
 			s2->play();
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+			particlesys->createParticlesSmash(50, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + tr_->getHeight());
 		}
 		
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+		particlesys->createParticlesSmash(40, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + tr_->getHeight());
+
 		tr_->getVel().set(Vector2D(0, 0));
 		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
 		lastTimeFloor = sdlutils().currRealTime();

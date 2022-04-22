@@ -34,15 +34,17 @@ private:
 	Phase phase_;
 	EyeState eyeState_;
 	CollisionManager* colManager_;
-	float eyeSpeed;
-	int lastTimeGround = 0, timeInGround = 1000;
+	float eyeSpeed_;
+	int lastTimeGround_ = 0, timeInGround_ = 1000;
 	Vector2D velocitySaved;
 	WaveSpawner* waveSp_;
-	Transform* playerTr;
+	Transform* playerTr_;
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
 
 	//random bola de fuego times
 	int lastFireBall_, fireBallCooldown_;
+
+	bool deadBoss_;
 };
 

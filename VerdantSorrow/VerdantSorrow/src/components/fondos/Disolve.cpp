@@ -6,7 +6,7 @@
 #include "../Image.h"
 
 
-Disolve::Disolve(int startFadingTime) : tr_(), startFadingTime_(startFadingTime), img_(), timer_()
+Disolve::Disolve(int startFadingTime) : tr_(), startFadingTime_(startFadingTime), img_(), timer_(), fading_(false)
 {
 
 }
@@ -21,8 +21,11 @@ void Disolve::initComponent() {
 void Disolve::update() {
 	
 	if (timer_.currTime() >= startFadingTime_) {
-		int alpha = 100 - (timer_.currTime() - startFadingTime_);
-		if (alpha < 0) {
+		if (!fading_) {
+			img_->fadeOut();
+			fading_ = true;
+		}
+		if (timer_.currTime() - startFadingTime_ > 100) {
 			ent_->setAlive(false);
 		}
 	}
