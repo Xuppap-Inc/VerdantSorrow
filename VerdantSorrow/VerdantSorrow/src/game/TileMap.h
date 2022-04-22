@@ -40,5 +40,7 @@ private:
 	map<Uint, map<Uint,Texture*>> tilesets;//tilemapid -> img id->texture
 	tmx::Map* tmxTileMap;
 	ecs::Manager* mngr_;
+
+	double scaleX, scaleY;
 };
 
