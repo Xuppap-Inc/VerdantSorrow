@@ -12,11 +12,25 @@ ParticleSystem::ParticleSystem(Texture* tex, ecs::Manager* mngr):tex_(tex),mngr_
 {
 }
 
+void ParticleSystem::disolveParticles()
+{
+	for (int i = 0; i < parts.size(); i++) {
+		parts[i]->addComponent<Disolve>(sdlutils().rand().nextInt(100, 1000));
+	}
+}
+void ParticleSystem::targetParticles(Transform* target)
+{
+	for (int i = 0; i < parts.size(); i++) {
+		parts[i]->addComponent<Target>(sdlutils().rand().nextInt(100, 1000), target);
+	}
+}
+
 void ParticleSystem::createParticlesAsh(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
-	
+		parts.push_back(particle);
+
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
 		auto width= sdlutils().rand().nextInt(3,11);
@@ -34,6 +48,7 @@ void ParticleSystem::createParticlesDandellion(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
+		parts.push_back(particle);
 	
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto width= sdlutils().rand().nextInt(40, 80);
@@ -50,7 +65,8 @@ void ParticleSystem::createOverlayParticlesDandellion(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
-	
+		parts.push_back(particle);
+
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto width= sdlutils().rand().nextInt(300, 500);
 		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-100, 100)) / 100), ((double)(sdlutils().rand().nextInt(-100, 100)) / 100));
@@ -66,7 +82,8 @@ void ParticleSystem::createBackgroundParticlesSymbols(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
-	
+		parts.push_back(particle);
+
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
 		auto width= sdlutils().rand().nextInt(200, 1000);
@@ -83,7 +100,8 @@ void ParticleSystem::createParticlesRain(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
-	
+		parts.push_back(particle);
+
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto width= sdlutils().rand().nextInt(20, 40);
 		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-80, -20)) / 100), ((double)(sdlutils().rand().nextInt(800, 1200)) / 100));
@@ -99,7 +117,8 @@ void ParticleSystem::createParticlesWind(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {
 		auto particle = mngr_->addEntity();
-	
+		parts.push_back(particle);
+
 		int dir = 1;
 		if (sdlutils().rand().nextInt(0, 2) == 1) dir = -1;
 

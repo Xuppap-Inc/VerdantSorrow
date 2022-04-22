@@ -31,7 +31,4 @@ void FlyMovement::update()
 	//Si queda poco espacio explota y muere
 	if (abs(playerTr_->getPos().getX() - tr_->getPos().getX()) < spaceWhereExplotes || abs(playerTr_->getPos().getY() - tr_->getPos().getY() < spaceWhereExplotes))
 		ent_->setAlive(false);
-
-
-	
 }

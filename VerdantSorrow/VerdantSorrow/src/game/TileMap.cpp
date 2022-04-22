@@ -2,6 +2,8 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../json/JSON.h"
 #include "../components/Transform.h"
+#include "../components/RectangleCollider.h"
+#include "../components/Image.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath)
 {
@@ -79,13 +81,18 @@ void TileMap::loadMap(string path)
 				// normalizamos el �ndice
 				cur_gid -= tset_gid;
 
-				auto aabb = object.getAABB();
-				tilesets[tset_gid][cur_gid]->render(build_sdlrect(aabb.left, aabb.top, aabb.width, aabb.height));
-
+				auto pos = object.getPosition();
+				SDL_Rect r = build_sdlrect(pos.x, pos.y - object.getAABB().height, object.getAABB().width, object.getAABB().height);
+				//tilesets[tset_gid][cur_gid]->render(r);
+				ecs::Entity* ent = mngr_->addEntity();
+				auto tr = ent->addComponent<Transform>();
+				tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+				ent->addComponent<Image>(tilesets[tset_gid][cur_gid]);
+				ent->addComponent<RectangleCollider>(r.w, r.h);
+				ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 			}
 		}
 	}
-
 	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
 
 }
@@ -116,7 +123,7 @@ void TileMap::render()
 
 	SDL_Rect src = { a->getPos().getX(), a->getPos().getY(),
 			 sdlutils().width(),
-			 sdlutils().height()};
+			 sdlutils().height() };
 
 	auto sW = mngr_->getWindowScaleWidth();
 	auto sH = mngr_->getWindowScaleHeight();
@@ -130,5 +137,5 @@ void TileMap::render()
 	src.y *= sH;
 	src.h *= sH;
 
-	SDL_RenderCopy(sdlutils().renderer(), tileMap, &src, &dest);
+	SDL_RenderCopy(sdlutils().renderer(), tileMap, NULL, &dest);
 }

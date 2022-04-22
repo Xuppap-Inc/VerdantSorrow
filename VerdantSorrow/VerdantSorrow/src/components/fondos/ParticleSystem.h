@@ -10,7 +10,11 @@ class ParticleSystem
 {
 public:
 
-	ParticleSystem(Texture* tex,ecs::Manager*mngr);
+	ParticleSystem(Texture* tex, ecs::Manager* mngr);
+	void disolveParticles();
+	
+	void targetParticles(Transform* target);
+
 	void createParticlesAsh(int numpart);
 
 	void createParticlesDandellion(int numpart);
@@ -46,10 +50,10 @@ public:
 	void createParticlesHandMagic(int numpart, Transform* target);
 
 private:
+
 	Texture* tex_;
 	std::vector<ecs::Entity*>parts;
 	ecs::Manager* mngr_;
-	
 };
 
 

@@ -40,8 +40,8 @@ void FinalBossMovement::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
 
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
-	particlesys->createParticlesAsh(100);
+	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
+	ashes_->createParticlesAsh(100);
 
 }
 
@@ -58,6 +58,8 @@ void FinalBossMovement::update()
 			s2->play();
 			musicaFase2_->setMusicVolume(60);
 			musicaFase1_->pauseChannel(0);
+
+			ashes_->targetParticles(tr_);
 
 			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
 			particlesys->createParticlesDandellion(20);

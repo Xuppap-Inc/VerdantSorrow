@@ -1,7 +1,7 @@
+#pragma once
 #include "../../../ecs/Component.h"
 
 class FrogAttackManager;
-#pragma once
 class FlyHp:public ecs::Component
 {
 public:
