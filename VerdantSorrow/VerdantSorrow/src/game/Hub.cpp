@@ -47,7 +47,7 @@ void Hub::init()
 	//Para gestionar las colisiones
 	colManager = new CollisionManager();
 
-	tileMap = new TileMap(mngr_, "resources/hub/Hub.tmx");
+	tileMap = new TileMap(mngr_, "resources/hub/mapa.tmx");
 
 
 	changeSc = false;
@@ -176,7 +176,6 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
-	player_->addComponent<CollideWithBorders>();
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(2, colManager);

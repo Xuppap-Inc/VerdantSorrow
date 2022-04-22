@@ -115,8 +115,8 @@ void TileMap::render()
 	SDL_Rect dest = { 0,0, sdlutils().width(), sdlutils().height() };
 
 	SDL_Rect src = { a->getPos().getX(), a->getPos().getY(),
-			 sdlutils().width() * 0.5,
-			 sdlutils().height() * 0.5 };
+			 sdlutils().width(),
+			 sdlutils().height()};
 
 	auto sW = mngr_->getWindowScaleWidth();
 	auto sH = mngr_->getWindowScaleHeight();
