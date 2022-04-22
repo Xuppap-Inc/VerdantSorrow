@@ -3,6 +3,7 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
+#include "../ecs/Manager.h"
 #include <cassert>
 
 class Transform : public ecs::Component {
@@ -70,6 +71,10 @@ public:
 	}
 
 	void update() override {
+		auto camera = mngr_->getHandler(ecs::_hdlr_CAMERA);
+		if (camera != nullptr) {
+			pos_ = pos_ - camera->getComponent<Transform>()->getPos();
+		}
 		pos_ = pos_ + vel_;
 	}
 
