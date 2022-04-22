@@ -427,8 +427,12 @@ void FrogAttackManager::checkPhaseChange()
 		animNewState_ = ANIM_CHANGE_PHASE;
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 		s->play();
+
 		musicaFase2_->setMusicVolume(60);
 		musicaFase1_->pauseChannel(0);
+
+		dandellions1_->disolveParticles();
+		dandellions2_->disolveParticles();
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_lluvia"), mngr_);
 		particlesys->createParticlesRain(120);
