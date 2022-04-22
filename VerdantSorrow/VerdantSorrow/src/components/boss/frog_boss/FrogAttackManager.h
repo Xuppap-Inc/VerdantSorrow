@@ -10,6 +10,7 @@ class CollisionManager;
 class BossAtributos;
 class FramedImage;
 class WaveSpawner;
+class ParticleSystem;
 
 #pragma once
 class FrogAttackManager : public ecs::Component
@@ -66,6 +67,9 @@ private:
 	FramedImage* tongueAnim_;
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
+
+	ParticleSystem* dandellions1_;
+	ParticleSystem* dandellions2_;
 
 	//clase para spawnear waves
 	WaveSpawner* waveSp_;

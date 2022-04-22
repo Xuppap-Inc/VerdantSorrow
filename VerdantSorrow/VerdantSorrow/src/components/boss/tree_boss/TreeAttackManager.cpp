@@ -60,8 +60,8 @@ void TreeAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
 
-	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
-	particlesys->createParticlesDandellion(10);
+	hojas_ = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+	hojas_->createParticlesDandellion(10);
 
 
 	bool correct = tr_ != nullptr && player_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr && lanternTr_ != nullptr;
@@ -141,6 +141,8 @@ void TreeAttackManager::update()
 				s->play();
 				musicaFase2_->setMusicVolume(100);
 				musicaFase1_->pauseChannel(0);
+
+				hojas_->disolveParticles();
 
 				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 				particlesys->createParticlesWind(50);
