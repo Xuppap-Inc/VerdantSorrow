@@ -26,37 +26,35 @@ void RenderParallax::initComponent()
 
 void RenderParallax::render()
 {
-	//Vector2D v = tr_->getPos() - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
-	//SDL_Rect dest = build_sdlrect(v, tr_->getWidth(), tr_->getHeight());
+	SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(), tr_->getHeight());
 
-	////escalado pantalla
-	//auto sW = mngr_->getWindowScaleWidth();
-	//auto sH = mngr_->getWindowScaleHeight();
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
 
-	//dest.x *= sW;
-	//dest.w *= sW;
-	//dest.y *= sH;
-	//dest.h *= sH;
-	//dest.y -= 50;
+	dest.x *= sW;
+	dest.w *= sW;
+	dest.y *= sH;
+	dest.h *= sH;
 
-	//assert(tex_ != nullptr);
-	//tex_->render(dest, tr_->getRot());
+	assert(tex_ != nullptr);
+	tex_->render(dest, tr_->getRot());
 }
 
 void RenderParallax::update()
 {
-	//
-	//float temp = (mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos().getX() * (1 - scrollratio_));
-	//float dist = (mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
-	//auto& pos = tr_->getPos();
-	//pos.set(startpos + dist, tr_->getPos().getY());
-	//if (temp >= startpos + tr_->getWidth()) {
-	//	startpos += ( 3*tr_->getWidth());
-	//}
-	//else if (temp <= startpos - tr_->getWidth()) {
+	
+	float temp = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (1 - scrollratio_));
+	float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
+	auto& pos = tr_->getPos();
+	pos.set(startpos + dist, tr_->getPos().getY());
+	if (temp >= startpos + tr_->getWidth()) {
+		startpos += ( 3*tr_->getWidth());
+	}
+	else if (temp <= startpos - tr_->getWidth()) {
 
-	//	startpos -= (3*tr_->getWidth());
-	//}
+		startpos -= (3*tr_->getWidth());
+	}
 
 	
 		
