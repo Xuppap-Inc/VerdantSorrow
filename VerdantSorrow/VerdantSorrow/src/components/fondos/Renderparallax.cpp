@@ -9,7 +9,7 @@
 
 
 
-RenderParallax::RenderParallax(Texture* tex,float scrollratio):tex_(tex),distance(0),tr_(nullptr),scrollratio_(scrollratio),startpos(0)
+RenderParallax::RenderParallax(Texture* tex,float scrollratio):tex_(tex),tr_(nullptr),scrollratio_(scrollratio),startpos(0)
 {
 }
 
@@ -22,7 +22,6 @@ void RenderParallax::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 	startpos = tr_->getPos().getX();
-	distance = startpos;
 }
 
 
@@ -60,27 +59,15 @@ void RenderParallax::update()
 
 	int dir = (mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->getMovementDir());
 	auto& pos = tr_->getPos();
-	//float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
+	float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
 	if (dir == 1) {
 		pos.set(pos.getX() - scrollratio_, tr_->getPos().getY());
-		distance -= scrollratio_;
 	}
 	else if(dir==-1) {
 		pos.set(pos.getX() +scrollratio_, tr_->getPos().getY());
-		distance += scrollratio_;
 	}
 
-	if (distance >= startpos + tr_->getWidth()) {
-		startpos = (3 * tr_->getWidth());
-		pos.set(3 * tr_->getWidth(), tr_->getPos().getY());
-		distance = 0;
-	}
-	else if (distance <= startpos - tr_->getWidth()) {
-
-		startpos = -(3 * tr_->getWidth());
-		pos.set(startpos, tr_->getPos().getY());
-		distance = 0;
-	}
+	
 		
 	
 }

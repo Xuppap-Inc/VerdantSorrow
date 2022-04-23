@@ -10,7 +10,7 @@
 using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
-	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
+	attrib_(), movementDir_(0), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
 	rollCooldown_(100), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
 	, isKnockback(false),
 
@@ -56,6 +56,7 @@ void PlayerCtrl::update()
 			attrib_->setOnGround(false);
 			slide_ = false;
 
+
 			// Animacion
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
@@ -64,7 +65,7 @@ void PlayerCtrl::update()
 		//moviemiento nulo
 		if (moveRight_ && moveLeft_) {
 			vel.set(Vector2D(0, vel.getY()));
-			movementDir_ = 1;
+			movementDir_ = 0;
 			slide_ = false;
 		}
 		//movimiento izquierda
@@ -85,8 +86,11 @@ void PlayerCtrl::update()
 
 			anim_->flipX(false);
 		}
-		else
+		else if(!moveRight_ && !moveLeft_&&!jump_)movementDir_ = 0;
+		else {
 			slide_ = true;
+		}
+			
 
 		//Roll
 		if (attrib_->isOnGround() && roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
