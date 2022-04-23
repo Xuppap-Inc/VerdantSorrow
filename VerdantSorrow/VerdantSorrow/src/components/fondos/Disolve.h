@@ -21,6 +21,7 @@ private:
 	Transform* tr_;
 
 	int startFadingTime_;
+	bool fading_;
 
 	Image* img_;
 	VirtualTimer* timer_;

@@ -36,7 +36,6 @@
     <ClInclude Include="src\game\CollisionChecker.h" />
     <ClInclude Include="src\components\boss\frog_boss\FlyMovement.h" />
     <ClInclude Include="src\game\MenuScene.h" />
-    <ClInclude Include="src\components\ScrollCamera.h" />
     <ClInclude Include="src\components\boss\wave\WaveSpawner.h" />
     <ClInclude Include="src\components\tutorial\TutorialFly.h" />
     <ClInclude Include="src\game\Game.h" />
@@ -116,6 +115,8 @@
     <ClInclude Include="src\game\TutorialScene.h" />
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
     <ClInclude Include="src\components\fondos\Target.h" />
+    <ClInclude Include="src\game\TileMap.h" />
+    <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
@@ -133,7 +134,6 @@
     <ClCompile Include="src\game\CollisionChecker.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FlyMovement.cpp" />
     <ClCompile Include="src\game\MenuScene.cpp" />
-    <ClCompile Include="src\components\ScrollCamera.cpp" />
     <ClCompile Include="src\components\boss\wave\WaveSpawner.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialFly.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
@@ -200,6 +200,8 @@
     <ClCompile Include="src\game\TutorialScene.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
     <ClCompile Include="src\components\fondos\Target.cpp" />
+    <ClCompile Include="src\game\TileMap.cpp" />
+    <ClCompile Include="src\components\tutorial\TutorialRootMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\escapeScene.json" />
@@ -378,8 +380,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\TMXLite\lib\ReleaseStatic;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libtmxlite-s.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>tmxlite-s.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

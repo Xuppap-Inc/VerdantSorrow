@@ -5,6 +5,7 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../sdlutils/VirtualTimer.h"
 #include "../../../ecs/Manager.h"
+#include "../../fondos/ParticleSystem.h"
 
 
 
@@ -67,7 +68,11 @@ void ClapAttack::goCenter(bool quemado)
 			if (quemado) {
 				SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_fire_clap");
 				s2->play();
+				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+				particlesys->createParticlesSmash(20, tr_->getPos().getX(), tr_->getPos().getY() + tr_->getHeight() / 2);
 			}
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+			particlesys->createParticlesSmash(40, tr_->getPos().getX(), tr_->getPos().getY() + tr_->getHeight() / 2);
 		}
 	}
 	else {

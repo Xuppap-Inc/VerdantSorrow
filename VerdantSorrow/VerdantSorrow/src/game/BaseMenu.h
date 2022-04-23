@@ -3,7 +3,7 @@
 #include "Scene.h"
 class BaseMenu : public Scene
 {
-private: 
+protected: 
 	bool changeSc_;
 public:
 	BaseMenu();
@@ -21,7 +21,6 @@ public:
 	void selectButton(Entity*buttProps);
 	void deselectButton(Entity*buttProps);
 	void isChangingScene(bool valor) { changeSc_ = valor; }
-
 
 };
 

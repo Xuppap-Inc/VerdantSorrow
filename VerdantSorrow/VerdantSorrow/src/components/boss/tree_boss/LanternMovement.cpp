@@ -2,6 +2,7 @@
 #include "../../../ecs/Entity.h"
 #include "../../../ecs/Manager.h"
 #include "../../../components/Transform.h"
+#include "../../fondos/ParticleSystem.h"
 
 LanternMovement::LanternMovement() :treeTr_(), lanternTr_(), active(true), rightSide(false)
 {
@@ -37,12 +38,19 @@ void LanternMovement::setActive(bool set)
 
 void LanternMovement::moveToSide()
 {
-	int x;
 
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_amarilla"), mngr_);
+	particlesys->createParticlesLanternMove(10, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
+	
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo2"), mngr_);
+	particlesys2->createParticlesLanternMove(10, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
+	
+	int x;
 	if (rightSide) x = sdlutils().width() - 100 - lanternTr_->getHeight() / 2;
 	else x = 100;
 
 	lanternTr_->getPos().set(Vector2D(x, sdlutils().height() - 100 - lanternTr_->getHeight() / 2));
 
 	rightSide = !rightSide;
+
 }

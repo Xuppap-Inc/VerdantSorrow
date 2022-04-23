@@ -9,6 +9,7 @@
 #include "../../../game/CollisionManager.h"
 #include "../BossAtributos.h"
 #include "../../Image.h"
+#include "../../fondos/ParticleSystem.h"
 
 RootSpawner::RootSpawner(CollisionManager* collManager) : collManager_(collManager), framedImg_(), rootWidth_(60)
 {
@@ -44,4 +45,7 @@ void RootSpawner::createRoot(int x)
 	//Se añade el movimiento vertical
 	Root->addComponent<RootMovement>();
 	Root->addToGroup(ecs::_BOSS_GRP);
+
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+	particlesys->createParticlesRoots(10, RootX + (rootWidth_ / 2), sdlutils().height() - 50);
 }

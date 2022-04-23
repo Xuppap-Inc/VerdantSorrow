@@ -136,7 +136,6 @@ void SceneManager::init()
 		break;
 	case SceneManager::Controls_:
 		playerInBossFight = false;
-		sdlUtils_.loadReasources("resources/config/controls.json");
 		controls_->init();
 		break;
 	case SceneManager::PauseMenu_:
@@ -164,6 +163,7 @@ void SceneManager::render()
 
 void SceneManager::changeScene(scenes s_)
 {
+	previousScene_ = getScene();
 	actScene = s_;
 	init();
 }

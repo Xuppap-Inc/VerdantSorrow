@@ -11,6 +11,7 @@
 #include "ClapAttack.h"
 #include "HammerArm.h"
 #include "../BossAtributos.h"
+#include "../../fondos/ParticleSystem.h"
 
 
 HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO),lastAttackDone_(),tiempoColor_()
@@ -75,7 +76,12 @@ void HandsManager::update()
 				rightHandImg_->setColor(200, 20, 200);
 				leftHandImg_->setColor(200, 20, 200);
 			}
-		}
+
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+			particlesys->createParticlesFire(2, leftHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (leftHandTr_->getWidth())), leftHandTr_->getPos().getY() + 20);
+		
+			ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+			particlesys->createParticlesFire(2, rightHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (rightHandTr_->getWidth())), rightHandTr_->getPos().getY() + 20);}
 	}
 	
 }
@@ -162,7 +168,13 @@ void HandsManager::clapAttack(){
 		clapRight_->changeState(ClapAttack::DIAGONAL); 
 		leftHandImg_->setColor(200, 200, 20, 500);
 		rightHandImg_->setColor(200, 200, 20, 500);
+		
 		tiempoColor_->reset();
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+		particlesys->createParticlesHandMagic(10, leftHandTr_);
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+		particlesys2->createParticlesHandMagic(10, rightHandTr_);
 	}
 	else if (clapLeft_->getstate() == ClapAttack::DIAGONAL || clapRight_->getstate() == ClapAttack::DIAGONAL) {
 		clapLeft_->goDiagonal();
@@ -200,8 +212,12 @@ void HandsManager::clapAttack(){
 }
 
 void HandsManager::punietazoAttack() {
-	if (punietazoright_->getstate() == Punietazo::REPOSO)
+	if (punietazoright_->getstate() == Punietazo::REPOSO) {
 		punietazoright_->changeState(Punietazo::DOWN);
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+		particlesys->createParticlesHandMagic(20, rightHandTr_);
+	}
 
 	else if (punietazoright_->getstate() == Punietazo::DOWN)
 		punietazoright_->goDown();
@@ -217,8 +233,12 @@ void HandsManager::punietazoAttack() {
 
 
 
-	else if (punietazoleft_->getstate() == Punietazo::REPOSO)
+	else if (punietazoleft_->getstate() == Punietazo::REPOSO) {
 		punietazoleft_->changeState(Punietazo::DOWN);
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+		particlesys->createParticlesHandMagic(20, leftHandTr_);
+	}
 
 	else if (punietazoleft_->getstate() == Punietazo::DOWN)
 		punietazoleft_->goDown();
@@ -260,6 +280,9 @@ void HandsManager::hammerAttack() {
 			rightHandImg_->setColor(200, 200, 20, 500);
 			tiempoColor_->reset();
 			hammerRight_->goDiagonal();
+
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+			particlesys->createParticlesHandMagic(1, rightHandTr_);
 		}
 		else if (hammerRight_->getstate() == HammerArm::HIT) {
 			if(multFase_== 1)
@@ -287,7 +310,11 @@ void HandsManager::hammerAttack() {
 			if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
 				hammerLeft_->goDiagonal();
 				leftHandImg_->setColor(200, 200, 20, 500);
+				
 				tiempoColor_->reset();
+
+				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+				particlesys->createParticlesHandMagic(1, leftHandTr_);
 			}
 			else if (hammerLeft_->getstate() == HammerArm::HIT) {
 				

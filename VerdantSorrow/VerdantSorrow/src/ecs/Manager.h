@@ -114,13 +114,13 @@ public:
 			for (auto i = 0; i < e; i++)
 			{
 				background1[i]->render();
+			}
 			//Renderización de todos los elementos del background
 			auto background2 = getEntitiesByGroup(ecs::_BACKGROUND_2_GRP);
 			e = background2.size();
 			for (auto i = 0; i < e; i++)
 			{
 				background2[i]->render();
-			}
 			}
 			//Renderización de las particulas del fondo
 			auto background3 = getEntitiesByGroup(ecs::_PARTICLES_BACKGROUND_2);

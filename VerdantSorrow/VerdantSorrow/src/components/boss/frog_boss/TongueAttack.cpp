@@ -7,8 +7,8 @@
 #include "../../../ecs/Manager.h"
 #include "../../RectangleRenderer.h"
 
-TongueAttack::TongueAttack(CollisionManager *colMan):RectangleCollider(), 
-	colMan_(colMan),delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
+TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
+colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 	timer_ = new VirtualTimer();
 	mngr_->addTimer(timer_);
@@ -19,7 +19,7 @@ TongueAttack::TongueAttack(CollisionManager *colMan):RectangleCollider(),
 }
 
 TongueAttack::TongueAttack() :RectangleCollider(),
-	colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
+colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 	timer_ = new VirtualTimer();
 	mngr_->addTimer(timer_);
@@ -36,6 +36,7 @@ void TongueAttack::initComponent()
 	frogTr_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<Transform>();
 	assert(frogTr_ != nullptr);
 }
+
 void TongueAttack::update()
 {
 	if (!finishedAttack_ && timer_->currTime() >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
@@ -56,7 +57,6 @@ void TongueAttack::attack(bool fly)
 	{
 		mngr_->getHandler(ecs::_FLY)->setAlive(false); //Si el objetivo es la mosca, la mata
 	}
-	
 }
 
 bool TongueAttack::finished()
@@ -69,10 +69,14 @@ void TongueAttack::cancel()
 	setActive(false);
 }
 
+/*
+* Metodo que posiciona la lengua dependiendo de la posicion actual de la rana y el objetivo de esta
+* @param fly: booleana que indica si el objetivo es la mosca (true) o el jugador (false)
+*/
 void TongueAttack::currentPos(bool fly)
 {
-	fly_ = fly;
-	//Compruebo si el objetivo es la mosca o el jugador 
+	fly_ = fly; //Compruebo si el objetivo es la mosca o el jugador 
+
 	auto flyEnt_ = mngr_->getHandler(ecs::_FLY);
 	auto playerEnt_ = mngr_->getHandler(ecs::_PLAYER);
 
@@ -96,6 +100,7 @@ void TongueAttack::currentPos(bool fly)
 		iniPos = Vector2D(posObj.getX(), sdlutils().height() - playerTr_->getHeight() - 60 + tongueYOffset);
 		w = posFrog.getX() + tongueXOffset - iniPos.getX();
 	}
+
 	else //En este caso el collider crece desde la rana
 	{
 		iniPos = Vector2D(posFrog.getX() - tongueXOffset + frogTr_->getWidth(), sdlutils().height() - playerTr_->getHeight() - 60 + tongueYOffset);

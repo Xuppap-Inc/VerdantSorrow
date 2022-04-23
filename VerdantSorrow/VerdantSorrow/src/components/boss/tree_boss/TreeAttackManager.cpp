@@ -16,6 +16,7 @@
 #include "TreeMovement.h"
 #include "LanternCollisions.h"
 #include "../BossAtributos.h"
+#include "../../fondos/ParticleSystem.h"
 
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), 
 attacking_(false), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
@@ -80,6 +81,10 @@ void TreeAttackManager::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_linterna_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
+
+	hojas_ = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+	hojas_->createParticlesDandellion(10);
+
 
 	bool correct = tr_ != nullptr && player_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr && lanternTr_ != nullptr;
 	assert(correct);
@@ -158,6 +163,15 @@ void TreeAttackManager::update()
 				s->play();
 				musicaFase2_->setMusicVolume(100);
 				musicaFase1_->pauseChannel(0);
+
+				hojas_->disolveParticles();
+
+				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+				particlesys->createParticlesWind(50);
+
+				ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo1_frente"), mngr_);
+				particlesys2->createOverlayParticlesDandellion(3);
+
 				phase = PHASE2;
 
 				rootAutoAim_->attack(true);
@@ -287,6 +301,11 @@ void TreeAttackManager::update()
 			break;
 		}
 	}
+
+	if (deadBoss_) {
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
+	}
 }
 
 void TreeAttackManager::returnToIni()
@@ -338,6 +357,13 @@ void TreeAttackManager::prepareToSpecial()
 		lanternMov_->setActive(false);
 
 		lanternTr_->getPos().set(Vector2D(sdlutils().width() / 2 - lanternTr_->getWidth() / 2, sdlutils().height() / 8));
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_amarilla"), mngr_);
+		particlesys->createParticlesLanternMove(20, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
+
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo2"), mngr_);
+		particlesys2->createParticlesLanternMove(20, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
+
 
 		state = MOVING_TO_CENTER;
 

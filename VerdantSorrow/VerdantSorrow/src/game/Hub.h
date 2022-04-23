@@ -2,6 +2,9 @@
 #include <vector>
 #include "CollisionManager.h"
 #include "Scene.h"
+
+class TileMap;
+
 class Hub :public Scene
 {
 public:
@@ -20,6 +23,8 @@ public:
 	void changeScene_(bool ch);
 	void checkCollissions();
 	void backgroundHub();
+
+	
 private:
 	CollisionManager* colManager;
 	bool isAble;
@@ -28,6 +33,6 @@ private:
 	Entity* entryFrog;
 	Entity* entryTree;
 	Entity* entryEye;
-
 	Music* musica_;
+	TileMap* tileMap;
 };

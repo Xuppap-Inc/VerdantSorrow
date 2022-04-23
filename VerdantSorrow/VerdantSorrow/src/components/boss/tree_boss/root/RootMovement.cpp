@@ -3,6 +3,7 @@
 #include "../../../Transform.h"
 #include "../../../../ecs/Entity.h"
 #include "../../../../ecs/Manager.h"
+#include "../../../fondos/ParticleSystem.h"
 
 
 RootMovement::RootMovement() : tr_(), col_(), speed_(0.25), lastTime_()
@@ -26,7 +27,12 @@ void RootMovement::update()
 {
 	if (speed_ == 0) {
 		col_->setActive(false);	
-		if ( lastTime_->currTime() > 700) {
+		
+		if ( lastTime_->currTime() > 700){
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
+			particlesys->createParticlesRootsDie(3, tr_->getPos().getX() + (tr_->getWidth() / 2));
+			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
+			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));
 			ent_->setAlive(false);
 		}
 	}
@@ -38,6 +44,11 @@ void RootMovement::update()
 		else if (tr_->getPos().getY() < sdlutils().height() - 30) {
 			speed_ = 50;
 			col_->setActive(true);
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+			particlesys->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
+
+			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+			particlesys2->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
 		}
 		auto& vel = tr_->getVel();
 		vel = new Vector2D(0, -speed_);

@@ -4,7 +4,7 @@
 #include "../../../ecs/Entity.h"
 #include "../../../ecs/Manager.h"
 
-WaveMovement::WaveMovement(Vector2D dir, float speed) : tr_(), dir_(dir), speed_(speed)//, lastTime_()
+WaveMovement::WaveMovement(Vector2D dir, float speed) : tr_(), dir_(dir), speed_(speed), particles_(particles), lastTime_()
 {
 }
 WaveMovement::~WaveMovement()
@@ -32,5 +32,19 @@ void WaveMovement::update()
 	if (pos.getX() < 0 - tr_->getWidth() || pos.getX() > sdlutils().width()
 		|| pos.getY() < -tr_->getHeight() || pos.getY() > sdlutils().height()) {
 		ent_->setAlive(false);
+	}
+
+	if (particles_) {
+		// Onda horizontal
+		if (vel.getY() == 0) {
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+			particlesys->createParticlesWave(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + tr_->getHeight());
+		}
+		// Bola de fuego
+		else
+		{
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+			particlesys->createParticlesFireball(2, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + tr_->getHeight()/2);
+		}
 	}
 }

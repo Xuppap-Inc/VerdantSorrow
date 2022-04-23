@@ -13,7 +13,6 @@ private:
 	float lastUpdate_;
 	Music* musicaTest_;
 	int currentVolume_;
-	bool changeSc_;
 	float varVolume_; //Cuanto varia el volumen respecto al volumen total al bajarlo o subirlo
 
 public:

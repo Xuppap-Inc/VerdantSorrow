@@ -8,6 +8,9 @@
 #include "root/RootMovement.h"
 #include "../../player/Attack.h"
 #include "RootAutoAim.h"
+#include "../../fondos/ParticleSystem.h"
+#include "../../Image.h" 
+
 
 LanternCollisions::LanternCollisions(CollisionManager* colManager) : attrib_(), lanternTr_(), collider_(), colMan_(colManager), damaged_(false), 
 lanterMov_(), secondPhase_(false), contAttacks_(0), attacked_(false), playerAttack_()
@@ -51,6 +54,11 @@ void LanternCollisions::update()
 					damaged_ = true;
 
 					mngr_->getHandler(ecs::_TREEBOSS)->getComponent<RootAutoAim>()->cancelAttack();
+
+					ent_->getComponent<Image>()->setColor(200, 50, 50, 500);
+
+					ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_amarilla"), mngr_);
+					particlesys->createParticlesLanternDamage(20, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
 				}
 
 				else if (secondPhase_ && !attacked_ && attack != nullptr) {

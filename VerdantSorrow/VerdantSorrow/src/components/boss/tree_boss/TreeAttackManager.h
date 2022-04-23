@@ -13,6 +13,7 @@ class TreeMovement;
 class LanternMovement;
 class LanternCollisions;
 class BossAtributos;
+class ParticleSystem;
 
 #pragma once
 class TreeAttackManager : public ecs::Component
@@ -85,6 +86,8 @@ private:
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
 
+	ParticleSystem* hojas_;
+
 	int rootWidth_;
 	
 	VirtualTimer* timerWave_;
@@ -103,5 +106,7 @@ private:
 	void attackWave();
 	void attackSpecial();
 	void prepareToSpecial();
+
+	bool deadBoss_;
 };
 

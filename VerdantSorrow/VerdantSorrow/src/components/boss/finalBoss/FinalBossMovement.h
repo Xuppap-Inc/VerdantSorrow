@@ -12,6 +12,7 @@ class CollisionManager;
 class WaveSpawner;
 class FramedImage;
 class VirtualTimer;
+class ParticleSystem;
 
 class FinalBossMovement : public ecs::Component
 {
@@ -38,7 +39,8 @@ private:
 	float eyeSpeed;
 	Vector2D velocitySaved;
 	WaveSpawner* waveSp_;
-	Transform* playerTr;
+	Transform* playerTr_;
+
 	SoundEffect* musicaFase1_;
 	Music* musicaFase2_;
 
@@ -46,5 +48,9 @@ private:
 	//random bola de fuego times
 	//int lastFireBall_;//, fireBallCooldown_;
 	int /*lastTimeGround = 0,*/ timeInGround = 1000;
+	
+	ParticleSystem* ashes_;
+
+	bool deadBoss_;
 };
 
