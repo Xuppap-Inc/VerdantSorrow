@@ -13,7 +13,6 @@ moveDown_(false), moveLeft_(false), moveRight_(false), moveUp_(false), isTalking
 
 void PlayerHubControl::update()
 {
-	auto currentTime = sdlutils().currRealTime();
 
 	handleInput();
 
