@@ -50,15 +50,15 @@ Vista General |
 ![Vista General](./images/interfaz.jpg)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
-El jugador realiza el tutorial, lo que le enseña las mecánicas básicas y además le enseña que puede matar moscas y atravesar raíces rodando. 
+El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando. 
 
-Tras eso sale al hub. Allí podrá hablar con distintos NPCs que explican la historia brevemente y además alguno le menciona su primer objetivo, la rana.
+Tras eso sale al hub, un gran espacio a modo de interfase global del juego en donde podrá hablar con distintos NPCs que explican la historia en profundidad, de hablar con todos ellos y además alguno le menciona su primer objetivo, la rana.
 
-El jugador encuentra la zona en la que se encuentra la rana y entra para pelear contra ella. Al derrotarla sale a hub nuevamente para buscar el segundo objetivo, además, en el hub los NPCs tendrán nuevos diálogos referenciándolo.
+El jugador encuentra la zona en la que se encuentra la rana y entra para pelear contra ella. Al derrotarla sale a hub nuevamente para buscar el segundo objetivo, además, en el hub los NPCs tendrán nuevos diálogos que introducirán más al jugador en la historia del juego.
 
 Tras encontrar y derrotar al segundo jefe el jugador vuelve a repetir el ciclo de hablar y buscar al tercero.
 
-Al derrotar al tercer jefe el jugador debe escapar en un nivel de plataformas a contrareloj. Al llegar al hub podrá finalmente abrir la puerta y descubrir qué se encuentra tras esta.
+Al derrotar al tercer jefe el jugador debe escapar en un nivel de plataformas y obstáculos. Al llegar al hub podrá finalmente abrir la puerta y descubrir qué se encuentra tras esta.
 
 Se reproduce una cinemática final al abrir la puerta.
 
@@ -84,11 +84,13 @@ Total del juego: unos **45 min**, esta duración asume que el jugador lee diálo
 
 -Movimiento top down: El jugador podrá moverse en **X direcciones** en el hub.  
 
--Esquivar: El jugador podrá esquivar ataques, consiguiendo frames de invulnerabilidad durante la animación de esquivar.  
+-Esquivar: El jugador podrá esquivar ataques, desplazándose una corta distancia y consiguiendo frames de invulnerabilidad durante la animación de esquivar.
 
--Ataque: El personaje dará un barrido hacia delante con la espada, en vertical, de forma que el ataque es un **arco de la altura del jugador**. Te quedas quieto cuando estés atacando. El ataque hace 1 de daño.
+-Ataque: El personaje dará un barrido hacia delante con la espada, en vertical, de forma que el ataque es un **arco de la altura del jugador**. Te quedas quieto cuando estés atacando. El ataque hace 1 de daño. El ataque se puede realizar también durante el salto. Tanto en el ataque en el suelo como en el aire el jugador puede encadenar varios de estos dando lugar a un combo.
 
--Vida: El jugador dispondrá de tres vidas, perdiendo una por cada golpe que reciba de un enemigo. Al recibir un golpe el jugador será impulsado hacia atrás y brillará en blanco.
+-Vida: El jugador dispondrá de tres vidas, perdiendo una por cada golpe que reciba de un enemigo. Al recibir un golpe el jugador será impulsado hacia atrás y brillará en blanco. Durante unos segundos el jugador se volverá invulnerable a todo daño recibido.
+
+-Hablar: En el hub, el jugador puede hablar con todos los personajes que hay en él, pudiendo obtener información que le ayude en sus enfrentamientos y además le contarán la historia del juego en profundidad.
 
 ### <a name="mecanicas-de-enemigos"></a> 2.1.2. Mecánicas de enemigos  
 
@@ -105,9 +107,9 @@ Comportamiento de los jefes:
 
             - X segundos después, la rana lanza la lengua hasta la posición x de la mosca y hace daño, y vuelve rápidamente. La lengua sale de forma horizontal.
 
-            - Si matas a la mosca se enfada y realiza un ataque, un salto sobre sí mismo realizando una onda expansiva al caer. Tras este ataque se queda vulnerable durante un tiempo.
+            - Si matas a la mosca se enfada y realiza un ataque, un salto sobre sí mismo, más alto que los normales y realizando una onda expansiva hacia ambos lados al caer. Tras este ataque se queda vulnerable durante un tiempo.
 
-            - La onda expansiva se define como un proyectil que se mueve de forma horizontal desde la posición del boss hasta uno de los extremos de la pantalla, pegado al suelo a velocidad constante, de tamaño lo suficientemente pequeño para que pueda ser saltado por el jugador.
+            - La onda expansiva se define como un proyectil que se mueve de forma horizontal desde la posición del boss hasta  cada uno de los extremos de la pantalla, pegado al suelo a velocidad constante, de tamaño lo suficientemente pequeño para que pueda ser saltado por el jugador.
 
         - Segunda fase:
           - Mismo comportamiento que en la primera fase.
