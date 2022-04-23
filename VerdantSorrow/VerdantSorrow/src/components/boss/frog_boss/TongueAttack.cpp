@@ -10,8 +10,7 @@
 TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
 colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
-	timer_ = new VirtualTimer();
-	mngr_->addTimer(timer_);
+	timer_ = mngr_->addTimer();
 
 	setIsTrigger(true);
 	setActive(false);
@@ -21,8 +20,7 @@ colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(fals
 TongueAttack::TongueAttack() :RectangleCollider(),
 colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
-	timer_ = new VirtualTimer();
-	mngr_->addTimer(timer_);
+	
 
 	setIsTrigger(true);
 	setActive(false);
@@ -35,6 +33,7 @@ void TongueAttack::initComponent()
 	assert(tr_ != nullptr);
 	frogTr_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<Transform>();
 	assert(frogTr_ != nullptr);
+	timer_ = mngr_->addTimer();
 }
 
 void TongueAttack::update()

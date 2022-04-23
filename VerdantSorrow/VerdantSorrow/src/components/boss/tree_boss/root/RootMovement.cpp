@@ -19,8 +19,7 @@ void RootMovement::initComponent()
 	assert(tr_ != nullptr);
 	col_ = ent_->getComponent<RectangleCollider>();
 	col_->setActive(false);
-	lastTime_ = new VirtualTimer();
-	mngr_->addTimer(lastTime_);
+	lastTime_ =mngr_->addTimer();
 }
 
 void RootMovement::update()

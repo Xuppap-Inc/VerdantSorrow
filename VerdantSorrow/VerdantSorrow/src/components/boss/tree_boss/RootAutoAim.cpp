@@ -29,10 +29,8 @@ void RootAutoAim::initComponent()
 
 	lanternTr_ = mngr_->getHandler(ecs::_LANTERN)->getComponent<Transform>();
 
-	lastTime_ = new VirtualTimer();
-	mngr_->addTimer(lastTime_);
-	iniTime_ = new VirtualTimer();
-	mngr_->addTimer(iniTime_);
+	lastTime_ =mngr_->addTimer();
+	iniTime_ = mngr_->addTimer();
 
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && playerTr_ != nullptr && movement_	!= nullptr && lanternTr_ != nullptr;
 	assert(comps);

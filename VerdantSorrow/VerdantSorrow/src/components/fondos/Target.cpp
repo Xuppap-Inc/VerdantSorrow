@@ -9,8 +9,7 @@
 
 Target::Target(int time, Transform* target) : tr_(), time_(time), img_(), target_(target)
 {
-	timer_ = new VirtualTimer();
-	mngr_->addTimer(timer_);
+	timer_ =mngr_->addTimer();
 }
 Target::~Target() {
 }

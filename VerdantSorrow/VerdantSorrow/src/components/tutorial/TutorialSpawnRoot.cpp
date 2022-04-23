@@ -22,8 +22,7 @@ TutorialSpawnRoot::~TutorialSpawnRoot()
 
 void TutorialSpawnRoot::initComponent()
 {
-	lastTime_ = new VirtualTimer();
-	mngr_->addTimer(lastTime_);
+	lastTime_ = mngr_->addTimer();
 }
 
 

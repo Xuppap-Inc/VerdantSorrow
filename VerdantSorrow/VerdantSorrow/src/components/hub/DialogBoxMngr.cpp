@@ -25,8 +25,7 @@ void DialogBoxMngr::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	vt_ = new VirtualTimer();
-	mngr_->addTimer(vt_);
+	vt_ = mngr_->addTimer();
 	
 }
 

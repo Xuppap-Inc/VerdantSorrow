@@ -40,8 +40,7 @@ void FinalBossMovement::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
-	lastTimeInGround_ = new VirtualTimer();
-	mngr_->addTimer(lastTimeInGround_);
+	lastTimeInGround_ =mngr_->addTimer();
 
 	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	ashes_->createParticlesAsh(100);

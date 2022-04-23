@@ -25,11 +25,7 @@ slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true),
 
 	iniTotalAnimTime_ = totalAnimationTime_;
 
-	timer_ = new VirtualTimer();
-	mngr_->addTimer(timer_);
-
-	colorTimer_ = new VirtualTimer();
-	mngr_->addTimer(colorTimer_);
+	
 }
 
 FramedImage::~FramedImage()
@@ -47,7 +43,9 @@ void FramedImage::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	colorTimer_->reset();
+	timer_ = mngr_->addTimer();
+
+	colorTimer_ = mngr_->addTimer();
 }
 
 void FramedImage::render()

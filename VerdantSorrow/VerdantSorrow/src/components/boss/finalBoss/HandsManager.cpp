@@ -27,11 +27,9 @@ void HandsManager::initComponent()
 	bA_ = ent_->getComponent<BossAtributos>();
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(playertr_ != nullptr && bA_ != nullptr);
-	lastAttackDone_ = new VirtualTimer();
-	mngr_->addTimer(lastAttackDone_);
+	lastAttackDone_ = mngr_->addTimer();
 	//tiempoColor_.reset();
-	tiempoColor_ = new VirtualTimer();
-	mngr_->addTimer(tiempoColor_);
+	tiempoColor_ =mngr_->addTimer();
 	createHands();
 	chooseAttack();
 

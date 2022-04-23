@@ -17,14 +17,7 @@ Attack::Attack(float width, float height, float offsetY, CollisionManager* colMa
 	attackKeys({ SDL_SCANCODE_J }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
-	attackTimer_ = new VirtualTimer();
-	mngr_->addTimer(attackTimer_);
-	recoveryTimer_ = new VirtualTimer();
-	mngr_->addTimer(recoveryTimer_);
-	comboTimerAir_ = new VirtualTimer();
-	mngr_->addTimer(comboTimerAir_);
-	comboTimerGround_ = new VirtualTimer();
-	mngr_->addTimer(comboTimerGround_);
+	
 
 	setActive(false);
 	colMan_ = colManager;
@@ -42,8 +35,10 @@ void Attack::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ != nullptr && attrib_ != nullptr);
-
-	attackTimer_->reset();
+	attackTimer_ = mngr_->addTimer();
+	recoveryTimer_ = mngr_->addTimer();
+	comboTimerAir_ = mngr_->addTimer();
+	comboTimerGround_ = mngr_->addTimer();
 }
 
 void Attack::update()

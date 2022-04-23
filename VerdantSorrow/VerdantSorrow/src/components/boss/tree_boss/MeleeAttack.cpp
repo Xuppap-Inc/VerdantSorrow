@@ -23,8 +23,7 @@ void MeleeAttack::initComponent()
 	treeMovement_ = ent_->getComponent<TreeMovement>();
 	assert(tr_ != nullptr, collider_ != nullptr, treeMovement_ !=  nullptr);
 
-	attackTimer_ = new VirtualTimer();
-	mngr_->addTimer(attackTimer_);
+	attackTimer_ = mngr_->addTimer();
 }
 
 void MeleeAttack::update()

@@ -43,8 +43,7 @@ void FrogAttackManager::initComponent()
 
 	/*tongueWaitTimer_ = new VirtualTimer();
 	mngr_->addTimer(tongueWaitTimer_);*/
-	vt_ = new VirtualTimer();
-	mngr_->addTimer(vt_);
+	vt_ = mngr_->addTimer();
 
 	//musica
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");

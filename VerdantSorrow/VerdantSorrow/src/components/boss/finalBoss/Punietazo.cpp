@@ -29,10 +29,8 @@ void Punietazo::initComponent()
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(playertr_ != nullptr);
 
-	hitTime_ = new VirtualTimer();
-	mngr_->addTimer(hitTime_);
-	goBackTime_ = new VirtualTimer();
-	mngr_->addTimer(goBackTime_);
+	hitTime_ = mngr_->addTimer();
+	goBackTime_ =mngr_->addTimer();
 
 
 	initialwidth_ = tr_->getWidth();

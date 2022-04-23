@@ -28,8 +28,7 @@ void HammerArm::initComponent()
 	assert(tr_ != nullptr, collider_ != nullptr, playertr_ != nullptr, waveSp_ != nullptr);
 
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
-	lastTimeFloor_ = new VirtualTimer();
-	mngr_->addTimer(lastTimeFloor_);
+	lastTimeFloor_ = mngr_->addTimer();
 
 }
 

@@ -9,16 +9,14 @@
 
 Disolve::Disolve(int startFadingTime) : tr_(), startFadingTime_(startFadingTime), img_(), fading_(false)
 {
-	timer_ = new VirtualTimer();
-	mngr_->addTimer(timer_);
+	
 }
 Disolve::~Disolve() {
 }
 
 void Disolve::initComponent() {
 	img_ = ent_->getComponent<Image>();
-	
-	timer_->reset();
+	timer_ = mngr_->addTimer();
 }
 
 void Disolve::update() {

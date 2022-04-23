@@ -14,15 +14,12 @@
 Image::Image() :
 	tr_(), tex_(), visible_(true) {
 
-	colorTimer_ = new VirtualTimer();
-	mngr_->addTimer(colorTimer_);
+	colorTimer_ =mngr_->addTimer();
 }
 
 Image::Image(Texture* tex) :
 	tr_(), tex_(tex), visible_(true) {
 
-	colorTimer_ = new VirtualTimer();
-	mngr_->addTimer(colorTimer_);
 }
 
 Image::~Image() {
@@ -38,8 +35,8 @@ void Image::setAlpha(int num)
 void Image::initComponent() {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	colorTimer_ = mngr_->addTimer();
 
-	colorTimer_->reset();
 }
 
 void Image::render() {

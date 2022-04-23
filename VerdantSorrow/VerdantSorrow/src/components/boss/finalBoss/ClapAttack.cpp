@@ -24,8 +24,7 @@ void ClapAttack::initComponent()
 	assert(tr_ != nullptr, collider_ != nullptr);
 
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
-	vt_ = new VirtualTimer();
-	mngr_->addTimer(vt_);
+	vt_ =mngr_->addTimer();
 }
 
 void ClapAttack::goDiagonal()

@@ -21,17 +21,13 @@
 TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), 
 attacking_(false), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
-	timerCd_ = new VirtualTimer();
-	mngr_->addTimer(timerCd_);
+	timerCd_ = mngr_->addTimer();
 
-	timerSpecial_ = new VirtualTimer();
-	mngr_->addTimer(timerSpecial_);
+	timerSpecial_ = mngr_->addTimer();
 
-	timerWave_ = new VirtualTimer();
-	mngr_->addTimer(timerWave_);
+	timerWave_ =mngr_->addTimer();
 
-	waitTimer_ = new VirtualTimer();
-	mngr_->addTimer(waitTimer_);
+	waitTimer_ =mngr_->addTimer();
 }
 
 TreeAttackManager::~TreeAttackManager()
@@ -43,17 +39,13 @@ TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(),
 																	attacking_(false), treeCol_(), waiting_(false), 
 																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
 {
-	timerCd_ = new VirtualTimer();
-	mngr_->addTimer(timerCd_);
+	timerCd_ = mngr_->addTimer();
 
-	timerSpecial_ = new VirtualTimer();
-	mngr_->addTimer(timerSpecial_);
+	timerSpecial_ =mngr_->addTimer();
 
-	timerWave_ = new VirtualTimer();
-	mngr_->addTimer(timerWave_);
+	timerWave_ = mngr_->addTimer();
 
-	waitTimer_ = new VirtualTimer();
-	mngr_->addTimer(waitTimer_);
+	waitTimer_ = mngr_->addTimer();
 }
 
 void TreeAttackManager::initComponent()

@@ -12,7 +12,7 @@
 #include "../sdlutils/VirtualTimer.h"
 #include "../game/SceneManager.h"
 
-class VirtualTimer;
+
 namespace ecs {
 
 class Manager {
@@ -55,9 +55,11 @@ public:
 		return e;
 	}
 
-	inline void addTimer(VirtualTimer* timer)
+	inline VirtualTimer* addTimer()
 	{
+		auto timer = new VirtualTimer();
 		allTimers_.push_back(timer);
+		return timer;
 	}
 
 	// returns the vector of all entities
