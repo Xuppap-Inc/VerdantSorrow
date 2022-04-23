@@ -10,7 +10,7 @@
 using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
-	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
+	attrib_(), movementDir_(1), lastRollTimer_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
 	rollCooldown_(100), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
 	, isKnockback(false),direction_(0),
 
@@ -31,14 +31,14 @@ PlayerCtrl::~PlayerCtrl()
 
 void PlayerCtrl::update()
 {
-	auto currentTime = sdlutils().currRealTime();
+	//auto currentTime = sdlutils().currRealTime();
 
 	auto& vel = tr_->getVel();
 	bool isAttacking = attack_->isActive();
 
 	//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
 	//Se desactiva y se activa el deslizar
-	if (currentTime >= lastRoll_ + rollDuration_ && isRolling_) {
+	if (lastRollTimer_->currTime() >=  rollDuration_ && isRolling_) {
 		slide_ = true;
 		isRolling_ = false;
 	}
@@ -93,9 +93,9 @@ void PlayerCtrl::update()
 			
 
 		//Roll
-		if (attrib_->isOnGround() && roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
+		if (attrib_->isOnGround() && roll_ && lastRollTimer_->currTime() >=  + rollDuration_ + rollCooldown_) {
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
-			lastRoll_ = currentTime;
+			lastRollTimer_->reset();
 			isRolling_ = true;
 			direction_ = movementDir_;
 			slide_ = false;
@@ -133,6 +133,7 @@ void PlayerCtrl::initComponent()
 	assert(anim_ != nullptr);
 	attack_ = ent_->getComponent<Attack>();
 	assert(attack_ != nullptr);
+	lastRollTimer_ = mngr_->addTimer();
 }
 
 // Realiza un knockback en la direccion especificada

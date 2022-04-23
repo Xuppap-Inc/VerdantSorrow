@@ -3,6 +3,7 @@
 #include "PlayerAttributes.h"
 #include "../RectangleCollider.h"
 #include "../FramedImage.h"
+#include "../../sdlutils/VirtualTimer.h"
 #include <SDL.h>
 #include <vector>
 using namespace std;
@@ -40,7 +41,8 @@ private:
 	float jumpForce_, speed_, rollSpeed_, deceleration_;
 
 	//variables de control de roll
-	float rollCooldown_ , rollDuration_, lastRoll_;
+	float rollCooldown_ , rollDuration_;
+	VirtualTimer* lastRollTimer_;
 	bool isRolling_;
 
 	//bool de control de slide
