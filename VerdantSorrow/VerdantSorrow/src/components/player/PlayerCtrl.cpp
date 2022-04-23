@@ -12,7 +12,7 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 	tr_(nullptr), speed_(speed), jumpForce_(jumpForce), rollSpeed_(rollSpeed), deceleration_(deceleration),
 	attrib_(), movementDir_(1), lastRoll_(), playerCol_(nullptr), moveLeft_(false), moveRight_(false), jump_(false),
 	rollCooldown_(100), rollDuration_(500), isRolling_(false), knockbackForceX_(40), knockbackForceY_(10), slide_(false), roll_(false)
-	, isKnockback(false),direction_(0),
+	, isKnockback(false),
 
 	// INPUT
 	// Jump
@@ -66,7 +66,6 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(0, vel.getY()));
 			movementDir_ = 1;
 			slide_ = false;
-			direction_ = 1;
 		}
 		//movimiento izquierda
 		else if (moveLeft_ && !attrib_->isLeftStop()) {
@@ -74,7 +73,7 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(-speed_, vel.getY()));
 			movementDir_ = -1;
 			slide_ = false;
-			direction_ = -1;
+
 			anim_->flipX(true);
 		}
 		//movimiento derecha
@@ -83,28 +82,23 @@ void PlayerCtrl::update()
 			vel.set(Vector2D(speed_, vel.getY()));
 			movementDir_ = 1;
 			slide_ = false;
-			direction_ = 1;
+
 			anim_->flipX(false);
 		}
-		else {
+		else
 			slide_ = true;
-			direction_ = 0;
-		}
-			
 
 		//Roll
 		if (attrib_->isOnGround() && roll_ && currentTime >= lastRoll_ + rollDuration_ + rollCooldown_) {
 			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
 			lastRoll_ = currentTime;
 			isRolling_ = true;
-			direction_ = movementDir_;
 			slide_ = false;
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
 			s->play();
 			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
 			particlesys->createParticlesRoll(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
-		}
-		
+		}	
 
 	}
 

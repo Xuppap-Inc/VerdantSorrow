@@ -19,7 +19,6 @@ public:
 	void initComponent() override;
 
 	int getMovementDir() { return movementDir_; }
-	int getDir() { return direction_; }
 
 	void doKnockback(int dir);
 	void doAttack();
@@ -51,7 +50,7 @@ private:
 	bool isKnockback;
 
 	//Indica la direccion del movimiento del jugador
-	int movementDir_,direction_;
+	int movementDir_;
 
 	//booleanas de control para manejar el input
 	bool moveLeft_, moveRight_, jump_, roll_;

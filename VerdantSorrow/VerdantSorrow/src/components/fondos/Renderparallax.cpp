@@ -58,7 +58,7 @@ void RenderParallax::update()
 		startpos -= (3*tr_->getWidth());
 	}*/
 
-	int dir = (mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->getDir());
+	int dir = (mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->getMovementDir());
 	auto& pos = tr_->getPos();
 	//float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
 	if (dir == 1) {
