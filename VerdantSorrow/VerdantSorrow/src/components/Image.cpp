@@ -13,6 +13,8 @@
 
 Image::Image() :
 	tr_(), tex_(), visible_(true) {
+
+	
 }
 
 Image::Image(Texture* tex) :
@@ -33,14 +35,15 @@ void Image::setAlpha(int num)
 void Image::initComponent() {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	colorTimer_ = mngr_->addTimer();
 
-	colorTimer_.reset();
 }
 
 void Image::render() {
 
 	if (visible_) {
-		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(), tr_->getHeight());
+		Vector2D v = tr_->getPos() - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+		SDL_Rect dest = build_sdlrect(v, tr_->getWidth(), tr_->getHeight());
 		
 		//escalado pantalla
 		auto sW = mngr_->getWindowScaleWidth();
@@ -83,13 +86,13 @@ void Image::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
 	green_ = g;
 	blue_ = b;
 	colorDuration_ = duration;
-	colorTimer_.reset();
+	colorTimer_->reset();
 }
 
 void Image::update() {
 	if (colorDuration_ != -1)
 	{
-		if (colorTimer_.currTime() >= colorDuration_) {
+		if (colorTimer_->currTime() >= colorDuration_) {
 			red_ = 255;
 			green_ = 255;
 			blue_ = 255;

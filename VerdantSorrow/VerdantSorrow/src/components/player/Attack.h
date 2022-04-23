@@ -61,10 +61,10 @@ protected:
 	//Variables que controlan el timing del ataque
 	int attackDuration;
 	int attackCoolDown;
-	VirtualTimer cooldownTimer_;
-	VirtualTimer attackTimer_;
-	VirtualTimer comboTimerGround_;
-	VirtualTimer comboTimerAir_;
+	VirtualTimer* cooldownTimer_;
+	VirtualTimer* attackTimer_;
+	VirtualTimer* comboTimerGround_;
+	VirtualTimer* comboTimerAir_;
 
 	//combo
 	bool comboFinishedGround_;
@@ -82,7 +82,7 @@ protected:
 	vector<SDL_Scancode> attackKeys;
 	vector<SDL_GameControllerButton> attackButtons;
 
-	VirtualTimer recoveryTimer_;
+	VirtualTimer* recoveryTimer_;
 	bool recovery_;
 
 	/**

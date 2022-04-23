@@ -12,6 +12,7 @@ class CollisionManager;
 class BossAtributos;
 class FramedImage;
 class WaveSpawner;
+class VitualTimer;
 class ParticleSystem;
 
 class FrogAttackManager : public ecs::Component
@@ -99,10 +100,12 @@ private:
 	bool attacking_;
 	bool jumpingBig_;
 	Uint32 delay_;
-	Uint32 lastUpdate_;
-	Uint32 tongueDelay_;
+	//Uint32 tongueDelay_;
 
-	VirtualTimer tongueWaitTimer_;
+	VirtualTimer* vt_;
+
+	//este no es necesario ya VirtualTimer tongueWaitTimer_;
+	
 
 	bool deadBoss_;
 };

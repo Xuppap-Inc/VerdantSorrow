@@ -73,7 +73,7 @@ private:
 	bool visible_;
 	bool adjustToTransform_;
 
-	VirtualTimer timer_;
+	VirtualTimer* timer_;
 
 	float slowFactor_;
 	bool slowed_;
@@ -88,7 +88,7 @@ private:
 	void checkEvents();
 	void clearEvents();
 
-	VirtualTimer colorTimer_;
+	VirtualTimer* colorTimer_;
 	int colorDuration_ = 0;
 	int red_ = 255, green_ = 255, blue_ = 255;
 };

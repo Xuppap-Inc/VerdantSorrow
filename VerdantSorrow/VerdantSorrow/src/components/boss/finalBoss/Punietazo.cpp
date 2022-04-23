@@ -29,9 +29,14 @@ void Punietazo::initComponent()
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(playertr_ != nullptr);
 
+	hitTime_ = mngr_->addTimer();
+	goBackTime_ =mngr_->addTimer();
+
+
 	initialwidth_ = tr_->getWidth();
 	initialheight_ = tr_->getHeight();
 	initialpos_ = tr_->getPos();
+
 	// Valores collider
 	col_initialwidth_ = col_->getWidth();
 	col_initialheight_ = col_->getHeight();
@@ -70,7 +75,7 @@ void Punietazo::followPlayer()
 	}
 	else
 	{
-		hitTime_ = sdlutils().currRealTime();
+		hitTime_->reset();
 		changeState(HIT);
 	}
 }
@@ -84,7 +89,7 @@ void Punietazo::hit()
 	if (manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer"));
 	else img_->setTexture(&sdlutils().images().at("manoIzq"));
 
-	if (sdlutils().currRealTime() - hitTime_ >= 350) {
+	if (hitTime_->currTime() >= 350) {
 		col_->setIsTrigger(true);
 		col_->setActive(true);
 
@@ -92,7 +97,7 @@ void Punietazo::hit()
 		col_->setHeight(height);
 
 		changeState(BACK);
-		goBackTime_ = sdlutils().currRealTime();
+		goBackTime_->reset();
 	}
 	else {
 		int nextWidth = std::min(width + dW, maxWidth_);
@@ -111,7 +116,7 @@ void Punietazo::goBack()
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
 
-	if (sdlutils().currRealTime() - goBackTime_ >= 750) {
+	if (goBackTime_->currTime() >= 750) {
 
 		col_->setActive(false);
 

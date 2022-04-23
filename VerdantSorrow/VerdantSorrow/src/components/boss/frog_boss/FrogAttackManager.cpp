@@ -20,8 +20,8 @@
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED), attr_(),
 jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), delay_(0), musicaFase1_(), musicaFase2_(),
-flySpacing_(0), tongueDelay_(3000), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
-animNewState_(ANIM_IDLE), waveSp_(), tongueWaitTimer_(), anim_(), tongueAnim_(), lastUpdate_(0), oldJumpDirection_(0), deadBoss_(false)
+flySpacing_(0), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
+animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false)
 {
 }
 
@@ -40,6 +40,10 @@ void FrogAttackManager::initComponent()
 	attr_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
+
+	/*tongueWaitTimer_ = new VirtualTimer();
+	mngr_->addTimer(tongueWaitTimer_);*/
+	vt_ = mngr_->addTimer();
 
 	//musica
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
@@ -221,7 +225,7 @@ void FrogAttackManager::checkFrogState()
 				tongue_->setActive(false);
 
 				delay_ = 0;
-				lastUpdate_ = sdlutils().currRealTime();
+				vt_->reset();
 			};
 
 			//animacion de recoger la lengua
@@ -234,7 +238,8 @@ void FrogAttackManager::checkFrogState()
 		nextAttack();
 		break;
 	case WAITING:
-		if (delay_ + lastUpdate_ < sdlutils().currRealTime()) {
+		
+		if (delay_< vt_->currTime()) {
 			frogState_ = CALC_NEXT_ATTACK;
 		}
 		break;
@@ -367,8 +372,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 	frogState_ = WAITING;
 	jump = false;
 	delay_ = sdlutils().rand().nextInt(1000, 2500);
-	lastUpdate_ = sdlutils().currRealTime();
-
+	vt_->reset();
 	if (isBig) {
 		if (secondPhase_) {
 			jumpsUntilNextTongue_--;
@@ -401,7 +405,7 @@ void FrogAttackManager::nextAttack()
 		}
 		frogState_ = DOING_ANIMATION;
 
-		tongueWaitTimer_.reset();
+		//tongueWaitTimer_.reset();
 		tongue_->setActive(true);
 	}
 	else {
@@ -439,7 +443,7 @@ void FrogAttackManager::checkPhaseChange()
 
 		frogState_ = DOING_ANIMATION;
 
-		lastUpdate_ = sdlutils().currRealTime();
+		vt_->reset();
 		secondPhase_ = true;
 	}
 }

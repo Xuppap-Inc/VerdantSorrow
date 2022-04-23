@@ -10,13 +10,15 @@
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
 	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
-	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), attackTimer_(), 
+	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), 
 	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
+	
+
 	setActive(false);
 	colMan_ = colManager;
 
@@ -33,8 +35,11 @@ void Attack::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ != nullptr && attrib_ != nullptr);
-
-	attackTimer_.reset();
+	attackTimer_ = mngr_->addTimer();
+	recoveryTimer_ = mngr_->addTimer();
+	comboTimerAir_ = mngr_->addTimer();
+	comboTimerGround_ = mngr_->addTimer();
+	cooldownTimer_ = mngr_->addTimer();
 }
 
 void Attack::update()
@@ -45,12 +50,12 @@ void Attack::update()
 
 		if (state_ == WAITING_RECOVERY) {
 
-			if (recoveryTimer_.currTime() >= TIME_UNTIL_RECOVERY) {
+			if (recoveryTimer_->currTime() >= TIME_UNTIL_RECOVERY) {
 
 				recoverAnim();
 
 				//activa el cooldown
-				cooldownTimer_.reset();
+				cooldownTimer_->reset();
 
 				state_ = COOLDOWN;
 			}
@@ -60,14 +65,14 @@ void Attack::update()
 		
 			if (recovery_) deactivateRecovery();
 
-			if (comboFinishedGround_ || comboTimerGround_.currTime() > COMBO_WINDOW) {
+			if (comboFinishedGround_ || comboTimerGround_->currTime() > COMBO_WINDOW) {
 			
 				//vars combo
 				nComboGround_ = 0;
 				comboFinishedGround_ = false;
 			}
 
-			if (attrib_->isOnGround() || comboFinishedAir_ || comboTimerAir_.currTime() > COMBO_WINDOW) {
+			if (attrib_->isOnGround() || comboFinishedAir_ || comboTimerAir_->currTime() > COMBO_WINDOW) {
 
 				//vars combo
 				nComboAir_ = 0;
@@ -78,12 +83,12 @@ void Attack::update()
 
 	else if (state_ == COOLDOWN) {
 	
-		if (!comboFinishedGround_ && comboTimerGround_.currTime() < COMBO_WINDOW) {
+		if (!comboFinishedGround_ && comboTimerGround_->currTime() < COMBO_WINDOW) {
 		
 			checkInput();
 		}
 
-		if (cooldownTimer_.currTime() >= attackCoolDown) {
+		if (cooldownTimer_->currTime() >= attackCoolDown) {
 		
 			state_ = WAITING;
 		}
@@ -93,7 +98,7 @@ void Attack::update()
 	
 		setPosition();
 
-		if (attackTimer_.currTime() >= attackDuration) {
+		if (attackTimer_->currTime() >= attackDuration) {
 
 			setActive(false);
 			finished_ = true;
@@ -157,7 +162,7 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 
 		nComboAir_++;
 
-		comboTimerAir_.reset();
+		comboTimerAir_->reset();
 	}
 
 	else if (nComboAir_ == 1) {
@@ -169,7 +174,7 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 
 		nComboAir_++;
 
-		comboTimerAir_.reset();
+		comboTimerAir_->reset();
 	}
 
 	else if (nComboAir_ == 2) {
@@ -212,7 +217,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		nComboGround_++;
 
-		comboTimerGround_.reset();
+		comboTimerGround_->reset();
 	}
 
 	else if (nComboGround_ == 1) {
@@ -226,7 +231,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 		nComboGround_++;
 
-		comboTimerGround_.reset();
+		comboTimerGround_->reset();
 	}
 
 	else if (nComboGround_ == 2) {
@@ -296,7 +301,7 @@ void Attack::attack()
 	newAttack_ = true;
 
 	setActive(true);
-	attackTimer_.reset();
+	attackTimer_->reset();
 	setPosition();//si no setamos la posicion aqui, se renderizara un frame del ataque en una posicion que no debe
 }
 
@@ -314,7 +319,7 @@ void Attack::setPosition()
 
 void Attack::activateRecoveryTimer()
 {
-	recoveryTimer_.reset();
+	recoveryTimer_->reset();
 
 	recovery_ = true;
 	state_ = WAITING_RECOVERY;

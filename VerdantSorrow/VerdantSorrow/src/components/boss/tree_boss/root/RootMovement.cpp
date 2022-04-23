@@ -2,10 +2,11 @@
 
 #include "../../../Transform.h"
 #include "../../../../ecs/Entity.h"
+#include "../../../../ecs/Manager.h"
 #include "../../../fondos/ParticleSystem.h"
 
 
-RootMovement::RootMovement() : tr_(), col_(), speed_(0.25), lastTime_(0)
+RootMovement::RootMovement() : tr_(), col_(), speed_(0.25), lastTime_()
 {
 }
 RootMovement::~RootMovement()
@@ -18,13 +19,15 @@ void RootMovement::initComponent()
 	assert(tr_ != nullptr);
 	col_ = ent_->getComponent<RectangleCollider>();
 	col_->setActive(false);
+	lastTime_ =mngr_->addTimer();
 }
 
 void RootMovement::update()
 {
 	if (speed_ == 0) {
 		col_->setActive(false);	
-		if (sdlutils().currRealTime() - lastTime_ > 700) {
+		
+		if ( lastTime_->currTime() > 700){
 			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
 			particlesys->createParticlesRootsDie(3, tr_->getPos().getX() + (tr_->getWidth() / 2));
 			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
@@ -35,7 +38,7 @@ void RootMovement::update()
 	else {
 		if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() + 100) {
 			speed_ = 0;
-			lastTime_ = sdlutils().currRealTime();
+			lastTime_->reset();
 		}
 		else if (tr_->getPos().getY() < sdlutils().height() - 30) {
 			speed_ = 50;

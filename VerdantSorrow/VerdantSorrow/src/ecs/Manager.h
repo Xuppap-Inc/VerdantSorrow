@@ -9,7 +9,9 @@
 #include "Component.h"
 #include "ecs.h"
 #include "Entity.h"
+#include "../sdlutils/VirtualTimer.h"
 #include "../game/SceneManager.h"
+
 
 namespace ecs {
 
@@ -53,10 +55,20 @@ public:
 		return e;
 	}
 
+	inline VirtualTimer* addTimer()
+	{
+		auto timer = new VirtualTimer();
+		allTimers_.push_back(timer);
+		return timer;
+	}
+
 	// returns the vector of all entities
 	//
 	inline const auto& getEntities() {
 		return ents_;
+	}
+	inline const auto& getTimers() {
+		return allTimers_;
 	}
 
 	// returns the vector of all entities for group 'gId'
@@ -251,6 +263,7 @@ private:
 	std::array<Entity*, maxHdlrId> hdlrs_;
 	std::array<std::vector<Entity*>, maxGroupId> entsByGroup_;
 
+	std::vector<VirtualTimer*> allTimers_;
 	//bool that says if debug mode is on
 	bool debug_;
 

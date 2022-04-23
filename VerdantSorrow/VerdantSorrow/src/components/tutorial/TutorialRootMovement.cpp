@@ -3,9 +3,10 @@
 #include "../Transform.h"
 #include "../../ecs/Entity.h"
 #include "../fondos/ParticleSystem.h"
+#include "../../ecs/Manager.h"
 
 
-TutorialRootMovement::TutorialRootMovement() : tr_(), col_(), speed_(0.25), lastTime_(0)
+TutorialRootMovement::TutorialRootMovement() : tr_(), col_(), speed_(0.25), lastTimeTimer_()
 {
 }
 TutorialRootMovement::~TutorialRootMovement()
@@ -18,20 +19,21 @@ void TutorialRootMovement::initComponent()
 	assert(tr_ != nullptr);
 	col_ = ent_->getComponent<RectangleCollider>();
 	col_->setActive(false);
+	lastTimeTimer_ = mngr_->addTimer();
 }
 
 void TutorialRootMovement::update()
 {
 	if (speed_ == 0) {
 		col_->setActive(false);
-		if (sdlutils().currRealTime() - lastTime_ > 700) {
+		if (lastTimeTimer_->currTime() > 700) {
 			ent_->setAlive(false);
 		}
 	}
 	else {
 		if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() + 100) {
 			speed_ = 0;
-			lastTime_ = sdlutils().currRealTime();
+			lastTimeTimer_->reset();
 		}
 		else if (tr_->getPos().getY() < sdlutils().height() - 30) {
 			speed_ = 50;

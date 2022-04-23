@@ -14,7 +14,7 @@
 #include "../../fondos/ParticleSystem.h"
 
 
-HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO)
+HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO),lastAttackDone_(),tiempoColor_()
 {
 }
 
@@ -27,14 +27,17 @@ void HandsManager::initComponent()
 	bA_ = ent_->getComponent<BossAtributos>();
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(playertr_ != nullptr && bA_ != nullptr);
+	lastAttackDone_ = mngr_->addTimer();
+	//tiempoColor_.reset();
+	tiempoColor_ =mngr_->addTimer();
 	createHands();
 	chooseAttack();
-	tiempoColor_.reset();
+
 }
 
 void HandsManager::update()
 {
-	if (state_ == REPOSO && sdlutils().currRealTime() > lastAttackDone + attackCooldown) {
+	if (state_ == REPOSO && lastAttackDone_->currTime() > attackCooldown) {
 		switch (numeroAtaque)
 		{
 		case CLAP:
@@ -67,7 +70,7 @@ void HandsManager::update()
 			colliderLeftHand_->setIsTrigger(true);
 			colliderRightHand_->setIsTrigger(true);
 
-			if (tiempoColor_.currTime() >= 500) {
+			if (tiempoColor_->currTime() >= 500) {
 				rightHandImg_->setColor(200, 20, 200);
 				leftHandImg_->setColor(200, 20, 200);
 			}
@@ -148,7 +151,8 @@ void HandsManager::chooseAttack() {
 	}
 	else {
 		attackCooldown = 1000;
-		lastAttackDone = sdlutils().currRealTime();
+		//lastAttackDone = sdlutils().currRealTime();
+		lastAttackDone_->reset();
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
 		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
 		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
@@ -162,7 +166,8 @@ void HandsManager::clapAttack(){
 		clapRight_->changeState(ClapAttack::DIAGONAL); 
 		leftHandImg_->setColor(200, 200, 20, 500);
 		rightHandImg_->setColor(200, 200, 20, 500);
-		tiempoColor_.reset();
+		
+		tiempoColor_->reset();
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
 		particlesys->createParticlesHandMagic(10, leftHandTr_);
@@ -198,7 +203,8 @@ void HandsManager::clapAttack(){
 		clapRight_->changeState(ClapAttack::REPOSO);
 
 		chooseAttack();
-		lastAttackDone = sdlutils().currRealTime();
+		//lastAttackDone = sdlutils().currRealTime();
+		lastAttackDone_->reset();
 		state_ = REPOSO;
 	}
 }
@@ -250,7 +256,8 @@ void HandsManager::punietazoAttack() {
 		punietazoright_->changeState(Punietazo::REPOSO);
 
 		chooseAttack();
-		lastAttackDone = sdlutils().currRealTime();
+		//lastAttackDone = sdlutils().currRealTime();
+		lastAttackDone_->reset();
 		state_ = REPOSO;
 	}
 }
@@ -269,7 +276,7 @@ void HandsManager::hammerAttack() {
 	else if (hammerLeft_->getstate() == HammerArm::REPOSO) {
 		if (hammerRight_->getstate() == HammerArm::DIAGONAL) {
 			rightHandImg_->setColor(200, 200, 20, 500);
-			tiempoColor_.reset();
+			tiempoColor_->reset();
 			hammerRight_->goDiagonal();
 
 			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
@@ -291,7 +298,8 @@ void HandsManager::hammerAttack() {
 			hammerRight_->changeState(HammerArm::REPOSO);
 
 			chooseAttack();
-			lastAttackDone = sdlutils().currRealTime();
+			//lastAttackDone = sdlutils().currRealTime();
+			lastAttackDone_->reset();
 			state_ = REPOSO;
 		}
 	}
@@ -300,7 +308,8 @@ void HandsManager::hammerAttack() {
 			if (hammerLeft_->getstate() == HammerArm::DIAGONAL) {
 				hammerLeft_->goDiagonal();
 				leftHandImg_->setColor(200, 200, 20, 500);
-				tiempoColor_.reset();
+				
+				tiempoColor_->reset();
 
 				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
 				particlesys->createParticlesHandMagic(1, leftHandTr_);
@@ -322,7 +331,8 @@ void HandsManager::hammerAttack() {
 				hammerLeft_->changeState(HammerArm::REPOSO);
 
 				chooseAttack();
-				lastAttackDone = sdlutils().currRealTime();
+				//lastAttackDone = sdlutils().currRealTime();
+				lastAttackDone_->reset();
 				state_ = REPOSO;
 			}
 		}

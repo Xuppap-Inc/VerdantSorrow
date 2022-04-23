@@ -24,7 +24,7 @@ private:
 	bool fading_;
 
 	Image* img_;
-	VirtualTimer timer_;
+	VirtualTimer* timer_;
 };
 
 

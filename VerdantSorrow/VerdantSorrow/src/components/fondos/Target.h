@@ -23,7 +23,7 @@ private:
 	int time_;
 
 	Image* img_;
-	VirtualTimer timer_;
+	VirtualTimer* timer_;
 
 	Transform* target_;
 };

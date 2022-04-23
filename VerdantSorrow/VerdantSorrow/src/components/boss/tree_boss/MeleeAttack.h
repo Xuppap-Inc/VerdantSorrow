@@ -4,6 +4,7 @@
 #include "../../RectangleCollider.h"
 #include "../../../game/CollisionManager.h"
 #include <SDL.h>
+#include "../../../sdlutils/VirtualTimer.h"
 
 class TreeMovement;
 class Transform;
@@ -31,7 +32,8 @@ protected:
     //Variables que controlan el timing del ataque
     int attackDuration;
     int attackCoolDown;
-    int lastAttack;
+
+    VirtualTimer* attackTimer_;
 
     CollisionManager* colMan_;
 

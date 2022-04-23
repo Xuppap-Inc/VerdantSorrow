@@ -11,7 +11,7 @@
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
 
-HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_()
+HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_(),lastTimeFloor_()
 {
 }
 
@@ -28,6 +28,8 @@ void HammerArm::initComponent()
 	assert(tr_ != nullptr, collider_ != nullptr, playertr_ != nullptr, waveSp_ != nullptr);
 
 	initialPos = Vector2D(tr_->getPos().getX(), tr_->getPos().getY());
+	lastTimeFloor_ = mngr_->addTimer();
+
 }
 
 void HammerArm::goDiagonal()
@@ -69,7 +71,7 @@ void HammerArm::attack(bool quemado)
 
 		tr_->getVel().set(Vector2D(0, 0));
 		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
-		lastTimeFloor = sdlutils().currRealTime();
+		lastTimeFloor_->reset();
 		changeState(REPOSOSUELO);
 		waveSp_->createWaves(75, 50, Vector2D(1, 0), tr_);
 	}
@@ -90,7 +92,7 @@ void HammerArm::goBack()
 
 void HammerArm::stayFloor() {
 	collider_->setIsTrigger(false);
-	if (sdlutils().currRealTime() > lastTimeFloor + cooldoownInFloor)
+	if (lastTimeFloor_->currTime() >  cooldoownInFloor)
 		changeState(BACK);
 }
 

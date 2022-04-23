@@ -2,9 +2,10 @@
 
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
+#include "../../../ecs/Manager.h"
 #include "../../fondos/ParticleSystem.h"
 
-WaveMovement::WaveMovement(Vector2D dir, float speed, bool particles) : tr_(), dir_(dir), speed_(speed), lastTime_(0), particles_(particles)
+WaveMovement::WaveMovement(Vector2D dir, float speed, bool particles) : tr_(), dir_(dir), speed_(speed), particles_(particles)
 {
 }
 WaveMovement::~WaveMovement()
@@ -15,7 +16,6 @@ void WaveMovement::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	lastTime_ = sdlutils().currRealTime();
 }
 
 

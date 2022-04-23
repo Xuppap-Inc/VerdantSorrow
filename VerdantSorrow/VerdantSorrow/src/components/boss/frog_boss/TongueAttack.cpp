@@ -11,6 +11,7 @@ TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
 colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 
+
 	setIsTrigger(true);
 	setActive(false);
 	colMan->addCollider(this);
@@ -19,6 +20,8 @@ colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(fals
 TongueAttack::TongueAttack() :RectangleCollider(),
 colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
+	
+
 	setIsTrigger(true);
 	setActive(false);
 }
@@ -30,11 +33,12 @@ void TongueAttack::initComponent()
 	assert(tr_ != nullptr);
 	frogTr_ = mngr_->getHandler(ecs::_FROGBOSS)->getComponent<Transform>();
 	assert(frogTr_ != nullptr);
+	timer_ = mngr_->addTimer();
 }
 
 void TongueAttack::update()
 {
-	if (!finishedAttack_ && timer_.currTime() >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
+	if (!finishedAttack_ && timer_->currTime() >= delay_) //Desactiva la lengua cuando pasa un tiempo determinado
 	{
 		setActive(false);
 		finishedAttack_ = true;
@@ -46,7 +50,7 @@ void TongueAttack::attack(bool fly)
 	setActive(true);
 
 	finishedAttack_ = false; //El ataque no ha terminado aun
-	timer_.reset();
+	timer_->reset();
 
 	if (fly_)
 	{

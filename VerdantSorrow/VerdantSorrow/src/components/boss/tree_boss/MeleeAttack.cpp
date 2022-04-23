@@ -7,7 +7,7 @@
 #include "../../player/PlayerAttributes.h"
 #include "../../../ecs/Manager.h"
 
-MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(800), attackCoolDown(800), lastAttack(), attacking_(false)
+MeleeAttack::MeleeAttack(float width, float height, CollisionManager* colManager) : tr_(nullptr), RectangleCollider(width, height), attackDuration(800), attackCoolDown(800), attackTimer_(), attacking_(false)
 {
 	setActive(false);
 	colMan_ = colManager;
@@ -22,18 +22,23 @@ void MeleeAttack::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
 	assert(tr_ != nullptr, collider_ != nullptr, treeMovement_ !=  nullptr);
+
+	attackTimer_ = mngr_->addTimer();
 }
 
 void MeleeAttack::update()
 {
-	auto currentTime = sdlutils().currRealTime();
+	//auto currentTime = sdlutils().currRealTime();
+	//attackTimer_->reset();
 
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
-		if (currentTime >= lastAttack + attackDuration) {
+		if (attackTimer_->currTime() >=attackDuration) {
 			setActive(false);
 			treeMovement_->setMoveActive(true);
 			attacking_ = false;
+			attackTimer_->reset();
+
 		}
 	}
 }
@@ -60,13 +65,13 @@ void MeleeAttack::render()
 
 void MeleeAttack::attack(int dir)
 {
-	auto currentTime = sdlutils().currRealTime();
+	//auto currentTime = sdlutils().currRealTime();
 	
 	//añade el propio collider porque meleeAttack ya es un RectangleCollider
 	colMan_->addCollider(this);
 	setActive(true);
 	setIsTrigger(true);
-	lastAttack = currentTime;
+	attackTimer_->reset();
 	setPosition(dir);
 
 	attacking_ = true;

@@ -23,6 +23,7 @@
 
 CollisionChecker::CollisionChecker(CollisionManager* colManager, ecs::Manager* mngr) : colManager_(colManager), mngr_(mngr)
 {
+	
 }
 
 CollisionChecker::~CollisionChecker()
@@ -49,9 +50,13 @@ void CollisionChecker::checkCollisions()
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
-
-	if (sdlutils().currRealTime() > attrib->getInvulnerableTimer() + 5000)
+	
+	if (vt_->currTime() > attrib->getInvulnerableTimer() + 5000)
+	{
 		attrib->setInvulnerable(false);
+		vt_->reset();
+	}
+		
 
 
 	checkAttackCollisions(playerAt, player);

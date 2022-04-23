@@ -4,6 +4,7 @@
 #include "BossAtributos.h"
 #include "../../utils/Vector2D.h"
 #include "../../sdlutils/Texture.h"
+#include "../../sdlutils/VirtualTimer.h"
 class BossHPBar : public ecs::Component {
 public:
 
@@ -29,8 +30,11 @@ private:
 	//variables para que la barra de vida baje poco a poco
 	float accumulatedDamage;
 	float lastHP;
+
 	int accumulatedDmgDecrease;
 	int accumulatedDmgFirstDecrease;
+
+	VirtualTimer* damageDecreaseTimer_;
 
 	// Texturas
 	Texture* bossBarArrow_left;

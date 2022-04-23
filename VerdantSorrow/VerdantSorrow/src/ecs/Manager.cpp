@@ -6,18 +6,22 @@
 #include "../game/TreeScene.h"
 #include "../game/FinalBossScene.h"
 #include "../game/TutorialScene.h"
+
 namespace ecs {
 
 Manager::Manager() :
 		ents_(), //
 		hdlrs_(), //
 		entsByGroup_(), //
-		debug_(false)
+		debug_(false),
+		allTimers_()
+
 {
 	// we reserve space for 100 entities, just to avoid resizing. You
 	// can adjust this number.
 	//
 	ents_.reserve(100);
+	allTimers_.reserve(100);
 
 	windowScaleHeight_ = sdlutils().windowHeight() / 1080.0f;
 	windowScaleWidth_ = sdlutils().windowWidth() / 1920.0f;
@@ -36,6 +40,14 @@ Manager::~Manager() {
 	//
 	for (auto e : ents_)
 		delete e;
+	
+	for (auto e : allTimers_)
+		delete e;
+
+
+	////delete all timers
+	//for (auto e : allTimers_)
+	//	delete e;
 }
 
 void Manager::refresh() {

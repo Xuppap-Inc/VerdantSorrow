@@ -15,7 +15,7 @@ void NpcCtrl::initComponent()
 {
 	col_ = ent_->getComponent<RectangleCollider>();
 	assert(col_ != nullptr);
-	vt_ = new VirtualTimer();
+	vt_ = mngr_->addTimer();
 }
 
 void NpcCtrl::update()

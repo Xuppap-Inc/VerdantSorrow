@@ -2,6 +2,7 @@
 #include "../../ecs/Component.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../RectangleCollider.h"
+#include "../../sdlutils/VirtualTimer.h"
 
 class Transform;
 
@@ -19,5 +20,5 @@ private:
 	Transform* tr_;
 	RectangleCollider* col_;
 	float speed_;
-	float lastTime_;
+	VirtualTimer* lastTimeTimer_;
 };

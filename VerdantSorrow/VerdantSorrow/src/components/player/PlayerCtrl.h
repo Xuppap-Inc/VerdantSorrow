@@ -3,6 +3,7 @@
 #include "PlayerAttributes.h"
 #include "../RectangleCollider.h"
 #include "../FramedImage.h"
+#include "../../sdlutils/VirtualTimer.h"
 #include <SDL.h>
 #include <vector>
 using namespace std;
@@ -19,7 +20,6 @@ public:
 	void initComponent() override;
 
 	int getMovementDir() { return movementDir_; }
-	int getDir() { return direction_; }
 
 	void doKnockback(int dir);
 	void doAttack();
@@ -40,7 +40,8 @@ private:
 	float jumpForce_, speed_, rollSpeed_, deceleration_;
 
 	//variables de control de roll
-	float rollCooldown_ , rollDuration_, lastRoll_;
+	float rollCooldown_ , rollDuration_;
+	VirtualTimer* lastRollTimer_;
 	bool isRolling_;
 
 	//bool de control de slide
@@ -51,7 +52,7 @@ private:
 	bool isKnockback;
 
 	//Indica la direccion del movimiento del jugador
-	int movementDir_,direction_;
+	int movementDir_;
 
 	//booleanas de control para manejar el input
 	bool moveLeft_, moveRight_, jump_, roll_;
