@@ -96,13 +96,13 @@ Total del juego: unos **45 min**, esta duración asume que el jugador lee diálo
 
 Comportamiento de los jefes: 
   - Jefe de la rana
-      - Visual: Una rana quiere comer moscas con la lengua.
+      - Visual: Una rana grande y verde.
       - Primera fase:  
           - La rana va saltando de un lado a otro de la pantalla. Empieza saltando hacia la izquierda, calculando la distancia del salto aleatoriamente dentro de un intervalo.
 
           - La rana rebota con los bordes de la pantalla, en ese momento cambia la dirección del salto.
 
-          - Ataque de la lengua: Cada X saltos(decidido aleatoriamente entre un intervalo), hace este ataque:
+          - Ataque de la lengua: Cada X saltos(decidido aleatoriamente entre un intervalo), hace este ataque
             - Aparece una mosca cerca del jugador, a una distancia determinada de la rana siempre a la misma distancia del suelo. Si la posición se sale de la pantalla, aparece en la otra dirección. La mosca aparece siempre a la altura del jugador.
 
             - X segundos después, la rana lanza la lengua hasta la posición x de la mosca y hace daño, y vuelve rápidamente. La lengua sale de forma horizontal.
@@ -114,60 +114,68 @@ Comportamiento de los jefes:
         - Segunda fase:
           - Mismo comportamiento que en la primera fase.
 
-          - La rana se enfada y cambia de color (por ejemplo), ahora ataca al jugador.
+          - La rana se enfada y cambia de color a rojo así como la expresión de la cara, ahora ataca al jugador.
 
           - Añade un nuevo ataque en que los saltos son el doble de alto y cada uno causa una onda expansiva.
 
           - En cada salto la rana tiene un 70% de probabilidad de hacer saltos pequeños y un 30% de hacer saltos grandes.
 
-          - El ataque de la lengua cambiaria. Ahora la mosca no aparece antes de tirar la lengua, si no que siempre ataca siempre hacia el jugador de forma horizontal.
+          - El ataque de la lengua cambia, de tal manera que ahora no aparece ninguna mosca antes, atacando instantaneamente al jugador.
+
+
     - Árbol humanoide:
-      - Visual: Groot con una lámpara.
+      - Visual: árbol con características antropomórficas que sostiene una lámpara y va cubierto por una capa.
       - Primera fase: 
-        - Se va acercando hacia la posición x del jugador, y cuando está lo suficientemente cerca, manotazo a melee (un arco frente al jefe de diámetro igual a su alto, similar al jugador), se queda quieto un instante.
+        - Se va acercando hacia la posición x del jugador, y cuando está lo suficientemente cerca, da manotazo a melee (un arco frente al jefe de un alto igual al suyo mismo y similar al jugador), cuando lo hace se detiene brevemente en esa posición.
 
-        - Ola de raíces: Tras un tiempo aleatorio en un intervalo, salen raíces del suelo progresivamente izquierda a derecha, separadas a la misma distancia cada una con un pequeño delay entre que sale una rama y otra. Cubriendo todo el alto de la pantalla. Antes de que salga una raíz, hay un indicador de una raíz pequeñita en la posición en la que va a salir la raíz.
+        - Ola de raíces: Tras un tiempo aleatorio en un intervalo, salen raíces del suelo progresivamente desde la posición del árbol hacia la que se encontraba el jugador cuando se inició este ataque. Estas raíces están separadas a la misma distancia cada una con un pequeño delay entre que sale una rama y otra. Cubriendo todo el alto de la pantalla. Antes de que salga una raíz, hay un indicador de una raíz más pequeña en la posición en la que va a salir la primera.
 
-        - Ataque raíces con auto-aim: Cada X segundos, elegidos aleatoriamente dentro de un intervalo. El boss se sale de pantalla, la lámpara se queda en mitad del ancho de la pantalla, y lo suficientemente alta para que el jugador no llegue. Las raíces del ataque anterior van saliendo en la posición del jugador cada X segundos. Si una de las raíces alcanza a la lámpara, se le hace mucho daño y se cambia a otro patrón de ataque.
+        - Ataque raíces con auto-aim: Cada X segundos, elegidos aleatoriamente dentro de un intervalo. El boss se sale de pantalla, la lámpara se queda en mitad del ancho de la pantalla, y lo suficientemente alta para que el jugador no llegue a atacarla. Las raíces del ataque anterior van saliendo en la posición del jugador cada X segundos, pero de manera singular, ya no a modo de ola sino en esa posición concreta. Si una de las raíces alcanza a la lámpara, se le hace mucho daño y se cambia a otro patrón de ataque.
         
       - Segunda fase: 
-        - El boss ya no lleva la lámpara con él. La lámpara aparece en un lado de la pantalla.
+        - El boss ya no lleva la lámpara con él y pierde la capa que llevaba al inicio del combate. La lámpara aparece en un lado de la pantalla.
 
-        - Cuando recibe 3 golpes, cambia al otro lado de la pantalla. De forma que el boss siempre está al principio entre la lámpara y el jugador. Esto se repite 3-4 veces.
+        - Cuando la lámpara recibe 3 golpes, cambia al otro lado de la pantalla. De forma que el boss siempre está al principio entre la lámpara y el jugador. Esto se repite 3-4 veces.
 
         - Al igual que en la primera fase, el boss persigue al jugador, y cuando lo tiene a rango, le pega un manotazo.
 
         - El ataque de raíces con auto-aim se realiza constantemente. Si la raíz sale cerca de la lámpara se cancela (el jefe no le pega a su lámpara).
+
+
     - Jefe de las manos: 
-      - Visual: Un cuerpo principal (ojo, cabeza, mago…) que ataca con 2 manos gigantes.
+      - Visual: Una cabeza gigante encadenada, de aspecto demoníaco y un solo ojo que ataca con 2 manos gigantes.       
+  
+        
 
-      - Hay que subirse a las manos para atacar al cuerpo principal.
-
-      - Las manos vuelven a su posición original tras cada ataque.
-
-      - Tres ataques:
-        - Clap: junta ambas manos hacia el centro de la pantalla rápidamente a ras de suelo.
-
-        - Puñetazo: la mano se echa hacia atrás y mete un puñetazo rápido.
-
-        - Martillazo: la mano choca contra el suelo, provoca una onda expansiva.
+    -Primera fase:
+    
+      - La cabeza es la única parte de este boss que recibe daño, las manos son inmunes.
+      - Hay que subirse a las manos para atacar al cuerpo principal puesto que la cabeza flota a una altura a la que el jugador no llega saltando.  
+      - Las manos hacen daño sólo durante el ataque.
       
-      - Las manos hacen daño sólo durante el ataque..
+      - Tres ataques:
+        - Clap: ambas manos se desplazan desde los laterales del boss a los extremos de la pantalla pero a la altura del suelo y se juntan rápidamente hacia el centro.
+
+        - Puñetazo: Una de las dos manos se desplaza hacia el fondo, en la posición del jugador e instantes después se hace grande a modo de puñetazo.
+
+        - Martillazo: Una de las manos se eleva sobre la posición del jugador y después desciende rápidamente. Cuando impacta en el suelo crea una onda expansiva hacia             ambos laterales de la pantalla.     
+     
 
       - Segunda fase:
-        - El boss se desencadena y comienza a moverse por la pantalla.
+        - El boss se desencadena y comienza a moverse por la pantalla, rebotando con el suelo y los laterales de la pantalla.
 
-        - El resto de ataques siguen igual, solo que las manos ahora hacen daño por contacto siempre (se prenden).
+        - Los ataques continuan siendo los mismos y de la misma manera, con la diferencia de que ahora las manos hacen daño constantemente puesto que se encuentran                 prendidas en fuego.
 
         - El movimiento del cuerpo del boss es el siguiente: <a ref="https://www.youtube.com/watch?v=5mGuCdlCcNMMovimiento">Movimiento</a>
 
-        - Cuando choca contra el suelo lanza una bola de fuego a cada lado y se queda inmóvil unos segundos.
+        - Cuando la cabeza choca contra el suelo lanza una bola de fuego a cada lado y se queda inmóvil unos segundos.
 
         - Cada X tiempo lanza una bola de fuego hacia el jugador, que desaparece al chocar con un lateral de la pantalla o el suelo.
 
       - Tercera fase:
-        Cámara scroll lateral hacia la derecha. El boss te persigue desde la izquierda y el jugador tendrá que correr hacia la derecha para huir.
-
+        - Ahora el enemigo te persigue a través de un nivel de plataformeo y es invulnerable en todo momento al daño, pero si te alcanza te elimina todas las vidas.
+        
+       
 ### <a name="controles"></a> 2.2. Controles  
 El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar, al igual que la tecla Espacio, A y D para el movimiento lateral). Se atacará con la tecla J, y se esquivará con el Shift izquierdo.
 <p align="center">
@@ -183,9 +191,9 @@ La cámara estará posicionada de modo que se muestre una vista lateral del pers
 
 - Recompensa: Nuevos caminos en el hub, nuevos diálogos y jefe.
 
-- Perder: Morir en combate contra los jefes  
+- Perder: Morir en combate contra los jefes o en el nivel de huída.
 
-- Castigo: Volver al hub y tener que comenzar de nuevo el jefe.  
+- Castigo: Volver al hub y tener que comenzar de nuevo el jefe, volver a comenzar el nivel de huída lateral o el vertical.
 
 
 ### <a name="estetica"></a> 2.5. Estética
