@@ -109,6 +109,12 @@ void TileMap::loadMap(string path)
 	}
 	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
 
+	//add map as entity
+	auto map = mngr_->addEntity();
+	auto tr = map->addComponent<Transform>();
+	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
+	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
+	map->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void TileMap::loadTilesetsTextures()
@@ -126,25 +132,4 @@ void TileMap::loadTilesetsTextures()
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}
-}
-
-void TileMap::render()
-{
-	auto b = mngr_->getHandler(ecs::_hdlr_CAMERA);
-	auto a = b->getComponent<Transform>();
-	// Dibujado del mapa
-
-	SDL_Rect src = { a->getPos().getX() * scaleX, a->getPos().getY() * scaleY,
-			 tileWidth * cols * scaleX,
-			 tileHeight * rows * scaleY };
-
-	auto sW = mngr_->getWindowScaleWidth();
-	auto sH = mngr_->getWindowScaleHeight();
-
-	src.x *= sW;
-	src.w *= sW;
-	src.y *= sH;
-	src.h *= sH;
-
-	SDL_RenderCopy(sdlutils().renderer(), tileMap, &src, NULL);
 }
