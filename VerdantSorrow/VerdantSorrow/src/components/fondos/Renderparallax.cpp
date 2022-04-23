@@ -5,6 +5,7 @@
 #include "../../ecs/Entity.h"
 #include "../../ecs/Manager.h"
 #include "../../sdlutils/SDLUtils.h"
+#include "../player/PlayerCtrl.h"
 
 
 
@@ -44,7 +45,7 @@ void RenderParallax::render()
 void RenderParallax::update()
 {
 	
-	float temp = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (1 - scrollratio_));
+	/*float temp = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (1 - scrollratio_));
 	float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
 	auto& pos = tr_->getPos();
 	pos.set(startpos + dist, tr_->getPos().getY());
@@ -54,6 +55,16 @@ void RenderParallax::update()
 	else if (temp <= startpos - tr_->getWidth()) {
 
 		startpos -= (3*tr_->getWidth());
+	}*/
+
+	int dir = (mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerCtrl>()->getMovementDir());
+	auto& pos = tr_->getPos();
+	float dist = (mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>()->getPos().getX() * (scrollratio_));
+	if (dir == 1) {
+		pos.set(pos.getX() - scrollratio_, tr_->getPos().getY());
+	}
+	else if(dir==-1) {
+		pos.set(pos.getX() +scrollratio_, tr_->getPos().getY());
 	}
 
 	
