@@ -10,7 +10,7 @@ TileMap::TileMap(ecs::Manager* mngr, string tileMapPath)
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scaleX = scaleY = 0.5;
+	scale = 0.15;
 
 	loadMap(path);
 }
@@ -19,13 +19,12 @@ TileMap::~TileMap()
 {
 	if (tmxTileMap != nullptr)
 		delete tmxTileMap;
-
-	if (tileMap != nullptr)
-		SDL_DestroyTexture(tileMap);
 }
 
 void TileMap::loadMap(string path)
 {
+	SDL_Texture* tileMap;
+
 	tmxTileMap = new tmx::Map();
 	tmxTileMap->load(path);
 
@@ -93,11 +92,8 @@ void TileMap::loadMap(string path)
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
 
-					double dx = sdlutils().windowWidth() / (double)tileMapWidth;
-					double dy = sdlutils().windowHeight() / (double)tileMapHeight;
-
-					dx /= scaleX;
-					dy /= scaleY;
+					double dx = (sdlutils().windowWidth() / (double)tileMapWidth)/scale;
+					double dy = (sdlutils().windowHeight() / (double)tileMapHeight)/scale;
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -108,6 +104,13 @@ void TileMap::loadMap(string path)
 		}
 	}
 	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
+
+	//add map as entity
+	auto map = mngr_->addEntity();
+	auto tr = map->addComponent<Transform>();
+	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scale, sdlutils().windowHeight() / scale, 0.0f);
+	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
+	map->addToGroup(ecs::_HUB_DECORATION_GRP);
 
 }
 
@@ -126,25 +129,4 @@ void TileMap::loadTilesetsTextures()
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}
-}
-
-void TileMap::render()
-{
-	auto b = mngr_->getHandler(ecs::_hdlr_CAMERA);
-	auto a = b->getComponent<Transform>();
-	// Dibujado del mapa
-
-	SDL_Rect src = { a->getPos().getX() * scaleX, a->getPos().getY() * scaleY,
-			 tileWidth * cols * scaleX,
-			 tileHeight * rows * scaleY };
-
-	auto sW = mngr_->getWindowScaleWidth();
-	auto sH = mngr_->getWindowScaleHeight();
-
-	src.x *= sW;
-	src.w *= sW;
-	src.y *= sH;
-	src.h *= sH;
-
-	SDL_RenderCopy(sdlutils().renderer(), tileMap, &src, NULL);
 }

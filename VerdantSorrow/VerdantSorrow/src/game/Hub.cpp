@@ -16,7 +16,6 @@
 #include "../components/player/PlayerHubControl.h"
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
-#include "../components/ScrollCamera.h"
 
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
@@ -55,11 +54,7 @@ void Hub::init()
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
-	auto camera = mngr_->addEntity();
-	auto cameraTr = camera->addComponent<Transform>();
-	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
-	auto cameraC = camera->addComponent<ScrollCamera>(3);
-	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
+	
 	//Genera las entradas a los bosses
 		//entrada a la rana
 	EntryGenerator(entryFrog, colManager, 0, 250, "frog");
@@ -149,7 +144,6 @@ void Hub::update()
 
 		sdlutils().clearRenderer();
 		
-		tileMap->render();
 		mngr_->render();
 #ifdef _DEBUG
 		mngr_->debug();
