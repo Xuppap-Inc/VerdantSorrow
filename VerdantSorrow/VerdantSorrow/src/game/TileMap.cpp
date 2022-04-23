@@ -10,7 +10,7 @@ TileMap::TileMap(ecs::Manager* mngr, string tileMapPath)
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scale = 0.15;
+	scaleX = scaleY = 0.5;
 
 	loadMap(path);
 }
@@ -19,12 +19,13 @@ TileMap::~TileMap()
 {
 	if (tmxTileMap != nullptr)
 		delete tmxTileMap;
+
+	if (tileMap != nullptr)
+		SDL_DestroyTexture(tileMap);
 }
 
 void TileMap::loadMap(string path)
 {
-	SDL_Texture* tileMap;
-
 	tmxTileMap = new tmx::Map();
 	tmxTileMap->load(path);
 
@@ -92,8 +93,11 @@ void TileMap::loadMap(string path)
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
 
-					double dx = (sdlutils().windowWidth() / (double)tileMapWidth)/scale;
-					double dy = (sdlutils().windowHeight() / (double)tileMapHeight)/scale;
+					double dx = sdlutils().windowWidth() / (double)tileMapWidth;
+					double dy = sdlutils().windowHeight() / (double)tileMapHeight;
+
+					dx /= scaleX;
+					dy /= scaleY;
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -108,10 +112,9 @@ void TileMap::loadMap(string path)
 	//add map as entity
 	auto map = mngr_->addEntity();
 	auto tr = map->addComponent<Transform>();
-	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scale, sdlutils().windowHeight() / scale, 0.0f);
+	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
 	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
 	map->addToGroup(ecs::_HUB_DECORATION_GRP);
-
 }
 
 void TileMap::loadTilesetsTextures()

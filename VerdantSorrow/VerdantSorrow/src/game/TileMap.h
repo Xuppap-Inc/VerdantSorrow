@@ -25,15 +25,14 @@ class TileMap
 public:
 	TileMap(ecs::Manager* mngr,string tileMapPath);
 	~TileMap();
-	void setScale(double set) {
-		scale = min(1.0, max(0.0, set))	;
-	}
 	
+
 private:
 
 	void loadMap(string path);
 	void loadTilesetsTextures();
 
+	SDL_Texture* tileMap;
 	string path;
 	int rows, cols;
 	int tileWidth, tileHeight;
@@ -41,6 +40,6 @@ private:
 	tmx::Map* tmxTileMap;
 	ecs::Manager* mngr_;
 
-	double scale;
+	double scaleX, scaleY;
 };
 

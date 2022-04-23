@@ -69,7 +69,9 @@ bool RectangleCollider::isActive()
 void RectangleCollider::drawCollider()
 {
 	SDL_Rect dest = getCollider();
-
+	auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+	dest.x -= cameraTr.getX();
+	dest.y -= cameraTr.getY();
 	if (isTrigger())
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 255, 255);
 	else

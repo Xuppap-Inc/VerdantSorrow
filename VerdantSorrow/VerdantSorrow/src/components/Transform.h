@@ -3,7 +3,6 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
-#include "../ecs/Manager.h"
 #include <cassert>
 
 class Transform : public ecs::Component {
@@ -15,7 +14,7 @@ public:
 	//    constexpr static ecs::cmpId_type id = ecs::_TRANSFORM
 	//
 	__CMPID_DECL__(ecs::_TRANSFORM)
-		/* g establece si hay gravedad en el jugador para las colisiones en la parte
+		/* g establece si hay gravedad en el jugador para las colisiones en la parte 
 		baja de la pantalla en el hub*/
 		Transform() :
 		pos_(), vel_(), width_(), height_(), rot_(), gravity_() {
@@ -35,7 +34,7 @@ public:
 		height_ = h;
 		rot_ = r;
 		gravity_ = g;
-
+		
 		scale_ = scale;
 	}
 
@@ -71,9 +70,6 @@ public:
 	}
 
 	void update() override {
-
-	
-
 		pos_ = pos_ + vel_;
 	}
 
