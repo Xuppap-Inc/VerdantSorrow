@@ -26,6 +26,7 @@ private:
 	Transform* tr_;
 	float scrollratio_;
 	float startpos;
+	float distance;
 
 
 };
