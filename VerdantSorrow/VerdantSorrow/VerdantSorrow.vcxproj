@@ -235,6 +235,7 @@
     <Media Include="resources\sound\sfx_rana_damage.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\favicon.ico" />
     <Image Include="resources\images\BossBarArrow_Left.png" />
     <Image Include="resources\images\BossFinal_ManoDer.png" />
     <Image Include="resources\images\BossFinal_ManoIzq.png" />
