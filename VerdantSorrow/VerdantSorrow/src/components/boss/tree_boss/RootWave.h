@@ -27,7 +27,8 @@ private:
 	TreeMovement* treeMovement_;
 	LanternSpawner* lanternSpawner_;
 
-	VirtualTimer* lastTime_;
+	VirtualTimer* lastTimeTimer_;
+	VirtualTimer* nextTimeTimer_;
 	Uint32 nextTime_;
 	Uint32 movingTime_;
 	bool attacking_;
