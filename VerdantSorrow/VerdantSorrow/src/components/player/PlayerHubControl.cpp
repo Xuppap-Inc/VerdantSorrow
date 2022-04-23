@@ -14,26 +14,26 @@ moveDown_(false), moveLeft_(false), moveRight_(false), moveUp_(false), isTalking
 void PlayerHubControl::update()
 {
 	auto currentTime = sdlutils().currRealTime();
+	auto& vel = tr_->getVel();
+
 
 	handleInput();
 
 	//movimiento en 8 direcciones
-
-	Vector2D newSpeed = Vector2D(0, 0);
-
+	vel.set(Vector2D(0, 0));
 	if (!isTalking_) {
 		if (moveUp_ && !moveDown_)
-			newSpeed.setY(speed_);
+			vel.setY(-speed_);
 		else if (!moveUp_ && moveDown_)
-			newSpeed.setY(-speed_);
+			vel.setY(speed_);
 
 		if (moveLeft_ && !moveRight_)
-			newSpeed.setX(speed_);
+			vel.setX(-speed_);
 		else if (!moveLeft_ && moveRight_)
-			newSpeed.setX(-speed_);
+			vel.setX(speed_);
 
-		if (newSpeed.magnitude() != 0)
-			newSpeed = newSpeed.normalize() * speed_;
+		if (vel.magnitude() != 0)
+			vel = vel.normalize() * speed_;
 
 		if (colMan_->hasCollisions(playerCol_)) {
 			std::vector<RectangleCollider*> colliders = colMan_->getCollisions(playerCol_);
@@ -44,12 +44,10 @@ void PlayerHubControl::update()
 				changeScene = colliders[i]->isActive() && colliders[i]->isTrigger() && colliders[i]->getEntity()->getComponent<NpcCtrl>() == nullptr;
 				i++;
 			}
+			//if (changeScene)
+				//mngr_->changeScene(1);
 		}
 	}
-
-	for (auto& entity : mngr_->getEntities())
-		if (entity->getComponent<Transform>() != nullptr && entity != ent_)
-			entity->getComponent<Transform>()->getVel().set(newSpeed);
 }
 
 void PlayerHubControl::initComponent()

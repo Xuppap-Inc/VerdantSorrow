@@ -15,7 +15,7 @@ public:
 	//    constexpr static ecs::cmpId_type id = ecs::_TRANSFORM
 	//
 	__CMPID_DECL__(ecs::_TRANSFORM)
-		/* g establece si hay gravedad en el jugador para las colisiones en la parte
+		/* g establece si hay gravedad en el jugador para las colisiones en la parte 
 		baja de la pantalla en el hub*/
 		Transform() :
 		pos_(), vel_(), width_(), height_(), rot_(), gravity_() {
@@ -35,7 +35,7 @@ public:
 		height_ = h;
 		rot_ = r;
 		gravity_ = g;
-
+		
 		scale_ = scale;
 	}
 
@@ -71,9 +71,10 @@ public:
 	}
 
 	void update() override {
-
-	
-
+		auto camera = mngr_->getHandler(ecs::_hdlr_CAMERA);
+		if (camera != nullptr) {
+			pos_ = pos_ - camera->getComponent<Transform>()->getPos();
+		}
 		pos_ = pos_ + vel_;
 	}
 

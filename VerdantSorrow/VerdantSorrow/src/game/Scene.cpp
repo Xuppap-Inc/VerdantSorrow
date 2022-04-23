@@ -33,6 +33,9 @@ void Scene::init()
 #ifdef _DEBUG
 	mngr_->setDebug(true);
 #endif
+	camera_ = mngr_->addEntity();
+	auto camTr = camera_->addComponent<Transform>();
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 }
 
 //void Scene::start()

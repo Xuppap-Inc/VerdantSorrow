@@ -15,6 +15,7 @@
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/tree_boss/Root/RootMovement.h"
+#include "../components/ScrollCamera.h"
 #include "Fondos/Parallax.h"
 #include "CollisionManager.h"
 
@@ -42,7 +43,12 @@ void EscapeScene::init()
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-	
+	auto camera = mngr_->addEntity();
+	auto cameraTr = camera->addComponent<Transform>();
+	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
+	auto cameraC = camera->addComponent<ScrollCamera>(8);
+	cameraC->setScrollX(true);
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);

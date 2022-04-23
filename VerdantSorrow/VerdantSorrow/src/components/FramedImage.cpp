@@ -129,6 +129,7 @@ void FramedImage::adjustAndRenderFrame()
 		float width = tr_->getWidth();
 
 		Vector2D pos = new Vector2D(posX, posY);
+		pos = pos - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
 
 		dest = build_sdlrect(pos, width, height);
 	}
