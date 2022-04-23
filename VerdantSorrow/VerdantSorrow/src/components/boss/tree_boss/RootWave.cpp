@@ -12,7 +12,7 @@
 
 
 RootWave::RootWave() : tr_(), lastTimeTimer_(), rootSpawner_(), attacking_(false), 
-dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),ableMove_(false),nextTime_(0),movingTime_(10000), nextTimeTimer_()
+dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),ableMove_(false),movingTime_(10000), nextTimeTimer_()
 {
 }
 
@@ -26,7 +26,6 @@ void RootWave::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
-	nextTime_ = sdlutils().currRealTime();
 	lastTimeTimer_ = mngr_->addTimer();
 	nextTimeTimer_ = mngr_->addTimer();
 
@@ -74,7 +73,6 @@ void RootWave::attack(int dir)
 	rootSpawner_->createRoot(rootPos_);
 	rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir;
 	lastTimeTimer_->reset();
-	nextTime_ = sdlutils().currRealTime();
 	nextTimeTimer_->reset();
 	ableMove_ = false;
 	

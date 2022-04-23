@@ -1,5 +1,6 @@
 #pragma once
 #include "../ecs/Manager.h"
+#include "../sdlutils/VirtualTimer.h"
 using ecs::Entity;
 class CollisionManager;
 class Attack;
@@ -14,6 +15,7 @@ private:
 	void hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* ent);
 	CollisionManager* colManager_;
 	ecs::Manager* mngr_;
+	VirtualTimer* vt_=mngr_->addTimer();
 
 	const int PLAYER_ATTACK_DMG = 1;
 };

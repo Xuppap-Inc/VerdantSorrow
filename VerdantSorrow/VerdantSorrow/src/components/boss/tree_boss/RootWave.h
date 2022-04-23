@@ -29,7 +29,6 @@ private:
 
 	VirtualTimer* lastTimeTimer_;
 	VirtualTimer* nextTimeTimer_;
-	Uint32 nextTime_;
 	Uint32 movingTime_;
 	bool attacking_;
 	bool ableMove_;
