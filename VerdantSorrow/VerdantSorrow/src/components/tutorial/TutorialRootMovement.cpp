@@ -3,6 +3,7 @@
 #include "../Transform.h"
 #include "../../ecs/Entity.h"
 #include "../fondos/ParticleSystem.h"
+#include "../../ecs/Manager.h"
 
 
 TutorialRootMovement::TutorialRootMovement() : tr_(), col_(), speed_(0.25), lastTimeTimer_()

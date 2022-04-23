@@ -2,6 +2,7 @@
 #include "../../../ecs/Component.h"
 #include "RootSpawner.h"
 #include "LanternSpawner.h"
+#include "../../../sdlutils/VirtualTimer.h"
 
 class TreeMovement;
 
@@ -26,7 +27,7 @@ private:
 	TreeMovement* treeMovement_;
 	LanternSpawner* lanternSpawner_;
 
-	Uint32 lastTime_;
+	VirtualTimer* lastTime_;
 	Uint32 nextTime_;
 	Uint32 movingTime_;
 	bool attacking_;

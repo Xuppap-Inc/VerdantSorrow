@@ -11,7 +11,7 @@
 #include "TreeMovement.h"
 
 
-RootWave::RootWave() : tr_(), lastTime_(0), rootSpawner_(), attacking_(false), 
+RootWave::RootWave() : tr_(), lastTime_(), rootSpawner_(), attacking_(false), 
 dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),ableMove_(false),nextTime_(0),movingTime_(10000)
 {
 }
@@ -27,7 +27,7 @@ void RootWave::initComponent()
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
 	nextTime_ = sdlutils().currRealTime();
-	
+	lastTime_ = mngr_->addTimer();
 
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr;
 	assert(comps);
@@ -36,13 +36,13 @@ void RootWave::initComponent()
 void RootWave::update()
 {
 	//si ha pasado el tiempo entre raices
-	if (attacking_ && sdlutils().currRealTime() - lastTime_ > TIME_BETWEEN_ROOTS) {
+	if (attacking_ && lastTime_->currTime() > TIME_BETWEEN_ROOTS) {
 	
 		//crea la raiz y suma la posicion de la siguiente
 		rootSpawner_->createRoot(rootPos_);
 		rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir_;
 
-		lastTime_ = sdlutils().currRealTime();		
+		lastTime_->reset();
 		//si llega al borde de la pantalla acaba el ataque y activa el movimiento
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			movingTime_ = sdlutils().currRealTime()-nextTime_;			
@@ -71,7 +71,7 @@ void RootWave::attack(int dir)
 	//crea la primera raíz
 	rootSpawner_->createRoot(rootPos_);
 	rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir;
-	lastTime_ = sdlutils().currRealTime();
+	lastTime_->reset();
 	nextTime_ = sdlutils().currRealTime();
 	ableMove_ = false;
 	
