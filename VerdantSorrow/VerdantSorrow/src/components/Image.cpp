@@ -40,7 +40,8 @@ void Image::initComponent() {
 void Image::render() {
 
 	if (visible_) {
-		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getWidth(), tr_->getHeight());
+		Vector2D v = tr_->getPos() - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
+		SDL_Rect dest = build_sdlrect(v, tr_->getWidth(), tr_->getHeight());
 		
 		//escalado pantalla
 		auto sW = mngr_->getWindowScaleWidth();

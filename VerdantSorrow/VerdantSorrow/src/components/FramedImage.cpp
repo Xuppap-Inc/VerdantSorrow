@@ -114,6 +114,7 @@ void FramedImage::adjustAndRenderFrame()
 		auto posY = tr_->getPos().getY() + yAdjustment + yOffset * height;
 
 		Vector2D pos = new Vector2D(posX, posY);
+		pos = pos - mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>()->getPos();
 
 		dest = build_sdlrect(pos, width, height);
 		dest.x += xOffset;
