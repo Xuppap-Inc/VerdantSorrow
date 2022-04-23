@@ -15,7 +15,7 @@
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE), 
-	eyeSpeed_(3), waveSp_(), fireBallCooldown_(), lastFireBall_()
+	eyeSpeed_(3), waveSp_(),lastTimeInGround_()
 {
 }
 

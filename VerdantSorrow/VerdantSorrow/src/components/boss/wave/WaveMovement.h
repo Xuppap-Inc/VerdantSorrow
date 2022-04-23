@@ -20,8 +20,6 @@ private:
 	Transform* tr_;
 	Vector2D dir_;
 	float speed_;
-	
-	//VirtualTimer * lastTime_;
 
 	bool particles_;
 };

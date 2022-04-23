@@ -104,8 +104,8 @@ private:
 
 	VirtualTimer* vt_;
 
-	//este no se si es necesario ya, porfa Paula no pongas vt que no se que es el timer
-	VirtualTimer tongueWaitTimer_;
+	//este no es necesario ya VirtualTimer tongueWaitTimer_;
+	
 
 	bool deadBoss_;
 };

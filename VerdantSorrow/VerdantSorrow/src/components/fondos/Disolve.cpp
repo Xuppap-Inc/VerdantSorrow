@@ -31,9 +31,7 @@ void Disolve::update() {
 		}
 
 		//no se si esta linea es lo mismo que el alpha, asi que te lo dejo aqui
-		//if (timer_.currTime() - startFadingTime_ > 100) {
-		int alpha = 100 - (timer_->currTime() - startFadingTime_);
-		if (alpha < 0) {
+		if (timer_->currTime() - startFadingTime_ > 100) {
 			ent_->setAlive(false);
 		}
 	}

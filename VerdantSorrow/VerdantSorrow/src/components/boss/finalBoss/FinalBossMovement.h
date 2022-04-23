@@ -36,7 +36,7 @@ private:
 	Phase phase_;
 	EyeState eyeState_;
 	CollisionManager* colManager_;
-	float eyeSpeed;
+	float eyeSpeed_;
 	Vector2D velocitySaved;
 	WaveSpawner* waveSp_;
 	Transform* playerTr_;
