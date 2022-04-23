@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="trees" tilewidth="300" tileheight="321" tilecount="22" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="trees" tilewidth="1200" tileheight="1200" tilecount="33" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="14">
   <image width="239" height="321" source="../assets/arbol.png"/>
@@ -65,6 +65,39 @@
   <image width="110" height="110" source="../assets/pinomorado1.png"/>
  </tile>
  <tile id="35">
-  <image width="300" height="300" source="../assets/FUEGO.png"/>
+  <image width="1200" height="1200" source="../assets/FUEGO.png"/>
+ </tile>
+ <tile id="36">
+  <image width="90" height="200" source="../assets/cementerio_0001_Layer9.png"/>
+ </tile>
+ <tile id="37">
+  <image width="106" height="200" source="../assets/chema_0001_Layer16.png"/>
+ </tile>
+ <tile id="38">
+  <image width="95" height="200" source="../assets/Daniel_Npc.png"/>
+ </tile>
+ <tile id="39">
+  <image width="81" height="200" source="../assets/javi_0001_javi.png"/>
+ </tile>
+ <tile id="40">
+  <image width="118" height="150" source="../assets/javi_0001_Layer17.png"/>
+ </tile>
+ <tile id="41">
+  <image width="82" height="200" source="../assets/Laura_Npc.png"/>
+ </tile>
+ <tile id="42">
+  <image width="115" height="200" source="../assets/Miriam_Npc.png"/>
+ </tile>
+ <tile id="43">
+  <image width="127" height="200" source="../assets/nacho_0001_nacho.png"/>
+ </tile>
+ <tile id="44">
+  <image width="84" height="200" source="../assets/paula_0001_cuerpo.png"/>
+ </tile>
+ <tile id="45">
+  <image width="187" height="200" source="../assets/Rodrigo_Npc.png"/>
+ </tile>
+ <tile id="46">
+  <image width="200" height="200" source="../assets/tumba.png"/>
  </tile>
 </tileset>
