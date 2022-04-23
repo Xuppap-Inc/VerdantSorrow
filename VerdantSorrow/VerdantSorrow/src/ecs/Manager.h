@@ -67,6 +67,9 @@ public:
 	inline const auto& getEntities() {
 		return ents_;
 	}
+	inline const auto& getTimers() {
+		return allTimers_;
+	}
 
 	// returns the vector of all entities for group 'gId'
 	//

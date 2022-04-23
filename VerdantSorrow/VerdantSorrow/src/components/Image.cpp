@@ -14,7 +14,7 @@
 Image::Image() :
 	tr_(), tex_(), visible_(true) {
 
-	colorTimer_ =mngr_->addTimer();
+	
 }
 
 Image::Image(Texture* tex) :

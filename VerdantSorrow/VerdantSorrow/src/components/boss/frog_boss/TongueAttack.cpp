@@ -10,7 +10,7 @@
 TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
 colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
-	timer_ = mngr_->addTimer();
+
 
 	setIsTrigger(true);
 	setActive(false);

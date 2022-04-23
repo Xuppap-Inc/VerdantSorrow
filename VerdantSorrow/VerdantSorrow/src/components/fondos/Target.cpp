@@ -9,7 +9,7 @@
 
 Target::Target(int time, Transform* target) : tr_(), time_(time), img_(), target_(target)
 {
-	timer_ =mngr_->addTimer();
+	
 }
 Target::~Target() {
 }
@@ -17,7 +17,7 @@ Target::~Target() {
 void Target::initComponent() {
 	tr_ = ent_->getComponent<Transform>();
 	img_ = ent_->getComponent<Image>();
-	timer_->reset();
+	timer_ = mngr_->addTimer();
 }
 
 void Target::update() {

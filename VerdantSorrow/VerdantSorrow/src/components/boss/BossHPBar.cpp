@@ -14,7 +14,7 @@ BossHPBar::BossHPBar() :
 	lastHP(), accumulatedDmgDecrease(), accumulatedDmgFirstDecrease(),
 	bossBarArrow_left(&sdlutils().images().at("bossBarArrow_Left")),
 	bossBarArrow_right(&sdlutils().images().at("bossBarArrow_Right")),
-	middleBar(&sdlutils().images().at("middleBar"))
+	middleBar(&sdlutils().images().at("middleBar")), damageDecreaseTimer_()
 { }
 
 BossHPBar::~BossHPBar() {
@@ -29,13 +29,14 @@ void BossHPBar::initComponent() {
 	lastHP = attrib_->getLife();
 	maxBarLength = sdlutils().width() * 0.5f;
 	pos = Vector2D((sdlutils().width() - maxBarLength) / 2, sdlutils().height() - 80);
+	damageDecreaseTimer_ = mngr_->addTimer();
 }
 
 void BossHPBar::render() {
 
 	//suma de daño acumulado
 	if (accumulatedDamage == 0)
-		accumulatedDmgFirstDecrease = sdlutils().currRealTime() + 1000;
+		accumulatedDmgFirstDecrease = damageDecreaseTimer_->currTime() + 1000;
 
 	accumulatedDamage += (lastHP - attrib_->getLife());
 
@@ -75,10 +76,10 @@ void BossHPBar::render() {
 
 	//cada accumulatedDmgDecreaseCooldown reduce un poco la barra de daño acumulado
 	//si el daño acumulado era 0, espera un poco antes de empezar a bajar
-	if (sdlutils().currRealTime() >= accumulatedDmgFirstDecrease) {
-		if (sdlutils().currRealTime() >= accumulatedDmgDecrease) {
+	if (damageDecreaseTimer_->currTime() >= accumulatedDmgFirstDecrease) {
+		if (damageDecreaseTimer_->currTime() >= accumulatedDmgDecrease) {
 			accumulatedDamage = (accumulatedDamage - 0.05 > 0 ? accumulatedDamage -= 0.05 : accumulatedDamage = 0);
-			accumulatedDmgDecrease = sdlutils().currRealTime() + 15;
+			accumulatedDmgDecrease = damageDecreaseTimer_->currTime() + 15;
 		}
 	}
 

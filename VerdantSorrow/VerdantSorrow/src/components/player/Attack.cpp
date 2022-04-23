@@ -39,6 +39,7 @@ void Attack::initComponent()
 	recoveryTimer_ = mngr_->addTimer();
 	comboTimerAir_ = mngr_->addTimer();
 	comboTimerGround_ = mngr_->addTimer();
+	cooldownTimer_ = mngr_->addTimer();
 }
 
 void Attack::update()
