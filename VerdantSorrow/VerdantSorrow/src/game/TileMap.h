@@ -26,8 +26,6 @@ public:
 	TileMap(ecs::Manager* mngr,string tileMapPath);
 	~TileMap();
 	
-	void render();
-
 private:
 
 	void loadMap(string path);

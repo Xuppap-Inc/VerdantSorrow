@@ -149,7 +149,6 @@ void Hub::update()
 
 		sdlutils().clearRenderer();
 		
-		tileMap->render();
 		mngr_->render();
 #ifdef _DEBUG
 		mngr_->debug();

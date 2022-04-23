@@ -33,6 +33,13 @@ public:
 	Texture(SDL_Renderer *renderer, const std::string &text, const Font &font,
 			const SDL_Color &fgColor, const SDL_Color &bgColor);
 
+	Texture(SDL_Renderer* renderer, SDL_Texture* tex, int width, int height) {
+		renderer_ = renderer;
+		texture_ = tex;
+		width_ = width;
+		height_ = height;
+	}
+
 
 	virtual ~Texture() {
 		if (texture_ != nullptr)
