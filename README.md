@@ -204,6 +204,7 @@ En las peleas con los jefes la cámara está fija en el centro porque las zonas 
   <p align="center">
   <img src="./images/fondo1.jpg" width="400"/>
 
+  
 Se busca una estética inspirada principalmente en “Más allá del jardín”. Dibujos infantiles pero con una tonalidad oscura que nos puede recordar también a la estética de Tim Burton. Los personajes, enemigos y objetos con los que interactúa el jugador tendrán tonos con más saturación para poder distinguirlos del fondo. Todo el arte tendrá lineart negro, exceptuando zonas muy alejadas del fondo. En ciertos momentos se usará una composición uniforme con un elemento contrastado para captar la atención del jugador (por ejemplo cuando el jefe de la linterna sale de la pantalla la linterna contrasta con todo lo demás).
 De la misma manera, para que el jugador tenga conciencia de los cambios que se producen en los jefes se añade un sistema de partículas. Estos, además de reflejar el cambio de fases dentro de las luchas contra los jefes, también proporcionan al jugador una ayuda visual a la hora de identificar distintos ataques, tanto propios como enemigos así como el inicio y la finalización de los mismos.
 
@@ -242,14 +243,15 @@ Esta será la paleta de colores que se utilizará.
  Utilizaremos GitHub Issues como sistema de gestión, cada historia de usuario se escribirá como una issue y los responsables se la asignarán.  
 
  ### 4.1. Breve descripción del sistema y plataforma de comunicación 
-     Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y          posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para      las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
+Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y          posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para      las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
      El grupo de whatsapp será para un uso más coloquial y distendido.
 
 ---
 
   ## <a name="contenido"></a> 5. Contenido  
   ### <a name="musica"></a> 5.1. Música 
-     En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos      buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el              lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho          más rápida, y en la segunda fase de cada uno, frenética.
+     
+En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos      buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el              lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho          más rápida, y en la segunda fase de cada uno, frenética.
      
      
   - Música de cada uno de los jefes tanto para la primera como para la segunda fase.
@@ -257,7 +259,7 @@ Esta será la paleta de colores que se utilizará.
 
   ### <a name="sonidos"></a> 5.2. Sonidos
      
-     Los distintos sonidos que habrá en el juego serán los siguientes:
+Los distintos sonidos que habrá en el juego serán los siguientes:
      
   - Jugador
     - Ataque con la espada
@@ -273,7 +275,9 @@ Esta será la paleta de colores que se utilizará.
 
   ### <a name="imagenes"></a> 5.3. Imágenes
      
-     Como indicábamos al principio del documento, la casi totalidad de nuestro juego contaría con arte hecho por nuestro equipo, de tal manera que tanto los fondos del      juego como las distintas animaciones de nuestro personaje y de los enemigos encajasen perfectamente en el juego y a nuestro gusto.
+Como indicábamos al principio del documento, la casi totalidad de nuestro juego contaría con arte hecho por nuestro equipo, de tal manera que tanto los fondos del      juego como las distintas animaciones de nuestro personaje y de los enemigos encajasen perfectamente en el juego y a nuestro gusto.
+     
+De tal manera se crean las siguientes animaciones:
      
   - Personaje principal:
     - Correr
@@ -290,7 +294,8 @@ Esta será la paleta de colores que se utilizará.
     - Rana sacando lengua
     - Rana vulnerable  
 
-    ![Rana](./images/rana.png)|
+    
+    <img src="./images/rana1.png" width="200" height="200" />
 
   - Boss humanoide:
     - Idle
@@ -330,7 +335,7 @@ Esta será la paleta de colores que se utilizará.
 
   El de Lumine se convirtió en un árbol viviente que encarceló la esencia de la luz en una lámpara cerrada.  
 
-  Por último, el de Etheria acabó por transformarse en un ser informe sin mente, una masa de materia en continua alteración, salvo por su único ojo y sus dos gigantescas manos que arremeten contra todo aquello que ve.  
+  Por último, el de Etheria acabó por transformarse en un ser informe sin mente, una masa de materia en continua alteración, salvo por su único ojo y sus dos gigantescas manos que arremeten contra todo aquello que ve.
 
   Para traer de vuelta el equilibrio, el propio mundo ha canalizado sus fuerzas y dado vida a su avatar, Kyna con la esperanza de que este reúna las 3 esencias primordiales.  
      
@@ -339,48 +344,38 @@ Esta será la paleta de colores que se utilizará.
   Al comenzar el juego, se le mostrará al jugador el grueso de la historia, el por qué está ahí y cual es el argumento que lo rodea. Decimos que se le cuenta el grueso pero no el total, puesto que a lo largo del juego a medida que hable con los NPCs del Hub estos, le informarán de manera progresiva de todo lo que ha pasado, qué fue lo que llevó al mundo de Arven a su estado actual, qué se espera de él y distintos detalles argumentales para dar sensación de una historia de la que el jugador es partícipe y pieza clave.
      
   Siendo así, se le mostrará la historia en la fase de tutorial, en su exploración del hub a medida que avance puesto que los NPCs le irán contando distintas partes del argumento en función de los bosses que haya superado y por último al finalizar el juego, cuando reúna las esencias de los 3 bosses sirviendo de cierre al mismo.
-     
-  La historia se le mostrará al jugador mediante cuadros de diálogo y en caso de tener tiempo se añadirá bien una secuencia de imágenes, bien una secuencia cinematográfica breve para el inicio y el final del juego.
 
  ### <a name="niveles"></a> 5.5. Niveles  
      
-     La progresión a lo largo del juego, si se distibuye en niveles, esquemáticamente sería la siguiente:
+La progresión a lo largo del juego, si se distribuye en niveles, esquemáticamente sería la siguiente:
      
-        - Tutorial: Se le muestran al jugador los controles de los que tendrá que hacer uso a lo largo del juego, así como se le expondrán las mecánicas de las que tendrá que hacer uso y la dinámica general del juego, lo que incluye también un NPC con el cual interactúe.
+- Tutorial: Se le muestran al jugador los controles de los que tendrá que hacer uso a lo largo del juego, así como se le expondrán las mecánicas de las que tendrá que hacer uso y la dinámica general del juego, lo que incluye también un NPC con el cual interactúe.
+
+- Hub: Esta será la zona más amplia del juego con una vista "Top/Down" en la cual el jugador puede desplazarse libremente dentro de los límites, hablando con los NPCs que encuentre en él, los cuales le darán, bien información relacionada con el lore para que el jugador tenga conciencia de la historia que le rodea, bien de los bosses a los que tendrá que enfrentarse. En este Hub el jugador también encontrará las entradas a los distintos bosses, entradas que se irán desbloqueando progresivamente, dado que el orden de enfrentamiento a estos es inalterable.
+
+- Boss Rana: [Mecanicas de enemigos](#mecanicas-de-enemigos)
+
+
+- Retorno al Hub: el jugador vuelve al hub notando cambios en el mismo, como que la entrada al primer boss está destruida, la puerta de las 3 esencias al norte del hub tiene la primera marca iluminada y los NPCs con los que puede interactuar le darán información distinta a la que le dieron al principio.
+
+- Boss Árbol: [Mecanicas de enemigos](#mecanicas-de-enemigos)
+
+
+- Retorno al Hub: el jugador vuelve al hub por segunda vez notando cambios similares a los primeros puesto que ahora las entradas a los dos primeros bosses están destruidas y los dos simbolos correspondientes en la puerta al norte del hub están iluminados a falta del tercero. Los NPCs del hub de nuevo le darán información distinta a la que ya le dieron las veces anteriores.
+
+- Boss Manos: [Mecanicas de enemigos](#mecanicas-de-enemigos)
      
-        - Hub: Esta será la zona más amplia del juego con una vista "Top/Down" en la cual el jugador puede desplazarse libremente dentro de los límites, hablando con los NPCs que encuentre en él, los cuales le darán, bien información relacionada con el lore para que el jugador tenga conciencia de la historia que le rodea, bien de los bosses a los que tendrá que enfrentarse. En este Hub el jugador también encontrará las entradas a los distintos bosses, entradas que se irán desbloqueando progresivamente, dado que el orden de enfrentamiento a estos es inalterable.
-     
-        -Boss Rana: (#mecanicas-de-enemigos)
-     
-        -Huida del Boss Rana: tras superar este primer boss el escenario comienza a derrumbarse y el jugador tendrá que ir avanzando en una fase de plataformeo horizontal hacia la derecha, evitando los elementos que caerán de la parte superior del nivel. En caso de que el jugador muera en este nivel, se le devolverá al comienzo del mismo.
-     
-        -Retorno al Hub: el jugador vuelve al hub notando cambios en el mismo, como que la entrada al primer boss está destruida, la puerta de las 3 esencias al norte del hub tiene la primera marca iluminada y los NPCs con los que puede interactuar le darán información distinta a la que le dieron al principio.
-     
-        -Boss Árbol: (#mecanicas-de-enemigos)
-     
-        -Huida del Boss Árbol: tras superar el segundo boss, esta vez la huida será en sentido vertical ascendente ascendiendo mediante saltos en platafrormas. Tendremos ramas que aaparecerán de los laterales del nivel haciendo daño al jugador, y haciendo que si este cae hacia abajo muera en el acto, volviendo al inicio de esta fase de huida.
-     
-        -Retorno al Hub: el jugador vuelve al hub por segunda vez notando cambios similares a los primeros puesto que ahora las entradas a los dos primeros bosses están destruidas y los dos simbolos correspondientes en la puerta al norte del hub están iluminados a falta del tercero. Los NPCs del hub de nuevo le darán información distinta a la que ya le dieron las veces anteriores.
-     
-        -Boss Manos: (#mecanicas-de-enemigos)
-     
-        -Retorno al Hub: el jugador vuelve directamente al Hub tras derrotar al tercer boss y ahora todas las entradas están destruidas, los NPCs le felicitan y le instan a ir hacia la puerta, la cual tiene iluminados los 3 símbolos de las esencias. El jugador interactuará con ella y se le muestra la descripción del desenlace del juego y de las buenas consecuencias que sus actos traerán al mundo de Arven, siendo así el final del juego.
+- Nivel de Huída: Cuando la salud del tercer jefe llega a 0, el jugador pasará automáticamente a un nivel de huída, basado en plataformeo y obstáculos que esquivar. En este nivel el jugador mediante saltos y coordinación tiene que avanzar en un primer momento, de manera horizontal saltando de plataforma en plataforma, esquivando los proyectiles que le arrojan algunas plantas, evitando pinchos distribuidos a lo largo del nivel, y no menos importante, evitando caer al vacío. Todo esto mientras la sombra del último boss te persigue.
+Cuando llegamos a la mitad del nivel, habrá un checkpoint para evitar penalizar al jugador de más si llega a este punto en caso de morir, y la dinámica del nivel se mantendrá, variando solo de la horizontalidad a la verticalidad.
+Al llegar a la salida de esta fase vertical pasaremos directamente al Hub.
+
+- Retorno al Hub: el jugador vuelve directamente al Hub tras derrotar al tercer boss y escapar. Ahora todas las entradas están destruidas, los NPCs le dan las últimas piezas de información de la historia detrás de toda su aventura y le instan a ir hacia la puerta, la cual tiene iluminados los 3 símbolos de las esencias. El jugador interactuará con ella y se le muestra la descripción del desenlace del juego y de las buenas consecuencias que sus actos traerán al mundo de Arven, siendo así el final del juego.
 
   ![Nivel1](./images/niveles1.png)|  
+     
   Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
   ![Nivel2](./images/niveles2.png)| 
-    
-Al matar a los dos primeros bosses, se avisará al jugador de que debe huír del lugar porque va a derrumbarse; acto seguido se pasará a un nivel de huída por plataformas.
-     -Después del boss rana: Será un nivel de plataformas horizontal, el jugador tiene que llegar al final mientras caen piedras del techo. Las plataformas se caen después de que el jugador haya pasado por encima de ellas para impedir que vuelva hacia atrás. Si una piedra toca al jugador se le quitará media vida; si cae de las plataformas morirá y volverá al último checkpoint.
-     -Después del boss arbol: Será un nivel de plataformas vertical, en el que tenga que ir saltando hacia arriba, evitando ramas que salen de los laterales. Si una rama golpea al jugador, se le quitará media vida. El jugador solo puede avanzar hacia arriba, si cae muere y vuelve al último checkpoint
-     -Depués del boss de las manos: Se pasa directamente a la cinemática de fin de juego.
      
-     
-Hub: Zona central que unifica todo el juego; al acabar el tutorial se situa al jugador en esta zona. Se trata de una escena estilo top down. Será una zona semiabierta donde se encuentran repartidos diferentes npc. El objetivo del jugador es recorrer el hub y hablar con los npcs, estos le irán contando parte de la historia y le darán pistas de cómo entrar a las zonas de los diferentes bosses. 
-En esta zona habrá diferentes objetos que se pueden destruír, dando monedas para el jugador. Estas monedas podrán intercambiarse por vidas extra en la parte baja del hub.
-
- Después de matar a los diferentes bosses se irá devolviendo al jugador al hub; en este se encontrarán cambios. La zona del boss que se acaba de destruír estará derrumbada y se habrá habilitado la entrada al siguiente boss; los dialogos de los npc estarán enfocados al siguiente boss que toca matar.
-
   <img src="./images/Hub boceto.jpeg" width="300" height="200">
      
      
