@@ -6,7 +6,6 @@
 #include "../../RectangleCollider.h"
 #include "../../Image.h"
 #include "../../FramedImage.h"
-#include "../CollideWithBordersBoss.h"
 #include "Punietazo.h"
 #include "ClapAttack.h"
 #include "HammerArm.h"

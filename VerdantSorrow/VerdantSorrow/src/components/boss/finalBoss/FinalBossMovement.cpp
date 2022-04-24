@@ -74,11 +74,9 @@ void FinalBossMovement::update()
 		//fireBallCooldown_ = 2000;
 	}
 	else if (phase_ == PHASE2) {
+
 		if (eyeState_ == EyeState::BOUNCE) bounce();
 		else restartBouncing();
-
-		//if (sdlutils().currRealTime() > lastFireBall_ + fireBallCooldown_)
-		//	fireBall();
 	}
 
 	if (deadBoss_) {
@@ -97,6 +95,7 @@ void FinalBossMovement::bounce()
 
 	//Aviso ataques
 	if ((pos_.getY() < 150 && vel_.getY() < 0) || (pos_.getY() > sdlutils().height() - 300 && vel_.getY() > 0)) {
+		
 		anim_->setColor(200, 200, 20, 100);
 	}
 
@@ -113,21 +112,23 @@ void FinalBossMovement::bounce()
 		//Guarda la velocidad y para el objeto actual
 		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
 		vel_ = Vector2D(0, 0);
+
 		//Inicia el contador
-		//lastTimeGround = sdlutils().currRealTime();
 		lastTimeInGround_->reset();
+		
 		//Crea las dos bolas de fuego
 		waveSp_->createWaves(100, 100, Vector2D(1, 0), tr_, &sdlutils().images().at("wave"));
+		
 		//Cambia el estado a suelo
 		eyeState_ = EyeState::GROUND;
-		//sdlutils().soundEffects().at("wall_hit").play();
 	}
 	else if (pos_.getX() + tr_->getWidth() > sdlutils().width()) {
+		
 		pos_.setX(sdlutils().width() - tr_->getWidth());
 		vel_.setX(-vel_.getX());
-		//sdlutils().soundEffects().at("wall_hit").play();
 	}
 	else if (pos_.getX() < 0) {
+		
 		pos_.setX(0);
 		vel_.setX(-vel_.getX());
 	}

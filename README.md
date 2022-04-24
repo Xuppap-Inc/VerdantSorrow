@@ -47,7 +47,7 @@ ___
 
 Vista General |
 :--:|
-![Vista General](./images/interfaz.jpg)|
+![Vista General](./images/finalboss.png)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
 El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando. 
@@ -234,7 +234,7 @@ Esta será la paleta de colores que se utilizará.
  La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cuando entra en cualquier enfrentamiento contra un jefe aparecerá en la parte inferior, sin obstaculizar la visibilidad de los elementos del juego, la barra de vida del jefe en cuestión.
 
  <p align="center">
-  <img src="./images/interfaz.jpg" width="400"/>
+  <img src="./images/rana.png" width="800"/>
 
 ---
 
@@ -242,29 +242,39 @@ Esta será la paleta de colores que se utilizará.
  Utilizaremos GitHub Issues como sistema de gestión, cada historia de usuario se escribirá como una issue y los responsables se la asignarán.  
 
  ### 4.1. Breve descripción del sistema y plataforma de comunicación 
- Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y posibles conflictos.  
+ Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
+El grupo de whatsapp será para un uso más coloquial y distendido.
 
 ---
 
   ## <a name="contenido"></a> 5. Contenido  
-  ### <a name="musica"></a> 5.1. Música  
-  - Música de cada uno de los jefe.
-  - Música menú.  
+  ### <a name="musica"></a> 5.1. Música 
+     En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos         buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el             lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho           más rápida, y en la segunda fase de cada uno, frenética.
+     
+     
+  - Música de cada uno de los jefes tanto para la primera como para la segunda fase.
+  - Música menú y del Hub. 
 
   ### <a name="sonidos"></a> 5.2. Sonidos
+     
+     Los distintos sonidos que habrá en el juego serán los siguientes:
+     
   - Jugador
-    - Espadazo (suena cuando el jugador ataca)
+    - Ataque con la espada
     - Salto
     - Rodar 
   
   - General
     - GameOver
     - Derrotar Boss
-  
-  - Enemigos
-  - Bosses
+     
+  - Jefes:
+     -Ataques
 
   ### <a name="imagenes"></a> 5.3. Imágenes
+     
+     Como indicábamos al principio del documento, la casi totalidad de nuestro juego contaría con arte hecho por nuestro equipo, de tal manera que tanto los fondos del      juego como las distintas animaciones de nuestro personaje y de los enemigos encajasen perfectamente en el juego y a nuestro gusto.
+     
   - Personaje principal:
     - Correr
     - Saltar
@@ -272,7 +282,7 @@ Esta será la paleta de colores que se utilizará.
     - Atacar (en aire)
     - Rodar  
   
-    ![Personaje](./images/protagonista.png)|  
+    ![Personaje](./images/chicafoto.png)|  
 
   - Boss rana:
     - Rana idle
@@ -287,8 +297,9 @@ Esta será la paleta de colores que se utilizará.
     - Caminar
     - Golpear
 
-    <img src="./images/arbol_humanoide_1.png" width="200" height="300" />  
-    <img src="./images/arbol_humanoide_2.png" width="200" height="300" />  
+    <img src="./images/groot.png" width="400" height="300" />  
+    <img src="./images/grootcapa.png" width="400" height="300" />  
+    <img src="./images/lampara.png" width="200" height="300" />
 
 
   - Boss manos:

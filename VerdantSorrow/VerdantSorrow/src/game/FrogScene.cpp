@@ -16,6 +16,7 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/wave/WaveMovement.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "../components/boss/frog_boss/BounceOnBordersFrog.h"
 #include "../components/fondos/ShowAtOppositeSide.h"
 #include "Fondos/Parallax.h"
 
@@ -137,7 +138,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	colManager->addCollider(frogCollider);
 
 	Frog->addComponent<SimpleGravity>(.5);
-	Frog->addComponent<CollideWithBordersBoss>();
+	Frog->addComponent<BounceOnBordersFrog>();
 
 	Frog->addComponent<FrogAttackManager>(colManager);
 
