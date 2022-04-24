@@ -3,7 +3,7 @@
 #include "../../../ecs/Entity.h"
 #include "../../../ecs/Manager.h"
 
-FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(10)
+FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(5)
 {
 }
 

@@ -20,6 +20,7 @@
 #include "../components/boss/nivelHuida/Mushroom.h"
 #include "../components/boss/nivelHuida/Spikes.h"
 #include "../components/boss/frog_boss/FlyMovement.h"
+#include "../components/boss/nivelHuida/FlySpawnerPlant.h"
 
 void TutorialScene::init() 
 {
@@ -40,6 +41,7 @@ void TutorialScene::init()
 
 	createPlatform(700, sdlutils().height() - 100, 300, 100);
 	createSpike();
+	createPlantFlySpawner();
 
 	auto rootSpawner = mngr_->addEntity();
 	rootSpawner->addComponent<TutorialSpawnRoot>(colManager_);
@@ -81,6 +83,22 @@ void TutorialScene::createFly(int x, int y)
 	fly->addComponent<FlyMovement>();
 	fly->addToGroup(ecs::_BOSSELEMENTS_GRP);
 }
+
+void TutorialScene::createPlantFlySpawner()
+{
+	auto plant = mngr_->addEntity();
+	auto plantTr = plant->addComponent<Transform>();
+	auto plantX = 500;
+	auto plantY = 500;
+	plantTr->init(Vector2D(plantX, plantY), Vector2D(), 60, 50, 0.0f);
+	auto col = plant->addComponent<RectangleCollider>(plantTr->getWidth(), plantTr->getHeight());
+	col->setIsTrigger(true);
+	colManager_->addCollider(col);
+	plant->addComponent<RectangleRenderer>();
+	plant->addComponent<FlySpawnerPlant>(colManager_, true, 5000);
+	plant->addToGroup(ecs::_BOSSELEMENTS_GRP);
+}
+
 void TutorialScene::createPlatform(int x, int y, int w, int h)
 {
 	auto platform = mngr_->addEntity();
