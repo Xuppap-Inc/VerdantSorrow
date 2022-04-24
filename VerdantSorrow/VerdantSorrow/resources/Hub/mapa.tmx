@@ -324,9 +324,17 @@
   <object id="209" gid="4" x="-2" y="596" width="2000" height="600"/>
   <object id="210" gid="3" x="1980.85" y="588.97" width="2000" height="600"/>
  </objectgroup>
- <objectgroup id="10" name="entradasbosses" locked="1">
-  <object id="1259" gid="70" x="2553.03" y="873.485" width="500" height="450"/>
-  <object id="1260" gid="2147483719" x="2468.18" y="2031.73" width="500" height="518"/>
+ <objectgroup id="10" name="entradasbosses">
+  <object id="1259" gid="70" x="2553.03" y="873.485" width="500" height="450">
+   <properties>
+    <property name="type" value="boss"/>
+   </properties>
+  </object>
+  <object id="1260" gid="2147483719" x="2468.18" y="2031.73" width="500" height="518">
+   <properties>
+    <property name="type" value="boss"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="arboles">
   <object id="393" gid="48" x="337.667" y="827.667" width="90" height="90"/>
