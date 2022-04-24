@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\nivelHuida\FlySpawnerPlant.h" />
     <ClInclude Include="src\components\boss\finalBoss\BounceOnBordersEye.h" />
     <ClInclude Include="src\components\boss\frog_boss\BounceOnBordersFrog.h" />
     <ClInclude Include="src\components\fondos\Disolve.h" />
@@ -121,6 +122,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\nivelHuida\FlySpawnerPlant.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\BounceOnBordersEye.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\BounceOnBordersFrog.cpp" />
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
