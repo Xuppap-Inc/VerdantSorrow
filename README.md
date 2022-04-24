@@ -242,14 +242,14 @@ Esta será la paleta de colores que se utilizará.
  Utilizaremos GitHub Issues como sistema de gestión, cada historia de usuario se escribirá como una issue y los responsables se la asignarán.  
 
  ### 4.1. Breve descripción del sistema y plataforma de comunicación 
- Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
-El grupo de whatsapp será para un uso más coloquial y distendido.
+     Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y          posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para      las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
+     El grupo de whatsapp será para un uso más coloquial y distendido.
 
 ---
 
   ## <a name="contenido"></a> 5. Contenido  
   ### <a name="musica"></a> 5.1. Música 
-     En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos         buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el             lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho           más rápida, y en la segunda fase de cada uno, frenética.
+     En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos      buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el              lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho          más rápida, y en la segunda fase de cada uno, frenética.
      
      
   - Música de cada uno de los jefes tanto para la primera como para la segunda fase.
@@ -282,7 +282,7 @@ El grupo de whatsapp será para un uso más coloquial y distendido.
     - Atacar (en aire)
     - Rodar  
   
-    ![Personaje](./images/chicafoto.png)|  
+    <img src="./images/chicafoto.png" width="200" height="300" />
 
   - Boss rana:
     - Rana idle
@@ -297,16 +297,16 @@ El grupo de whatsapp será para un uso más coloquial y distendido.
     - Caminar
     - Golpear
 
-    <img src="./images/groot.png" width="400" height="300" />  
-    <img src="./images/grootcapa.png" width="400" height="300" />  
-    <img src="./images/lampara.png" width="200" height="300" />
+    <img src="./images/groot.png" width="200" height="300" />  
+    <img src="./images/grootcapa.png" width="300" height="300" />  
+    <img src="./images/lampara.png" width="100" height="100" />
 
 
   - Boss manos:
     - Mano abierta/puño
     - Ojo central gigante
 
-    ![BossManos](./images/bossmanos.png)|  
+   <img src="./images/jefeOjo.png" width="350" height="300" />  
 
 
   ### <a name="historia"></a> 5.4. Historia  
