@@ -27,6 +27,7 @@ public:
 	void initComponent() override;
 	void render() override;
 	void flipX(bool h);
+	bool isFlipped();
 	void repeat(bool h);
 
 	bool hasFinished();

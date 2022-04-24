@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\finalBoss\BounceOnBordersEye.h" />
+    <ClInclude Include="src\components\boss\frog_boss\BounceOnBordersFrog.h" />
     <ClInclude Include="src\components\fondos\Disolve.h" />
     <ClInclude Include="src\components\boss\nivelHuida\Spikes.h" />
     <ClInclude Include="src\components\boss\nivelHuida\Mushroom.h" />
@@ -73,7 +75,6 @@
     <ClInclude Include="src\game\TreeScene.h" />
     <ClInclude Include="src\game\Hub.h" />
     <ClInclude Include="src\components\OnBorders.h" />
-    <ClInclude Include="src\components\boss\CollideWithBordersBoss.h" />
     <ClInclude Include="src\components\boss\frog_boss\FrogJump.h" />
     <ClInclude Include="src\components\player\Attack.h" />
     <ClInclude Include="src\components\player\PlayerAttributes.h" />
@@ -120,6 +121,8 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\finalBoss\BounceOnBordersEye.cpp" />
+    <ClCompile Include="src\components\boss\frog_boss\BounceOnBordersFrog.cpp" />
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Mushroom.cpp" />
@@ -172,7 +175,6 @@
     <ClCompile Include="src\game\TreeScene.cpp" />
     <ClCompile Include="src\game\Hub.cpp" />
     <ClCompile Include="src\components\OnBorders.cpp" />
-    <ClCompile Include="src\components\boss\CollideWithBordersBoss.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\FrogJump.cpp" />
     <ClCompile Include="src\components\player\Attack.cpp" />
     <ClCompile Include="src\components\player\PlayerAttributes.cpp" />

@@ -17,7 +17,7 @@ public:
 	void initComponent() override;
 	void update() override;
 	void attack(int dir);
-	bool getMove() { return ableMove_; }
+	bool getMove() { return ableToMove_; }
 
 	bool hasFinished() { return attacking_ == false; };
 
@@ -27,11 +27,11 @@ private:
 	TreeMovement* treeMovement_;
 	LanternSpawner* lanternSpawner_;
 
-	VirtualTimer* lastTimeTimer_;
-	VirtualTimer* nextTimeTimer_;
+	VirtualTimer* rootSpawnTimer_;
+	VirtualTimer* waitTimer_;
 	Uint32 movingTime_;
 	bool attacking_;
-	bool ableMove_;
+	bool ableToMove_;
 	float rootPos_;
 	int dir_;
 	int rootW_;
@@ -39,5 +39,6 @@ private:
 	
 	const int SPACE_BETWEEN_ROOTS = 10;
 	const int TIME_BETWEEN_ROOTS = 150;
+	const int TIME_UNTIL_MOVING = 3000;
 };
 

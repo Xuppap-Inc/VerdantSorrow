@@ -271,6 +271,11 @@ void FramedImage::flipX(bool s)
 	flipX_ = s;
 }
 
+bool FramedImage::isFlipped()
+{
+	return flipX_;
+}
+
 void FramedImage::repeat(bool h)
 {
 	noRepeat_ = !h;

@@ -20,5 +20,5 @@ private:
 	Transform* tr_;
 	RectangleCollider* col_;
 	float speed_;
-	VirtualTimer* lastTimeTimer_;
+	VirtualTimer* rootSpawnTimer_;
 };

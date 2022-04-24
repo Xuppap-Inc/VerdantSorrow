@@ -1,16 +1,16 @@
 #pragma once
-#include "../OnBorders.h"
+#include "../../OnBorders.h"
 
 class Transform;
 class BossAtributos;
 class FramedImage;
 
-class CollideWithBordersBoss :
+class BounceOnBordersFrog :
     public OnBorders
 {
 public:
-    CollideWithBordersBoss();
-    ~CollideWithBordersBoss();
+    BounceOnBordersFrog();
+    ~BounceOnBordersFrog();
     void initComponent() override;
 
     void onBottom() override;

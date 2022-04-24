@@ -11,8 +11,8 @@
 #include "TreeMovement.h"
 
 
-RootWave::RootWave() : tr_(), lastTimeTimer_(), rootSpawner_(), attacking_(false), 
-dir_(1), rootPos_(-1), rootW_(0), treeMovement_(),ableMove_(false),movingTime_(10000), nextTimeTimer_()
+RootWave::RootWave() : tr_(), rootSpawnTimer_(), rootSpawner_(), attacking_(false), 
+dir_(1), rootPos_(-1), rootW_(0), treeMovement_(), ableToMove_(false), movingTime_(10000), waitTimer_()
 {
 }
 
@@ -26,8 +26,8 @@ void RootWave::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	rootSpawner_ = ent_->getComponent<RootSpawner>();
 	treeMovement_ = ent_->getComponent<TreeMovement>();
-	lastTimeTimer_ = mngr_->addTimer();
-	nextTimeTimer_ = mngr_->addTimer();
+	rootSpawnTimer_ = mngr_->addTimer();
+	waitTimer_ = mngr_->addTimer();
 
 	bool comps = tr_ != nullptr && rootSpawner_ != nullptr && treeMovement_ != nullptr;
 	assert(comps);
@@ -37,24 +37,26 @@ void RootWave::update()
 {
 	
 	//si ha pasado el tiempo entre raices
-	if (attacking_ && lastTimeTimer_->currTime() > TIME_BETWEEN_ROOTS) {
+	if (attacking_ && rootSpawnTimer_->currTime() > TIME_BETWEEN_ROOTS) {
 	
 		//crea la raiz y suma la posicion de la siguiente
 		rootSpawner_->createRoot(rootPos_);
 		rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir_;
 
-		lastTimeTimer_->reset();
+		rootSpawnTimer_->reset();
 		//si llega al borde de la pantalla acaba el ataque y activa el movimiento
 		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
-			movingTime_ =nextTimeTimer_->currTime();			
-			attacking_ = false;		
 			
+			waitTimer_->reset();			
+			attacking_ = false;
+
+			std::cout << "termina wave" << std::endl;
 		}		
-	}//si ha pasado el doble de tiempo de lo que dura la oleada
+	}
+	//si ha pasado el doble de tiempo de lo que dura la oleada
 	//(que es lo que tarda en llegar la última al limite)
-	else if (nextTimeTimer_->currTime()>=   movingTime_ * 1.8) {
-		ableMove_ = true;		
-		//movingTime_ = 10000;
+	else if (!attacking_ && waitTimer_->currTime() >= TIME_UNTIL_MOVING) {
+		ableToMove_ = true;
 	}
 }
 
@@ -66,17 +68,13 @@ void RootWave::attack(int dir)
 	attacking_ = true;
 	rootW_ = rootSpawner_->getRootWidth();
 
-	//para el movimiento del arbol
-	treeMovement_->setMoveActive(false);
-
 	//crea la primera raíz
 	rootSpawner_->createRoot(rootPos_);
 	rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir;
-	lastTimeTimer_->reset();
-	nextTimeTimer_->reset();
-	ableMove_ = false;
-	
-	
+	rootSpawnTimer_->reset();
+	ableToMove_ = false;	
+	waitTimer_->reset();
+	waitTimer_->pause();
 }
 
 

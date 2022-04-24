@@ -18,8 +18,20 @@ public:
 	void update() override;
 
 private:
+
+	enum State
+	{
+		APPEARING, GROWING, DYING
+	};
+
+	State state_;
+
+	const int WAIT_TO_DIE = 700;
+
+	const int MAX_HEIGH_BEFORE_GROWING = 100;
+
 	Transform* tr_;
 	RectangleCollider* col_;
 	float speed_;
-	VirtualTimer* lastTime_;
+	VirtualTimer* waitTimer_;
 };

@@ -18,12 +18,6 @@
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
 
-TreeAttackManager::TreeAttackManager() : player_(), tr_(), collManager_(), anim_(), rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(), 
-attacking_(false), treeCol_(), waiting_(false), lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
-{
-	
-}
-
 TreeAttackManager::~TreeAttackManager()
 {
 }
@@ -31,7 +25,8 @@ TreeAttackManager::~TreeAttackManager()
 TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(), tr_(), collManager_(collManager), anim_(), 
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
 																	attacking_(false), treeCol_(), waiting_(false), 
-																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), attribs_(), dir_(0), movement_()
+																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), 
+																	attribs_(), dir_(0), movement_(), deadBoss_(false)
 {
 }
 
@@ -117,8 +112,6 @@ void TreeAttackManager::update()
 
 		if (!attacking_) animNewState_ = ANIM_WALK;
 		anim_->repeat(true);
-
-		
 		
 		//si se encuentra a distancia de ataque a melee, ataca
 		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
@@ -139,47 +132,11 @@ void TreeAttackManager::update()
 
 		if (phase == PHASE1) {
 
-			if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
+			checkPhaseChange();
 
-				animNewState_ = ANIM_CHANGE_PHASE;
-				anim_->repeat(false);
+			if (timerWave_->currTime() > TIME_BETWEEN_WAVES) attackWave();
 
-				//callback que llama al cambio de estado al acabar la animacion de cambio de fase
-				std::function<void()> changePhaseCallback = [this]() { state = MOVING; };
-				anim_->registerEvent(std::pair<int, std::string>(13, "arbol_capa_cambio_fase"), changePhaseCallback);
-
-				SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
-				s->play();
-				musicaFase2_->setMusicVolume(100);
-				musicaFase1_->pauseChannel(0);
-
-				hojas_->disolveParticles();
-
-				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
-				particlesys->createParticlesWind(50);
-
-				ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo1_frente"), mngr_);
-				particlesys2->createOverlayParticlesDandellion(3);
-
-				phase = PHASE2;
-
-				rootAutoAim_->attack(true);
-
-				lanternMov_->setActive(false);
-				lanternMov_->moveToSide();
-
-				lanternCols_->changeToSecondPhase();
-				rootAutoAim_->changeToSecondPhase();
-
-				state = CHANGING_PHASE;
-			}
-
-			else {
-
-				if (timerWave_->currTime() > TIME_BETWEEN_WAVES) attackWave();
-
-				if (timerSpecial_->currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
-			}
+			if (timerSpecial_->currTime() > TIME_FOR_SPECIAL) prepareToSpecial();
 		}
 	}
 
@@ -243,16 +200,14 @@ void TreeAttackManager::update()
 		
 			animNewState_ = ANIM_BACKGROUND;
 			anim_->repeat(false);
-
-			//callback que llama al ataque especial al acabar la animacion
-			std::function<void()> attackCallback = [this]() { attackSpecial(); };
-
-			anim_->registerEvent(std::pair<int, std::string>(8, "arbol_capa_background"), attackCallback);
 		}
 	}
 
 	if (animState_ != animNewState_) {
 		animState_ = animNewState_;
+
+		std::function<void()> attackCallback;
+
 		switch (animState_)
 		{
 		case TreeAttackManager::ANIM_IDLE:
@@ -275,9 +230,22 @@ void TreeAttackManager::update()
 			break;
 		case TreeAttackManager::ANIM_ROOTS:
 			anim_->setColor(255, 200, 20, 500);
+
+			//callback que llama al ataque de raices al acabar la animacion
+			attackCallback = [this]() { 
+				rootWave_->attack(dir_); state = WAVE; };
+
+			anim_->registerEvent(std::pair<int, std::string>(15, "arbol_capa_roots"), attackCallback);
+
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_roots"), 3, 6, (1000 / 30) * 16, 16, "arbol_capa_roots");
 			break;
 		case TreeAttackManager::ANIM_BACKGROUND:
+
+			//callback que llama al ataque especial al acabar la animacion
+			attackCallback = [this]() { attackSpecial(); };
+
+			anim_->registerEvent(std::pair<int, std::string>(8, "arbol_capa_background"), attackCallback);
+
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_background"), 2, 6, (1000 / 30) * 9, 9, "arbol_capa_background");
 			break;
 		case TreeAttackManager::ANIM_CHANGE_PHASE:
@@ -297,6 +265,44 @@ void TreeAttackManager::update()
 	}
 }
 
+void TreeAttackManager::checkPhaseChange()
+{
+	if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
+
+		animNewState_ = ANIM_CHANGE_PHASE;
+		anim_->repeat(false);
+
+		//callback que llama al cambio de estado al acabar la animacion de cambio de fase
+		std::function<void()> changePhaseCallback = [this]() { state = MOVING; };
+		anim_->registerEvent(std::pair<int, std::string>(13, "arbol_capa_cambio_fase"), changePhaseCallback);
+
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
+		s->play();
+		musicaFase2_->setMusicVolume(100);
+		musicaFase1_->pauseChannel(0);
+
+		hojas_->disolveParticles();
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+		particlesys->createParticlesWind(50);
+
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_simbolo1_frente"), mngr_);
+		particlesys2->createOverlayParticlesDandellion(3);
+
+		phase = PHASE2;
+
+		rootAutoAim_->attack(true);
+
+		lanternMov_->setActive(false);
+		lanternMov_->moveToSide();
+
+		lanternCols_->changeToSecondPhase();
+		rootAutoAim_->changeToSecondPhase();
+
+		state = CHANGING_PHASE;
+	}
+}
+
 void TreeAttackManager::returnToIni()
 {
 	auto treeX = sdlutils().width() / 2 - 80;
@@ -311,15 +317,12 @@ void TreeAttackManager::attackWave()
 		animNewState_ = ANIM_ROOTS;
 		anim_->repeat(false);
 
+		movement_->setMoveActive(false);
+
 		//pausa el timer del otro ataque
 		timerSpecial_->pause();
-		
-		//callback que llama al ataque de raices al acabar la animacion
-		std::function<void()> attackCallback = [this]() { rootWave_->attack(dir_); };
 
-		anim_->registerEvent(std::pair<int, std::string>(15, "arbol_capa_roots"), attackCallback);
-
-		state = WAVE;
+		state = DOING_ANIM;
 	}
 }
 

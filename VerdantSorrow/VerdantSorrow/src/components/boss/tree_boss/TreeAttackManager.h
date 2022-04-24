@@ -26,16 +26,17 @@ public:
 		WAVE,
 		SPECIAL_ATTACK,
 		MOVING_TO_CENTER,
-		CHANGING_PHASE
+		CHANGING_PHASE,
+		DOING_ANIM
 	};
 	enum Phase {
 		PHASE1,
 		PHASE2
 	};
 
-	TreeAttackManager();
-	~TreeAttackManager();
 	TreeAttackManager(CollisionManager* collManager);
+	~TreeAttackManager();
+
 	void initComponent() override;
 	void update() override;
 
@@ -106,6 +107,8 @@ private:
 	void attackWave();
 	void attackSpecial();
 	void prepareToSpecial();
+
+	void checkPhaseChange();
 
 	bool deadBoss_;
 };
