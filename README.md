@@ -234,7 +234,7 @@ Esta será la paleta de colores que se utilizará.
  La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cuando entra en cualquier enfrentamiento contra un jefe aparecerá en la parte inferior, sin obstaculizar la visibilidad de los elementos del juego, la barra de vida del jefe en cuestión.
 
  <p align="center">
-  <img src="./images/rana.png" width="400"/>
+  <img src="./images/rana.png" width="800"/>
 
 ---
 
@@ -256,19 +256,25 @@ El grupo de whatsapp será para un uso más coloquial y distendido.
   - Música menú y del Hub. 
 
   ### <a name="sonidos"></a> 5.2. Sonidos
+     
+     Los distintos sonidos que habrá en el juego serán los siguientes:
+     
   - Jugador
-    - Espadazo (suena cuando el jugador ataca)
+    - Ataque con la espada
     - Salto
     - Rodar 
   
   - General
     - GameOver
     - Derrotar Boss
-  
-  - Enemigos
-  - Bosses
+     
+  - Jefes:
+     -Ataques
 
   ### <a name="imagenes"></a> 5.3. Imágenes
+     
+     Como indicábamos al principio del documento, la casi totalidad de nuestro juego contaría con arte hecho por nuestro equipo, de tal manera que tanto los fondos del      juego como las distintas animaciones de nuestro personaje y de los enemigos encajasen perfectamente en el juego y a nuestro gusto.
+     
   - Personaje principal:
     - Correr
     - Saltar
@@ -276,7 +282,7 @@ El grupo de whatsapp será para un uso más coloquial y distendido.
     - Atacar (en aire)
     - Rodar  
   
-    ![Personaje](./images/protagonista.png)|  
+    ![Personaje](./images/chicafoto.png)|  
 
   - Boss rana:
     - Rana idle
@@ -291,8 +297,9 @@ El grupo de whatsapp será para un uso más coloquial y distendido.
     - Caminar
     - Golpear
 
-    <img src="./images/arbol_humanoide_1.png" width="200" height="300" />  
-    <img src="./images/arbol_humanoide_2.png" width="200" height="300" />  
+    <img src="./images/groot.png" width="400" height="300" />  
+    <img src="./images/grootcapa.png" width="400" height="300" />  
+    <img src="./images/lampara.png" width="200" height="300" />
 
 
   - Boss manos:
