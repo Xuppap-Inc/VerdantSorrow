@@ -57,7 +57,7 @@ private:
 	AnimState animNewState_;
 
 	const float MELEE_ATTACK_DISTANCE = 20.0;
-	const int TIME_BETWEEN_WAVES = 1000;
+	const int TIME_BETWEEN_WAVES = 5000;
 
 	const int TIME_FOR_SPECIAL = 10000;
 	const int WAIT_AFTER_SPECIAL = 1000;
