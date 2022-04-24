@@ -17,7 +17,7 @@ std::vector<RectangleCollider*> CollisionManager::getCollisions(RectangleCollide
 	for (auto col2 : colliders) {
 	
 		if (c != col2) {
-		
+
 			if (collision(c->getCollider(), col2->getCollider())) cols.push_back(col2);
 		}
 	}

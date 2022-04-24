@@ -33,5 +33,9 @@ private:
 
 	bool moveActive_;
 	bool movingToCenter_;
+
+	void moveToCenter(Vector2D& treePos, float treeWidth, Vector2D& treeVel);
+
+	void followPlayer(Vector2D& playerPos, float playerWidth, Vector2D& treePos, float treeWidth, Vector2D& treeVel);
 };
 
