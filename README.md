@@ -47,7 +47,7 @@ ___
 
 Vista General |
 :--:|
-![Vista General](./images/interfaz.jpg)|
+![Vista General](./images/finalboss.png)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
 El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando. 
@@ -178,16 +178,18 @@ Comportamiento de los jefes:
        
 ### <a name="controles"></a> 2.2. Controles  
 El jugador se controla con las teclas WASD del teclado (W se utiliza para saltar, al igual que la tecla Espacio, A y D para el movimiento lateral). Se atacará con la tecla J, y se esquivará con el Shift izquierdo.
+El jugador, dentro del Hub, puede hablar con los NPCs que encuentre pulsando la tecla "E".
 <p align="center">
   <img src="./images/controles.png" width="400"/>
 
 ### <a name="camara"></a> 2.3. Cámara  
-La cámara estará posicionada de modo que se muestre una vista lateral del personaje y del escenario. Según el jugador vaya avanzando, la cámara lo seguirá con un cierto delay haciendo scroll, con el jugador siempre centrado en la cámara. En las peleas con los jefes la cámara está fija en el centro porque las zonas de combate ocupan una pantalla únicamente.
+La cámara estará posicionada de modo que se muestre una vista lateral del personaje y del escenario. Según el jugador vaya avanzando, la cámara lo seguirá con un cierto delay haciendo scroll, con el jugador siempre centrado en la cámara. 
+En las peleas con los jefes la cámara está fija en el centro porque las zonas de combate ocupan una pantalla únicamente.
 
 ### <a name="dinamica"></a> 2.4. Dinámica  
 - Objetivo: Avanzar a través de las diferentes zonas venciendo a los 3 jefes para abrir la puerta central.  
 
-- Ganar: Acabar con el jefe actual.
+- Ganar: Acabar con el jefe actual, sería una victoria parcial. Superar los 3 bosses y llegar al final del juego sería una victoria total.
 
 - Recompensa: Nuevos caminos en el hub, nuevos diálogos y jefe.
 
@@ -203,6 +205,7 @@ La cámara estará posicionada de modo que se muestre una vista lateral del pers
   <img src="./images/fondo1.jpg" width="400"/>
 
 Se busca una estética inspirada principalmente en “Más allá del jardín”. Dibujos infantiles pero con una tonalidad oscura que nos puede recordar también a la estética de Tim Burton. Los personajes, enemigos y objetos con los que interactúa el jugador tendrán tonos con más saturación para poder distinguirlos del fondo. Todo el arte tendrá lineart negro, exceptuando zonas muy alejadas del fondo. En ciertos momentos se usará una composición uniforme con un elemento contrastado para captar la atención del jugador (por ejemplo cuando el jefe de la linterna sale de la pantalla la linterna contrasta con todo lo demás).
+De la misma manera, para que el jugador tenga conciencia de los cambios que se producen en los jefes se añade un sistema de partículas. Estos, además de reflejar el cambio de fases dentro de las luchas contra los jefes, también proporcionan al jugador una ayuda visual a la hora de identificar distintos ataques, tanto propios como enemigos así como el inicio y la finalización de los mismos.
 
 Esta será la paleta de colores que se utilizará.
  <p align="center">
@@ -216,8 +219,6 @@ Esta será la paleta de colores que se utilizará.
 - Menú principal: Cuenta con los siguientes botones:
     - Nueva partida: Comienza una nueva partida.
     - Continuar: Continúa el juego en el último punto de guardado.
-   -  Zonas: Te permite seleccionar un jefe contra el que luchar.
-   -  Ajustes: Permite regular el volumen de salida de audio.
    -  Controles: Muestra una pantalla con los controles del juego.
    -  Salir: Permite salir del juego.
  
@@ -230,10 +231,10 @@ Esta será la paleta de colores que se utilizará.
  Al utilizar las opciones de salir, el juego guardará el estado desde el último punto de guardado.
 
  ### <a name="interfaz-y-control"></a> 3.2. Interfaz y control  
- La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cada enemigo tendrá en la cabeza una barra que representa su vida. 
+ La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cuando entra en cualquier enfrentamiento contra un jefe aparecerá en la parte inferior, sin obstaculizar la visibilidad de los elementos del juego, la barra de vida del jefe en cuestión.
 
  <p align="center">
-  <img src="./images/interfaz.jpg" width="400"/>
+  <img src="./images/rana.png" width="400"/>
 
 ---
 
@@ -241,14 +242,18 @@ Esta será la paleta de colores que se utilizará.
  Utilizaremos GitHub Issues como sistema de gestión, cada historia de usuario se escribirá como una issue y los responsables se la asignarán.  
 
  ### 4.1. Breve descripción del sistema y plataforma de comunicación 
- Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y posibles conflictos.  
+ Utilizaremos medios como Discord y/o WhatsApp para la comunicación efectiva entre todo el equipo y para acordar fechas y horas de reunión para aclarar dudas y posibles conflictos. De la misma manera Discord se utilizará para una comunicación más enfocada al proyecto de manera seria, con diversos canales que se usen para las distintas áreas del proyecto así como para las reuniones de todo el equipo una vez al comienzo de semana para organizar el trabajo de cara a la siguiente.
+El grupo de whatsapp será para un uso más coloquial y distendido.
 
 ---
 
   ## <a name="contenido"></a> 5. Contenido  
-  ### <a name="musica"></a> 5.1. Música  
-  - Música de cada uno de los jefe.
-  - Música menú.  
+  ### <a name="musica"></a> 5.1. Música 
+     En el apartado de la música, al igual que en el apartado de arte queremos que sean de creación propia, de tal manera que encaje con el estilo de juego que estamos         buscando la música será también un aliciente para el jugador y acompañará con el estado de juego en ese momento, de tal manera que la música en el hub, el             lugar donde nada te hace daño y puedes explorar tranquilamente, será una música tranquila, mientras que en los combates contra los jefes la música será mucho           más rápida, y en la segunda fase de cada uno, frenética.
+     
+     
+  - Música de cada uno de los jefes tanto para la primera como para la segunda fase.
+  - Música menú y del Hub. 
 
   ### <a name="sonidos"></a> 5.2. Sonidos
   - Jugador
