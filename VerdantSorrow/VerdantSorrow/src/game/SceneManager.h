@@ -33,8 +33,6 @@ public:
 	void changeStatePlayerInBoss(bool active);
 	void activatePause();
 	void decideScene();
-	ControlsScene* getControlScene() { return controls_; };
-	MenuScene* getMenuScene() { return menu_; };
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
 private:

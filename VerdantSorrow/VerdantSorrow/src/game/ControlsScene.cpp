@@ -14,6 +14,7 @@ ControlsScene::ControlsScene():BaseMenu(),delay_(250),lastUpdate_(0),controllerI
 
 void ControlsScene::init()
 {
+	changeSc_ = false;
 	Scene::init();
 	isChangingScene(changeSc_);
 
@@ -40,7 +41,6 @@ void ControlsScene::onButtonClicked(int index)
 	case 0: //Boton salida al menu principal
 		if (sC().getPreviousScene() == SceneManager::Menu_) {
 			sC().changeScene(SceneManager::Menu_);
-			sC().getMenuScene()->isChangingScene(false);
 		}
 		break;
 	}

@@ -17,6 +17,7 @@ MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(25
 
 void MenuScene::init()
 {
+	changeSc_ = false;
 	Scene::init();
 	isChangingScene(changeSc_);
 	//background();//Dibuja el fondo
@@ -64,7 +65,6 @@ void MenuScene::onButtonClicked(int index)
 		break;
 	case 2: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
-		sC().getControlScene()->isChangingScene(false);
 		break;
 	case 3: //Boton quit
 		SDL_Quit();

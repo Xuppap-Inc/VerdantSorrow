@@ -14,6 +14,7 @@ PauseMenu::PauseMenu() :BaseMenu(), controllerIndex_(-1), delay_(250), lastUpdat
 
 void PauseMenu::init()
 {
+	changeSc_ = false;
 	Scene::init();
 	isChangingScene(changeSc_);
 	generateAllButtons();
