@@ -47,7 +47,7 @@ ___
 
 Vista General |
 :--:|
-![Vista General](./images/rana.jpg)|
+![Vista General](./images/finalboss.png)|
 
 ### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
 El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando. 
@@ -234,7 +234,7 @@ Esta será la paleta de colores que se utilizará.
  La interfaz será una interfaz sencilla; contendrá 3 corazones que representan la vida del jugador. Cuando entra en cualquier enfrentamiento contra un jefe aparecerá en la parte inferior, sin obstaculizar la visibilidad de los elementos del juego, la barra de vida del jefe en cuestión.
 
  <p align="center">
-  <img src="./images/rana.jpg" width="400"/>
+  <img src="./images/rana.png" width="400"/>
 
 ---
 
