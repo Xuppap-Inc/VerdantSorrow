@@ -19,11 +19,15 @@ using Uint = unsigned int;
 using namespace std;
 
 class Texture;
-
+class CollisionManager;
+struct propertys {
+	Texture* tex_;
+	string type;
+};
 class TileMap
 {
 public:
-	TileMap(ecs::Manager* mngr,string tileMapPath);
+	TileMap(ecs::Manager* mngr,string tileMapPath, CollisionManager*col);
 	~TileMap();
 	
 
@@ -39,7 +43,7 @@ private:
 	map<Uint, map<Uint,Texture*>> tilesets;//tilemapid -> img id->texture
 	tmx::Map* tmxTileMap;
 	ecs::Manager* mngr_;
-
+	CollisionManager* col_;
 	double scaleX, scaleY;
 };
 

@@ -4,8 +4,10 @@
 #include "../components/Transform.h"
 #include "../components/RectangleCollider.h"
 #include "../components/Image.h"
+#include "../components/hub/NpcCtrl.h"
+#include "../components/hub/DialogBoxMngr.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string tileMapPath)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath,CollisionManager*col):col_(col)
 {
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
@@ -88,7 +90,7 @@ void TileMap::loadMap(string path)
 				auto pos = object.getPosition();
 				SDL_Rect r = build_sdlrect(pos.x, pos.y - object.getAABB().height, object.getAABB().width, object.getAABB().height);
 				tilesets[tset_gid][cur_gid]->render(r);
-
+				
 				if (objects->getName() != "suelo" && objects->getName() != "camino") {
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
@@ -102,7 +104,26 @@ void TileMap::loadMap(string path)
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
 					tr->init(Vector2D(r.x * dx, r.y * dy), Vector2D(), r.w * dx, r.h * dy, 0.0f);
-					ent->addComponent<RectangleCollider>(r.w * dx, r.h * dy);
+					auto col=ent->addComponent<RectangleCollider>(r.w * dx, r.h * dy);
+					vector<tmx::Property>s = object.getProperties();
+					if (s.size() > 0 && s[0].getName() == "type") {
+
+						if (s[0].getStringValue() == "npc") {
+							auto dialogBox = mngr_->addEntity();
+							dialogBox->setActive(false);
+							auto tr = dialogBox->addComponent<Transform>();
+							tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
+							dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
+							dialogBox->addToGroup(ecs::_UI_GRP);
+							col_->addCollider(col);
+							col->setIsTrigger(true);
+							ent->addComponent<NpcCtrl>(col_, dialogBox);
+							ent->addToGroup(ecs::_HUB_DECORATION_GRP);
+						}
+						else if (s[0].getStringValue() == "boss") {
+
+						}
+					}
 				}
 			}
 		}
@@ -127,8 +148,8 @@ void TileMap::loadTilesetsTextures()
 		for (auto& sprite : tileset.getTiles()) {
 
 			Uint imgId = sprite.ID;
-			string imagePath = sprite.imagePath;
-
+			string imagePath = sprite.imagePath;			
+			
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}
