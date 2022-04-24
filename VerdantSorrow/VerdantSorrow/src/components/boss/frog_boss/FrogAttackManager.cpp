@@ -72,7 +72,7 @@ void FrogAttackManager::update()
 {
 	if (!deadBoss_) checkIfDead();
 
-	flipOnBorders();
+	checkJumpDirection();
 
 	checkPhaseChange();
 
@@ -303,6 +303,26 @@ void FrogAttackManager::checkIfDead()
 	}
 }
 
+void FrogAttackManager::checkPositionPlayer()
+{
+	auto posPlayer = player_->getPos();
+	auto frogPos = tr_->getPos();
+
+	auto distance = posPlayer.getX() - frogPos.getX();
+	
+	if (distance < 0) 
+	{
+		anim_->flipX(false);
+		jumpDirection_ = -1;
+	}
+	
+	else 
+	{
+		anim_->flipX(true);
+		jumpDirection_ = 1;
+	}
+}
+
 ecs::Entity* FrogAttackManager::createFly()
 {
 	fly_ = mngr_->addEntity();
@@ -355,15 +375,13 @@ void FrogAttackManager::onFlyDied() {
 	frogState_ = FLY_DIED;
 }
 
-void FrogAttackManager::flipOnBorders()
+void FrogAttackManager::checkJumpDirection()
 {
-	if (jumpDirection_ == 1 && attr_->isOnRightBorder()) {
-		anim_->flipX(false);
+	if (jumpDirection_ == 1 && !anim_->isFlipped()) {
 		jumpDirection_ = -1;
 	}
-	else if (jumpDirection_ == -1 && attr_->isOnLeftBorder()) {
+	else if (jumpDirection_ == -1 && anim_->isFlipped()) {
 		jumpDirection_ = 1;
-		anim_->flipX(true);
 	}
 }
 
@@ -398,6 +416,8 @@ void FrogAttackManager::nextAttack()
 	if (jumpsUntilNextTongue_ == 0) {
 		jumpsUntilNextTongue_ = sdlutils().rand().nextInt(3, 5);
 		
+		checkPositionPlayer();
+
 		animNewState_ = ANIM_TONGUE;
 
 		if (!secondPhase_) {

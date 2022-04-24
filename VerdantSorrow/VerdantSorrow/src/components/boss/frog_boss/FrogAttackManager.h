@@ -59,7 +59,7 @@ private:
 		ANIM_DEATH,
 	};
 
-	void flipOnBorders();
+	void checkJumpDirection();
 	void onGrounded(bool &jump, bool isBig);
 	void nextAttack();
 
@@ -67,7 +67,7 @@ private:
 	void checkAnimationState();
 	void checkFrogState();
 	void checkIfDead();
-
+	void checkPositionPlayer();
 
 	FrogJump* frogJump_;
 	FrogBigJump* bigJump_;
