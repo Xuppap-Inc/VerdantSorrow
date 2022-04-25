@@ -146,7 +146,7 @@ void TileMap::loadTilesetsTextures()
 
 			Uint imgId = sprite.ID;
 			string imagePath = sprite.imagePath;			
-			
+			//sprite.objectGroup.getObjects();
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}

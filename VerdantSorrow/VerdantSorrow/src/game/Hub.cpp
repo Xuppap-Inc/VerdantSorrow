@@ -170,10 +170,12 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto playerX = sdlutils().width() / 2 ;
 	auto playerY = sdlutils().height() / 2 ;
 	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 200, 200, 0.0f, 0.25f, false);
-	player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(),70, 150, 0.0f, 0.25f, false);
+	auto s=player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
+	playerTr->setScale(0.15);
+	
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	//Componente que permite controlar al jugador
