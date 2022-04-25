@@ -35,7 +35,7 @@ void FinalBossScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
-
+	mngr_->setColManager(colManager);
 
 	background();
 

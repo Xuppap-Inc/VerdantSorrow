@@ -16,7 +16,7 @@ std::vector<RectangleCollider*> CollisionManager::getCollisions(RectangleCollide
 
 	for (auto col2 : colliders) {
 	
-		if (c != col2) {
+		if (c != col2 && col2 != nullptr) {
 
 			if (collision(c->getCollider(), col2->getCollider())) cols.push_back(col2);
 		}
@@ -41,6 +41,17 @@ bool CollisionManager::hasCollisions(RectangleCollider* c)
 void CollisionManager::addCollider(RectangleCollider* col) 
 {
 	colliders.push_back(col);
+}
+
+void CollisionManager::deleteCollider(RectangleCollider* col)
+{
+	int i = 0;
+	while (colliders[i] != col)
+	{
+		i++;
+	}
+
+	colliders.erase(colliders.begin() + i);
 }
 
 

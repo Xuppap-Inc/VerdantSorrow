@@ -39,6 +39,7 @@ public:
 
 		// we delete all available components
 		//
+		deleteColliderFromManager();
 		for (auto c : currCmps_)
 			delete c;
 	}
@@ -235,6 +236,8 @@ private:
 	std::bitset<maxGroupId> groups_;
 	bool alive_;
 	bool active_;
+
+	void deleteColliderFromManager();
 };
 
 } // end of name space
