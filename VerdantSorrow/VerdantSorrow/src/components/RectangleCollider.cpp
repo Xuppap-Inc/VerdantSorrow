@@ -36,8 +36,8 @@ void RectangleCollider::update()
 
 void RectangleCollider::debug()
 {
-	if (isActive())
-		drawCollider();
+	/*if (isActive())
+		drawCollider();*/
 }
 
 

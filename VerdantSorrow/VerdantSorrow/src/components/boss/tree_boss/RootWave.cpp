@@ -35,22 +35,20 @@ void RootWave::initComponent()
 
 void RootWave::update()
 {
-	
 	//si ha pasado el tiempo entre raices
 	if (attacking_ && rootSpawnTimer_->currTime() > TIME_BETWEEN_ROOTS) {
 	
 		//crea la raiz y suma la posicion de la siguiente
 		rootSpawner_->createRoot(rootPos_);
+		nRoots_++;
 		rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir_;
 
 		rootSpawnTimer_->reset();
 		//si llega al borde de la pantalla acaba el ataque y activa el movimiento
-		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
+		if (rootPos_ < 0 || rootPos_ > sdlutils().width() || nRoots_ >= 7) {
 			
 			waitTimer_->reset();			
 			attacking_ = false;
-
-			std::cout << "termina wave" << std::endl;
 		}		
 	}
 	//si ha pasado el doble de tiempo de lo que dura la oleada
@@ -75,6 +73,8 @@ void RootWave::attack(int dir)
 	ableToMove_ = false;	
 	waitTimer_->reset();
 	waitTimer_->pause();
+
+	nRoots_ = 0;
 }
 
 
