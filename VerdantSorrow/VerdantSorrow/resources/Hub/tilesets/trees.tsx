@@ -32,6 +32,9 @@
   <image width="100" height="209" source="../assets/arbolsinhojas.png"/>
  </tile>
  <tile id="24">
+  <properties>
+   <property name="type" value="light"/>
+  </properties>
   <image width="40" height="76" source="../assets/luz.png"/>
  </tile>
  <tile id="25">
