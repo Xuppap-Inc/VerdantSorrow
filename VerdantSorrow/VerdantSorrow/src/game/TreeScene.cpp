@@ -39,6 +39,7 @@ void TreeScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
+	mngr_->setColManager(colManager);
 
 	Scene::background("fondo2");
 	//Se crea el jugador 

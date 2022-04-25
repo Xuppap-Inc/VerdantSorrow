@@ -32,10 +32,10 @@ void RootMovement::update()
 		if (waitTimer_->currTime() >= WAIT_TO_DIE) {
 
 			//particles
-			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
+			/*ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
 			particlesys->createParticlesRootsDie(3, tr_->getPos().getX() + (tr_->getWidth() / 2));
 			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
-			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));
+			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));*/
 
 			ent_->setAlive(false);
 		}

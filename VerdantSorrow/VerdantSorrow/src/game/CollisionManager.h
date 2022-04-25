@@ -16,6 +16,8 @@ public:
 
 	void addCollider(RectangleCollider* col);
 
+	void deleteCollider(RectangleCollider* col);
+
 protected:
 	std::vector<RectangleCollider*> colliders;
 };

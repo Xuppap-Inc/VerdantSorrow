@@ -28,7 +28,7 @@ void TutorialScene::init()
 	Scene::init();
 	//Para gestionar las colisiones
 	colManager_ = new CollisionManager();
-
+	mngr_->setColManager(colManager_);
 
 	background();
 
