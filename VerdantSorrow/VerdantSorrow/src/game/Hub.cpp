@@ -17,6 +17,7 @@
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
 #include "../components/ScrollCamera.h"
+#include "../components/CameraShake.h"
 
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
