@@ -46,6 +46,7 @@ void Hub::init()
 
 	//Para gestionar las colisiones
 	colManager = new CollisionManager();
+	mngr_->setColManager(colManager);
 
 	tileMap = new TileMap(mngr_, "resources/hub/mapa.tmx",colManager);
 

@@ -12,7 +12,7 @@
 #include "../sdlutils/VirtualTimer.h"
 #include "../game/SceneManager.h"
 
-
+class CollisionManager;
 namespace ecs {
 
 class Manager {
@@ -227,6 +227,9 @@ public:
 	//
 	void refresh();
 
+	void setColManager(CollisionManager* colManager);
+	CollisionManager* getColManager();
+
 	//void changeScene(int n);
 
 	//changes boolean that says if debug mode is on
@@ -269,6 +272,8 @@ private:
 
 	float windowScaleHeight_;
 	float windowScaleWidth_;
+
+	CollisionManager* colMngr_;
 };
 
 } // end of namespace

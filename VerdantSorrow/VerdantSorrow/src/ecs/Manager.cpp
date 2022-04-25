@@ -7,6 +7,8 @@
 #include "../game/FinalBossScene.h"
 #include "../game/TutorialScene.h"
 
+#include "../game/CollisionManager.h"
+
 namespace ecs {
 
 Manager::Manager() :
@@ -14,7 +16,8 @@ Manager::Manager() :
 		hdlrs_(), //
 		entsByGroup_(), //
 		debug_(false),
-		allTimers_()
+		allTimers_(),
+		colMngr_(nullptr)
 
 {
 	// we reserve space for 100 entities, just to avoid resizing. You
@@ -43,7 +46,6 @@ Manager::~Manager() {
 	
 	for (auto e : allTimers_)
 		delete e;
-
 
 	////delete all timers
 	//for (auto e : allTimers_)
@@ -74,7 +76,16 @@ void Manager::refresh() {
 				}
 			}), //
 			ents_.end());
+}
 
+void Manager::setColManager(CollisionManager* colManager)
+{
+	colMngr_ = colManager;
+}
+
+CollisionManager* Manager::getColManager()
+{
+	return colMngr_;
 }
 
 /*void Manager::changeScene(int n)

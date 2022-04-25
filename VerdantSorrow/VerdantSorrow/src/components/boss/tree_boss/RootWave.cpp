@@ -45,7 +45,7 @@ void RootWave::update()
 
 		rootSpawnTimer_->reset();
 		//si llega al borde de la pantalla acaba el ataque y activa el movimiento
-		if (rootPos_ < 0 || rootPos_ > sdlutils().width() || nRoots_ >= 7) {
+		if (rootPos_ < 0 || rootPos_ > sdlutils().width()) {
 			
 			waitTimer_->reset();			
 			attacking_ = false;
