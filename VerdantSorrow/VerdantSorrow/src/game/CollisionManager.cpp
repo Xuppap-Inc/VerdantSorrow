@@ -46,12 +46,11 @@ void CollisionManager::addCollider(RectangleCollider* col)
 void CollisionManager::deleteCollider(RectangleCollider* col)
 {
 	int i = 0;
-	while (colliders[i] != col)
-	{
+	while (i<colliders.size() && colliders[i] != col)
 		i++;
-	}
 
-	colliders.erase(colliders.begin() + i);
+	if(i < colliders.size())
+		colliders.erase(colliders.begin() + i);
 }
 
 

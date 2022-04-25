@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "../utils/Vector2D.h"
 #include "ControlsScene.h"
+#include "Game.h"
 
 MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0)
 {
@@ -67,7 +68,7 @@ void MenuScene::onButtonClicked(int index)
 		sC().changeScene(SceneManager::Controls_);
 		break;
 	case 3: //Boton quit
-		SDL_Quit();
+		Game::instance()->setExit(true);
 		break;
 	default:
 		break;
