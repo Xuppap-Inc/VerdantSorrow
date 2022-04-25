@@ -35,7 +35,7 @@ private:
 
 	void loadMap(string path);
 	void loadTilesetsTextures();
-
+	void dialogBoxGenerator(ecs::Entity* dialogBox);
 	SDL_Texture* tileMap;
 	string path;
 	int rows, cols;
@@ -45,5 +45,6 @@ private:
 	ecs::Manager* mngr_;
 	CollisionManager* col_;
 	double scaleX, scaleY;
+	ecs::Entity* dialogBox_;
 };
 

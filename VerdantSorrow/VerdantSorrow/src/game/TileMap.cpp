@@ -7,13 +7,14 @@
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string tileMapPath,CollisionManager*col):col_(col)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath,CollisionManager*col):col_(col),dialogBox_(nullptr)
 {
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
 	scaleX = scaleY = 0.5;
-
+	dialogBox_ = mngr_->addEntity();
+	dialogBoxGenerator(dialogBox_);
 	loadMap(path);
 }
 
@@ -109,16 +110,12 @@ void TileMap::loadMap(string path)
 					if (s.size() > 0 && s[0].getName() == "type") {
 
 						if (s[0].getStringValue() == "npc") {
-							auto dialogBox = mngr_->addEntity();
-							dialogBox->setActive(false);
-							auto tr = dialogBox->addComponent<Transform>();
-							tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
-							dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
-							dialogBox->addToGroup(ecs::_UI_GRP);
+							
 							col_->addCollider(col);
 							col->setIsTrigger(true);
-							ent->addComponent<NpcCtrl>(col_, dialogBox);
+							ent->addComponent<NpcCtrl>(col_, dialogBox_);
 							ent->addToGroup(ecs::_HUB_DECORATION_GRP);
+							
 						}
 						else if (s[0].getStringValue() == "boss") {
 
@@ -153,4 +150,12 @@ void TileMap::loadTilesetsTextures()
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}
+}
+void TileMap::dialogBoxGenerator(ecs::Entity* dialogBox)
+{
+	dialogBox->setActive(false);
+	auto tr = dialogBox->addComponent<Transform>();
+	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
+	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
+	dialogBox->addToGroup(ecs::_UI_GRP);
 }
