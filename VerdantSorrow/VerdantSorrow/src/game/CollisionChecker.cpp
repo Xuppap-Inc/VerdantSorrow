@@ -50,14 +50,10 @@ void CollisionChecker::checkCollisions()
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
-	
-	if (vt_->currTime() > attrib->getInvulnerableTimer() + 5000)
+	if (vt_->currTime() > attrib->getInvulnerableTimer())
 	{
 		attrib->setInvulnerable(false);
-		vt_->reset();
 	}
-		
-
 
 	checkAttackCollisions(playerAt, player);
 }
@@ -146,10 +142,11 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 	Transform* playerTr = player->getComponent<Transform>();
 	FramedImage* playerFImg = player->getComponent<FramedImage>();
 
+
 	if (!attrib->getInvulnerable() && !playerCtrl->isRolling()) {
 		attrib->damagePlayer(1);
 		attrib->setInvulnerable(true);
-		attrib->setInvulnerableTimer(sdlutils().currRealTime());
+		attrib->setInvulnerableTimer(5000);
 
 		playerFImg->setColor(200, 50, 50, 1000);
 
@@ -158,5 +155,6 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		// Calcular la direccion en la que se realizara el knockback
 		// Informar al controlador
 		playerCtrl->doKnockback(enemyXpos >= (playerTr->getPos().getX() + playerTr->getWidth() / 2) ? -1 : 1);
+		vt_->reset();
 	}
 }
