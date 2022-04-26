@@ -62,17 +62,9 @@ void Hub::init()
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
-	//Genera las entradas a los bosses
-		//entrada a la rana
-	EntryGenerator(entryFrog, colManager, 0, 250, "frog");
-	//Entrada al ojo
-	EntryGenerator(entryTree, colManager, sdlutils().width() - 100, 100, "tree");
-	//Entrada al arbol
-	EntryGenerator(entryEye, colManager, sdlutils().width() - 100, sdlutils().height() - 100, "eye");
 
 	auto dialogBox = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox);
-	NPCGenerator(colManager, dialogBox);
 
 	musica_ = &sdlutils().musicsHub().at("musica_hub");
 	musica_->play();
@@ -191,39 +183,6 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	playerLife_->addToGroup(ecs::_UI_GRP);
 
 	player_->addToGroup(ecs::_PLAYER_GRP);
-}
-
-void Hub::EntryGenerator(Entity* entry, CollisionManager* colManager, float posX, float posY, std::string name)
-{
-	entry = mngr_->addEntity();
-
-	auto entryTr = entry->addComponent<Transform>();
-	auto entryX = 0;
-	auto entryY = sdlutils().height() / 4 * 3;
-	entryTr->init(Vector2D(posX, posY), Vector2D(), 100, 100, 0.0f);
-
-	entry->addComponent<RectangleRenderer>();
-
-	auto entryCollider = entry->addComponent<RectangleCollider>(entryTr->getWidth(), entryTr->getHeight());
-	colManager->addCollider(entryCollider);
-	entryCollider->setIsTrigger(true);
-	entry->addComponent<PlatformAtribsForHub>(name);
-	entry->addToGroup(ecs::_HUB_DECORATION_GRP);
-}
-
-void Hub::NPCGenerator(CollisionManager* colManager, Entity* dialogBox_)
-{
-	auto npc = mngr_->addEntity();
-	auto npctr = npc->addComponent<Transform>();
-	npctr->init(Vector2D(sdlutils().width() / 2, 360), Vector2D(), 50, 100, 0.0f, false);
-	npc->addComponent<Image>(&sdlutils().imagesHub().at("matt"));
-	auto col = npc->addComponent<RectangleCollider>(npctr->getWidth() + 100, npctr->getHeight() + 100);
-	colManager->addCollider(col);
-	col->setIsTrigger(true);
-	npc->addComponent<NpcCtrl>(colManager, dialogBox_);
-
-
-	npc->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void Hub::createLights() {

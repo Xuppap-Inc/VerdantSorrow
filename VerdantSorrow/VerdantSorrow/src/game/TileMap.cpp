@@ -6,13 +6,14 @@
 #include "../components/Image.h"
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
+#include "../components/hub/PlatformAtribsForHub.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string tileMapPath,CollisionManager*col):col_(col),dialogBox_(nullptr)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col) :col_(col), dialogBox_(nullptr)
 {
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scaleX = scaleY = 0.5;
+	scaleX = scaleY = 0.25;
 	dialogBox_ = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox_);
 	loadMap(path);
@@ -63,36 +64,48 @@ void TileMap::loadMap(string path)
 			// cargamos la capa
 			tmx::ObjectGroup* objects = dynamic_cast<tmx::ObjectGroup*>(layer.get());
 
+			if (objects->getName() == "colliders") {
+				int a = 4;
+			}
 			// obtenemos sus tiles
 
 			for (auto& object : objects->getObjects()) {
-				auto cur_gid = object.getTileID();
-
-				if (cur_gid == 0)
-					continue;
-
-				// el mas cercano, y a la vez menor, al gid del tile)
-				auto tset_gid = -1;
-				for (auto& ts : tilesets) {
-					if (ts.first <= cur_gid) {
-						tset_gid = ts.first;
-					}
-					else
-						break;
-				}
-
-				// si no hay tileset v�lido, continuamos a la siguiente iteracion
-				if (tset_gid == -1)
-					continue;
-
-				// normalizamos el �ndice
-				cur_gid -= tset_gid;
 
 				auto pos = object.getPosition();
-				SDL_Rect r = build_sdlrect(pos.x, pos.y - object.getAABB().height, object.getAABB().width, object.getAABB().height);
-				tilesets[tset_gid][cur_gid]->render(r);
-				
-				if (objects->getName() != "suelo" && objects->getName() != "camino") {
+				SDL_Rect r = build_sdlrect(pos.x, pos.y, object.getAABB().width, object.getAABB().height);
+
+				//se pintan solo si no son colliders
+				if (objects->getName() != "colliders") {
+
+					auto cur_gid = object.getTileID();
+
+					if (cur_gid == 0)
+						continue;
+
+					// el mas cercano, y a la vez menor, al gid del tile)
+					auto tset_gid = -1;
+					for (auto& ts : tilesets) {
+						if (ts.first <= cur_gid) {
+							tset_gid = ts.first;
+						}
+						else
+							break;
+					}
+
+					// si no hay tileset v�lido, continuamos a la siguiente iteracion
+					if (tset_gid == -1)
+						continue;
+
+					// normalizamos el �ndice
+					cur_gid -= tset_gid;
+
+					//el pivote de los objetos esta abajo
+					r.y -= object.getAABB().height;
+					tilesets[tset_gid][cur_gid]->render(r);
+				}
+				string name = objects->getName();
+				if (name == "colliders" || name == "entradasbosses" || name == "npc") {
+
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
 
@@ -105,26 +118,29 @@ void TileMap::loadMap(string path)
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
 					tr->init(Vector2D(r.x * dx, r.y * dy), Vector2D(), r.w * dx, r.h * dy, 0.0f);
-					auto col=ent->addComponent<RectangleCollider>(r.w * dx, r.h * dy);
-					vector<tmx::Property>s = object.getProperties();
-					if (s.size() > 0 && s[0].getName() == "type") {
+					auto col = ent->addComponent<RectangleCollider>(r.w * dx, r.h * dy);
+					col_->addCollider(col);
 
-						if (s[0].getStringValue() == "npc") {
-							
-							col_->addCollider(col);
-							col->setIsTrigger(true);
-							ent->addComponent<NpcCtrl>(col_, dialogBox_);
-							ent->addToGroup(ecs::_HUB_DECORATION_GRP);
-							
-						}
-						else if (s[0].getStringValue() == "boss") {
-
-						}
+					if (name == "npc") {
+						col->setIsTrigger(true);
+						ent->addComponent<NpcCtrl>(col_, dialogBox_);
+						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 					}
+					else if (name == "entradasbosses") {
+						col->setIsTrigger(true);
+						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
+
+						vector<tmx::Property> properties = object.getProperties();
+
+						if (properties.size() > 0 && properties[0].getName() == "Boss")
+							ent->addComponent<PlatformAtribsForHub>(properties[0].getStringValue());
+					}
+
 				}
 			}
 		}
 	}
+
 	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
 
 	//add map as entity
@@ -145,7 +161,7 @@ void TileMap::loadTilesetsTextures()
 		for (auto& sprite : tileset.getTiles()) {
 
 			Uint imgId = sprite.ID;
-			string imagePath = sprite.imagePath;			
+			string imagePath = sprite.imagePath;
 			//sprite.objectGroup.getObjects();
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
