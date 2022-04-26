@@ -21,7 +21,9 @@ public:
 
     ~SimplePhysicsPlayer();
     void initComponent() override;
-
+    void gravedad(bool gr) {
+        gravedad_ = gr;
+    }
     void update() override;
     void onCollisionExit();
 protected:
@@ -33,7 +35,7 @@ protected:
     PlayerCtrl* ctrl_;
     bool invulnerable_;
     Uint32 invTimer;
-
+    bool gravedad_;
     //cuando se deja de colisionar, se resetea lo necesario
     bool exitCollision;
     std::vector <bool> lastCollision;
