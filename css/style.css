@@ -209,54 +209,6 @@ h2.bnr-sub-title
    color: #fff;
 } */
 
-/***********************************
-************************************
-features
-************************************
-***********************************/
-.title, .service-title
-{
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 35px;
-    text-transform: uppercase;
-}
-.item-img
-{
-    margin-bottom: 15px;
-}
-.sub-title
-{
-    font-size: 20px;
-}
-.bottom-line
-{
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border: 0;
-    border-top: 0px;
-    height: 3px;
-    width: 40px;
-    background-color: #BE9E21;
-}
-.wrap-item h3 {
-    font-size: 24px;
-    line-height: 25px;
-}
-.pad-bt15 {
-    padding-bottom: 15px;
-}
-.sec-sub-title
-{
-    padding-top: 30px;
-}
-.sec-sub-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #002F2F;
-    text-transform: uppercase;
-    margin: 25px 0px;
-    line-height: 1.7;
-}
 #service
 {
     background-color: #F3F4F8;
