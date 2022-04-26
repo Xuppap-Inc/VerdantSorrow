@@ -172,6 +172,8 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
+	auto collision_=player_->addComponent<SimplePhysicsPlayer>(colManager);
+	collision_->gravedad(false);
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(2, colManager);
 
