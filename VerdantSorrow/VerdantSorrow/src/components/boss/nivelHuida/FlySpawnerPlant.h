@@ -13,7 +13,7 @@ class FlySpawnerPlant :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_MUSHROOM)
+    __CMPID_DECL__(ecs::_FLYSPAWNERPLANT)
         FlySpawnerPlant(CollisionManager* colMan, bool lookingUp, float timer);
 
     ~FlySpawnerPlant();
