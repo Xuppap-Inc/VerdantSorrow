@@ -57,6 +57,21 @@ void TileMap::loadMap(string path)
 
 	loadTilesetsTextures();
 
+	createObjects();
+
+	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
+
+	//add map as entity
+	auto map = mngr_->addEntity();
+	auto tr = map->addComponent<Transform>();
+	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
+	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
+	map->addToGroup(ecs::_HUB_DECORATION_GRP);
+	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
+}
+
+void TileMap::createObjects()
+{
 	// recorremos cada una de las capas (de momento solo las de tiles) del mapa
 	auto& map_layers = tmxTileMap->getLayers();
 	for (auto& layer : map_layers) {
@@ -98,6 +113,7 @@ void TileMap::loadMap(string path)
 
 				}
 				string name = objects->getName();
+
 				if (name == "colliders" || name == "entradasbosses" || name == "npc") {
 
 					auto tileMapWidth = tileWidth * cols;
@@ -124,8 +140,8 @@ void TileMap::loadMap(string path)
 						int i = 0;
 						while (i < properties.size() && properties[i].getName() != "npc")i++;
 
-						if (i < properties.size()) 
-							npcctrl->setDialog(sdlutils().dialogs().at("npc"+ to_string(properties[i].getIntValue()) + "_dialogue" + to_string((int)Game::instance()->state_)));
+						if (i < properties.size())
+							npcctrl->setDialog(sdlutils().dialogs().at("npc" + to_string(properties[i].getIntValue()) + "_dialogue" + to_string((int)Game::instance()->state_)));
 
 
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
@@ -136,7 +152,10 @@ void TileMap::loadMap(string path)
 
 						vector<tmx::Property> properties = object.getProperties();
 
-						if (properties.size() > 0 && properties[0].getName() == "Boss")
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "Boss")i++;
+
+						if (i < properties.size())
 							ent->addComponent<PlatformAtribsForHub>(properties[0].getStringValue());
 					}
 
@@ -144,16 +163,6 @@ void TileMap::loadMap(string path)
 			}
 		}
 	}
-
-	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
-
-	//add map as entity
-	auto map = mngr_->addEntity();
-	auto tr = map->addComponent<Transform>();
-	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
-	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
-	map->addToGroup(ecs::_HUB_DECORATION_GRP);
-	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
 }
 
 void TileMap::loadTilesetsTextures()
@@ -167,7 +176,6 @@ void TileMap::loadTilesetsTextures()
 
 			Uint imgId = sprite.ID;
 			string imagePath = sprite.imagePath;
-			//sprite.objectGroup.getObjects();
 			tilesets[tilesetId].insert(pair<Uint, Texture*>(imgId, new Texture(sdlutils().renderer(), imagePath)));
 		}
 	}

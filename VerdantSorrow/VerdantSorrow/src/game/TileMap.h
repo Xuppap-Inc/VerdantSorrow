@@ -20,10 +20,7 @@ using namespace std;
 
 class Texture;
 class CollisionManager;
-struct propertys {
-	Texture* tex_;
-	string type;
-};
+
 class TileMap
 {
 public:
@@ -34,6 +31,7 @@ public:
 private:
 
 	void loadMap(string path);
+	void createObjects();
 	void loadTilesetsTextures();
 	void dialogBoxGenerator(ecs::Entity* dialogBox);
 	SDL_Texture* tileMap;
