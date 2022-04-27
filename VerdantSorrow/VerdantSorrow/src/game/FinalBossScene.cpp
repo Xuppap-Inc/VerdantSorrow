@@ -27,6 +27,7 @@
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
+#include "Game.h"
 
 
 void FinalBossScene::init()
@@ -78,7 +79,10 @@ void FinalBossScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeEyeEssenceState(true);
-		if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);
+		if (bossHealth <= 0) {
+			sC().changeStatePlayerInBoss(false);
+			Game::instance()->state_ = Game::State::FINALDEFEATED;
+		}
 		setAble(false);
 		sC().decideScene();
 	}

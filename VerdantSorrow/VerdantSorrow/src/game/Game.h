@@ -14,6 +14,14 @@ public:
 	void start();
 	void update();
 	void setExit(bool set);
+
+	enum State {
+		HUB = 1,
+		FROGDEFEATED,
+		TREEDEFEATED,
+		FINALDEFEATED
+	}state_;
+
 private:
 	ecs::Manager *mngr_;
 	bool exit;

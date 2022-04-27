@@ -31,6 +31,7 @@
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
+#include "Game.h"
 
 
 void TreeScene::init()
@@ -70,7 +71,11 @@ void TreeScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeTreeEssenceState(true);
-		if(bossHealth<=0)sC().changeStatePlayerInBoss(false);
+		if (bossHealth <= 0) {
+			sC().changeStatePlayerInBoss(false);
+			Game::instance()->state_ = Game::State::TREEDEFEATED;
+		}
+
 			
 		setAble(false);
 		sC().decideScene();

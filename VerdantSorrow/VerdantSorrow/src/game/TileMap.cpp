@@ -7,6 +7,7 @@
 #include "../components/hub/NpcCtrl.h"
 #include "../components/hub/DialogBoxMngr.h"
 #include "../components/hub/PlatformAtribsForHub.h"
+#include "../game/Game.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col) :col_(col), dialogBox_(nullptr)
 {
@@ -124,7 +125,7 @@ void TileMap::loadMap(string path)
 						while (i < properties.size() && properties[i].getName() != "npc")i++;
 
 						if (i < properties.size()) 
-							npcctrl->setDialog(sdlutils().dialogs().at("npc"+ to_string(properties[i].getIntValue()) + "_dialogue1"));
+							npcctrl->setDialog(sdlutils().dialogs().at("npc"+ to_string(properties[i].getIntValue()) + "_dialogue" + to_string((int)Game::instance()->state_)));
 
 
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
