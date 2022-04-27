@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="15" nextobjectid="1682">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="15" nextobjectid="1683">
  <tileset firstgid="1" source="tilesets/colina.tsx"/>
  <tileset firstgid="5" source="tilesets/cesped.tsx"/>
  <tileset firstgid="18" source="tilesets/camino.tsx"/>
@@ -327,52 +327,52 @@
  <objectgroup id="14" name="npc">
   <object id="1649" gid="65" x="1090.02" y="723.045" width="61" height="112">
    <properties>
-    <property name="npc" type="int" value="10"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
-  <object id="1650" gid="66" x="404.379" y="809.439" width="84" height="126">
+  <object id="1650" gid="66" x="449.712" y="684.106" width="84" height="126">
    <properties>
-    <property name="npc" type="int" value="9"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1651" gid="68" x="1638.38" y="754.439" width="112" height="137">
    <properties>
-    <property name="npc" type="int" value="8"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1652" gid="67" x="1347.38" y="1068.77" width="46" height="105">
    <properties>
-    <property name="npc" type="int" value="7"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1653" gid="64" x="407.379" y="1988.44" width="43" height="104">
    <properties>
-    <property name="npc" type="int" value="6"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1654" gid="62" x="909.379" y="1598.44" width="48" height="117">
    <properties>
-    <property name="npc" type="int" value="5"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1655" gid="63" x="2262.05" y="1895.77" width="84" height="111">
    <properties>
-    <property name="npc" type="int" value="4"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1656" gid="59" x="2283.56" y="1573.44" width="59.697" height="157.576">
    <properties>
-    <property name="npc" type="int" value="3"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1657" gid="61" x="2278.41" y="674.439" width="58.6364" height="139.394">
    <properties>
-    <property name="npc" type="int" value="2"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
   <object id="1658" gid="60" x="1428.05" y="1533.44" width="63.3333" height="118.667">
    <properties>
-    <property name="npc" type="int" value="1"/>
+    <property name="type" value="npc"/>
    </properties>
   </object>
  </objectgroup>
@@ -387,11 +387,12 @@
     <property name="Boss" value="frog"/>
    </properties>
   </object>
+  <object id="1682" gid="73" x="1.33333" y="949.333" width="453.333" height="476"/>
  </objectgroup>
  <objectgroup id="4" name="arboles">
-  <object id="393" gid="48" x="337.667" y="827.667" width="90" height="90"/>
+  <object id="393" gid="48" x="351" y="670.334" width="90" height="90"/>
   <object id="394" gid="48" x="588.333" y="717" width="90" height="90"/>
-  <object id="395" gid="48" x="109.667" y="667.667" width="90" height="90"/>
+  <object id="395" gid="48" x="320.334" y="591.667" width="90" height="90"/>
   <object id="396" gid="48" x="57.6667" y="919.667" width="90" height="90"/>
   <object id="397" gid="51" x="202" y="954" width="100" height="132"/>
   <object id="398" gid="51" x="322" y="1043.33" width="100" height="132"/>
@@ -623,7 +624,7 @@
   <object id="1185" gid="51" x="898.485" y="629.636" width="100" height="132"/>
   <object id="1186" gid="51" x="740.909" y="475.091" width="100" height="132"/>
   <object id="1187" gid="51" x="677.273" y="1078.12" width="100" height="132"/>
-  <object id="1188" gid="51" x="1037.88" y="969.03" width="145.455" height="186.545"/>
+  <object id="1188" gid="51" x="1079.21" y="997.03" width="145.455" height="186.545"/>
   <object id="1189" gid="53" x="1875" y="1144" width="170" height="227"/>
   <object id="1190" gid="47" x="1498.18" y="1350.12" width="40" height="76"/>
   <object id="1191" gid="47" x="1607.27" y="1471.33" width="40" height="76"/>
@@ -699,18 +700,18 @@
   <object id="1483" gid="44" x="965.152" y="538.727" width="100" height="132"/>
   <object id="1484" gid="44" x="1243.94" y="796.303" width="100" height="132"/>
   <object id="1485" gid="44" x="746.97" y="1159.94" width="100" height="132"/>
-  <object id="1486" gid="44" x="107.576" y="614.485" width="100" height="132"/>
-  <object id="1487" gid="44" x="231.818" y="669.03" width="100" height="132"/>
+  <object id="1486" gid="44" x="103.576" y="562.485" width="100" height="132"/>
+  <object id="1487" gid="44" x="149.151" y="475.697" width="100" height="132"/>
   <object id="1488" gid="51" x="-4.54545" y="684.182" width="100" height="132"/>
   <object id="1490" gid="51" x="83.3333" y="481.152" width="100" height="132"/>
   <object id="1491" gid="51" x="186.364" y="523.576" width="100" height="132"/>
   <object id="1493" gid="51" x="253.03" y="453.879" width="100" height="132"/>
   <object id="1494" gid="51" x="371.212" y="420.545" width="100" height="132"/>
-  <object id="1495" gid="51" x="298.485" y="678.121" width="100" height="132"/>
+  <object id="1495" gid="51" x="257.152" y="560.788" width="100" height="132"/>
   <object id="1496" gid="51" x="534.848" y="532.667" width="100" height="132"/>
   <object id="1497" gid="51" x="595.455" y="578.121" width="100" height="132"/>
-  <object id="1498" gid="45" x="-80" y="804.97" width="160" height="215"/>
-  <object id="1499" gid="45" x="-19.3939" y="611.03" width="160" height="215"/>
+  <object id="1498" gid="45" x="-53.3333" y="918.303" width="160" height="215"/>
+  <object id="1499" gid="45" x="-48.7272" y="580.363" width="160" height="215"/>
   <object id="1500" gid="45" x="123.03" y="429.212" width="160" height="215"/>
   <object id="1501" gid="45" x="259.394" y="429.212" width="160" height="215"/>
   <object id="1502" gid="45" x="292.727" y="589.818" width="160" height="215"/>
@@ -753,7 +754,7 @@
   <object id="1680" gid="50" x="1871.67" y="1638.33" width="110" height="110"/>
   <object id="1681" gid="39" x="1968.67" y="1956.67" width="100" height="132"/>
  </objectgroup>
- <objectgroup id="11" name="colliders">
+ <objectgroup id="11" name="colliders" locked="1">
   <object id="1598" x="960.485" y="1896.06" width="745.333" height="292"/>
   <object id="1599" x="1171.15" y="1533.39" width="372" height="405.333"/>
   <object id="1600" x="1545.81" y="1597.39"/>
@@ -799,7 +800,7 @@
   <object id="1671" x="2393.7" y="1677.52" width="195.273" height="200.97"/>
   <object id="1672" x="2054" y="918.667" width="230.666" height="204"/>
   <object id="1673" x="920.667" y="231.333" width="588" height="164"/>
-  <object id="1674" x="1036" y="804" width="125.333" height="90.6667"/>
+  <object id="1674" x="1101.33" y="854.667" width="125.333" height="90.6667"/>
   <object id="1675" x="2172.67" y="850.667" width="308" height="249.333"/>
   <object id="1676" x="1106.67" y="922.667" width="125.333" height="90.6667"/>
   <object id="1677" x="1526" y="1043.33" width="85.333" height="217.333"/>
