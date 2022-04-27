@@ -6,20 +6,30 @@
 #include "../../sdlutils/InputHandler.h"
 #include "DialogBoxMngr.h"
 #include "../player/PlayerHubControl.h"
+#include "../Transform.h"
+#include "../Image.h"
 
-NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200),dialog_()
+NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200),dialog_(),tr_(nullptr),firstcol_(false)
 {
 }
 
 void NpcCtrl::initComponent()
 {
 	col_ = ent_->getComponent<RectangleCollider>();
-	assert(col_ != nullptr);
+	tr_ = ent_->getComponent<Transform>();
+	assert(col_ != nullptr,tr_!=nullptr);
 	vt_ = mngr_->addTimer();
+	auto letter = mngr_->addEntity();
+	auto pos = tr_->getPos();
+	letter->addComponent<Transform>( Vector2D(pos.getX()+tr_->getWidth()/2,pos.getY() + tr_->getHeight()/1.5) , Vector2D(), 30, 30, 0);
+	letterE =letter->addComponent<Image>(&sdlutils().imagesHub().at("letterE"));
+	letterE->setVisible(false);
+	letter->addToGroup(ecs::_FIRST_GRP);
 }
 
 void NpcCtrl::update()
 {
+	bool letter = false;
 	if (vt_->currTime() > dialogTimer)
 		canTalk = true;
 
@@ -60,9 +70,17 @@ void NpcCtrl::update()
 							else
 								dialogMngr->changeTextSpeed(true);
 						}
+
 					}
+					else letter = true;
+						
+					
 				}
 			}
+			
 		}
 	}
+	letterE->setVisible(letter);
 }
+
+

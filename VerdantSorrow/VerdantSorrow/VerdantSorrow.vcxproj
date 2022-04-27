@@ -249,6 +249,7 @@
     <Image Include="resources\images\fondoSuelo.png" />
     <Image Include="resources\images\HealthDetail.png" />
     <Image Include="resources\images\heartBlack.png" />
+    <Image Include="resources\images\letterE.png" />
     <Image Include="resources\images\MenuPrincipal\continueButton.png" />
     <Image Include="resources\images\MenuPrincipal\controlsButton.png" />
     <Image Include="resources\images\MenuPrincipal\quitButton.png" />

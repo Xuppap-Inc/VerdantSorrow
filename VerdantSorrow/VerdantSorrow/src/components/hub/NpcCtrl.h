@@ -4,7 +4,7 @@
 #include "../../ecs/Entity.h"
 
 class VirtualTimer;
-
+class Image;
 class NpcCtrl : public ecs::Component
 {
 
@@ -18,15 +18,18 @@ public:
 	void setDialog(std::string dialog) {
 		dialog_ = dialog;
 	};
+	
 
 protected:
 	Entity* dialogBox_;
+	Transform* tr_;
 	CollisionManager* colMan_;
 	RectangleCollider* col_;
-
+	bool firstcol_;
 	VirtualTimer* vt_;
 	int dialogTimer;
 	bool canTalk;
 	std::string dialog_;
+	Image* letterE;
 };
 
