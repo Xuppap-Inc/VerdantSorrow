@@ -153,6 +153,7 @@ void TileMap::loadMap(string path)
 	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
 	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
 	map->addToGroup(ecs::_HUB_DECORATION_GRP);
+	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
 }
 
 void TileMap::loadTilesetsTextures()

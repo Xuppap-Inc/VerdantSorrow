@@ -7,13 +7,15 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 
-ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_(),scrollX_(false)
+ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_(),scrollX_(true), scrollY_(true),
+		limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN)
 {
 	
 }
 
 ScrollCamera::ScrollCamera( float cameraSpeed, float deadzoneX, float deadzoneY) : 
-	tr_(nullptr), player_(nullptr),  cameraSpeed_(cameraSpeed), deadzoneX_(deadzoneX), deadzoneY_(deadzoneY)
+	tr_(nullptr), player_(nullptr),  cameraSpeed_(cameraSpeed), deadzoneX_(deadzoneX), deadzoneY_(deadzoneY), scrollX_(true), scrollY_(true),
+	limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN)
 {
 
 }
@@ -24,8 +26,6 @@ ScrollCamera::~ScrollCamera()
 
 void ScrollCamera::update()
 {
-	//auto& pos = tr_->getPos();
-	//pos = player_->getPos() - Vector2D(sdlutils().width()/2, sdlutils().height()/2);
 	calculateDirection();
 }
 
@@ -44,22 +44,40 @@ void ScrollCamera::calculateDirection()
 	auto playerPos = player_->getPos();
 	auto diff = playerPos - actPos;
 
-	//Movimiento en X
-	if (diff.getX() > deadzoneX_) {
+	if (pos.getX() < limitLeft_ || pos.getX() > limitRight_) {
+		scrollX_ = false;
+		vel.setX(0);
+		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_);
+	}
+	else scrollX_ = true;
+
+	if (pos.getY() < limitTop_ || pos.getY() > limitBot_) {
+		scrollY_ = false;
+		vel.setY(0);
+		pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_);
+	}
+	else scrollY_ = true;
 	
-		vel.setX(cameraSpeed_);
-	}
-	if (diff.getX() + player_->getWidth() < 0) {
-		vel.setX(-cameraSpeed_);
-	}
-	else if (diff.getX() <= deadzoneX_ && diff.getX() + player_->getWidth() >= 0) {
-		vel.setX(vel.getX()*0.995);
-		if (abs(diff.getX()) < 10 && abs(diff.getX())>0) {
-			vel.setX(0);
+
+
+	if (scrollX_) {
+		//Movimiento en X
+		if (diff.getX() > deadzoneX_) {
+
+			vel.setX(cameraSpeed_);
+		}
+		if (diff.getX() + player_->getWidth() < 0) {
+			vel.setX(-cameraSpeed_);
+		}
+		else if (diff.getX() <= deadzoneX_ && diff.getX() + player_->getWidth() >= 0) {
+			vel.setX(vel.getX() * 0.995);
+			if (abs(diff.getX()) < 10 && abs(diff.getX()) > 0) {
+				vel.setX(0);
+			}
 		}
 	}
 
-	if (!scrollX_) {
+	if (scrollY_) {
 		//Movimiento en Y
 		if (diff.getY() > deadzoneY_) {
 
@@ -70,11 +88,10 @@ void ScrollCamera::calculateDirection()
 		}
 		else if (diff.getY() <= deadzoneY_ && diff.getX() + player_->getHeight() >= 0) {
 			vel.setY(vel.getY() * 0.995);
-			if (abs(diff.getY()) < 10 && abs(diff.getY()) > 0) {
+			if (abs(diff.getY()) <= 10 && abs(diff.getY()) >= 0) {
 				vel.setY(0);
 			}
 		}
-
 	}
 	
 }
