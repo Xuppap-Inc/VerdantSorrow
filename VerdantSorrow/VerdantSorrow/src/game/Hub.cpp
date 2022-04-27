@@ -38,7 +38,7 @@ Hub::Hub() :Scene()
 
 Hub::~Hub()
 {
-	delete tileMap;
+	delete tileMap_;
 }
 
 void Hub::init()
@@ -49,48 +49,28 @@ void Hub::init()
 	colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-	tileMap = new TileMap(mngr_, "resources/hub/mapa.tmx",colManager);
+	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx",colManager);
 
 
 	changeSc = false;
-	//backgroundHub();
-	//Se crea el jugador 
-	player = mngr_->addEntity();
-	playerGenerator(colManager, player);
+
+	playerGenerator(colManager);
 
 	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-	player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
+	player_->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
-	cameraTr->init(player->getComponent<Transform>()->getPos()/2, Vector2D(0, 0), 0, 0, 0);
+	cameraTr->init(player_->getComponent<Transform>()->getPos() + Vector2D(-sdlutils().windowWidth()/2,-sdlutils().windowHeight()/2), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
-
-	auto dialogBox = mngr_->addEntity();
-	dialogBoxGenerator(dialogBox);
 
 	musica_ = &sdlutils().musicsHub().at("musica_hub");
 	musica_->play();
 	musica_->setMusicVolume(60);
 
-	auto hoguera = mngr_->addEntity();
-	auto hogueraTr = hoguera->addComponent<Transform>();
-	hogueraTr->init(Vector2D(100, 300), Vector2D(), 10, 20, 0.0f);
-	hogueraTr->setScale(0.25);
-	hoguera->addComponent<FramedImage>(&sdlutils().imagesHub().at("spritesheet_hoguera"), 6, 6, (1000 / 30) * 34, 34, "spritesheet_hoguera");
-
+	
 	createLights();
-	hoguera->addToGroup(ecs::_HUB_DECORATION_GRP);
-}
-
-void Hub::dialogBoxGenerator(Entity* dialogBox)
-{
-	dialogBox->setActive(false);
-	auto tr = dialogBox->addComponent<Transform>();
-	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
-	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
-	dialogBox->addToGroup(ecs::_UI_GRP);
 }
 
 bool Hub::getAble()
@@ -110,7 +90,7 @@ void Hub::changeScene_(bool ch)
 
 void Hub::checkCollissions()
 {
-	auto playerCol_ = player->getComponent<RectangleCollider>();
+	auto playerCol_ = player_->getComponent<RectangleCollider>();
 	if (colManager->hasCollisions(playerCol_)) {
 		std::vector<RectangleCollider*> colliders = colManager->getCollisions(playerCol_);
 		bool changeScene = false;
@@ -130,13 +110,6 @@ void Hub::checkCollissions()
 	}
 }
 
-void Hub::backgroundHub()
-{
-	auto backgr_ = mngr_->addEntity();
-	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("fondoHub"));
-	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
-}
 
 
 void Hub::update()
@@ -160,24 +133,31 @@ void Hub::update()
 	}
 }
 
-void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
+void Hub::playerGenerator(CollisionManager* colManager) {
 	//Se le a�aden los atributos del player, no los del transform
+	player_ = mngr_->addEntity();
+
 	player_->addComponent<PlayerAttributes>();
+
 	//Se le a�ade el transform
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 ;
 	auto playerY = sdlutils().height() / 2 ;
-	//Se le dan las posiciones iniciales, vecocidad, ancho y alto al player
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),70, 150, 0.0f, 0.25f, false);
 	auto s=player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+
+
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
 	playerTr->setScale(0.15);
 	
+
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 	auto collision_=player_->addComponent<SimplePhysicsPlayer>(colManager);
 	collision_->gravedad(false);
+
+
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(2, colManager);
 
@@ -187,6 +167,7 @@ void Hub::playerGenerator(CollisionManager* colManager, Entity* player_) {
 	auto* playerLife_ = mngr_->addEntity();
 	playerLife_->addComponent<PlayerUI>(true);
 	playerLife_->addToGroup(ecs::_UI_GRP);
+
 
 	player_->addToGroup(ecs::_PLAYER_GRP);
 }
