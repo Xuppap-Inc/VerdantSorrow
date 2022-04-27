@@ -12,7 +12,7 @@
 
 
 RootWave::RootWave() : tr_(), rootSpawnTimer_(), rootSpawner_(), attacking_(false), 
-dir_(1), rootPos_(-1), rootW_(0), treeMovement_(), ableToMove_(false), movingTime_(10000), waitTimer_()
+dir_(1), rootPos_(-1), rootW_(0), treeMovement_(), ableToMove_(false), movingTime_(10000), waitTimer_(), lanternPos_(), lanternSpawner_()
 {
 }
 
@@ -40,7 +40,6 @@ void RootWave::update()
 	
 		//crea la raiz y suma la posicion de la siguiente
 		rootSpawner_->createRoot(rootPos_);
-		nRoots_++;
 		rootPos_ += (rootW_ + SPACE_BETWEEN_ROOTS) * dir_;
 
 		rootSpawnTimer_->reset();
@@ -73,8 +72,6 @@ void RootWave::attack(int dir)
 	ableToMove_ = false;	
 	waitTimer_->reset();
 	waitTimer_->pause();
-
-	nRoots_ = 0;
 }
 
 

@@ -8,7 +8,6 @@ class TreeMovement : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::_TREEMOVEMENT)
 
-		TreeMovement();
 	TreeMovement(Transform* playerTransform_, float followVelocity);
 	~TreeMovement();
 

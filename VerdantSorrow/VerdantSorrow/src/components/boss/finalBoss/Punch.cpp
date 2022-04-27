@@ -1,4 +1,4 @@
-#include "Punietazo.h"
+#include "Punch.h"
 #include "../../../sdlutils/SDLUtils.h"
 #include "HandsManager.h"
 #include "../../../ecs/Entity.h"
@@ -10,16 +10,16 @@
 
 
 
-Punietazo::Punietazo(bool manoDerecha) : hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(8), dW(4), dH(4), manoDerecha_(manoDerecha)
+Punch::Punch(bool manoDerecha) : hitTime_(), goBackTime_(), state_(REPOSO), handSpeed_(8), dW(4), dH(4), manoDerecha_(manoDerecha)
 {
 
 }
 
-Punietazo::~Punietazo()
+Punch::~Punch()
 {
 }
 
-void Punietazo::initComponent()
+void Punch::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -46,7 +46,7 @@ void Punietazo::initComponent()
 
 }
 
-void Punietazo::goDown()
+void Punch::goDown()
 {
 	int objectivePos = sdlutils().height() - tr_->getHeight();
 	
@@ -64,7 +64,7 @@ void Punietazo::goDown()
 	}
 }
 
-void Punietazo::followPlayer()
+void Punch::followPlayer()
 {
 	auto handPos = tr_->getPos();
 	auto playerPos = playertr_->getPos();
@@ -80,7 +80,7 @@ void Punietazo::followPlayer()
 	}
 }
 
-void Punietazo::hit()
+void Punch::hit()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();
@@ -111,7 +111,7 @@ void Punietazo::hit()
 	}
 }
 
-void Punietazo::goBack()
+void Punch::goBack()
 {
 	auto width = tr_->getWidth();
 	auto height = tr_->getHeight();

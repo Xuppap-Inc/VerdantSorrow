@@ -13,7 +13,7 @@
 #include "player/PlayerCtrl.h"
 #include "boss/frog_boss/FrogJump.h"
 #include "boss/tree_boss/RootWave.h"
-#include "boss/finalBoss/Punietazo.h"
+#include "boss/finalBoss/Punch.h"
 #include "boss/finalBoss/FinalBossMovement.h"
 
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
@@ -169,7 +169,7 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.35;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
+			else if (currentAnim == "Chica_AtkFloor1" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
 				xOffset = -0.4;
 				yOffset = 0.145;
 			}
@@ -199,7 +199,7 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 				xOffset = -0.25;
 				yOffset = 0.1;
 			}
-			else if (currentAnim == "Chica_AtkFloor" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
+			else if (currentAnim == "Chica_AtkFloor1" || currentAnim == "Chica_AtkFloor2" || currentAnim == "Chica_AtkFloor3" || currentAnim == "Chica_AtkFinished") {
 				xOffset = -0.4;
 				yOffset = 0.145;
 			}
