@@ -28,9 +28,6 @@ void MeleeAttack::initComponent()
 
 void MeleeAttack::update()
 {
-	//auto currentTime = sdlutils().currRealTime();
-	//attackTimer_->reset();
-
 	if (isActive()) { //si esta activo, se coloca en la posicion correspondiente
 
 		if (attackTimer_->currTime() >=attackDuration) {
@@ -38,7 +35,6 @@ void MeleeAttack::update()
 			treeMovement_->setMoveActive(true);
 			attacking_ = false;
 			attackTimer_->reset();
-
 		}
 	}
 }
@@ -65,8 +61,6 @@ void MeleeAttack::render()
 
 void MeleeAttack::attack(int dir)
 {
-	//auto currentTime = sdlutils().currRealTime();
-	
 	//añade el propio collider porque meleeAttack ya es un RectangleCollider
 	colMan_->addCollider(this);
 	setActive(true);

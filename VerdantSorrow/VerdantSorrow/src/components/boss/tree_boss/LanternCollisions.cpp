@@ -38,6 +38,13 @@ void LanternCollisions::initComponent()
 
 void LanternCollisions::update()
 {
+	checkCollisions();
+
+	if (attacked_ && playerAttack_->hasFinished()) attacked_ = false;
+}
+
+void LanternCollisions::checkCollisions()
+{
 	if (colMan_->hasCollisions(collider_)) {
 
 		for (auto c : colMan_->getCollisions(collider_)) {
@@ -46,9 +53,10 @@ void LanternCollisions::update()
 
 				ecs::Entity* ent = c->getEntity();
 				RootMovement* rootMov = ent->getComponent<RootMovement>();
-				
+
 				Attack* attack = ent->getComponent<Attack>();
 
+				//si una raiz colisiona con la lampara 
 				if (!damaged_ && rootMov != nullptr) {
 					attrib_->setDamage(ROOT_DAMAGE_TO_LAMP);
 					damaged_ = true;
@@ -61,14 +69,15 @@ void LanternCollisions::update()
 					particlesys->createParticlesLanternDamage(20, lanternTr_->getPos().getX() + (lanternTr_->getWidth() / 2), sdlutils().height() - 50);
 				}
 
+				//en la segunda fase recibe 3 ataques antes de cambiar de lado
 				else if (secondPhase_ && !attacked_ && attack != nullptr) {
-				
+
 					contAttacks_++;
 
 					attacked_ = true;
 
 					if (contAttacks_ >= NUM_ATTACKS_TO_REPOSITION) {
-					
+
 						contAttacks_ = 0;
 
 						lanterMov_->moveToSide();
@@ -77,8 +86,6 @@ void LanternCollisions::update()
 			}
 		}
 	}
-
-	if (attacked_ && playerAttack_->hasFinished()) attacked_ = false;
 }
 
 void LanternCollisions::setDamaged(bool set)

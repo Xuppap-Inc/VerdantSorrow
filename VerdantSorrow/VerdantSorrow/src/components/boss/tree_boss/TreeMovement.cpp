@@ -2,16 +2,6 @@
 #include "../../../components/Transform.h"
 #include "../../../ecs/Entity.h"
 
-TreeMovement::TreeMovement() :
-	tr_(),
-	playerTr_(),
-	offsetX_(),
-	movementDir_(),
-	isNextToPlayer_(),
-	moveActive_(true),
-	movingToCenter_(false)
-{
-}
 TreeMovement::TreeMovement(Transform* playerTransform_, float followVelocity) :
 	tr_(),
 	movementDir_(),

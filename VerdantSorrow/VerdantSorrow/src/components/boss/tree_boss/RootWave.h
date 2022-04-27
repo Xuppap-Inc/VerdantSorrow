@@ -40,7 +40,5 @@ private:
 	const int SPACE_BETWEEN_ROOTS = 50;
 	const int TIME_BETWEEN_ROOTS = 150;
 	const int TIME_UNTIL_MOVING = 3000;
-
-	int nRoots_;
 };
 

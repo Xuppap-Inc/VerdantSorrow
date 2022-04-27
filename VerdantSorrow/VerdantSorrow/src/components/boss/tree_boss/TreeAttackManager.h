@@ -40,6 +40,14 @@ public:
 	void initComponent() override;
 	void update() override;
 
+	void checkIfDead();
+
+	void checkDirection(float distance);
+
+	void checkState(float absDistance);
+
+	void checkAnimState();
+
 	int getRootWidth() { return rootWidth_; }
 private:
 	enum AnimState {

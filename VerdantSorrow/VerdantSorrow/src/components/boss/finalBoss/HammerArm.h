@@ -44,7 +44,7 @@ protected:
     Transform* tr_;
     RectangleCollider* collider_;
     int handSpeed = 6, cooldoownInFloor = 1500;
-    Transform* playertr_;
+    Transform* playerTr_;
     int playerXPos;
     CollisionManager* colManager_;
 

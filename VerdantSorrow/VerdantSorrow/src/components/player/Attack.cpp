@@ -10,15 +10,13 @@
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
 	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
-	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), 
+	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), attackTimer_(),
 	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
 	attackKeys({ SDL_SCANCODE_J }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
-	
-
 	setActive(false);
 	colMan_ = colManager;
 
@@ -153,36 +151,42 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 
 	anim_->repeat(false);
 
+	std::function<void()> recoveryCallback = []() {};
+
 	if (nComboAir_ == 0) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir1"), 3, 3, 100, 8, "Chica_AtkAir1");
+		int rows = 3; 
+		int columns = 3;
+		int animDuration = 100;
+		int nFrames = 8;
+		int attackFrame = 4;
+		int recoveryFrame = -1;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir1"), attackCallback);
-
-		nComboAir_++;
-
-		comboTimerAir_->reset();
+		changeComboAnim(nComboAir_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerAir_, false);
 	}
 
 	else if (nComboAir_ == 1) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir2"), 3, 3, 100, 9, "Chica_AtkAir2");
+		int rows = 3;
+		int columns = 3;
+		int animDuration = 100;
+		int nFrames = 9;
+		int attackFrame = 4;
+		int recoveryFrame = -1;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir2"), attackCallback);
-
-		nComboAir_++;
-
-		comboTimerAir_->reset();
+		changeComboAnim(nComboAir_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerAir_, false);
 	}
 
 	else if (nComboAir_ == 2) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkAir3"), 2, 6, 300, 11, "Chica_AtkAir3");
+		int rows = 2;
+		int columns = 6;
+		int animDuration = 300;
+		int nFrames = 11;
+		int attackFrame = 4;
+		int recoveryFrame = -1;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(4, "Chica_AtkAir3"), attackCallback);
+		changeComboAnim(nComboAir_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerAir_, false);
 
 		comboFinishedAir_ = true;
 
@@ -197,6 +201,25 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 	}
 }
 
+void Attack::changeComboAnim(int& nCombo, int rows, int columns, int animDuration, int nFrames, int attackFrame, std::function<void()>& attackCallback, int recoveryFrame, std::function<void()>& recoveryCallback, VirtualTimer* comboTimer, bool ground)
+{
+	std::string animName;
+
+	int n = nCombo + 1;
+	if (ground) animName = "Chica_AtkFloor" + to_string(n);
+	else animName = "Chica_AtkAir" + to_string(n);
+
+	anim_->changeanim(&sdlutils().images().at(animName), rows, columns, animDuration, nFrames, animName);
+
+	//registra el evento en la animacion
+	anim_->registerEvent(std::pair<int, std::string>(attackFrame, animName), attackCallback);
+	anim_->registerEvent(std::pair<int, std::string>(attackFrame, animName), recoveryCallback);
+
+	nCombo++;
+
+	comboTimer->reset();
+}
+
 void Attack::attackGround(std::function<void()>& attackCallback)
 {
 	state_ = ATTACKING;
@@ -208,40 +231,38 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 
 	if (nComboGround_ == 0) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor"), 2, 5, 100, 9, "Chica_AtkFloor");
+		int rows = 2;
+		int columns = 5;
+		int animDuration = 100;
+		int nFrames = 9;
+		int attackFrame = 6;
+		int recoveryFrame = 8;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(6, "Chica_AtkFloor"), attackCallback);
-
-		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor"), recoveryCallback);
-
-		nComboGround_++;
-
-		comboTimerGround_->reset();
+		changeComboAnim(nComboGround_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerGround_, true);
 	}
 
 	else if (nComboGround_ == 1) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor2"), 3, 2, 60, 6, "Chica_AtkFloor2");
+		int rows = 3;
+		int columns = 2;
+		int animDuration = 60;
+		int nFrames = 6;
+		int attackFrame = 1;
+		int recoveryFrame = 5;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(1, "Chica_AtkFloor2"), attackCallback);
-
-		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor2"), recoveryCallback);
-
-		nComboGround_++;
-
-		comboTimerGround_->reset();
+		changeComboAnim(nComboGround_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerGround_, true);
 	}
 
 	else if (nComboGround_ == 2) {
 
-		anim_->changeanim(&sdlutils().images().at("Chica_AtkFloor3"), 2, 5, 100, 9, "Chica_AtkFloor3");
+		int rows = 2;
+		int columns = 5;
+		int animDuration = 100;
+		int nFrames = 9;
+		int attackFrame = 5;
+		int recoveryFrame = 8;
 
-		//registra el evento en la animacion
-		anim_->registerEvent(std::pair<int, std::string>(5, "Chica_AtkFloor3"), attackCallback);
-
-		anim_->registerEvent(std::pair<int, std::string>(8, "Chica_AtkFloor3"), recoveryCallback);
+		changeComboAnim(nComboGround_, rows, columns, animDuration, nFrames, attackFrame, attackCallback, recoveryFrame, recoveryCallback, comboTimerGround_, true);
 
 		comboFinishedGround_ = true;
 

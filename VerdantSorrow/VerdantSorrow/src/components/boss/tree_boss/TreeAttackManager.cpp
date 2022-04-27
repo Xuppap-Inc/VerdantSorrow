@@ -92,6 +92,25 @@ void TreeAttackManager::update()
 
 	float absDistance = abs(distance);
 
+	checkDirection(distance);
+
+	checkState(absDistance);
+
+	checkAnimState();
+
+	checkIfDead();
+}
+
+void TreeAttackManager::checkIfDead()
+{
+	if (deadBoss_) {
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
+	}
+}
+
+void TreeAttackManager::checkDirection(float distance)
+{
 	if (!attacking_) {
 		if (distance > 0) dir_ = 1;
 		else dir_ = -1;
@@ -105,18 +124,21 @@ void TreeAttackManager::update()
 		}
 		else anim_->flipX(true);
 	}
+}
 
+void TreeAttackManager::checkState(float absDistance)
+{
 	if (state == MOVING) {
 
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
 		if (!attacking_) animNewState_ = ANIM_WALK;
 		anim_->repeat(true);
-		
+
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (((dir_<0 &&absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE))  && newAtack_) {
-			
-			if(timerCd_->currTime() >= ATTACK_CD) {
+		if (((dir_<0 && absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE)) && newAtack_) {
+
+			if (timerCd_->currTime() >= ATTACK_CD) {
 				animNewState_ = ANIM_ATTACK;
 				anim_->repeat(false);
 
@@ -127,7 +149,7 @@ void TreeAttackManager::update()
 				newAtack_ = false;
 				timerCd_->reset();
 			}
-			
+
 		}
 
 		if (phase == PHASE1) {
@@ -143,7 +165,7 @@ void TreeAttackManager::update()
 	else if (state == WAVE) {
 		lanternCols_->setDamaged(true); //waves no hacen da�o
 		if (rootWave_->getMove()) {
-			
+
 			state = MOVING;
 
 			movement_->setMoveActive(true);
@@ -157,7 +179,7 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == SPECIAL_ATTACK) {
-		
+
 		if (!waiting_ && rootAutoAim_->hasFinished()) {
 
 			//reactiva al arbol
@@ -195,14 +217,17 @@ void TreeAttackManager::update()
 	}
 
 	else if (state == MOVING_TO_CENTER) {
-	
+
 		if (movement_->hasFinishedMovingToCenter()) {
-		
+
 			animNewState_ = ANIM_BACKGROUND;
 			anim_->repeat(false);
 		}
 	}
+}
 
+void TreeAttackManager::checkAnimState()
+{
 	if (animState_ != animNewState_) {
 		animState_ = animNewState_;
 
@@ -211,28 +236,28 @@ void TreeAttackManager::update()
 		switch (animState_)
 		{
 		case TreeAttackManager::ANIM_IDLE:
-			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
+			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
 			break;
 		case TreeAttackManager::ANIM_WALK:
-			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_walk"), 5, 6, (1000 / 30) * 28, 28, "arbol_walk");
+			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_walk"), 5, 6, (1000 / 30) * 28, 28, "arbol_walk");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_walk"), 2, 6, (1000 / 30) * 12, 12, "arbol_capa_walk");
 			break;
 		case TreeAttackManager::ANIM_ATTACK:
 			anim_->setColor(255, 200, 20, 200);
-			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
+			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_capa_attack");
 			break;
 		case TreeAttackManager::ANIM_ATTACK_COMBO:
 			anim_->setColor(255, 200, 20, 200);
-			if (phase==PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
+			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack_combo"), 3, 6, (1000 / 30) * 13, 13, "arbol_capa_attack_combo");
 			break;
 		case TreeAttackManager::ANIM_ROOTS:
 			anim_->setColor(255, 200, 20, 500);
 
 			//callback que llama al ataque de raices al acabar la animacion
-			attackCallback = [this]() { 
+			attackCallback = [this]() {
 				rootWave_->attack(dir_); state = WAVE; };
 
 			anim_->registerEvent(std::pair<int, std::string>(15, "arbol_capa_roots"), attackCallback);
@@ -257,11 +282,6 @@ void TreeAttackManager::update()
 		default:
 			break;
 		}
-	}
-
-	if (deadBoss_) {
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
 	}
 }
 

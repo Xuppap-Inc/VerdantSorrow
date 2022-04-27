@@ -19,6 +19,8 @@ public:
 	void initComponent()override;
 	virtual void update()override;
 
+	void checkCollisions();
+
 	void setDamaged(bool set);
 	void changeToSecondPhase();
 

@@ -32,6 +32,8 @@ public:
 
 	void attackAir(std::function<void()>& attackCallback);
 
+	void changeComboAnim(int& nCombo, int rows, int columns, int animDuration, int nFrames, int attackFrame, std::function<void()>& attackCallback, int recoveryFrame, std::function<void()>& recoveryCallback, VirtualTimer* comboTimer, bool ground);
+
 	void attackGround(std::function<void()>& attackCallback);
 
 	bool hasFinished();

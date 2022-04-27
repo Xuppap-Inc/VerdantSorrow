@@ -8,7 +8,7 @@ class CollisionManager;
 class Image;
 class VirtualTimer;
 
-class Punietazo :
+class Punch :
 	public ecs::Component
 {
 public:
@@ -21,8 +21,8 @@ public:
 		FIN
 	};
 	__CMPID_DECL__(ecs::_PUNIETAZO)
-		Punietazo(bool manoDerecha);
-	~Punietazo();
+		Punch(bool manoDerecha);
+	~Punch();
 	void initComponent()override;
 
 
@@ -45,12 +45,11 @@ private:
 
 	VirtualTimer* hitTime_;
 	VirtualTimer* goBackTime_;
-	/*float hitTime_;
-	float goBackTime_;*/
 
 	//initial hand tr
 	float initialwidth_;
 	float initialheight_;
+
 	// Initial hand collider
 	float col_initialwidth_;
 	float col_initialheight_;

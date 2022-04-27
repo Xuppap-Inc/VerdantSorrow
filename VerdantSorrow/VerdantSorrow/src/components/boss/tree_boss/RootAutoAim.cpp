@@ -44,6 +44,7 @@ void RootAutoAim::update()
 
 		auto lanternPos_ = lanternTr_->getPos();
 
+		//chequea si la raiz fuera a spawnear en el rango de la lampara
 		if (!secondPhase_ || (rootPos_ < lanternPos_.getX() - LANTER_SECURE_SPACE || rootPos_ > lanternPos_.getX() + lanternTr_->getWidth() + LANTER_SECURE_SPACE) ) {
 			
 			rootSpawner_->createRoot(rootPos_);

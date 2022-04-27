@@ -24,11 +24,11 @@ public:
 		FinalBossMovement(CollisionManager* colManager);
 	~FinalBossMovement();
 	void update() override;
-	void bounce();
-	void restartBouncing();
-	void fireBall();
 	void initComponent()override;
 private:
+
+	const int WAIT_ON_GROUND = 1000;
+
 	Transform* tr_;
 	BossAtributos* bA_;
 	HandsManager* handMngr_;
@@ -45,12 +45,15 @@ private:
 	Music* musicaFase2_;
 
 	VirtualTimer* lastTimeInGround_;
-	//random bola de fuego times
-	//int lastFireBall_;//, fireBallCooldown_;
-	int /*lastTimeGround = 0,*/ timeInGround = 1000;
 	
 	ParticleSystem* ashes_;
 
 	bool deadBoss_;
+
+
+	void checkPhaseChange();
+	void bounce();
+	void restartBouncing();
+	void fireBall();
 };
 

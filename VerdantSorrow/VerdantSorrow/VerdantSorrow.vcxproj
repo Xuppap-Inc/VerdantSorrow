@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="src\components\CameraShake.h" />
     <ClInclude Include="src\components\boss\nivelHuida\FlySpawnerPlant.h" />
-    <ClInclude Include="src\components\boss\finalBoss\BounceOnBordersEye.h" />
     <ClInclude Include="src\components\boss\frog_boss\BounceOnBordersFrog.h" />
     <ClInclude Include="src\components\fondos\Disolve.h" />
     <ClInclude Include="src\components\boss\nivelHuida\Spikes.h" />
@@ -48,7 +47,7 @@
     <ClInclude Include="src\game\Scene.h" />
     <ClInclude Include="src\components\boss\finalBoss\FinalBossMovement.h" />
     <ClInclude Include="src\components\boss\finalBoss\HammerArm.h" />
-    <ClInclude Include="src\components\boss\finalBoss\Punietazo.h" />
+    <ClInclude Include="src\components\boss\finalBoss\Punch.h" />
     <ClInclude Include="src\components\boss\finalBoss\HandsManager.h" />
     <ClInclude Include="src\components\boss\finalBoss\ClapAttack.h" />
     <ClInclude Include="src\components\boss\tree_boss\LanternMovement.h" />
@@ -125,7 +124,6 @@
   <ItemGroup>
     <ClCompile Include="src\components\CameraShake.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\FlySpawnerPlant.cpp" />
-    <ClCompile Include="src\components\boss\finalBoss\BounceOnBordersEye.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\BounceOnBordersFrog.cpp" />
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
@@ -150,7 +148,7 @@
     <ClCompile Include="src\game\Scene.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\FinalBossMovement.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\HammerArm.cpp" />
-    <ClCompile Include="src\components\boss\finalBoss\Punietazo.cpp" />
+    <ClCompile Include="src\components\boss\finalBoss\Punch.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\HandsManager.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\ClapAttack.cpp" />
     <ClCompile Include="src\components\boss\tree_boss\LanternMovement.cpp" />
