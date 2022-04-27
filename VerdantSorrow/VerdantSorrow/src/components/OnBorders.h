@@ -44,6 +44,6 @@ public:
 protected:
     Transform* tr_;
 
-    const int GROUND_HEIGHT = 60;
+    const int GROUND_HEIGHT = 100;
 };
 
