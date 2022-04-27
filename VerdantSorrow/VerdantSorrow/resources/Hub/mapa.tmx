@@ -327,52 +327,52 @@
  <objectgroup id="14" name="npc">
   <object id="1649" gid="65" x="1090.02" y="723.045" width="61" height="112">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="10"/>
    </properties>
   </object>
   <object id="1650" gid="66" x="404.379" y="809.439" width="84" height="126">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="9"/>
    </properties>
   </object>
   <object id="1651" gid="68" x="1638.38" y="754.439" width="112" height="137">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="8"/>
    </properties>
   </object>
   <object id="1652" gid="67" x="1347.38" y="1068.77" width="46" height="105">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="7"/>
    </properties>
   </object>
   <object id="1653" gid="64" x="407.379" y="1988.44" width="43" height="104">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="6"/>
    </properties>
   </object>
   <object id="1654" gid="62" x="909.379" y="1598.44" width="48" height="117">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="5"/>
    </properties>
   </object>
   <object id="1655" gid="63" x="2262.05" y="1895.77" width="84" height="111">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="4"/>
    </properties>
   </object>
   <object id="1656" gid="59" x="2283.56" y="1573.44" width="59.697" height="157.576">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="3"/>
    </properties>
   </object>
   <object id="1657" gid="61" x="2278.41" y="674.439" width="58.6364" height="139.394">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="2"/>
    </properties>
   </object>
   <object id="1658" gid="60" x="1428.05" y="1533.44" width="63.3333" height="118.667">
    <properties>
-    <property name="type" value="npc"/>
+    <property name="npc" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

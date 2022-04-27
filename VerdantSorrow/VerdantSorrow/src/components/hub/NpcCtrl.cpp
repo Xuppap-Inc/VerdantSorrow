@@ -7,7 +7,7 @@
 #include "DialogBoxMngr.h"
 #include "../player/PlayerHubControl.h"
 
-NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200)
+NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200),dialog_()
 {
 }
 
@@ -38,7 +38,7 @@ void NpcCtrl::update()
 						//Activa el diálogo si está desactivado e inmoviliza al jugador
 						if (!dialogBox_->isActive()) {
 							mngr_->getHandler(ecs::_PLAYER)->getComponent<PlayerHubControl>()->changeStateTalk(true);
-							dialogMngr->activate(sdlutils().dialogs().at("npc10_dialogue4"));
+							dialogMngr->activate(dialog_);
 						}
 
 						//Si ha terminado y es el último párrafo se desactiva

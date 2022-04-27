@@ -15,6 +15,9 @@ public:
 
 	void initComponent() override;
 	void update() override;
+	void setDialog(std::string dialog) {
+		dialog_ = dialog;
+	};
 
 protected:
 	Entity* dialogBox_;
@@ -24,5 +27,6 @@ protected:
 	VirtualTimer* vt_;
 	int dialogTimer;
 	bool canTalk;
+	std::string dialog_;
 };
 

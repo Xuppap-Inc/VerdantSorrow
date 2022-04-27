@@ -115,8 +115,18 @@ void TileMap::loadMap(string path)
 					col_->addCollider(col);
 
 					if (name == "npc") {
+
 						col->setIsTrigger(true);
-						ent->addComponent<NpcCtrl>(col_, dialogBox_);
+						auto npcctrl = ent->addComponent<NpcCtrl>(col_, dialogBox_);
+
+						vector<tmx::Property> properties = object.getProperties();
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "npc")i++;
+
+						if (i < properties.size()) 
+							npcctrl->setDialog(sdlutils().dialogs().at("npc"+ to_string(properties[i].getIntValue()) + "_dialogue1"));
+
+
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 					}
 					else if (name == "entradasbosses") {
