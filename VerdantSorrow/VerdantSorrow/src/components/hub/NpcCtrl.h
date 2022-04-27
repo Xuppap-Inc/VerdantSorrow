@@ -25,7 +25,6 @@ protected:
 	Transform* tr_;
 	CollisionManager* colMan_;
 	RectangleCollider* col_;
-	bool firstcol_;
 	VirtualTimer* vt_;
 	int dialogTimer;
 	bool canTalk;

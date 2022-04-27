@@ -9,7 +9,7 @@
 #include "../Transform.h"
 #include "../Image.h"
 
-NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200),dialog_(),tr_(nullptr),firstcol_(false)
+NpcCtrl::NpcCtrl(CollisionManager* colManager, Entity* dialogBox) : colMan_(colManager), dialogBox_(dialogBox), canTalk(true), dialogTimer(200),dialog_(),tr_(nullptr)
 {
 }
 
