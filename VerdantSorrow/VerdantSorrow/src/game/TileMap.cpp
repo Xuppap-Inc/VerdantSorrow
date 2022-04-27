@@ -13,7 +13,7 @@ TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col) 
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scaleX = scaleY = 0.25;
+	scaleX = scaleY = 0.4;
 	dialogBox_ = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox_);
 	loadMap(path);
@@ -63,10 +63,6 @@ void TileMap::loadMap(string path)
 		if (layer->getType() == tmx::Layer::Type::Object) {
 			// cargamos la capa
 			tmx::ObjectGroup* objects = dynamic_cast<tmx::ObjectGroup*>(layer.get());
-
-			if (objects->getName() == "colliders") {
-				int a = 4;
-			}
 			// obtenemos sus tiles
 
 			for (auto& object : objects->getObjects()) {
@@ -74,13 +70,9 @@ void TileMap::loadMap(string path)
 				auto pos = object.getPosition();
 				SDL_Rect r = build_sdlrect(pos.x, pos.y, object.getAABB().width, object.getAABB().height);
 
-				//se pintan solo si no son colliders
-				if (objects->getName() != "colliders") {
+				auto cur_gid = object.getTileID();
 
-					auto cur_gid = object.getTileID();
-
-					if (cur_gid == 0)
-						continue;
+				if (cur_gid != 0) {
 
 					// el mas cercano, y a la vez menor, al gid del tile)
 					auto tset_gid = -1;
@@ -102,6 +94,7 @@ void TileMap::loadMap(string path)
 					//el pivote de los objetos esta abajo
 					r.y -= object.getAABB().height;
 					tilesets[tset_gid][cur_gid]->render(r);
+
 				}
 				string name = objects->getName();
 				if (name == "colliders" || name == "entradasbosses" || name == "npc") {
