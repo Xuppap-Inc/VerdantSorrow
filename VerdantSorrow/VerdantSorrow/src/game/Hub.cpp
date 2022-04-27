@@ -61,6 +61,8 @@ void Hub::init()
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
+	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
+	cameraC->setLimitToDimensions(tilemapTr->getPos().getX(), tilemapTr->getPos().getY(), tilemapTr->getWidth(), tilemapTr->getHeight());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	auto dialogBox = mngr_->addEntity();

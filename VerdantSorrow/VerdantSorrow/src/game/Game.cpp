@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Game::Game() : mngr_(nullptr), exit(false)
+Game::Game() : mngr_(nullptr), exit(false),state_(HUB)
 {
 }
 

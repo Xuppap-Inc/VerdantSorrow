@@ -26,6 +26,7 @@
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
+#include "Game.h"
 
 
 void FrogScene::init()
@@ -70,7 +71,11 @@ void FrogScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeFrogEssenceState(true);
-		if (bossHealth <= 0)sC().changeStatePlayerInBoss(false);
+		if (bossHealth <= 0) {
+			sC().changeStatePlayerInBoss(false);
+			Game::instance()->state_ = Game::State::FROGDEFEATED;
+		}
+
 
 		setAble(false);
 		sC().decideScene();

@@ -96,5 +96,6 @@
 	_TREEBOSS, \
 	_EYE, \
 	_WAVE_GENERATOR, \
-	_hdlr_CAMERA
+	_hdlr_CAMERA, \
+	_hdlr_TILEMAP
 

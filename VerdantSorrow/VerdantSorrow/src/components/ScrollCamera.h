@@ -17,12 +17,28 @@ public:
 	void setScrollX(bool x) {
 		scrollX_ = x;
 	}
+	void setScrollY(bool y) {
+		scrollY_ = y;
+	};
+	void setLimitToDimensions(float x, float y, float w, float h) {
+		limitLeft_ = x;
+		limitTop_ = y;
+		limitRight_ = x + w;
+		limitBot_ = y + h;
+	};
+	void setLimitsToPositions(float right, float left, float top, float bot) {
+		limitRight_ = right;
+		limitLeft_ = left;
+		limitTop_ = top;
+		limitBot_ = bot;
+	};
 protected:
 	void calculateDirection();
 	Transform* tr_;
 	Transform* player_;
 	float cameraSpeed_;
 	float deadzoneX_, deadzoneY_;
-	bool scrollX_;
+	bool scrollX_, scrollY_;
+	float limitRight_, limitLeft_, limitTop_, limitBot_;
 };
 
