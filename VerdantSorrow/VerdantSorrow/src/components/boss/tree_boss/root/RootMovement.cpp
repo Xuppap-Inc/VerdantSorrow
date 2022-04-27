@@ -23,6 +23,13 @@ void RootMovement::initComponent()
 
 	auto& vel = tr_->getVel();
 	vel = new Vector2D(0, -speed_);
+
+
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+	particlesys->createParticlesRoots(9, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
+
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+	particlesys2->createParticlesRoots(3, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
 }
 
 void RootMovement::update()
@@ -32,16 +39,22 @@ void RootMovement::update()
 		if (waitTimer_->currTime() >= WAIT_TO_DIE) {
 
 			//particles
-			/*ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_simbolo1"), mngr_);
 			particlesys->createParticlesRootsDie(3, tr_->getPos().getX() + (tr_->getWidth() / 2));
 			ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
-			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));*/
+			particlesys2->createParticlesRootsDie(9, tr_->getPos().getX() + (tr_->getWidth() / 2));
 
 			ent_->setAlive(false);
 		}
 	}
 	else if (state_ == GROWING)
 	{
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+		particlesys->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
+
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
+		particlesys2->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
+
 		//si ha llegado al borde de la pantalla
 		if (tr_->getPos().getY() <= 100) {
 			speed_ = 0;
@@ -68,10 +81,5 @@ void RootMovement::update()
 			state_ = GROWING;
 		}
 
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
-		particlesys->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
-
-		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
-		particlesys2->createParticlesRoots(1, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
 	}
 }
