@@ -44,17 +44,17 @@ void ScrollCamera::calculateDirection()
 	auto playerPos = player_->getPos();
 	auto diff = playerPos - actPos;
 
-	if (pos.getX() < limitLeft_ || pos.getX() > limitRight_) {
+	if (pos.getX() < limitLeft_ || pos.getX() + sdlutils().width() > limitRight_) {
 		scrollX_ = false;
 		vel.setX(0);
-		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_);
+		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
 	}
 	else scrollX_ = true;
 
-	if (pos.getY() < limitTop_ || pos.getY() > limitBot_) {
+	if (pos.getY() < limitTop_ || pos.getY() + sdlutils().height() > limitBot_) {
 		scrollY_ = false;
 		vel.setY(0);
-		pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_);
+		pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_ - sdlutils().height());
 	}
 	else scrollY_ = true;
 	
@@ -86,13 +86,15 @@ void ScrollCamera::calculateDirection()
 		if (diff.getY() + player_->getHeight() < 0) {
 			vel.setY(-cameraSpeed_);
 		}
-		else if (diff.getY() <= deadzoneY_ && diff.getX() + player_->getHeight() >= 0) {
+		else if (diff.getY() <= deadzoneY_ && diff.getY() + player_->getHeight() >= 0) {
 			vel.setY(vel.getY() * 0.995);
-			if (abs(diff.getY()) <= 10 && abs(diff.getY()) >= 0) {
+			if (abs(diff.getY()) < 10 && abs(diff.getY()) > 0) {
 				vel.setY(0);
 			}
 		}
 	}
+
+	if (vel.getX() >= cameraSpeed_ && vel.getY() <= cameraSpeed_) vel = vel.normalize() * cameraSpeed_;
 	
 }
 
