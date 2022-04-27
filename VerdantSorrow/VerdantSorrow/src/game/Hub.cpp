@@ -57,12 +57,14 @@ void Hub::init()
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+
+	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
+	player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
+
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
-	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
+	cameraTr->init(player->getComponent<Transform>()->getPos()/2, Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
-	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-	cameraC->setLimitToDimensions(tilemapTr->getPos().getX(), tilemapTr->getPos().getY(), tilemapTr->getWidth(), tilemapTr->getHeight());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	auto dialogBox = mngr_->addEntity();
