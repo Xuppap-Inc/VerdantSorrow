@@ -42,7 +42,7 @@ void SceneManager::update()
 	{
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) 
 		{
-			if(actScene!=Controls_ && actScene != Menu_)
+			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
 			{
 				activatePause();
 			}
