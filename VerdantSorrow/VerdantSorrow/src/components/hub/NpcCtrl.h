@@ -30,5 +30,7 @@ protected:
 	bool canTalk;
 	std::string dialog_;
 	Image* letterE;
+
+	SDL_GameControllerButton controllerButton;
 };
 
