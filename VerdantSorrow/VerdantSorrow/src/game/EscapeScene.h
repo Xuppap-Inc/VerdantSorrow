@@ -1,23 +1,24 @@
-	#pragma once
+#pragma once
 
 #include <vector>
 #include "CollisionManager.h"
 
 #include "Scene.h"
-
 class CollisionChecker;
-class EscapeScene: public Scene
+class TileMap;
+
+class EscapeScene : public Scene
 {
-public: 
-	EscapeScene() :Scene(), isAble(false) {}
-	~EscapeScene() {};
+public:
+	EscapeScene();
+	~EscapeScene();
 	void init();
 
 	void update()override;
 
 	//start lo hace scene directamente
 	void background();
-	
+
 
 	bool getAble();
 	void setAble(bool a);
@@ -27,5 +28,6 @@ private:
 	Entity* player;
 	Entity* FinalBossFace;
 	CollisionChecker* colCheck_;
+	TileMap* tileMap_;
 };
 

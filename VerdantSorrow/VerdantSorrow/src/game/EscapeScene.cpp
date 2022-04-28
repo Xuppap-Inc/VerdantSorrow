@@ -25,7 +25,16 @@
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
+#include "TileMap.h"
 
+EscapeScene::EscapeScene() :Scene(), isAble(false)
+{
+}
+
+EscapeScene::~EscapeScene()
+{
+	delete tileMap_; 
+}
 
 void EscapeScene::init()
 {
@@ -37,12 +46,16 @@ void EscapeScene::init()
 
 	background();
 
+	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager);
+
 
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
+	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
+	player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);

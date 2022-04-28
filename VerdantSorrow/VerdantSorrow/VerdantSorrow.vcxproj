@@ -219,6 +219,7 @@
     <None Include="resources\config\resources.json" />
     <None Include="resources\config\treeScene.json" />
     <None Include="resources\config\tutorial.json" />
+    <None Include="resources\Huida\nivelHuida.tmx" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\sound\musica_hub.wav" />
