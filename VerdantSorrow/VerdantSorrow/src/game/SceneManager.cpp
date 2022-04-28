@@ -44,7 +44,7 @@ void SceneManager::update()
 		{
 			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
 			{
-				activatePause();
+				if(actScene != Tutorial_) activatePause();
 			}
 		}
 	}
