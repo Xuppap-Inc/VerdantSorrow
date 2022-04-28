@@ -13,7 +13,7 @@
 #include "../../fondos/ParticleSystem.h"
 
 
-HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(REPOSO), lastAttackDone_(), tiempoColor_()
+HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(START_ANIM), lastAttackDone_(), tiempoColor_()
 {
 }
 
@@ -29,9 +29,10 @@ void HandsManager::initComponent()
 	lastAttackDone_ = mngr_->addTimer();
 
 	tiempoColor_ = mngr_->addTimer();
-	createHands();
-	chooseAttack();
 
+	startTimer_ = mngr_->addTimer();
+
+	createHands();
 }
 
 void HandsManager::update()
@@ -59,7 +60,21 @@ void HandsManager::update()
 		punietazoAttack();
 	else if (state_ == MARTILLAZO)
 		hammerAttack();
+	else if (state_ == START_ANIM) {
+	
+		if (startTimer_->currTime() >= START_DELAY) {
+		
+			chooseAttack();
+			state_ = REPOSO;
+		}
+	}
 
+	checkPhaseChange();
+
+}
+
+void HandsManager::checkPhaseChange()
+{
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
 		if (multFase_ == 1) {
 			multFase_ = 4;
@@ -81,7 +96,6 @@ void HandsManager::update()
 			particlesys->createParticlesFire(2, rightHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (rightHandTr_->getWidth())), rightHandTr_->getPos().getY() + 20);
 		}
 	}
-
 }
 
 void HandsManager::createHands() {

@@ -24,7 +24,8 @@ public:
 		REPOSO = 0,
 		CLAP,
 		PUNIETAZO,
-		MARTILLAZO
+		MARTILLAZO,
+		START_ANIM
 	};
 
 	__CMPID_DECL__(ecs::_HANDS_MANAGER)
@@ -33,22 +34,29 @@ public:
 	void initComponent()override;
 	void update();
 
+	void checkPhaseChange();
+
 	State getState() { return state_; };
 	void setState(State state) { state_ = state; };
 
 	
 private:
+
+	const int START_DELAY = 5000;
+
 	void createHands();
 	void chooseAttack();
 	void clapAttack();
 	void punietazoAttack();
 	void hammerAttack();
 	VirtualTimer* lastAttackDone_;
-	float  attackCooldown;//lastAttackDone = 0,
+	float  attackCooldown;
 	int numeroAtaque;
 
 	int multFase_;
 	VirtualTimer* tiempoColor_;
+
+	VirtualTimer* startTimer_;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
