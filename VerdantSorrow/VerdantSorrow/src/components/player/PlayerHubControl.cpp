@@ -118,28 +118,31 @@ void PlayerHubControl::handleInput()
 		}
 	}
 
+
+
+	if (moveLeft_)
+		anim_->flipX(true);
+	else
+		anim_->flipX(false);
+
+
 	if (moveDown_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_Kyna");
-		anim_->flipX(false);
 	}
 
 	else if (moveUp_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_up_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_side_Kyna");
-		anim_->flipX(false);
 	}
 
 	else if (moveRight_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_side_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_side_Kyna");
-		anim_->flipX(false);
 	}
 
 	else if (moveLeft_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_side_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_side_Kyna");
-		anim_->flipX(true);
 	}
 
 	else if (!moveUp_ && !moveDown_ && !moveLeft_ && !moveRight_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
-		anim_->flipX(false);
 	}
 }
