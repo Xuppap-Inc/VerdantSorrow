@@ -18,8 +18,8 @@
 #include "../../fondos/ParticleSystem.h"
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
-fly_(), player_(), tr_(), collManager_(collManager), frogState_(FLY_DIED), attr_(),
-jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(0), delay_(0), musicaFase1_(), musicaFase2_(),
+fly_(), player_(), tr_(), collManager_(collManager), frogState_(START_ANIMATION), attr_(),
+jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(3), delay_(0), musicaFase1_(), musicaFase2_(),
 flySpacing_(0), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
 animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false)
 {
@@ -41,9 +41,8 @@ void FrogAttackManager::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 
-	/*tongueWaitTimer_ = new VirtualTimer();
-	mngr_->addTimer(tongueWaitTimer_);*/
 	vt_ = mngr_->addTimer();
+	startTimer_ = mngr_->addTimer();
 
 	//musica
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
@@ -284,6 +283,13 @@ void FrogAttackManager::checkFrogState()
 		{
 			if (jumping_) frogState_ = JUMPING;
 			else if (jumpingBig_) frogState_ = JUMPING_BIG;
+		}
+		break;
+	case START_ANIMATION:
+		if (startTimer_->currTime() >= START_DELAY) 
+		{
+			frogState_ = WAITING;
+			startTimer_->pause();
 		}
 		break;
 	default:

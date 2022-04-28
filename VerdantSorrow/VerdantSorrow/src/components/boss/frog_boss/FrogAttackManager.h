@@ -31,7 +31,8 @@ public:
 		CASTING_TONGUE,
 		FLY_DIED,
 		SECOND_PHASE,
-		DOING_ANIMATION
+		DOING_ANIMATION,
+		START_ANIMATION
 	};
 
 	FrogAttackManager(CollisionManager* collManager); 
@@ -45,7 +46,10 @@ public:
 
 private:
 
-	const int FLOOR_HEIGHT = 60;
+	const int FLOOR_HEIGHT = 100;
+
+	//tiempo que dura la animacion de inicio con la rana quieta
+	const int START_DELAY = 5000;
 
 	enum AnimState {
 		ANIM_IDLE,
@@ -100,12 +104,9 @@ private:
 	bool attacking_;
 	bool jumpingBig_;
 	Uint32 delay_;
-	//Uint32 tongueDelay_;
 
 	VirtualTimer* vt_;
-
-	//este no es necesario ya VirtualTimer tongueWaitTimer_;
-	
+	VirtualTimer* startTimer_;
 
 	bool deadBoss_;
 };

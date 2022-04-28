@@ -136,7 +136,8 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 1);
 
-	Frog->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 5000, 32, "ranajump");
+	auto anim_ = Frog->addComponent<FramedImage>(&sdlutils().images().at("rana_idle"), 4, 6, (1000 / 30) * 24, 24, "rana_idle");
+	anim_->repeat(true);
 
 	//Se añade un collider a la rana
 	auto frogCollider = Frog->addComponent<RectangleCollider>(FrogTr->getWidth() - 150, FrogTr->getHeight() - 200, 0, 75);
