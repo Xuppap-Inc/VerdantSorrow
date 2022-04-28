@@ -26,7 +26,8 @@ TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(),
 																	rootWidth_(0), rootAutoAim_(), rootWave_(), meleeAttack_(),
 																	attacking_(false), treeCol_(), waiting_(false), 
 																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), 
-																	attribs_(), dir_(0), movement_(), deadBoss_(false)
+																	attribs_(), dir_(0), movement_(), deadBoss_(false), animState_(ANIM_IDLE),
+																	animNewState_(ANIM_IDLE)
 {
 }
 
@@ -36,6 +37,8 @@ void TreeAttackManager::initComponent()
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	treeCol_ = ent_->getComponent<RectangleCollider>();
 	movement_ = ent_->getComponent<TreeMovement>();
+	movement_->setMoveActive(false);
+
 	anim_ = ent_->getComponent<FramedImage>();
 
 	lantern_ = mngr_->getHandler(ecs::_LANTERN);
@@ -47,15 +50,19 @@ void TreeAttackManager::initComponent()
 	rootWave_ = ent_->getComponent<RootWave>();
 	rootAutoAim_ = ent_->getComponent<RootAutoAim>();
 	meleeAttack_ = ent_->getComponent<MeleeAttack>();
+	
 	//Timers
-
 	timerCd_ = mngr_->addTimer();
 
 	timerSpecial_ = mngr_->addTimer();
+	timerSpecial_->pause();
 
 	timerWave_ = mngr_->addTimer();
+	timerWave_->pause();
 
 	waitTimer_ = mngr_->addTimer();
+
+	startTimer_ = mngr_->addTimer();
 
 	//Musica
 	musicaFase2_ = &sdlutils().musics().at("musica_linterna_fase2");
@@ -74,7 +81,7 @@ void TreeAttackManager::initComponent()
 	assert(correct);
 
 	phase = PHASE1;
-	state = MOVING;
+	state = START_ANIM;
 
 	timerWave_->reset();
 	timerSpecial_->reset();
@@ -222,6 +229,21 @@ void TreeAttackManager::checkState(float absDistance)
 
 			animNewState_ = ANIM_BACKGROUND;
 			anim_->repeat(false);
+		}
+	}
+
+	else if (state == START_ANIM) {
+	
+		if (startTimer_->currTime() >= START_DELAY) {
+		
+			startTimer_->pause();
+
+			state = MOVING;
+			animNewState_ = ANIM_WALK;
+
+			timerWave_->reset();
+			timerSpecial_->reset();
+			movement_->setMoveActive(true);
 		}
 	}
 }

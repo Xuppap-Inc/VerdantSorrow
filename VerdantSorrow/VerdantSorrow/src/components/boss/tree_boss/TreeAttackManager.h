@@ -27,7 +27,8 @@ public:
 		SPECIAL_ATTACK,
 		MOVING_TO_CENTER,
 		CHANGING_PHASE,
-		DOING_ANIM
+		DOING_ANIM,
+		START_ANIM
 	};
 	enum Phase {
 		PHASE1,
@@ -71,6 +72,9 @@ private:
 	const int WAIT_AFTER_SPECIAL = 1000;
 	const int ATTACK_CD = 2000;
 
+	//tiempo que espera al inicio del combate
+	const int START_DELAY = 5000;
+
 	State state;
 	Phase phase;
 
@@ -103,6 +107,8 @@ private:
 	VirtualTimer* timerSpecial_;
 	VirtualTimer* waitTimer_;
 	VirtualTimer* timerCd_;
+
+	VirtualTimer* startTimer_;
 
 	bool attacking_;
 	bool waiting_;
