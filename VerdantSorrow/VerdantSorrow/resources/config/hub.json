@@ -115,6 +115,10 @@
     {
       "id": "letterE",
       "file": "resources/images/letterE.png"
+    },
+    {
+      "id": "CajaDialogo",
+      "file": "resources/images/CajaDialogo.png"
     }
   ],
 

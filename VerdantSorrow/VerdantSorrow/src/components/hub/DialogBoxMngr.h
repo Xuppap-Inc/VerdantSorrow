@@ -39,6 +39,8 @@ public:
 
 protected:
 
+	Texture* cajaDialogo;
+
 	//posicion del dialog box
 	Transform* tr_;
 

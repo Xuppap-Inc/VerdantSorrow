@@ -38,9 +38,7 @@ void DialogBoxMngr::update()
 	}
 
 	else if (!finished_ && (quickText_ || vt_->currTime() > letterTimer_)) {
-
 		addLetter();
-
 		vt_->reset();
 	}
 }
@@ -60,7 +58,7 @@ void DialogBoxMngr::render()
 	rect.y *= sH;
 	rect.h *= sH;
 
-	SDL_RenderFillRect(sdlutils().renderer(), &rect);
+	//SDL_RenderFillRect(sdlutils().renderer(), &rect);
 
 	//render text
 	for (int i = 0; i < lines_.size(); i++) {
