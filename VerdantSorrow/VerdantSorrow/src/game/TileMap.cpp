@@ -189,6 +189,4 @@ void TileMap::dialogBoxGenerator(ecs::Entity* dialogBox)
 	tr->init(Vector2D((sdlutils().width() - 600) / 2, (sdlutils().height() - 200)), Vector2D(), 600, 150, 0.0f, false);
 	dialogBox->addComponent<DialogBoxMngr>("PTMONO24");
 	dialogBox->addToGroup(ecs::_UI_GRP);
-
-	dialogBox->addComponent<Image>(&sdlutils().imagesHub().at("CajaDialogo"));
 }

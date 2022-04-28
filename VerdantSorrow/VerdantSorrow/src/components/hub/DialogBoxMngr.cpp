@@ -17,7 +17,7 @@ using namespace std;
 
 DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), letterWidth_(14), letterHeight_(28),
 												lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false), quickText_(false), finished_(false), lineNumber_(0)
-												,skip_(false)
+												,skip_(false), cajaDialogo(&sdlutils().imagesHub().at("CajaDialogo"))
 {
 }
 
@@ -31,7 +31,6 @@ void DialogBoxMngr::initComponent()
 
 void DialogBoxMngr::update()
 {
-
 	if (skip_) {
 		while (!finished_)
 			addLetter();
@@ -60,10 +59,17 @@ void DialogBoxMngr::render()
 
 	//SDL_RenderFillRect(sdlutils().renderer(), &rect);
 
+	int w = 1000;
+	int h = 300;
+	SDL_Rect dialogoRect = build_sdlrect(tr_->getPos().getX() - w/5, tr_->getPos().getY() - h/2, w, h);
+
+	cajaDialogo->render(dialogoRect); // 50 grosor
+
 	//render text
 	for (int i = 0; i < lines_.size(); i++) {
-		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0x444444ff));
-		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_ + lineOffsetY_) * i), text.width(), text.height());
+		//Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0x444444ff));
+		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0xffffffff));
+		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_ + lineOffsetY_) * i) - 70, text.width(), text.height());
 
 		//escalado pantalla
 		dest.x *= sW;
@@ -132,5 +138,4 @@ void DialogBoxMngr::addLetter()
 		dialog_.erase(0, 1);
 		lastChar_ = lines_[lineNumber_].back();
 	}
-
 }

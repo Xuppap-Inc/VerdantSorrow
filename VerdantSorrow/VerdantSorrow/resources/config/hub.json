@@ -131,37 +131,9 @@
   ],
 
 
-  "Npcs" : [
-    { "id" : "Chema_Npc", 
-    "file" : "resources/images/Npcs/Chema_Npc.png" },
 
-    { "id" : "Daniel_Npc",
-    "file" : "resources/images/Npcs/Daniel_Npc.png" },
-
-    { "id" : "Javier_Npc",
-    "file" : "resources/images/Npcs/Javier_Npc.png" },
-
-    { "id" : "Laura_Npc",
-    "file" : "resources/images/Npcs/Laura_Npc.png" },
-
-    { "id" : "Miriam_Npc",
-    "file" : "resources/images/Npcs/Miriam_Npc.png" },
-
-    { "id" : "Nacho_Npc",
-    "file" : "resources/images/Npcs/Nacho_Npc.png" },
-
-    { "id" : "Paula_Npc",
-    "file" : "resources/images/Npcs/ComboBox.png" },
-
-    { "id" : "Rodrigo_Npc",
-    "file" : "resources/images/Npcs/Rodrigo_Npc.png" },
-
-    { "id" : "Sergio_Npc",
-    "file" : "resources/images/Npcs/Sergio_Npc.png" }
-  ],
-
+  
   "dialogs": [
-
     {
       "id": "npc1_dialogue1",
       "file": "The guardians lost their mind when the   wave of magic arrived, it had strongly   impacts on them. I remember when they    fell off screaming out loud things       completely meaningless, and then...then.. changed, they...now...no...they are...   other...thing."
@@ -186,7 +158,6 @@
     {
       "id": "npc2_dialogue2",
       "file": "That thick and ugly and unpleasant frog  scared me, and as well she made that     everything was full of  flies  that came to my food."
-
     },
     {
       "id": "npc2_dialogue3",
@@ -196,7 +167,6 @@
       "id": "npc2_dialogue4",
       "file": "The ground doesn't tremble anymore, so... you ended with that nasty monster! His   hands were enormous and they made PLOM    PLOM PLOM how did you do it?"
     },
-
     {
       "id": "npc3_dialogue1",
       "file": "I was an historian at the capital before the magic disappeared, before the start  of the wars for power and for control.   Before those viles mages lost their mind and before they started to kill the      remnant of the world. People think magic died because they used her in a wrong    way. Arlen knows the truth, ask her, you will find her next to the large door."
@@ -332,5 +302,34 @@
       "id": "npc10_dialogue4",
       "file": "Once again, the immortal kiddo over here. Once more unharmed and fresh as a lettuce none would say that you have possibly    killed three of the most rare and        powerful creatures in the world, at least the ones we know and despite that fact... You feel nothing, there is nothing inside you that feels happiness, or remorse, or sadness, nothing... You are pure magic,  that is crystal clear, but you have not  just one feeling and I feel sorry for    you. Lots of people here are happy about your performance in this story, your     success and being the one who is bringing back the magic to the world... but I am   not one of them."
     }
+  ],
+
+  "Npcs" : [
+    { "id" : "Chema_Npc", 
+    "file" : "resources/images/Npcs/Chema_Npc.png" },
+
+    { "id" : "Daniel_Npc",
+    "file" : "resources/images/Npcs/Daniel_Npc.png" },
+
+    { "id" : "Javier_Npc",
+    "file" : "resources/images/Npcs/Javier_Npc.png" },
+
+    { "id" : "Laura_Npc",
+    "file" : "resources/images/Npcs/Laura_Npc.png" },
+
+    { "id" : "Miriam_Npc",
+    "file" : "resources/images/Npcs/Miriam_Npc.png" },
+
+    { "id" : "Nacho_Npc",
+    "file" : "resources/images/Npcs/Nacho_Npc.png" },
+
+    { "id" : "Paula_Npc",
+    "file" : "resources/images/Npcs/ComboBox.png" },
+
+    { "id" : "Rodrigo_Npc",
+    "file" : "resources/images/Npcs/Rodrigo_Npc.png" },
+
+    { "id" : "Sergio_Npc",
+    "file" : "resources/images/Npcs/Sergio_Npc.png" }
   ]
 }

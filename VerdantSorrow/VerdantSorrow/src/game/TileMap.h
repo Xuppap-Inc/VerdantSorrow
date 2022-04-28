@@ -26,7 +26,6 @@ class TileMap
 public:
 	TileMap(ecs::Manager* mngr,string tileMapPath, CollisionManager*col);
 	~TileMap();
-	
 
 private:
 
