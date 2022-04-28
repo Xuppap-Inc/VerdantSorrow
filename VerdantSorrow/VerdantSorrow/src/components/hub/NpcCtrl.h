@@ -31,6 +31,7 @@ protected:
 	std::string dialog_;
 	Image* letterE;
 
-	SDL_GameControllerButton controllerButton;
+	SDL_GameControllerButton x_Button;
+	SDL_GameControllerButton a_Button;
 };
 

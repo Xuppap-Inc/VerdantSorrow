@@ -125,7 +125,6 @@ void PlayerHubControl::handleInput()
 	else
 		anim_->flipX(false);
 
-
 	if (moveDown_) {
 		anim_->changeanim(&sdlutils().imagesHub().at("walk_Kyna"), 3, 9, (1000 / 25) * 25, 25, "walk_Kyna");
 	}
