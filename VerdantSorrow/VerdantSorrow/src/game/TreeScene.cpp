@@ -56,8 +56,8 @@ void TreeScene::init()
 void TreeScene::update()
 {
 	auto health = player->getComponent<PlayerAttributes>()->getLives();
-	auto bossHealth = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>()->getLife();
-	if (health > 0 && bossHealth > 0) {
+	auto bossHealth = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
+	if (health > 0 && !bossHealth->isDefeated()) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -71,7 +71,7 @@ void TreeScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeTreeEssenceState(true);
-		if (bossHealth <= 0) {
+		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::TREEDEFEATED;
 		}
@@ -131,7 +131,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto lanternAtribs = lantern->addComponent<BossAtributos>(30);
+	auto lanternAtribs = lantern->addComponent<BossAtributos>(3);
 	auto lanternTr = lantern->addComponent<Transform>();
 	auto lanternX = x;
 	auto lanternY = y;

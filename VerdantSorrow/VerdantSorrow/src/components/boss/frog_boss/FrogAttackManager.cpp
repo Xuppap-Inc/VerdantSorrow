@@ -71,13 +71,6 @@ void FrogAttackManager::initComponent()
 void FrogAttackManager::update()
 {
 	if (!deadBoss_) checkIfDead();
-	else {
-	
-		if (deathTimer_->currTime() >= DEATH_DELAY) {
-		
-			attr_->setDefeated(true);
-		}
-	}
 
 	checkJumpDirection();
 
@@ -294,6 +287,12 @@ void FrogAttackManager::checkFrogState()
 			startTimer_->pause();
 		}
 		break;
+	case DYING:
+		if (deathTimer_->currTime() >= DEATH_DELAY) {
+
+			attr_->setDefeated(true);
+		}
+		break;
 	default:
 		break;
 	}
@@ -303,7 +302,7 @@ void FrogAttackManager::checkIfDead()
 {
 	if (attr_->getLife() <= 0) {
 
-		frogState_ = DOING_ANIMATION;
+		frogState_ = DYING;
 		animNewState_ = ANIM_DEATH;
 
 		deadBoss_ = true;

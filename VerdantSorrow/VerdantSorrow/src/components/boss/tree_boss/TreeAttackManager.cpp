@@ -63,6 +63,7 @@ void TreeAttackManager::initComponent()
 	waitTimer_ = mngr_->addTimer();
 
 	startTimer_ = mngr_->addTimer();
+	deathTimer_ = mngr_->addTimer();
 
 	//Musica
 	musicaFase2_ = &sdlutils().musics().at("musica_linterna_fase2");
@@ -105,14 +106,25 @@ void TreeAttackManager::update()
 
 	checkAnimState();
 
-	checkIfDead();
+	if (!deadBoss_) checkIfDead();
 }
 
 void TreeAttackManager::checkIfDead()
 {
-	if (deadBoss_) {
+	if (attribs_->getLife() <= 0) {
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
 		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
+
+		animNewState_ = ANIM_DEATH;
+		state = DYING;
+
+		deadBoss_ = true;
+		deathTimer_->reset();
+
+		auto col = ent_->getComponent<RectangleCollider>();
+		col->setActive(false);
+
+		rootAutoAim_->cancelAttack();
 	}
 }
 
@@ -232,6 +244,14 @@ void TreeAttackManager::checkState(float absDistance)
 		}
 	}
 
+	else if (state == DYING)
+	{
+		if (deathTimer_->currTime() >= DEATH_DELAY) {
+
+			attribs_->setDefeated(true);
+		}
+	}
+
 	else if (state == START_ANIM) {
 	
 		if (startTimer_->currTime() >= START_DELAY) {
@@ -299,6 +319,7 @@ void TreeAttackManager::checkAnimState()
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_cambio_fase"), 3, 6, (1000 / 30) * 14, 14, "arbol_capa_cambio_fase");
 			break;
 		case TreeAttackManager::ANIM_DEATH:
+			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("arbol_muerte"), 3, 6, (1000 / 30) * 16, 16, "arbol_muerte");
 			break;
 		default:

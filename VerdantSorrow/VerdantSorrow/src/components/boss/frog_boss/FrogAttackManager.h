@@ -32,7 +32,8 @@ public:
 		FLY_DIED,
 		SECOND_PHASE,
 		DOING_ANIMATION,
-		START_ANIMATION
+		START_ANIMATION,
+		DYING
 	};
 
 	FrogAttackManager(CollisionManager* collManager); 

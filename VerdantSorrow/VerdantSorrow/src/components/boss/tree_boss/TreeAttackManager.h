@@ -28,7 +28,8 @@ public:
 		MOVING_TO_CENTER,
 		CHANGING_PHASE,
 		DOING_ANIM,
-		START_ANIM
+		START_ANIM,
+		DYING
 	};
 	enum Phase {
 		PHASE1,
@@ -59,7 +60,7 @@ private:
 		ANIM_ROOTS,
 		ANIM_BACKGROUND,
 		ANIM_CHANGE_PHASE,
-		ANIM_DEATH,
+		ANIM_DEATH
 	};
 
 	AnimState animState_;
@@ -74,6 +75,8 @@ private:
 
 	//tiempo que espera al inicio del combate
 	const int START_DELAY = 5000;
+
+	const int DEATH_DELAY = 2000;
 
 	State state;
 	Phase phase;
@@ -109,6 +112,7 @@ private:
 	VirtualTimer* timerCd_;
 
 	VirtualTimer* startTimer_;
+	VirtualTimer* deathTimer_;
 
 	bool attacking_;
 	bool waiting_;
