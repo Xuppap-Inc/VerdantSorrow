@@ -52,12 +52,11 @@ void FrogScene::init()
 void FrogScene::update()
 {
 	auto health = 0;
-	auto bossHealth = 0;
 	if (player != nullptr)
 		health = player->getComponent<PlayerAttributes>()->getLives();
-	if (Frog != nullptr)
-		bossHealth = Frog->getComponent<BossAtributos>()->getLife();
-	if (health > 0 && bossHealth > 0) {
+	auto bossHealth = Frog->getComponent<BossAtributos>();
+	
+	if (health > 0 && !bossHealth->isDefeated()) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -71,7 +70,7 @@ void FrogScene::update()
 	}
 	else {
 		if (health <= 0) sC().changeFrogEssenceState(true);
-		if (bossHealth <= 0) {
+		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FROGDEFEATED;
 		}

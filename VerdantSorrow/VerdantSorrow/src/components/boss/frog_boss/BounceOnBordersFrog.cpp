@@ -37,7 +37,6 @@ void BounceOnBordersFrog::onBottom()
 void BounceOnBordersFrog::onLeft()
 {
 	auto& pos = tr_->getPos();
-	attr_->setOnLeftBorder(true);
 
 	pos.set(Vector2D(0, pos.getY()));
 	auto& vel = tr_->getVel();
@@ -51,18 +50,11 @@ void BounceOnBordersFrog::onRight()
 
 	auto width = sdlutils().width();
 	auto bossWidth = tr_->getWidth();
-	attr_->setOnRightBorder(true);
 
 	pos.set(Vector2D(width - bossWidth, pos.getY()));
 	auto& vel = tr_->getVel();
 	vel.setX(-vel.getX());
 	sprite_->flipX(false);
-}
-
-void BounceOnBordersFrog::onNoLeftAndRight()
-{
-	if (attr_->isOnRightBorder()) attr_->setOnRightBorder(false);
-	if (attr_->isOnLeftBorder()) attr_->setOnLeftBorder(false);
 }
 
 void BounceOnBordersFrog::onNoTopAndBot()

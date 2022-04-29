@@ -52,7 +52,7 @@ void LanternSpawner::createLantern(int x,int y,bool quieta)
 	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto LanternAtribs = lantern->addComponent<BossAtributos>();
+	auto LanternAtribs = lantern->addComponent<BossAtributos>(1);
 	auto LanternTr = lantern->addComponent<Transform>();
 	auto LanternX = x;
 	auto LanternY = y;

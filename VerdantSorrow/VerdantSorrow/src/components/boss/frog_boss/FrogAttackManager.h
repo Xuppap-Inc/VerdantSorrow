@@ -50,6 +50,7 @@ private:
 
 	//tiempo que dura la animacion de inicio con la rana quieta
 	const int START_DELAY = 5000;
+	const int DEATH_DELAY = 2000;
 
 	enum AnimState {
 		ANIM_IDLE,
@@ -107,6 +108,7 @@ private:
 
 	VirtualTimer* vt_;
 	VirtualTimer* startTimer_;
+	VirtualTimer* deathTimer_;
 
 	bool deadBoss_;
 };

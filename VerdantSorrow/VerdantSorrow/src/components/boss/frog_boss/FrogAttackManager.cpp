@@ -21,7 +21,7 @@ FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(START_ANIMATION), attr_(),
 jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(3), delay_(0), musicaFase1_(), musicaFase2_(),
 flySpacing_(0), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
-animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false)
+animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false), deathTimer_(), startTimer_()
 {
 }
 
@@ -43,6 +43,7 @@ void FrogAttackManager::initComponent()
 
 	vt_ = mngr_->addTimer();
 	startTimer_ = mngr_->addTimer();
+	deathTimer_ = mngr_->addTimer();
 
 	//musica
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
@@ -70,6 +71,13 @@ void FrogAttackManager::initComponent()
 void FrogAttackManager::update()
 {
 	if (!deadBoss_) checkIfDead();
+	else {
+	
+		if (deathTimer_->currTime() >= DEATH_DELAY) {
+		
+			attr_->setDefeated(true);
+		}
+	}
 
 	checkJumpDirection();
 
@@ -78,11 +86,6 @@ void FrogAttackManager::update()
 	checkFrogState();
 	
 	checkAnimationState();
-
-	if (deadBoss_) {
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
-	}
 }
 
 // Si el estado de animacion ha cambiado, cambia la animacion actual a la correspondiente, creando eventos de animacion cuando sean necesarios
@@ -185,7 +188,6 @@ void FrogAttackManager::checkAnimationState()
 		case FrogAttackManager::ANIM_DEATH:
 			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("rana_enfadada_muerte"), 3, 6, (1000 / 30) * 16, 16, "rana_enfadada_muerte");
-			if (anim_->getFrameNum() == 14) anim_->select_sprite(4, 3);
 			break;
 		default:
 			break;
@@ -304,8 +306,14 @@ void FrogAttackManager::checkIfDead()
 		frogState_ = DOING_ANIMATION;
 		animNewState_ = ANIM_DEATH;
 
-		if (anim_->getFrameNum() == 16)
-			ent_->setAlive(false);
+		deadBoss_ = true;
+		deathTimer_->reset();
+
+		auto col = ent_->getComponent<RectangleCollider>();
+		col->setActive(false);
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
 	}
 }
 
@@ -431,7 +439,6 @@ void FrogAttackManager::nextAttack()
 		}
 		frogState_ = DOING_ANIMATION;
 
-		//tongueWaitTimer_.reset();
 		tongue_->setActive(true);
 	}
 	else {
