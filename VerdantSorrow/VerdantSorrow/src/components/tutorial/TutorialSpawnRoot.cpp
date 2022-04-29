@@ -42,7 +42,7 @@ void TutorialSpawnRoot::createRoot(int x)
 	//Se crea la raiz
 	auto Root = mngr_->addEntity();
 	//Se añaden los atributos del boss que están junto al transform
-	Root->addComponent<BossAtributos>();
+	Root->addComponent<BossAtributos>(1);
 	auto RootTr = Root->addComponent<Transform>();
 	auto RootX = x;
 	auto RootY = sdlutils().height();

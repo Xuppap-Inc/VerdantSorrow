@@ -118,30 +118,6 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addToGroup(ecs::_BOSS_GRP);
 }
 
-void TreeScene::rootGenerator(CollisionManager* colManager, float x) {
-
-	//Se crea la raiz
-	auto Root = mngr_->addEntity();
-	//Se añaden los atributos del boss que están junto al transform
-	auto RootAtribs = Root->addComponent<BossAtributos>();
-	auto RootTr = Root->addComponent<Transform>();
-	auto RootX = x;
-	auto RootY = sdlutils().height() + 200;
-	//Se le dan las posiciones iniciales, velocidad, ancho y alto a la raiz
-	RootTr->init(Vector2D(RootX, RootY), Vector2D(), 25, 1000, 0.0f);
-	//Se le añade un color inicial a la raiz
-	Root->addComponent<RectangleRenderer>(SDL_Color());
-
-	//Se añade un collider a la onda
-	auto RootCollider = Root->addComponent<RectangleCollider>(RootTr->getWidth(), RootTr->getHeight());
-	RootCollider->setIsTrigger(true);
-	//Se añade el collider al colliderGameManager
-	colManager->addCollider(RootCollider);
-	//Se añade el movimiento horizontal
-	Root->addComponent<RootMovement>();
-	Root->addToGroup(ecs::_BOSS_GRP);
-}
-
 void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, float x, float y)
 {
 	//distribucion random de intervalo variable en distintas llamadas

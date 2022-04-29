@@ -22,6 +22,8 @@ public :
 	void currentPos(bool fly);
 protected:
 
+	const int GROUND_HEIGHT = 100;
+
 	void setCollider(Vector2D pos, float w,float h); //crea el collider en la posicion que quiere
 	CollisionManager* colMan_;
 	float delay_;

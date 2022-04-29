@@ -6,12 +6,10 @@ private:
 	int life_;
 	int maxHp_;
 	bool onGround_;
-	bool onRightBorder_;
-	bool onLeftBorder_;
+	bool defeated_;
 public:
 	__CMPID_DECL__(ecs::_BOSS_ATTRIBUTES)
-	BossAtributos() : life_(), maxHp_(), onGround_(false), onRightBorder_(false), onLeftBorder_(false) {};
-	BossAtributos(int vida) : life_(vida), maxHp_(vida), onGround_(false), onRightBorder_(false), onLeftBorder_(false)	{};
+	BossAtributos(int vida) : life_(vida), maxHp_(vida), onGround_(false), defeated_(false) {};
 
 	float getLife() {
 		return life_;
@@ -31,24 +29,16 @@ public:
 		onGround_ = set;
 	}
 
-	bool isOnRightBorder() {
-		return onRightBorder_;
-	}
-
-	void setOnRightBorder(bool set){
-		onRightBorder_ = set;
-	}
-
-	bool isOnLeftBorder() {
-		return onLeftBorder_;
-	}
-
-	void setOnLeftBorder(bool set) {
-		onLeftBorder_ = set;
-	}
-
 	float getMaxHp() {
 		return maxHp_;
+	}
+
+	void setDefeated(bool set) {
+		defeated_ = set;
+	};
+
+	bool isDefeated() {
+		return defeated_;
 	}
 };
 

@@ -16,7 +16,6 @@ public:
     void onBottom() override;
     void onLeft() override;
     void onRight() override;
-    void onNoLeftAndRight() override;
     void onNoTopAndBot() override;
 
 protected:
