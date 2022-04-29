@@ -4,10 +4,10 @@
  <tile id="0">
   <image width="500" height="450" source="../assets/arbol_abierta.png"/>
  </tile>
- <tile id="1">
-  <image width="500" height="518" source="../assets/RanAbierta.png"/>
- </tile>
  <tile id="3">
   <image width="400" height="400" source="../assets/entradaNOabiertaOjo.png"/>
+ </tile>
+ <tile id="4">
+  <image width="500" height="518" source="../assets/RanAbierta.png"/>
  </tile>
 </tileset>

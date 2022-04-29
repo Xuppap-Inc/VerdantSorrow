@@ -8,6 +8,7 @@
 #include "../components/hub/DialogBoxMngr.h"
 #include "../components/hub/PlatformAtribsForHub.h"
 #include "../game/Game.h"
+#include "../components/hub/HubAreas.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col) :col_(col), dialogBox_(nullptr)
 {
@@ -114,7 +115,7 @@ void TileMap::createObjects()
 				}
 				string name = objects->getName();
 
-				if (name == "colliders" || name == "entradasbosses" || name == "npc") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc"||name=="areas") {
 
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
@@ -157,6 +158,20 @@ void TileMap::createObjects()
 
 						if (i < properties.size())
 							ent->addComponent<PlatformAtribsForHub>(properties[0].getStringValue());
+					}
+					else if (name == "areas") {
+						col->setIsTrigger(true);
+						
+
+						vector<tmx::Property> properties = object.getProperties();
+
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "area")i++;
+
+						if (i < properties.size())						
+						ent->addComponent<HubAreas>(col_,properties[0].getStringValue());
+
+						ent->addToGroup(ecs::_UI_GRP);
 					}
 
 				}

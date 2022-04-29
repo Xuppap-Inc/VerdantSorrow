@@ -142,6 +142,7 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 	//Se le a�ade el transform
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = sdlutils().width() / 2 ;
+	cout << sdlutils().width() / 2 << endl;
 	auto playerY = sdlutils().height() / 2 ;
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(),70, 150, 0.0f, 0.25f, false);
 	auto s=player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
@@ -169,7 +170,8 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 	playerLife_->addToGroup(ecs::_UI_GRP);
 
 
-	player_->addToGroup(ecs::_PLAYER_GRP);
+
+	player_->addToGroup(ecs::_HUB_DECORATION_GRP);
 }
 
 void Hub::createLights() {

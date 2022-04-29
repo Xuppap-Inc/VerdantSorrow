@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\hub\HubAreas.h" />
     <ClInclude Include="src\components\CameraShake.h" />
     <ClInclude Include="src\components\boss\nivelHuida\FlySpawnerPlant.h" />
     <ClInclude Include="src\components\boss\frog_boss\BounceOnBordersFrog.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\hub\HubAreas.cpp" />
     <ClCompile Include="src\components\CameraShake.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\FlySpawnerPlant.cpp" />
     <ClCompile Include="src\components\boss\frog_boss\BounceOnBordersFrog.cpp" />
