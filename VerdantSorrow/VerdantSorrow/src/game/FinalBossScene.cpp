@@ -28,6 +28,8 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
 #include "Game.h"
+#include <iostream>
+#include <fstream>
 
 
 void FinalBossScene::init()
@@ -82,6 +84,14 @@ void FinalBossScene::update()
 		if (bossHealth <= 0) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FINALDEFEATED;
+
+			ofstream myfile("resources/config/guardado.txt");
+			if (myfile.is_open())
+			{
+				myfile << Game::State::FINALDEFEATED;
+				myfile.close();
+			}
+			else cout << "No se puede abrir el guardado.txt";
 		}
 		setAble(false);
 		sC().decideScene();

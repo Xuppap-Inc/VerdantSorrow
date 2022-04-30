@@ -27,6 +27,8 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
 #include "Game.h"
+#include <iostream>
+#include <fstream>
 
 
 void FrogScene::init()
@@ -47,6 +49,7 @@ void FrogScene::init()
 	frogGenerator(colManager, player);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
+	
 }
 
 void FrogScene::update()
@@ -73,6 +76,14 @@ void FrogScene::update()
 		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FROGDEFEATED;
+
+			ofstream myfile("resources/config/guardado.txt");
+			if (myfile.is_open())
+			{
+				myfile << Game::State::FROGDEFEATED;
+				myfile.close();
+			}
+			else cout << "No se puede abrir el guardado.txt";
 		}
 
 

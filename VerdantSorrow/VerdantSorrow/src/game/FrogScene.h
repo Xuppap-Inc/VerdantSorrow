@@ -24,5 +24,6 @@ private:
 	Entity* player;
 	Entity* Frog;
 	CollisionChecker* colCheck_;
+
 };
 

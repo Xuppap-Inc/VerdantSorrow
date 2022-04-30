@@ -11,6 +11,8 @@
 #include "ControlsScene.h"
 #include "Game.h"
 #include "../components/fondos/ParticleSystem.h"
+#include <iostream>
+#include <fstream>
 
 MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),
 					   buttonsActive_(false), background_(), background1_(), background2_()
@@ -100,6 +102,25 @@ void MenuScene::onButtonClicked(int index)
 	/De la misma manera si se añade un nuevo boton habría que añadir el caso correspondiente*/
 	changeSc_ = true;
 	isChangingScene(changeSc_);
+	if(index==1) //No te permite leer un archivo dentro de un switch asi que hay que hacer esto
+	{
+		ifstream myfile("resources/config/guardado.txt");
+		string state;
+		if (myfile.is_open())
+		{
+			
+			getline(myfile, state);
+			myfile.close();
+		}
+		
+		//Queremos que lea el txt y asigne el estado correspondiente a game
+		int val= stoi(state);
+		Game::instance()->state_=static_cast<Game::State>(val); //Castea de un int a su valor correspondiente en el enum
+
+		sC().changeScene(SceneManager::Hub_);
+
+	}
+	else
 	switch (index)
 	{
 	case 0: //Boton new game
@@ -107,13 +128,9 @@ void MenuScene::onButtonClicked(int index)
 		sC().changeScene(SceneManager::Hub_);
 		
 		break;
-	case 1: //Boton continue
-
-
-		break;
 	case 2: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
-		break;
+		break; 
 	case 3: //Boton quit
 		Game::instance()->setExit(true);
 		break;
@@ -121,7 +138,8 @@ void MenuScene::onButtonClicked(int index)
 		break;
 
 	}
-
+	
+	
 }
 
 void MenuScene::generateAllButtons()

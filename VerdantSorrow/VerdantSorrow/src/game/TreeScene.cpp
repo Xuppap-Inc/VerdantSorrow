@@ -32,6 +32,8 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/fondos/Light.h"
 #include "Game.h"
+#include <iostream>
+#include <fstream>
 
 
 void TreeScene::init()
@@ -74,6 +76,14 @@ void TreeScene::update()
 		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::TREEDEFEATED;
+
+			ofstream myfile("resources/config/guardado.txt");
+			if (myfile.is_open())
+			{
+				myfile << Game::State::TREEDEFEATED;
+				myfile.close();
+			}
+			else cout << "Unable to open file";
 		}
 
 			
