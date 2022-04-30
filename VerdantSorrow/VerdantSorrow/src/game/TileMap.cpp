@@ -148,7 +148,7 @@ void TileMap::createObjects()
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 					}
 					else if (name == "entradasbosses") {
-						col->setIsTrigger(true);
+						//col->setIsTrigger(true);
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 
 						vector<tmx::Property> properties = object.getProperties();

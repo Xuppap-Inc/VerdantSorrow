@@ -130,6 +130,7 @@
     <ClCompile Include="src\components\fondos\Disolve.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Spikes.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\Mushroom.cpp" />
+    <ClCompile Include="src\components\hub\PlatformAtribsForHub.cpp" />
     <ClCompile Include="src\game\BaseMenu.cpp" />
     <ClCompile Include="src\game\EscapeScene.cpp" />
     <ClCompile Include="src\game\Fondos\Parallax.cpp" />
