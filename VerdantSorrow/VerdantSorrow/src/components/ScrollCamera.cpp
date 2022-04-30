@@ -44,23 +44,23 @@ void ScrollCamera::calculateDirection()
 	auto playerPos = player_->getPos();
 	auto diff = playerPos - actPos;
 
-	if (!lockX_) {
-		if (pos.getX() < limitLeft_ || pos.getX() + sdlutils().width() > limitRight_) {
-			scrollX_ = false;
-			vel.setX(0);
-			pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
-		}
-		else scrollX_ = true;
+	
+	if (pos.getX() < limitLeft_ || pos.getX() + sdlutils().width() > limitRight_) {
+		scrollX_ = false;
+		vel.setX(0);
+		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
 	}
+	else if(!lockX_) scrollX_ = true;
+	
 
-	if (!lockY_) {
-		if (pos.getY() < limitTop_ || pos.getY() + sdlutils().height() > limitBot_) {
-			scrollY_ = false;
-			vel.setY(0);
-			pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_ - sdlutils().height());
-		}
-		else scrollY_ = true;
+	
+	if (pos.getY() < limitTop_ || pos.getY() + sdlutils().height() > limitBot_) {
+		scrollY_ = false;
+		vel.setY(0);
+		pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_ - sdlutils().height());
 	}
+	else if (!lockY_) scrollY_ = true;
+	
 	
 
 
