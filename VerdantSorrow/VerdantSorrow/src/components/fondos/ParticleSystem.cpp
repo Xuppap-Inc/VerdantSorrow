@@ -15,7 +15,8 @@ ParticleSystem::ParticleSystem(Texture* tex, ecs::Manager* mngr):tex_(tex),mngr_
 void ParticleSystem::disolveParticles()
 {
 	for (int i = 0; i < parts.size(); i++) {
-		parts[i]->addComponent<Disolve>(sdlutils().rand().nextInt(100, 1000));
+		parts[i]->addComponent<Disolve>(5000);
+		parts[i]->getComponent<Image>()->fadeOut();
 	}
 }
 void ParticleSystem::targetParticles(Transform* target)
@@ -41,6 +42,41 @@ void ParticleSystem::createParticlesAsh(int numpart)
 		imag->setColor(sdlutils().rand().nextInt(100, 200), sdlutils().rand().nextInt(100, 200), sdlutils().rand().nextInt(100, 200));
 		particle->addComponent<ShowAtOpposideSide>();
 		particle->addToGroup(ecs::_PARTICLES_BACKGROUND_2);
+	}
+}
+
+void ParticleSystem::createParticlesMenu(int numpart)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+		parts.push_back(particle);
+	
+		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
+		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
+		auto width= sdlutils().rand().nextInt(30, 90);
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-300, 300)) / 100), ((double)(sdlutils().rand().nextInt(-600, -100)) / 100));
+		particle->addComponent<Transform>(Vector2D(posx, posy), vel, width, width, 0.0f);
+		Image *imag=particle->addComponent<Image>(tex_);
+		imag->setAlpha(255);
+		particle->addComponent<ShowAtOpposideSide>();
+		particle->addToGroup(ecs::_PARTICLES_GRP);
+	}
+}
+void ParticleSystem::createParticlesMenu2(int numpart)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+		parts.push_back(particle);
+	
+		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
+		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
+		auto width= sdlutils().rand().nextInt(40, 140);
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-100, 100)) / 100), ((double)(sdlutils().rand().nextInt(-100, -50)) / 100));
+		particle->addComponent<Transform>(Vector2D(posx, posy), vel, width, width, 0.0f);
+		Image *imag=particle->addComponent<Image>(tex_);
+		imag->setAlpha(100);
+		particle->addComponent<ShowAtOpposideSide>();
+		particle->addToGroup(ecs::_PARTICLES_BACKGROUND_1);
 	}
 }
 

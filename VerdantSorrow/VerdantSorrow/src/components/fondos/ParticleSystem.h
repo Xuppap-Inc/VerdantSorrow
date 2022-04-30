@@ -17,6 +17,10 @@ public:
 
 	void createParticlesAsh(int numpart);
 
+	void createParticlesMenu(int numpart);
+
+	void createParticlesMenu2(int numpart);
+
 	void createParticlesDandellion(int numpart);
 
 	void createOverlayParticlesDandellion(int numpart);

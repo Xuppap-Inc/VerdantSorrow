@@ -99,7 +99,11 @@ public:
 	}
 
 	inline void setAlpha(Uint8 alpha) {
-		SDL_SetTextureAlphaMod(texture_, alpha);
+		SDL_SetTextureAlphaMod(texture_, alpha);	
+	}
+
+	inline void setBlendMode(SDL_BlendMode blending) {
+		SDL_SetTextureBlendMode(texture_, blending);
 	}
 
 	inline void setColor(Uint8 r, Uint8 g, Uint8 b) {

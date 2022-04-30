@@ -32,6 +32,11 @@ void Image::setAlpha(int num)
 	tex_->setAlpha(alpha_);
 }
 
+void Image::setBlendMode(SDL_BlendMode blending)
+{
+	tex_->setBlendMode(blending);
+}
+
 void Image::initComponent() {
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -101,8 +106,23 @@ void Image::update() {
 	getTexture()->setColor(red_, green_, blue_);
 
 	if (isFadingIn_) {
-		alpha_++;
-		setAlpha(alpha_);
+		if (alpha_ >= 255) {
+			alpha_ = 255;
+			isFadingIn_ = false;
+		}
+		else {
+			alpha_++;
+			setAlpha(alpha_);
+		}
 	}
-	getTexture()->setAlpha(alpha_);
+	if (isFadingOut_) {
+		if (alpha_ <= 0) {
+			alpha_ = 0;
+			isFadingOut_ = false;
+		}
+		else {
+			alpha_--;
+			setAlpha(alpha_);
+		}
+	}
 }

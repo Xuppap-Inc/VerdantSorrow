@@ -27,6 +27,7 @@ public:
 		return tex_;
 	}
 	void setAlpha(int num);
+	void setBlendMode(SDL_BlendMode blending);
 
 	void initComponent() override;
 	void render() override;

@@ -28,7 +28,6 @@ void Disolve::update() {
 			fading_ = true;
 		}
 
-		//no se si esta linea es lo mismo que el alpha, asi que te lo dejo aqui
 		if (timer_->currTime() - startFadingTime_ > 100) {
 			ent_->setAlive(false);
 		}

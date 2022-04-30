@@ -43,6 +43,10 @@
       "file": "resources/images/MenuPrincipal/menuFondo.png"
     },
     {
+      "id": "menuFondoLogo",
+      "file": "resources/images/MenuPrincipal/menuFondoLogo.png"
+    },
+    {
       "id": "menuFondo1",
       "file": "resources/images/MenuPrincipal/menuFondo1.png"
     },
@@ -53,6 +57,10 @@
     {
       "id": "particula_menu",
       "file": "resources/images/MenuPrincipal/particula_menu.png"
+    },
+    {
+      "id": "particula_menu2",
+      "file": "resources/images/MenuPrincipal/particula_menu2.png"
     },
     {
       "id": "new_Game",

@@ -26,6 +26,7 @@ void BaseMenu::createButton(float x, float y, float w, float h, std::string butt
 	auto newButton = mngr_->addEntity();
 	auto tr = newButton->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
 	newButton->addComponent<Image>(&sdlutils().imagesHub().at(buttImg));
+	newButton->addToGroup(ecs::_PARTICLES_GRP);
 	buttPos.push_back(tr);
 	buttProps.push_back(newButton);
 }

@@ -4,6 +4,7 @@
 #include "BaseMenu.h"
 
 class Image;
+class ParticleSystem;
 class MenuScene : public BaseMenu
 {
 private:
@@ -24,6 +25,9 @@ private:
 
 	Image* background1Img_;
 	Image* background2Img_;
+
+	ParticleSystem* particlesys_;
+	ParticleSystem* particlesys2_;
 public:
 	MenuScene();
 	~MenuScene() {};
