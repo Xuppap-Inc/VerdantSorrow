@@ -57,6 +57,9 @@ void MenuScene::update()
 			background1Img_->fadeOut();
 			generateAllButtons();
 			buttonsActive_ = true;
+
+			SoundEffect* s = &sdlutils().soundEffectsHub().at("sfx_iniciar_menu");
+			s->play();
 		}
 	}
 	if (!changeSc_) {

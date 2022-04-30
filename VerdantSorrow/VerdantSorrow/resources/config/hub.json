@@ -25,7 +25,6 @@
     {
       "id": "menu",
       "file": "resources/images/MenuPausa/menuButton.png"
-
     },
     {
       "id": "volume",
@@ -138,7 +137,8 @@
   ],
   
   "sounds_hub" : [
-    { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" }
+    { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" },
+    { "id" : "sfx_iniciar_menu", "file" : "resources/sound/sfx_iniciar_menu.wav" }
   ],
 
     "Npcs" : [

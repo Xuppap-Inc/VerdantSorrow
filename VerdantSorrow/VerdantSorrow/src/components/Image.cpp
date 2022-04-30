@@ -104,4 +104,5 @@ void Image::update() {
 		alpha_++;
 		setAlpha(alpha_);
 	}
+	getTexture()->setAlpha(alpha_);
 }
