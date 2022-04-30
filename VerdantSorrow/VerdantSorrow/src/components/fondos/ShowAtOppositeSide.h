@@ -13,11 +13,12 @@ public:
 
 	__CMPID_DECL__(ecs::_SHOWATOPPOSIDESIDE)
 
-		ShowAtOpposideSide();
+		ShowAtOpposideSide(bool camera = false);
 	virtual ~ShowAtOpposideSide();
 	void initComponent() override;
 	void update() override;
 private:
 	Transform* tr_;
+	ecs::Entity* camera;
 };
 

@@ -62,6 +62,23 @@ void ParticleSystem::createParticlesMenu(int numpart)
 		particle->addToGroup(ecs::_PARTICLES_UI);
 	}
 }
+void ParticleSystem::createParticlesHub(int numpart)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+		parts.push_back(particle);
+
+		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
+		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
+		auto width = sdlutils().rand().nextInt(30, 90);
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-300, 300)) / 100), ((double)(sdlutils().rand().nextInt(-600, -100)) / 100));
+		particle->addComponent<Transform>(Vector2D(posx, posy), vel, width, width, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(255);
+		particle->addComponent<ShowAtOpposideSide>();
+		particle->addToGroup(ecs::_PARTICLES_UI);
+	}
+}
 void ParticleSystem::createParticlesMenu2(int numpart)
 {
 	for (int i = 0; i < numpart; i++) {

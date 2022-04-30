@@ -19,6 +19,8 @@ public:
 
 	void createParticlesMenu(int numpart);
 
+	void createParticlesHub(int numpart);
+
 	void createParticlesMenu2(int numpart);
 
 	void createParticlesDandellion(int numpart);

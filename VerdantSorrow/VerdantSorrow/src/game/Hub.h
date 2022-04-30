@@ -28,4 +28,5 @@ private:
 	Entity* player_;
 	Music* musica_;
 	TileMap* tileMap_;
+
 };
