@@ -50,7 +50,7 @@ void ScrollCamera::calculateDirection()
 		vel.setX(0);
 		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
 	}
-	else if(!lockX_) scrollX_ = true;
+	else if (!lockX_) scrollX_ = true;
 	
 
 	

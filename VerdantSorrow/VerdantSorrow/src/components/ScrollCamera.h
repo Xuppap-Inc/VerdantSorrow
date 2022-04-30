@@ -24,8 +24,8 @@ public:
 	void lock(bool x, bool y) {
 		lockX_ = x;
 		lockY_ = y;
-		scrollX_ = lockX_;
-		scrollY_ = lockY_;
+		scrollX_ = !lockX_;
+		scrollY_ = !lockY_;
 	}
 	void setLimitToDimensions(float x, float y, float w, float h) {
 		limitLeft_ = x;
