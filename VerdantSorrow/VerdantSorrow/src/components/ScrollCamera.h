@@ -20,6 +20,13 @@ public:
 	void setScrollY(bool y) {
 		scrollY_ = y;
 	};
+
+	void lock(bool x, bool y) {
+		lockX_ = x;
+		lockY_ = y;
+		scrollX_ = lockX_;
+		scrollY_ = lockY_;
+	}
 	void setLimitToDimensions(float x, float y, float w, float h) {
 		limitLeft_ = x;
 		limitTop_ = y;
@@ -40,5 +47,6 @@ protected:
 	float deadzoneX_, deadzoneY_;
 	bool scrollX_, scrollY_;
 	float limitRight_, limitLeft_, limitTop_, limitBot_;
+	bool lockX_, lockY_;
 };
 

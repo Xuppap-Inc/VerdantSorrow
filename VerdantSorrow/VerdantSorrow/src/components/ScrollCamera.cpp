@@ -7,15 +7,15 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 
-ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_(),scrollX_(true), scrollY_(true),
-		limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN)
+ScrollCamera::ScrollCamera() : tr_(nullptr), player_(nullptr), cameraSpeed_(0), deadzoneX_(), deadzoneY_(), scrollX_(true), scrollY_(true),
+limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN), lockX_(false), lockY_(false)
 {
 	
 }
 
 ScrollCamera::ScrollCamera( float cameraSpeed, float deadzoneX, float deadzoneY) : 
 	tr_(nullptr), player_(nullptr),  cameraSpeed_(cameraSpeed), deadzoneX_(deadzoneX), deadzoneY_(deadzoneY), scrollX_(true), scrollY_(true),
-	limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN)
+	limitRight_(INT_MAX), limitLeft_(INT_MIN), limitBot_(INT_MAX), limitTop_(INT_MIN), lockX_(false), lockY_(false)
 {
 
 }
@@ -44,19 +44,23 @@ void ScrollCamera::calculateDirection()
 	auto playerPos = player_->getPos();
 	auto diff = playerPos - actPos;
 
-	/*if (pos.getX() < limitLeft_ || pos.getX() + sdlutils().width() > limitRight_) {
-		scrollX_ = false;
-		vel.setX(0);
-		pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
+	if (!lockX_) {
+		if (pos.getX() < limitLeft_ || pos.getX() + sdlutils().width() > limitRight_) {
+			scrollX_ = false;
+			vel.setX(0);
+			pos.setX(pos.getX() <= limitLeft_ ? limitLeft_ : limitRight_ - sdlutils().width());
+		}
+		else scrollX_ = true;
 	}
-	else scrollX_ = true;
 
-	if (pos.getY() < limitTop_ || pos.getY() + sdlutils().height() > limitBot_) {
-		scrollY_ = false;
-		vel.setY(0);
-		pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_ - sdlutils().height());
+	if (!lockY_) {
+		if (pos.getY() < limitTop_ || pos.getY() + sdlutils().height() > limitBot_) {
+			scrollY_ = false;
+			vel.setY(0);
+			pos.setY(pos.getY() <= limitTop_ ? limitTop_ : limitBot_ - sdlutils().height());
+		}
+		else scrollY_ = true;
 	}
-	else scrollY_ = true;*/
 	
 
 
