@@ -3,6 +3,7 @@
 #include <vector>
 #include "BaseMenu.h"
 
+class Image;
 class MenuScene : public BaseMenu
 {
 private:
@@ -14,6 +15,15 @@ private:
 	int controllerIndex_;
 	float delay_; //Delay del mando
 	float lastUpdate_;
+
+	bool buttonsActive_;
+
+	ecs::Entity* background_;
+	ecs::Entity* background1_;
+	ecs::Entity* background2_;
+
+	Image* background1Img_;
+	Image* background2Img_;
 public:
 	MenuScene();
 	~MenuScene() {};
@@ -24,6 +34,6 @@ public:
 	void init() override;
 	//void selectButton(int index);
 	//void deselectButton(int index);
-	//void background();
+	void background();
 };
 

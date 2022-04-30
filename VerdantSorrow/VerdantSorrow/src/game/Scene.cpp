@@ -98,7 +98,7 @@ void Scene::background(std::string backgroundName, int height)
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
-	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
+	suelo->addToGroup(ecs::_BACKGROUND_2_GRP);
 }
 
 void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)

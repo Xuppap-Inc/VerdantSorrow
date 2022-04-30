@@ -11,7 +11,8 @@
 #include "ControlsScene.h"
 #include "Game.h"
 
-MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0)
+MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),
+					   buttonsActive_(false), background_(), background1_(), background2_()
 {
 
 }
@@ -21,27 +22,50 @@ void MenuScene::init()
 	changeSc_ = false;
 	Scene::init();
 	isChangingScene(changeSc_);
-	//background();//Dibuja el fondo
-
-	generateAllButtons(); //Genera todos los botones del menu (para ordenar mejor el codigo)
+	background();//Dibuja el fondo
 
 }
 
-//void MenuScene::background()
-//{
-//	Scene::background("fondoMenu");
-//}
+void MenuScene::background()
+{
+	background_ = mngr_->addEntity();
+	background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	background_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo"));
+	background_->addToGroup(ecs::_BACKGROUND_1_GRP);
+
+	background1_ = mngr_->addEntity();
+	background1_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	background1Img_ = background1_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo1"));
+	background1_->addToGroup(ecs::_BACKGROUND_1_GRP);
+
+	background2_ = mngr_->addEntity();
+	background2_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	background2Img_= background2_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo2"));
+	background2_->addToGroup(ecs::_BACKGROUND_1_GRP);
+}
 
 void MenuScene::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
+	if (buttonsActive_) {
+		handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
+	}
+	else
+	{
+		auto& ihdlr = ih();
+		if (ihdlr.isKeyDown(SDLK_SPACE)) {
+			background2Img_->setAlpha(0);
+			background1Img_->fadeOut();
+			generateAllButtons();
+			buttonsActive_ = true;
+		}
+	}
 	if (!changeSc_) {
-			mngr_->update();
-			mngr_->refresh();
-			sdlutils().clearRenderer();
-			mngr_->render();
-			mngr_->debug();
-			sdlutils().presentRenderer();	
+		mngr_->update();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
+		mngr_->debug();
+		sdlutils().presentRenderer();
 	}
 }
 
@@ -86,7 +110,7 @@ void MenuScene::generateAllButtons()
 	//Bucle que dibuja la primera columna (izq) de botones
 	for (int i = 0; i < rows; ++i)
 	{
-		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY),
+		createButton(sdlutils().width() / 2 - buttonW, sdlutils().height() / 2 - offsetY + (i * spacingY) + 100,
 			buttonW, buttonH, buttonNames_[i], buttonPositions_,buttonPoperties_);
 	}
 	int j = 0; //Variable para separar los botones en su posicion Y
@@ -95,7 +119,7 @@ void MenuScene::generateAllButtons()
 	for (int i = rows; i < buttonNames_.size(); ++i)
 	{
 
-		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY),
+		createButton(sdlutils().width() / 2 + spacingX, sdlutils().height() / 2 - offsetY + (j * spacingY) + 100,
 			buttonW, buttonH, buttonNames_[i],buttonPositions_, buttonPoperties_);
 		++j;
 	}

@@ -40,8 +40,20 @@
       "file": "resources/images/MenuPausa/leftVolume.png"
     },
     {
-      "id": "fondoMenu",
-      "file": "resources/images/MenuPrincipal/fondoMenu.png"
+      "id": "menuFondo",
+      "file": "resources/images/MenuPrincipal/menuFondo.png"
+    },
+    {
+      "id": "menuFondo1",
+      "file": "resources/images/MenuPrincipal/menuFondo1.png"
+    },
+    {
+      "id": "menuFondo2",
+      "file": "resources/images/MenuPrincipal/menuFondo2.png"
+    },
+    {
+      "id": "particula_menu",
+      "file": "resources/images/MenuPrincipal/particula_menu.png"
     },
     {
       "id": "new_Game",
@@ -58,7 +70,6 @@
     {
       "id": "settings",
       "file": "resources/images/MenuPrincipal/settingsButton.png"
-
     },
     {
       "id": "quit",
