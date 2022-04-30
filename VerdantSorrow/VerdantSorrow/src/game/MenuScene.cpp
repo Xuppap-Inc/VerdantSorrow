@@ -20,11 +20,12 @@ MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(25
 
 void MenuScene::init()
 {
+	buttonsActive_ = false;
 	changeSc_ = false;
 	Scene::init();
 	isChangingScene(changeSc_);
 	background();//Dibuja el fondo
-
+	
 }
 
 void MenuScene::background()
