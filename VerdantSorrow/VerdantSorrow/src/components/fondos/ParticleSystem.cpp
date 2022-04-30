@@ -59,7 +59,7 @@ void ParticleSystem::createParticlesMenu(int numpart)
 		Image *imag=particle->addComponent<Image>(tex_);
 		imag->setAlpha(255);
 		particle->addComponent<ShowAtOpposideSide>();
-		particle->addToGroup(ecs::_PARTICLES_GRP);
+		particle->addToGroup(ecs::_PARTICLES_UI);
 	}
 }
 void ParticleSystem::createParticlesMenu2(int numpart)
@@ -70,7 +70,7 @@ void ParticleSystem::createParticlesMenu2(int numpart)
 	
 		auto posx = sdlutils().rand().nextInt(0, sdlutils().width());
 		auto posy = sdlutils().rand().nextInt(0, sdlutils().height());
-		auto width= sdlutils().rand().nextInt(40, 140);
+		auto width= sdlutils().rand().nextInt(40, 240);
 		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-100, 100)) / 100), ((double)(sdlutils().rand().nextInt(-100, -50)) / 100));
 		particle->addComponent<Transform>(Vector2D(posx, posy), vel, width, width, 0.0f);
 		Image *imag=particle->addComponent<Image>(tex_);

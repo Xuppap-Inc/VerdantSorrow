@@ -44,20 +44,20 @@ void MenuScene::background()
 	background1Img_ = background1_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo1"));
 	background1Img_->setBlendMode(SDL_BLENDMODE_BLEND);
 	background1Img_->setAlpha(255);
-	background1_->addToGroup(ecs::_BACKGROUND_2_GRP);
+	background1_->addToGroup(ecs::_UI_GRP);
 
 	background2_ = mngr_->addEntity();
 	background2_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	background2Img_= background2_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo2"));
 	background2Img_->setBlendMode(SDL_BLENDMODE_BLEND);
 	background2Img_->setAlpha(255);
-	background2_->addToGroup(ecs::_BACKGROUND_2_GRP);
+	background2_->addToGroup(ecs::_UI_GRP);
 
 	particlesys_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu"), mngr_);
-	particlesys_->createParticlesMenu(50);
+	particlesys_->createParticlesMenu(30);
 
 	particlesys2_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu2"), mngr_);
-	particlesys2_->createParticlesMenu2(50);
+	particlesys2_->createParticlesMenu2(80);
 }
 
 void MenuScene::update()

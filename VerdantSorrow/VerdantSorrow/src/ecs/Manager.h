@@ -199,7 +199,7 @@ public:
 				entitiesUI[i]->render();
 			}
 			//Renderización de las particulas de la UI
-			auto particles3 = getEntitiesByGroup(ecs::_PARTICLES_GRP);
+			auto particles3 = getEntitiesByGroup(ecs::_PARTICLES_UI);
 			e = particles3.size();
 			for (auto i = 0; i < e; i++)
 			{
