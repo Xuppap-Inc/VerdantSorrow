@@ -88,6 +88,7 @@ void TileMap::createObjects()
 				SDL_Rect r = build_sdlrect(pos.x, pos.y, object.getAABB().width, object.getAABB().height);
 
 				auto cur_gid = object.getTileID();
+				string name = objects->getName();
 
 				if (cur_gid != 0) {
 
@@ -110,10 +111,11 @@ void TileMap::createObjects()
 
 					//el pivote de los objetos esta abajo
 					r.y -= object.getAABB().height;
+					if(name!= "entradasbosses")
 					tilesets[tset_gid][cur_gid]->render(r);
 
 				}
-				string name = objects->getName();
+	
 
 				if (name == "colliders" || name == "entradasbosses" || name == "npc"||name=="areas") {
 
@@ -149,15 +151,20 @@ void TileMap::createObjects()
 					}
 					else if (name == "entradasbosses") {
 						//col->setIsTrigger(true);
-						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
+						
+					
 
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
 						while (i < properties.size() && properties[i].getName() != "Boss")i++;
 
-						if (i < properties.size())
+						if (i < properties.size()) {
+							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[0].getStringValue() + "_" + "open"));
 							ent->addComponent<PlatformAtribsForHub>(properties[0].getStringValue());
+							
+						}
+						ent->addToGroup(ecs::_UI_GRP);
 					}
 					else if (name == "areas") {
 						col->setIsTrigger(true);
