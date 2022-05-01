@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="566">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="566">
  <tileset firstgid="1" name="ObjetosHuida" tilewidth="666" tileheight="667" tilecount="25" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Plataforma">
@@ -78,7 +78,7 @@
    <image width="105" height="98" source="../images/Nivel huida/medio plataforma giro izq.png"/>
   </tile>
  </tileset>
- <imagelayer id="2" name="Fondo"/>
+ <imagelayer id="2" name="Fondo" offsetx="-2464" offsety="2368"/>
  <objectgroup id="4" name="Pinchos">
   <object id="473" gid="8" x="2430" y="5018" width="164" height="547"/>
   <object id="474" gid="8" x="2342" y="5006" width="164" height="547"/>
