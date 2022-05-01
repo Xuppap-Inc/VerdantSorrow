@@ -16,7 +16,7 @@ Attack::Attack(float width, float height, float offsetY, CollisionManager* colMa
 	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
-	attackKeys({ SDL_SCANCODE_J }),
+	attackKeys({ SDL_SCANCODE_J,SDL_SCANCODE_K, SDL_SCANCODE_L }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
 	setActive(false);
