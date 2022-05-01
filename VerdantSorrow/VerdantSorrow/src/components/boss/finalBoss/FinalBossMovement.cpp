@@ -14,7 +14,7 @@
 #include "../../fondos/ParticleSystem.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager), bA_(nullptr), handMngr_(nullptr), phase_(PHASE1), eyeState_(BOUNCE),
+	tr_(nullptr), colManager_(colManager), bA_(nullptr), phase_(PHASE1), eyeState_(BOUNCE),
 	eyeSpeed_(3), waveSp_(), lastTimeInGround_(), anim_(), ashes_(), deadBoss_(false), musicaFase1_(), musicaFase2_(),
 	playerTr_()
 {
@@ -28,11 +28,10 @@ void FinalBossMovement::initComponent()
 {
 	tr_ = ent_->getComponent<Transform>();
 	bA_ = ent_->getComponent<BossAtributos>();
-	handMngr_ = ent_->getComponent<HandsManager>();
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
 	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(tr_ != nullptr, bA_ != nullptr, handMngr_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
+	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
 
 	musicaFase2_ = &sdlutils().musics().at("musica_manos_fase2");
 	musicaFase2_->play();
@@ -61,12 +60,33 @@ void FinalBossMovement::update()
 			if (eyeState_ == EyeState::BOUNCE) bounce();
 			else restartBouncing();
 		}
+	}
 
-		if (deadBoss_) {
+	else if (returningToCenter) {
+	
+		//vector cuya magnitud es la distancia desde la cabeza al centro de la pantalla
+		auto distance = Vector2D(sdlutils().width() / 2, sdlutils().height() / 2) - 
+			Vector2D(tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2);
 
-			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-			particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
+		if (distance.magnitude() <= 2 * RETURNING_SPEED) {
+		
+			tr_->getVel().set(0, 0);
+			returningToCenter = false;
 		}
+		else {
+		
+			distance = distance.normalize();
+
+			tr_->getVel().set(distance * RETURNING_SPEED);
+		}
+	}
+
+	if (deadBoss_) {
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
+
+		deadBoss_ = false;
 	}
 }
 

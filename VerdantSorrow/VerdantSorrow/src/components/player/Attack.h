@@ -28,6 +28,8 @@ public:
 	void initComponent() override;
 	void update() override;
 
+	void checkHovering();
+
 	void checkInput();
 
 	void attackAir(std::function<void()>& attackCallback);
@@ -44,6 +46,8 @@ public:
 	bool hasFinishedRecovery();
 	void deactivateRecovery();
 
+	void attackCollided();
+
 	bool isAttacking();
 
     void attack();
@@ -57,6 +61,8 @@ protected:
 	const int COMBO_WINDOW = 2000;
 
 	const int MAX_COMBO = 3;
+
+	const int AIR_HOVERING_TIME = 300;
 
 	Transform* tr_;
 
@@ -86,6 +92,10 @@ protected:
 
 	VirtualTimer* recoveryTimer_;
 	bool recovery_;
+
+	//indica si el jugador esta "flotando" tras impactar un ataque en salto
+	bool airHovering = false;
+	VirtualTimer* hoveringTimer;
 
 	/**
 	* Setea la posicion del ataque delante del jugador, teniendo en cuenta su direccion de movimiento

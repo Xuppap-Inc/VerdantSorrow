@@ -83,7 +83,7 @@ void HammerArm::attack(bool quemado)
 
 void HammerArm::goBack()
 {
-	if (abs(tr_->getPos().getX() - initialPos.getX()) > 5 || abs(tr_->getPos().getY() - initialPos.getY()) > 5) {
+	if (abs(tr_->getPos().getX() - initialPos.getX()) > handSpeed + 1 || abs(tr_->getPos().getY() - initialPos.getY()) > handSpeed + 1) {
 
 		Vector2D dir = initialPos - tr_->getPos();
 		tr_->getVel().set(dir.normalize() * handSpeed);
