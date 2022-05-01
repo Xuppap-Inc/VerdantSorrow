@@ -372,13 +372,19 @@ Cuando llegamos a la mitad del nivel, habrá un checkpoint para evitar penalizar
 Al llegar a la salida de esta fase vertical pasaremos directamente al Hub.
 
 - Retorno al Hub: el jugador vuelve directamente al Hub tras derrotar al tercer boss y escapar. Ahora todas las entradas están destruidas, los NPCs le dan las últimas piezas de información de la historia detrás de toda su aventura y le instan a ir hacia la puerta, la cual tiene iluminados los 3 símbolos de las esencias. El jugador interactuará con ella y se le muestra la descripción del desenlace del juego y de las buenas consecuencias que sus actos traerán al mundo de Arven, siendo así el final del juego.
+    - El esquema del tutorial sería algo tal que:
 
+     
   ![Nivel1](./images/niveles1.png)|  
      
-  Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
+     - Y el esquema de un enfrentamiento a un jefe sería:
+     
+     
   ![Nivel2](./images/niveles2.png)| 
      
-  <img src="./images/Hub boceto.jpeg" width="300" height="200">
+     - Por último el boceto sobre el que está basado el diseño del hub sería preliminarmente así:
+     
+  <img src="./images/Hub boceto.jpeg" width="500" height="500">
      
      
 
