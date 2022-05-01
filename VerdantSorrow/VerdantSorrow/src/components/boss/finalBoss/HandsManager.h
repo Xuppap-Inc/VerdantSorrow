@@ -46,12 +46,17 @@ public:
 private:
 
 	const int START_DELAY = 5000;
+	const int DEATH_DELAY = 2000;
 
 	void createHands();
 	void chooseAttack();
 	void clapAttack();
 	void punietazoAttack();
 	void hammerAttack();
+
+	void checkIfDead();
+	void checkDeathTimer();
+
 	VirtualTimer* lastAttackDone_;
 	float  attackCooldown;
 	int numeroAtaque;
@@ -60,6 +65,7 @@ private:
 	VirtualTimer* tiempoColor_;
 
 	VirtualTimer* startTimer_;
+	VirtualTimer* deathTimer_;
 
 	ecs::Entity* leftHand_;
 	ecs::Entity* rightHand_;
@@ -82,5 +88,7 @@ private:
 	Image* rightHandImg_;
 
 	State state_;
+
+	bool deadBoss_ = false;
 };
 

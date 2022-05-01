@@ -66,8 +66,8 @@ void FinalBossScene::init()
 
 void FinalBossScene::update()
 {
-	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
-	if (!playerAttribs_->isDefeated() && bossHealth > 0) {
+	auto bossHealth = FinalBossFace->getComponent<BossAtributos>();
+	if (!playerAttribs_->isDefeated() && !bossHealth->isDefeated()) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -84,7 +84,7 @@ void FinalBossScene::update()
 	}
 	else {
 		if (playerAttribs_->isDefeated()) sC().changeEyeEssenceState(true);
-		if (bossHealth <= 0) {
+		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FINALDEFEATED;
 
