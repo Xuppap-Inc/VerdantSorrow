@@ -44,7 +44,7 @@ void NpcCtrl::update()
 			for (auto c : colMan_->getCollisions(col_)) {
 				if (c->isActive() && c->getEntity()->getComponent<PlayerCtrl>() != nullptr) {
 
-					if ((ihdlr.keyDownEvent() && ihdlr.isKeyDown(SDL_SCANCODE_E)) || ihdlr.isControllerButtonDown(a_Button) || ihdlr.isControllerButtonDown(x_Button)) {
+					if ((ihdlr.keyDownEvent() && ihdlr.isKeyDown(SDL_SCANCODE_SPACE)) || ihdlr.isControllerButtonDown(a_Button) || ihdlr.isControllerButtonDown(x_Button)) {
 
 						//Activa el diálogo si está desactivado e inmoviliza al jugador
 						if (!dialogBox_->isActive()) {
