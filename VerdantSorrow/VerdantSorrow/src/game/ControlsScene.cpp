@@ -8,7 +8,7 @@
 #include "../sdlutils/Texture.h"
 #include "MenuScene.h"
 
-ControlsScene::ControlsScene():BaseMenu(),delay_(250),lastUpdate_(0),controllerIdex_(-1)
+ControlsScene::ControlsScene() :BaseMenu(), delay_(250), lastUpdate_(0), controllerIdex_(-1)
 {
 }
 
@@ -18,11 +18,19 @@ void ControlsScene::init()
 	Scene::init();
 	isChangingScene(changeSc_);
 
-	//background();//Dibuja el fondo
 
 	int imageW = 800, imageH = 300; //Ancho y alto e imagen
-	createImages(sdlutils().width() / 2-(imageW/2), sdlutils().height() / 2 - (imageH/ 2), imageW, imageH, "keyboardControls");
+	createImages(sdlutils().width() / 2 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
+	//background();//Dibuja el fondo
 	generateAllButtons();
+}
+void ControlsScene::background()
+{
+	auto background_ = mngr_->addEntity();
+	background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 1.0f);
+	background_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo"));
+	background_->addToGroup(ecs::_BACKGROUND_1_GRP);
+	
 }
 //
 //void ControlsScene::background()
@@ -54,13 +62,13 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 
 }
 
-void ControlsScene::createText(std::string message)
+void ControlsScene::createText(float x, float y,std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
-		sdlutils().fontsHub().at("ARIAL24"), build_sdlcolor(0x444444ff));
+		sdlutils().fontsHub().at("SOURCESERIF24"), build_sdlcolor(0x00000000));
 
 	SDL_Rect rect = build_sdlrect(
-		(sdlutils().width() - text.width()) / 2.0f, sdlutils().height()-100.0f, text.width(), text.height());
+		(x - text.width()) / 2.0f, y, text.width(), text.height());
 
 	//escalado pantalla
 	auto sW = mngr_->getWindowScaleWidth();
@@ -82,16 +90,21 @@ void ControlsScene::generateAllButtons()
 
 void ControlsScene::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIdex_,buttonNames_, buttonPoperties_);
-	if(!changeSc_)
+	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_);
+	if (!changeSc_)
 	{
 		mngr_->update();
 		mngr_->refresh();
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		createText("Explicacion de prueba");
+		//createText(sdlutils().width(), sdlutils().height()-100,"Explicacion de prueba");
+		createText(sdlutils().width(), sdlutils().height()-400,"Move  -> W,A,S,D");
+		createText(sdlutils().width(), sdlutils().height()-350,"Jump -> W,SPACE");
+		createText(sdlutils().width(), sdlutils().height()-300,"Interact with characters -> SPACE");
+		createText(sdlutils().width(), sdlutils().height()-250,"Attack -> J,K,L");
+		createText(sdlutils().width(), sdlutils().height()-200,"Roll -> LEFT SHIFT");
 		sdlutils().presentRenderer();
 	}
-	
+
 }
