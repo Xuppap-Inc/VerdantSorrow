@@ -128,8 +128,13 @@ private:
 	void attackSpecial();
 	void prepareToSpecial();
 
+	void dieAnimation();
+
 	void checkPhaseChange();
 
 	bool deadBoss_;
+
+	ParticleSystem* deadParticles1_;
+	ParticleSystem* deadParticles2_;
 };
 

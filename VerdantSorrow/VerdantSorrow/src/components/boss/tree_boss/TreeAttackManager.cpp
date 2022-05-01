@@ -77,6 +77,8 @@ void TreeAttackManager::initComponent()
 	hojas_ = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	hojas_->createParticlesDandellion(10);
 
+	deadParticles1_ = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+	deadParticles2_ = new ParticleSystem(&sdlutils().images().at("simbolo_lumine"), mngr_);
 
 	bool correct = tr_ != nullptr && player_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr && lanternTr_ != nullptr;
 	assert(correct);
@@ -107,19 +109,19 @@ void TreeAttackManager::update()
 	checkAnimState();
 
 	if (!deadBoss_) checkIfDead();
+	else dieAnimation();
 }
 
 void TreeAttackManager::checkIfDead()
 {
 	if (attribs_->getLife() <= 0) {
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
-
 		animNewState_ = ANIM_DEATH;
 		state = DYING;
 
 		deadBoss_ = true;
 		deathTimer_->reset();
+
+		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
 		auto col = ent_->getComponent<RectangleCollider>();
 		col->setActive(false);
@@ -434,3 +436,8 @@ void TreeAttackManager::prepareToSpecial()
 	}
 }
 
+void TreeAttackManager::dieAnimation() {
+
+	deadParticles1_->createParticlesBossDie(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+
+}
