@@ -9,7 +9,39 @@
     { "id" : "PTMONO24", "file" : "resources/fonts/PTMono-Regular.ttf", "size": 24 },
     { "id": "SOURCESERIF24", "file": "resources/fonts/SourceSerifPro-Regular.ttf", "size": 24}
   ],
-    "images_hub": [
+  "images_hub": [
+    {
+      "id": "eye_open",
+      "file": "resources/images/Hub/eye_open.png"
+    },
+    {
+      "id": "eye_closed",
+      "file": "resources/images/Hub/eye_closed.png"
+    },
+    {
+      "id": "eye_win",
+      "file": "resources/images/Hub/eye_win.png"
+    },
+    {
+      "id": "frog_open",
+      "file": "resources/images/Hub/frog_open.png"
+    },
+    {
+      "id": "frog_win",
+      "file": "resources/images/Hub/frog_win.png"
+    },
+    {
+      "id": "tree_win",
+      "file": "resources/images/Hub/tree_win.png"
+    },
+    {
+      "id": "tree_open",
+      "file": "resources/images/Hub/tree_open.png"
+    },
+    {
+      "id": "tree_closed",
+      "file": "resources/images/Hub/tree_closed.png"
+    },
     {
       "id": "resume",
       "file": "resources/images/MenuPausa/resumeButton.png"

@@ -49,21 +49,23 @@ Vista General |
 :--:|
 ![Vista General](./images/finalboss.png)|
 
-### <a name = "relato-breve"></a> 1.1. Relato breve y parrcial de una partida típica   
-El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando. 
+### <a name = "relato-breve"></a> 1.1. Relato breve y parcial de una partida típica   
+El jugador realiza el tutorial, lo que le enseña las mecánicas básicas tanto de movilidad como de ataque y desplazamiento. Además le enseña que puede matar moscas y atravesar raíces rodando, que serán lo primero que tendrá que hacer al comenzar el juego en los primeros jefes. 
 
-Tras eso sale al hub, un gran espacio a modo de interfase global del juego en donde podrá hablar con distintos NPCs que explican la historia en profundidad, de hablar con todos ellos y además alguno le menciona su primer objetivo, la rana.
+Tras eso sale al hub, un gran espacio a modo de interfase global del juego en donde podrá hablar con distintos NPCs que explican la historia en profundidad en caso de hablar con todos ellos. Además de eso alguno de ellos le dará información sobre el primer jefe que tiene que enfrentar.
 
-El jugador encuentra la zona en la que se encuentra la rana y entra para pelear contra ella. Al derrotarla sale a hub nuevamente para buscar el segundo objetivo, además, en el hub los NPCs tendrán nuevos diálogos que introducirán más al jugador en la historia del juego.
+El jugador encuentra la zona en la que se encuentra la rana y entra para pelear contra ella. Al derrotarla sale al hub nuevamente para buscar el segundo objetivo, además, en el hub los NPCs tendrán nuevos diálogos que introducirán más al jugador en la historia del juego, y de igual manera que antes, uno de ellos le dará pistas y o consejos para enfrentarse al segundo jefe.
 
 Tras encontrar y derrotar al segundo jefe el jugador vuelve a repetir el ciclo de hablar y buscar al tercero.
 
-Al derrotar al tercer jefe el jugador debe escapar en un nivel de plataformas y obstáculos. Al llegar al hub podrá finalmente abrir la puerta y descubrir qué se encuentra tras esta.
+Al derrotar al tercer jefe el jugador debe escapar en un nivel de plataformas y obstáculos. 
 
-Se reproduce una cinemática final al abrir la puerta.
+Cuando haya llegado hasta la salida, el jugador se transportará directamente al hub, donde los NPCs le contarán el final de la historia y le felicitarán por su labor, y deberemos de proseguir hacia la puerta, en la parte superior del hub, donde, tras interaccionar con ella concluiremos el juego.
+
+Se reproduce una cinemática final al abrir la puerta y se muestran los créditos del juego.
 
 ### <a name = "tiempos"></a> 1.2. Duración esperada de una partida
-El tiempo aproximado que debe durar una partida de un jugador novel se compone de:
+El tiempo aproximado que debe durar una partida de un jugador sin experiencia previa en el juego se compondría de:
 
 - El tiempo que tarda en realizar el tutorial: aproximadamente unos **3-5 min**.
 - El tiempo de búsqueda del jefe en el hub, teniendo en cuenta la lectura de los diálogos para poder acceder al jefe: aproximadamente unos **3-5 min**. Un total de 3 veces: unos **10-15 min**
@@ -82,34 +84,34 @@ Total del juego: unos **45 min**, esta duración asume que el jugador lee diálo
 
 -Movimiento: El jugador podrá moverse hacia la izquierda o la derecha con un movimiento lateral a velocidad constante. Además podrá saltar.  
 
--Movimiento top down: El jugador podrá moverse en **X direcciones** en el hub.  
+-Movimiento top down: El jugador podrá moverse en **8 direcciones** en el hub.  
 
 -Esquivar: El jugador podrá esquivar ataques, desplazándose una corta distancia y consiguiendo frames de invulnerabilidad durante la animación de esquivar.
 
 -Ataque: El personaje dará un barrido hacia delante con la espada, en vertical, de forma que el ataque es un **arco de la altura del jugador**. Te quedas quieto cuando estés atacando. El ataque hace 1 de daño. El ataque se puede realizar también durante el salto. Tanto en el ataque en el suelo como en el aire el jugador puede encadenar varios de estos dando lugar a un combo.
 
--Vida: El jugador dispondrá de tres vidas, perdiendo una por cada golpe que reciba de un enemigo. Al recibir un golpe el jugador será impulsado hacia atrás y brillará en blanco. Durante unos segundos el jugador se volverá invulnerable a todo daño recibido.
+-Vida: El jugador dispondrá de tres vidas, perdiendo una por cada golpe que reciba de un enemigo. Al recibir un golpe el jugador será impulsado hacia atrás y brillará en rojo. Durante unos segundos el jugador se volverá invulnerable a todo daño recibido.
 
 -Hablar: En el hub, el jugador puede hablar con todos los personajes que hay en él, pudiendo obtener información que le ayude en sus enfrentamientos y además le contarán la historia del juego en profundidad.
 
 ### <a name="mecanicas-de-enemigos"></a> 2.1.2. Mecánicas de enemigos  
 
 Comportamiento de los jefes: 
-  - Jefe de la rana
+  - Jefe rana
       - Visual: Una rana grande y verde.
       - Primera fase:  
           - La rana va saltando de un lado a otro de la pantalla. Empieza saltando hacia la izquierda, calculando la distancia del salto aleatoriamente dentro de un intervalo.
 
           - La rana rebota con los bordes de la pantalla, en ese momento cambia la dirección del salto.
 
-          - Ataque de la lengua: Cada X saltos(decidido aleatoriamente entre un intervalo), hace este ataque
-            - Aparece una mosca cerca del jugador, a una distancia determinada de la rana siempre a la misma distancia del suelo. Si la posición se sale de la pantalla, aparece en la otra dirección. La mosca aparece siempre a la altura del jugador.
-
-            - X segundos después, la rana lanza la lengua hasta la posición x de la mosca y hace daño, y vuelve rápidamente. La lengua sale de forma horizontal.
+          - Ataque de la lengua: Cada X saltos(decidido aleatoriamente entre un intervalo), hace este ataque:
+           
+            - Aparece una mosca cerca del jugador, a una distancia determinada de la rana y a cierta altura sobre el suelo igual a la del jugador. Si la posición se saliera de la pantalla aparecería en la otra dirección. 
+                            Pasados unos pocos segundos, la rana lanza la lengua hasta la posición de la mosca y hace daño al jugador en caso de impactarle. El movimiento de la lengua es siempre horizontal y tanto la "ida" como la "vuelta" son rápidas.
 
             - Si matas a la mosca se enfada y realiza un ataque, un salto sobre sí mismo, más alto que los normales y realizando una onda expansiva hacia ambos lados al caer. Tras este ataque se queda vulnerable durante un tiempo.
 
-            - La onda expansiva se define como un proyectil que se mueve de forma horizontal desde la posición del boss hasta  cada uno de los extremos de la pantalla, pegado al suelo a velocidad constante, de tamaño lo suficientemente pequeño para que pueda ser saltado por el jugador.
+            - La onda expansiva se define como un proyectil que se mueve de forma horizontal desde la posición del boss hacia cada uno de los extremos de la pantalla, pegado al suelo a velocidad constante, de tamaño lo suficientemente pequeño para que pueda ser saltado por el jugador.
 
         - Segunda fase:
           - Mismo comportamiento que en la primera fase.
@@ -149,7 +151,7 @@ Comportamiento de los jefes:
 
     -Primera fase:
     
-      - La cabeza es la única parte de este boss que recibe daño, las manos son inmunes.
+      - La cabeza es la única parte de este boss que recibe daño mientras que las manos son inmunes.
       - Hay que subirse a las manos para atacar al cuerpo principal puesto que la cabeza flota a una altura a la que el jugador no llega saltando.  
       - Las manos hacen daño sólo durante el ataque.
       
@@ -370,13 +372,19 @@ Cuando llegamos a la mitad del nivel, habrá un checkpoint para evitar penalizar
 Al llegar a la salida de esta fase vertical pasaremos directamente al Hub.
 
 - Retorno al Hub: el jugador vuelve directamente al Hub tras derrotar al tercer boss y escapar. Ahora todas las entradas están destruidas, los NPCs le dan las últimas piezas de información de la historia detrás de toda su aventura y le instan a ir hacia la puerta, la cual tiene iluminados los 3 símbolos de las esencias. El jugador interactuará con ella y se le muestra la descripción del desenlace del juego y de las buenas consecuencias que sus actos traerán al mundo de Arven, siendo así el final del juego.
+    - El esquema del tutorial sería algo tal que:
 
+     
   ![Nivel1](./images/niveles1.png)|  
      
-  Tutorial de ataque usar moscas, de esta forma al llegar al boss de la rana sabrá que puede golpear a las moscas.  
+     - Y el esquema de un enfrentamiento a un jefe sería:
+     
+     
   ![Nivel2](./images/niveles2.png)| 
      
-  <img src="./images/Hub boceto.jpeg" width="300" height="200">
+     - Por último el boceto sobre el que está basado el diseño del hub sería preliminarmente así:
+     
+  <img src="./images/Hub boceto.jpeg" width="500" height="500">
      
      
 
