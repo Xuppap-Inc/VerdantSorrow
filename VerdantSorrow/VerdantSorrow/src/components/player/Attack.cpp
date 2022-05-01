@@ -9,12 +9,12 @@
 
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
-	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(),
+	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
 	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), attackTimer_(),
 	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
-	attackKeys({ SDL_SCANCODE_J,SDL_SCANCODE_K,SDL_SCANCODE_L }),
+	attackKeys({ SDL_SCANCODE_J }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
 	setActive(false);
@@ -43,7 +43,7 @@ void Attack::initComponent()
 void Attack::update()
 {
 	if (state_ == WAITING || state_ == WAITING_RECOVERY) { //comprueba si el jugador está dentro de la ventana dada para hacer el combo
-
+	
 		checkInput();
 
 		if (state_ == WAITING_RECOVERY) {
@@ -60,11 +60,11 @@ void Attack::update()
 		}
 
 		else if (state_ == WAITING) {
-
+		
 			if (recovery_) deactivateRecovery();
 
 			if (comboFinishedGround_ || comboTimerGround_->currTime() > COMBO_WINDOW) {
-
+			
 				//vars combo
 				nComboGround_ = 0;
 				comboFinishedGround_ = false;
@@ -80,20 +80,20 @@ void Attack::update()
 	}
 
 	else if (state_ == COOLDOWN) {
-
+	
 		if (!comboFinishedGround_ && comboTimerGround_->currTime() < COMBO_WINDOW) {
-
+		
 			checkInput();
 		}
 
 		if (cooldownTimer_->currTime() >= attackCoolDown) {
-
+		
 			state_ = WAITING;
 		}
 	}
 
 	if (!finished_) {
-
+	
 		setPosition();
 
 		if (attackTimer_->currTime() >= attackDuration) {
@@ -155,7 +155,7 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 
 	if (nComboAir_ == 0) {
 
-		int rows = 3;
+		int rows = 3; 
 		int columns = 3;
 		int animDuration = 100;
 		int nFrames = 8;
@@ -270,7 +270,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 	}
 
 	else {
-
+	
 		comboFinishedGround_ = false;
 
 		nComboGround_ = 0;
@@ -317,7 +317,7 @@ void Attack::attack()
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
 
-
+	
 	finished_ = false;
 	newAttack_ = true;
 
