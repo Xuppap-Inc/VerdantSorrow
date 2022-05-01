@@ -31,12 +31,14 @@ void HandsManager::initComponent()
 	tiempoColor_ = mngr_->addTimer();
 
 	startTimer_ = mngr_->addTimer();
+	deathTimer_ = mngr_->addTimer();
 
 	createHands();
 }
 
 void HandsManager::update()
 {
+	//check next attack
 	if (state_ == REPOSO && lastAttackDone_->currTime() > attackCooldown) {
 		switch (numeroAtaque)
 		{
@@ -54,6 +56,7 @@ void HandsManager::update()
 		}
 	}
 
+	//check state
 	if (state_ == CLAP)
 		clapAttack();
 	else if (state_ == PUNIETAZO) // primero el derecho luego el izdo
@@ -70,7 +73,8 @@ void HandsManager::update()
 	}
 
 	checkPhaseChange();
-
+	if (!deadBoss_) checkIfDead();
+	else checkDeathTimer();
 }
 
 void HandsManager::checkPhaseChange()
@@ -373,6 +377,24 @@ void HandsManager::hammerAttack()
 				state_ = REPOSO;
 			}
 		}
+	}
+}
+
+void HandsManager::checkIfDead()
+{
+	if (bA_->getLife() <= 0) 
+	{
+		deactivateBoss();
+
+		deathTimer_->reset();
+	}
+}
+
+void HandsManager::checkDeathTimer()
+{
+	if (deathTimer_->currTime() >= DEATH_DELAY) 
+	{
+		bA_->setDefeated(true);
 	}
 }
 
