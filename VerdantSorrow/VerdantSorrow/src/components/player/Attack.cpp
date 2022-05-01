@@ -5,18 +5,16 @@
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
 #include "../../ecs/Manager.h"
-#include "../SimpleGravity.h"
-#include "SimplePhysicsPlayer.h"
 
 
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
-	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(), 
+	attackCoolDown(300), newAttack_(false), finished_(true), recoveryTimer_(),
 	recovery_(false), cooldownTimer_(), comboFinishedGround_(false), attackTimer_(),
 	anim_(), attrib_(), nComboGround_(0), comboTimerGround_(), nComboAir_(0), comboFinishedAir_(false), comboTimerAir_(),
 
 	// INPUT
-	attackKeys({ SDL_SCANCODE_SPACE }),
+	attackKeys({ SDL_SCANCODE_J,SDL_SCANCODE_K,SDL_SCANCODE_L }),
 	attackButtons({ SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER })
 {
 	setActive(false);
@@ -35,20 +33,17 @@ void Attack::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ != nullptr && attrib_ != nullptr);
-	
-	//timers
 	attackTimer_ = mngr_->addTimer();
-	hoveringTimer = mngr_->addTimer();
 	recoveryTimer_ = mngr_->addTimer();
 	comboTimerAir_ = mngr_->addTimer();
-	cooldownTimer_ = mngr_->addTimer();
 	comboTimerGround_ = mngr_->addTimer();
+	cooldownTimer_ = mngr_->addTimer();
 }
 
 void Attack::update()
 {
 	if (state_ == WAITING || state_ == WAITING_RECOVERY) { //comprueba si el jugador está dentro de la ventana dada para hacer el combo
-	
+
 		checkInput();
 
 		if (state_ == WAITING_RECOVERY) {
@@ -65,17 +60,17 @@ void Attack::update()
 		}
 
 		else if (state_ == WAITING) {
-		
+
 			if (recovery_) deactivateRecovery();
 
 			if (comboFinishedGround_ || comboTimerGround_->currTime() > COMBO_WINDOW) {
-			
+
 				//vars combo
 				nComboGround_ = 0;
 				comboFinishedGround_ = false;
 			}
 
-			if (attrib_->isOnGround() || comboTimerAir_->currTime() > COMBO_WINDOW) {
+			if (attrib_->isOnGround() || comboFinishedAir_ || comboTimerAir_->currTime() > COMBO_WINDOW) {
 
 				//vars combo
 				nComboAir_ = 0;
@@ -85,20 +80,20 @@ void Attack::update()
 	}
 
 	else if (state_ == COOLDOWN) {
-	
+
 		if (!comboFinishedGround_ && comboTimerGround_->currTime() < COMBO_WINDOW) {
-		
+
 			checkInput();
 		}
 
 		if (cooldownTimer_->currTime() >= attackCoolDown) {
-		
+
 			state_ = WAITING;
 		}
 	}
 
 	if (!finished_) {
-	
+
 		setPosition();
 
 		if (attackTimer_->currTime() >= attackDuration) {
@@ -108,19 +103,6 @@ void Attack::update()
 
 			if (state_ == ATTACKING) state_ = COOLDOWN;
 		}
-	}
-
-	checkHovering();
-}
-
-//comprueba si el tiempo que flota en el aire ha pasado y reactiva la gravedad
-void Attack::checkHovering()
-{
-	if (airHovering && hoveringTimer->currTime() >= AIR_HOVERING_TIME)
-	{
-		ent_->getComponent<SimpleGravity>()->setActive(true);
-		ent_->getComponent<SimplePhysicsPlayer>()->gravedad(true);
-		airHovering = false;
 	}
 }
 
@@ -173,7 +155,7 @@ void Attack::attackAir(std::function<void()>& attackCallback)
 
 	if (nComboAir_ == 0) {
 
-		int rows = 3; 
+		int rows = 3;
 		int columns = 3;
 		int animDuration = 100;
 		int nFrames = 8;
@@ -288,7 +270,7 @@ void Attack::attackGround(std::function<void()>& attackCallback)
 	}
 
 	else {
-	
+
 		comboFinishedGround_ = false;
 
 		nComboGround_ = 0;
@@ -325,25 +307,6 @@ void Attack::deactivateRecovery()
 	recovery_ = false;
 }
 
-void Attack::attackCollided()
-{
-	if (!attrib_->isOnGround() && nComboAir_ < 3) 
-	{
-		ent_->getComponent<SimpleGravity>()->setActive(false);
-		ent_->getComponent<SimplePhysicsPlayer>()->gravedad(false);
-		
-		auto tr = ent_->getComponent<Transform>();
-		auto& pos = tr->getPos();
-		auto& vel = tr->getVel();
-
-		vel.setY(0);
-		pos.setY(pos.getY() - 10);
-
-		airHovering = true;
-		hoveringTimer->reset();
-	}
-}
-
 bool Attack::isAttacking()
 {
 	return state_ != WAITING && state_ != COOLDOWN;
@@ -354,7 +317,7 @@ void Attack::attack()
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
 
-	
+
 	finished_ = false;
 	newAttack_ = true;
 
