@@ -79,7 +79,7 @@
   </tile>
  </tileset>
  <imagelayer id="2" name="Fondo" offsetx="8032" offsety="9544"/>
- <objectgroup id="4" name="Pinchos" offsetx="24" offsety="-1152">
+ <objectgroup id="4" name="Pinchos" offsetx="24" offsety="0">
   <object id="473" gid="8" x="2430" y="5018" width="164" height="547"/>
   <object id="474" gid="8" x="2342" y="5006" width="164" height="547"/>
   <object id="475" gid="8" x="2250" y="5018" width="164" height="547"/>
@@ -132,7 +132,7 @@
   <object id="555" gid="8" x="1343.75" y="4789.25" width="115.735" height="359.969"/>
   <object id="556" gid="8" x="1396.51" y="4794.78" width="115.735" height="359.969"/>
  </objectgroup>
- <objectgroup id="3" name="Plataformas" offsetx="0" offsety="-4392">
+ <objectgroup id="3" name="Plataformas" offsetx="0" offsety="24">
   <object id="1" gid="1" x="-1" y="6085" width="98" height="105"/>
   <object id="2" gid="1" x="95.8333" y="6085" width="98" height="105"/>
   <object id="3" gid="1" x="193.5" y="6084.83" width="98" height="105"/>
@@ -505,7 +505,7 @@
   <object id="470" gid="11" x="672" y="5184" width="106" height="105"/>
   <object id="552" gid="11" x="5398.52" y="4028.76" width="106" height="105"/>
  </objectgroup>
- <objectgroup id="5" name="LanzaMoscas" offsetx="8" offsety="-1152">
+ <objectgroup id="5" name="LanzaMoscas" offsetx="8" offsety="32">
   <object id="557" gid="15" x="2791.76" y="4785.21" width="255.879" height="300.027"/>
   <object id="558" gid="15" x="4599.33" y="4783.32" width="255.879" height="300.027"/>
   <object id="559" gid="16" x="4882.15" y="456.727" width="259.939" height="221.69"/>
