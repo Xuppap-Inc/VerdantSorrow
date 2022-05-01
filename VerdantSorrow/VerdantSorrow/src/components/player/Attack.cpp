@@ -5,6 +5,8 @@
 #include "../../sdlutils/SDLUtils.h"
 #include "../player/PlayerCtrl.h"
 #include "../../ecs/Manager.h"
+#include "../SimpleGravity.h"
+#include "SimplePhysicsPlayer.h"
 
 
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
@@ -33,16 +35,19 @@ void Attack::initComponent()
 	anim_ = ent_->getComponent<FramedImage>();
 	attrib_ = ent_->getComponent<PlayerAttributes>();
 	assert(tr_ != nullptr, collider_ != nullptr && attrib_ != nullptr);
+	
+	//timers
 	attackTimer_ = mngr_->addTimer();
+	hoveringTimer = mngr_->addTimer();
 	recoveryTimer_ = mngr_->addTimer();
 	comboTimerAir_ = mngr_->addTimer();
-	comboTimerGround_ = mngr_->addTimer();
 	cooldownTimer_ = mngr_->addTimer();
+	comboTimerGround_ = mngr_->addTimer();
 }
 
 void Attack::update()
 {
-	if (state_ == WAITING || state_ == WAITING_RECOVERY) { //comprueba si el jugador está dentro de la ventana dada para hacer el combo
+	if (state_ == WAITING || state_ == WAITING_RECOVERY) { //comprueba si el jugador estï¿½ dentro de la ventana dada para hacer el combo
 	
 		checkInput();
 
@@ -70,7 +75,7 @@ void Attack::update()
 				comboFinishedGround_ = false;
 			}
 
-			if (attrib_->isOnGround() || comboFinishedAir_ || comboTimerAir_->currTime() > COMBO_WINDOW) {
+			if (attrib_->isOnGround() || comboTimerAir_->currTime() > COMBO_WINDOW) {
 
 				//vars combo
 				nComboAir_ = 0;
@@ -103,6 +108,19 @@ void Attack::update()
 
 			if (state_ == ATTACKING) state_ = COOLDOWN;
 		}
+	}
+
+	checkHovering();
+}
+
+//comprueba si el tiempo que flota en el aire ha pasado y reactiva la gravedad
+void Attack::checkHovering()
+{
+	if (airHovering && hoveringTimer->currTime() >= AIR_HOVERING_TIME)
+	{
+		ent_->getComponent<SimpleGravity>()->setActive(true);
+		ent_->getComponent<SimplePhysicsPlayer>()->gravedad(true);
+		airHovering = false;
 	}
 }
 
@@ -305,6 +323,25 @@ bool Attack::hasFinishedRecovery()
 void Attack::deactivateRecovery()
 {
 	recovery_ = false;
+}
+
+void Attack::attackCollided()
+{
+	if (!attrib_->isOnGround() && nComboAir_ < 3) 
+	{
+		ent_->getComponent<SimpleGravity>()->setActive(false);
+		ent_->getComponent<SimplePhysicsPlayer>()->gravedad(false);
+		
+		auto tr = ent_->getComponent<Transform>();
+		auto& pos = tr->getPos();
+		auto& vel = tr->getVel();
+
+		vel.setY(0);
+		pos.setY(pos.getY() - 10);
+
+		airHovering = true;
+		hoveringTimer->reset();
+	}
 }
 
 bool Attack::isAttacking()
