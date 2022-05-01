@@ -125,7 +125,7 @@ void Punch::goBack()
 		if (manoDerecha_) img_->setTexture(&sdlutils().images().at("manoDer_fondo"));
 		else img_->setTexture(&sdlutils().images().at("manoIzq_fondo"));
 
-		if (abs(tr_->getPos().getX() - initialpos_.getX()) > 5 || abs(tr_->getPos().getY() - initialpos_.getY()) > 5) {
+		if (abs(tr_->getPos().getX() - initialpos_.getX()) > handSpeed_ + 1 || abs(tr_->getPos().getY() - initialpos_.getY()) > handSpeed_ + 1) {
 			Vector2D dir = initialpos_ - tr_->getPos();
 			tr_->getVel().set(dir.normalize() * handSpeed_);
 		}

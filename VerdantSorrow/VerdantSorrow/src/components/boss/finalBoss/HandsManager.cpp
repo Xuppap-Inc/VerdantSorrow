@@ -11,9 +11,10 @@
 #include "HammerArm.h"
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
+#include "FinalBossMovement.h"
 
 
-HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(START_ANIM), lastAttackDone_(), tiempoColor_()
+HandsManager::HandsManager(CollisionManager* colManager) :colmanager_(colManager), multFase_(1), state_(START_ANIM), lastAttackDoneTimer_(), tiempoColor_()
 {
 }
 
@@ -25,8 +26,11 @@ void HandsManager::initComponent()
 {
 	bA_ = ent_->getComponent<BossAtributos>();
 	playertr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(playertr_ != nullptr && bA_ != nullptr);
-	lastAttackDone_ = mngr_->addTimer();
+
+	movement_ = ent_->getComponent<FinalBossMovement>();
+
+	assert(playertr_ != nullptr && bA_ != nullptr && movement_ != nullptr);
+	lastAttackDoneTimer_ = mngr_->addTimer();
 
 	tiempoColor_ = mngr_->addTimer();
 
@@ -39,7 +43,7 @@ void HandsManager::initComponent()
 void HandsManager::update()
 {
 	//check next attack
-	if (state_ == REPOSO && lastAttackDone_->currTime() > attackCooldown) {
+	if (state_ == REPOSO && lastAttackDoneTimer_->currTime() > attackCooldown) {
 		switch (numeroAtaque)
 		{
 		case CLAP:
@@ -72,7 +76,7 @@ void HandsManager::update()
 		}
 	}
 
-	checkPhaseChange();
+	if (!secondPhase_) checkPhaseChange();
 	if (!deadBoss_) checkIfDead();
 	else checkDeathTimer();
 }
@@ -80,6 +84,9 @@ void HandsManager::update()
 void HandsManager::checkPhaseChange()
 {
 	if (bA_->getLife() <= bA_->getMaxHp() / 2) {
+		
+		secondPhase_ = true;
+		
 		if (multFase_ == 1) {
 			multFase_ = 4;
 		}
@@ -107,7 +114,14 @@ void HandsManager::deactivateBoss()
 	auto col = ent_->getComponent<RectangleCollider>();
 	col->setActive(false);
 
-	state_ = DOING_ANIM;
+	leftHand_->setAlive(false);
+	rightHand_->setAlive(false);
+
+	movement_->setActive(false);
+	if (secondPhase_) movement_->setReturningToCenter(true);
+
+	state_ = REPOSO;
+	numeroAtaque = 0;
 }
 
 void HandsManager::createHands() {
@@ -128,7 +142,7 @@ void HandsManager::createHands() {
 		(leftHandTr_->getWidth() - width_colliderOffset, leftHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoIzCollider);
 	clapLeft_ = leftHand_->addComponent<ClapAttack>(true);
-	punietazoleft_ = leftHand_->addComponent<Punch>(false);
+	punchLeft_ = leftHand_->addComponent<Punch>(false);
 	hammerLeft_ = leftHand_->addComponent<HammerArm>(colmanager_);
 
 
@@ -140,7 +154,7 @@ void HandsManager::createHands() {
 		(rightHandTr_->getWidth() - width_colliderOffset, rightHandTr_->getHeight() - height_colliderOffset);
 	colmanager_->addCollider(manoDrCollider);
 	clapRight_ = rightHand_->addComponent<ClapAttack>(false);
-	punietazoright_ = rightHand_->addComponent<Punch>(true);
+	punchRight_ = rightHand_->addComponent<Punch>(true);
 	hammerRight_ = rightHand_->addComponent<HammerArm>(colmanager_);
 
 	colliderLeftHand_ = manoIzCollider;
@@ -178,8 +192,7 @@ void HandsManager::chooseAttack() {
 	}
 	else {
 		attackCooldown = 1000;
-		//lastAttackDone = sdlutils().currRealTime();
-		lastAttackDone_->reset();
+		lastAttackDoneTimer_->reset();
 		auto ataqueElegido = sdlutils().rand().nextInt(0, 10);
 		if (ataqueElegido <= punietazoProb) numeroAtaque = PUNIETAZO;
 		else if (ataqueElegido <= martillazoProb) numeroAtaque = MARTILLAZO;
@@ -189,6 +202,8 @@ void HandsManager::chooseAttack() {
 
 void HandsManager::clapAttack()
 {
+	lastAttack_ = CLAP;
+
 	if (clapLeft_->getstate() == ClapAttack::REPOSO || clapRight_->getstate() == ClapAttack::REPOSO) {
 		clapLeft_->changeState(ClapAttack::DIAGONAL);
 		clapRight_->changeState(ClapAttack::DIAGONAL);
@@ -231,68 +246,71 @@ void HandsManager::clapAttack()
 		clapRight_->changeState(ClapAttack::REPOSO);
 
 		chooseAttack();
-		//lastAttackDone = sdlutils().currRealTime();
-		lastAttackDone_->reset();
+		lastAttackDoneTimer_->reset();
 		state_ = REPOSO;
 	}
 }
 
 void HandsManager::punietazoAttack()
 {
-	if (punietazoright_->getstate() == Punch::REPOSO) {
-		punietazoright_->changeState(Punch::DOWN);
+	lastAttack_ = PUNIETAZO;
+
+	if (punchRight_->getstate() == Punch::REPOSO) {
+		punchRight_->changeState(Punch::DOWN);
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
 		particlesys->createParticlesHandMagic(20, rightHandTr_);
 	}
 
-	else if (punietazoright_->getstate() == Punch::DOWN)
-		punietazoright_->goDown();
+	else if (punchRight_->getstate() == Punch::DOWN)
+		punchRight_->goDown();
 
-	else if (punietazoright_->getstate() == Punch::FOLLOW)
-		punietazoright_->followPlayer();
+	else if (punchRight_->getstate() == Punch::FOLLOW)
+		punchRight_->followPlayer();
 
-	else if (punietazoright_->getstate() == Punch::HIT)
-		punietazoright_->hit();
+	else if (punchRight_->getstate() == Punch::HIT)
+		punchRight_->hit();
 
-	else if (punietazoright_->getstate() == Punch::BACK)
-		punietazoright_->goBack();
+	else if (punchRight_->getstate() == Punch::BACK)
+		punchRight_->goBack();
 
-	else if (punietazoleft_->getstate() == Punch::REPOSO) {
+	else if (punchLeft_->getstate() == Punch::REPOSO) {
 
-		punietazoleft_->changeState(Punch::DOWN);
+		punchLeft_->changeState(Punch::DOWN);
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
 		particlesys->createParticlesHandMagic(20, leftHandTr_);
 	}
 
-	else if (punietazoleft_->getstate() == Punch::DOWN)
-		punietazoleft_->goDown();
+	else if (punchLeft_->getstate() == Punch::DOWN)
+		punchLeft_->goDown();
 
-	else if (punietazoleft_->getstate() == Punch::FOLLOW)
-		punietazoleft_->followPlayer();
+	else if (punchLeft_->getstate() == Punch::FOLLOW)
+		punchLeft_->followPlayer();
 
-	else if (punietazoleft_->getstate() == Punch::HIT)
-		punietazoleft_->hit();
+	else if (punchLeft_->getstate() == Punch::HIT)
+		punchLeft_->hit();
 
-	else if (punietazoleft_->getstate() == Punch::BACK)
-		punietazoleft_->goBack();
+	else if (punchLeft_->getstate() == Punch::BACK)
+		punchLeft_->goBack();
 
 
 	else {
 
-		punietazoleft_->changeState(Punch::REPOSO);
-		punietazoright_->changeState(Punch::REPOSO);
+		punchLeft_->changeState(Punch::REPOSO);
+		punchRight_->changeState(Punch::REPOSO);
 
 		chooseAttack();
 		//lastAttackDone = sdlutils().currRealTime();
-		lastAttackDone_->reset();
+		lastAttackDoneTimer_->reset();
 		state_ = REPOSO;
 	}
 }
 
 void HandsManager::hammerAttack()
 {
+	lastAttack_ = MARTILLAZO;
+
 	if (hammerLeft_->getstate() == HammerArm::REPOSO && hammerRight_->getstate() == HammerArm::REPOSO) {
 
 		if (playertr_->getPos().getX() - playertr_->getWidth() < sdlutils().width() / 2) {
@@ -336,7 +354,7 @@ void HandsManager::hammerAttack()
 
 			chooseAttack();
 			//lastAttackDone = sdlutils().currRealTime();
-			lastAttackDone_->reset();
+			lastAttackDoneTimer_->reset();
 			state_ = REPOSO;
 		}
 	}
@@ -373,7 +391,7 @@ void HandsManager::hammerAttack()
 
 				chooseAttack();
 				//lastAttackDone = sdlutils().currRealTime();
-				lastAttackDone_->reset();
+				lastAttackDoneTimer_->reset();
 				state_ = REPOSO;
 			}
 		}
@@ -385,6 +403,9 @@ void HandsManager::checkIfDead()
 	if (bA_->getLife() <= 0) 
 	{
 		deactivateBoss();
+		movement_->setDeadBoss(true);
+
+		deadBoss_ = true;
 
 		deathTimer_->reset();
 	}

@@ -89,20 +89,13 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 					Transform* playerTr = player->getComponent<Transform>();
 
-					player->getComponent<Transform>()->getVel().setY(0);
-
 					if (playerAt->isNewAttack()) {
+
+						player->getComponent<Attack>()->attackCollided();
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(70);
 						s->play();
-
-						//slow de la animacion
-						/*auto anim = player->getComponent<FramedImage>();
-
-						std::function<void()> slowAnimCallback = [anim]() { anim->slowAnimation(10, 1); };
-
-						anim->registerEvent(std::pair<int, std::string>(7, "Chica_AtkFloor"), slowAnimCallback);*/
 
 						bA->setDamage(PLAYER_ATTACK_DMG);
 

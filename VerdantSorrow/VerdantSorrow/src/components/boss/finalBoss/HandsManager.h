@@ -14,6 +14,7 @@ class BossAtributos;
 class RectangleCollider;
 class Image;
 class VirtualTimer;
+class FinalBossMovement;
 
 class HandsManager :
 	public ecs::Component
@@ -25,8 +26,7 @@ public:
 		CLAP,
 		PUNIETAZO,
 		MARTILLAZO,
-		START_ANIM,
-		DOING_ANIM
+		START_ANIM
 	};
 
 	__CMPID_DECL__(ecs::_HANDS_MANAGER)
@@ -46,7 +46,7 @@ public:
 private:
 
 	const int START_DELAY = 5000;
-	const int DEATH_DELAY = 2000;
+	const int DEATH_DELAY = 5000;
 
 	void createHands();
 	void chooseAttack();
@@ -57,7 +57,7 @@ private:
 	void checkIfDead();
 	void checkDeathTimer();
 
-	VirtualTimer* lastAttackDone_;
+	VirtualTimer* lastAttackDoneTimer_;
 	float  attackCooldown;
 	int numeroAtaque;
 
@@ -74,8 +74,8 @@ private:
 	Transform* tr_;
 	Transform* playertr_;
 	CollisionManager* colmanager_;
-	Punch* punietazoright_;
-	Punch* punietazoleft_;
+	Punch* punchRight_;
+	Punch* punchLeft_;
 	ClapAttack* clapLeft_;
 	ClapAttack* clapRight_;
 	HammerArm* hammerRight_;
@@ -88,7 +88,11 @@ private:
 	Image* rightHandImg_;
 
 	State state_;
+	State lastAttack_;
 
 	bool deadBoss_ = false;
+	bool secondPhase_ = false;
+
+	FinalBossMovement* movement_;
 };
 

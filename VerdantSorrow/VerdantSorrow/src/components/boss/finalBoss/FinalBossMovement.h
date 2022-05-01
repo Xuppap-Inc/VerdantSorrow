@@ -28,13 +28,19 @@ public:
 
 	void setActive(bool set) { active_ = set; };
 	bool isActive() { return active_; };
+
+	void setReturningToCenter(bool set) { returningToCenter = set; };
+	bool isReturningToCenter() { return returningToCenter; };
+
+	void setDeadBoss(bool set) { deadBoss_ = set; };
 private:
 
 	const int WAIT_ON_GROUND = 1000;
 
+	const int RETURNING_SPEED = 5;
+
 	Transform* tr_;
 	BossAtributos* bA_;
-	HandsManager* handMngr_;
 	FramedImage* anim_;
 	Phase phase_;
 	EyeState eyeState_;
@@ -59,5 +65,7 @@ private:
 	void bounce();
 	void restartBouncing();
 	void fireBall();
+
+	bool returningToCenter = false;
 };
 
