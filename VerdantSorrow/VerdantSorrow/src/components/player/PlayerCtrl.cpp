@@ -16,7 +16,7 @@ PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float r
 
 	// INPUT
 	// Jump
-	jumpKeys({ SDL_SCANCODE_W , SDL_SCANCODE_SPACE }),
+	jumpKeys({ SDL_SCANCODE_W}),
 	jumpButtons({ SDL_CONTROLLER_BUTTON_A }),
 
 	// Roll

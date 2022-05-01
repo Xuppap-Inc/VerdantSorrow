@@ -46,8 +46,8 @@ void EscapeScene::init()
 
 
 	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager);
-
 	background();
+	
 
 
 	//Se crea el jugador 
@@ -55,7 +55,7 @@ void EscapeScene::init()
 	playerGenerator(colManager, player);
 
 	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-	player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
+	player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() , tilemapTr->getHeight() / 2));
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
