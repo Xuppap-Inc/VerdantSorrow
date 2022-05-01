@@ -196,6 +196,10 @@
     {
       "id": "luz_naranja",
       "file": "resources/images/luz_amarilla.png"
+    },
+    {
+      "id": "simbolo_lumine",
+      "file": "resources/images/simbolo_lumine.png"
     }
   ],
 

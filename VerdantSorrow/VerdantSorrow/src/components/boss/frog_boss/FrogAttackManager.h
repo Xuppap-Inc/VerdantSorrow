@@ -72,6 +72,7 @@ private:
 	void nextAttack();
 
 	void checkPhaseChange();
+	void dieAnimation();
 	void checkAnimationState();
 	void checkFrogState();
 	void checkIfDead();
@@ -114,5 +115,8 @@ private:
 	VirtualTimer* deathTimer_;
 
 	bool deadBoss_;
+
+	ParticleSystem* deadParticles1_;
+	ParticleSystem* deadParticles2_;
 };
 
