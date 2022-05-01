@@ -46,7 +46,7 @@ public:
 	bool hasFinishedRecovery();
 	void deactivateRecovery();
 
-	void attackCollided() {};
+	void attackCollided();
 
 	bool isAttacking();
 
