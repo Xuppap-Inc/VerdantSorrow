@@ -74,7 +74,7 @@ void HandsManager::update()
 
 	checkPhaseChange();
 	if (!deadBoss_) checkIfDead();
-	else checkDeathTimer;
+	else checkDeathTimer();
 }
 
 void HandsManager::checkPhaseChange()
