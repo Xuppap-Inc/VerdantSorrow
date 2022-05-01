@@ -51,7 +51,6 @@ void Hub::init()
 
 	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx",colManager);
 
-
 	changeSc = false;
 
 	playerGenerator(colManager);
