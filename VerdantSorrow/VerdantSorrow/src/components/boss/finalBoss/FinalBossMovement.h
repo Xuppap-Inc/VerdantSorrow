@@ -25,6 +25,9 @@ public:
 	~FinalBossMovement();
 	void update() override;
 	void initComponent()override;
+
+	void setActive(bool set) { active_ = set; };
+	bool isActive() { return active_; };
 private:
 
 	const int WAIT_ON_GROUND = 1000;
@@ -50,6 +53,7 @@ private:
 
 	bool deadBoss_;
 
+	bool active_ = true;;
 
 	void checkPhaseChange();
 	void bounce();

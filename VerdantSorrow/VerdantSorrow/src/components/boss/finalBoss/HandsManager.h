@@ -25,7 +25,8 @@ public:
 		CLAP,
 		PUNIETAZO,
 		MARTILLAZO,
-		START_ANIM
+		START_ANIM,
+		DOING_ANIM
 	};
 
 	__CMPID_DECL__(ecs::_HANDS_MANAGER)
@@ -35,6 +36,8 @@ public:
 	void update();
 
 	void checkPhaseChange();
+
+	void deactivateBoss();
 
 	State getState() { return state_; };
 	void setState(State state) { state_ = state; };

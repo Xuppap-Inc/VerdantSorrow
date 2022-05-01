@@ -52,14 +52,15 @@ void TreeScene::init()
 	treeGenerator(colManager);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
+
+	playerDeathTimer_ = mngr_->addTimer();
 }
 
 
 void TreeScene::update()
 {
-	auto health = player->getComponent<PlayerAttributes>()->getLives();
 	auto bossHealth = mngr_->getHandler(ecs::_LANTERN)->getComponent<BossAtributos>();
-	if (health > 0 && !bossHealth->isDefeated()) {
+	if (!playerAttribs_->isDefeated() && !bossHealth->isDefeated()) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -70,9 +71,12 @@ void TreeScene::update()
 		mngr_->debug();
 #endif
 		sdlutils().presentRenderer();
+
+		if (playerDying) checkPlayerFinishedDying();
+		else checkPlayerDied();
 	}
 	else {
-		if (health <= 0) sC().changeTreeEssenceState(true);
+		if (playerAttribs_->isDefeated()) sC().changeTreeEssenceState(true);
 		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::TREEDEFEATED;
@@ -123,7 +127,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addComponent<MeleeAttack>(100, treeH, colManager);
 
 	//IMPORTANTE: attack manager al final
-	tree_->addComponent<TreeAttackManager>(colManager);
+	treeMngr_ = tree_->addComponent<TreeAttackManager>(colManager);
 	
 	tree_->addToGroup(ecs::_BOSS_GRP);
 }
@@ -165,6 +169,13 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	auto lanternHPBar = mngr_->addEntity();
 	lanternHPBar->addComponent<BossHPBar>();
 	lanternHPBar->addToGroup(ecs::_UI_GRP);
+}
+
+void TreeScene::deactivateBoss()
+{
+	treeMngr_->deactivateBoss();
+	playerCtrl_->setActive(false);
+	playerDying = true;
 }
 
 bool TreeScene::getAble()

@@ -86,6 +86,12 @@ public:
 
     //Cambia el tiempo del int invulnerableTimer_
     void setInvulnerableTimer(int time) { invulnerableTimer_ = time; };
+
+    void stop();
+    void deactivateStop();
+
+    bool isDefeated() { return defeated_; };
+    void setDefeated(bool set) { defeated_ = set; };
 protected:
     int invulnerableTimer_;
     //Vidas que posee el jugador
@@ -100,5 +106,7 @@ protected:
     bool downStop;
     //Indica si es invulnerable
     bool invulnerable_;
+
+    bool defeated_;
 };
 

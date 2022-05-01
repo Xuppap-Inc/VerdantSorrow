@@ -41,8 +41,13 @@ public:
     */
     virtual void onNoTopAndBot() {};
 
+    void setActive(bool set) { active_ = set; };
+    bool isActive() { return active_; };
+
 protected:
     Transform* tr_;
+
+    bool active_ = true;
 
     const int GROUND_HEIGHT = 100;
 };

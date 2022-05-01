@@ -20,45 +20,48 @@ void OnBorders::initComponent()
 
 void OnBorders::update()
 {
-	auto& pos = tr_->getPos();
+	if (active_) {
 
-	auto height = sdlutils().height();
-	auto width = sdlutils().width();
-	auto entHeight = tr_->getHeight();
-	auto entWidth = tr_->getWidth();
-	
-	//Borde inferior
-	if (pos.getY() > height - entHeight - GROUND_HEIGHT) {
-	
-		onBottom();
-	}
+		auto& pos = tr_->getPos();
 
-	//Borde superior
-	else if (pos.getY() < 0) {
+		auto height = sdlutils().height();
+		auto width = sdlutils().width();
+		auto entHeight = tr_->getHeight();
+		auto entWidth = tr_->getWidth();
 
-		onTop();
-	}
+		//Borde inferior
+		if (pos.getY() > height - entHeight - GROUND_HEIGHT) {
 
-	//si no toca bordes superior e inferior
-	else {
-	
-		onNoTopAndBot();
-	}
+			onBottom();
+		}
 
-	//Borde derecho
-	if (pos.getX() > width - entWidth) {
-	
-		onRight();
-	}
-	//Borde izquierdo
-	else if (pos.getX() < 0) {
+		//Borde superior
+		else if (pos.getY() < 0) {
 
-		onLeft();
-	}
+			onTop();
+		}
 
-	//si no toca bordes laterales
-	else {
-		
-		onNoLeftAndRight();
+		//si no toca bordes superior e inferior
+		else {
+
+			onNoTopAndBot();
+		}
+
+		//Borde derecho
+		if (pos.getX() > width - entWidth) {
+
+			onRight();
+		}
+		//Borde izquierdo
+		else if (pos.getX() < 0) {
+
+			onLeft();
+		}
+
+		//si no toca bordes laterales
+		else {
+
+			onNoLeftAndRight();
+		}
 	}
 }

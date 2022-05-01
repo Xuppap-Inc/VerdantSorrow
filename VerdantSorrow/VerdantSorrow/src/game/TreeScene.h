@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 class CollisionChecker;
+class TreeAttackManager;
 class TreeScene :public Scene
 {
 public:
@@ -15,11 +16,9 @@ public:
 	void update()override;
 	void treeGenerator(CollisionManager* colManager);
 
-	//void playerGenerator(CollisionManager* colManager);
-
-	void rootGenerator(CollisionManager* colManager, float x);
-
 	void lanternGenerator(CollisionManager* colManager, Entity* tree_, float x,float y);
+
+	void deactivateBoss() override;
 
 	bool getAble();
 	void setAble(bool a);
@@ -31,5 +30,7 @@ private:
 	Entity* tree_;
 	bool isAble;
 	CollisionChecker* colCheck_;
+
+	TreeAttackManager* treeMngr_;
 };
 

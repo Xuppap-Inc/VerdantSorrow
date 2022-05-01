@@ -6,6 +6,8 @@
 #include "Scene.h"
 
 class CollisionChecker;
+class FinalBossMovement;
+class HandsManager;
 class FinalBossScene: public Scene
 {
 public: 
@@ -19,6 +21,8 @@ public:
 	void background();
 	void finalBossGenerator(CollisionManager* colManager, Entity* player_);
 
+	void deactivateBoss() override;
+
 	bool getAble();
 	void setAble(bool a);
 	void createLights();
@@ -27,5 +31,8 @@ private:
 	Entity* player;
 	Entity* FinalBossFace;
 	CollisionChecker* colCheck_;
+
+	HandsManager* handsMngr_;
+	FinalBossMovement* movement_;
 };
 

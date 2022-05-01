@@ -328,6 +328,14 @@ void TreeAttackManager::checkAnimState()
 	}
 }
 
+void TreeAttackManager::deactivateBoss()
+{
+	state = DOING_ANIM;
+	animNewState_ = ANIM_IDLE;
+
+	movement_->setMoveActive(false);
+}
+
 void TreeAttackManager::checkPhaseChange()
 {
 	if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {

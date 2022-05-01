@@ -45,6 +45,8 @@ public:
 	ecs::Entity* createTongue(CollisionManager* colManager);
 	void onFlyDied();
 
+	void deactivateBoss();
+
 private:
 
 	const int FLOOR_HEIGHT = 100;

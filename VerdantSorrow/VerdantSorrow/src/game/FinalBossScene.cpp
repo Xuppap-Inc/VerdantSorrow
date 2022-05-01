@@ -61,13 +61,13 @@ void FinalBossScene::init()
 	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));
 	suelo->addToGroup(ecs::_FIRST_GRP);
 
+	playerDeathTimer_ = mngr_->addTimer();
 }
 
 void FinalBossScene::update()
 {
-	auto health = player->getComponent<PlayerAttributes>()->getLives();
 	auto bossHealth = FinalBossFace->getComponent<BossAtributos>()->getLife();
-	if (health > 0 && bossHealth > 0) {
+	if (!playerAttribs_->isDefeated() && bossHealth > 0) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -78,9 +78,12 @@ void FinalBossScene::update()
 		mngr_->debug();
 #endif
 		sdlutils().presentRenderer();
+
+		if (playerDying) checkPlayerFinishedDying();
+		else checkPlayerDied();
 	}
 	else {
-		if (health <= 0) sC().changeEyeEssenceState(true);
+		if (playerAttribs_->isDefeated()) sC().changeEyeEssenceState(true);
 		if (bossHealth <= 0) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FINALDEFEATED;
@@ -124,16 +127,11 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto BossY = sdlutils().height() / 2 - 250;
 	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f, 0.55f);
 
-	//FinalBossFace->addComponent<Image>(&sdlutils().images().at("ojo"));
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase1"), 10, 6, 2000, 60, "FinalBoss_Fase1");
 	BossTr->setScale(1);
 
-	//BossTr->setScale(BossTr->getScale() * 3);
-	//FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
-	//anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 4, 5, 800, 20, "FinalBoss_Fase2");
-
-	FinalBossFace->addComponent<HandsManager>(colManager);
-	FinalBossFace->addComponent<FinalBossMovement>(colManager);
+	handsMngr_ = FinalBossFace->addComponent<HandsManager>(colManager);
+	movement_ = FinalBossFace->addComponent<FinalBossMovement>(colManager);
 
 	float colliderWidth = 100, colliderOffset_y = 100;
 	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>
@@ -145,6 +143,14 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	auto finalBossHPBar = mngr_->addEntity();
 	finalBossHPBar->addComponent<BossHPBar>();
 	finalBossHPBar->addToGroup(ecs::_UI_GRP);
+}
+
+void FinalBossScene::deactivateBoss()
+{
+	handsMngr_->deactivateBoss();
+	movement_->setActive(false);
+	playerCtrl_->setActive(false);
+	playerDying = true;
 }
 
 bool FinalBossScene::getAble()

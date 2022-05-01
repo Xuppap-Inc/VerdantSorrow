@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 class CollisionChecker;
+class FrogAttackManager;
 class FrogScene: public Scene
 {
 public: 
@@ -17,6 +18,8 @@ public:
 	void background();
 	void frogGenerator(CollisionManager* colManager, Entity* player_);
 
+	void deactivateBoss() override;
+
 	bool getAble();
 	void setAble(bool a);
 private:
@@ -24,6 +27,8 @@ private:
 	Entity* player;
 	Entity* Frog;
 	CollisionChecker* colCheck_;
+
+	FrogAttackManager* frogMngr_;
 
 };
 

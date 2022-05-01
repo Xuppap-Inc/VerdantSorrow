@@ -50,16 +50,14 @@ void FrogScene::init()
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	
+	playerDeathTimer_ = mngr_->addTimer();
 }
 
 void FrogScene::update()
 {
-	auto health = 0;
-	if (player != nullptr)
-		health = player->getComponent<PlayerAttributes>()->getLives();
 	auto bossHealth = Frog->getComponent<BossAtributos>();
 	
-	if (health > 0 && !bossHealth->isDefeated()) {
+	if (!playerAttribs_->isDefeated() && !bossHealth->isDefeated()) {
 		mngr_->update();
 		colCheck_->checkCollisions();
 		mngr_->refresh();
@@ -70,9 +68,12 @@ void FrogScene::update()
 		mngr_->debug();
 #endif		
 		sdlutils().presentRenderer();
+
+		if (playerDying) checkPlayerFinishedDying();
+		else checkPlayerDied();
 	}
 	else {
-		if (health <= 0) sC().changeFrogEssenceState(true);
+		if (playerAttribs_->isDefeated()) sC().changeFrogEssenceState(true);
 		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
 			Game::instance()->state_ = Game::State::FROGDEFEATED;
@@ -141,7 +142,6 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	auto frogW = frogH * 1.11f;
 	auto FrogX = sdlutils().width() / 2 - 25;
 	auto FrogY = sdlutils().height() - frogH;
-	//auto FrogTr = Frog->addComponent<Transform>(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f);
 	auto FrogTr = Frog->addComponent<Transform>();
 
 	FrogTr->init(Vector2D(FrogX, FrogY), Vector2D(), frogW, frogH, 0.0f, 1);
@@ -157,12 +157,19 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog->addComponent<SimpleGravity>(.5);
 	Frog->addComponent<BounceOnBordersFrog>();
 
-	Frog->addComponent<FrogAttackManager>(colManager);
+	frogMngr_ = Frog->addComponent<FrogAttackManager>(colManager);
 
 	Frog->addComponent<BossHPBar>();
 	auto frogHPBar = mngr_->addEntity();
 	frogHPBar->addComponent<BossHPBar>();
 	frogHPBar->addToGroup(ecs::_UI_GRP);
+}
+
+void FrogScene::deactivateBoss()
+{
+	frogMngr_->deactivateBoss();
+	playerCtrl_->setActive(false);
+	playerDying = true;
 }
 
 bool FrogScene::getAble()

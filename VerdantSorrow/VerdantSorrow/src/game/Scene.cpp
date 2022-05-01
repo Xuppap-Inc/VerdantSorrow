@@ -18,7 +18,7 @@
 
 #include "CollisionManager.h"
 
-Scene::Scene() : mngr_(nullptr)
+Scene::Scene() : mngr_(nullptr), camera_(), playerAttribs_()
 {
 }
 
@@ -37,41 +37,6 @@ void Scene::init()
 	auto camTr = camera_->addComponent<Transform>();
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 }
-
-//void Scene::start()
-//{
-//	// a boolean to exit the loop
-//	bool exit = false;
-//
-//	auto& ihdlr = ih();
-//
-//	while (!exit) {
-//		Uint32 startTime = sdlutils().currRealTime();
-//
-//		// refresh the input handler
-//		ihdlr.refresh();
-//
-//		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-//			exit = true;
-//			continue;
-//		}
-//
-//		mngr_->update();
-//		mngr_->refresh();
-//
-//		sdlutils().clearRenderer();
-//		mngr_->render();
-//		mngr_->debug();
-//		sdlutils().presentRenderer();
-//
-//		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-//
-//		if (frameTime < 10)
-//			SDL_Delay(10 - frameTime);
-//	}
-//
-//	SDL_Quit();
-//}
 
 void Scene::update()
 {
@@ -103,30 +68,27 @@ void Scene::background(std::string backgroundName, int height)
 
 void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 {
-	player_->addComponent<PlayerAttributes>();
+	playerAttribs_ = player_->addComponent<PlayerAttributes>();
 
 	auto playerTr = player_->addComponent<Transform>();
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
-	//playerTr->init(Vector2D(playerX, playerY), Vector2D(),80, 160, 0.0f);
 	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 
-	//player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 7, 5000, 30);
 	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	auto collide = player_->addComponent<CollideWithBorders>(100);
-	collide->collisionx(false);
-	//Se a�ade un collider al jugadordd
+	bordersPlayer_ = player_->addComponent<CollideWithBorders>(100);
+	bordersPlayer_->collisionx(false);
+
+	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
 
 	//IMPORTANTE :No poner estas f�sicas detr�s del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
-
-	//player_->addComponent<Image>(&sdlutils().images().at("chica"));
 
 	//Componente de ataque del jugador
 	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr->getHeight() * 1.8, -playerTr->getHeight() * 1.5 / 3, colManager);
@@ -134,19 +96,30 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	playerAttackCollider->setIsTrigger(true);
 
 	// float jumpForce, float speed, float deceleration, float rollSpeed
-	player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
+	playerCtrl_ = player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
 	mngr_->setHandler(ecs::_PLAYER, player_);
-	//Componente ui jugador
-	//player_->addComponent<PlayerUI>(&sdlutils().images().at("heart"), &sdlutils().images().at("heartBlack"));
 
 	auto playerLife_ = mngr_->addEntity();
 	playerLife_->addComponent<PlayerUI>();
 	playerLife_->addToGroup(ecs::_UI_GRP);
 
-
-	// Animacion del jugador
-	//player_->addComponent<FramedImage>(&sdlutils().images().at("ranajump"), 6, 6, 2000, 31);
-
-
 	player_->addToGroup(ecs::_PLAYER_GRP);
+}
+
+void Scene::checkPlayerFinishedDying()
+{
+	if (playerDeathTimer_->currTime() >= PLAYER_DEATH_DELAY) 
+	{
+		playerAttribs_->setDefeated(true);
+		playerAttribs_->deactivateStop();
+	}
+}
+
+void Scene::checkPlayerDied()
+{
+	if (playerAttribs_->getLives() <= 0) 
+	{
+		deactivateBoss();
+		playerDeathTimer_->reset();
+	}
 }

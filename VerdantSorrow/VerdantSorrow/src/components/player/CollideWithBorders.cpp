@@ -4,7 +4,7 @@
 #include "../../ecs/Entity.h"
 #include "../Transform.h"
 
-CollideWithBorders::CollideWithBorders(): OnBorders()
+CollideWithBorders::CollideWithBorders() : OnBorders()
 {
 	attrib_ = nullptr;
 	tr_ = nullptr;
@@ -38,7 +38,7 @@ void CollideWithBorders::onBottom()
 	auto height = sdlutils().height();
 	auto playerHeight = tr_->getHeight();
 	bool gr = tr_->getGravity();
-	if (!attrib_->isOnGround()||!gr) {
+	if (!attrib_->isOnGround() || !gr) {
 
 		attrib_->setOnGround(true);
 		pos.set(Vector2D(pos.getX(), height - playerHeight - GROUND_HEIGHT));
@@ -48,27 +48,21 @@ void CollideWithBorders::onBottom()
 
 void CollideWithBorders::onLeft()
 {
-	
-		auto& pos = tr_->getPos();
+	auto& pos = tr_->getPos();
 
-		pos.set(Vector2D(0, pos.getY()));
-		attrib_->setLeftStop(true);
-
-	
+	pos.set(Vector2D(0, pos.getY()));
+	attrib_->setLeftStop(true);
 }
 
 void CollideWithBorders::onRight()
 {
-	
-		auto& pos = tr_->getPos();
+	auto& pos = tr_->getPos();
 
-		auto width = sdlutils().width();
-		auto playerWidth = tr_->getWidth();
+	auto width = sdlutils().width();
+	auto playerWidth = tr_->getWidth();
 
-		pos.set(Vector2D(width - playerWidth, pos.getY()));
-		attrib_->setRightStop(true);
-	
-	
+	pos.set(Vector2D(width - playerWidth, pos.getY()));
+	attrib_->setRightStop(true);
 }
 
 void CollideWithBorders::onTop()

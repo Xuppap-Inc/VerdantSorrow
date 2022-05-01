@@ -29,6 +29,9 @@ public:
 	bool isRolling() { return isRolling_; };
 	void disableKnockback();
 
+	void setActive(bool set) { active_ = set; };
+	bool isActive() { return active_; };
+
 private:
 	RectangleCollider* playerCol_;
 	Transform* tr_;
@@ -57,6 +60,7 @@ private:
 	//booleanas de control para manejar el input
 	bool moveLeft_, moveRight_, jump_, roll_;
 
+	bool active_ = true;
 
 	// Input
 	vector<SDL_Scancode> jumpKeys;

@@ -31,88 +31,88 @@ PlayerCtrl::~PlayerCtrl()
 
 void PlayerCtrl::update()
 {
-	//auto currentTime = sdlutils().currRealTime();
+	if (active_) {
 
-	auto& vel = tr_->getVel();
-	bool isAttacking = attack_->isActive();
+		auto& vel = tr_->getVel();
+		bool isAttacking = attack_->isActive();
 
-	//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
-	//Se desactiva y se activa el deslizar
-	if (lastRollTimer_->currTime() >=  rollDuration_ && isRolling_) {
-		slide_ = true;
-		isRolling_ = false;
-	}
-
-	//handle input
-	handleInput();
-
-	//!isAttacking
-	if (!attack_->isAttacking() && !isRolling_ && !isKnockback) {
-
-		//salto
-		if (jump_ && attrib_->isOnGround()) {
-
-			vel.set(Vector2D(vel.getX(), -jumpForce_));
-			attrib_->setOnGround(false);
-			slide_ = false;
-
-			// Animacion
-			anim_->repeat(false);
-			anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
-		}
-
-		//moviemiento nulo
-		if (moveRight_ && moveLeft_) {
-			vel.set(Vector2D(0, vel.getY()));
-			movementDir_ = 1;
-			slide_ = false;
-		}
-		//movimiento izquierda
-		else if (moveLeft_ && !attrib_->isLeftStop()) {
-
-			vel.set(Vector2D(-speed_, vel.getY()));
-			movementDir_ = -1;
-			slide_ = false;
-
-			anim_->flipX(true);
-		}
-		//movimiento derecha
-		else if (moveRight_ && !attrib_->isRightStop()) {
-
-			vel.set(Vector2D(speed_, vel.getY()));
-			movementDir_ = 1;
-			slide_ = false;
-
-			anim_->flipX(false);
-		}
-		else
+		//Si ha pasado el tiempo actual es mayor que cuando se activó el roll + su duración
+		//Se desactiva y se activa el deslizar
+		if (lastRollTimer_->currTime() >= rollDuration_ && isRolling_) {
 			slide_ = true;
+			isRolling_ = false;
+		}
 
-		//Roll
-		if (attrib_->isOnGround() && roll_ && lastRollTimer_->currTime() >=  + rollDuration_ + rollCooldown_) {
-			vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
-			lastRollTimer_->reset();
-			isRolling_ = true;
-			slide_ = false;
-			SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
-			s->play();
-			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
-			particlesys->createParticlesRoll(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
-		}	
+		//handle input
+		handleInput();
 
+		//!isAttacking
+		if (!attack_->isAttacking() && !isRolling_ && !isKnockback) {
+
+			//salto
+			if (jump_ && attrib_->isOnGround()) {
+
+				vel.set(Vector2D(vel.getX(), -jumpForce_));
+				attrib_->setOnGround(false);
+				slide_ = false;
+
+				// Animacion
+				anim_->repeat(false);
+				anim_->changeanim(&sdlutils().images().at("Chica_Jump"), 4, 5, 300, 20, "Chica_Jump");
+			}
+
+			//moviemiento nulo
+			if (moveRight_ && moveLeft_) {
+				vel.set(Vector2D(0, vel.getY()));
+				movementDir_ = 1;
+				slide_ = false;
+			}
+			//movimiento izquierda
+			else if (moveLeft_ && !attrib_->isLeftStop()) {
+
+				vel.set(Vector2D(-speed_, vel.getY()));
+				movementDir_ = -1;
+				slide_ = false;
+
+				anim_->flipX(true);
+			}
+			//movimiento derecha
+			else if (moveRight_ && !attrib_->isRightStop()) {
+
+				vel.set(Vector2D(speed_, vel.getY()));
+				movementDir_ = 1;
+				slide_ = false;
+
+				anim_->flipX(false);
+			}
+			else
+				slide_ = true;
+
+			//Roll
+			if (attrib_->isOnGround() && roll_ && lastRollTimer_->currTime() >= +rollDuration_ + rollCooldown_) {
+				vel.set(Vector2D(movementDir_ * rollSpeed_, vel.getY()));
+				lastRollTimer_->reset();
+				isRolling_ = true;
+				slide_ = false;
+				SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
+				s->play();
+				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
+				particlesys->createParticlesRoll(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
+			}
+
+		}
+
+		animationManagement();
+
+		if (slide_)
+			doSlide();
+
+		if (isAttacking)
+			doAttack();
+
+		if (isKnockback)
+			disableKnockback();
 	}
-
-	animationManagement();
-
-	if (slide_)
-		doSlide();
-
-	if (isAttacking)
-		doAttack();
-
-	if (isKnockback)
-		disableKnockback();
-
 }
 
 void PlayerCtrl::initComponent()

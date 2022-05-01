@@ -50,6 +50,8 @@ public:
 
 	void checkAnimState();
 
+	void deactivateBoss();
+
 	int getRootWidth() { return rootWidth_; }
 private:
 	enum AnimState {

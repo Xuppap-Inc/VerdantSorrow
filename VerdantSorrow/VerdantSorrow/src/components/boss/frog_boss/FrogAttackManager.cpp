@@ -388,6 +388,12 @@ void FrogAttackManager::onFlyDied() {
 	frogState_ = FLY_DIED;
 }
 
+void FrogAttackManager::deactivateBoss()
+{
+	frogState_ = DOING_ANIMATION;
+	animNewState_ = ANIM_IDLE;
+}
+
 void FrogAttackManager::checkJumpDirection()
 {
 	if (jumpDirection_ == 1 && !anim_->isFlipped()) {

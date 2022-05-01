@@ -50,20 +50,23 @@ void FinalBossMovement::initComponent()
 
 void FinalBossMovement::update()
 {
-	if (phase_ == PHASE1) {
+	if (active_) {
+		
+		if (phase_ == PHASE1) {
 
-		checkPhaseChange();
-	}
-	else if (phase_ == PHASE2) {
+			checkPhaseChange();
+		}
+		else if (phase_ == PHASE2) {
 
-		if (eyeState_ == EyeState::BOUNCE) bounce();
-		else restartBouncing();
-	}
+			if (eyeState_ == EyeState::BOUNCE) bounce();
+			else restartBouncing();
+		}
 
-	if (deadBoss_) {
+		if (deadBoss_) {
 
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
+			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+			particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
+		}
 	}
 }
 

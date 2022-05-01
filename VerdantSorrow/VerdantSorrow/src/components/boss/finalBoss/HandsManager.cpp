@@ -98,6 +98,14 @@ void HandsManager::checkPhaseChange()
 	}
 }
 
+void HandsManager::deactivateBoss()
+{
+	auto col = ent_->getComponent<RectangleCollider>();
+	col->setActive(false);
+
+	state_ = DOING_ANIM;
+}
+
 void HandsManager::createHands() {
 
 	float handSize = 200;
