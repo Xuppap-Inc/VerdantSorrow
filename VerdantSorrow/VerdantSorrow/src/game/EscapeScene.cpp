@@ -44,10 +44,10 @@ void EscapeScene::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-	background();
 
 	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager);
 
+	background();
 
 
 	//Se crea el jugador 
