@@ -113,10 +113,6 @@ void FrogScene::background()
 
 	auto parallax_ = new Parallax(mngr_);
 	parallax_->AddLayer(&sdlutils().images().at("nubes"), 14, sdlutils().height(), sdlutils().width(), 0);
-	/*auto nubes = mngr_->addEntity();
-	auto nubestr = nubes->addComponent<Transform>(Vector2D(0, 0), Vector2D(-5,0), sdlutils().width(), sdlutils().height()/2, 0.0f);
-	nubes->addComponent<Image>(&sdlutils().images().at("nubes"));
-	nubes->addComponent<ShowAtOpposideSide>();*/
 	auto fondodel = mngr_->addEntity();
 	auto fondotr = fondodel->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
 	fondodel->addComponent<Image>(&sdlutils().images().at("fondodel"));
@@ -126,7 +122,6 @@ void FrogScene::background()
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 	blCK->addToGroup(ecs::_BACKGROUND_1_GRP);
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
-	//nubes->addToGroup(ecs::_BACKGROUND_1_GRP);
 	fondodel->addToGroup(ecs::_BACKGROUND_1_GRP);
 	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
