@@ -20,7 +20,12 @@ class SDLUtils: public Singleton<SDLUtils> {
 	friend Singleton<SDLUtils> ; // needed to give access to private constructors
 
 public:
-
+	void setWindowSize(int w, int h){
+		width_ = w;
+		height_ = h;
+		SDL_SetWindowSize(window_, w, h);
+		SDL_SetWindowPosition(window_, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	}
 	// we abstract away the actual data structure we use for
 	// tables. All we assume is that is has the following
 	// methods
@@ -164,15 +169,16 @@ public:
 	void freeMemory();
 	void loadReasources(std::string filename); // load resources from the json file
 	void loadReasourcesHub(std::string filename); // load resources from the json file
-
+	void initWindow();
+	void closeWindow();
+	void setWidth(int w) { width_ = w; };
+	void setHeight(int h) { height_ = h; };
 private:
 	SDLUtils();
 	SDLUtils(std::string windowTitle, int width, int height);
 	SDLUtils(std::string windowTitle, int width, int height,
 			std::string filename);
 
-	void initWindow();
-	void closeWindow();
 	void initSDLExtensions(); // initialize resources (fonts, textures, audio, etc.)
 	void closeSDLExtensions(); // free resources the
 
