@@ -76,7 +76,7 @@ void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos, std::vector<Enti
 	}
 }
 
-void BaseMenu::handleControllerInput(float delay, float lastUpdate,int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
+void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
 {
 	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
@@ -91,7 +91,7 @@ void BaseMenu::handleControllerInput(float delay, float lastUpdate,int &controll
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, 2); //Suma tres posiciones (el menu es simetrico y hay tres botones por columna)
+					changeButton(controllerIndex, buttNames, lastUpdate, 2); //Suma dos posiciones (el menu es simetrico y hay tres botones por columna)
 
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba

@@ -71,7 +71,7 @@ void MenuScene::update()
 	else
 	{
 		auto& ihdlr = ih();
-		if (ihdlr.isKeyDown(SDLK_SPACE)) {
+		if (ihdlr.isKeyDown(SDLK_SPACE )|| ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) {
 			
 			generateAllButtons();
 			buttonsActive_ = true;
@@ -88,6 +88,7 @@ void MenuScene::update()
 			musica_->setMusicVolume(60);
 		}
 	}
+	
 	if (!changeSc_) {
 		mngr_->update();
 		mngr_->refresh();

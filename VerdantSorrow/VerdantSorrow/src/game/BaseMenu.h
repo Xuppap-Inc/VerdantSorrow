@@ -17,7 +17,7 @@ public:
 	virtual void generateAllButtons()=0; //Virtual puro, cada menu dibuja sus botones de diferentes formas
 	void handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames,std::vector<Entity*>buttProps);
 	void handleMouseInput(std::vector<Transform*>buttPos, std::vector<Entity*>buttProps);
-	void handleControllerInput(float delay, float lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps);
+	void handleControllerInput(float delay, float& lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps);
 	void changeButton(int &controllerIndex, std::vector<std::string>buttNames, float &lastUpdate, int numMoves);
 	void selectButton(Entity*buttProps);
 	void deselectButton(Entity*buttProps);
