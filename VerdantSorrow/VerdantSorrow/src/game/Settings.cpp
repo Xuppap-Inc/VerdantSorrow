@@ -46,6 +46,26 @@ void Settings::onButtonClicked(int index)
 
 void Settings::generateAllButtons()
 {
+	
+	////Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
+	//int spacingX = 250; int buttonW = 200, buttonH = 80, iniX = 350, smallButtonWH = 80;
+	//for (int i = 0; i < 2; ++i)
+	//{
+	//	createButton(sdlutils().width() / 2 + (i * spacingX), sdlutils().height() / 2 - (smallButtonWH * 2),
+	//		smallButtonWH, smallButtonWH, buttonNames_[i], buttonPositions_, buttonPoperties_);
+	//}
+	////Bucle que dibuja la fila de botones
+	//int j = 0;
+	//for (int i = 2; i < buttonNames_.size(); ++i)
+	//{
+	//	createButton((sdlutils().width() / 2) - iniX + (j * spacingX), sdlutils().height() / 2, buttonW, buttonH,
+	//		buttonNames_[i], buttonPositions_, buttonPoperties_);
+	//	++j;
+	//}
+	
+
+
+
 	int buttonWH = 50;
 	createButton(0, sdlutils().height() - buttonWH, buttonWH, buttonWH, buttonNames_[0], buttonPositions_, buttonPoperties_);
 }
