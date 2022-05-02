@@ -109,7 +109,6 @@ void TreeAttackManager::update()
 	checkAnimState();
 
 	if (!deadBoss_) checkIfDead();
-	else dieAnimation();
 }
 
 void TreeAttackManager::checkIfDead()
@@ -121,6 +120,7 @@ void TreeAttackManager::checkIfDead()
 		deadBoss_ = true;
 		deathTimer_->reset();
 
+		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
 		auto col = ent_->getComponent<RectangleCollider>();
@@ -434,10 +434,4 @@ void TreeAttackManager::prepareToSpecial()
 
 		movement_->moveToCenter();
 	}
-}
-
-void TreeAttackManager::dieAnimation() {
-
-	deadParticles1_->createParticlesBossDie(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
-
 }

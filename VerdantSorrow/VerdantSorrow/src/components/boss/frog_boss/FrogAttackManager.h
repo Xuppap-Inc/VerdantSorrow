@@ -72,7 +72,6 @@ private:
 	void nextAttack();
 
 	void checkPhaseChange();
-	void dieAnimation();
 	void checkAnimationState();
 	void checkFrogState();
 	void checkIfDead();

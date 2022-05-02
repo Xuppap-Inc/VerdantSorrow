@@ -74,7 +74,6 @@ void FrogAttackManager::initComponent()
 void FrogAttackManager::update()
 {
 	if (!deadBoss_) checkIfDead();
-	else dieAnimation();
 
 	checkJumpDirection();
 
@@ -312,6 +311,7 @@ void FrogAttackManager::checkIfDead()
 		deadBoss_ = true;
 		deathTimer_->reset();
 
+		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
 		auto col = ent_->getComponent<RectangleCollider>();
@@ -487,10 +487,4 @@ void FrogAttackManager::checkPhaseChange()
 		vt_->reset();
 		secondPhase_ = true;
 	}
-}
-
-void FrogAttackManager::dieAnimation() {
-
-	deadParticles1_->createParticlesBossDie(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
-
 }
