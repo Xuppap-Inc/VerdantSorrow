@@ -21,6 +21,7 @@ public:
 	//inicializa la escena en la que está
 	void init();
 	void render();
+	void changePauseState(bool state) { isPauseActive_ = state; };
 	scenes getScene() { return actScene; }
 	scenes getPreviousScene() { return previousScene_; }
 	void changeScene(scenes s_=Hub_);

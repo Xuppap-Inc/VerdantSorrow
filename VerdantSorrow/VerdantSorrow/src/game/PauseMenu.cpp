@@ -53,6 +53,7 @@ void PauseMenu::onButtonClicked(int index)
 		sC().activatePause();
 		break;
 	case 3:
+		sC().changePauseState(false);
 		sC().changeScene(SceneManager::Menu_);
 		break;
 	case 4:
