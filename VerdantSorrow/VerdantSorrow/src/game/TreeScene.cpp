@@ -104,7 +104,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addComponent<BossAtributos>(100);
 	auto treeTr = tree_->addComponent<Transform>();
 	auto treeX = sdlutils().width() / 4 * 3 - 80;
-	auto treeY = sdlutils().height() - 360;
+	auto treeY = sdlutils().height() - 430;
 	auto treeH = 360;
 	auto treeW = treeH * 1.105;
 	treeTr->init(Vector2D(treeX, treeY), Vector2D(), treeW, treeH, 0.0f);
