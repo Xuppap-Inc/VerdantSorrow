@@ -130,7 +130,7 @@ void TileMap::createObjects()
 					r.y = r.y / scale_;
 
 				//add entidades correspondientes
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Plataformas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -185,6 +185,9 @@ void TileMap::createObjects()
 					else if (name == "LanzaMoscas") {
 						ent->addComponent<FlySpawnerPlant>(col_, true, 5000);
 						ent->addToGroup(ecs::_BOSSELEMENTS_GRP);
+					}
+					else if (name == "Pinchos") {
+						col->setIsTrigger(true);
 					}
 
 				}
