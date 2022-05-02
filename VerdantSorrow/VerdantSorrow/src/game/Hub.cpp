@@ -69,6 +69,8 @@ void Hub::init()
 	musica_ = &sdlutils().musicsHub().at("musica_hub");
 	musica_->play();
 	musica_->setMusicVolume(60);
+	musica_->resumeMusic();
+
 	ParticleSystem* particlesys_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu"), mngr_);
 	particlesys_->createParticlesMenu(30);
 

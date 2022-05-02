@@ -2,6 +2,8 @@
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
 #include "../../../ecs/Manager.h"
+#include "../../../sdlutils/SoundEffect.h"
+#include "../../../sdlutils/SDLUtils.h"
 
 FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(5)
 {
@@ -15,6 +17,9 @@ void FlyMovement::initComponent() {
 	
 	tr_ = ent_->getComponent<Transform>();
 	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
+
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_mosca_idle");
+	s->play();
 
 	bool correct = tr_ != nullptr && playerTr_ != nullptr;
 }

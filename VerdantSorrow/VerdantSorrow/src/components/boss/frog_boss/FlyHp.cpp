@@ -8,6 +8,8 @@ FlyHp::FlyHp() : fAM_()
 
 FlyHp::FlyHp(FrogAttackManager* fAM):fAM_(fAM)
 {
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_mosca_idle");
+	s->play();
 }
 
 FlyHp::~FlyHp()

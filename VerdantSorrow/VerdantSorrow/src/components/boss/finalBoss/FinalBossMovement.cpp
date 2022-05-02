@@ -219,5 +219,7 @@ void FinalBossMovement::setDeadBoss(bool set)
 
 	if (set) {
 		musica_->pauseMusic();
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_avalancha");
+		s->play();
 	}
 }

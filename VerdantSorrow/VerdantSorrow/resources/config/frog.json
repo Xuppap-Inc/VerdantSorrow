@@ -239,19 +239,61 @@
     }
   ],
 
-  "sounds" : [
-    { "id" : "musica_rana_fase1", "file" : "resources/sound/musica_rana_fase1.mp3" },
-    { "id" : "sfx_cambio_fase", "file" : "resources/sound/sfx_cambio_fase.wav" },
-    { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
-    { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
-    { "id" : "sfx_chica_roll", "file" : "resources/sound/sfx_chica_roll.wav" },
-    { "id" : "sfx_mosca_idle", "file" : "resources/sound/sfx_mosca_idle.wav" },
-    { "id" : "sfx_rana_attack", "file" : "resources/sound/sfx_rana_attack.wav" },
-    { "id" : "sfx_rana_lengua", "file" : "resources/sound/sfx_rana_lengua.wav" },
-    { "id" : "sfx_rana_damage", "file" : "resources/sound/sfx_rana_damage.wav" },
-    { "id" : "sfx_boss_defeated", "file" : "resources/sound/sfx_boss_defeated.wav" },
-    { "id" : "sfx_descubrir_rana", "file" : "resources/sound/sfx_descubrir_rana.wav" }
+  "sounds": [
+    {
+      "id": "musica_rana_fase1",
+      "file": "resources/sound/musica_rana_fase1.mp3"
+    },
+    {
+      "id": "sfx_cambio_fase",
+      "file": "resources/sound/sfx_cambio_fase.wav"
+    },
+    {
+      "id": "sfx_chica_attack1",
+      "file": "resources/sound/sfx_chica_attack1.wav"
+    },
+    {
+      "id": "sfx_chica_attack2",
+      "file": "resources/sound/sfx_chica_attack2.wav"
+    },
+    {
+      "id": "sfx_chica_roll",
+      "file": "resources/sound/sfx_chica_roll.wav"
+    },
+    {
+      "id": "sfx_mosca_idle",
+      "file": "resources/sound/sfx_mosca_idle.wav"
+    },
+    {
+      "id": "sfx_rana_attack",
+      "file": "resources/sound/sfx_rana_attack.wav"
+    },
+    {
+      "id": "sfx_rana_lengua",
+      "file": "resources/sound/sfx_rana_lengua.wav"
+    },
+    {
+      "id": "sfx_rana_damage",
+      "file": "resources/sound/sfx_rana_damage.wav"
+    },
+    {
+      "id": "sfx_boss_defeated",
+      "file": "resources/sound/sfx_boss_defeated.wav"
+    },
+    {
+      "id": "sfx_descubrir_rana",
+      "file": "resources/sound/sfx_descubrir_rana.wav"
+    },
+    {
+      "id": "sfx_lengua",
+      "file": "resources/sound/sfx_lengua.wav"
+    },
+    {
+      "id": "sfx_mosca_idle",
+      "file": "resources/sound/sfx_mosca_idle.wav"
+    }
   ],
+
   "musics": [
     {
       "id": "musica_rana_fase2",
