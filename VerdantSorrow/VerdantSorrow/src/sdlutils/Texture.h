@@ -99,6 +99,8 @@ public:
 	}
 
 	inline void setAlpha(Uint8 alpha) {
+		if (alpha <= 0)alpha = 0;
+		else if (alpha >= 255)alpha = 255;
 		SDL_SetTextureAlphaMod(texture_, alpha);	
 	}
 
