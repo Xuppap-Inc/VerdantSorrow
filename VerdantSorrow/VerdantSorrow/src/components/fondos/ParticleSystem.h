@@ -59,6 +59,8 @@ public:
 
 	void createParticlesBossSign(int numpart);
 
+	void createParticlesBossSignYouDied(int numpart);
+
 	void createParticlesBossSpawn(int numpart, int x, int y);
 
 	void createParticlesDamagePlayer(int numpart, int x, int y);

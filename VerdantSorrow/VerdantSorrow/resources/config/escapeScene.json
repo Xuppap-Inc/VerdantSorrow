@@ -166,6 +166,10 @@
     {
       "id": "particula_damage",
       "file": "resources/images/particula_damage.png"
+    },
+    {
+      "id": "you_died",
+      "file": "resources/images/you_died.png"
     }
   ],
 

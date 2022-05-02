@@ -405,6 +405,23 @@ void ParticleSystem::createParticlesBossSign(int numpart)
 		particle->addToGroup(ecs::_PARTICLES_UI);
 	}
 }
+void ParticleSystem::createParticlesBossSignYouDied(int numpart)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		int w = 860;
+		int h = 200;
+		int x = (sdlutils().width() / 2) - (w / 2);
+		int y = sdlutils().height() / 2 - (h / 2);
+
+		particle->addComponent<Transform>(Vector2D(x, y), Vector2D(), 860, 200, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(0);
+		imag->fadeIn();
+		particle->addToGroup(ecs::_PARTICLES_UI);
+	}
+}
 
 void ParticleSystem::createParticlesBossSpawn(int numpart, int x, int y)
 {

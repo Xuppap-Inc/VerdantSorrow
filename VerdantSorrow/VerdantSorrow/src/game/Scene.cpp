@@ -123,10 +123,13 @@ void Scene::checkPlayerDied()
 	{
 		playerImg_->setAlpha(0);
 
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
-		particlesys->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
-		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("you_died"), mngr_);
+		particlesys->createParticlesBossSignYouDied(1);
+
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
 		particlesys2->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
+		ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
+		particlesys3->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
 
 		deactivateBoss();
 		playerDeathTimer_->reset();

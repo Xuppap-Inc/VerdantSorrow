@@ -208,6 +208,10 @@
     {
       "id": "esencia_lumine",
       "file": "resources/images/esencia_lumine.png"
+    },
+    {
+      "id": "you_died",
+      "file": "resources/images/you_died.png"
     }
   ],
 

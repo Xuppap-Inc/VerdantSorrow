@@ -175,6 +175,10 @@
     {
       "id": "esencia_etheria",
       "file": "resources/images/esencia_etheria.png"
+    },
+    {
+      "id": "you_died",
+      "file": "resources/images/you_died.png"
     }
   ],
 
