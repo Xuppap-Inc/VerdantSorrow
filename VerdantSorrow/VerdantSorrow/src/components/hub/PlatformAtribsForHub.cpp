@@ -9,8 +9,8 @@ PlatformAtribsForHub::PlatformAtribsForHub(std::string sceneName) : sceneName_(s
 {
 	if (sceneName == "eye")scene = 3;
 	else if (sceneName == "frog")scene = 1;
-	else scene = 2;
-
+	else if (sceneName == "tree") scene = 2;
+	else scene = 4;
 
 }
 
@@ -24,7 +24,7 @@ void PlatformAtribsForHub::initComponent()
 		rect->setIsTrigger(true);
 		image_->setTexture(&sdlutils().imagesHub().at(sceneName_ + "_open"));
 	}
-	else if (scene < state) {
+	else if (scene!=4&&scene < state) {
 		image_->setTexture(&sdlutils().imagesHub().at(sceneName_ + "_win"));
 	}
 	else {

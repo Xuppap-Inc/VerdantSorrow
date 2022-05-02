@@ -23,6 +23,14 @@
       "file": "resources/images/Hub/terria.png"
     },
     {
+      "id": "end_open",
+      "file": "resources/images/Hub/end_open.png"
+    },
+    {
+      "id": "end_closed",
+      "file": "resources/images/Hub/end_closed.png"
+    },
+    {
       "id": "eye_open",
       "file": "resources/images/Hub/eye_open.png"
     },

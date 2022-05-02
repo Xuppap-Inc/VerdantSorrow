@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="16" nextobjectid="1689">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="16" nextobjectid="1691">
  <tileset firstgid="1" source="tilesets/colina.tsx"/>
  <tileset firstgid="5" source="tilesets/cesped.tsx"/>
  <tileset firstgid="18" source="tilesets/camino.tsx"/>
@@ -325,7 +325,7 @@
   <object id="210" gid="3" x="1499.76" y="600.97" width="1505.33" height="600"/>
  </objectgroup>
  <objectgroup id="14" name="npc">
-  <object id="1649" gid="65" x="1090.02" y="723.045" width="61" height="112">
+  <object id="1649" gid="65" x="1053.02" y="764.045" width="61" height="112">
    <properties>
     <property name="npc" type="int" value="10"/>
    </properties>
@@ -390,6 +390,11 @@
   <object id="1688" gid="74" x="2537.88" y="2171.12" width="500" height="518">
    <properties>
     <property name="Boss" value="frog"/>
+   </properties>
+  </object>
+  <object id="1690" gid="75" x="1120" y="674" width="500" height="415">
+   <properties>
+    <property name="Boss" value="end"/>
    </properties>
   </object>
  </objectgroup>
@@ -480,14 +485,14 @@
   <object id="687" gid="53" x="2034.85" y="1141.76" width="100" height="132"/>
   <object id="688" gid="53" x="2101.52" y="1250.85" width="100" height="132"/>
   <object id="689" gid="53" x="1922.73" y="1262.97" width="100" height="132"/>
-  <object id="690" gid="45" x="1444.24" y="656.485" width="160" height="215"/>
+  <object id="690" gid="45" x="1520" y="571.637" width="160" height="215"/>
   <object id="691" gid="45" x="1613.94" y="668.606" width="160" height="215"/>
-  <object id="692" gid="45" x="1371.52" y="744.364" width="160" height="215"/>
+  <object id="692" gid="45" x="1429.1" y="762.546" width="160" height="215"/>
   <object id="693" gid="54" x="1337.88" y="802.364" width="100" height="132"/>
   <object id="694" gid="54" x="1468.18" y="696.303" width="100" height="132"/>
   <object id="695" gid="54" x="1550" y="596.303" width="100" height="132"/>
-  <object id="696" gid="54" x="1274.24" y="553.879" width="100" height="132"/>
-  <object id="697" gid="54" x="1340.91" y="753.879" width="100" height="132"/>
+  <object id="696" gid="54" x="1043.94" y="562.97" width="100" height="132"/>
+  <object id="697" gid="54" x="1395.46" y="775.091" width="100" height="132"/>
   <object id="775" gid="47" x="1938.67" y="814" width="40" height="76"/>
   <object id="776" gid="47" x="2112.67" y="786.667" width="40" height="76"/>
   <object id="777" gid="47" x="2074.67" y="914" width="40" height="76"/>
@@ -752,13 +757,13 @@
   <object id="1537" gid="53" x="1837.88" y="1241.76" width="100" height="132"/>
   <object id="1538" gid="54" x="1571.21" y="1196.3" width="100" height="132"/>
   <object id="1539" gid="54" x="2043.94" y="1026.61" width="100" height="132"/>
-  <object id="1540" gid="54" x="1350" y="484.182" width="100" height="132"/>
-  <object id="1541" gid="54" x="1365.15" y="584.182" width="100" height="132"/>
+  <object id="1540" gid="54" x="1662.12" y="456.909" width="100" height="132"/>
+  <object id="1541" gid="54" x="1740.91" y="390.243" width="100" height="132"/>
   <object id="1679" gid="39" x="288.667" y="2059.33" width="100" height="132"/>
   <object id="1680" gid="50" x="1871.67" y="1638.33" width="110" height="110"/>
   <object id="1681" gid="39" x="1968.67" y="1956.67" width="100" height="132"/>
  </objectgroup>
- <objectgroup id="11" name="colliders">
+ <objectgroup id="11" name="colliders" visible="0">
   <object id="1598" x="960.485" y="1896.06" width="745.333" height="292"/>
   <object id="1599" x="1171.15" y="1533.39" width="372" height="405.333"/>
   <object id="1600" x="1545.81" y="1597.39"/>
@@ -809,7 +814,7 @@
   <object id="1676" x="1106.67" y="922.667" width="125.333" height="90.6667"/>
   <object id="1677" x="1526" y="1043.33" width="85.333" height="217.333"/>
  </objectgroup>
- <objectgroup id="15" name="areas">
+ <objectgroup id="15" name="areas" visible="0">
   <object id="1683" x="-3.0303" y="9.09091" width="1224.24" height="1178.79">
    <properties>
     <property name="area" value="eye"/>

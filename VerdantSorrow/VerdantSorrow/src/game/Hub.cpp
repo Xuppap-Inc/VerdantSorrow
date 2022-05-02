@@ -178,4 +178,5 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 void Hub::createLights() {
 	new Light(&sdlutils().imagesHub().at("luz_naranja"), -200, -100, 800, 100, mngr_);
+	
 }
