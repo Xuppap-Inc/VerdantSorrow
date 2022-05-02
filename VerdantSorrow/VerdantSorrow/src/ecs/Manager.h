@@ -246,6 +246,8 @@ public:
 		return windowScaleWidth_;
 	};
 
+	void updateScale();
+
 private:
 
 	// class Entity is a friend so it can access addToGroup and removeFromGroup

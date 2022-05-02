@@ -33,6 +33,7 @@ protected:
 	bool collision;
 	std::string text_;
 	Image* image_;
-	int i = 255;
+	int i = 0;
+	int j = 0;
 };
 
