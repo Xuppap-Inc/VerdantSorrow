@@ -11,6 +11,8 @@
 #include "../components/hub/HubAreas.h"
 #include "../components/boss/nivelHuida/Mushroom.h"
 #include "../components/boss/nivelHuida/FlySpawnerPlant.h"
+#include "../components/SimpleGravity.h"
+#include "../components/boss/nivelHuida/Spikes.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -188,6 +190,18 @@ void TileMap::createObjects()
 					}
 					else if (name == "Pinchos") {
 						col->setIsTrigger(true);
+						
+					
+						vector<tmx::Property> properties = object.getProperties();
+
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "damage")i++;
+
+						if (i < properties.size()) {
+							ent->addComponent<SimpleGravity>(0.4);
+							ent->addComponent<Spikes>(col_);
+						}
+							
 					}
 
 				}

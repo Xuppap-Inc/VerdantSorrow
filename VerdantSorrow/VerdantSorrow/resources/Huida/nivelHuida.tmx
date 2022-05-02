@@ -85,7 +85,7 @@
   </tile>
  </tileset>
  <imagelayer id="2" name="Fondo" offsetx="10036.4" offsety="11153.9"/>
- <objectgroup id="4" name="Pinchos" locked="1" offsetx="2.78788" offsety="0">
+ <objectgroup id="4" name="Pinchos" offsetx="2.78788" offsety="0">
   <object id="473" gid="8" x="2242.12" y="5011.94" width="164" height="547"/>
   <object id="474" gid="8" x="2154.12" y="4999.94" width="164" height="547"/>
   <object id="475" gid="8" x="2062.12" y="5011.94" width="164" height="547"/>
