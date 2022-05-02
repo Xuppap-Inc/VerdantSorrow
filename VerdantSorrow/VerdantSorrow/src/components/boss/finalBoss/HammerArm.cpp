@@ -53,7 +53,7 @@ void HammerArm::attack(bool quemado)
 	collider_->setActive(true);
 	collider_->setIsTrigger(true);
 
-	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() - 50) {
+	if (tr_->getPos().getY() < sdlutils().height() - tr_->getHeight() - 130) {
 
 		tr_->getVel().set(Vector2D(0, handSpeed * 4));
 	}
@@ -74,7 +74,7 @@ void HammerArm::attack(bool quemado)
 		particlesys->createParticlesSmash(40, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + tr_->getHeight());
 
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 50);
+		tr_->getPos().setY(sdlutils().height() - tr_->getHeight() - 130);
 		lastTimeFloor_->reset();
 		changeState(REPOSOSUELO);
 		waveSp_->createWaves(75, 50, Vector2D(1, 0), tr_);

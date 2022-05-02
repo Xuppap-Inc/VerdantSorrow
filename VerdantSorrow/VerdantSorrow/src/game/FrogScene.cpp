@@ -118,8 +118,8 @@ void FrogScene::background()
 	fondodel->addComponent<Image>(&sdlutils().images().at("fondodel"));
 
 	auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height()), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
+	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height() - 190), Vector2D(), sdlutils().width() + 20, sdlutils().height() + 190, 0.0f);
+	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));	
 	blCK->addToGroup(ecs::_BACKGROUND_1_GRP);
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 	fondodel->addToGroup(ecs::_BACKGROUND_1_GRP);

@@ -61,7 +61,13 @@ void Scene::background(std::string backgroundName, int height)
 	backgr_->addComponent<Image>(&sdlutils().images().at(backgroundName));
 
 	auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
+
+	if (backgroundName == "fondo2")
+		auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height() - 190), Vector2D(), sdlutils().width() + 20, sdlutils().height() + 190, 0.0f);
+	else
+		auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
+
+
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 	suelo->addToGroup(ecs::_BACKGROUND_2_GRP);
