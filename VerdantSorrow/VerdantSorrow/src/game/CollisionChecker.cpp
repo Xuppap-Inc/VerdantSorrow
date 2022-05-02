@@ -144,6 +144,9 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
 		particlesys->createParticlesDamagePlayer(50, playerTr->getPos().getX() + (playerTr->getWidth() / 2), playerTr->getPos().getY() + (playerTr->getHeight() / 2));
 
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_player_damage");
+		s->play();
+
 		playerFImg->setColor(200, 50, 50, 1000);
 
 		// Knock back

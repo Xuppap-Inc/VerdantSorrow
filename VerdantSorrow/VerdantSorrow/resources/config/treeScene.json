@@ -283,6 +283,22 @@
     {
       "id": "sfx_wind",
       "file": "resources/sound/sfx_wind.wav"
+    },
+    {
+      "id": "sfx_arbol_damage",
+      "file": "resources/sound/sfx_arbol_damage.wav"
+    },
+    {
+      "id": "sfx_boss_defeated",
+      "file": "resources/sound/sfx_boss_defeated.wav"
+    },
+    {
+      "id": "sfx_descubrir_arbol",
+      "file": "resources/sound/sfx_descubrir_arbol.wav"
+    },
+    {
+      "id": "sfx_player_damage",
+      "file": "resources/sound/sfx_player_damage.wav"
     }
   ],
   "musics": [
