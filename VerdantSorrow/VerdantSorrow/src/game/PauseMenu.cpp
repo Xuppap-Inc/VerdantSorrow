@@ -19,9 +19,6 @@ void PauseMenu::init()
 	isChangingScene(changeSc_);
 	generateAllButtons();
 	createImages((sdlutils().width() / 2) - 350, sdlutils().height() / 2 - (80 * 2), 80, 80, imagesNames_[0]);
-	/*musicaTest_ = &sdlutils().musics().at("musica_rana_fase2");
-	musicaTest_->play();
-	currentVolume_ = musicaTest_->setMusicVolume(128);*/
 }
 
 void PauseMenu::update()
