@@ -49,6 +49,5 @@ protected:
 
     bool active_ = true;
 
-    const int GROUND_HEIGHT = 100;
+    const int GROUND_HEIGHT = 130;
 };
-

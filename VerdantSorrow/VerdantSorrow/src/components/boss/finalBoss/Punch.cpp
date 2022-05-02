@@ -48,7 +48,7 @@ void Punch::initComponent()
 
 void Punch::goDown()
 {
-	int objectivePos = sdlutils().height() - tr_->getHeight();
+	int objectivePos = sdlutils().height() - tr_->getHeight() - 100;
 	
 
 	if (tr_->getPos().getY() < objectivePos) {
