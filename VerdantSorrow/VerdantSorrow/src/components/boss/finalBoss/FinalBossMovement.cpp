@@ -45,6 +45,15 @@ void FinalBossMovement::initComponent()
 	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	ashes_->createParticlesAsh(100);
 
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("esencia_etheria"), mngr_);
+	particlesys->createParticlesBossSign(1);
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_rosa"), mngr_);
+	particlesys2->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
+	particlesys3->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+	ParticleSystem* particlesys4 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+
 }
 
 void FinalBossMovement::update()

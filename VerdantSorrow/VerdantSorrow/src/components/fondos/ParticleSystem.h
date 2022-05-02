@@ -57,6 +57,10 @@ public:
 
 	void createParticlesBossDieSymbol(int numpart, int x, int y);
 
+	void createParticlesBossSign(int numpart);
+
+	void createParticlesBossSpawn(int numpart, int x, int y);
+
 private:
 
 	Texture* tex_;

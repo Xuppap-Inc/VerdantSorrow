@@ -386,3 +386,38 @@ void ParticleSystem::createParticlesBossDieSymbol(int numpart, int x, int y)
 		particle->addToGroup(ecs::_PARTICLES_FRONT);
 	}
 }
+
+void ParticleSystem::createParticlesBossSign(int numpart)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		int w = 860;
+		int h = 200;
+		int x = (sdlutils().width() / 2) - (w / 2);
+		int y = 100;
+
+		particle->addComponent<Transform>(Vector2D(x, y), Vector2D(), 860, 200, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(255);
+		particle->addComponent<Disolve>(5000);
+		imag->fadeOut();
+		particle->addToGroup(ecs::_PARTICLES_UI);
+	}
+}
+
+void ParticleSystem::createParticlesBossSpawn(int numpart, int x, int y)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		auto width = sdlutils().rand().nextInt(30, 100);
+
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-500, 500)) / 100), ((double)(sdlutils().rand().nextInt(-500, 500)) / 100));
+		particle->addComponent<Transform>(Vector2D(x + sdlutils().rand().nextInt(-100, 100), y + sdlutils().rand().nextInt(-100, 100)), vel, width, width, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(150);
+		particle->addComponent<Disolve>(sdlutils().rand().nextInt(3000, 5000));
+		particle->addToGroup(ecs::_PARTICLES_FRONT);
+	}
+}

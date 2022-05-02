@@ -63,6 +63,15 @@ void FrogAttackManager::initComponent()
 	deadParticles1_ = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
 	deadParticles2_ = new ParticleSystem(&sdlutils().images().at("simbolo_terria"), mngr_);
 
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("esencia_terria"), mngr_);
+	particlesys->createParticlesBossSign(1);
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
+	particlesys2->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
+	particlesys3->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+	ParticleSystem* particlesys4 = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
+	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+
 	//lengua
 	createTongue(collManager_);
 

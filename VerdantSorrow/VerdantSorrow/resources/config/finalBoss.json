@@ -163,6 +163,18 @@
     {
       "id": "luz_morado",
       "file": "resources/images/luz_morado.png"
+    },
+    {
+      "id": "particula_negro",
+      "file": "resources/images/particula_negro.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
+    },
+    {
+      "id": "esencia_etheria",
+      "file": "resources/images/esencia_etheria.png"
     }
   ],
 

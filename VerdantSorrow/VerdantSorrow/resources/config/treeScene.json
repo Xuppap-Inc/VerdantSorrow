@@ -182,10 +182,6 @@
       "file": "resources/images/particula_simbolo1.png"
     },
     {
-      "id": "particula_mariposa",
-      "file": "resources/images/particula_mariposa.png"
-    },
-    {
       "id": "particula_simbolo1_frente",
       "file": "resources/images/particula_simbolo1_frente.png"
     },
@@ -200,6 +196,18 @@
     {
       "id": "simbolo_lumine",
       "file": "resources/images/simbolo_lumine.png"
+    },
+    {
+      "id": "particula_negro",
+      "file": "resources/images/particula_negro.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
+    },
+    {
+      "id": "esencia_lumine",
+      "file": "resources/images/esencia_lumine.png"
     }
   ],
 

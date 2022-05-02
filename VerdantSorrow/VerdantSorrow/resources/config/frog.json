@@ -220,6 +220,18 @@
     {
       "id": "simbolo_terria",
       "file": "resources/images/simbolo_terria.png"
+    },
+    {
+      "id": "esencia_terria",
+      "file": "resources/images/esencia_terria.png"
+    },
+    {
+      "id": "particula_negro",
+      "file": "resources/images/particula_negro.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
     }
   ],
 

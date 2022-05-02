@@ -100,6 +100,10 @@
     {
       "id": "root",
       "file": "resources/images/root.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
     }
   ],
 

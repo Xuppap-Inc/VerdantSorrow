@@ -162,6 +162,10 @@
     {
       "id": "Parallax_Layer5",
       "file": "resources/images/Parallax_Layer5.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
     }
   ],
 
