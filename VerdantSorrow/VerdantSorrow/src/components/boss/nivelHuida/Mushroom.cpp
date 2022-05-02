@@ -43,7 +43,7 @@ void Mushroom::update()
 				float colliderDiffX = (tr_->getWidth() - collider_->getWidth()) / 2;
 				float colliderDiffY = (tr_->getHeight() - collider_->getHeight()) / 2;
 				if (lastPositionY + c->getEntity()->getComponent<RectangleCollider>()->getHeight() <= mushroomPos.getY() || lastPositionY >= mushroomPos.getY() + c->getHeight()) //arriba
-					velPlayer.setY(velPlayer.getY() * -1);
+					velPlayer.setY(velPlayer.getY() * -1 -3);
 				
 				else if (lastPositionX + c->getEntity()->getComponent<RectangleCollider>()->getWidth() <= mushroomPos.getX() || lastPositionX >= mushroomPos.getX() + c->getWidth()) //colision por la izda
 					velPlayer.setX(velPlayer.getX() * -1);

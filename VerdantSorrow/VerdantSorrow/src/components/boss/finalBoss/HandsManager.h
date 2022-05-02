@@ -56,6 +56,7 @@ private:
 
 	void checkIfDead();
 	void checkDeathTimer();
+	void createParticlesHands();
 
 	VirtualTimer* lastAttackDoneTimer_;
 	float  attackCooldown;

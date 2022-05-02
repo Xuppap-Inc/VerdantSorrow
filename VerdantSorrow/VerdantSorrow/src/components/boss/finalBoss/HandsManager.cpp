@@ -76,7 +76,9 @@ void HandsManager::update()
 		}
 	}
 
-	checkPhaseChange();
+	if (!secondPhase_) checkPhaseChange();
+	else createParticlesHands(); //en segunda fase las manos tienen particulas de fuego y cambian de color
+
 	if (!deadBoss_) checkIfDead();
 	else checkDeathTimer();
 }
@@ -90,22 +92,9 @@ void HandsManager::checkPhaseChange()
 		if (multFase_ == 1) {
 			multFase_ = 4;
 		}
-		else
-		{
-			colliderLeftHand_->setIsTrigger(true);
-			colliderRightHand_->setIsTrigger(true);
 
-			if (tiempoColor_->currTime() >= 500) {
-				rightHandImg_->setColor(200, 20, 200);
-				leftHandImg_->setColor(200, 20, 200);
-			}
-
-			ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
-			particlesys->createParticlesFire(2, leftHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (leftHandTr_->getWidth())), leftHandTr_->getPos().getY() + 20);
-
-			ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
-			particlesys->createParticlesFire(2, rightHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (rightHandTr_->getWidth())), rightHandTr_->getPos().getY() + 20);
-		}
+		colliderLeftHand_->setIsTrigger(true);
+		colliderRightHand_->setIsTrigger(true);
 	}
 }
 
@@ -417,5 +406,24 @@ void HandsManager::checkDeathTimer()
 	{
 		bA_->setDefeated(true);
 	}
+}
+
+void HandsManager::createParticlesHands()
+{
+	if (tiempoColor_->currTime() >= 500) {
+		rightHandImg_->setColor(200, 20, 200);
+		leftHandImg_->setColor(200, 20, 200);
+	}
+
+	//lo seteamos en cada frame porque los ataques vuelven las manos un collider al acabar, no merece la pena comprobar una booleana en 3
+	//clases para evitar esto
+	colliderLeftHand_->setIsTrigger(true);
+	colliderRightHand_->setIsTrigger(true);
+
+	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+	particlesys->createParticlesFire(2, leftHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (leftHandTr_->getWidth())), leftHandTr_->getPos().getY() + 20);
+
+	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
+	particlesys->createParticlesFire(2, rightHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (rightHandTr_->getWidth())), rightHandTr_->getPos().getY() + 20);
 }
 

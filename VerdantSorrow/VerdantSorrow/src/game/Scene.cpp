@@ -113,7 +113,7 @@ void Scene::playerGeneratorEscape(CollisionManager* colManager, Entity* player_)
 
 	playerTr_ = player_->addComponent<Transform>();
 	auto playerX = 0;
-	auto playerY = sdlutils().height() / 2 - 25;
+	auto playerY = sdlutils().height() / 4;
 	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 
 	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
