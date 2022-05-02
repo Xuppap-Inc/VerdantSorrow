@@ -144,9 +144,9 @@ void FinalBossMovement::bounce()
 		vel_.setY(-vel_.getY());
 		fireBall();
 	}
-	else if (pos_.getY() + tr_->getHeight() > sdlutils().height()) {
+	else if (pos_.getY() + tr_->getHeight() > sdlutils().height() - 150) {
 
-		pos_.setY(sdlutils().height() - tr_->getHeight());
+		pos_.setY(sdlutils().height() - tr_->getHeight() - 150);
 
 		//Guarda la velocidad y para el objeto actual
 		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
