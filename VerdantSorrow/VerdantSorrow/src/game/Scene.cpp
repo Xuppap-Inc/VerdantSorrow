@@ -83,6 +83,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 
 	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
+	playerImg_->setVisible(true);
 	playerImg_->setAlpha(255);
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
@@ -167,7 +168,7 @@ void Scene::checkPlayerDied()
 {
 	if (playerAttribs_->getLives() <= 0) 
 	{
-		playerImg_->setAlpha(0);
+		playerImg_->setVisible(false);
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("you_died"), mngr_);
 		particlesys->createParticlesBossSignYouDied(1);
