@@ -8,7 +8,7 @@
 #include "../Transform.h"
 #include "../Image.h"
 
-HubAreas::HubAreas(CollisionManager* colManager,string area) : colMan_(colManager), showarea(true), areatimer(3500), tr_(nullptr), initime(-1),collision(false)
+HubAreas::HubAreas(CollisionManager* colManager,string area) : colMan_(colManager), showarea(true), areatimer(5000), tr_(nullptr), initime(-1),collision(false)
 { 
 	if (area == "eye") {
 		text_ = "etheria";
@@ -49,7 +49,7 @@ void HubAreas::update()
 			}
 
 		}
-		if (!h) { initime = -1; i = 255; }
+		if (!h) { initime = -1; i = 0; j = 0; }
 		
 	
 	
@@ -60,6 +60,7 @@ void HubAreas::render()
 
 
 	if(collision){
+		
 		if (!(sdlutils().currRealTime() - initime >= areatimer)) {
 
 			Texture* text = &sdlutils().imagesHub().at(text_);
@@ -73,9 +74,13 @@ void HubAreas::render()
 			dest.h *= sH;
 			text->render(dest);
 			text->setAlpha(i);
-			i -= 1;
+			if (j < 255-2) { i = i + 2; j = i; }
+			else if(i>2) { 
+				i =i- 2; 
+			}
+			
 		}
-		else i = 255;
+	
 		
 			
 	}
