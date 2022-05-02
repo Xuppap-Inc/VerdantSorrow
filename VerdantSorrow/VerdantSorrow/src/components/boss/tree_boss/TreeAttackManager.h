@@ -128,8 +128,6 @@ private:
 	void attackSpecial();
 	void prepareToSpecial();
 
-	void dieAnimation();
-
 	void checkPhaseChange();
 
 	bool deadBoss_;

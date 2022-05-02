@@ -111,13 +111,14 @@ void TileMap::createObjects()
 
 					//el pivote de los objetos esta abajo
 					r.y -= object.getAABB().height;
+
 					if(name!= "entradasbosses")
 					tilesets[tset_gid][cur_gid]->render(r);
 
 				}
 	
 
-				if (name == "colliders" || name == "entradasbosses" || name == "npc"||name=="areas") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name=="areas") {
 
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
@@ -152,17 +153,14 @@ void TileMap::createObjects()
 					else if (name == "entradasbosses") {
 						//col->setIsTrigger(true);
 						
-					
-
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
 						while (i < properties.size() && properties[i].getName() != "Boss")i++;
 
 						if (i < properties.size()) {
-							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[0].getStringValue() + "_" + "open"));
-							ent->addComponent<PlatformAtribsForHub>(properties[0].getStringValue());
-							
+							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() + "_" + "open"));
+							ent->addComponent<PlatformAtribsForHub>(properties[i].getStringValue());
 						}
 						ent->addToGroup(ecs::_UI_GRP);
 					}
