@@ -49,7 +49,7 @@ void Hub::init()
 	colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx",colManager);
+	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx", colManager, 0.4);
 
 	changeSc = false;
 
@@ -60,7 +60,7 @@ void Hub::init()
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
-	cameraTr->init(player_->getComponent<Transform>()->getPos() + Vector2D(-sdlutils().windowWidth()/2,-sdlutils().windowHeight()/2), Vector2D(0, 0), 0, 0, 0);
+	cameraTr->init(player_->getComponent<Transform>()->getPos() + Vector2D(-sdlutils().windowWidth() / 2, -sdlutils().windowHeight() / 2), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
@@ -69,7 +69,7 @@ void Hub::init()
 	musica_->setMusicVolume(60);
 	ParticleSystem* particlesys_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu"), mngr_);
 	particlesys_->createParticlesMenu(30);
-	
+
 	createLights();
 }
 
@@ -101,7 +101,7 @@ void Hub::checkCollissions()
 			if (changeScene) entWithName = colliders[i]->getEntity();
 			i++;
 		}
-		if (changeScene){
+		if (changeScene) {
 			if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "frog") sC().FrogSceneState(true);
 			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "tree") sC().TreeSceneState(true);
 			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "eye") sC().EyeSceneState(true);
@@ -119,7 +119,7 @@ void Hub::update()
 		mngr_->refresh();
 
 		sdlutils().clearRenderer();
-		
+
 		mngr_->render();
 #ifdef _DEBUG
 		mngr_->debug();
@@ -141,28 +141,28 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 	//Se le a�ade el transform
 	auto playerTr = player_->addComponent<Transform>();
-	auto playerX = sdlutils().width() / 2 ;
+	auto playerX = sdlutils().width() / 2;
 	cout << sdlutils().width() / 2 << endl;
-	auto playerY = sdlutils().height() / 2 ;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(),70, 150, 0.0f, 0.25f, false);
-	auto s=player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
+	auto playerY = sdlutils().height() / 2;
+	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 70, 150, 0.0f, 0.25f, false);
+	auto s = player_->addComponent<FramedImage>(&sdlutils().imagesHub().at("idle_Kyna"), 4, 8, (1000 / 30) * 30, 30, "idle_Kyna");
 
 
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	//Se a�ade un collider al jugador
 	playerTr->setScale(0.15);
-	
+
 
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
 	colManager->addCollider(playerCollider);
-	auto collision_=player_->addComponent<SimplePhysicsPlayer>(colManager);
+	auto collision_ = player_->addComponent<SimplePhysicsPlayer>(colManager);
 	collision_->gravedad(false);
 
 
 	//Componente que permite controlar al jugador
 	player_->addComponent<PlayerHubControl>(2, colManager);
 
-	
+
 	//Componente ui jugador
 	mngr_->setHandler(ecs::_PLAYER, player_);
 	auto* playerLife_ = mngr_->addEntity();

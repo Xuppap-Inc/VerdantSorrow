@@ -24,7 +24,7 @@ class CollisionManager;
 class TileMap
 {
 public:
-	TileMap(ecs::Manager* mngr,string tileMapPath, CollisionManager*col);
+	TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale);
 	~TileMap();
 
 private:
@@ -37,11 +37,11 @@ private:
 	string path;
 	int rows, cols;
 	int tileWidth, tileHeight;
-	map<Uint, map<Uint,Texture*>> tilesets;//tilemapid -> img id->texture
+	map<Uint, map<Uint, Texture*>> tilesets;//tilemapid -> img id->texture
 	tmx::Map* tmxTileMap;
 	ecs::Manager* mngr_;
 	CollisionManager* col_;
-	double scaleX, scaleY;
+	double scale_;
 	ecs::Entity* dialogBox_;
 };
 

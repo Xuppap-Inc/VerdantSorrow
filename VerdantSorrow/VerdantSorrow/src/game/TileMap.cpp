@@ -10,12 +10,12 @@
 #include "../game/Game.h"
 #include "../components/hub/HubAreas.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col) :col_(col), dialogBox_(nullptr)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale) :col_(col), dialogBox_(nullptr)
 {
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scaleX = scaleY = 0.4;
+	scale_ = scale;
 	dialogBox_ = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox_);
 	loadMap(path);
@@ -29,6 +29,7 @@ TileMap::~TileMap()
 	if (tileMap != nullptr)
 		SDL_DestroyTexture(tileMap);
 }
+
 
 void TileMap::loadMap(string path)
 {
@@ -65,7 +66,7 @@ void TileMap::loadMap(string path)
 	//add map as entity
 	auto map = mngr_->addEntity();
 	auto tr = map->addComponent<Transform>();
-	tr->init(Vector2D(), Vector2D(), sdlutils().width() / scaleX, sdlutils().height() / scaleY, 0.0f);
+	tr->init(Vector2D(), Vector2D(), sdlutils().width() / scale_, sdlutils().height() / scale_, 0.0f);
 	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
 	map->addToGroup(ecs::_HUB_DECORATION_GRP);
 	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
@@ -126,8 +127,8 @@ void TileMap::createObjects()
 					double dx = sdlutils().width() / (double)tileMapWidth;
 					double dy = sdlutils().height() / (double)tileMapHeight;
 
-					dx /= scaleX;
-					dy /= scaleY;
+					dx /= scale_;
+					dy /= scale_;
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
