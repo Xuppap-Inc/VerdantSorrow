@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="566">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="573">
  <tileset firstgid="1" name="ObjetosHuida" tilewidth="666" tileheight="667" tilecount="25" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Plataforma">
@@ -448,7 +448,6 @@
   <object id="401" gid="1" x="5024" y="3712" width="98" height="105"/>
   <object id="406" gid="1" x="5120" y="3712" width="98" height="105"/>
   <object id="407" gid="19" x="5216" y="3712" width="103" height="105"/>
-  <object id="414" gid="11" x="11819" y="9013" width="106" height="105"/>
   <object id="415" gid="11" x="5888" y="5024" width="106" height="105"/>
   <object id="416" gid="22" x="4945.83" y="4917.2" width="106" height="105"/>
   <object id="417" gid="1" x="5041.83" y="4917.2" width="98" height="105"/>
