@@ -234,7 +234,7 @@
   "sounds": [
     {
       "id": "musica_linterna_fase1",
-      "file": "resources/sound/musica_linterna_fase1.wav"
+      "file": "resources/sound/musica_linterna_fase1.mp3"
     },
     {
       "id": "sfx_cambio_fase",
@@ -281,10 +281,6 @@
     {
       "id": "musica_hub",
       "file": "resources/sound/musica_hub.mp3"
-    },
-    {
-      "id": "musica_rana_fase2",
-      "file": "resources/sound/musica_rana_fase2.mp3"
     },
     {
       "id": "musica_linterna_fase2",
