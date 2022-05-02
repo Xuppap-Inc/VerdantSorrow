@@ -14,19 +14,15 @@ private:
 	Music* musicaTest_;
 	int currentVolume_;
 	float varVolume_; //Cuanto varia el volumen respecto al volumen total al bajarlo o subirlo
-
+	void onButtonClicked(int index)override; //Versión raton
+	void generateAllButtons() override;
+	void controlVolume(bool turnUp); //Booleano para ver si sube o baja el volumen
+	void createImages(float x, float y, float w, float h, std::string imageName);
 public:
 	PauseMenu();
 	~PauseMenu() {};
 	void changeScState(bool state) { changeSc_ = state; };
 	void init() override;
 	void update()override;
-	void onButtonClicked(int index)override; //Versión raton
-	void generateAllButtons() override;
-
-	void controlVolume(bool turnUp); //Booleano para ver si sube o baja el volumen
-	void createImages(float x, float y, float w, float h, std::string imageName);
-	
-
 };
 

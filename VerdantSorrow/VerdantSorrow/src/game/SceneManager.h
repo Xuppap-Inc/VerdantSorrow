@@ -10,12 +10,13 @@ class MenuScene;
 class ControlsScene;
 class EscapeScene;
 class PauseMenu;
+class Settings;
 #include <vector>
 class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
 public:
-	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_, Controls_, PauseMenu_ ,EscapeScene_};
+	enum scenes { Hub_, Frog_, Tree_, Eye_, Tutorial_, Menu_, Controls_, PauseMenu_ ,Settings_,EscapeScene_};
 	~SceneManager();
 	void update();
 	//inicializa la escena en la que está
@@ -50,6 +51,7 @@ private:
 	MenuScene* menu_;
 	ControlsScene* controls_;
 	PauseMenu* pauseMenu_;
+	Settings* settingsMenu_;
 	EscapeScene* ecapesc_;
 	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
 	bool hubAssetsChargeds_, playerInBossFight;

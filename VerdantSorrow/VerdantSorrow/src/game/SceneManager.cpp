@@ -10,6 +10,7 @@
 #include "ControlsScene.h"
 #include "PauseMenu.h"
 #include "EscapeScene.h"
+#include "Settings.h"
 
 
 SceneManager::SceneManager() : actScene(Menu_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
@@ -24,6 +25,7 @@ playerInBossFight(false),previousScene_(Menu_),isPauseActive_(false)
 	controls_ = new ControlsScene(); sceneList.push_back(controls_);
 	pauseMenu_ = new PauseMenu(); sceneList.push_back(pauseMenu_);
 	ecapesc_ = new EscapeScene(); sceneList.push_back(ecapesc_);
+	settingsMenu_ = new Settings(); sceneList.push_back(settingsMenu_);
 }
 
 SceneManager::~SceneManager()
@@ -74,6 +76,9 @@ void SceneManager::update()
 		break;
 	case SceneManager::PauseMenu_:
 		pauseMenu_->update();
+		break;
+	case SceneManager::Settings_:
+		settingsMenu_->update();
 		break;
 	case SceneManager::EscapeScene_:
 		ecapesc_->update();
@@ -141,6 +146,9 @@ void SceneManager::init()
 		break;
 	case SceneManager::PauseMenu_:
 		pauseMenu_->init();
+		break;
+	case SceneManager::Settings_:
+		settingsMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
 		playerInBossFight = false;

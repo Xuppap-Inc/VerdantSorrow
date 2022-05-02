@@ -6,7 +6,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../sdlutils/Texture.h"
-#include "MenuScene.h"
+
 
 ControlsScene::ControlsScene() :BaseMenu(), delay_(250), lastUpdate_(0), controllerIdex_(-1)
 {

@@ -6,7 +6,6 @@ class BaseMenu : public Scene
 	//No pongo virtual timers porque no nos interesa pausar el propio menu de pausa
 protected: 
 	bool changeSc_;
-public:
 	BaseMenu();
 	~BaseMenu() {};
 	virtual void init()=0; 

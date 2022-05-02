@@ -133,10 +133,14 @@ void MenuScene::onButtonClicked(int index)
 		sC().changeScene(SceneManager::Hub_);
 		
 		break;
-	case 2: //Boton controls
+	case 2:
+		sC().changeScene(SceneManager::Settings_);
+
+		break;
+	case 3: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
 		break; 
-	case 3: //Boton quit
+	case 4: //Boton quit
 		Game::instance()->setExit(true);
 		break;
 	default:
@@ -150,7 +154,7 @@ void MenuScene::onButtonClicked(int index)
 void MenuScene::generateAllButtons()
 {
 	//Variables que definen caracteristicas de los botones y numero de filas de botones en el menu
-	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 2;
+	int offsetY = 40, spacingX = 20, spacingY = 100, rows = 3;
 	int buttonW = 200, buttonH = 80; // Width y Height de los botones
 
 	//Bucle que dibuja la primera columna (izq) de botones

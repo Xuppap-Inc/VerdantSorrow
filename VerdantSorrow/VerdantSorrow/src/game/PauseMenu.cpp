@@ -100,3 +100,4 @@ void PauseMenu::createImages(float x, float y, float w, float h, std::string ima
 	newImage->addComponent<Image>(&sdlutils().imagesHub().at(image));
 
 }
+
