@@ -76,7 +76,7 @@ void Scene::background(std::string backgroundName, int height)
 void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 {
 	playerAttribs_ = player_->addComponent<PlayerAttributes>();
-
+	playerAttribs_->setDefeated(false);
 	playerTr_ = player_->addComponent<Transform>();
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;

@@ -37,7 +37,7 @@ void FrogScene::init()
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
-
+	playerDying = false;
 	background();
 
 	waveSpawerGenerator(colManager);
