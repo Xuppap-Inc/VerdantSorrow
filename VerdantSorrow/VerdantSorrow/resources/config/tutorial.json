@@ -119,10 +119,27 @@
         }
     ],
 
-  "sounds" : [
-    { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
-    { "id" : "sfx_chica_attack2", "file" : "resources/sound/sfx_chica_attack2.wav" },
-    { "id" : "sfx_chica_roll", "file" : "resources/sound/sfx_chica_roll.wav" }
+  "sounds": [
+    {
+      "id": "sfx_chica_attack1",
+      "file": "resources/sound/sfx_chica_attack1.wav"
+    },
+    {
+      "id": "sfx_chica_attack2",
+      "file": "resources/sound/sfx_chica_attack2.wav"
+    },
+    {
+      "id": "sfx_chica_roll",
+      "file": "resources/sound/sfx_chica_roll.wav"
+    },
+    {
+      "id": "sfx_player_damage",
+      "file": "resources/sound/sfx_player_damage.wav"
+    },
+    {
+      "id": "sfx_player_dead",
+      "file": "resources/sound/sfx_player_dead.wav"
+    }
 
   ],
   "musics" : [

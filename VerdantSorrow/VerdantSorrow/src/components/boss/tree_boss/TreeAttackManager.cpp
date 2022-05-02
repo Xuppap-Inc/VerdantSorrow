@@ -134,8 +134,8 @@ void TreeAttackManager::checkIfDead()
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_boss_defeated");
 		s->play();
-		SoundEffect* s = &sdlutils().soundEffects().at("sfx_descubrir_arbol");
-		s->play();
+		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_descubrir_arbol");
+		s2->play();
 
 		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
@@ -223,7 +223,7 @@ void TreeAttackManager::checkState(float absDistance)
 
 			//reactiva al arbol
 			lanternMov_->setActive(true);
-			anim_->setVisible(true);
+			anim_->fadeIn();
 
 			lanternCols_->setDamaged(true);
 
@@ -429,7 +429,10 @@ void TreeAttackManager::attackSpecial()
 	rootAutoAim_->attack(false);
 	lanternCols_->setDamaged(false);//raices especial si hacen da�o
 
-	anim_->setVisible(false);
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_background");
+	s->play();
+
+	anim_->fadeOut();
 	treeCol_->setActive(false);
 }
 

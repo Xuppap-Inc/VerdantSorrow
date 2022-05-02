@@ -315,6 +315,10 @@
     {
       "id": "sfx_player_damage",
       "file": "resources/sound/sfx_player_damage.wav"
+    },
+    {
+      "id": "sfx_player_dead",
+      "file": "resources/sound/sfx_player_dead.wav"
     }
   ],
 

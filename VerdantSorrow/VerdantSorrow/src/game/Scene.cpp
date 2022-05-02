@@ -171,6 +171,9 @@ void Scene::checkPlayerDied()
 		ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
 		particlesys3->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
 
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_player_dead");
+		s->play();
+
 		deactivateBoss();
 		playerDeathTimer_->reset();
 	}
