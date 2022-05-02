@@ -31,19 +31,20 @@ void ClapAttack::goDiagonal()
 {
 	collider_->setActive(false);
 	int xObjective;
+	int yOffset = 120;
 
 	if (!leftHand_) xObjective = 0;
 	else xObjective = sdlutils().width() - tr_->getWidth();
 
-	if (abs(tr_->getPos().getX() - xObjective) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight()) > 5) {
+	if (abs(tr_->getPos().getX() - xObjective) > 5 || abs(tr_->getPos().getY() - sdlutils().height() + tr_->getHeight() + yOffset) > 5) {
 
-		Vector2D dir = Vector2D(xObjective - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight());
+		Vector2D dir = Vector2D(xObjective - tr_->getPos().getX(), sdlutils().height() - tr_->getPos().getY() - tr_->getHeight() - yOffset);
 		tr_->getVel().set(dir.normalize() * handSpeed);
 	}
 	else {
 
 		tr_->getVel().set(Vector2D(0, 0));
-		tr_->getPos().set(Vector2D(xObjective, sdlutils().height() - tr_->getHeight()));
+		tr_->getPos().set(Vector2D(xObjective, sdlutils().height() - tr_->getHeight() - yOffset));
 		changeState(CENTER);
 	}
 }

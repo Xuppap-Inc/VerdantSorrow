@@ -426,4 +426,3 @@ void HandsManager::createParticlesHands()
 	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
 	particlesys->createParticlesFire(2, rightHandTr_->getPos().getX() + sdlutils().rand().nextInt(0, (rightHandTr_->getWidth())), rightHandTr_->getPos().getY() + 20);
 }
-

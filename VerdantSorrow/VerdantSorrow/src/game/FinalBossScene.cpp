@@ -119,7 +119,9 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	FinalBossFace = mngr_->addEntity();
 	mngr_->setHandler(ecs::_EYE, FinalBossFace);
 	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
-	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(30);
+
+	// poner a 30
+	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(5);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = (sdlutils().width() - 350) / 2;
