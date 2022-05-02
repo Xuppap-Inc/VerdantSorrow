@@ -10,6 +10,7 @@
 #include "../game/Game.h"
 #include "../components/hub/HubAreas.h"
 #include "../components/boss/nivelHuida/Mushroom.h"
+#include "../components/boss/nivelHuida/FlySpawnerPlant.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -179,6 +180,11 @@ void TileMap::createObjects()
 					}
 					else if (name == "Setas") {
 						ent->addComponent<Mushroom>(col_);
+						ent->addToGroup(ecs::_BOSSELEMENTS_GRP);
+					}
+					else if (name == "LanzaMoscas") {
+						ent->addComponent<FlySpawnerPlant>(col_, true, 5000);
+						ent->addToGroup(ecs::_BOSSELEMENTS_GRP);
 					}
 
 				}

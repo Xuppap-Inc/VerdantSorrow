@@ -8,108 +8,116 @@
   ],
 
 
-  "images": [
-    {
-      "id": "Chica_Idle",
-      "file": "resources/images/idle.png"
-    },
-    {
-      "id": "Chica_Run",
-      "file": "resources/images/run.png"
-    },
-    {
-      "id": "chicaroll",
-      "file": "resources/images/roll.png"
-    },
-    {
-      "id": "Chica_Jump",
-      "file": "resources/images/jump.png"
-    },
-    {
-      "id": "Chica_AtkFloor1",
-      "file": "resources/images/attack1.png"
-    },
-    {
-      "id": "Chica_AtkFloor2",
-      "file": "resources/images/attack2.png"
-    },
-    {
-      "id": "Chica_AtkFloor3",
-      "file": "resources/images/attack3.png"
-    },
-    {
-      "id": "Attack1_Recovery",
-      "file": "resources/images/attack1_recovery.png"
-    },
-    {
-      "id": "Chica_AtkAir1",
-      "file": "resources/images/attackAir1.png"
-    },
-    {
-      "id": "Chica_AtkAir2",
-      "file": "resources/images/attackAir2.png"
-    },
-    {
-      "id": "Chica_AtkAir3",
-      "file": "resources/images/attackAir3.png"
-    },
-    {
-      "id": "particula_tierra",
-      "file": "resources/images/particula_tierra.png"
-    },
-    {
-      "id": "particula_esencia",
-      "file": "resources/images/particula_esencia.png"
-    },
-    {
-      "id": "particula_hoja",
-      "file": "resources/images/particula_hoja.png"
-    },
-    {
-      "id": "heart",
-      "file": "resources/images/heart.png"
-    },
-    {
-      "id": "heartBlack",
-      "file": "resources/images/heartBlack.png"
-    },
-    {
-      "id": "healthDetail",
-      "file": "resources/images/HealthDetail.png"
-    },
-    {
-      "id": "middleBar",
-      "file": "resources/images/middleBar.png"
-    },
-    {
-      "id": "fondo1",
-      "file": "resources/images/fondo1.png"
-    },
-    {
-      "id": "Suelo",
-      "file": "resources/images/Suelo.png"
-    },
-    {
-      "id": "fondoSuelo",
-      "file": "resources/images/fondoSuelo.png"
-    },
-    {
-      "id": "mosca",
-      "file": "resources/images/mosca.png"
-    },
-    {
-      "id": "root",
-      "file": "resources/images/root.png"
-    },
-    {
-      "id": "particula_damage",
-      "file": "resources/images/particula_damage.png"
-    },
-    {
-      "id": "you_died",
-      "file": "resources/images/you_died.png"
-    }
-  ],
+    "images": [
+        {
+            "id": "chica",
+            "file": "resources/images/chicafoto.png"
+        },
+        {
+            "id": "Chica_Idle",
+            "file": "resources/images/idle.png"
+        },
+        {
+            "id": "Chica_Run",
+            "file": "resources/images/run.png"
+        },
+        {
+            "id": "chicaroll",
+            "file": "resources/images/roll.png"
+        },
+        {
+            "id": "Chica_Jump",
+            "file": "resources/images/jump.png"
+        },
+        {
+            "id": "Chica_AtkFloor1",
+            "file": "resources/images/attack1.png"
+        },
+        {
+            "id": "Chica_AtkFloor2",
+            "file": "resources/images/attack2.png"
+        },
+        {
+            "id": "Chica_AtkFloor3",
+            "file": "resources/images/attack3.png"
+        },
+        {
+            "id": "chicaroll",
+            "file": "resources/images/roll.png"
+        },
+        {
+            "id": "Attack1_Recovery",
+            "file": "resources/images/attack1_recovery.png"
+        },
+        {
+            "id": "Chica_AtkAir1",
+            "file": "resources/images/attackAir1.png"
+        },
+        {
+            "id": "Chica_AtkAir2",
+            "file": "resources/images/attackAir2.png"
+        },
+        {
+            "id": "Chica_AtkAir3",
+            "file": "resources/images/attackAir3.png"
+        },
+        {
+            "id": "particula_tierra",
+            "file": "resources/images/particula_tierra.png"
+        },
+        {
+            "id": "particula_esencia",
+            "file": "resources/images/particula_esencia.png"
+        },
+        {
+            "id": "particula_hoja",
+            "file": "resources/images/particula_hoja.png"
+        },
+        {
+            "id": "heart",
+            "file": "resources/images/heart.png"
+        },
+        {
+            "id": "heartBlack",
+            "file": "resources/images/heartBlack.png"
+        },
+        {
+            "id": "healthDetail",
+            "file": "resources/images/HealthDetail.png"
+        },
+        {
+            "id": "middleBar",
+            "file": "resources/images/middleBar.png"
+        },
+        {
+            "id": "fondo1",
+            "file": "resources/images/fondo1.png"
+        },
+        {
+            "id": "Suelo",
+            "file": "resources/images/Suelo.png"
+        },
+        {
+            "id": "fondoSuelo",
+            "file": "resources/images/fondoSuelo.png"
+        },
+        {
+            "id": "mosca",
+            "file": "resources/images/mosca.png"
+        },
+        {
+            "id": "root",
+            "file": "resources/images/root.png"
+        },
+        {
+            "id": "particula_damage",
+            "file": "resources/images/particula_damage.png"
+        },
+        {
+            "id": "you_died",
+            "file": "resources/images/you_died.png"
+        }
+    ],
 
   "sounds" : [
     { "id" : "sfx_chica_attack1", "file" : "resources/sound/sfx_chica_attack1.wav" },
