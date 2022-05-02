@@ -253,7 +253,7 @@
     { "id" : "sfx_descubrir_rana", "file" : "resources/sound/sfx_descubrir_rana.wav" }
   ],
   "musics" : [
-    { "id" : "musica_rana_fase2", "file" : "resources/sound/musica_rana_fase2.wav" }
+    { "id" : "musica_rana_fase2", "file" : "resources/sound/musica_rana_fase2.mp3" }
   ]
 
 }
