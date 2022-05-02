@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="566">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="left-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="573">
  <tileset firstgid="1" name="ObjetosHuida" tilewidth="666" tileheight="667" tilecount="25" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Plataforma">
+   <properties>
+    <property name="Collision" type="bool" value="true"/>
+   </properties>
    <image width="98" height="105" source="../images/Nivel huida/medio plataforma.png"/>
   </tile>
   <tile id="1" type="Pincho">
@@ -80,21 +83,21 @@
  </tileset>
  <imagelayer id="2" name="Fondo" offsetx="8032" offsety="9544"/>
  <objectgroup id="4" name="Pinchos" offsetx="2.78788" offsety="0">
-  <object id="473" gid="8" x="2430" y="5018" width="164" height="547"/>
-  <object id="474" gid="8" x="2342" y="5006" width="164" height="547"/>
-  <object id="475" gid="8" x="2250" y="5018" width="164" height="547"/>
+  <object id="473" gid="8" x="2242.12" y="5011.94" width="164" height="547"/>
+  <object id="474" gid="8" x="2154.12" y="4999.94" width="164" height="547"/>
+  <object id="475" gid="8" x="2062.12" y="5011.94" width="164" height="547"/>
   <object id="476" gid="8" x="1232.75" y="4778.97" width="115.735" height="359.969"/>
   <object id="477" gid="6" x="2230" y="6054" width="165" height="547"/>
   <object id="478" gid="6" x="2342" y="6038" width="165" height="547"/>
   <object id="479" gid="6" x="2422" y="6026" width="165" height="547"/>
-  <object id="480" gid="5" x="3715" y="4656" width="322" height="175"/>
-  <object id="481" gid="5" x="3915" y="4668" width="322" height="175"/>
-  <object id="482" gid="5" x="4115" y="4656" width="322" height="175"/>
-  <object id="483" gid="5" x="4311" y="4680" width="322" height="175"/>
-  <object id="484" gid="5" x="3491" y="4660" width="322" height="175"/>
+  <object id="480" gid="5" x="3463.48" y="4649.94" width="322" height="175"/>
+  <object id="481" gid="5" x="3663.48" y="4661.94" width="322" height="175"/>
+  <object id="482" gid="5" x="3863.48" y="4649.94" width="322" height="175"/>
+  <object id="483" gid="5" x="4059.48" y="4673.94" width="322" height="175"/>
+  <object id="484" gid="5" x="3239.48" y="4653.94" width="322" height="175"/>
   <object id="485" gid="5" x="2776.94" y="5388" width="222" height="175"/>
   <object id="486" gid="5" x="2944" y="5376" width="225.03" height="175"/>
-  <object id="487" gid="3" x="1592" y="5379" width="135" height="142"/>
+  <object id="487" gid="3" x="1592" y="5371" width="135" height="142"/>
   <object id="488" gid="3" x="1592.5" y="5269" width="135" height="142"/>
   <object id="489" gid="3" x="1581.5" y="5154" width="135" height="142"/>
   <object id="490" gid="3" x="1592.5" y="5048" width="135" height="142"/>
@@ -131,6 +134,13 @@
   <object id="554" gid="8" x="1285.51" y="4784.5" width="115.735" height="359.969"/>
   <object id="555" gid="8" x="1343.75" y="4789.25" width="115.735" height="359.969"/>
   <object id="556" gid="8" x="1396.51" y="4794.78" width="115.735" height="359.969"/>
+ </objectgroup>
+ <objectgroup id="6" name="Setas">
+  <object id="568" gid="12" x="623.303" y="5985.67" width="414" height="238"/>
+  <object id="569" gid="12" x="3635.42" y="5979.61" width="414" height="238"/>
+  <object id="570" gid="12" x="4393" y="5461.42" width="414" height="238"/>
+  <object id="571" gid="12" x="5593" y="4061.42" width="414" height="238"/>
+  <object id="572" gid="12" x="5093" y="1379.61" width="414" height="238"/>
  </objectgroup>
  <objectgroup id="3" name="Plataformas" offsetx="3.0303" offsety="-3.27273">
   <object id="1" gid="1" x="-1" y="6085" width="98" height="105"/>
@@ -464,10 +474,6 @@
   <object id="428" gid="11" x="5440.94" y="4395.42" width="106" height="105"/>
   <object id="429" gid="11" x="5213.67" y="4271.18" width="106" height="105"/>
   <object id="430" gid="11" x="5040.94" y="4040.88" width="106" height="105"/>
-  <object id="432" gid="12" x="5591.18" y="4065.91" width="414" height="238"/>
-  <object id="433" gid="12" x="5089" y="1387" width="414" height="238"/>
-  <object id="434" gid="12" x="4391" y="5463" width="414" height="238"/>
-  <object id="435" gid="12" x="3633" y="5983" width="414" height="238"/>
   <object id="436" gid="11" x="4125" y="5465" width="106" height="105"/>
   <object id="437" gid="11" x="4027" y="5463" width="106" height="105"/>
   <object id="438" gid="11" x="3925" y="5463" width="106" height="105"/>
@@ -493,7 +499,6 @@
   <object id="459" gid="1" x="1308.5" y="5227.5" width="98" height="105"/>
   <object id="460" gid="1" x="1404.5" y="5227.5" width="98" height="105"/>
   <object id="461" gid="19" x="1500.5" y="5227.5" width="103" height="105"/>
-  <object id="462" gid="12" x="621" y="5983" width="414" height="238"/>
   <object id="463" gid="11" x="7" y="5249" width="106" height="105"/>
   <object id="464" gid="11" x="96" y="5280" width="106" height="105"/>
   <object id="465" gid="11" x="192" y="5312" width="106" height="105"/>
@@ -506,7 +511,7 @@
  </objectgroup>
  <objectgroup id="5" name="LanzaMoscas" offsetx="1.93939" offsety="1.69697">
   <object id="557" gid="15" x="2791.76" y="4785.21" width="255.879" height="300.027"/>
-  <object id="558" gid="15" x="4599.33" y="4783.32" width="255.879" height="300.027"/>
+  <object id="558" gid="15" x="4505.39" y="4662.11" width="149.918" height="175.785"/>
   <object id="559" gid="16" x="4882.15" y="456.727" width="259.939" height="221.69"/>
   <object id="560" gid="16" x="4888.21" y="4349.76" width="190.242" height="162.249"/>
   <object id="561" gid="14" x="4389.33" y="6006" width="222.667" height="261.477"/>

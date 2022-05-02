@@ -9,6 +9,7 @@
 #include "../components/hub/PlatformAtribsForHub.h"
 #include "../game/Game.h"
 #include "../components/hub/HubAreas.h"
+#include "../components/boss/nivelHuida/Mushroom.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -128,7 +129,7 @@ void TileMap::createObjects()
 					r.y = r.y / scale_;
 
 				//add entidades correspondientes
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Plataformas"||name=="Pinchos" || name=="LanzaMoscas") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Plataformas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -175,6 +176,9 @@ void TileMap::createObjects()
 							ent->addComponent<HubAreas>(col_, properties[i].getStringValue());
 
 						ent->addToGroup(ecs::_UI_GRP);
+					}
+					else if (name == "Setas") {
+						ent->addComponent<Mushroom>(col_);
 					}
 
 				}
