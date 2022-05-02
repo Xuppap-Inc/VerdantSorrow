@@ -62,6 +62,8 @@ void Hub::init()
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(player_->getComponent<Transform>()->getPos() + Vector2D(-sdlutils().windowWidth()/2,-sdlutils().windowHeight()/2), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
+	auto tilemapTR = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
+	cameraC->setLimitToDimensions(tilemapTR->getPos().getX(), tilemapTR->getPos().getY(), tilemapTR->getWidth(), tilemapTR->getHeight());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	musica_ = &sdlutils().musicsHub().at("musica_hub");
