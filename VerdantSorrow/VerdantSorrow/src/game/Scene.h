@@ -5,6 +5,7 @@
 class PlayerAttributes;
 class CollideWithBorders;
 class PlayerCtrl;
+class FramedImage;
 class Scene
 {
 public:
@@ -34,6 +35,9 @@ protected:
 	VirtualTimer* playerDeathTimer_;
 	CollideWithBorders* bordersPlayer_;
 	PlayerCtrl* playerCtrl_;
+
+	Transform* playerTr_;
+	FramedImage* playerImg_;
 
 	bool playerDying = false;
 };

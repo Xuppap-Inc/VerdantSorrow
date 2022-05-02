@@ -14,7 +14,8 @@
 #include "../components/Image.h"
 #include "../components/player/PlayerComponents.h"
 #include "../components/boss/BossComponents.h"
-
+#include "../components/boss/BossComponents.h"
+#include "../components/fondos/ParticleSystem.h"
 
 #include "CollisionManager.h"
 
@@ -70,12 +71,13 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 {
 	playerAttribs_ = player_->addComponent<PlayerAttributes>();
 
-	auto playerTr = player_->addComponent<Transform>();
+	playerTr_ = player_->addComponent<Transform>();
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
+	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 
-	player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
+	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
+	playerImg_->setAlpha(255);
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
@@ -84,14 +86,14 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	bordersPlayer_->collisionx(false);
 
 	//Se a�ade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr->getWidth(), playerTr->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
 	colManager->addCollider(playerCollider);
 
 	//IMPORTANTE :No poner estas f�sicas detr�s del playerctrl
 	player_->addComponent<SimplePhysicsPlayer>(colManager);
 
 	//Componente de ataque del jugador
-	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr->getHeight() * 1.8, -playerTr->getHeight() * 1.5 / 3, colManager);
+	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr_->getHeight() * 1.8, -playerTr_->getHeight() * 1.5 / 3, colManager);
 	colManager->addCollider(playerAttackCollider);
 	playerAttackCollider->setIsTrigger(true);
 
@@ -119,6 +121,13 @@ void Scene::checkPlayerDied()
 {
 	if (playerAttribs_->getLives() <= 0) 
 	{
+		playerImg_->setAlpha(0);
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
+		particlesys->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
+		particlesys2->createParticlesKillPlayer(50, playerTr_->getPos().getX() + (playerTr_->getWidth() / 2), playerTr_->getPos().getY() + (playerTr_->getHeight() / 2));
+
 		deactivateBoss();
 		playerDeathTimer_->reset();
 	}

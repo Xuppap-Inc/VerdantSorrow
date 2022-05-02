@@ -61,6 +61,10 @@ public:
 
 	void createParticlesBossSpawn(int numpart, int x, int y);
 
+	void createParticlesDamagePlayer(int numpart, int x, int y);
+
+	void createParticlesKillPlayer(int numpart, int x, int y);
+
 private:
 
 	Texture* tex_;

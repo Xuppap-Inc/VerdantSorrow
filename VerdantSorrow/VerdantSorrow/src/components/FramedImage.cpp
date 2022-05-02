@@ -313,6 +313,18 @@ bool FramedImage::isVisible()
 	return visible_;
 }
 
+void FramedImage::setAlpha(int num)
+{
+	alpha_ = num;
+	assert(alpha_ >= 0 && alpha_ <= 255);
+	tex_->setAlpha(alpha_);
+}
+
+void FramedImage::setBlendMode(SDL_BlendMode blending)
+{
+	tex_->setBlendMode(blending);
+}
+
 void FramedImage::adjustToTransform(bool set)
 {
 	adjustToTransform_ = set;
@@ -366,6 +378,18 @@ void FramedImage::clearEvents()
 	eventsCallbacks_.clear();
 }
 
+void FramedImage::fadeIn()
+{
+	isFadingOut_ = false;
+	isFadingIn_ = true;
+}
+
+void FramedImage::fadeOut()
+{
+	isFadingIn_ = false;
+	isFadingOut_ = true;
+}
+
 void FramedImage::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
 	red_ = r;
 	green_ = g;
@@ -385,4 +409,24 @@ void FramedImage::update() {
 		}
 	}
 	getTexture()->setColor(red_, green_, blue_);
+	if (isFadingIn_) {
+		if (alpha_ >= 255) {
+			alpha_ = 255;
+			isFadingIn_ = false;
+		}
+		else {
+			alpha_++;
+			setAlpha(alpha_);
+		}
+	}
+	if (isFadingOut_) {
+		if (alpha_ <= 0) {
+			alpha_ = 0;
+			isFadingOut_ = false;
+		}
+		else {
+			alpha_--;
+			setAlpha(alpha_);
+		}
+	}
 }
