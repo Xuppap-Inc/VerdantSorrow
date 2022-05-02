@@ -39,6 +39,8 @@ public:
 	FrogScene* getFrogScene() { return f_; };
 	TreeScene* getTreeScene() { return t_; };
 	FinalBossScene* getEyeScene() { return fin_; };
+	MenuScene* getMenuScene() { return menu_; };
+	EscapeScene* getEscapeScene() { return ecapesc_; };
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
 private:

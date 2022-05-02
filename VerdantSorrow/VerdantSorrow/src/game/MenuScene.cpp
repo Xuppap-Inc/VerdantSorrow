@@ -15,7 +15,7 @@
 #include <fstream>
 
 MenuScene::MenuScene():BaseMenu(),mouseIndex_(-1),controllerIndex_(-1),delay_(250), lastUpdate_(0),
-					   buttonsActive_(false), background_(), background1_(), background2_()
+					   buttonsActive_(false), background_(), background1_(), background2_(), musicVolume_(60)
 {
 
 }
@@ -85,7 +85,7 @@ void MenuScene::update()
 
 			musica_ = &sdlutils().musicsHub().at("music_menu");
 			musica_->play();
-			musica_->setMusicVolume(60);
+			musica_->setMusicVolume(musicVolume_);
 		}
 	}
 	

@@ -10,6 +10,8 @@
 #include "../components/boss/tree_boss/TreeAttackManager.h"
 #include "FinalBossScene.h"
 #include "../components/boss/finalBoss/FinalBossMovement.h"
+#include "MenuScene.h"
+#include "EscapeScene.h"
 #include "Game.h"
 
 
@@ -91,8 +93,11 @@ void PauseMenu::controlVolume(bool turnUp)
 {
 	Music* musica = new Music();
 	SoundEffect* soundEffect;
-	int* volMusicaHub = nullptr; int* volMusicaFrog = nullptr; int* volMusicaTree = nullptr; int* volMusicaEye = 0;
+	int* volMusicaHub = nullptr; int* volMusicaFrog = nullptr; int* volMusicaTree = nullptr; int* volMusicaEye = nullptr;
+	int* volMenu = nullptr; int* volEscapeScene = nullptr;
 	volMusicaHub = sC().getHubScene()->getMusicVolume();
+	volMenu = sC().getMenuScene()->getMusicVolume();
+	volEscapeScene = sC().getEscapeScene()->getMusicVolume();
 	volMusicaFrog = sC().getFrogScene()->getAttackManager()->getMusicVolume();
 	volMusicaTree = sC().getTreeScene()->getTreeAttackManager()->getMusicVolume();
 	volMusicaEye = sC().getEyeScene()->getFinalBossManager()->getMusicVolume();
@@ -120,7 +125,14 @@ void PauseMenu::controlVolume(bool turnUp)
 		isEye = true;
 		musica = sC().getEyeScene()->getFinalBossManager()->getMusic();
 		break;
+	case SceneManager::scenes::Menu_:
+		musica = sC().getMenuScene()->getMusic();
+		break;
+	case SceneManager::scenes::EscapeScene_:
+		musica = sC().getEscapeScene()->getMusic();
+		break;
 	}
+
 
 
 	int newVolume = 0;
@@ -132,6 +144,8 @@ void PauseMenu::controlVolume(bool turnUp)
 
 	if (newVolume <= 128 && newVolume >= 0) {
 		*volMusicaHub = newVolume;
+		*volMenu = newVolume;
+		*volEscapeScene = newVolume;
 		if (isFrog) *volMusicaFrog = newVolume;
 		if (isTree) *volMusicaTree = newVolume;
 		if (isEye) *volMusicaEye = newVolume;

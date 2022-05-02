@@ -41,7 +41,7 @@ void FinalBossMovement::initComponent()
 
 	musica_ = &sdlutils().musics().at("music_manos");
 	musica_->play();
-	musica_->setMusicVolume(60);
+	musica_->setMusicVolume(musicVolume_);
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_enter");
 	s->play();

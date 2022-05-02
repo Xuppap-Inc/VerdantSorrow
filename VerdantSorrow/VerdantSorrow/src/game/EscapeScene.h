@@ -23,6 +23,10 @@ public:
 	bool getAble();
 	void setAble(bool a);
 	void createLights();
+	
+
+	int* getMusicVolume() { return &musicVolume_; };
+	Music* getMusic() { return musica_; };
 private:
 	bool isAble;
 	Entity* player;
@@ -30,6 +34,7 @@ private:
 	CollisionChecker* colCheck_;
 	TileMap* tileMap_;
 
+	int musicVolume_;
 	Music* musica_;
 };
 

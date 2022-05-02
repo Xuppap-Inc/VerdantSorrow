@@ -27,7 +27,7 @@
 #include "../components/fondos/Light.h"
 #include "TileMap.h"
 
-EscapeScene::EscapeScene() :Scene(), isAble(false)
+EscapeScene::EscapeScene() :Scene(), isAble(false), musicVolume_(60)
 {
 }
 
@@ -65,7 +65,7 @@ void EscapeScene::init()
 
 	musica_ = &sdlutils().musics().at("music_huida");
 	musica_->play();
-	musica_->setMusicVolume(60);
+	musica_->setMusicVolume(musicVolume_);
 }
 
 void EscapeScene::update()

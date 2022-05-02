@@ -33,7 +33,7 @@ private:
 	void onButtonClicked(int index)override; //Versión raton
 	void generateAllButtons() override;
 	void background();
-
+	int musicVolume_;
 public:
 	MenuScene();
 	~MenuScene() {};
@@ -41,5 +41,7 @@ public:
 	void update()override;
 	
 	void init() override;
+	Music* getMusic() { return musica_; };
+	int* getMusicVolume() { return &musicVolume_; };
 };
 

@@ -13,8 +13,8 @@
 #include "Settings.h"
 
 
-SceneManager::SceneManager() : actScene(Menu_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
-playerInBossFight(false),previousScene_(Menu_),isPauseActive_(false)
+SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
+playerInBossFight(false),previousScene_(Hub_),isPauseActive_(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
