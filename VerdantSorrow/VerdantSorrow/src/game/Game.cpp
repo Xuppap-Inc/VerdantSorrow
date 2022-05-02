@@ -116,7 +116,6 @@ void Game::start() {
 		else cout << "No se puede abrir el guardado.txt";
 	}
 	
-
 	SDLUtils::init("Verdant Sorrow", w, h);
 
 	auto& scMngr_ = sC();

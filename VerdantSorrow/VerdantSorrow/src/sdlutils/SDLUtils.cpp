@@ -459,7 +459,6 @@ void SDLUtils::renderProgressBar(int assetsLoaded)
 
 	SDL_Rect r = build_sdlrect(pos.getX(), pos.getY(), maxBarLength, maxBarLength);
 	SDL_Rect r2 = build_sdlrect(pos.getX(), pos.getY(), maxBarLength * assetsLoaded / assetsNumber_, maxBarLength);
-
 	SDL_SetRenderDrawColor(renderer_, 50, 50, 50, 255);
 	SDL_RenderFillRect(renderer_, &r);
 	SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
