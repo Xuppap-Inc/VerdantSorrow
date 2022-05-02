@@ -167,6 +167,3 @@ void Punch::goBack()
 	}
 
 }
-
-
-
