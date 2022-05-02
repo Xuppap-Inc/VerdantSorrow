@@ -15,7 +15,7 @@
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), phase_(PHASE1), eyeState_(BOUNCE),
-	eyeSpeed_(3), waveSp_(), lastTimeInGround_(), anim_(), ashes_(), deadBoss_(false), musicaFase1_(), musicaFase2_(),
+	eyeSpeed_(3), waveSp_(), lastTimeInGround_(), anim_(), ashes_(), deadBoss_(false), musica_(),
 	playerTr_()
 {
 }
@@ -33,13 +33,10 @@ void FinalBossMovement::initComponent()
 	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
 
-	musicaFase2_ = &sdlutils().musics().at("musica_manos_fase2");
-	musicaFase2_->play();
-	musicaFase2_->setMusicVolume(0);
+	musica_ = &sdlutils().musics().at("music_manos");
+	musica_->play();
+	musica_->setMusicVolume(60);
 
-	musicaFase1_ = &sdlutils().soundEffects().at("musica_manos_fase1");
-	musicaFase1_->play(10, 0);
-	musicaFase1_->setChannelVolume(60, 0);
 	lastTimeInGround_ = mngr_->addTimer();
 
 	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
@@ -107,8 +104,6 @@ void FinalBossMovement::checkPhaseChange()
 		s->play();
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_damage");
 		s2->play();
-		musicaFase2_->setMusicVolume(60);
-		musicaFase1_->pauseChannel(0);
 
 		ashes_->targetParticles(tr_);
 
@@ -216,4 +211,13 @@ void FinalBossMovement::fireBall()
 
 	waveImgEnt->addToGroup(ecs::_BOSSELEMENTS_GRP);
 	wave->addComponent<WaveMovement>(Vector2D(0, 1), fireballSpeed);
+}
+
+void FinalBossMovement::setDeadBoss(bool set)
+{
+	deadBoss_ = set;
+
+	if (set) {
+		musica_->pauseMusic();
+	}
 }

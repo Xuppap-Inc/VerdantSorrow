@@ -28,6 +28,8 @@ private:
 
 	ParticleSystem* particlesys_;
 	ParticleSystem* particlesys2_;
+
+	Music* musica_;
 public:
 	MenuScene();
 	~MenuScene() {};

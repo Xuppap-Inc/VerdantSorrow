@@ -63,6 +63,9 @@ void EscapeScene::init()
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	particlesys->createParticlesAsh(100);
 
+	musica_ = &sdlutils().musics().at("music_huida");
+	musica_->play();
+	musica_->setMusicVolume(60);
 }
 
 void EscapeScene::update()

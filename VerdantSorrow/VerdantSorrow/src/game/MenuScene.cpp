@@ -82,6 +82,10 @@ void MenuScene::update()
 
 			SoundEffect* s = &sdlutils().soundEffectsHub().at("sfx_iniciar_menu");
 			s->play();
+
+			musica_ = &sdlutils().musicsHub().at("music_menu");
+			musica_->play();
+			musica_->setMusicVolume(60);
 		}
 	}
 	if (!changeSc_) {
