@@ -16,8 +16,8 @@ using namespace std;
 
 
 DialogBoxMngr::DialogBoxMngr(std::string font) :tr_(), font_(font), letterWidth_(14), letterHeight_(28),
-												lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false), quickText_(false), finished_(false), lineNumber_(0)
-												,skip_(false), cajaDialogo(&sdlutils().imagesHub().at("CajaDialogo"))
+lineOffsetY_(2), letterTimer_(50), lastChar_(""), lastParagraph_(false), quickText_(false), finished_(false), lineNumber_(0)
+, skip_(false), cajaDialogo(&sdlutils().imagesHub().at("CajaDialogo"))
 {
 }
 
@@ -26,7 +26,7 @@ void DialogBoxMngr::initComponent()
 	tr_ = ent_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 	vt_ = mngr_->addTimer();
-	
+
 }
 
 void DialogBoxMngr::update()
@@ -46,22 +46,22 @@ void DialogBoxMngr::render()
 {
 	//render sprite
 	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(build_sdlcolor(0xFFFFFFFF)));
-	SDL_Rect rect = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY(), tr_->getWidth(), tr_->getHeight());
 
 	//escalado pantalla
 	auto sW = mngr_->getWindowScaleWidth();
 	auto sH = mngr_->getWindowScaleHeight();
+
+	int w = 1000;
+	int h = 300;
+
+	SDL_Rect rect = build_sdlrect(tr_->getPos().getX() - w / 5, tr_->getPos().getY() - h / 2, w, h);
 
 	rect.x *= sW;
 	rect.w *= sW;
 	rect.y *= sH;
 	rect.h *= sH;
 
-	int w = 1000;
-	int h = 300;
-	SDL_Rect dialogoRect = build_sdlrect(tr_->getPos().getX() - w/5, tr_->getPos().getY() - h/2, w, h);
-
-	cajaDialogo->render(dialogoRect); // 50 grosor
+	cajaDialogo->render(rect); // 50 grosor
 
 	//render text
 	for (int i = 0; i < lines_.size(); i++) {
