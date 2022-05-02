@@ -57,8 +57,6 @@ void DialogBoxMngr::render()
 	rect.y *= sH;
 	rect.h *= sH;
 
-	//SDL_RenderFillRect(sdlutils().renderer(), &rect);
-
 	int w = 1000;
 	int h = 300;
 	SDL_Rect dialogoRect = build_sdlrect(tr_->getPos().getX() - w/5, tr_->getPos().getY() - h/2, w, h);
@@ -67,7 +65,6 @@ void DialogBoxMngr::render()
 
 	//render text
 	for (int i = 0; i < lines_.size(); i++) {
-		//Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0x444444ff));
 		Texture text(sdlutils().renderer(), lines_[i], sdlutils().fontsHub().at(font_), build_sdlcolor(0xffffffff));
 		SDL_Rect dest = build_sdlrect(tr_->getPos().getX(), tr_->getPos().getY() + ((letterHeight_ + lineOffsetY_) * i) - 70, text.width(), text.height());
 

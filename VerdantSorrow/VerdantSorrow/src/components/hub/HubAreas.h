@@ -32,6 +32,6 @@ protected:
 	std::string font_;
 	bool collision;
 	std::string text_;
-
+	Image* image_;
 };
 

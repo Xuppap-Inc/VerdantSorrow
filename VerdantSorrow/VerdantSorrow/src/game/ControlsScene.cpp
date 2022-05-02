@@ -21,7 +21,6 @@ void ControlsScene::init()
 
 	int imageW = 800, imageH = 300; //Ancho y alto e imagen
 	createImages(sdlutils().width() / 2 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
-	//background();//Dibuja el fondo
 	generateAllButtons();
 }
 void ControlsScene::background()
@@ -32,12 +31,6 @@ void ControlsScene::background()
 	background_->addToGroup(ecs::_BACKGROUND_1_GRP);
 	
 }
-//
-//void ControlsScene::background()
-//{
-//	Scene::background("fondoMenu");
-//
-//}
 
 void ControlsScene::onButtonClicked(int index)
 {
@@ -98,7 +91,6 @@ void ControlsScene::update()
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		//createText(sdlutils().width(), sdlutils().height()-100,"Explicacion de prueba");
 		createText(sdlutils().width(), sdlutils().height()-400,"Move  -> W,A,S,D");
 		createText(sdlutils().width(), sdlutils().height()-350,"Jump -> W,SPACE");
 		createText(sdlutils().width(), sdlutils().height()-300,"Interact with characters -> SPACE");

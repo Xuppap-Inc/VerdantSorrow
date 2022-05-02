@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-//#include "Scene.h"
 #include "BaseMenu.h"
 
 class ControlsScene : public BaseMenu
@@ -9,7 +8,6 @@ class ControlsScene : public BaseMenu
 private:
 	//Se usaran los vectores si se añaden mas botones o imagenes
 	std::vector<std::string> buttonNames_ = { "back" };
-	//std::vector<std::string> imagesNames = { "keyboardControls" };
 	std::vector<Transform*> buttonPositions_;
 	std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
 	float delay_; //Delay del mando

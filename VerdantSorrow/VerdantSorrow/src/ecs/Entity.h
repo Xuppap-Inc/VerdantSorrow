@@ -31,8 +31,6 @@ public:
 	Entity(const Entity&) = delete;
 	Entity& operator=(const Entity&) = delete;
 
-	// Exercise: define move constructor/assignment for class Entity
-
 	// Destroys the entity
 	//
 	virtual ~Entity() {

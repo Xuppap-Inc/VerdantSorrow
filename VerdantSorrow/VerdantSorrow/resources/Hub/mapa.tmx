@@ -825,11 +825,6 @@
     <property name="area" value="frog"/>
    </properties>
   </object>
-  <object id="1686" x="9.09091" y="1506.06" width="1539.39" height="678.788">
-   <properties>
-    <property name="area" value="rest"/>
-   </properties>
-  </object>
   <object id="1687" x="1409.09" y="2424.24"/>
  </objectgroup>
 </map>

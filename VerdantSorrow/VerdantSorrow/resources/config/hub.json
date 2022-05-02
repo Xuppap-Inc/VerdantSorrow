@@ -11,6 +11,18 @@
   ],
   "images_hub": [
     {
+      "id": "etheria",
+      "file": "resources/images/Hub/etheria.png"
+    },
+    {
+      "id": "lumine",
+      "file": "resources/images/Hub/lumine.png"
+    },
+    {
+      "id": "terria",
+      "file": "resources/images/Hub/terria.png"
+    },
+    {
       "id": "eye_open",
       "file": "resources/images/Hub/eye_open.png"
     },
