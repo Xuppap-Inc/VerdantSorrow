@@ -41,7 +41,7 @@ void TutorialScene::init()
 
 	createPlatform(700, sdlutils().height() - 100, 300, 100);
 	createSpike();
-	/*createPlantFlySpawner();*/
+	createPlantFlySpawner();
 
 	auto rootSpawner = mngr_->addEntity();
 	rootSpawner->addComponent<TutorialSpawnRoot>(colManager_);

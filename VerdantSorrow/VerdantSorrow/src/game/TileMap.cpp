@@ -65,7 +65,7 @@ void TileMap::loadMap(string path)
 	//add map as entity
 	auto map = mngr_->addEntity();
 	auto tr = map->addComponent<Transform>();
-	tr->init(Vector2D(), Vector2D(), sdlutils().windowWidth() / scaleX, sdlutils().windowHeight() / scaleY, 0.0f);
+	tr->init(Vector2D(), Vector2D(), sdlutils().width() / scaleX, sdlutils().height() / scaleY, 0.0f);
 	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
 	map->addToGroup(ecs::_HUB_DECORATION_GRP);
 	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
@@ -122,8 +122,8 @@ void TileMap::createObjects()
 					auto tileMapWidth = tileWidth * cols;
 					auto tileMapHeight = tileHeight * rows;
 
-					double dx = sdlutils().windowWidth() / (double)tileMapWidth;
-					double dy = sdlutils().windowHeight() / (double)tileMapHeight;
+					double dx = sdlutils().width() / (double)tileMapWidth;
+					double dy = sdlutils().height() / (double)tileMapHeight;
 
 					dx /= scaleX;
 					dy /= scaleY;

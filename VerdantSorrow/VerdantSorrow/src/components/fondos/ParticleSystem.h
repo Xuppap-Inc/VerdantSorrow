@@ -51,9 +51,11 @@ public:
 	
 	void createParticlesLanternDamage(int numpart, int x, int y);
 
-	void createParticlesEssence(int numpart, int x, int y, Transform* target);
-
 	void createParticlesHandMagic(int numpart, Transform* target);
+
+	void createParticlesBossDie(int numpart, int x, int y);
+
+	void createParticlesBossDieSymbol(int numpart, int x, int y);
 
 private:
 

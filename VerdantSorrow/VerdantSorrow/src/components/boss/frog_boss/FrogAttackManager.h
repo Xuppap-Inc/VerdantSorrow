@@ -53,7 +53,7 @@ private:
 
 	//tiempo que dura la animacion de inicio con la rana quieta
 	const int START_DELAY = 5000;
-	const int DEATH_DELAY = 2000;
+	const int DEATH_DELAY = 5000;
 
 	enum AnimState {
 		ANIM_IDLE,
@@ -72,6 +72,7 @@ private:
 	void nextAttack();
 
 	void checkPhaseChange();
+	void dieAnimation();
 	void checkAnimationState();
 	void checkFrogState();
 	void checkIfDead();
@@ -114,5 +115,8 @@ private:
 	VirtualTimer* deathTimer_;
 
 	bool deadBoss_;
+
+	ParticleSystem* deadParticles1_;
+	ParticleSystem* deadParticles2_;
 };
 

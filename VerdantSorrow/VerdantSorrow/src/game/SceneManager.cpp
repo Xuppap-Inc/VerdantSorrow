@@ -228,14 +228,17 @@ void SceneManager::decideScene()
 		h_->changeScene_(false);
 	}
 	else if (f_->getAble()) {
+		previousScene_ = Hub_;
 		actScene = Frog_;
 		t_->setAble(true);
 	}
 	else if (t_->getAble()) {
+		previousScene_ = Hub_;
 		actScene = Tree_;
 		fin_->setAble(true);
 	}
 	else if (fin_->getAble()) {
+		previousScene_ = Hub_;
 		actScene = Eye_;
 	}
 	init();

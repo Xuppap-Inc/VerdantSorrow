@@ -60,6 +60,9 @@ void FrogAttackManager::initComponent()
 	dandellions2_ = new ParticleSystem(&sdlutils().images().at("particula_dandellion_frente"), mngr_);
 	dandellions2_->createOverlayParticlesDandellion(3);
 
+	deadParticles1_ = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
+	deadParticles2_ = new ParticleSystem(&sdlutils().images().at("simbolo_terria"), mngr_);
+
 	//lengua
 	createTongue(collManager_);
 
@@ -71,6 +74,7 @@ void FrogAttackManager::initComponent()
 void FrogAttackManager::update()
 {
 	if (!deadBoss_) checkIfDead();
+	else dieAnimation();
 
 	checkJumpDirection();
 
@@ -308,11 +312,10 @@ void FrogAttackManager::checkIfDead()
 		deadBoss_ = true;
 		deathTimer_->reset();
 
+		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+
 		auto col = ent_->getComponent<RectangleCollider>();
 		col->setActive(false);
-
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, player_);
 	}
 }
 
@@ -484,4 +487,10 @@ void FrogAttackManager::checkPhaseChange()
 		vt_->reset();
 		secondPhase_ = true;
 	}
+}
+
+void FrogAttackManager::dieAnimation() {
+
+	deadParticles1_->createParticlesBossDie(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
+
 }

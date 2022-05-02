@@ -32,9 +32,9 @@ void FlyMovement::update()
 	if (dirX_ < -SPEED) dirX_ = -SPEED;
 	else if (dirX_ > SPEED) dirX_ = SPEED;
 
-	vel = new Vector2D(dirX_ * 1, dirY_ * 1);;
+	vel = new Vector2D(dirX_ * SPEED, dirY_ * SPEED);;
 	
 	//Si queda poco espacio explota y muere
-	//if (abs(playerTr_->getPos().getX() - tr_->getPos().getX()) < spaceWhereExplotes || abs(playerTr_->getPos().getY() - tr_->getPos().getY() < spaceWhereExplotes))
-	//	ent_->setAlive(false);
+	if (abs(playerTr_->getPos().getX() - tr_->getPos().getX()) < spaceWhereExplotes && abs(playerTr_->getPos().getY() - tr_->getPos().getY() < spaceWhereExplotes))
+		ent_->setAlive(false);
 }

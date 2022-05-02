@@ -83,9 +83,6 @@ void FinalBossMovement::update()
 
 	if (deadBoss_) {
 
-		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_esencia"), mngr_);
-		particlesys->createParticlesEssence(10, tr_->getPos().getX() - tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2, playerTr_);
-
 		deadBoss_ = false;
 	}
 }

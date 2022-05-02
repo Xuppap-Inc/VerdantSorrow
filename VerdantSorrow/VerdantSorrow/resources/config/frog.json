@@ -216,6 +216,10 @@
     {
       "id": "luz_cyan",
       "file": "resources/images/luz_cyan.png"
+    },
+    {
+      "id": "simbolo_terria",
+      "file": "resources/images/simbolo_terria.png"
     }
   ],
 
