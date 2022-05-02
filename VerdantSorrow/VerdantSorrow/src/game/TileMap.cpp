@@ -10,12 +10,11 @@
 #include "../game/Game.h"
 #include "../components/hub/HubAreas.h"
 
-TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale) :col_(col), dialogBox_(nullptr)
+TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
 	path = tileMapPath;
 	rows = cols = tileWidth = tileHeight = 0;
 	mngr_ = mngr;
-	scale_ = scale;
 	dialogBox_ = mngr_->addEntity();
 	dialogBoxGenerator(dialogBox_);
 	loadMap(path);
@@ -63,35 +62,37 @@ void TileMap::loadMap(string path)
 
 	SDL_SetRenderTarget(sdlutils().renderer(), nullptr);
 
-	//add map as entity
-	auto map = mngr_->addEntity();
-	auto tr = map->addComponent<Transform>();
-	tr->init(Vector2D(), Vector2D(), sdlutils().width() / scale_, sdlutils().height() / scale_, 0.0f);
-	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
-	map->addToGroup(ecs::_HUB_DECORATION_GRP);
-	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
 }
 
 void TileMap::createObjects()
 {
+	auto mapWidth = tileWidth * cols;
+	auto mapHeight = tileHeight * rows;
+
 	// recorremos cada una de las capas (de momento solo las de tiles) del mapa
 	auto& map_layers = tmxTileMap->getLayers();
+
 	for (auto& layer : map_layers) {
 		// aqui comprobamos que sea la capa de tiles
 		if (layer->getType() == tmx::Layer::Type::Object) {
+
 			// cargamos la capa
 			tmx::ObjectGroup* objects = dynamic_cast<tmx::ObjectGroup*>(layer.get());
-			// obtenemos sus tiles
 
+			// obtenemos sus tiles
 			for (auto& object : objects->getObjects()) {
 
 				auto pos = object.getPosition();
-				SDL_Rect r = build_sdlrect(pos.x, pos.y, object.getAABB().width, object.getAABB().height);
+				auto size = object.getAABB();
+				SDL_Rect r = build_sdlrect(pos.x, pos.y, size.width, size.height);
 
 				auto cur_gid = object.getTileID();
 				string name = objects->getName();
 
-				if (cur_gid != 0) {
+				if (cur_gid != 0) { // si es distinto de 0 tiene sprite
+
+					//el pivote de los objetos esta abajo
+					r.y -= size.height;
 
 					// el mas cercano, y a la vez menor, al gid del tile)
 					auto tset_gid = -1;
@@ -110,30 +111,29 @@ void TileMap::createObjects()
 					// normalizamos el �ndice
 					cur_gid -= tset_gid;
 
-					//el pivote de los objetos esta abajo
-					r.y -= object.getAABB().height;
-
-					if(name!= "entradasbosses")
-					tilesets[tset_gid][cur_gid]->render(r);
+					//render con respecto a la textura
+					if (name != "entradasbosses")
+						tilesets[tset_gid][cur_gid]->render(r);
 
 				}
-	
 
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name=="areas") {
+				//trasformacion de objetos teniendo en cuenta la escala y su pivote (para añadirlos a escena)
+				r.x = r.x / scale_;
+				r.w = r.w / scale_;
+				r.h = r.h / scale_;
 
-					auto tileMapWidth = tileWidth * cols;
-					auto tileMapHeight = tileHeight * rows;
+				if (pivot_ == BOTTONLEFT)
+					r.y = (r.y - mapHeight) / scale_ + sdlutils().height();
+				else if (pivot_ == TOPLEFT)
+					r.y = r.y / scale_;
 
-					double dx = sdlutils().width() / (double)tileMapWidth;
-					double dy = sdlutils().height() / (double)tileMapHeight;
-
-					dx /= scale_;
-					dy /= scale_;
+				//add entidades correspondientes
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
-					tr->init(Vector2D(r.x * dx, r.y * dy), Vector2D(), r.w * dx, r.h * dy, 0.0f);
-					auto col = ent->addComponent<RectangleCollider>(r.w * dx, r.h * dy);
+					tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+					auto col = ent->addComponent<RectangleCollider>(r.w, r.h);
 					col_->addCollider(col);
 
 					if (name == "npc") {
@@ -148,11 +148,9 @@ void TileMap::createObjects()
 						if (i < properties.size())
 							npcctrl->setDialog(sdlutils().dialogs().at("npc" + to_string(properties[i].getIntValue()) + "_dialogue" + to_string((int)Game::instance()->state_)));
 
-
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 					}
 					else if (name == "entradasbosses") {
-						
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
@@ -166,15 +164,15 @@ void TileMap::createObjects()
 					}
 					else if (name == "areas") {
 						col->setIsTrigger(true);
-						
+
 
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
 						while (i < properties.size() && properties[i].getName() != "area")i++;
 
-						if (i < properties.size())						
-						ent->addComponent<HubAreas>(col_,properties[0].getStringValue());
+						if (i < properties.size())
+							ent->addComponent<HubAreas>(col_, properties[i].getStringValue());
 
 						ent->addToGroup(ecs::_UI_GRP);
 					}
@@ -183,6 +181,17 @@ void TileMap::createObjects()
 			}
 		}
 	}
+
+	//add map as entity (teniendo en cuenta el pivote y la escala)
+	auto map = mngr_->addEntity();
+
+	auto tr = map->addComponent<Transform>();
+	Vector2D pos = Vector2D(0, pivot_ == TOPLEFT ? 0 : sdlutils().height() - mapHeight / scale_);
+	tr->init(pos, Vector2D(), mapWidth / scale_, mapHeight / scale_, 0.0f);
+
+	map->addComponent<Image>(new Texture(sdlutils().renderer(), tileMap, tileWidth * cols, tileHeight * rows));
+	map->addToGroup(ecs::_HUB_DECORATION_GRP);
+	mngr_->setHandler(ecs::_hdlr_TILEMAP, map);
 }
 
 void TileMap::loadTilesetsTextures()

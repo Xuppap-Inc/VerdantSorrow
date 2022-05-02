@@ -44,29 +44,25 @@ void EscapeScene::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-
-	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager, 1);
+	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager, 1.5, TileMap::Pivot::BOTTONLEFT);
 	background();
-
 
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
-	cameraC->setScrollY(false);
+	cameraC->lock(false, true);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	particlesys->createParticlesAsh(100);
 
-	auto height = (sdlutils().height() / 5) + 40;
 }
 
 void EscapeScene::update()

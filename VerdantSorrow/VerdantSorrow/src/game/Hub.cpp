@@ -49,7 +49,7 @@ void Hub::init()
 	colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx", colManager, 0.4);
+	tileMap_ = new TileMap(mngr_, "resources/hub/mapa.tmx", colManager, 0.6);
 
 	changeSc = false;
 

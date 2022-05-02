@@ -280,15 +280,15 @@
   "musics": [
     {
       "id": "musica_hub",
-      "file": "resources/sound/musica_hub.wav"
+      "file": "resources/sound/musica_hub.mp3"
     },
     {
       "id": "musica_rana_fase2",
-      "file": "resources/sound/musica_rana_fase2.wav"
+      "file": "resources/sound/musica_rana_fase2.mp3"
     },
     {
       "id": "musica_linterna_fase2",
-      "file": "resources/sound/musica_linterna_fase2.wav"
+      "file": "resources/sound/musica_linterna_fase2.mp3"
     }
   ]
 

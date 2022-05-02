@@ -24,7 +24,9 @@ class CollisionManager;
 class TileMap
 {
 public:
-	TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale);
+	enum Pivot {TOPLEFT = 0,BOTTONLEFT	}pivot_;
+
+	TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot = TOPLEFT);
 	~TileMap();
 
 private:

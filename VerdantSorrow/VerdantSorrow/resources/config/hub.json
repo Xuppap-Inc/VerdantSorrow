@@ -193,7 +193,7 @@
   ],
 
   "musics_hub" : [
-    { "id" : "musica_hub", "file" : "resources/sound/musica_hub.wav" }
+    { "id" : "musica_hub", "file" : "resources/sound/musica_hub.mp3" }
   ],
   
   "sounds_hub" : [
