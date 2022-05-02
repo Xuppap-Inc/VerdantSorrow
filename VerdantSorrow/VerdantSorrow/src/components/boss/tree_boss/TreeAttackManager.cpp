@@ -17,6 +17,7 @@
 #include "LanternCollisions.h"
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
+#include "../../../game/Hub.h"
 
 TreeAttackManager::~TreeAttackManager()
 {
@@ -27,12 +28,14 @@ TreeAttackManager::TreeAttackManager(CollisionManager* collManager) : player_(),
 																	attacking_(false), treeCol_(), waiting_(false), 
 																	lantern_(), lanternTr_(), lanternMov_(), lanternCols_(), 
 																	attribs_(), dir_(0), movement_(), deadBoss_(false), animState_(ANIM_IDLE),
-																	animNewState_(ANIM_IDLE)
+																	animNewState_(ANIM_IDLE), musicVolume_(60)
 {
 }
 
 void TreeAttackManager::initComponent()
 {
+	auto volume = sC().getHubScene()->getMusicVolume();
+	musicVolume_ = *volume;
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	treeCol_ = ent_->getComponent<RectangleCollider>();
@@ -73,7 +76,7 @@ void TreeAttackManager::initComponent()
 
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_linterna_fase1");
 	musicaFase1_->play(10, 0);
-	musicaFase1_->setChannelVolume(80, 0);
+	musicaFase1_->setChannelVolume(musicVolume_, 0);
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_enter");
 	s->play();
@@ -360,6 +363,11 @@ void TreeAttackManager::deactivateBoss()
 	movement_->setMoveActive(false);
 }
 
+bool TreeAttackManager::isSecondPhase()
+{
+	return attribs_->getLife() <= attribs_->getMaxHp() / 2; 
+}
+
 void TreeAttackManager::checkPhaseChange()
 {
 	if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
@@ -378,7 +386,7 @@ void TreeAttackManager::checkPhaseChange()
 		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_arbol_damage");
 		s3->play();
 
-		musicaFase2_->setMusicVolume(100);
+		musicaFase2_->setMusicVolume(musicVolume_);
 		musicaFase1_->pauseChannel(0);
 
 		hojas_->disolveParticles();

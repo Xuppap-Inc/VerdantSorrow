@@ -3,6 +3,13 @@
 #include "../components/Image.h"
 #include "../ecs/Manager.h"
 #include "../components/Transform.h"
+#include "Hub.h"
+#include "FrogScene.h"
+#include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "TreeScene.h"
+#include "../components/boss/tree_boss/TreeAttackManager.h"
+#include "FinalBossScene.h"
+#include "../components/boss/finalBoss/FinalBossMovement.h"
 #include "Game.h"
 
 
@@ -82,18 +89,55 @@ void PauseMenu::generateAllButtons()
 
 void PauseMenu::controlVolume(bool turnUp)
 {
+	Music* musica = new Music();
+	SoundEffect* soundEffect;
+	int* volMusicaHub = nullptr; int* volMusicaFrog = nullptr; int* volMusicaTree = nullptr; int* volMusicaEye = 0;
+	volMusicaHub = sC().getHubScene()->getMusicVolume();
+	volMusicaFrog = sC().getFrogScene()->getAttackManager()->getMusicVolume();
+	volMusicaTree = sC().getTreeScene()->getTreeAttackManager()->getMusicVolume();
+	volMusicaEye = sC().getEyeScene()->getFinalBossManager()->getMusicVolume();
+	bool isFrog = false, isTree = false, isEye = false;
+	FrogAttackManager* attackManagerFrog;
+	TreeAttackManager* attackManagerTree;
+	switch (sC().getPreviousScene())
+	{
+	case SceneManager::scenes::Hub_:
+		musica = sC().getHubScene()->getMusic();
+		break;
+	case SceneManager::scenes::Frog_:
+		isFrog = true;
+		attackManagerFrog = sC().getFrogScene()->getAttackManager();
+		if (attackManagerFrog->isSecondPhase()) { musica = attackManagerFrog->getMusicSecondPhase(); }
+		else { soundEffect = attackManagerFrog->getMusicFirtPhase(); }
+		break;
+	case SceneManager::scenes::Tree_:
+		isTree = true;
+		attackManagerTree = sC().getTreeScene()->getTreeAttackManager();
+		if (attackManagerTree->isSecondPhase()) { musica = attackManagerTree->getMusicSecondPhase(); }
+		else { soundEffect = attackManagerTree->getMusicFirtPhase(); }
+		break;
+	case SceneManager::scenes::Eye_:
+		isEye = true;
+		musica = sC().getEyeScene()->getFinalBossManager()->getMusic();
+		break;
+	}
+
+
 	int newVolume = 0;
-	if (turnUp) newVolume = currentVolume_ + varVolume_; 
-	else newVolume = currentVolume_ - varVolume_; 
+	if (turnUp) newVolume = *volMusicaHub + varVolume_;
+	else newVolume = *volMusicaHub - varVolume_;
 
 	if (newVolume > 128) newVolume = 128;
 	else if (newVolume < 0) newVolume = 0;
 
-	if (newVolume <= 128 && newVolume >= 0) currentVolume_ = newVolume;
-
-
-	musicaTest_->setMusicVolume(currentVolume_);
-
+	if (newVolume <= 128 && newVolume >= 0) {
+		*volMusicaHub = newVolume;
+		if (isFrog) *volMusicaFrog = newVolume;
+		if (isTree) *volMusicaTree = newVolume;
+		if (isEye) *volMusicaEye = newVolume;
+	}
+	if(musica->getMusic() != NULL) musica->setMusicVolume(*volMusicaHub);
+	else soundEffect->setChannelVolume(*volMusicaHub, 0);
 }
 void PauseMenu::createImages(float x, float y, float w, float h, std::string image)
 {

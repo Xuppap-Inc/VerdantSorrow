@@ -47,6 +47,12 @@ public:
 
 	void deactivateBoss();
 
+	bool isSecondPhase() { return secondPhase_; };
+
+	int* getMusicVolume() { return &musicVolume_; };
+
+	Music* getMusicSecondPhase() { return musicaFase2_; };
+	SoundEffect* getMusicFirtPhase() { return musicaFase1_; };
 private:
 
 	const int FLOOR_HEIGHT = 100;
@@ -117,5 +123,7 @@ private:
 
 	ParticleSystem* deadParticles1_;
 	ParticleSystem* deadParticles2_;
+
+	int musicVolume_;
 };
 

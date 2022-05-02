@@ -33,6 +33,11 @@ public:
 	bool isReturningToCenter() { return returningToCenter; };
 
 	void setDeadBoss(bool set);
+	
+
+	int* getMusicVolume() { return &musicVolume_; };
+
+	Music* getMusic() { return musica_; };
 private:
 
 	const int WAIT_ON_GROUND = 1000;
@@ -66,5 +71,6 @@ private:
 	void fireBall();
 
 	bool returningToCenter = false;
+	int musicVolume_;
 };
 

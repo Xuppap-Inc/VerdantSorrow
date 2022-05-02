@@ -16,6 +16,9 @@ public:
 		music_ = Mix_LoadMUS(fileName.c_str());
 		assert(music_ != nullptr);
 	}
+	Music() {
+		music_ = NULL;
+	}
 
 	Music(Music &&other) noexcept {
 		music_ = other.music_;
@@ -55,7 +58,7 @@ public:
 	inline static void resumeMusic() {
 		Mix_ResumeMusic();
 	}
-
+	Mix_Music* getMusic() { return music_; };
 
 private:
 	Mix_Music *music_;

@@ -16,12 +16,14 @@
 #include "FlyMovement.h"
 #include "../../Image.h"
 #include "../../fondos/ParticleSystem.h"
+#include "../../../game/Hub.h"
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(START_ANIMATION), attr_(),
 jumping_(false), jumpingBig_(false), jumpDirection_(-1), jumpsUntilNextTongue_(3), delay_(0), musicaFase1_(), musicaFase2_(),
 flySpacing_(0), animState_(ANIM_IDLE), tongue_(), attacking_(false), secondPhase_(false), 
-animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false), deathTimer_(), startTimer_()
+animNewState_(ANIM_IDLE), waveSp_(), anim_(), tongueAnim_(), oldJumpDirection_(0), deadBoss_(false), deathTimer_(), startTimer_(),
+musicVolume_(60)
 {
 }
 
@@ -31,7 +33,8 @@ FrogAttackManager::~FrogAttackManager()
 
 void FrogAttackManager::initComponent()
 {
-
+	auto volume = sC().getHubScene()->getMusicVolume();
+	musicVolume_ = *volume;
 	frogJump_ = ent_->addComponent<FrogJump>(17);
 	bigJump_ = ent_->addComponent<FrogBigJump>(22);
 
@@ -53,7 +56,7 @@ void FrogAttackManager::initComponent()
 
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_rana_fase1");
 	musicaFase1_->play(10, 0);
-	musicaFase1_->setChannelVolume(60, 0);
+	musicaFase1_->setChannelVolume(musicVolume_, 0);
 	
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_enter");
 	s->play();
@@ -504,7 +507,7 @@ void FrogAttackManager::checkPhaseChange()
 		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_rain");
 		s3->play();
 
-		musicaFase2_->setMusicVolume(60);
+		musicaFase2_->setMusicVolume(musicVolume_);
 		musicaFase1_->pauseChannel(0);
 
 		dandellions1_->disolveParticles();

@@ -31,7 +31,7 @@
 
 
 
-Hub::Hub() :Scene()
+Hub::Hub() :Scene(), musicVolume_(60)
 {
 	colManager = nullptr;
 }
@@ -68,7 +68,7 @@ void Hub::init()
 
 	musica_ = &sdlutils().musicsHub().at("musica_hub");
 	musica_->play();
-	musica_->setMusicVolume(60);
+	musica_->setMusicVolume(musicVolume_);
 	musica_->resumeMusic();
 
 	ParticleSystem* particlesys_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu"), mngr_);

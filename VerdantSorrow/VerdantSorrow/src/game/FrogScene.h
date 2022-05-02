@@ -22,6 +22,7 @@ public:
 
 	bool getAble();
 	void setAble(bool a);
+	FrogAttackManager* getAttackManager() { return frogMngr_; };
 private:
 	bool isAble;
 	Entity* player;

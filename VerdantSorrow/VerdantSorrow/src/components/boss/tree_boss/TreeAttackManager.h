@@ -53,6 +53,14 @@ public:
 	void deactivateBoss();
 
 	int getRootWidth() { return rootWidth_; }
+
+	bool isSecondPhase();
+
+	int* getMusicVolume() { return &musicVolume_; };
+
+	Music* getMusicSecondPhase() { return musicaFase2_; };
+	SoundEffect* getMusicFirtPhase() { return musicaFase1_; };
+
 private:
 	enum AnimState {
 		ANIM_IDLE,
@@ -134,5 +142,7 @@ private:
 
 	ParticleSystem* deadParticles1_;
 	ParticleSystem* deadParticles2_;
+
+	int musicVolume_;
 };
 

@@ -24,7 +24,7 @@ public:
 	void setAble(bool a);
 
 	void createLights();
-
+	TreeAttackManager* getTreeAttackManager() { return treeMngr_; };
 private:
 	Entity* player;
 	Entity* tree_;

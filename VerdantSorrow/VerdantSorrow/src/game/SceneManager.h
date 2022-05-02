@@ -35,6 +35,10 @@ public:
 	void changeStatePlayerInBoss(bool active);
 	void activatePause();
 	void decideScene();
+	Hub* getHubScene() { return h_; };
+	FrogScene* getFrogScene() { return f_; };
+	TreeScene* getTreeScene() { return t_; };
+	FinalBossScene* getEyeScene() { return fin_; };
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
 private:

@@ -19,12 +19,13 @@ public:
 	void setAble(bool a);
 	void changeScene_(bool ch);
 	void checkCollissions();
-
-	
+	Music* getMusic() { return musica_; };
+	int* getMusicVolume() { return &musicVolume_; };
 private:
 	CollisionManager* colManager;
 	bool isAble;
 	bool changeSc;
+	int musicVolume_;
 	Entity* player_;
 	Music* musica_;
 	TileMap* tileMap_;

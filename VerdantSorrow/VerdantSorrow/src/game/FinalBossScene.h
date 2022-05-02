@@ -26,6 +26,7 @@ public:
 	bool getAble();
 	void setAble(bool a);
 	void createLights();
+	FinalBossMovement* getFinalBossManager() { return movement_; };
 private:
 	bool isAble;
 	Entity* player;

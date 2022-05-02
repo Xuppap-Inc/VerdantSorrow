@@ -12,11 +12,12 @@
 #include "../../FramedImage.h"
 #include "../../../sdlutils/VirtualTimer.h"
 #include "../../fondos/ParticleSystem.h"
+#include "../../../game/Hub.h"
 
 FinalBossMovement::FinalBossMovement(CollisionManager* colManager) :
 	tr_(nullptr), colManager_(colManager), bA_(nullptr), phase_(PHASE1), eyeState_(BOUNCE),
 	eyeSpeed_(3), waveSp_(), lastTimeInGround_(), anim_(), ashes_(), deadBoss_(false), musica_(),
-	playerTr_()
+	playerTr_(), musicVolume_(60)
 {
 }
 
@@ -26,6 +27,8 @@ FinalBossMovement::~FinalBossMovement()
 
 void FinalBossMovement::initComponent()
 {
+	auto volume = sC().getHubScene()->getMusicVolume();
+	musicVolume_ = *volume;
 	tr_ = ent_->getComponent<Transform>();
 	bA_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
