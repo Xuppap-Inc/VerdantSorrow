@@ -107,20 +107,34 @@ void MenuScene::onButtonClicked(int index)
 	/De la misma manera si se añade un nuevo boton habría que añadir el caso correspondiente*/
 	changeSc_ = true;
 	isChangingScene(changeSc_);
-	if(index==1) //No te permite leer un archivo dentro de un switch asi que hay que hacer esto
+	if(index==0)
+	{
+		ofstream myfile("resources/config/guardado.txt");
+
+		if (myfile.is_open())
+		{
+			myfile << Game::State::HUB;
+			myfile.close();
+		}
+		else cout << "No se puede abrir el guardado.txt";
+		sC().changeScene(SceneManager::Hub_);
+	}
+	else if(index==1) //No te permite leer un archivo dentro de un switch asi que hay que hacer esto
 	{
 		ifstream myfile("resources/config/guardado.txt");
 		string state;
 		if (myfile.is_open())
 		{
-			
 			getline(myfile, state);
 			myfile.close();
 		}
 		
 		//Queremos que lea el txt y asigne el estado correspondiente a game
-		int val= stoi(state);
-		Game::instance()->state_=static_cast<Game::State>(val); //Castea de un int a su valor correspondiente en el enum
+		if(state!="")
+		{
+			int val = stoi(state);
+			Game::instance()->state_ = static_cast<Game::State>(val); //Castea de un int a su valor correspondiente en el enum
+		}
 
 		sC().changeScene(SceneManager::Hub_);
 
@@ -128,11 +142,6 @@ void MenuScene::onButtonClicked(int index)
 	else
 	switch (index)
 	{
-	case 0: //Boton new game
-
-		sC().changeScene(SceneManager::Hub_);
-		
-		break;
 	case 2:
 		sC().changeScene(SceneManager::Settings_);
 

@@ -94,28 +94,6 @@ void Game::start() {
 		sC().setFirstSceneAble();
 	}
 
-	//Si el txt tiene guardado un valor distinto a 1 (es decir, si se ha jugado una partida antes, no se escribe el valor "1")
-	ifstream reading("resources/config/guardado.txt");
-	string state;
-	if (reading.is_open())
-	{
-		getline(reading, state);
-		reading.close();
-	}
-	int val = stoi(state);
-	//Por defecto, si aun no has derrotado a nigun boss al pulsar "continuar" guarda "1" (el primer estado del juego)
-	if(val<1)
-	{
-		ofstream myfile("resources/config/guardado.txt");
-
-		if (myfile.is_open())
-		{
-			myfile << Game::State::HUB;
-			myfile.close();
-		}
-		else cout << "No se puede abrir el guardado.txt";
-	}
-	
 	SDLUtils::init("Verdant Sorrow", w, h);
 
 	auto& scMngr_ = sC();
