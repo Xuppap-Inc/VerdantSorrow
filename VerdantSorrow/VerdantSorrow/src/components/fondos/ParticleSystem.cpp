@@ -421,3 +421,33 @@ void ParticleSystem::createParticlesBossSpawn(int numpart, int x, int y)
 		particle->addToGroup(ecs::_PARTICLES_FRONT);
 	}
 }
+void ParticleSystem::createParticlesDamagePlayer(int numpart, int x, int y)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		auto width = sdlutils().rand().nextInt(20, 60);
+
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-100, 100)) / 100), ((double)(sdlutils().rand().nextInt(-200, 200)) / 100));
+		particle->addComponent<Transform>(Vector2D(x + sdlutils().rand().nextInt(-50, 50), y + sdlutils().rand().nextInt(-50, 50)), vel, width, width, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(150);
+		particle->addComponent<Disolve>(sdlutils().rand().nextInt(300, 1000));
+		particle->addToGroup(ecs::_PARTICLES_GRP);
+	}
+}
+void ParticleSystem::createParticlesKillPlayer(int numpart, int x, int y)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		auto width = sdlutils().rand().nextInt(30, 100);
+
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-100, 100)) / 100), ((double)(sdlutils().rand().nextInt(-130, 130)) / 100));
+		particle->addComponent<Transform>(Vector2D(x + sdlutils().rand().nextInt(-60, 60), y + sdlutils().rand().nextInt(-80, 80)), vel, width, width, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(200);
+		particle->addComponent<Disolve>(sdlutils().rand().nextInt(1000, 3000));
+		particle->addToGroup(ecs::_PARTICLES_UI);
+	}
+}

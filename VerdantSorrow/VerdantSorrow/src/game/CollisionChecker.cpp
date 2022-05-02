@@ -141,6 +141,9 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		attrib->setInvulnerable(true);
 		attrib->setInvulnerableTimer(5000);
 
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
+		particlesys->createParticlesDamagePlayer(50, playerTr->getPos().getX() + (playerTr->getWidth() / 2), playerTr->getPos().getY() + (playerTr->getHeight() / 2));
+
 		playerFImg->setColor(200, 50, 50, 1000);
 
 		// Knock back
