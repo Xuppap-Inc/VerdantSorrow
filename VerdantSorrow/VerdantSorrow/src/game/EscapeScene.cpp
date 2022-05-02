@@ -44,34 +44,25 @@ void EscapeScene::init()
 	CollisionManager* colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
 
-
-	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager, 1);
+	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager, 1.5, TileMap::Pivot::BOTTONLEFT);
 	background();
-
 
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
 
-	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-	//player->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() , tilemapTr->getHeight() / 2));
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
-	cameraC->setScrollY(false);
+	cameraC->lock(false, true);
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	particlesys->createParticlesAsh(100);
 
-	auto height = (sdlutils().height() / 5) + 40;
-
-	/*auto suelo = mngr_->addEntity();
-	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - height), Vector2D(), sdlutils().width(), height, 0.0f);
-	suelo->addComponent<Image>(&sdlutils().images().at("fondodelante"));*/
 }
 
 void EscapeScene::update()
@@ -95,7 +86,6 @@ void EscapeScene::background()
 {
 	auto parallax_ = new Parallax(mngr_);
 
-	////parallax_->AddLayer(&sdlutils().images().at("nubescapa"),- 0.2f, sdlutils().height(), sdlutils().width(), 80);
 	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer5"), 1, sdlutils().height(), sdlutils().width(), 0);
 	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer4"), 0.3f, sdlutils().height(), sdlutils().width(), 0);
 	parallax_->AddLayer(&sdlutils().images().at("Parallax_Layer3"), 0.2f, sdlutils().height(), sdlutils().width(), 80);
