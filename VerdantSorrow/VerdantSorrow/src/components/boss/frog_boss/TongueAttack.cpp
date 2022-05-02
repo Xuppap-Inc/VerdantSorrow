@@ -49,6 +49,9 @@ void TongueAttack::attack(bool fly)
 	currentPos(fly);
 	setActive(true);
 
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_lengua");
+	s->play();
+
 	finishedAttack_ = false; //El ataque no ha terminado aun
 	timer_->reset();
 

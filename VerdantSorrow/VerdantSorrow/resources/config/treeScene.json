@@ -275,6 +275,14 @@
     {
       "id": "sfx_descubrir_arbol",
       "file": "resources/sound/sfx_descubrir_arbol.wav"
+    },
+    {
+      "id": "sfx_raiz",
+      "file": "resources/sound/sfx_raiz.wav"
+    },
+    {
+      "id": "sfx_wind",
+      "file": "resources/sound/sfx_wind.wav"
     }
   ],
   "musics": [

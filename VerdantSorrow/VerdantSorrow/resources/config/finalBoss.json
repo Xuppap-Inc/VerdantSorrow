@@ -193,7 +193,8 @@
     { "id" : "sfx_manos_fuego", "file" : "resources/sound/sfx_manos_fuego.wav" },
     { "id" : "sfx_manos_quemado", "file" : "resources/sound/sfx_manos_quemado.wav" },
     { "id" : "sfx_manos_fire_clap", "file" : "resources/sound/sfx_manos_fire_clap.wav" },
-    { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
+    { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" },
+    { "id" : "sfx_avalancha", "file" : "resources/sound/sfx_avalancha.wav" }
     ],
   "musics" : [
     { "id" : "music_manos", "file" : "resources/sound/music_manos.mp3" }

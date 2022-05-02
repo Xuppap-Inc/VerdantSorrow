@@ -263,7 +263,7 @@ void FrogAttackManager::checkFrogState()
 		tongueAnim_->changeanim(&sdlutils().images().at("lengua"), 2, 2, (1000 / 20) * 4, 4, "lengua");
 		tongueAnim_->repeat(false);
 		tongueAnim_->adjustToTransform(true);
-
+		
 		if (jumpDirection_ == 1) tongueAnim_->flipX(true);
 		else tongueAnim_->flipX(false);
 

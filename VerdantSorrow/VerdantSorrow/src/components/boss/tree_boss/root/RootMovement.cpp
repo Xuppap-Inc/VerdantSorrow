@@ -30,6 +30,9 @@ void RootMovement::initComponent()
 
 	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	particlesys2->createParticlesRoots(3, tr_->getPos().getX() + (tr_->getWidth() / 2), sdlutils().height() - 50);
+
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_raiz");
+	s->play();
 }
 
 void RootMovement::update()
