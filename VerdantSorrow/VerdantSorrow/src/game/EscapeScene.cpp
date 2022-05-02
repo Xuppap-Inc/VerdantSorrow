@@ -50,7 +50,7 @@ void EscapeScene::init()
 
 	//Se crea el jugador 
 	player = mngr_->addEntity();
-	playerGenerator(colManager, player);
+	playerGeneratorEscape(colManager, player);
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();

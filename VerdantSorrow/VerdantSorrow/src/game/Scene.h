@@ -19,7 +19,7 @@ public:
 	virtual void backgroundmovement(std::string backgroundName);
 	virtual void background(std::string backgroundName,int height=sdlutils().height());
 	virtual void playerGenerator(CollisionManager* colManager, Entity* player_);
-
+	virtual void  playerGeneratorEscape(CollisionManager* colManager, Entity* player_);
 	virtual void deactivateBoss() {};
 	void checkPlayerFinishedDying();
 	void checkPlayerDied();

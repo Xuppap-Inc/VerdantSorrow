@@ -83,7 +83,47 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
 	bordersPlayer_ = player_->addComponent<CollideWithBorders>(100);
-	bordersPlayer_->collisionx(false);
+	bordersPlayer_->collisionx(true);
+
+	//Se a�ade un collider al jugador
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
+	colManager->addCollider(playerCollider);
+
+	//IMPORTANTE :No poner estas f�sicas detr�s del playerctrl
+	player_->addComponent<SimplePhysicsPlayer>(colManager);
+
+	//Componente de ataque del jugador
+	auto playerAttackCollider = player_->addComponent<Attack>(135, playerTr_->getHeight() * 1.8, -playerTr_->getHeight() * 1.5 / 3, colManager);
+	colManager->addCollider(playerAttackCollider);
+	playerAttackCollider->setIsTrigger(true);
+
+	// float jumpForce, float speed, float deceleration, float rollSpeed
+	playerCtrl_ = player_->addComponent<PlayerCtrl>(15, 6, 0.7, 10);
+	mngr_->setHandler(ecs::_PLAYER, player_);
+
+	auto playerLife_ = mngr_->addEntity();
+	playerLife_->addComponent<PlayerUI>();
+	playerLife_->addToGroup(ecs::_UI_GRP);
+
+	player_->addToGroup(ecs::_PLAYER_GRP);
+}
+void Scene::playerGeneratorEscape(CollisionManager* colManager, Entity* player_)
+{
+	playerAttribs_ = player_->addComponent<PlayerAttributes>();
+
+	playerTr_ = player_->addComponent<Transform>();
+	auto playerX = 0;
+	auto playerY = sdlutils().height() / 2 - 25;
+	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
+
+	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
+	playerImg_->setAlpha(255);
+
+	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
+	player_->addComponent<SimpleGravity>(1);
+	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
+	auto bordersPlayer_1 = player_->addComponent<CollideWithBorders>(100);
+	bordersPlayer_1->collisionx(false);
 
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
