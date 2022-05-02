@@ -24,14 +24,15 @@ protected:
 	Transform* tr_;
 	CollisionManager* colMan_;
 	RectangleCollider* col_;
-	VirtualTimer* vt_;
+
 	int areatimer;
 	bool showarea;
-	std::string dialog_;
+	
 	float initime;
-	std::string font_;
+
 	bool collision;
 	std::string text_;
 	Image* image_;
+	int i = 255;
 };
 
