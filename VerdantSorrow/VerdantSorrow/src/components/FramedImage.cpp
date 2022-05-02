@@ -25,7 +25,7 @@ slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true),
 
 	iniTotalAnimTime_ = totalAnimationTime_;
 
-	
+	setAlpha(255); 
 }
 
 FramedImage::~FramedImage()
@@ -343,7 +343,10 @@ void FramedImage::reset()
 
 void FramedImage::changeanim(Texture* tex, int row, int column, float time, int numframes_, std::string newAnim)
 {
+	setAlpha(255);
+
 	if (currentAnim == newAnim) return;
+
 
 	totalAnimationTime_ = time;
 	iniTotalAnimTime_ = totalAnimationTime_;
