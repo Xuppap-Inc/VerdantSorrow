@@ -4,7 +4,7 @@ class Settings :
     public BaseMenu
 {
 private:
-	std::vector<std::string> buttonNames_ = { "back" };
+	std::vector<std::string> buttonNames_ = { "back", "leftVolume","rightVolume","resume","menu" };
 	std::vector<Transform*> buttonPositions_;
 	std::vector<Entity*> buttonPoperties_; //Vector que guarda los botones como entidad (para el cambio de alfa)
 	float delay_; //Delay del mando

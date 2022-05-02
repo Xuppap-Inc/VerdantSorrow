@@ -44,7 +44,6 @@ void SceneManager::update()
 	{
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)|| ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_LEFTSHOULDER))
 		{
-			/*sdlutils().setWindowSize(1920, 1080);*/
 			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
 			{
 				if(actScene != Tutorial_) activatePause();
