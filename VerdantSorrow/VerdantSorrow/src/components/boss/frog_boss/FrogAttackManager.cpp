@@ -320,6 +320,8 @@ void FrogAttackManager::checkIfDead()
 		deadBoss_ = true;
 		deathTimer_->reset();
 
+		musicaFase2_->pauseMusic();
+
 		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 

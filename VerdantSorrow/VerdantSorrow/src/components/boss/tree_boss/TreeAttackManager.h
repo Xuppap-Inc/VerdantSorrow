@@ -76,9 +76,9 @@ private:
 	const int ATTACK_CD = 2000;
 
 	//tiempo que espera al inicio del combate
-	const int START_DELAY = 5000;
+	const int START_DELAY = 2000;
 
-	const int DEATH_DELAY = 5000;
+	const int DEATH_DELAY = 10000;
 
 	State state;
 	Phase phase;

@@ -32,7 +32,7 @@ public:
 	void setReturningToCenter(bool set) { returningToCenter = set; };
 	bool isReturningToCenter() { return returningToCenter; };
 
-	void setDeadBoss(bool set) { deadBoss_ = set; };
+	void setDeadBoss(bool set);
 private:
 
 	const int WAIT_ON_GROUND = 1000;
@@ -50,8 +50,7 @@ private:
 	WaveSpawner* waveSp_;
 	Transform* playerTr_;
 
-	SoundEffect* musicaFase1_;
-	Music* musicaFase2_;
+	Music* musica_;
 
 	VirtualTimer* lastTimeInGround_;
 	

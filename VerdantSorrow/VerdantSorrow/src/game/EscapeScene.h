@@ -29,5 +29,7 @@ private:
 	Entity* FinalBossFace;
 	CollisionChecker* colCheck_;
 	TileMap* tileMap_;
+
+	Music* musica_;
 };
 

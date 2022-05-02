@@ -362,11 +362,11 @@ void ParticleSystem::createParticlesBossDie(int numpart, int x, int y)
 
 		auto width = sdlutils().rand().nextInt(30, 100);
 
-		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-130, 130)) / 100), ((double)(sdlutils().rand().nextInt(-300, -10)) / 100));
+		auto vel = Vector2D(((double)(sdlutils().rand().nextInt(-130, 130)) / 100), ((double)(sdlutils().rand().nextInt(-100, -10)) / 100));
 		particle->addComponent<Transform>(Vector2D(x + sdlutils().rand().nextInt(-100, 100), y + sdlutils().rand().nextInt(-100, 100)), vel, width, width, 0.0f);
 		Image* imag = particle->addComponent<Image>(tex_);
 		imag->setAlpha(200);
-		particle->addComponent<Target>(sdlutils().rand().nextInt(500, 4000), mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>());
+		particle->addComponent<Target>(sdlutils().rand().nextInt(3000, 8000), mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>());
 		particle->addToGroup(ecs::_PARTICLES_GRP);
 	}
 }

@@ -187,7 +187,7 @@
     { "id" : "sfx_descubrir_manos", "file" : "resources/sound/sfx_descubrir_manos.wav" }
     ],
   "musics" : [
-
+    { "id" : "music_huida", "file" : "resources/sound/music_huida.mp3" }
   ]
 
 }

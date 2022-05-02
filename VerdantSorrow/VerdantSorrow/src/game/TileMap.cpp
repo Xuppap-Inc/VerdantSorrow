@@ -128,7 +128,7 @@ void TileMap::createObjects()
 					r.y = r.y / scale_;
 
 				//add entidades correspondientes
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Plataformas"||name=="Pinchos" || name=="LanzaMoscas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
