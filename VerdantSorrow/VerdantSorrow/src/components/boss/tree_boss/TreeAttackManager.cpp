@@ -82,9 +82,9 @@ void TreeAttackManager::initComponent()
 
 	ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("esencia_lumine"), mngr_);
 	particlesys->createParticlesBossSign(1);
-	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
+	ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("luz_naranja"), mngr_);
 	particlesys2->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
-	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_damage"), mngr_);
+	ParticleSystem* particlesys3 = new ParticleSystem(&sdlutils().images().at("particula_negro"), mngr_);
 	particlesys3->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 	ParticleSystem* particlesys4 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
