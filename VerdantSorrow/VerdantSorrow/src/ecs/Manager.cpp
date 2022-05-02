@@ -87,4 +87,9 @@ CollisionManager* Manager::getColManager()
 {
 	return colMngr_;
 }
+void Manager::updateScale()
+{
+	windowScaleHeight_ = sdlutils().windowHeight() / 1080.0f;
+	windowScaleWidth_ = sdlutils().windowWidth() / 1920.0f;
+}
 } // end of namespace
