@@ -41,7 +41,7 @@ void FlySpawnerPlant::update()
 		auto col = fly->addComponent<RectangleCollider>(fTr->getWidth(), fTr->getHeight());
 		col->setIsTrigger(true);
 		colMan_->addCollider(col);
-		fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000 / 30) * 31, 31, "mosca");
+	fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000 / 30) * 31, 31, "mosca");
 		fly->addComponent<TutorialFly>();
 		fly->addComponent<FlyMovement>();
 		fly->addToGroup(ecs::_BOSSELEMENTS_GRP);
