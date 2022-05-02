@@ -36,7 +36,7 @@ void PauseMenu::update()
 
 void PauseMenu::onButtonClicked(int index)
 {
-	changeSc_ = true;
+	
 	isChangingScene(changeSc_);
 	switch (index)
 	{
@@ -47,9 +47,11 @@ void PauseMenu::onButtonClicked(int index)
 		controlVolume(true);
 		break;
 	case 2:
+		changeSc_ = true;
 		sC().activatePause();
 		break;
 	case 3:
+		changeSc_ = true;
 		sC().changePauseState(false);
 		sC().changeScene(SceneManager::Menu_);
 		break;
