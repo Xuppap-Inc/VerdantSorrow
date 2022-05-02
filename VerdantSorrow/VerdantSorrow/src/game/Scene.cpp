@@ -83,13 +83,13 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 
 	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
+	playerImg_->setVisible(true);
 	playerImg_->setAlpha(255);
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	bordersPlayer_ = player_->addComponent<CollideWithBorders>(100);
-	bordersPlayer_->collisionx(true);
+
 
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
@@ -121,15 +121,15 @@ void Scene::playerGeneratorEscape(CollisionManager* colManager, Entity* player_)
 	auto playerX = 0;
 	auto playerY = sdlutils().height() / 4;
 	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
-
+	playerTr_->setScale(0.4);
 	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 	playerImg_->setAlpha(255);
+	
 
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	auto bordersPlayer_1 = player_->addComponent<CollideWithBorders>(100);
-	bordersPlayer_1->collisionx(false);
+
 
 	//Se a�ade un collider al jugador
 	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
@@ -167,7 +167,7 @@ void Scene::checkPlayerDied()
 {
 	if (playerAttribs_->getLives() <= 0) 
 	{
-		playerImg_->setAlpha(0);
+		playerImg_->setVisible(false);
 
 		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("you_died"), mngr_);
 		particlesys->createParticlesBossSignYouDied(1);

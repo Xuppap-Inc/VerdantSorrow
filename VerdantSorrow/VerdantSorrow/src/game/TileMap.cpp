@@ -11,6 +11,8 @@
 #include "../components/hub/HubAreas.h"
 #include "../components/boss/nivelHuida/Mushroom.h"
 #include "../components/boss/nivelHuida/FlySpawnerPlant.h"
+#include "../components/SimpleGravity.h"
+#include "../components/boss/nivelHuida/Spikes.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -130,7 +132,7 @@ void TileMap::createObjects()
 					r.y = r.y / scale_;
 
 				//add entidades correspondientes
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Plataformas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
+				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -185,6 +187,21 @@ void TileMap::createObjects()
 					else if (name == "LanzaMoscas") {
 						ent->addComponent<FlySpawnerPlant>(col_, true, 5000);
 						ent->addToGroup(ecs::_BOSSELEMENTS_GRP);
+					}
+					else if (name == "Pinchos") {
+						col->setIsTrigger(true);
+						
+					
+						vector<tmx::Property> properties = object.getProperties();
+
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "damage")i++;
+
+						if (i < properties.size()) {
+							ent->addComponent<SimpleGravity>(0.4);
+							ent->addComponent<Spikes>(col_);
+						}
+							
 					}
 
 				}
