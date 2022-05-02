@@ -18,6 +18,7 @@
 #include "../components/Image.h"
 #include "../components/boss/tree_boss/MeleeAttack.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "Hub.h"
 
 
 
@@ -94,7 +95,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						player->getComponent<Attack>()->attackCollided();
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
-						s->setChannelVolume(70);
+						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 						s->play();
 
 						bA->setDamage(PLAYER_ATTACK_DMG);
