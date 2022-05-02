@@ -34,7 +34,6 @@
 
 void FinalBossScene::init()
 {
-	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 	Scene::init();
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
