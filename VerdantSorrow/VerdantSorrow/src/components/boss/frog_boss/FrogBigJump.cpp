@@ -29,4 +29,7 @@ void FrogBigJump::attack(int dir) {
 	int x = 10 * dir;
 	vel = new Vector2D(x, -jumpForce_);
 	vel = vel.normalize() * jumpForce_;
+
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_jump");
+	s->play();
 }

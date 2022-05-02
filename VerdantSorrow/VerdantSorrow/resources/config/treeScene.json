@@ -307,6 +307,10 @@
     {
       "id": "sfx_arbol_background",
       "file": "resources/sound/sfx_arbol_background.wav"
+    },
+    {
+      "id": "sfx_arbol_enter",
+      "file": "resources/sound/sfx_arbol_enter.wav"
     }
   ],
   "musics": [

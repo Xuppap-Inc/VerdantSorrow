@@ -65,6 +65,7 @@ void TreeAttackManager::initComponent()
 	startTimer_ = mngr_->addTimer();
 	deathTimer_ = mngr_->addTimer();
 
+
 	//Musica
 	musicaFase2_ = &sdlutils().musics().at("musica_linterna_fase2");
 	musicaFase2_->play();
@@ -73,6 +74,9 @@ void TreeAttackManager::initComponent()
 	musicaFase1_ = &sdlutils().soundEffects().at("musica_linterna_fase1");
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(80, 0);
+
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_enter");
+	s->play();
 
 	hojas_ = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	hojas_->createParticlesDandellion(10);

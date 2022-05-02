@@ -45,6 +45,7 @@ void FrogAttackManager::initComponent()
 	startTimer_ = mngr_->addTimer();
 	deathTimer_ = mngr_->addTimer();
 
+
 	//musica
 	musicaFase2_ = &sdlutils().musics().at("musica_rana_fase2");
 	musicaFase2_->play();
@@ -54,6 +55,9 @@ void FrogAttackManager::initComponent()
 	musicaFase1_->play(10, 0);
 	musicaFase1_->setChannelVolume(60, 0);
 	
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_enter");
+	s->play();
+
 	dandellions1_ = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
 	dandellions1_->createParticlesDandellion(50);
 
@@ -440,14 +444,18 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 		}
 		waveSp_->createWaves(200, 70, Vector2D(1, 0), tr_);
 
-		SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_attack");
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
 		s->play();
-
+		
 		if (jumpDirection_ == 0) jumpDirection_ = oldJumpDirection_;
 	}
 	else {
 		jumpsUntilNextTongue_--;
 		animNewState_ = ANIM_IDLE;
+
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_attack");
+		s->play();
+
 	}
 }
 

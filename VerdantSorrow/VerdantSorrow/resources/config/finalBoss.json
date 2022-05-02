@@ -246,6 +246,10 @@
     {
       "id": "sfx_player_dead",
       "file": "resources/sound/sfx_player_dead.wav"
+    },
+    {
+      "id": "sfx_manos_enter",
+      "file": "resources/sound/sfx_manos_enter.wav"
     }
     ],
   "musics" : [

@@ -305,6 +305,10 @@
       "file": "resources/sound/sfx_rana_attack.wav"
     },
     {
+      "id": "sfx_manos_attack",
+      "file": "resources/sound/sfx_manos_attack.wav"
+    },
+    {
       "id": "sfx_boss_defeated",
       "file": "resources/sound/sfx_boss_defeated.wav"
     },
@@ -319,6 +323,14 @@
     {
       "id": "sfx_player_dead",
       "file": "resources/sound/sfx_player_dead.wav"
+    },
+    {
+      "id": "sfx_rana_enter",
+      "file": "resources/sound/sfx_rana_enter.wav"
+    },
+    {
+      "id": "sfx_rana_jump",
+      "file": "resources/sound/sfx_rana_jump.wav"
     }
   ],
 

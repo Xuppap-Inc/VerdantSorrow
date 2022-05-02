@@ -33,11 +33,15 @@ void FinalBossMovement::initComponent()
 	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
 
+	lastTimeInGround_ = mngr_->addTimer();
+
+
 	musica_ = &sdlutils().musics().at("music_manos");
 	musica_->play();
 	musica_->setMusicVolume(60);
 
-	lastTimeInGround_ = mngr_->addTimer();
+	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_enter");
+	s->play();
 
 	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	ashes_->createParticlesAsh(100);
