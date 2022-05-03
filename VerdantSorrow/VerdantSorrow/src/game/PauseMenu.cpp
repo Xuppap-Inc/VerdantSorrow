@@ -32,7 +32,7 @@ void PauseMenu::init()
 
 void PauseMenu::update()
 {
-	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
+	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_, 3, 1); //Metodo para control de input 
 	if (!changeSc_) {
 		
 		mngr_->update();

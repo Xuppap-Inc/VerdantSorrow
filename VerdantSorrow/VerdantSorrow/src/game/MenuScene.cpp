@@ -66,7 +66,7 @@ void MenuScene::background()
 void MenuScene::update()
 {
 	if (buttonsActive_) {
-		handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
+		handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_, 1, 3); //Metodo para control de input 
 	}
 	else
 	{
