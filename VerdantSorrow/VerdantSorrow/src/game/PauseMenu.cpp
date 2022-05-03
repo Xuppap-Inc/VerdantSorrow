@@ -34,11 +34,16 @@ void PauseMenu::update()
 {
 	handleInput(buttonPositions_,delay_,lastUpdate_,controllerIndex_,buttonNames_, buttonPoperties_); //Metodo para control de input 
 	if (!changeSc_) {
+		
 		mngr_->update();
 		mngr_->refresh();
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
+		sdlutils().presentRenderer();
+		string texto(std::to_string(*sC().getHubScene()->getMusicVolume() * 100 / 128));
+		texto += " %";
+		createText(sdlutils().width(), sdlutils().height() - 680, texto);
 		sdlutils().presentRenderer();
 	}
 }
@@ -76,7 +81,7 @@ void PauseMenu::generateAllButtons()
 	int spacingX = 250; int buttonW = 200, buttonH = 80, iniX = 350, smallButtonWH = 80;
 	for (int i = 0; i < 2; ++i)
 	{
-		createButton(sdlutils().width() / 2 + (i * spacingX), sdlutils().height() / 2 - (smallButtonWH*2),
+		createButton(sdlutils().width() / 2 + (i * (spacingX + 270)) - 300, sdlutils().height() / 2 - (smallButtonWH*2),
 			smallButtonWH, smallButtonWH, buttonNames_[i],buttonPositions_, buttonPoperties_);
 	}
 	//Bucle que dibuja la fila de botones
@@ -158,6 +163,25 @@ void PauseMenu::createImages(float x, float y, float w, float h, std::string ima
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
 	newImage->addComponent<Image>(&sdlutils().imagesHub().at(image));
+}
 
+void PauseMenu::createText(float x, float y, std::string message)
+{
+	Texture text(sdlutils().renderer(), message,
+		sdlutils().fontsHub().at("ARIAL48"), build_sdlcolor(0x00000000));
+
+	SDL_Rect rect = build_sdlrect(
+		(x - text.width()) / 2.0f, y, text.width(), text.height());
+
+	//escalado pantalla
+	auto sW = mngr_->getWindowScaleWidth();
+	auto sH = mngr_->getWindowScaleHeight();
+
+	rect.x *= sW;
+	rect.w *= sW;
+	rect.y *= sH;
+	rect.h *= sH;
+
+	text.render(rect);
 }
 

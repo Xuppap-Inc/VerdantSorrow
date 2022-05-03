@@ -18,6 +18,7 @@ private:
 	void generateAllButtons() override;
 	void controlVolume(bool turnUp); //Booleano para ver si sube o baja el volumen
 	void createImages(float x, float y, float w, float h, std::string imageName);
+	void createText(float x, float y, std::string message);
 public:
 	PauseMenu();
 	~PauseMenu() {};
