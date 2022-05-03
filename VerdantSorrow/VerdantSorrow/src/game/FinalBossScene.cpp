@@ -122,7 +122,7 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
 
 	// poner a 30
-	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(5);
+	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(30);
 
 	auto BossTr = FinalBossFace->addComponent<Transform>();
 	auto BossX = (sdlutils().width() - 350) / 2;
@@ -135,9 +135,8 @@ void FinalBossScene::finalBossGenerator(CollisionManager* colManager, Entity* pl
 	movement_ = FinalBossFace->addComponent<FinalBossMovement>(colManager);
 	handsMngr_ = FinalBossFace->addComponent<HandsManager>(colManager);
 
-	float colliderWidth = 100, colliderOffset_y = 100;
-	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>
-		(colliderWidth, colliderWidth);
+	float colliderWidth = 200;
+	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(colliderWidth, colliderWidth);
 
 	bossCollider->setIsTrigger(true);
 	colManager->addCollider(bossCollider);

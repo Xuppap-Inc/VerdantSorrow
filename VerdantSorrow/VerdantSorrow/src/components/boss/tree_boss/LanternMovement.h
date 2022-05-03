@@ -19,6 +19,9 @@ public:
 	void moveToSide();
 
 private:
+
+	const int GROUND_HEIGHT = 100;
+
 	Transform* lanternTr_;
 	Transform* treeTr_;
 	

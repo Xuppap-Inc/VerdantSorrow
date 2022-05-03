@@ -18,7 +18,7 @@
 
 FramedImage::FramedImage(Texture* tex, int row, int column,float time, int numframes_=0, std::string anim = 0) : totalAnimationTime_(time), 
 tr_(), tex_(tex), row_(row), column_(column),flipX_(false),numframes(numframes_), currentAnim(anim),noRepeat_(false), completed_(false),
-slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true), adjustToTransform_(false)
+slowed_(false), slowFactor_(1), contFramesSlowed_(-1), timer_(), visible_(true), adjustToTransform_(false), alpha_(255)
 {
 	m_clip.w = tex_->width() / column;
 	m_clip.h = tex_->height() / row;
@@ -227,11 +227,23 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 		}
 	}
 
+	else if (ent_->getComponent<RootWave>() != nullptr)
+	{
+		if (flipX_) {
+			xOffset = 0.20;
+		}
+	}
+
 	else if (ent_->getComponent<FinalBossMovement>() != nullptr) {
 
 		if (currentAnim == "FinalBoss_Fase1" ) {
 			xOffset = -.17;
 			yOffset = .25;
+		}
+		else {
+		
+			xOffset = -0.1;
+			yOffset = .22;
 		}
 	}
 

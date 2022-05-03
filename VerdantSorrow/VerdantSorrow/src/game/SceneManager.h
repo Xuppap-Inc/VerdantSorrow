@@ -12,6 +12,8 @@ class EscapeScene;
 class PauseMenu;
 class Settings;
 #include <vector>
+
+
 class SceneManager :public Singleton<SceneManager> {
 
 	friend Singleton<SceneManager>;
@@ -62,6 +64,9 @@ private:
 	bool frogEssenceObtained_, treeEssenceObtained_, eyeEssenceObtained_;
 	bool hubAssetsChargeds_, playerInBossFight;
 	bool isPauseActive_;
+
+
+
 };
 	// This macro defines a compact way for using the singleton InputHandler, instead of
 // writing InputHandler::instance()->method() we write ih().method()

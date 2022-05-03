@@ -39,26 +39,6 @@ void MeleeAttack::update()
 	}
 }
 
-
-void MeleeAttack::render()
-{
-	if (isActive()) {
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
-
-		SDL_Rect dest = getCollider();
-
-		auto sW = mngr_->getWindowScaleWidth();
-		auto sH = mngr_->getWindowScaleHeight();
-
-		dest.x *= sW;
-		dest.w *= sW;
-		dest.y *= sH;
-		dest.h *= sH;
-
-		SDL_RenderFillRect(sdlutils().renderer(), &dest);
-	}
-}
-
 void MeleeAttack::attack(int dir)
 {
 	//añade el propio collider porque meleeAttack ya es un RectangleCollider

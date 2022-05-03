@@ -14,9 +14,11 @@ protected:
 	virtual void update()=0; //Los menus pueden hacer cosas difrentes en el update
 	virtual void onButtonClicked(int index)=0; //Virtual puro cada menu hace cosas diferentes segun sus botones
 	virtual void generateAllButtons()=0; //Virtual puro, cada menu dibuja sus botones de diferentes formas
-	void handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames,std::vector<Entity*>buttProps);
+	void handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, 
+		std::vector<std::string>buttNames,std::vector<Entity*>buttProps, int verMov_, int horMov_);
+
 	void handleMouseInput(std::vector<Transform*>buttPos, std::vector<Entity*>buttProps);
-	void handleControllerInput(float delay, float& lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps);
+	void handleControllerInput(float delay, float& lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps, int verMov_, int horMov_);
 	void changeButton(int &controllerIndex, std::vector<std::string>buttNames, float &lastUpdate, int numMoves);
 	void selectButton(Entity*buttProps);
 	void deselectButton(Entity*buttProps);

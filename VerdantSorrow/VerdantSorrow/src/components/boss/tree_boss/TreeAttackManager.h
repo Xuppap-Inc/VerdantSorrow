@@ -42,14 +42,6 @@ public:
 	void initComponent() override;
 	void update() override;
 
-	void checkIfDead();
-
-	void checkDirection(float distance);
-
-	void checkState(float absDistance);
-
-	void checkAnimState();
-
 	void deactivateBoss();
 
 	int getRootWidth() { return rootWidth_; }
@@ -76,10 +68,10 @@ private:
 	AnimState animState_;
 	AnimState animNewState_;
 
-	const float MELEE_ATTACK_DISTANCE = 20.0;
+	const float MELEE_ATTACK_DISTANCE = 160.0;
 	const int TIME_BETWEEN_WAVES = 5000;
 
-	const int TIME_FOR_SPECIAL = 10000;
+	const int TIME_FOR_SPECIAL = 12000;
 	const int WAIT_AFTER_SPECIAL = 1000;
 	const int ATTACK_CD = 2000;
 
@@ -137,6 +129,16 @@ private:
 	void prepareToSpecial();
 
 	void checkPhaseChange();
+
+	void checkIfDead();
+
+	void checkDirection(float distance);
+
+	void checkState(float absDistance);
+
+	void attackMelee();
+
+	void checkAnimState();
 
 	bool deadBoss_;
 
