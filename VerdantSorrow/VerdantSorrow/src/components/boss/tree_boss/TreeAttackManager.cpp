@@ -135,6 +135,10 @@ void TreeAttackManager::checkIfDead()
 		animNewState_ = ANIM_DEATH;
 		state = DYING;
 
+		movement_->setMoveActive(false);
+		
+		lantern_->setActive(false);
+
 		deadBoss_ = true;
 		deathTimer_->reset();
 
@@ -272,6 +276,7 @@ void TreeAttackManager::checkState(float absDistance)
 		if (movement_->hasFinishedMovingToCenter()) {
 
 			animNewState_ = ANIM_BACKGROUND;
+			anim_->fadeOut();
 			anim_->repeat(false);
 		}
 	}
@@ -474,7 +479,6 @@ void TreeAttackManager::attackSpecial()
 	s->play();
 	s->setChannelVolume(musicVolume_);
 
-	anim_->fadeOut();
 	treeCol_->setActive(false);
 }
 
