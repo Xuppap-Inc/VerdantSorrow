@@ -23,6 +23,9 @@ public:
 	int* getMusicVolume() { return &musicVolume_; };
 
 private:
+
+	void teleportPlayer();
+
 	CollisionManager* colManager;
 	bool isAble;
 	bool changeSc;
@@ -36,5 +39,4 @@ private:
 	Vector2D frogDoorPos;
 	Vector2D treeDoorPos;
 	Vector2D finalDoorPos;
-
 };

@@ -35,7 +35,10 @@
 
 
 
-Hub::Hub() :Scene(), musicVolume_(60), firstTimeEnteringGame(true)
+Hub::Hub() :Scene(), musicVolume_(60), firstTimeEnteringGame(true),
+frogDoorPos({ 2500 + 1400, 1825 + 1400}),
+treeDoorPos({ 2500 + 1400, 1825 - 700}),
+finalDoorPos({ 2500 - 1400, 1825 - 500})
 {
 	colManager = nullptr;
 }
@@ -59,78 +62,7 @@ void Hub::init()
 
 	playerGenerator(colManager);
 
-	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-
-	float xSpawnPos = tilemapTr->getWidth() / 2;
-	float ySpawnPos = tilemapTr->getHeight() / 2;
-
-	Vector2D frogDoorPos;
-	Vector2D treeDoorPos;
-	Vector2D finalDoorPos;
-
-	if (!firstTimeEnteringGame) {
-
-		// Si el jugador a muerto y vuelve al hub, teletransportarlo a la puerta del boss en el que murio
-		if (Game::instance()->playerJustKilled) 
-		{
-			Game::instance()->playerJustKilled = false;
-
-			switch (Game::instance()->state_)
-			{
-			case Game::State::HUB:
-				// Aparecer en la entrada del jefe del rana
-				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
-				ySpawnPos = tilemapTr->getHeight() / 2 + 1400;
-				break;
-
-			case Game::State::FROGDEFEATED:
-				// Aparecer en la entrada del jefe del arbol
-				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
-				ySpawnPos = tilemapTr->getHeight() / 2 - 700;
-				break;
-
-			case Game::State::TREEDEFEATED:
-				// Aparecer en la entrada del jefe final
-				xSpawnPos = tilemapTr->getWidth() / 2 - 1400;
-				ySpawnPos = tilemapTr->getHeight() / 2 - 500;
-				break;
-			default:
-				break;
-			}
-		}
-		// Si el jugador ha matado al jefe y vuelve al hub
-		else {
-			switch (Game::instance()->state_)
-			{
-			case Game::State::FROGDEFEATED:
-
-				// Aparecer en la entrada del jefe del rana
-				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
-				ySpawnPos = tilemapTr->getHeight() / 2 + 1400;
-				break;
-
-			case Game::State::TREEDEFEATED:
-				// Aparecer en la entrada del jefe final
-				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
-				ySpawnPos = tilemapTr->getHeight() / 2 - 700;
-				break;
-
-			//case Game::State::FINALDEFEATED:
-			//	// Aparecer en la entrada del jefe final
-			//	xSpawnPos = tilemapTr->getWidth() / 2 - 1400;
-			//	ySpawnPos = tilemapTr->getHeight() / 2 - 500;
-			//	break;
-			default:
-				break;
-			}
-		}
-	}
-	else
-		firstTimeEnteringGame = false;
-
-	player_->getComponent<Transform>()->getPos().set(Vector2D(xSpawnPos, ySpawnPos));
-
-	//player_->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
+	teleportPlayer();
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
@@ -172,6 +104,73 @@ void Hub::init()
 	blackScreenImg_->setAlpha(255);
 	blackScreenImg_->fadeOut();
 }
+
+void Hub::teleportPlayer()
+{
+	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
+
+	// SpawnpointInicial
+	Vector2D spawnPoint = { tilemapTr->getWidth() / 2 , tilemapTr->getHeight() / 2 };
+
+	if (!firstTimeEnteringGame) {
+
+		// Si el jugador a muerto y vuelve al hub, teletransportarlo a la puerta del boss en el que murio
+		if (Game::instance()->playerJustKilled)
+		{
+			Game::instance()->playerJustKilled = false;
+
+			switch (Game::instance()->state_)
+			{
+			case Game::State::HUB:
+				// Aparecer en la entrada del jefe del rana
+				spawnPoint = frogDoorPos;
+				break;
+
+			case Game::State::FROGDEFEATED:
+				// Aparecer en la entrada del jefe del arbol
+				spawnPoint = treeDoorPos;
+				break;
+
+			case Game::State::TREEDEFEATED:
+				// Aparecer en la entrada del jefe final
+				spawnPoint = finalDoorPos;
+				break;
+
+			default:
+				break;
+			}
+		}
+		// Si el jugador ha matado al jefe y vuelve al hub
+		else {
+			switch (Game::instance()->state_)
+			{
+			case Game::State::FROGDEFEATED:
+				// Aparecer en la entrada del jefe del rana
+				spawnPoint = frogDoorPos;
+				break;
+
+			case Game::State::TREEDEFEATED:
+				// Aparecer en la entrada del jefe del arbol
+				spawnPoint = treeDoorPos;
+				break;
+
+			case Game::State::FINALDEFEATED:
+				// Aparecer en la entrada del jefe final
+				spawnPoint = finalDoorPos;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+	else
+		firstTimeEnteringGame = false;
+
+	player_->getComponent<Transform>()->getPos().set(spawnPoint);
+}
+
+
 
 bool Hub::getAble()
 {
