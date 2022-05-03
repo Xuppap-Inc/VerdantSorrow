@@ -26,6 +26,7 @@ playerInBossFight(false),previousScene_(Menu_),isPauseActive_(false)
 	pauseMenu_ = new PauseMenu(); sceneList.push_back(pauseMenu_);
 	ecapesc_ = new EscapeScene(); sceneList.push_back(ecapesc_);
 	settingsMenu_ = new Settings(); sceneList.push_back(settingsMenu_);
+
 }
 
 SceneManager::~SceneManager()
@@ -38,11 +39,15 @@ SceneManager::~SceneManager()
 
 void SceneManager::update()
 {
+
+	SDL_GameControllerButton pauseGamepadButton = SDL_CONTROLLER_BUTTON_START;
+	SDL_Scancode pauseKeyboardButton = SDL_SCANCODE_ESCAPE;
+
 	auto& ihdlr = ih();
 
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent())
 	{
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)|| ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_LEFTSHOULDER))
+		if (ihdlr.isKeyDown(pauseKeyboardButton)|| ihdlr.isControllerButtonDown(pauseGamepadButton))
 		{
 			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
 			{
