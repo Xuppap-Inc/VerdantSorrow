@@ -39,7 +39,6 @@ SceneManager::~SceneManager()
 
 void SceneManager::update()
 {
-
 	SDL_GameControllerButton pauseGamepadButton = SDL_CONTROLLER_BUTTON_START;
 	SDL_Scancode pauseKeyboardButton = SDL_SCANCODE_ESCAPE;
 
@@ -229,13 +228,10 @@ void SceneManager::activatePause()
 	}
 
 	isPauseActive_ =!isPauseActive_;
-
-
 }
 
 void SceneManager::decideScene()
 {
-
 	if (actScene != Hub_) {
 		actScene = Hub_;
 		h_->changeScene_(false);
