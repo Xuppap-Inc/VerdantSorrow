@@ -25,6 +25,7 @@ void PauseMenu::init()
 {
 	changeSc_ = false;
 	Scene::init();
+	background();
 	isChangingScene(changeSc_);
 	generateAllButtons();
 	createImages((sdlutils().width() / 2) - 350, sdlutils().height() / 2 - (80 * 2), 80, 80, imagesNames_[0]);
@@ -168,7 +169,7 @@ void PauseMenu::createImages(float x, float y, float w, float h, std::string ima
 void PauseMenu::createText(float x, float y, std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
-		sdlutils().fontsHub().at("ARIAL48"), build_sdlcolor(0x00000000));
+		sdlutils().fontsHub().at("ARIAL48"), build_sdlcolor(0xFFFFFFFFF));
 
 	SDL_Rect rect = build_sdlrect(
 		(x - text.width()) / 2.0f, y, text.width(), text.height());
@@ -185,3 +186,10 @@ void PauseMenu::createText(float x, float y, std::string message)
 	text.render(rect);
 }
 
+void PauseMenu::background()
+{
+	auto backgr_ = mngr_->addEntity();
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondoSet"));
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
+}

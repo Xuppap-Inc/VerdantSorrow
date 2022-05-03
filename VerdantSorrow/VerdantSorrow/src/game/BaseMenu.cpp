@@ -27,6 +27,7 @@ void BaseMenu::createButton(float x, float y, float w, float h, std::string butt
 	newButton->addToGroup(ecs::_PARTICLES_GRP);
 	buttPos.push_back(tr);
 	buttProps.push_back(newButton);
+	newButton->addToGroup(ecs::_UI_GRP);
 }
 
 void BaseMenu::handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps, int verMov_, int horMov_)

@@ -99,6 +99,10 @@
       "file": "resources/images/MenuPrincipal/menuFondo.png"
     },
     {
+      "id": "menuFondoSet",
+      "file": "resources/images/MenuPrincipal/fondoMenu.png"
+    },
+    {
       "id": "menuFondoLogo",
       "file": "resources/images/MenuPrincipal/menuFondoLogo.png"
     },
@@ -141,6 +145,22 @@
     {
       "id": "load",
       "file": "resources/images/MenuPrincipal/loadButton.png"
+    },
+    {
+      "id": "foto1080",
+      "file": "resources/images/MenuPrincipal/1080.png"
+    },
+    {
+      "id": "foto720",
+      "file": "resources/images/MenuPrincipal/720.png"
+    },
+    {
+      "id": "foto480",
+      "file": "resources/images/MenuPrincipal/480.png"
+    },
+    {
+      "id": "foto144",
+      "file": "resources/images/MenuPrincipal/144.png"
     },
     {
       "id": "matt",

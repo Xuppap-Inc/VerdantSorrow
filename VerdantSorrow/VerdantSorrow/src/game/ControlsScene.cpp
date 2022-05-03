@@ -16,20 +16,13 @@ void ControlsScene::init()
 {
 	changeSc_ = false;
 	Scene::init();
+	background();
 	isChangingScene(changeSc_);
 
 
 	int imageW = 800, imageH = 300; //Ancho y alto e imagen
 	createImages(sdlutils().width() / 2 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
 	generateAllButtons();
-}
-void ControlsScene::background()
-{
-	auto background_ = mngr_->addEntity();
-	background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 1.0f);
-	background_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondo"));
-	background_->addToGroup(ecs::_BACKGROUND_1_GRP);
-	
 }
 
 void ControlsScene::onButtonClicked(int index)
@@ -58,7 +51,7 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 void ControlsScene::createText(float x, float y,std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
-		sdlutils().fontsHub().at("SOURCESERIF24"), build_sdlcolor(0x00000000));
+		sdlutils().fontsHub().at("SOURCESERIF24"), build_sdlcolor(0xFFFFFFFF));
 
 	SDL_Rect rect = build_sdlrect(
 		(x - text.width()) / 2.0f, y, text.width(), text.height());
@@ -99,4 +92,11 @@ void ControlsScene::update()
 		sdlutils().presentRenderer();
 	}
 
+}
+void ControlsScene::background()
+{
+	auto backgr_ = mngr_->addEntity();
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondoSet"));
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 }

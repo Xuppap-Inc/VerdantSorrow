@@ -2,6 +2,8 @@
 #include "../components/Image.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
+#include "../components/Transform.h"
+
 Settings::Settings() : delay_(250)
 {
 
@@ -10,6 +12,7 @@ void Settings::init()
 {
 	changeSc_ = false;
 	Scene::init();
+	background();
 	isChangingScene(changeSc_);
 	generateAllButtons();
 }
@@ -89,6 +92,10 @@ void Settings::generateAllButtons()
 
 void Settings::background()
 {
+	auto backgr_ = mngr_->addEntity();
+	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
+	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondoSet"));
+	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
 
