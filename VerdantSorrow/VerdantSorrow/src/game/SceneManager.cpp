@@ -13,8 +13,8 @@
 #include "Settings.h"
 
 
-SceneManager::SceneManager() : actScene(Menu_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
-playerInBossFight(false),previousScene_(Menu_),isPauseActive_(false)
+SceneManager::SceneManager() : actScene(Hub_), frogEssenceObtained_(false), treeEssenceObtained_(false), eyeEssenceObtained_(false), hubAssetsChargeds_(false),
+playerInBossFight(false),previousScene_(Hub_),isPauseActive_(false)
 {
 	h_ = new Hub(); sceneList.push_back(h_);
 	f_ = new FrogScene(); sceneList.push_back(f_);
@@ -50,7 +50,7 @@ void SceneManager::update()
 		{
 			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
 			{
-				if(actScene != Tutorial_) activatePause();
+				activatePause();
 			}
 		}
 	}
@@ -132,7 +132,7 @@ void SceneManager::init()
 		break;
 	case SceneManager::Tutorial_:
 		if (!playerInBossFight) {
-			playerInBossFight = false;
+			playerInBossFight = true;
 			sdlUtils_.loadReasources("resources/config/tutorial.json");
 		}
 		tut_->init();
@@ -152,8 +152,10 @@ void SceneManager::init()
 		settingsMenu_->init();
 		break;
 	case SceneManager::EscapeScene_:
-		playerInBossFight = false;
-		sdlUtils_.loadReasources("resources/config/escapeScene.json");
+		if (!playerInBossFight) {
+			playerInBossFight = true;
+			sdlUtils_.loadReasources("resources/config/escapeScene.json");
+		}
 		ecapesc_->init();
 		break;
 	default:
