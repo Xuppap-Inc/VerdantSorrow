@@ -52,11 +52,13 @@ void EscapeScene::init()
 	player = mngr_->addEntity();
 	playerGeneratorEscape(colManager, player);
 
+	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
 	cameraC->lock(false, true);
+	//cameraC->setLimitsToPositions(tilemapTr->getPos().getX(), tilemapTr->getPos().getY(), tilemapTr->getWidth(), tilemapTr->getHeight());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);

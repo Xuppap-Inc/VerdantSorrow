@@ -191,7 +191,6 @@ void TileMap::createObjects()
 					else if (name == "Pinchos") {
 						col->setIsTrigger(true);
 						
-					
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;

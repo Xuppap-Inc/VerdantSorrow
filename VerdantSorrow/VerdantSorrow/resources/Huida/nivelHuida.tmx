@@ -86,10 +86,26 @@
  </tileset>
  <imagelayer id="2" name="Fondo" offsetx="10036.4" offsety="11153.9"/>
  <objectgroup id="4" name="Pinchos" offsetx="2.78788" offsety="0">
-  <object id="473" gid="8" x="2242.12" y="5011.94" width="164" height="547"/>
-  <object id="474" gid="8" x="2154.12" y="4999.94" width="164" height="547"/>
-  <object id="475" gid="8" x="2062.12" y="5011.94" width="164" height="547"/>
-  <object id="476" gid="8" x="1346.75" y="4703.5" width="91.4694" height="284.496"/>
+  <object id="473" gid="8" x="2242.12" y="5011.94" width="164" height="547">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="474" gid="8" x="2154.12" y="4999.94" width="164" height="547">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="475" gid="8" x="2062.12" y="5011.94" width="164" height="547">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="476" gid="8" x="1346.75" y="4703.5" width="91.4694" height="284.496">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="477" gid="6" x="2230" y="6054" width="165" height="547"/>
   <object id="478" gid="6" x="2342" y="6038" width="165" height="547"/>
   <object id="479" gid="6" x="2422" y="6026" width="165" height="547"/>
@@ -134,9 +150,21 @@
   <object id="549" gid="3" x="6212.3" y="4112.92" width="98.5741" height="103.685"/>
   <object id="550" gid="3" x="6204.27" y="4028.95" width="98.5741" height="103.685"/>
   <object id="551" gid="3" x="6212.3" y="3951.55" width="98.5741" height="103.685"/>
-  <object id="554" gid="8" x="1388.45" y="4707.87" width="91.4694" height="284.496"/>
-  <object id="555" gid="8" x="1434.48" y="4711.62" width="91.4694" height="284.496"/>
-  <object id="556" gid="8" x="1476.18" y="4715.99" width="91.4694" height="284.496"/>
+  <object id="554" gid="8" x="1388.45" y="4707.87" width="91.4694" height="284.496">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="555" gid="8" x="1434.48" y="4711.62" width="91.4694" height="284.496">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="556" gid="8" x="1476.18" y="4715.99" width="91.4694" height="284.496">
+   <properties>
+    <property name="damage" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="6" name="Setas" locked="1">
   <object id="568" gid="12" x="623.303" y="5985.67" width="414" height="238"/>
