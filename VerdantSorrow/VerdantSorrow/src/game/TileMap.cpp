@@ -202,6 +202,17 @@ void TileMap::createObjects()
 						}
 							
 					}
+					else if (name == "colliders") {
+						vector<tmx::Property> properties = object.getProperties();
+
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "trigger")i++;
+
+						if (i < properties.size()) {
+							col->setIsTrigger(true);
+							
+						}
+					}
 
 				}
 			}

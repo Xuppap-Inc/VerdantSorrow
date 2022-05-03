@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="left-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="645">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="left-down" width="213" height="190" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="676">
  <tileset firstgid="1" name="ObjetosHuida" tilewidth="666" tileheight="667" tilecount="25" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0" type="Plataforma">
@@ -530,14 +530,6 @@
   <object id="459" gid="1" x="1308.5" y="5260.5" width="98" height="105"/>
   <object id="460" gid="1" x="1404.5" y="5260.5" width="98" height="105"/>
   <object id="461" gid="19" x="1500.5" y="5260.5" width="103" height="105"/>
-  <object id="463" gid="11" x="7" y="5249" width="106" height="105"/>
-  <object id="464" gid="11" x="96" y="5280" width="106" height="105"/>
-  <object id="465" gid="11" x="192" y="5312" width="106" height="105"/>
-  <object id="466" gid="11" x="288" y="5344" width="106" height="105"/>
-  <object id="467" gid="11" x="384" y="5376" width="106" height="105"/>
-  <object id="468" gid="11" x="480" y="5312" width="106" height="105"/>
-  <object id="469" gid="11" x="576" y="5248" width="106" height="105"/>
-  <object id="470" gid="11" x="672" y="5184" width="106" height="105"/>
   <object id="552" gid="11" x="5398.52" y="4028.76" width="106" height="105"/>
   <object id="634" x="6292.42" y="1188.12" width="106.061" height="96.9697"/>
   <object id="635" x="6398.48" y="1088.12" width="106.061" height="96.9697"/>
@@ -545,6 +537,14 @@
   <object id="637" x="5474.24" y="569.939" width="190.909" height="96.9697"/>
   <object id="638" x="6434.85" y="508.273" width="287.879" height="96.9697"/>
   <object id="639" x="6535.03" y="925.182" width="190.909" height="96.9697"/>
+  <object id="667" gid="22" x="59.0455" y="5223.5" width="106" height="105"/>
+  <object id="668" gid="1" x="155.045" y="5223.5" width="98" height="105"/>
+  <object id="669" gid="1" x="251.045" y="5223.5" width="98" height="105"/>
+  <object id="670" gid="19" x="347.045" y="5223.5" width="103" height="105"/>
+  <object id="671" gid="22" x="431.773" y="5217.44" width="106" height="105"/>
+  <object id="672" gid="1" x="527.772" y="5217.44" width="98" height="105"/>
+  <object id="673" gid="1" x="623.772" y="5217.44" width="98" height="105"/>
+  <object id="674" gid="19" x="719.772" y="5217.44" width="103" height="105"/>
  </objectgroup>
  <objectgroup id="5" name="LanzaMoscas" locked="1" offsetx="1.93939" offsety="1.69697">
   <object id="557" gid="15" x="2791.76" y="4785.21" width="255.879" height="300.027"/>
@@ -563,15 +563,7 @@
   <object id="575" x="2742.42" y="5124.24" width="775.758" height="96.9697"/>
   <object id="576" x="4936.36" y="4806.06" width="815.152" height="96.9697"/>
   <object id="577" x="1940.91" y="5521.21" width="106.061" height="96.9697"/>
-  <object id="578" x="1219.7" y="5158.18" width="390.909" height="96.9697"/>
-  <object id="579" x="580.303" y="5139.39" width="106.061" height="96.9697"/>
-  <object id="580" x="488.212" y="5204.03" width="106.061" height="96.9697"/>
-  <object id="581" x="383.333" y="5266.67" width="106.061" height="96.9697"/>
-  <object id="582" x="298.485" y="5242.42" width="106.061" height="96.9697"/>
-  <object id="583" x="189.394" y="5212.12" width="106.061" height="96.9697"/>
-  <object id="584" x="19.6968" y="5139.39" width="106.061" height="96.9697"/>
-  <object id="585" x="103.394" y="5173.42" width="106.061" height="96.9697"/>
-  <object id="586" x="681.485" y="5075.76" width="106.061" height="96.9697"/>
+  <object id="578" x="56.0636" y="5106.66" width="803.03" height="112.121"/>
   <object id="587" x="1710.52" y="4887.88" width="93.9393" height="481.818"/>
   <object id="588" x="2243.94" y="5324.24" width="330.303" height="96.9697"/>
   <object id="589" x="3607.58" y="4900.97" width="90.9091" height="96.9697"/>
@@ -622,5 +614,8 @@
   <object id="641" x="6071.21" y="848.485" width="106.061" height="203.03"/>
   <object id="642" x="5123.7" y="2132.21" width="1254.55" height="96.9697"/>
   <object id="644" x="5927.27" y="2648.48" width="763.641" height="96.9697"/>
+  <object id="645" x="4909.09" y="4009.09" width="1833.33" height="1039.39"/>
+  <object id="646" x="7130.3" y="4530.3"/>
+  <object id="675" x="1222.73" y="5130.3" width="390.909" height="96.9697"/>
  </objectgroup>
 </map>
