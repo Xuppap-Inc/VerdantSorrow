@@ -2,7 +2,7 @@
 #include "../components/Image.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
-Settings::Settings()
+Settings::Settings() : delay_(250)
 {
 
 }
@@ -16,7 +16,7 @@ void Settings::init()
 
 void Settings::update()
 {
-	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_, 1, 2);
+	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_, -2, 1);
 	if (!changeSc_)
 	{
 		mngr_->update();
