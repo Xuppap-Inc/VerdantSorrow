@@ -83,7 +83,7 @@ void ControlsScene::generateAllButtons()
 
 void ControlsScene::update()
 {
-	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_, false);
+	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_, 1, 1);
 	if (!changeSc_)
 	{
 		mngr_->update();
