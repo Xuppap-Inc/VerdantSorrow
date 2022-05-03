@@ -33,7 +33,7 @@ private:
 	Entity* FinalBossFace;
 	CollisionChecker* colCheck_;
 	TileMap* tileMap_;
-
+	void changescenes();
 	int musicVolume_;
 	Music* musica_;
 };

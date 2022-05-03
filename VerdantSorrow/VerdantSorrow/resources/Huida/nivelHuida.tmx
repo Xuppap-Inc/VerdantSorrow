@@ -86,22 +86,17 @@
  </tileset>
  <imagelayer id="2" name="Fondo" offsetx="10036.4" offsety="11153.9"/>
  <objectgroup id="4" name="Pinchos" offsetx="2.78788" offsety="0">
-  <object id="473" gid="8" x="2242.12" y="4943.94" width="164" height="547">
+  <object id="473" gid="8" x="2242.12" y="4944.94" width="164" height="547">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="474" gid="8" x="2154.12" y="4931.94" width="164" height="547">
+  <object id="474" gid="8" x="2154.12" y="4932.94" width="164" height="547">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="475" gid="8" x="2062.12" y="4943.94" width="164" height="547">
-   <properties>
-    <property name="damage" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="476" gid="8" x="1346.75" y="4703.5" width="91.4694" height="284.496">
+  <object id="475" gid="8" x="2062.12" y="4944.94" width="164" height="547">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
@@ -150,17 +145,12 @@
   <object id="549" gid="3" x="6212.3" y="4112.92" width="98.5741" height="103.685"/>
   <object id="550" gid="3" x="6204.27" y="4028.95" width="98.5741" height="103.685"/>
   <object id="551" gid="3" x="6212.3" y="3951.55" width="98.5741" height="103.685"/>
-  <object id="554" gid="8" x="1388.45" y="4707.87" width="91.4694" height="284.496">
+  <object id="555" gid="8" x="1395.09" y="4647.98" width="91.4694" height="284.496">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="555" gid="8" x="1434.48" y="4711.62" width="91.4694" height="284.496">
-   <properties>
-    <property name="damage" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="556" gid="8" x="1476.18" y="4715.99" width="91.4694" height="284.496">
+  <object id="556" gid="8" x="1521.63" y="4646.29" width="91.4694" height="284.496">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
@@ -450,11 +440,11 @@
   <object id="679" gid="1" x="5320.39" y="2846.74" width="98" height="105"/>
   <object id="680" gid="19" x="5416.39" y="2846.74" width="103" height="105"/>
   <object id="681" x="5135.24" y="2733.59" width="384.849" height="96.9697"/>
-  <object id="683" gid="22" x="5625.36" y="1967.57" width="106" height="105"/>
-  <object id="684" gid="1" x="5727.42" y="1969.6" width="98" height="105"/>
-  <object id="685" gid="1" x="5823.42" y="1969.6" width="98" height="105"/>
-  <object id="686" gid="19" x="5919.42" y="1969.6" width="103" height="105"/>
-  <object id="704" gid="11" x="6048.52" y="961.379" width="293.879" height="205"/>
+  <object id="683" gid="22" x="5524.36" y="1967.57" width="106" height="105"/>
+  <object id="684" gid="1" x="5626.42" y="1969.6" width="98" height="105"/>
+  <object id="685" gid="1" x="5722.42" y="1969.6" width="98" height="105"/>
+  <object id="686" gid="19" x="5818.42" y="1969.6" width="103" height="105"/>
+  <object id="704" gid="11" x="6021.25" y="1128.05" width="293.879" height="205"/>
   <object id="721" gid="11" x="4986.4" y="3326.53" width="106" height="105"/>
   <object id="722" gid="11" x="4883.36" y="3326.54" width="106" height="105"/>
  </objectgroup>
@@ -501,7 +491,7 @@
   <object id="607" x="5380.31" y="3130.3" width="106.061" height="96.9697"/>
   <object id="610" x="6016.67" y="4120" width="215.152" height="96.9697"/>
   <object id="620" x="6510.6" y="2293.94" width="106.061" height="96.9697"/>
-  <object id="628" x="5617.57" y="1857.57" width="421.213" height="96.9697"/>
+  <object id="628" x="5520.6" y="1860.6" width="421.213" height="96.9697"/>
   <object id="629" x="5731.82" y="1296.97" width="175.758" height="187.879"/>
   <object id="641" x="6488.85" y="993.97" width="203.031" height="124.242"/>
   <object id="642" x="5123.7" y="2132.21" width="1254.55" height="96.9697"/>
@@ -520,7 +510,7 @@
   <object id="696" x="6366.67" y="548.485" width="315.152" height="112.121"/>
   <object id="699" x="6078.79" y="1542.42" width="163.636" height="272.727"/>
   <object id="701" x="6730.3" y="709.091"/>
-  <object id="705" x="6072.73" y="754.545" width="263.636" height="203.03"/>
+  <object id="705" x="6033.34" y="903.03" width="263.636" height="203.03"/>
   <object id="723" x="4880.3" y="3224.24" width="215.152" height="96.9697"/>
  </objectgroup>
 </map>

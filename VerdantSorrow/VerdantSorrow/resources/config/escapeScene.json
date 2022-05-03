@@ -182,6 +182,10 @@
     {
       "id": "mosca",
       "file": "resources/images/mosca.png"
+    },
+    {
+      "id": "pincho",
+      "file": "resources/images/pincho.png"
     }
   ],
 

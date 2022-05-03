@@ -197,8 +197,10 @@ void TileMap::createObjects()
 						while (i < properties.size() && properties[i].getName() != "damage")i++;
 
 						if (i < properties.size()) {
-							ent->addComponent<SimpleGravity>(0.4);
+							ent->addComponent<Image>(&sdlutils().images().at("pincho"));
+							ent->addComponent<SimpleGravity>(0.2);
 							ent->addComponent<Spikes>(col_);
+							ent->addToGroup(ecs::_UI_GRP);
 						}
 							
 					}

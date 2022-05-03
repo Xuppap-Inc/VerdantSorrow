@@ -6,6 +6,7 @@
 #include "../frog_boss/TongueAttack.h"
 #include "../finalBoss/ClapAttack.h"
 #include "../../SimpleGravity.h"
+#include "../../player/PlayerAttributes.h"
 
 
 Spikes::Spikes(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), activationDistance_(100), moving_(false), spikeVelocity_(2.5)
@@ -42,10 +43,16 @@ void Spikes::update()
 
 			if (c->isActive() && !c->isTrigger()) {
 				//colisiones
+				//
+			}
+			if (c->isActive() && !c->isTrigger() && c->getEntity()->getComponent<PlayerAttributes>()) {
+				c->getEntity()->getComponent<PlayerAttributes>()->damagePlayer(1);
 				ent_->setAlive(false);
+				
 			}
 		}
 	}
+	
 }
 
 

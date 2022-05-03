@@ -76,7 +76,7 @@ void EscapeScene::update()
 	mngr_->update();
 	colCheck_->checkCollisions();
 	mngr_->refresh();
-
+	changescenes();
 	sdlutils().clearRenderer();
 	mngr_->render();
 #ifdef _DEBUG
@@ -112,4 +112,11 @@ void EscapeScene::setAble(bool a)
 void EscapeScene::createLights() {
 	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
 
+}
+
+void EscapeScene::changescenes()
+{
+	if (player->getComponent<PlayerAttributes>()->getLives() <= 0) {
+		init();
+	}
 }
