@@ -12,9 +12,7 @@
 #include "../utils/Vector2D.h"
 
 BaseMenu::BaseMenu() :Scene(), changeSc_(false)
-{
-
-}
+{ }
 
 void BaseMenu::background(std::string backgroundName)
 {
@@ -63,11 +61,8 @@ void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos, std::vector<Enti
 
 			if (ihdlr.mouseButtonEvent()) { //Booleano que comprueba eventos de ratón
 
-				if (ihdlr.getMouseButtonState(ihdlr.LEFT)) //Comprueba si hace click izquierdo
-				{
-			
+				if (ihdlr.getMouseButtonState(ihdlr.LEFT)) { //Comprueba si hace click izquierdo
 					onButtonClicked(i);
-				
 				}
 			}
 		}
@@ -81,17 +76,20 @@ void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &control
 	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
 	{
+
 		if (ihdlr.isAxisMotionEvent())
 		{
+
 			if (delay + lastUpdate < sdlutils().currRealTime())
 			{
+
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9) //Movimiento hacia abajo
 				{
 					changeButton(controllerIndex, buttNames,lastUpdate,1); //Suma una posicion
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, 2); //Suma dos posiciones (el menu es simetrico y hay tres botones por columna)
+					changeButton(controllerIndex, buttNames, lastUpdate, 3); //Suma dos posiciones (el menu es simetrico y hay tres botones por columna)
 
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba
@@ -100,15 +98,13 @@ void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &control
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, -2);
+					changeButton(controllerIndex, buttNames, lastUpdate, -3);
 				}
-
 			}
 		}
 
 		if (controllerIndex != -1 && controllerIndex < buttNames.size())
 		{
-
 			if (ihdlr.isControllerButtonDown(SDL_CONTROLLER_BUTTON_A)) 
 			{
 		
@@ -128,15 +124,17 @@ void BaseMenu::selectButton(Entity*buttProps)
 		auto img =buttProps->getComponent<Image>();
 		img->setAlpha(127);
 	}
-	
-	
 }
 
 void BaseMenu::changeButton(int &controllerIndex, std::vector<std::string>buttNames, float &lastUpdate,int numMoves)//Controla la lógica entre el cambio de botones seleccionados con el mando
 {
-
-	//Controller index guarda el indice del boton sobre el que se encuentra el raton
+	// Si se intenta acceder a un boton que no existe (estas en el boton del limite derecho
+	// e intentas moverte a la derecha), ignorar el movimiento
+	if (controllerIndex + numMoves >= buttNames.size()
+		|| controllerIndex + numMoves < 0)
+		return;
 	
+	//Controller index guarda el indice del boton sobre el que se encuentra el raton
 	if (controllerIndex< buttNames.size() || controllerIndex == -1)
 	{
 		controllerIndex += numMoves; //Suma un determinado numero de "movimientos" necesarios para llegar al boton deseado
@@ -144,7 +142,6 @@ void BaseMenu::changeButton(int &controllerIndex, std::vector<std::string>buttNa
 	else controllerIndex = -1;
 	
 	lastUpdate= sdlutils().currRealTime(); //Para controlar el delay entre cambio de botones con mando
-
 }
 
 void BaseMenu::deselectButton( Entity*buttProps)
@@ -154,5 +151,4 @@ void BaseMenu::deselectButton( Entity*buttProps)
 		auto img = buttProps->getComponent<Image>();
 		img->setAlpha(255);
 	}
-
 }
