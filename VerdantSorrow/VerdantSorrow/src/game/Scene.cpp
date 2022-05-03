@@ -18,6 +18,7 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "Hub.h"
 #include "CollisionManager.h"
+#include "Game.h"
 
 Scene::Scene() : mngr_(nullptr), camera_(), playerAttribs_()
 {
@@ -190,6 +191,9 @@ void Scene::checkPlayerDied()
 		playerDeathTimer_->reset();
 
 		blackScreenImg_->fadeIn();
+
+		// Comunicar al game que el jugador acaba de morir
+		Game::instance()->playerJustKilled = true;
 	}
 }
 

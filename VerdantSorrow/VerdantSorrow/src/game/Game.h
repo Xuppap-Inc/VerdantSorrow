@@ -22,6 +22,9 @@ public:
 		FINALDEFEATED
 	}state_;
 
+	// Esta variable devuelve true si el jugador acaba de morir en un jefe y vuelve al hub
+	bool playerJustKilled;
+
 private:
 	ecs::Manager *mngr_;
 	bool exit;

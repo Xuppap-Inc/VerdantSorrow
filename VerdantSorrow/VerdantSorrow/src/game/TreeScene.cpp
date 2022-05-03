@@ -157,7 +157,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto lanternAtribs = lantern->addComponent<BossAtributos>(32);
+	auto lanternAtribs = lantern->addComponent<BossAtributos>(3); // 32
 	auto lanternTr = lantern->addComponent<Transform>();
 	auto lanternX = x;
 	auto lanternY = y;

@@ -30,11 +30,12 @@
 #include "FrogScene.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
 #include "../components/FollowCamera.h"
+#include "Game.h"
 
 
 
 
-Hub::Hub() :Scene(), musicVolume_(60)
+Hub::Hub() :Scene(), musicVolume_(60), firstTimeEnteringGame(true)
 {
 	colManager = nullptr;
 }
@@ -59,7 +60,77 @@ void Hub::init()
 	playerGenerator(colManager);
 
 	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
-	player_->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
+
+	float xSpawnPos = tilemapTr->getWidth() / 2;
+	float ySpawnPos = tilemapTr->getHeight() / 2;
+
+	Vector2D frogDoorPos;
+	Vector2D treeDoorPos;
+	Vector2D finalDoorPos;
+
+	if (!firstTimeEnteringGame) {
+
+		// Si el jugador a muerto y vuelve al hub, teletransportarlo a la puerta del boss en el que murio
+		if (Game::instance()->playerJustKilled) 
+		{
+			Game::instance()->playerJustKilled = false;
+
+			switch (Game::instance()->state_)
+			{
+			case Game::State::HUB:
+				// Aparecer en la entrada del jefe del rana
+				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
+				ySpawnPos = tilemapTr->getHeight() / 2 + 1400;
+				break;
+
+			case Game::State::FROGDEFEATED:
+				// Aparecer en la entrada del jefe del arbol
+				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
+				ySpawnPos = tilemapTr->getHeight() / 2 - 700;
+				break;
+
+			case Game::State::TREEDEFEATED:
+				// Aparecer en la entrada del jefe final
+				xSpawnPos = tilemapTr->getWidth() / 2 - 1400;
+				ySpawnPos = tilemapTr->getHeight() / 2 - 500;
+				break;
+			default:
+				break;
+			}
+		}
+		// Si el jugador ha matado al jefe y vuelve al hub
+		else {
+			switch (Game::instance()->state_)
+			{
+			case Game::State::FROGDEFEATED:
+
+				// Aparecer en la entrada del jefe del rana
+				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
+				ySpawnPos = tilemapTr->getHeight() / 2 + 1400;
+				break;
+
+			case Game::State::TREEDEFEATED:
+				// Aparecer en la entrada del jefe final
+				xSpawnPos = tilemapTr->getWidth() / 2 + 1400;
+				ySpawnPos = tilemapTr->getHeight() / 2 - 700;
+				break;
+
+			//case Game::State::FINALDEFEATED:
+			//	// Aparecer en la entrada del jefe final
+			//	xSpawnPos = tilemapTr->getWidth() / 2 - 1400;
+			//	ySpawnPos = tilemapTr->getHeight() / 2 - 500;
+			//	break;
+			default:
+				break;
+			}
+		}
+	}
+	else
+		firstTimeEnteringGame = false;
+
+	player_->getComponent<Transform>()->getPos().set(Vector2D(xSpawnPos, ySpawnPos));
+
+	//player_->getComponent<Transform>()->getPos().set(Vector2D(tilemapTr->getWidth() / 2, tilemapTr->getHeight() / 2));
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
@@ -203,7 +274,7 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(2, colManager);
+	player_->addComponent<PlayerHubControl>(30, colManager); // Estaba en 2
 
 
 	//Componente ui jugador

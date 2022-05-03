@@ -31,4 +31,10 @@ private:
 	Music* musica_;
 	TileMap* tileMap_;
 
+	bool firstTimeEnteringGame;
+
+	Vector2D frogDoorPos;
+	Vector2D treeDoorPos;
+	Vector2D finalDoorPos;
+
 };
