@@ -65,6 +65,13 @@ void FinalBossScene::init()
 
 	if (blackScreen_ == nullptr) createBlackScreen();
 
+	else {
+
+		delete blackScreen_;
+
+		createBlackScreen();
+	}
+
 	blackScreenImg_->setAlpha(255);
 	blackScreenImg_->fadeOut(3);
 }

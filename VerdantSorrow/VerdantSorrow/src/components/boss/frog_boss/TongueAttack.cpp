@@ -9,7 +9,7 @@
 #include "../../../game/Hub.h"
 
 TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
-colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
+colMan_(colMan), delay_(500), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 
 
@@ -19,7 +19,7 @@ colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(fals
 }
 
 TongueAttack::TongueAttack() :RectangleCollider(),
-colMan_(nullptr), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
+colMan_(nullptr), delay_(500), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
 {
 	
 

@@ -401,13 +401,18 @@ bool TreeAttackManager::isSecondPhase()
 
 void TreeAttackManager::checkPhaseChange()
 {
-	if (attribs_->getLife() <= attribs_->getMaxHp() / 2) {
+	if (attribs_->getLife() < attribs_->getMaxHp() / 3) {
 
 		animNewState_ = ANIM_CHANGE_PHASE;
 		anim_->repeat(false);
 
 		//callback que llama al cambio de estado al acabar la animacion de cambio de fase
-		std::function<void()> changePhaseCallback = [this]() { state = MOVING; };
+		std::function<void()> changePhaseCallback = [this]() { 
+			
+			state = MOVING; 
+			movement_->setMoveActive(true);
+		};
+		
 		anim_->registerEvent(std::pair<int, std::string>(13, "arbol_capa_cambio_fase"), changePhaseCallback);
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
