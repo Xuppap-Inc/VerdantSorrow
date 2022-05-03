@@ -139,8 +139,11 @@
     {
       "id": "sfx_player_dead",
       "file": "resources/sound/sfx_player_dead.wav"
+    },
+    {
+        "id": "sfx_mosca_idle",
+        "file": "resources/sound/sfx_mosca_idle.wav"
     }
-
   ],
   "musics" : [
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.mp3" }
