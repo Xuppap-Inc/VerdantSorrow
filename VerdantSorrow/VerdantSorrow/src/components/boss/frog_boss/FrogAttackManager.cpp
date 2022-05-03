@@ -35,8 +35,8 @@ void FrogAttackManager::initComponent()
 {
 	auto volume = sC().getHubScene()->getMusicVolume();
 	musicVolume_ = *volume;
-	frogJump_ = ent_->addComponent<FrogJump>(17);
-	bigJump_ = ent_->addComponent<FrogBigJump>(22);
+	frogJump_ = ent_->addComponent<FrogJump>(19);
+	bigJump_ = ent_->addComponent<FrogBigJump>(30);
 
 	tr_ = ent_->getComponent<Transform>();
 	player_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
@@ -141,11 +141,11 @@ void FrogAttackManager::checkAnimationState()
 			callback = [this]() { frogState_ = JUMPING_BIG; bigJump_->attack(jumpDirection_); };
 
 			if (!secondPhase_) {
-				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_jump");
+				anim_->changeanim(&sdlutils().images().at("rana_jump"), 6, 6, (1000 / 30) * 30, 24, "rana_jump");
 				anim_->registerEvent(std::pair<int, std::string>(10, "rana_jump"), callback);
 			}
 			else {
-				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 31, 31, "rana_enfadada_jump");
+				anim_->changeanim(&sdlutils().images().at("rana_enfadada_jump"), 6, 6, (1000 / 30) * 30, 24, "rana_enfadada_jump");
 				anim_->registerEvent(std::pair<int, std::string>(10, "rana_enfadada_jump"), callback);
 			}
 			break;
@@ -369,7 +369,7 @@ ecs::Entity* FrogAttackManager::createFly()
 	fly_ = mngr_->addEntity();
 	auto fTr = fly_->addComponent<Transform>();
 
-	auto flyY = sdlutils().height() - player_->getHeight() - FLOOR_HEIGHT;
+	auto flyY = sdlutils().height() - player_->getHeight() * tr_->getScale() - FLOOR_HEIGHT;
 	
 	auto flyX = player_->getPos().getX();
 
