@@ -8,7 +8,7 @@
 
 
 SimplePhysicsPlayer::SimplePhysicsPlayer(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr), invulnerable_(false), invTimer(0),
-exitCollision(false), lastCollision(3, false),gravedad_(true)
+exitCollision(false), lastCollision(3, false), gravedad_(true)
 {
 }
 
@@ -34,6 +34,9 @@ void SimplePhysicsPlayer::update()
 		if (!attrib_->isOnGround() && !gravity_->isActive()) gravity_->setActive(true);
 		else if (gravity_->isActive()) gravity_->setActive(false);
 	}
+
+	onCollisionExit();
+
 	//Colisiones
 	if (colMan_->hasCollisions(collider_)) {
 
@@ -80,13 +83,8 @@ void SimplePhysicsPlayer::update()
 				}
 				exitCollision = true;
 			}
-
-			else //collider no activo
-				onCollisionExit();
 		}
 	}
-	else //no colisiones
-		onCollisionExit();
 }
 
 void SimplePhysicsPlayer::onCollisionExit()

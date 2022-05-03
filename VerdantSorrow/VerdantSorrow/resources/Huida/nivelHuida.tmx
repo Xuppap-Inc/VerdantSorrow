@@ -614,7 +614,11 @@
   <object id="641" x="6071.21" y="848.485" width="106.061" height="203.03"/>
   <object id="642" x="5123.7" y="2132.21" width="1254.55" height="96.9697"/>
   <object id="644" x="5927.27" y="2648.48" width="763.641" height="96.9697"/>
-  <object id="645" x="4909.09" y="4009.09" width="1833.33" height="1039.39"/>
+  <object id="645" x="4909.09" y="4009.09" width="1833.33" height="1039.39">
+   <properties>
+    <property name="trigger" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="646" x="7130.3" y="4530.3"/>
   <object id="675" x="1222.73" y="5130.3" width="390.909" height="96.9697"/>
  </objectgroup>
