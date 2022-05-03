@@ -90,7 +90,7 @@ void TreeScene::update()
 			else cout << "Unable to open file";
 		}
 
-			
+		treeMngr_->getMusicFirtPhase()->pauseChannel(0);
 		setAble(false);
 		sC().decideScene();
 	}

@@ -27,6 +27,8 @@
 #include "../sdlutils/Texture.h"
 #include "../json/JSONValue.h"
 #include "TileMap.h"
+#include "FrogScene.h"
+#include "../components/boss/frog_boss/FrogAttackManager.h"
 
 
 

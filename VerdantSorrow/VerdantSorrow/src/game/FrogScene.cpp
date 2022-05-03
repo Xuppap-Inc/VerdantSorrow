@@ -87,7 +87,7 @@ void FrogScene::update()
 			else cout << "No se puede abrir el guardado.txt";
 		}
 
-
+		frogMngr_->getMusicFirtPhase()->pauseChannel(0);
 		setAble(false);
 		sC().decideScene();
 	}
