@@ -90,6 +90,14 @@ void Hub::init()
 		blackScreen_->addComponent<FollowCamera>();
 	}
 
+	else {
+	
+		delete blackScreen_;
+
+		createBlackScreen();
+		blackScreen_->addComponent<FollowCamera>();
+	}
+
 	blackScreenImg_->setAlpha(255);
 	blackScreenImg_->fadeOut();
 }
