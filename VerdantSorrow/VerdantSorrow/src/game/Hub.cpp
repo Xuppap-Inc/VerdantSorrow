@@ -273,7 +273,7 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(30, colManager); // Estaba en 2
+	player_->addComponent<PlayerHubControl>(2, colManager);
 
 
 	//Componente ui jugador

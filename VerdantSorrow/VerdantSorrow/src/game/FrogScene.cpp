@@ -143,7 +143,7 @@ void FrogScene::frogGenerator(CollisionManager* colManager, Entity* player_) {
 	Frog = mngr_->addEntity();
 	Frog->addToGroup(ecs::_BOSS_GRP);
 	mngr_->setHandler(ecs::_FROGBOSS, Frog);
-	auto FrogAtribs = Frog->addComponent<BossAtributos>(3); // Estaba en 40
+	auto FrogAtribs = Frog->addComponent<BossAtributos>(40);
 
 	auto frogH = 450;
 	auto frogW = frogH * 1.11f;
