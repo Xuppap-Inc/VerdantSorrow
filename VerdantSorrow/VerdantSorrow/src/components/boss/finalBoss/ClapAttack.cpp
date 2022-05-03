@@ -6,7 +6,7 @@
 #include "../../../sdlutils/VirtualTimer.h"
 #include "../../../ecs/Manager.h"
 #include "../../fondos/ParticleSystem.h"
-
+#include "../../../game/Hub.h"
 
 
 ClapAttack::ClapAttack(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO), vt_(), initialPos(), collider_()
@@ -74,6 +74,7 @@ void ClapAttack::goCenter(bool quemado)
 
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack2");
 			s->play();
+			s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 			if (quemado) {
 				SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_fire_clap");

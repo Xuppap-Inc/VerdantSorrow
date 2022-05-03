@@ -7,7 +7,7 @@
 #include "../../ecs/Manager.h"
 #include "../SimpleGravity.h"
 #include "SimplePhysicsPlayer.h"
-
+#include "../../game/Hub.h"
 
 Attack::Attack(float width, float height, float offsetY, CollisionManager* colManager) :
 	tr_(nullptr), RectangleCollider(width, height, 0, offsetY), attackDuration(200),
@@ -353,7 +353,7 @@ void Attack::attack()
 {
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack2");
 	s->play();
-
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 	
 	finished_ = false;
 	newAttack_ = true;

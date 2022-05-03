@@ -6,6 +6,7 @@
 #include "Attack.h"
 #include "../../sdlutils/SDLUtils.h"
 #include "../fondos/ParticleSystem.h"
+#include "../../game/Hub.h"
 
 using namespace std;
 PlayerCtrl::PlayerCtrl(float jumpForce, float speed, float deceleration, float rollSpeed) :
@@ -96,6 +97,7 @@ void PlayerCtrl::update()
 				slide_ = false;
 				SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_roll");
 				s->play();
+				s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 				ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("particula_tierra"), mngr_);
 				particlesys->createParticlesRoll(20, movementDir_, tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight());
 			}

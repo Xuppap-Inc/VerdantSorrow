@@ -60,6 +60,7 @@ void FrogAttackManager::initComponent()
 	
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_enter");
 	s->play();
+	s->setChannelVolume(musicVolume_);
 
 	dandellions1_ = new ParticleSystem(&sdlutils().images().at("particula_dandellion"), mngr_);
 	dandellions1_->createParticlesDandellion(50);
@@ -331,9 +332,10 @@ void FrogAttackManager::checkIfDead()
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_boss_defeated");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_descubrir_rana");
 		s2->play();
-
+		s2->setChannelVolume(musicVolume_);
 		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
@@ -449,7 +451,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
 		s->play();
-		
+		s->setChannelVolume(musicVolume_);
 		if (jumpDirection_ == 0) jumpDirection_ = oldJumpDirection_;
 	}
 	else {
@@ -458,6 +460,7 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_attack");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 
 	}
 }
@@ -502,10 +505,13 @@ void FrogAttackManager::checkPhaseChange()
 		animNewState_ = ANIM_CHANGE_PHASE;
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_rana_damage");
 		s2->play();
+		s2->setChannelVolume(musicVolume_);
 		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_rain");
 		s3->play();
+		s3->setChannelVolume(musicVolume_);
 
 		musicaFase2_->setMusicVolume(musicVolume_);
 		musicaFase1_->pauseChannel(0);

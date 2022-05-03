@@ -4,6 +4,7 @@
 #include "../../../ecs/Manager.h"
 #include "../../../sdlutils/SoundEffect.h"
 #include "../../../sdlutils/SDLUtils.h"
+#include "../../../game/Hub.h"
 
 FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(5)
 {
@@ -20,6 +21,7 @@ void FlyMovement::initComponent() {
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_mosca_idle");
 	s->play();
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 	bool correct = tr_ != nullptr && playerTr_ != nullptr;
 }

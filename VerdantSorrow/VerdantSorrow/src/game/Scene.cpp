@@ -16,7 +16,7 @@
 #include "../components/boss/BossComponents.h"
 #include "../components/boss/BossComponents.h"
 #include "../components/fondos/ParticleSystem.h"
-
+#include "Hub.h"
 #include "CollisionManager.h"
 
 Scene::Scene() : mngr_(nullptr), camera_(), playerAttribs_()
@@ -180,7 +180,7 @@ void Scene::checkPlayerDied()
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_player_dead");
 		s->play();
-
+		s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 		deactivateBoss();
 		playerDeathTimer_->reset();
 	}

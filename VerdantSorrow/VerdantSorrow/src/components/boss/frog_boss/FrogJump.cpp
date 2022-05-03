@@ -3,6 +3,8 @@
 #include "../../Transform.h"
 #include "../../FramedImage.h"
 #include "../../../ecs/Entity.h"
+#include "../../../game/SceneManager.h"
+#include "../../../game/Hub.h"
 
 FrogJump::FrogJump(): tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpCd_(2000), fr_()
 {
@@ -35,4 +37,5 @@ void FrogJump::attack(int dir) {
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_jump");
 	s->play();
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 }

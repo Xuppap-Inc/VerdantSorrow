@@ -10,6 +10,7 @@
 #include "../wave/WaveSpawner.h"
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
+#include "../../../game/Hub.h"
 
 HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_(),
 lastTimeFloor_(), collider_(), playerTr_(), playerXPos()
@@ -61,6 +62,7 @@ void HammerArm::attack(bool quemado)
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
 		s->play();
+		s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 		if (quemado)
 		{

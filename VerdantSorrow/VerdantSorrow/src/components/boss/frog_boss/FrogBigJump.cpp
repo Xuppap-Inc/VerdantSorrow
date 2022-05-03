@@ -2,6 +2,8 @@
 
 #include "../../Transform.h"
 #include "../../../ecs/Entity.h"
+#include "../../../game/SceneManager.h"
+#include "../../../game/Hub.h"
 
 FrogBigJump::FrogBigJump() : tr_(), isJumping_(false), jumpForce_(), lastJump_(), jumpCd_(2000)
 {
@@ -32,4 +34,5 @@ void FrogBigJump::attack(int dir) {
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_jump");
 	s->play();
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 }

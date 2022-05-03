@@ -45,6 +45,7 @@ void FinalBossMovement::initComponent()
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_enter");
 	s->play();
+	s->setChannelVolume(musicVolume_);
 
 	ashes_ = new ParticleSystem(&sdlutils().images().at("particle"), mngr_);
 	ashes_->createParticlesAsh(100);
@@ -109,8 +110,10 @@ void FinalBossMovement::checkPhaseChange()
 		tr_->setScale(.33);
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_quemado");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_damage");
 		s2->play();
+		s2->setChannelVolume(musicVolume_);
 
 		ashes_->targetParticles(tr_);
 
@@ -211,6 +214,7 @@ void FinalBossMovement::fireBall()
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_fuego");
 	s->play();
+	s->setChannelVolume(musicVolume_);
 
 	auto waveCollider = wave->addComponent<RectangleCollider>(width - 20, height - 20);
 	waveCollider->setIsTrigger(true);
@@ -229,9 +233,12 @@ void FinalBossMovement::setDeadBoss(bool set)
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_boss_defeated");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_descubrir_manos");
 		s2->play();
+		s2->setChannelVolume(musicVolume_);
 		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_avalancha");
 		s3->play();
+		s3->setChannelVolume(musicVolume_);
 	}
 }

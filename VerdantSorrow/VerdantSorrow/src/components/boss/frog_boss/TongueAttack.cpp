@@ -6,6 +6,7 @@
 #include "../../../sdlutils/InputHandler.h"
 #include "../../../ecs/Manager.h"
 #include "../../RectangleRenderer.h"
+#include "../../../game/Hub.h"
 
 TongueAttack::TongueAttack(CollisionManager* colMan) :RectangleCollider(),
 colMan_(colMan), delay_(1000), lastUpdate_(0), finishedAttack_(false), fly_(false), frogTr_(), timer_()
@@ -51,6 +52,7 @@ void TongueAttack::attack(bool fly)
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_lengua");
 	s->play();
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 	finishedAttack_ = false; //El ataque no ha terminado aun
 	timer_->reset();

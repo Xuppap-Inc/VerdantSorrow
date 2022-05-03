@@ -97,6 +97,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 						s->play();
+						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 						bA->setDamage(PLAYER_ATTACK_DMG);
 
@@ -147,6 +148,7 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_player_damage");
 		s->play();
+		s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 		playerFImg->setColor(200, 50, 50, 1000);
 

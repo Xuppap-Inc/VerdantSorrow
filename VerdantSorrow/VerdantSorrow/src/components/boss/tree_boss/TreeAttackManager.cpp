@@ -80,6 +80,7 @@ void TreeAttackManager::initComponent()
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_enter");
 	s->play();
+	s->setChannelVolume(musicVolume_);
 
 	hojas_ = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	hojas_->createParticlesDandellion(10);
@@ -141,9 +142,10 @@ void TreeAttackManager::checkIfDead()
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_boss_defeated");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_descubrir_arbol");
 		s2->play();
-
+		s2->setChannelVolume(musicVolume_);
 		deadParticles1_->createParticlesBossDie(150, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 		deadParticles2_->createParticlesBossDieSymbol(1, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
@@ -189,7 +191,7 @@ void TreeAttackManager::checkState(float absDistance)
 
 				SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
 				s->play();
-
+				s->setChannelVolume(musicVolume_);
 				meleeAttack_->attack(dir_);
 				attacking_ = true;
 				newAtack_ = false;
@@ -381,10 +383,13 @@ void TreeAttackManager::checkPhaseChange()
 
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_cambio_fase");
 		s->play();
+		s->setChannelVolume(musicVolume_);
 		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_wind");
 		s2->play();
+		s2->setChannelVolume(musicVolume_);
 		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_arbol_damage");
 		s3->play();
+		s3->setChannelVolume(musicVolume_);
 
 		musicaFase2_->setMusicVolume(musicVolume_);
 		musicaFase1_->pauseChannel(0);
@@ -443,6 +448,7 @@ void TreeAttackManager::attackSpecial()
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_background");
 	s->play();
+	s->setChannelVolume(musicVolume_);
 
 	anim_->fadeOut();
 	treeCol_->setActive(false);

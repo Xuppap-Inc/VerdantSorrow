@@ -4,7 +4,7 @@
 #include "../../../../ecs/Entity.h"
 #include "../../../../ecs/Manager.h"
 #include "../../../fondos/ParticleSystem.h"
-
+#include "../../../../game/Hub.h"
 
 RootMovement::RootMovement() : tr_(), col_(), speed_(1), waitTimer_(), state_(APPEARING)
 {
@@ -33,6 +33,7 @@ void RootMovement::initComponent()
 
 	SoundEffect* s = &sdlutils().soundEffects().at("sfx_raiz");
 	s->play();
+	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 }
 
 void RootMovement::update()
