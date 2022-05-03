@@ -7,175 +7,183 @@
     { "id" : "ARIAL48", "file" : "resources/fonts/ARIAL.ttf", "size": 48 }
   ],
 
-    "images": [
+  "images": [
 
-        {
-            "id": "fondoNegro",
-            "file": "resources/images/fondoNegro.png"
-        },
-        {
-            "id": "manoIzq",
-            "file": "resources/images/BossFinal_ManoIzq.png"
-        },
-        {
-            "id": "manoDer",
-            "file": "resources/images/BossFinal_ManoDer.png"
-        },
-        {
-            "id": "chica",
-            "file": "resources/images/chicafoto.png"
-        },
-        {
-            "id": "Chica_Idle",
-            "file": "resources/images/idle.png"
-        },
-        {
-            "id": "Chica_Run",
-            "file": "resources/images/run.png"
-        },
-        {
-            "id": "Chica_Jump",
-            "file": "resources/images/jump.png"
-        },
-        {
-            "id": "Chica_AtkFloor1",
-            "file": "resources/images/attack1.png"
-        },
-        {
-            "id": "Chica_AtkFloor2",
-            "file": "resources/images/attack2.png"
-        },
-        {
-            "id": "Chica_AtkFloor3",
-            "file": "resources/images/attack3.png"
-        },
-        {
-            "id": "Attack1_Recovery",
-            "file": "resources/images/attack1_recovery.png"
-        },
-        {
-            "id": "Chica_AtkAir",
-            "file": "resources/images/attackAir.png"
-        },
-        {
-            "id": "chicaroll",
-            "file": "resources/images/roll.png"
-        },
-        {
-            "id": "particula_tierra",
-            "file": "resources/images/particula_tierra.png"
-        },
-        {
-            "id": "particula_esencia",
-            "file": "resources/images/particula_esencia.png"
-        },
-        {
-            "id": "heart",
-            "file": "resources/images/heart.png"
-        },
-        {
-            "id": "heartBlack",
-            "file": "resources/images/heartBlack.png"
-        },
-        {
-            "id": "healthDetail",
-            "file": "resources/images/HealthDetail.png"
-        },
-        {
-            "id": "bossBarArrow_Left",
-            "file": "resources/images/BossBarArrow_Left.png"
-        },
-        {
-            "id": "bossBarArrow_Right",
-            "file": "resources/images/BossBarArrow_Right.png"
-        },
-        {
-            "id": "middleBar",
-            "file": "resources/images/middleBar.png"
-        },
-        {
-            "id": "fondo1",
-            "file": "resources/images/fondo1.png"
-        },
-        {
-            "id": "wave",
-            "file": "resources/images/wave.png"
-        },
-        {
-            "id": "particle",
-            "file": "resources/images/particlered.png"
-        },
-        {
-            "id": "Suelo",
-            "file": "resources/images/fondofinal.png"
-        },
-        {
-            "id": "vfx_manos_fuego",
-            "file": "resources/images/vfx_manos_fuego.png"
-        },
-        {
-            "id": "luz_roja",
-            "file": "resources/images/luz_roja.png"
-        },
-        {
-            "id": "luz_rosa",
-            "file": "resources/images/luz_rosa.png"
-        },
-        {
-            "id": "capa",
-            "file": "resources/images/capa.png"
-        },
+    {
+      "id": "fondoNegro",
+      "file": "resources/images/fondoNegro.png"
+    },
+    {
+      "id": "manoIzq",
+      "file": "resources/images/BossFinal_ManoIzq.png"
+    },
+    {
+      "id": "manoDer",
+      "file": "resources/images/BossFinal_ManoDer.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/chicafoto.png"
+    },
+    {
+      "id": "Chica_Idle",
+      "file": "resources/images/idle.png"
+    },
+    {
+      "id": "Chica_Run",
+      "file": "resources/images/run.png"
+    },
+    {
+      "id": "Chica_Jump",
+      "file": "resources/images/jump.png"
+    },
+    {
+      "id": "Chica_AtkFloor1",
+      "file": "resources/images/attack1.png"
+    },
+    {
+      "id": "Chica_AtkFloor2",
+      "file": "resources/images/attack2.png"
+    },
+    {
+      "id": "Chica_AtkFloor3",
+      "file": "resources/images/attack3.png"
+    },
+    {
+      "id": "Attack1_Recovery",
+      "file": "resources/images/attack1_recovery.png"
+    },
+    {
+      "id": "Chica_AtkAir1",
+      "file": "resources/images/attackAir1.png"
+    },
+    {
+      "id": "Chica_AtkAir2",
+      "file": "resources/images/attackAir2.png"
+    },
+    {
+      "id": "Chica_AtkAir3",
+      "file": "resources/images/attackAir3.png"
+    },
+    {
+      "id": "chicaroll",
+      "file": "resources/images/roll.png"
+    },
+    {
+      "id": "particula_tierra",
+      "file": "resources/images/particula_tierra.png"
+    },
+    {
+      "id": "particula_esencia",
+      "file": "resources/images/particula_esencia.png"
+    },
+    {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "bossBarArrow_Left",
+      "file": "resources/images/BossBarArrow_Left.png"
+    },
+    {
+      "id": "bossBarArrow_Right",
+      "file": "resources/images/BossBarArrow_Right.png"
+    },
+    {
+      "id": "middleBar",
+      "file": "resources/images/middleBar.png"
+    },
+    {
+      "id": "fondo1",
+      "file": "resources/images/fondo1.png"
+    },
+    {
+      "id": "wave",
+      "file": "resources/images/wave.png"
+    },
+    {
+      "id": "particle",
+      "file": "resources/images/particlered.png"
+    },
+    {
+      "id": "Suelo",
+      "file": "resources/images/fondofinal.png"
+    },
+    {
+      "id": "vfx_manos_fuego",
+      "file": "resources/images/vfx_manos_fuego.png"
+    },
+    {
+      "id": "luz_roja",
+      "file": "resources/images/luz_roja.png"
+    },
+    {
+      "id": "luz_rosa",
+      "file": "resources/images/luz_rosa.png"
+    },
+    {
+      "id": "capa",
+      "file": "resources/images/capa.png"
+    },
 
-        {
-            "id": "nubescapa",
-            "file": "resources/images/nubescapa.png"
-        },
-        {
-            "id": "capa1",
-            "file": "resources/images/capa1.png"
-        },
-        {
-            "id": "capa2",
-            "file": "resources/images/capa2.png"
-        },
-        {
-            "id": "capa3",
-            "file": "resources/images/capa3.png"
-        },
+    {
+      "id": "nubescapa",
+      "file": "resources/images/nubescapa.png"
+    },
+    {
+      "id": "capa1",
+      "file": "resources/images/capa1.png"
+    },
+    {
+      "id": "capa2",
+      "file": "resources/images/capa2.png"
+    },
+    {
+      "id": "capa3",
+      "file": "resources/images/capa3.png"
+    },
 
-        {
-            "id": "Parallax_Layer1",
-            "file": "resources/images/Parallax_Layer1.png"
-        },
-        {
-            "id": "Parallax_Layer2",
-            "file": "resources/images/Parallax_Layer2.png"
-        },
-        {
-            "id": "Parallax_Layer3",
-            "file": "resources/images/Parallax_Layer3.png"
-        },
-        {
-            "id": "Parallax_Layer4",
-            "file": "resources/images/Parallax_Layer4.png"
-        },
-        {
-            "id": "Parallax_Layer5",
-            "file": "resources/images/Parallax_Layer5.png"
-        },
-        {
-            "id": "particula_damage",
-            "file": "resources/images/particula_damage.png"
-        },
-        {
-            "id": "you_died",
-            "file": "resources/images/you_died.png"
-        },
-        {
-            "id": "mosca",
-            "file": "resources/images/mosca.png"
-        }
-    ],
+    {
+      "id": "Parallax_Layer1",
+      "file": "resources/images/Parallax_Layer1.png"
+    },
+    {
+      "id": "Parallax_Layer2",
+      "file": "resources/images/Parallax_Layer2.png"
+    },
+    {
+      "id": "Parallax_Layer3",
+      "file": "resources/images/Parallax_Layer3.png"
+    },
+    {
+      "id": "Parallax_Layer4",
+      "file": "resources/images/Parallax_Layer4.png"
+    },
+    {
+      "id": "Parallax_Layer5",
+      "file": "resources/images/Parallax_Layer5.png"
+    },
+    {
+      "id": "particula_damage",
+      "file": "resources/images/particula_damage.png"
+    },
+    {
+      "id": "you_died",
+      "file": "resources/images/you_died.png"
+    },
+    {
+      "id": "mosca",
+      "file": "resources/images/mosca.png"
+    }
+  ],
 
   "sounds": [
     {

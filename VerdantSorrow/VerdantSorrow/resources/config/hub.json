@@ -200,10 +200,18 @@
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.mp3" },
     { "id" : "music_menu", "file" : "resources/sound/music_menu.mp3" }
   ],
+
+  "sounds_hub": [
+    {
+      "id": "sfx_descubrir_hub",
+      "file": "resources/sound/sfx_descubrir_hub.wav"
+    },
+    {
+      "id": "sfx_iniciar_menu",
+      "file": "resources/sound/sfx_iniciar_menu.wav"
+    }
   
-  "sounds_hub" : [
-    { "id" : "sfx_descubrir_hub", "file" : "resources/sound/sfx_descubrir_hub.wav" },
-    { "id" : "sfx_iniciar_menu", "file" : "resources/sound/sfx_iniciar_menu.wav" }
+  
   ],
 
     "Npcs" : [
