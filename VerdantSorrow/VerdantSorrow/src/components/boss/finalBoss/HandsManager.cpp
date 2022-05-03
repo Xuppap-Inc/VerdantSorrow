@@ -103,8 +103,8 @@ void HandsManager::deactivateBoss()
 	auto col = ent_->getComponent<RectangleCollider>();
 	col->setActive(false);
 
-	leftHand_->setAlive(false);
-	rightHand_->setAlive(false);
+	leftHand_->setActive(false);
+	rightHand_->setActive(false);
 
 	movement_->setActive(false);
 	if (secondPhase_) movement_->setReturningToCenter(true);

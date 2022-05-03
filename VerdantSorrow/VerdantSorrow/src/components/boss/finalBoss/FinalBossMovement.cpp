@@ -107,7 +107,7 @@ void FinalBossMovement::checkPhaseChange()
 
 		anim_->changeanim(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
 		phase_ = PHASE2;
-		tr_->setScale(.33);
+		tr_->setScale(.4);
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_quemado");
 		s->play();
 		s->setChannelVolume(musicVolume_);

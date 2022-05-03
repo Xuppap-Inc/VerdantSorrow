@@ -240,6 +240,11 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 			xOffset = -.17;
 			yOffset = .25;
 		}
+		else {
+		
+			xOffset = -0.1;
+			yOffset = .22;
+		}
 	}
 
 	if (currentAnim == "bolaFuego") {
