@@ -58,7 +58,7 @@ void EscapeScene::init()
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
 	cameraC->lock(false, true);
-	//cameraC->setLimitsToPositions(tilemapTr->getPos().getX(), tilemapTr->getPos().getY(), tilemapTr->getWidth(), tilemapTr->getHeight());
+	cameraC->setLimitsToPositions(tilemapTr->getWidth(),0,tilemapTr->getPos().getY(),sdlutils().height());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
