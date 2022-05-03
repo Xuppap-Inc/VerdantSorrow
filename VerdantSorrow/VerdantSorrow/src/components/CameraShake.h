@@ -11,7 +11,7 @@ public:
 	virtual ~CameraShake() {};
 	void initComponent() override;
 	void update() override;
-	void shake();
+	void shake(float,float);
 protected:
 	float shakeSp_;
 	Transform* tr_;

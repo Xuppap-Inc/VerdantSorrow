@@ -34,6 +34,7 @@
 #include "Game.h"
 #include <iostream>
 #include <fstream>
+#include "../components/CameraShake.h"
 
 
 void TreeScene::init()
@@ -48,6 +49,12 @@ void TreeScene::init()
 	//Se crea el jugador 
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+
+	camera_ = mngr_->addEntity();
+	auto cameraTr = camera_->addComponent<Transform>();
+	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0, 0, false);
+	auto cShake = camera_->addComponent<CameraShake>(5, 10);
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 
 	treeGenerator(colManager);
 

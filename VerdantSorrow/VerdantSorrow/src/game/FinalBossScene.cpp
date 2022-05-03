@@ -30,6 +30,7 @@
 #include "Game.h"
 #include <iostream>
 #include <fstream>
+#include "../components/CameraShake.h"
 
 
 void FinalBossScene::init()
@@ -49,6 +50,12 @@ void FinalBossScene::init()
 	playerGenerator(colManager, player);
 
 	finalBossGenerator(colManager, player);
+
+	camera_ = mngr_->addEntity();
+	auto cameraTr = camera_->addComponent<Transform>();
+	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0, 0, false);
+	auto cShake = camera_->addComponent<CameraShake>(5, 10);
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 
