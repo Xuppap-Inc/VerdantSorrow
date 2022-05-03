@@ -110,7 +110,7 @@ void Hub::teleportPlayer()
 	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 
 	// SpawnpointInicial
-	Vector2D spawnPoint = { tilemapTr->getWidth() / 2 , tilemapTr->getHeight() / 2 };
+	Vector2D spawnPoint = { tilemapTr->getWidth() / 2 - 200, tilemapTr->getHeight() / 2 };
 
 	if (!firstTimeEnteringGame) {
 
