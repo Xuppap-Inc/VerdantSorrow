@@ -210,7 +210,6 @@ void TileMap::createObjects()
 
 						if (i < properties.size()) {
 							col->setIsTrigger(true);
-							
 						}
 					}
 

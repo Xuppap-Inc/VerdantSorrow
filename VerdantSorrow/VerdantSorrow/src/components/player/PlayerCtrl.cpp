@@ -218,13 +218,13 @@ void PlayerCtrl::handleInput()
 
 			// JUMP
 			int i = 0;
-			while (i < jumpKeys.size() && !ihdlr.isKeyUp(jumpKeys[i])) i++;
-			if (i < jumpKeys.size()) jump_ = false;
+			while (i < jumpKeys.size() && ihdlr.isKeyUp(jumpKeys[i])) i++;
+			if (i == jumpKeys.size()) jump_ = false;
 
 			// ROLL
 			i = 0;
-			while (i < rollKeys.size() && !ihdlr.isKeyUp(rollKeys[i])) i++;
-			if (i < rollKeys.size()) roll_ = false;
+			while (i < rollKeys.size() && ihdlr.isKeyUp(rollKeys[i])) i++;
+			if (i == rollKeys.size()) roll_ = false;
 		}
 
 		// CONTROLLER
@@ -232,13 +232,13 @@ void PlayerCtrl::handleInput()
 
 			// JUMP
 			int i = 0;
-			while (i < jumpButtons.size() && !ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
-			if (i < jumpButtons.size()) jump_ = false;
+			while (i < jumpButtons.size() && ihdlr.isControllerButtonUp(jumpButtons[i])) i++;
+			if (i == jumpButtons.size()) jump_ = false;
 
 			// ROLL
 			i = 0;
-			while (i < rollButtons.size() && !ihdlr.isControllerButtonUp(rollButtons[i])) i++;
-			if (i < rollButtons.size()) roll_ = false;
+			while (i < rollButtons.size() && ihdlr.isControllerButtonUp(rollButtons[i])) i++;
+			if (i == rollButtons.size()) roll_ = false;
 		}
 	}
 
@@ -293,6 +293,7 @@ void PlayerCtrl::handleInput()
 			moveLeft_ = false; moveRight_ = false;
 		}
 	}
+
 }
 
 void PlayerCtrl::disableKnockback()
