@@ -90,14 +90,14 @@ void Punch::hit()
 	else img_->setTexture(&sdlutils().images().at("manoIzq"));
 
 	if (hitTime_->currTime() >= 350) {
-		col_->setIsTrigger(true);
-		col_->setActive(true);
-
 		col_->setWidth(width);
 		col_->setHeight(height);
 
 		changeState(BACK);
 		goBackTime_->reset();
+
+		col_->setIsTrigger(false);
+		col_->setActive(false);
 	}
 	else {
 		int nextWidth = std::min(width + dW, maxWidth_);
@@ -108,6 +108,11 @@ void Punch::hit()
 
 		tr_->setWidth(nextWidth);
 		tr_->setHeight(nextHeight);
+
+		col_->setWidth(nextWidth);
+		col_->setHeight(nextHeight);
+		col_->setIsTrigger(true);
+		col_->setActive(true);
 	}
 }
 
