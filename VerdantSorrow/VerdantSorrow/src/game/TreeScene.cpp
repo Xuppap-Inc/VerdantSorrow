@@ -114,7 +114,7 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	tree_->addComponent<FramedImage>(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
 
 	//Se añade un collider al arbol
-	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth()/3, treeTr->getHeight()/1.2);
+	auto treeCollider = tree_->addComponent<RectangleCollider>(treeTr->getWidth()/4, treeTr->getHeight()/1.2);
 	treeCollider->setIsTrigger(true);
 	colManager->addCollider(treeCollider);
 
