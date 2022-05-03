@@ -60,7 +60,7 @@ void RootWave::update()
 void RootWave::attack(int dir)
 {
 	//inicializa variables
-	rootPos_ = tr_->getPos().getX();
+	rootPos_ = tr_->getPos().getX() + tr_->getWidth() / 2;
 	dir_ = dir;
 	attacking_ = true;
 	rootW_ = rootSpawner_->getRootWidth();

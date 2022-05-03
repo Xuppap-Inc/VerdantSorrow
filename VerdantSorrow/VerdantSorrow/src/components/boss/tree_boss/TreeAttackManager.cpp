@@ -116,7 +116,7 @@ void TreeAttackManager::update()
 	Vector2D treePos = tr_->getPos();
 
 	//el arbol es más ancho que su collider, se ajusta jugando con su ancho
-	float distance = playerPos.getX() - treePos.getX()-tr_->getWidth()/7;
+	float distance = (playerPos.getX() + player_->getWidth() / 2) - (treePos.getX() + tr_->getWidth() / 2);
 
 	float absDistance = abs(distance);
 
@@ -179,20 +179,23 @@ void TreeAttackManager::checkState(float absDistance)
 
 		if (meleeAttack_->hasFinished()) attacking_ = false, newAtack_ = true;
 
-		if (!attacking_) animNewState_ = ANIM_WALK;
-		anim_->repeat(true);
+		if (!attacking_) {
+		
+			animNewState_ = ANIM_WALK;
+		}
 
 		//si se encuentra a distancia de ataque a melee, ataca
-		if (((dir_<0 && absDistance < MELEE_ATTACK_DISTANCE) || (dir_ > 0 && absDistance<tr_->getWidth() + MELEE_ATTACK_DISTANCE)) && newAtack_) {
+		if ((absDistance < MELEE_ATTACK_DISTANCE) && newAtack_) {
 
 			if (timerCd_->currTime() >= ATTACK_CD) {
 				animNewState_ = ANIM_ATTACK;
-				anim_->repeat(false);
 
 				SoundEffect* s = &sdlutils().soundEffects().at("sfx_arbol_attack");
 				s->play();
 				s->setChannelVolume(musicVolume_);
-				meleeAttack_->attack(dir_);
+
+				meleeAttack_->setFinished(false);
+
 				attacking_ = true;
 				newAtack_ = false;
 				timerCd_->reset();
@@ -297,6 +300,11 @@ void TreeAttackManager::checkState(float absDistance)
 	}
 }
 
+void TreeAttackManager::attackMelee()
+{
+	meleeAttack_->attack(dir_);
+}
+
 void TreeAttackManager::checkAnimState()
 {
 	if (animState_ != animNewState_) {
@@ -307,17 +315,31 @@ void TreeAttackManager::checkAnimState()
 		switch (animState_)
 		{
 		case TreeAttackManager::ANIM_IDLE:
+			anim_->repeat(true);
 			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_idle"), 5, 6, (1000 / 30) * 27, 27, "arbol_idle");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_idle"), 5, 6, (1000 / 30) * 25, 25, "arbol_capa_idle");
 			break;
 		case TreeAttackManager::ANIM_WALK:
+			anim_->repeat(true);
 			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_walk"), 5, 6, (1000 / 30) * 28, 28, "arbol_walk");
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_walk"), 2, 6, (1000 / 30) * 12, 12, "arbol_capa_walk");
 			break;
 		case TreeAttackManager::ANIM_ATTACK:
 			anim_->setColor(255, 200, 20, 200);
-			if (phase == PHASE2)anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_attack");
-			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 30) * 24, 24, "arbol_capa_attack");
+			anim_->repeat(false);
+
+			attackCallback = [this]() { attackMelee(); };
+
+			if (phase == PHASE2) {
+			
+				anim_->registerEvent(std::pair<int, std::string>(16, "arbol_attack"), attackCallback);
+				anim_->changeanim(&sdlutils().images().at("arbol_attack"), 4, 6, (1000 / 60) * 24, 24, "arbol_attack");
+			}
+			else {
+
+				anim_->registerEvent(std::pair<int, std::string>(16, "arbol_capa_attack"), attackCallback);
+				anim_->changeanim(&sdlutils().images().at("arbol_capa_attack"), 4, 6, (1000 / 60) * 24, 24, "arbol_capa_attack");
+			}
 			break;
 		case TreeAttackManager::ANIM_ATTACK_COMBO:
 			anim_->setColor(255, 200, 20, 200);
@@ -325,6 +347,7 @@ void TreeAttackManager::checkAnimState()
 			else anim_->changeanim(&sdlutils().images().at("arbol_capa_attack_combo"), 3, 6, (1000 / 30) * 13, 13, "arbol_capa_attack_combo");
 			break;
 		case TreeAttackManager::ANIM_ROOTS:
+			anim_->repeat(false);
 			anim_->setColor(255, 200, 20, 500);
 
 			//callback que llama al ataque de raices al acabar la animacion
@@ -345,6 +368,7 @@ void TreeAttackManager::checkAnimState()
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_background"), 2, 6, (1000 / 30) * 9, 9, "arbol_capa_background");
 			break;
 		case TreeAttackManager::ANIM_CHANGE_PHASE:
+			anim_->repeat(false);
 			anim_->changeanim(&sdlutils().images().at("arbol_capa_cambio_fase"), 3, 6, (1000 / 30) * 14, 14, "arbol_capa_cambio_fase");
 			break;
 		case TreeAttackManager::ANIM_DEATH:
@@ -419,7 +443,7 @@ void TreeAttackManager::checkPhaseChange()
 void TreeAttackManager::returnToIni()
 {
 	auto treeX = sdlutils().width() / 2 - 80;
-	auto treeY = sdlutils().height() - 360;
+	auto treeY = tr_->getPos().getY();
 	tr_->getPos().set(Vector2D(treeX, treeY));
 }
 

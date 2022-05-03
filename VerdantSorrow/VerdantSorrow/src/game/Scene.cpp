@@ -78,9 +78,12 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	playerAttribs_ = player_->addComponent<PlayerAttributes>();
 	playerAttribs_->setDefeated(false);
 	playerTr_ = player_->addComponent<Transform>();
+
+	auto playerH = 140;
+	auto playerW = 50;
 	auto playerX = 0;
-	auto playerY = sdlutils().height() / 2 - 25;
-	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
+	auto playerY = sdlutils().height() - playerH - GROUND_HEIGHT;
+	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), playerW, playerH, 0.0f, 0.5f);
 
 	playerImg_ = player_->addComponent<FramedImage>(&sdlutils().images().at("Chica_Idle"), 5, 6, 5000, 30, "Chica_Idle");
 	playerImg_->setVisible(true);
@@ -89,7 +92,7 @@ void Scene::playerGenerator(CollisionManager* colManager, Entity* player_)
 	//IMPORTANTE: Ponerlo antes de CollideWithBorders siempre
 	player_->addComponent<SimpleGravity>(1);
 	//IMPORTANTE: Ponerlo antes del PlayerCtrl siempre porque si no se salta 2 veces
-	bordersPlayer_ = player_->addComponent<CollideWithBorders>(100);
+	bordersPlayer_ = player_->addComponent<CollideWithBorders>();
 	bordersPlayer_->collisionx(true);
 
 	//Se a�ade un collider al jugador

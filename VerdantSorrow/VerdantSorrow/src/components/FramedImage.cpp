@@ -227,6 +227,13 @@ void FramedImage::calculateOffset(float& xOffset, float& yOffset)
 		}
 	}
 
+	else if (ent_->getComponent<RootWave>() != nullptr)
+	{
+		if (flipX_) {
+			xOffset = 0.20;
+		}
+	}
+
 	else if (ent_->getComponent<FinalBossMovement>() != nullptr) {
 
 		if (currentAnim == "FinalBoss_Fase1" ) {

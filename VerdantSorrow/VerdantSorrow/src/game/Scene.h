@@ -28,6 +28,8 @@ protected:
 
 	const int PLAYER_DEATH_DELAY = 5000;
 
+	const int GROUND_HEIGHT = 100;
+
 	ecs::Entity* camera_;
 	ecs::Manager* mngr_;
 

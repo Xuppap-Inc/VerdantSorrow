@@ -103,10 +103,10 @@ void TreeScene::treeGenerator(CollisionManager* colManager) {
 	mngr_->setHandler(ecs::_TREEBOSS, tree_);
 	tree_->addComponent<BossAtributos>(100);
 	auto treeTr = tree_->addComponent<Transform>();
-	auto treeX = sdlutils().width() / 4 * 3 - 80;
-	auto treeY = sdlutils().height() - 430;
 	auto treeH = 360;
 	auto treeW = treeH * 1.105;
+	auto treeX = sdlutils().width() / 4 * 3 - 80;
+	auto treeY = sdlutils().height() - treeH - GROUND_HEIGHT;
 	treeTr->init(Vector2D(treeX, treeY), Vector2D(), treeW, treeH, 0.0f);
 
 	lanternGenerator(colManager, tree_, treeTr->getPos().getX(), treeTr->getPos().getY());
@@ -145,7 +145,7 @@ void TreeScene::lanternGenerator(CollisionManager* colManager, Entity* tree_, fl
 	mngr_->setHandler(ecs::_LANTERN, lantern);
 
 	//atributos de linterna
-	auto lanternAtribs = lantern->addComponent<BossAtributos>(3);
+	auto lanternAtribs = lantern->addComponent<BossAtributos>(32);
 	auto lanternTr = lantern->addComponent<Transform>();
 	auto lanternX = x;
 	auto lanternY = y;

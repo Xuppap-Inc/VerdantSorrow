@@ -19,11 +19,11 @@ public:
 
     void initComponent() override;
     void update() override;
-    void render() override;
 
     void attack(int dir);
 
-    bool hasFinished() { return attacking_ == false; };
+    bool hasFinished() { return !attacking_; };
+    void setFinished(bool set) { attacking_ = !set; }
 
 protected:
     Transform* tr_;
