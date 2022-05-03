@@ -18,6 +18,7 @@
 #include "../components/boss/frog_boss/FrogAttackManager.h"
 #include "../components/boss/frog_boss/BounceOnBordersFrog.h"
 #include "../components/fondos/ShowAtOppositeSide.h"
+#include "../components/CameraShake.h"
 #include "Fondos/Parallax.h"
 
 #include "CollisionManager.h"
@@ -45,6 +46,12 @@ void FrogScene::init()
 	//Se crea el jugador
 	player = mngr_->addEntity();
 	playerGenerator(colManager, player);
+
+	camera_ = mngr_->addEntity();
+	auto cameraTr = camera_->addComponent<Transform>();
+	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0, 0, false);
+	auto cShake = camera_->addComponent<CameraShake>(5,10);
+	mngr_->setHandler(ecs::_hdlr_CAMERA, camera_);
 
 	frogGenerator(colManager, player);
 

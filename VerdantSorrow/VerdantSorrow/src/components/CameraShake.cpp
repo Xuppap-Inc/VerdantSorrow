@@ -39,9 +39,11 @@ void CameraShake::update()
 	}
 }
 
-void CameraShake::shake()
+void CameraShake::shake(float radius, float duration)
 {
 	if (!shaking_) {
+		shakeRadius_ = radius;
+		shakeDur_ = duration;
 		shaking_ = true;
 		tr_->getVel().setX(shakeSp_);
 	}

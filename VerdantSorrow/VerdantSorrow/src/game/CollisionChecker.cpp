@@ -18,6 +18,7 @@
 #include "../components/Image.h"
 #include "../components/boss/tree_boss/MeleeAttack.h"
 #include "../components/fondos/ParticleSystem.h"
+#include "../components/CameraShake.h"
 #include "Hub.h"
 
 
@@ -94,6 +95,11 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 						player->getComponent<Attack>()->attackCollided();
 
+						auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+						if (camShake != nullptr) {
+						camShake->shake(15, 10);
+						}
+
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 						s->play();
@@ -158,5 +164,10 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		// Informar al controlador
 		playerCtrl->doKnockback(enemyXpos >= (playerTr->getPos().getX() + playerTr->getWidth() / 2) ? -1 : 1);
 		vt_->reset();
+
+		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+		if (camShake != nullptr) {
+			camShake->shake(10, 10);
+		}
 	}
 }
