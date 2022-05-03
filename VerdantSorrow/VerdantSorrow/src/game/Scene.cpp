@@ -137,7 +137,7 @@ void Scene::playerGeneratorEscape(CollisionManager* colManager, Entity* player_)
 
 
 	//Se a�ade un collider al jugador
-	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth(), playerTr_->getHeight());
+	auto playerCollider = player_->addComponent<RectangleCollider>(playerTr_->getWidth()-5, playerTr_->getHeight()-30);
 	colManager->addCollider(playerCollider);
 
 	//IMPORTANTE :No poner estas f�sicas detr�s del playerctrl

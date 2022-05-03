@@ -14,6 +14,7 @@
 #include "../components/SimpleGravity.h"
 #include "../components/boss/nivelHuida/Spikes.h"
 #include "../components/boss/nivelHuida/ChangeVertical.h"
+#include "../components/boss/nivelHuida/PlayerDeathZone.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -169,8 +170,6 @@ void TileMap::createObjects()
 					}
 					else if (name == "areas") {
 						col->setIsTrigger(true);
-
-
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
@@ -211,8 +210,13 @@ void TileMap::createObjects()
 
 						if (i < properties.size()) {
 							col->setIsTrigger(true);
-							ent->addComponent<ChangeVertical>(col_);
-							
+						
+							if (properties[i].getStringValue() == "died") {
+								ent->addComponent<PlayerDeathZone>(col_);
+							}
+							else {
+								ent->addComponent<ChangeVertical>(col_);
+							}
 						}
 					}
 
