@@ -389,16 +389,20 @@ void FramedImage::clearEvents()
 	eventsCallbacks_.clear();
 }
 
-void FramedImage::fadeIn()
+void FramedImage::fadeIn(int speed)
 {
 	isFadingOut_ = false;
 	isFadingIn_ = true;
+
+	fadeSpeed_ = speed;
 }
 
-void FramedImage::fadeOut()
+void FramedImage::fadeOut(int speed)
 {
 	isFadingIn_ = false;
 	isFadingOut_ = true;
+
+	fadeSpeed_ = speed;
 }
 
 void FramedImage::setColor(Uint8 r, Uint8 g, Uint8 b, int duration) {
@@ -426,7 +430,8 @@ void FramedImage::update() {
 			isFadingIn_ = false;
 		}
 		else {
-			alpha_++;
+			alpha_ += fadeSpeed_;
+			if (alpha_ > 255) alpha_ = 255;
 			setAlpha(alpha_);
 		}
 	}
@@ -436,7 +441,8 @@ void FramedImage::update() {
 			isFadingOut_ = false;
 		}
 		else {
-			alpha_--;
+			alpha_ -= fadeSpeed_;
+			if (alpha_ < 0) alpha_ = 0;
 			setAlpha(alpha_);
 		}
 	}

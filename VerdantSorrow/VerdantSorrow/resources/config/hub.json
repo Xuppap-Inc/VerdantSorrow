@@ -11,6 +11,10 @@
   ],
   "images_hub": [
     {
+      "id": "BlackScreen",
+      "file": "resources/images/blackScreen.png"
+    },
+    {
       "id": "etheria",
       "file": "resources/images/Hub/etheria.png"
     },

@@ -164,6 +164,8 @@ void Scene::checkPlayerFinishedDying()
 	{
 		playerAttribs_->setDefeated(true);
 		playerAttribs_->deactivateStop();
+
+		blackScreenImg_->setAlpha(0);
 	}
 }
 
@@ -186,5 +188,25 @@ void Scene::checkPlayerDied()
 		s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 		deactivateBoss();
 		playerDeathTimer_->reset();
+
+		blackScreenImg_->fadeIn();
 	}
+}
+
+void Scene::createBlackScreen()
+{
+	blackScreen_ = mngr_->addEntity();
+
+	auto tr = blackScreen_->addComponent<Transform>();
+
+	auto x = (1920 - 2160) / 2;
+	auto y = (1080 - 1440) / 2;
+
+	tr->init(Vector2D(), Vector2D(), 2560, 1440, 0);
+
+	//framedImage para hacer el fadeIn y fadeOut
+	blackScreenImg_ =  blackScreen_->addComponent<FramedImage>(&sdlutils().imagesHub().at("BlackScreen"), 1, 1, 5, 1, "BlackScreen");
+	blackScreenImg_->setAlpha(0);
+
+	blackScreen_->addToGroup(ecs::_PARTICLES_UI);
 }

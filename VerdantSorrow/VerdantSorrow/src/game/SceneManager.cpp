@@ -96,8 +96,6 @@ void SceneManager::init()
 {
 	auto& sdlUtils_ = sdlutils();
 
-	//sdlUtils_.soundEffects().clear();
-
 	if (!hubAssetsChargeds_) {
 		sdlUtils_.loadReasourcesHub("resources/config/hub.json");
 		hubAssetsChargeds_ = true;
@@ -169,9 +167,6 @@ void SceneManager::init()
 void SceneManager::render()
 {
 }
-
-
-
 
 void SceneManager::changeScene(scenes s_)
 {

@@ -21,6 +21,7 @@ public:
 	void checkCollissions();
 	Music* getMusic() { return musica_; };
 	int* getMusicVolume() { return &musicVolume_; };
+
 private:
 	CollisionManager* colManager;
 	bool isAble;

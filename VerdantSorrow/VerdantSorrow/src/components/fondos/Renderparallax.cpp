@@ -60,8 +60,4 @@ void RenderParallax::update()
 
 		startpos -= (3*tr_->getWidth());
 	}
-
-	
-		
-	
 }

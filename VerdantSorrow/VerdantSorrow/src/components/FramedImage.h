@@ -39,6 +39,7 @@ public:
 	bool isVisible();
 
 	void setAlpha(int num);
+	int getAlpha() { return alpha_; };
 	void setBlendMode(SDL_BlendMode blending);
 
 	//Establece si la animación se ajusta al transform de la entidad
@@ -53,8 +54,8 @@ public:
 	int getFrameNum();
 	std::string getCurrentAnimation() { return currentAnim; }
 
-	void fadeIn();
-	void fadeOut();
+	void fadeIn(int speed = 1);
+	void fadeOut(int speed = 1);
 
 	void setColor(Uint8 r, Uint8 g, Uint8 b, int duration = -1);
 
@@ -102,5 +103,6 @@ private:
 	VirtualTimer* colorTimer_;
 	int colorDuration_ = 0;
 	int red_ = 255, green_ = 255, blue_ = 255;
+	int fadeSpeed_ = 1;
 };
 

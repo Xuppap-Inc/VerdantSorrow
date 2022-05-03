@@ -24,6 +24,10 @@ public:
 	void checkPlayerFinishedDying();
 	void checkPlayerDied();
 
+	void createBlackScreen();
+	
+	FramedImage* getBlackScreen() { return blackScreenImg_; };
+
 protected:
 
 	const int PLAYER_DEATH_DELAY = 5000;
@@ -31,6 +35,7 @@ protected:
 	const int GROUND_HEIGHT = 100;
 
 	ecs::Entity* camera_;
+	ecs::Entity* blackScreen_;
 	ecs::Manager* mngr_;
 
 	PlayerAttributes* playerAttribs_;
@@ -40,6 +45,8 @@ protected:
 
 	Transform* playerTr_;
 	FramedImage* playerImg_;
+
+	FramedImage* blackScreenImg_;
 
 	bool playerDying = false;
 };

@@ -62,6 +62,11 @@ void FinalBossScene::init()
 	suelo->addToGroup(ecs::_FIRST_GRP);
 
 	playerDeathTimer_ = mngr_->addTimer();
+
+	if (blackScreen_ == nullptr) createBlackScreen();
+
+	blackScreenImg_->setAlpha(255);
+	blackScreenImg_->fadeOut(3);
 }
 
 void FinalBossScene::update()

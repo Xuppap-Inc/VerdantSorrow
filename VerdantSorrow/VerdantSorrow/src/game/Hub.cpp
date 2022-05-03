@@ -29,6 +29,7 @@
 #include "TileMap.h"
 #include "FrogScene.h"
 #include "../components/boss/frog_boss/FrogAttackManager.h"
+#include "../components/FollowCamera.h"
 
 
 
@@ -62,7 +63,13 @@ void Hub::init()
 
 	auto camera = mngr_->addEntity();
 	auto cameraTr = camera->addComponent<Transform>();
-	cameraTr->init(player_->getComponent<Transform>()->getPos() + Vector2D(-sdlutils().windowWidth() / 2, -sdlutils().windowHeight() / 2), Vector2D(0, 0), 0, 0, 0);
+
+	auto playerTr_ = player_->getComponent<Transform>();
+
+	auto x = playerTr_->getPos().getX() - playerTr_->getWidth() / 2 - sdlutils().width() / 2;
+	auto y = playerTr_->getPos().getY() - sdlutils().height() / 2;
+
+	cameraTr->init(Vector2D(x, y), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(3);
 	auto tilemapTR = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 	cameraC->setLimitToDimensions(tilemapTR->getPos().getX(), tilemapTR->getPos().getY(), tilemapTR->getWidth(), tilemapTR->getHeight());
@@ -77,6 +84,14 @@ void Hub::init()
 	particlesys_->createParticlesMenu(30);
 
 	createLights();
+
+	if (blackScreen_ == nullptr) {
+		createBlackScreen();
+		blackScreen_->addComponent<FollowCamera>();
+	}
+
+	blackScreenImg_->setAlpha(255);
+	blackScreenImg_->fadeOut();
 }
 
 bool Hub::getAble()
@@ -115,8 +130,6 @@ void Hub::checkCollissions()
 		}
 	}
 }
-
-
 
 void Hub::update()
 {

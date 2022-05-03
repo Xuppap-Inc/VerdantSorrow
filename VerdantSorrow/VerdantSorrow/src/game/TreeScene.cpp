@@ -54,6 +54,11 @@ void TreeScene::init()
 	colCheck_ = new CollisionChecker(colManager, mngr_);
 
 	playerDeathTimer_ = mngr_->addTimer();
+
+	if (blackScreen_ == nullptr) createBlackScreen();
+
+	blackScreenImg_->setAlpha(255);
+	blackScreenImg_->fadeOut(3);
 }
 
 
