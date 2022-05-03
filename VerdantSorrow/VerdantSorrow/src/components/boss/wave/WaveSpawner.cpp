@@ -32,15 +32,18 @@ void WaveSpawner::createWave(float width, float height, Vector2D dir, Transform*
 
 	float waveX, waveY = tr->getPos().getY() + tr->getHeight() - height;
 	if (dir.getX() > 0)
-		waveX = tr->getPos().getX() + tr->getWidth();
+		waveX = tr->getPos().getX() + tr->getWidth() / 2 - width / 2;
 	else
-		waveX = tr->getPos().getX() - width;
+		waveX = tr->getPos().getX() + tr->getWidth() / 2 - width / 2;
 
-	//auto tr_ = wave->addComponent<Transform>(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f);
 	auto tr_ = wave->addComponent<Transform>();
 	tr_->init(Vector2D(waveX, waveY), Vector2D(), width, height, 0.0f, .7f);
 
 	auto waveimg = wave->addComponent<FramedImage>(& sdlutils().images().at("wave"),3,3,2000,9,"wave");
+
+	if (dir.getX() < 0)
+		waveimg->flipX(true);
+	
 	//Se anyade un collider a la onda
 	auto waveCollider = wave->addComponent<RectangleCollider>(width, height);
 	waveCollider->setIsTrigger(true);
