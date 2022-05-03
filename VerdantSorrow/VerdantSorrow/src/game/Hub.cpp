@@ -106,6 +106,12 @@ void Hub::setAble(bool a)
 
 void Hub::changeScene_(bool ch)
 {
+	if (ch) {
+	
+		blackScreenImg_->setAlpha(0);
+		blackScreenImg_->fadeIn(2);
+	}
+
 	changeSc = ch;
 }
 
@@ -147,8 +153,18 @@ void Hub::update()
 
 		checkCollissions();
 	}
-	else {
+	else if (blackScreenImg_->getAlpha() >= 255) {
+
 		sC().decideScene();
+	}
+
+	else {
+	
+		blackScreen_->update();
+
+		sdlutils().clearRenderer();
+		mngr_->render();
+		sdlutils().presentRenderer();
 	}
 }
 
