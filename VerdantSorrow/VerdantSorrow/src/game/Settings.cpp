@@ -16,7 +16,7 @@ void Settings::init()
 
 void Settings::update()
 {
-	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_);
+	handleInput(buttonPositions_, delay_, lastUpdate_, controllerIdex_, buttonNames_, buttonPoperties_, false);
 	if (!changeSc_)
 	{
 		mngr_->update();

@@ -29,10 +29,10 @@ void BaseMenu::createButton(float x, float y, float w, float h, std::string butt
 	buttProps.push_back(newButton);
 }
 
-void BaseMenu::handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
+void BaseMenu::handleInput(std::vector<Transform*>buttPos, float delay, float &lastUpdate, int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps, bool isPauseMenu)
 {
 	handleMouseInput(buttPos,buttProps);
-	handleControllerInput(delay, lastUpdate, controllerIndex,buttNames,buttProps);
+	handleControllerInput(delay, lastUpdate, controllerIndex,buttNames,buttProps, isPauseMenu);
 }
 
 void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos, std::vector<Entity*>buttProps)
@@ -71,7 +71,7 @@ void BaseMenu::handleMouseInput(std::vector<Transform*>buttPos, std::vector<Enti
 	}
 }
 
-void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps)
+void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &controllerIndex, std::vector<std::string>buttNames, std::vector<Entity*>buttProps, bool isPauseMenu)
 {
 	auto& ihdlr = ih();
 	if (ihdlr.controllerConnected()) //Input con el mando
@@ -83,22 +83,29 @@ void BaseMenu::handleControllerInput(float delay, float &lastUpdate,int &control
 			if (delay + lastUpdate < sdlutils().currRealTime())
 			{
 
+				int verMov = 1;
+				int horMov = 3;
+
+				if (isPauseMenu) {
+					 verMov = 3;
+					 horMov = 1;
+				}
+
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) > 0.9) //Movimiento hacia abajo
 				{
-					changeButton(controllerIndex, buttNames,lastUpdate,1); //Suma una posicion
+					changeButton(controllerIndex, buttNames,lastUpdate, verMov); //Suma una posicion
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) > 0.9) //Movimieto hacia la derecha
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, 3); //Suma dos posiciones (el menu es simetrico y hay tres botones por columna)
-
+					changeButton(controllerIndex, buttNames, lastUpdate, horMov); //Suma dos posiciones (el menu es simetrico y hay tres botones por columna)
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTY) < -0.9) //Movimiento hacia arriba
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, -1);
+					changeButton(controllerIndex, buttNames, lastUpdate, -verMov);
 				}
 				if (ihdlr.getAxisValue(SDL_CONTROLLER_AXIS_LEFTX) < -0.9) //Movimiento hacia la izquierda
 				{
-					changeButton(controllerIndex, buttNames, lastUpdate, -3);
+					changeButton(controllerIndex, buttNames, lastUpdate, -horMov);
 				}
 			}
 		}
