@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\nivelHuida\ChangeVertical.h" />
     <ClInclude Include="src\components\FollowCamera.h" />
     <ClInclude Include="src\game\Settings.h" />
     <ClInclude Include="src\components\hub\HubAreas.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\nivelHuida\ChangeVertical.cpp" />
     <ClCompile Include="src\components\FollowCamera.cpp" />
     <ClCompile Include="src\game\Settings.cpp" />
     <ClCompile Include="src\components\hub\HubAreas.cpp" />

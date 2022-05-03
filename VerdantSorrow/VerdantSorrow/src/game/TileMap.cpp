@@ -13,6 +13,7 @@
 #include "../components/boss/nivelHuida/FlySpawnerPlant.h"
 #include "../components/SimpleGravity.h"
 #include "../components/boss/nivelHuida/Spikes.h"
+#include "../components/boss/nivelHuida/ChangeVertical.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -210,6 +211,8 @@ void TileMap::createObjects()
 
 						if (i < properties.size()) {
 							col->setIsTrigger(true);
+							ent->addComponent<ChangeVertical>(col_);
+							
 						}
 					}
 
