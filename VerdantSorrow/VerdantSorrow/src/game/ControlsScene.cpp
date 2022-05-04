@@ -20,8 +20,8 @@ void ControlsScene::init()
 	isChangingScene(changeSc_);
 
 
-	int imageW = 800, imageH = 300; //Ancho y alto e imagen
-	createImages(sdlutils().width() / 2 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
+	int imageW =530, imageH = 200; //Ancho y alto e imagen
+	createImages(sdlutils().width() /4 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
 	generateAllButtons();
 }
 
@@ -48,7 +48,7 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 	newImage->addToGroup(ecs::_UI_GRP);
 }
 
-void ControlsScene::createText(float x, float y,std::string message)
+void ControlsScene::createText(float x, float y, std::string message)
 {
 	Texture text(sdlutils().renderer(), message,
 		sdlutils().fontsHub().at("SOURCESERIF24"), build_sdlcolor(0xFFFFFFFF));
@@ -85,19 +85,19 @@ void ControlsScene::update()
 		mngr_->render();
 		mngr_->debug();
 		//teclado
-		createText(sdlutils().width()/2, sdlutils().height()-400,"Move  -> W,A,S,D");
-		createText(sdlutils().width()/2, sdlutils().height()-350,"Jump -> W,SPACE");
-		createText(sdlutils().width()/2, sdlutils().height()-300,"Interact with characters -> SPACE");
-		createText(sdlutils().width()/2, sdlutils().height()-250,"Attack -> J,K,L");
-		createText(sdlutils().width()/2, sdlutils().height()-200,"Roll -> LEFT SHIFT");
-		createText(sdlutils().width()/2, sdlutils().height()-150,"Pause -> ESC");	
+		createText(sdlutils().width() / 2, sdlutils().height() - 400, "Move  -> W,A,S,D");
+		createText(sdlutils().width() / 2, sdlutils().height() - 350, "Jump -> W,SPACE");
+		createText(sdlutils().width() / 2, sdlutils().height() - 300, "Interact with characters -> SPACE,E");
+		createText(sdlutils().width() / 2, sdlutils().height() - 250, "Attack -> J,K,L");
+		createText(sdlutils().width() / 2, sdlutils().height() - 200, "Roll -> LEFT SHIFT");
+		createText(sdlutils().width() / 2, sdlutils().height() - 150, "Pause -> ESC");
 		//Mando
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 400, "Move  -> W,A,S,D");
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 350, "Jump -> W,SPACE");
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 300, "Interact with characters -> SPACE");
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 250, "Attack -> J,K,L");
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 200, "Roll -> LEFT SHIFT");
-		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height()-150,"Pause -> ESC");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 400, "Move  -> Left joystick");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 350, "Jump -> A ");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 300, "Interact with characters -> X");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 250, "Attack -> RB, x");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 200, "Roll -> LB, B");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 150, "Pause -> Start");
 		sdlutils().presentRenderer();
 	}
 
