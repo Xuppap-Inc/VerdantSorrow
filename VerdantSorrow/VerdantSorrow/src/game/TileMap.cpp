@@ -202,8 +202,8 @@ void TileMap::createObjects()
 						if (i < properties.size()) {
 							col->setIsTrigger(true);
 
-							if (properties[i].getStringValue() == "died") {
-								ent->addComponent<PlayerDeathZone>(col_);
+							if (properties[i].getStringValue() == "died"|| properties[i].getStringValue() == "win") {
+								ent->addComponent<PlayerDeathZone>(col_, properties[i].getStringValue());
 							}
 							else {
 								ent->addComponent<ChangeVertical>(col_);
