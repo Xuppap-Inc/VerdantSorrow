@@ -20,7 +20,6 @@ Game::~Game()
 //Inicializa el juego y llama a las escenas
 void Game::start() {
 
-	//SDLUtils::init("Verdant Sorrow", 1280, 720, "resources/config/resources.json");
 	exit = false;
 
 	int w = 0, h = 0;

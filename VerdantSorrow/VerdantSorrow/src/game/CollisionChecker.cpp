@@ -114,7 +114,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
 						if (camShake != nullptr) {
 
-							camShake->shake(15, 10);
+							camShake->shake(5, 5);
 						}
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
