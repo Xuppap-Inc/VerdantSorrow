@@ -12,9 +12,8 @@
 #include "../../../game/Hub.h"
 
 EscapeSceneBoss::EscapeSceneBoss(CollisionManager* colManager) :
-	tr_(nullptr), colManager_(colManager), bA_(nullptr), eyeState_(BOUNCE),
-	eyeSpeed_(3), lastTimeInGround_(), anim_(), ashes_(), deadBoss_(false), musica_(),
-	playerTr_(), musicVolume_(60)
+	tr_(nullptr), colManager_(colManager), 
+	eyeSpeed_(3), deadBoss_(false)
 {
 }
 EscapeSceneBoss::~EscapeSceneBoss()
@@ -25,12 +24,10 @@ void EscapeSceneBoss::initComponent()
 {
 
 	tr_ = ent_->getComponent<Transform>();
-	bA_ = ent_->getComponent<BossAtributos>();
-	anim_ = ent_->getComponent<FramedImage>();
 
 	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr);
 
-	lastTimeInGround_ = mngr_->addTimer();
+
 
 }
 
@@ -78,30 +75,3 @@ void EscapeSceneBoss::bounce()
 		vel_ = vel_.normalize() * eyeSpeed_;
 }
 
-void EscapeSceneBoss::restartBouncing() {
-
-	if (lastTimeInGround_->currTime() > +WAIT_ON_GROUND) {
-
-		eyeState_ = EyeState::BOUNCE;
-		tr_->getVel().set(velocitySaved);
-	}
-}
-
-void EscapeSceneBoss::setDeadBoss(bool set)
-{
-	deadBoss_ = set;
-
-	if (set) {
-		musica_->pauseMusic();
-
-		SoundEffect* s = &sdlutils().soundEffects().at("sfx_boss_defeated");
-		s->play();
-		s->setChannelVolume(musicVolume_);
-		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_descubrir_manos");
-		s2->play();
-		s2->setChannelVolume(musicVolume_);
-		SoundEffect* s3 = &sdlutils().soundEffects().at("sfx_avalancha");
-		s3->play();
-		s3->setChannelVolume(musicVolume_);
-	}
-}

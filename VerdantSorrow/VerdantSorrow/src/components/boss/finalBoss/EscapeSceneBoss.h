@@ -25,41 +25,22 @@ public:
 	void setActive(bool set) { active_ = set; };
 	bool isActive() { return active_; };
 
-	void setReturningToCenter(bool set) { returningToCenter = set; };
-	bool isReturningToCenter() { return returningToCenter; };
-
-	void setDeadBoss(bool set);
-
-	int* getMusicVolume() { return &musicVolume_; };
-
-	Music* getMusic() { return musica_; };
 private:
 
-	const int WAIT_ON_GROUND = 1000;
-
-	const int RETURNING_SPEED = 5;
 
 	Transform* tr_;
-	BossAtributos* bA_;
-	FramedImage* anim_;
+	
 	CollisionManager* colManager_;
-	EyeState eyeState_;
+
 	float eyeSpeed_;
 	Vector2D velocitySaved;
-	Transform* playerTr_;
 
-	Music* musica_;
-
-	VirtualTimer* lastTimeInGround_;
-
-	ParticleSystem* ashes_;
 
 	bool deadBoss_;
 
 	bool active_ = true;;
 
 	void bounce();
-	void restartBouncing();
 
 	bool returningToCenter = false;
 	int musicVolume_;
