@@ -68,33 +68,34 @@ void EscapeSceneBoss::bounce()
 	if (vel_.magnitude() == 0)
 		vel_ = Vector2D(1, 1);
 
-			auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>();
-			//tr_->getVel().set(cameraTr->getPos().getX(), cameraTr->getPos().getY());
+	auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>();
+	//tr_->getVel().set(cameraTr->getPos().getX(), cameraTr->getPos().getY());
 	// bounce on top/bottom borders
-	if (pos_.getY() < cameraTr->getPos().getY()+cameraTr->getHeight()/2) {
+	if (pos_.getY() < cameraTr->getPos().getY() + cameraTr->getHeight() / 2) {
 
 		pos_.setY(cameraTr->getPos().getY() + cameraTr->getHeight() / 2);
 		vel_.setY(-vel_.getY());
 	}
-	else if (pos_.getY() + tr_->getHeight() > sdlutils().height() - 150) {
+	else if (pos_.getY() + tr_->getHeight() > cameraTr->getPos().getY() + sdlutils().height() - 100) {
 
-		pos_.setY(sdlutils().height() - tr_->getHeight() - 150);
+		pos_.setY(cameraTr->getPos().getY() + sdlutils().height() - tr_->getHeight() - 100);
+		vel_.setY(-vel_.getY());
 
-		//Guarda la velocidad y para el objeto actual
-		velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
-		vel_ = Vector2D(0, 0);
+		////Guarda la velocidad y para el objeto actual
+		//velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
+		//vel_ = Vector2D(0, 0);
 
-		//Inicia el contador
-		lastTimeInGround_->reset();
+		////Inicia el contador
+		//lastTimeInGround_->reset();
 
 
 
-		//Cambia el estado a suelo
-		eyeState_ = EyeState::GROUND;
+		////Cambia el estado a suelo
+		//eyeState_ = EyeState::GROUND;
 	}
-	else if (pos_.getX() + tr_->getWidth() > cameraTr->getPos().getX()+ cameraTr->getWidth()/2) {
+	else if (pos_.getX() + tr_->getWidth() > cameraTr->getPos().getX() + cameraTr->getWidth() / 2) {
 
-		pos_.setX(cameraTr->getPos().getX() + cameraTr->getWidth() / 2);
+		pos_.setX(cameraTr->getPos().getX() + cameraTr->getWidth() / 2 - tr_->getWidth());
 		vel_.setX(-vel_.getX());
 	}
 	else if (pos_.getX() < cameraTr->getPos().getX() - cameraTr->getWidth() / 2) {
