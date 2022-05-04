@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="16" nextobjectid="1701">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="73" tilewidth="30" tileheight="30" infinite="0" nextlayerid="16" nextobjectid="1704">
  <tileset firstgid="1" source="tilesets/colina.tsx"/>
  <tileset firstgid="5" source="tilesets/cesped.tsx"/>
  <tileset firstgid="18" source="tilesets/camino.tsx"/>
@@ -781,8 +781,8 @@
   <object id="1612" x="4.4848" y="-6.6079" width="1553.33" height="306.666"/>
   <object id="1613" x="1529.81" y="1.3921" width="461.333" height="374.667"/>
   <object id="1614" x="1995.15" y="4.05877" width="1006.66" height="220"/>
-  <object id="1615" x="1156.48" y="821.392" width="292" height="117.333"/>
-  <object id="1616" x="1336.48" y="456.059" width="277.333" height="394.667"/>
+  <object id="1615" x="1156.48" y="786.725" width="292" height="152"/>
+  <object id="1616" x="1463.15" y="485.392" width="140" height="214.667"/>
   <object id="1617" x="1585.81" y="453.392" width="624" height="156"/>
   <object id="1618" x="1799.15" y="588.059" width="334.667" height="158.667"/>
   <object id="1619" x="2063.15" y="180.059" width="938.666" height="353.333"/>
@@ -802,7 +802,7 @@
   <object id="1664" x="1030.42" y="1240.06" width="169.697" height="141.455"/>
   <object id="1665" x="1169.09" y="1271.33" width="139.394" height="96.9697"/>
   <object id="1666" x="826.665" y="1050.12" width="212.121" height="436.364"/>
-  <object id="1667" x="835.333" y="395.334" width="344" height="220"/>
+  <object id="1667" x="835.333" y="395.334" width="313.333" height="220"/>
   <object id="1668" x="395.151" y="1495.27" width="136.364" height="140.121"/>
   <object id="1669" x="893.333" y="2009.33" width="221.333" height="154.667"/>
   <object id="1670" x="2344.36" y="1613.52" width="567.273" height="188.97"/>
@@ -813,8 +813,10 @@
   <object id="1675" x="2176.67" y="896" width="308" height="249.333"/>
   <object id="1676" x="1106.67" y="922.667" width="125.333" height="90.6667"/>
   <object id="1677" x="1526" y="1043.33" width="85.333" height="217.333"/>
+  <object id="1701" x="1266" y="703.333" width="250.667" height="185.334"/>
+  <object id="1703" x="1104.67" y="398" width="173.333" height="121.333"/>
  </objectgroup>
- <objectgroup id="15" name="areas">
+ <objectgroup id="15" name="areas" visible="0">
   <object id="1683" x="-3.0303" y="9.09091" width="1224.24" height="1178.79">
    <properties>
     <property name="area" value="eye"/>

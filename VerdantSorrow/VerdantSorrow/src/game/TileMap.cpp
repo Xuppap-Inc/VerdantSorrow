@@ -134,7 +134,7 @@ void TileMap::createObjects()
 					r.y = r.y / scale_;
 
 				//add entidades correspondientes
-				if (name == "colliders" || name == "entradasbosses" || name == "npc" || name == "areas"||name=="Pinchos" || name=="LanzaMoscas" || name == "Setas") {
+				if (name == "colliders" || name == "npc" || name == "areas" || name == "Pinchos" || name == "LanzaMoscas" || name == "Setas") {
 
 					ecs::Entity* ent = mngr_->addEntity();
 					auto tr = ent->addComponent<Transform>();
@@ -156,18 +156,7 @@ void TileMap::createObjects()
 
 						ent->addToGroup(ecs::_HUB_DECORATION_GRP);
 					}
-					else if (name == "entradasbosses") {
-						vector<tmx::Property> properties = object.getProperties();
 
-						int i = 0;
-						while (i < properties.size() && properties[i].getName() != "Boss")i++;
-
-						if (i < properties.size()) {
-							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() + "_" + "open"));
-							ent->addComponent<PlatformAtribsForHub>(properties[i].getStringValue());
-						}
-						ent->addToGroup(ecs::_UI_GRP);
-					}
 					else if (name == "areas") {
 						col->setIsTrigger(true);
 						vector<tmx::Property> properties = object.getProperties();
@@ -190,7 +179,7 @@ void TileMap::createObjects()
 					}
 					else if (name == "Pinchos") {
 						col->setIsTrigger(true);
-						
+
 						vector<tmx::Property> properties = object.getProperties();
 
 						int i = 0;
@@ -202,7 +191,7 @@ void TileMap::createObjects()
 							ent->addComponent<Spikes>(col_);
 							ent->addToGroup(ecs::_UI_GRP);
 						}
-							
+
 					}
 					else if (name == "colliders") {
 						vector<tmx::Property> properties = object.getProperties();
@@ -212,7 +201,7 @@ void TileMap::createObjects()
 
 						if (i < properties.size()) {
 							col->setIsTrigger(true);
-						
+
 							if (properties[i].getStringValue() == "died") {
 								ent->addComponent<PlayerDeathZone>(col_);
 							}
@@ -221,6 +210,28 @@ void TileMap::createObjects()
 							}
 						}
 					}
+
+				}
+
+				else if (name == "entradasbosses") {
+
+					ecs::Entity* ent = mngr_->addEntity();
+					auto tr = ent->addComponent<Transform>();
+					tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+					auto col = ent->addComponent<RectangleCollider>(r.w / 2, r.h / 2);
+					col_->addCollider(col);
+
+					vector<tmx::Property> properties = object.getProperties();
+
+					int i = 0;
+					while (i < properties.size() && properties[i].getName() != "Boss")i++;
+
+					if (i < properties.size()) {
+						ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() + "_" + "open"));
+						ent->addComponent<PlatformAtribsForHub>(properties[i].getStringValue());
+					}
+					ent->addToGroup(ecs::_BOSS_GRP);
+
 
 				}
 			}

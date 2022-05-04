@@ -285,7 +285,7 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 
 
-	player_->addToGroup(ecs::_HUB_DECORATION_GRP);
+	player_->addToGroup(ecs::_PLAYER_GRP);
 }
 
 void Hub::createLights() {
