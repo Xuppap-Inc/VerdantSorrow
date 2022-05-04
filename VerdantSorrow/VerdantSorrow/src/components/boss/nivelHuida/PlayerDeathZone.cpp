@@ -6,7 +6,9 @@
 #include "../../player/PlayerAttributes.h"
 #include "../../../game/SceneManager.h"
 #include "../../../game/EscapeScene.h"
-PlayerDeathZone::PlayerDeathZone(CollisionManager* colManager) : tr_(nullptr), colMan_(colManager), collider_(nullptr)
+#include "../../../game/Hub.h"
+#include "../../../game/Game.h"
+PlayerDeathZone::PlayerDeathZone(CollisionManager* colManager, std::string s) : tr_(nullptr), colMan_(colManager), collider_(nullptr), area_(s)
 {
 }
 
@@ -30,8 +32,12 @@ void PlayerDeathZone::update()
 
 		for (auto c : colMan_->getCollisions(collider_)) {
 			if (c->isActive() && !c->isTrigger() && c->getEntity()->getComponent<PlayerAttributes>()) {
-			  
-				sC().getEscapeScene()->init();
+				if (area_ == "died")
+					sC().getEscapeScene()->init();
+				else {
+					Game::instance()->state_ = Game::FINALDEFEATED;
+					sC().changeScene(SceneManager::Hub_);
+				}
 			}
 		}
 	}
