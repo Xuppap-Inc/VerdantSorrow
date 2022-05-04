@@ -4,7 +4,7 @@
 #include "../sdlutils/InputHandler.h"
 #include "../components/Transform.h"
 
-CreditsScene::CreditsScene() : delay_(250), lastUpdate_(0), controllerIdex_(-1)
+CreditsScene::CreditsScene() : delay_(250), lastUpdate_(0), controllerIdex_(-1), musicVolume_(60)
 {
 
 }
@@ -15,6 +15,12 @@ void CreditsScene::init()
 	background();
 	isChangingScene(changeSc_);
 	generateAllButtons();
+
+	//Musica
+	musica_ = &sdlutils().musicsHub().at("music_credits");
+	musica_->play();
+	musica_->setMusicVolume(musicVolume_);
+	musica_->resumeMusic();
 }
 
 void CreditsScene::update()
@@ -36,7 +42,7 @@ void CreditsScene::onButtonClicked(int index)
 {
 
 	isChangingScene(changeSc_);
-
+	musica_->pauseMusic();
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal

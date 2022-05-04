@@ -10,11 +10,11 @@ private:
 	float delay_; //Delay del mando
 	float lastUpdate_;
 	int controllerIdex_;
-
-
 	void onButtonClicked(int index) override; //Virtual puro cada menu hace cosas diferentes segun sus botones
 	void generateAllButtons() override; //Virtual puro, cada menu dibuja sus botones de diferentes formas
 	void background();
+	Music* musica_;
+	int musicVolume_;
 public:
 	CreditsScene();
 	~CreditsScene() {};

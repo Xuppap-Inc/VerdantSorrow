@@ -41,7 +41,6 @@ void PauseMenu::update()
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		sdlutils().presentRenderer();
 		string texto(std::to_string(*sC().getHubScene()->getMusicVolume() * 100 / 128));
 		texto += " %";
 		createText(sdlutils().width(), sdlutils().height() - 680, texto);
