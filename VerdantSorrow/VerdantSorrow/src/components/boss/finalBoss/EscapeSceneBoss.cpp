@@ -37,25 +37,7 @@ void EscapeSceneBoss::initComponent()
 void EscapeSceneBoss::update()
 {
 	if (active_) {
-		if (eyeState_ == EyeState::BOUNCE) bounce();
-		else restartBouncing();
-	}
-	else if (returningToCenter) {
-
-		//vector cuya magnitud es la distancia desde la cabeza al centro de la pantalla
-		auto distance = Vector2D(sdlutils().width() / 2, sdlutils().height() / 2) -
-			Vector2D(tr_->getPos().getX() + tr_->getWidth() / 2, tr_->getPos().getY() + tr_->getHeight() / 2);
-
-		if (distance.magnitude() <= 2 * RETURNING_SPEED) {
-
-			returningToCenter = false;
-		}
-		else {
-
-			distance = distance.normalize();
-
-			tr_->getVel().set(distance * RETURNING_SPEED);
-		}
+		bounce();
 	}
 
 }
@@ -80,27 +62,15 @@ void EscapeSceneBoss::bounce()
 
 		pos_.setY(cameraTr->getPos().getY() + sdlutils().height() - tr_->getHeight() - 100);
 		vel_.setY(-vel_.getY());
-
-		////Guarda la velocidad y para el objeto actual
-		//velocitySaved = Vector2D(vel_.getX(), -vel_.getY());
-		//vel_ = Vector2D(0, 0);
-
-		////Inicia el contador
-		//lastTimeInGround_->reset();
-
-
-
-		////Cambia el estado a suelo
-		//eyeState_ = EyeState::GROUND;
 	}
-	else if (pos_.getX() + tr_->getWidth() > cameraTr->getPos().getX() + cameraTr->getWidth() / 2) {
+	else if (pos_.getX() + tr_->getWidth() > cameraTr->getPos().getX() + sdlutils().width()) {
 
-		pos_.setX(cameraTr->getPos().getX() + cameraTr->getWidth() / 2 - tr_->getWidth());
+		pos_.setX(cameraTr->getPos().getX() + sdlutils().width() - tr_->getWidth());
 		vel_.setX(-vel_.getX());
 	}
-	else if (pos_.getX() < cameraTr->getPos().getX() - cameraTr->getWidth() / 2) {
+	else if (pos_.getX() < cameraTr->getPos().getX()) {
 
-		pos_.setX(cameraTr->getPos().getX() - cameraTr->getWidth() / 2);
+		pos_.setX(cameraTr->getPos().getX());
 		vel_.setX(-vel_.getX());
 	}
 
