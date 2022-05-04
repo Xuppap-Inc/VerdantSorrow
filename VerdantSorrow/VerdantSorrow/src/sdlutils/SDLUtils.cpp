@@ -446,8 +446,6 @@ void SDLUtils::closeSDLExtensions() {
 	Mix_Quit(); // quit SDL_mixer
 	IMG_Quit(); // quit SDL_image
 	TTF_Quit(); // quit SDL_ttf
-
-	//delete logoCargando_; logoCargando_ = nullptr;
 }
 
 void SDLUtils::renderProgressBar(int assetsLoaded)
