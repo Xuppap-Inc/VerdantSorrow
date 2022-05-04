@@ -22,6 +22,7 @@ void ControlsScene::init()
 
 	int imageW =530, imageH = 200; //Ancho y alto e imagen
 	createImages(sdlutils().width() /4 - (imageW / 2), sdlutils().height() / 2 - (imageH), imageW, imageH, "keyboardControls");
+	createImages(sdlutils().width()/4*3 - (500 / 2), sdlutils().height() / 2 - (300),500, 300, "MandoControls");
 	generateAllButtons();
 }
 
