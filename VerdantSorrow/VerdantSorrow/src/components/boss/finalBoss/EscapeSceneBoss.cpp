@@ -59,15 +59,8 @@ void EscapeSceneBoss::update()
 		}
 	}
 
-	if (deadBoss_) {
-
-		deadBoss_ = false;
-	}
 }
 
-//este metodo seria mejor separarlo en una clase auxiliar que herede de OnBorders,
-//pero como se realizan muchas comprobaciones para hacer avisos de ataques y pararse
-//seria bastante complejo hacer esta separacion sin romper el funcionamiento
 void EscapeSceneBoss::bounce()
 {
 	auto& pos_ = tr_->getPos();
