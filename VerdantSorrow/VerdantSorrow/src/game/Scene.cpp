@@ -123,7 +123,7 @@ void Scene::playerGeneratorEscape(CollisionManager* colManager, Entity* player_)
 	playerAttribs_ = player_->addComponent<PlayerAttributes>();
 
 	playerTr_ = player_->addComponent<Transform>();
-	auto playerX = 0;
+	auto playerX = 180;
 	auto playerY = sdlutils().height() / 4;
 	playerTr_->init(Vector2D(playerX, playerY), Vector2D(), 50, 140, 0.0f, 0.5f);
 	playerTr_->setScale(0.4);
