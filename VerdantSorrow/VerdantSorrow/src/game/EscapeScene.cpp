@@ -18,6 +18,7 @@
 #include "../components/ScrollCamera.h"
 #include "Fondos/Parallax.h"
 #include "CollisionManager.h"
+#include "../components/boss/finalBoss/EscapeSceneBoss.h"
 
 #include "../components/boss/wave/WaveSpawner.h"
 
@@ -138,7 +139,7 @@ void EscapeScene::createBoss(CollisionManager* col)
 	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
 	BossTr->setScale(.3);
 
-	//auto movement_ = FinalBossFace->addComponent<FinalBossMovement>(col);
+	auto movement_ = FinalBossFace->addComponent<EscapeSceneBoss>(col);
 	//movement_->setPhase(FinalBossMovement::Phase::PHASE2);
 
 	float colliderWidth = 200;
