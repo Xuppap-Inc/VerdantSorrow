@@ -33,7 +33,8 @@ public:
 	bool isReturningToCenter() { return returningToCenter; };
 
 	void setDeadBoss(bool set);
-	
+	//Para ponerle la fase en el nivel de huida
+	void setPhase(Phase p);
 
 	int* getMusicVolume() { return &musicVolume_; };
 
