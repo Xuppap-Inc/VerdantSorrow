@@ -34,17 +34,17 @@ void TutorialScene::init()
 	auto player = mngr_->addEntity();
 	playerGenerator(colManager_, player);
 
-	createFly(2500 * mngr_->getWindowScaleWidth(), sdlutils().height() - 700 * mngr_->getWindowScaleHeight());
-	createPlatform(2200 * mngr_->getWindowScaleWidth(), sdlutils().height() - 500 * mngr_->getWindowScaleHeight(),
-		300 * mngr_->getWindowScaleWidth(), 100 * mngr_->getWindowScaleHeight());
-	createPlatform(1700 * mngr_->getWindowScaleWidth(), sdlutils().height() - 800 * mngr_->getWindowScaleHeight(),
-		300 * mngr_->getWindowScaleWidth(), 100 * mngr_->getWindowScaleHeight());
-	createPlatform(1500 * mngr_->getWindowScaleWidth(), sdlutils().height() - 1100 * mngr_->getWindowScaleHeight(),
-		300 * mngr_->getWindowScaleWidth(), 100 * mngr_->getWindowScaleHeight());
-	createPlatform(1200 * mngr_->getWindowScaleWidth(), sdlutils().height() - 1150 * mngr_->getWindowScaleHeight(),
-		300 * mngr_->getWindowScaleWidth(), 100 * mngr_->getWindowScaleHeight());
-	createDoor(1200 * mngr_->getWindowScaleWidth(), sdlutils().height() - 1150 * mngr_->getWindowScaleHeight() - 400 * mngr_->getWindowScaleHeight(),
-		300 * mngr_->getWindowScaleWidth(), 400 * mngr_->getWindowScaleHeight());
+	createFly(2500 * 0.6, sdlutils().height() - 700 * 0.6);
+	createPlatform(2200 * 0.6, sdlutils().height() - 500 * 0.6,
+		300 * 0.6, 100 * 0.6);
+	createPlatform(1700 * 0.6, sdlutils().height() - 800 * 0.6,
+		300 * 0.6, 100 * 0.6);
+	createPlatform(1500 * 0.6, sdlutils().height() - 1100 * 0.6,
+		300 * 0.6, 100 * 0.6);
+	createPlatform(1200 * 0.6, sdlutils().height() - 1150 * 0.6,
+		300 * 0.6, 100 * 0.6);
+	createDoor(1200 * 0.6, sdlutils().height() - 1150 * 0.6 - 400 * 0.6,
+		300 * 0.6, 400 * 0.6);
 
 	auto rootSpawner = mngr_->addEntity();
 	rootSpawner->addComponent<TutorialSpawnRoot>(colManager_);
@@ -70,8 +70,6 @@ void TutorialScene::update()
 		sdlutils().presentRenderer();
 	}
 }
-
-
 
 void TutorialScene::createFly(int x, int y)
 {
