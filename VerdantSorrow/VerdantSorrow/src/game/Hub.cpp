@@ -210,6 +210,7 @@ void Hub::checkCollissions()
 			if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "frog") sC().FrogSceneState(true);
 			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "tree") sC().TreeSceneState(true);
 			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "eye") sC().EyeSceneState(true);
+			else if (entWithName->getComponent<PlatformAtribsForHub>()->getName() == "end") sC().EyeSceneState(false);
 			changeScene_(true);
 		}
 	}

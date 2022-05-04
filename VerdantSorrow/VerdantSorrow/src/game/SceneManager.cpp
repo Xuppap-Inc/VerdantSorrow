@@ -254,6 +254,10 @@ void SceneManager::decideScene()
 		previousScene_ = Hub_;
 		actScene = Eye_;
 	}
+	else {
+		previousScene_ = Hub_;
+		actScene = Credits_;
+	}
 	init();
 }
 
