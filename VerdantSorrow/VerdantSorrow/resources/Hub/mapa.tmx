@@ -816,7 +816,7 @@
   <object id="1701" x="1266" y="703.333" width="250.667" height="185.334"/>
   <object id="1703" x="1104.67" y="398" width="173.333" height="121.333"/>
  </objectgroup>
- <objectgroup id="15" name="areas" visible="0">
+ <objectgroup id="15" name="areas">
   <object id="1683" x="-3.0303" y="9.09091" width="1224.24" height="1178.79">
    <properties>
     <property name="area" value="eye"/>
