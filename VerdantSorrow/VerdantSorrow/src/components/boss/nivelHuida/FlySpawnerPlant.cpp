@@ -9,6 +9,7 @@
 #include "../../FramedImage.h"
 #include "../../tutorial/TutorialFly.h"
 #include "../frog_boss/FlyMovement.h"
+#include "../frog_boss/FlyHp.h"
 
 
 FlySpawnerPlant::FlySpawnerPlant(CollisionManager* colManager, bool lookingUp, float timer) : tr_(nullptr), colMan_(colManager), lookingUp_(lookingUp), cooldownSpawner_(timer)
@@ -42,7 +43,7 @@ void FlySpawnerPlant::update()
 		col->setIsTrigger(true);
 		colMan_->addCollider(col);
 		fly->addComponent<FramedImage>(&sdlutils().images().at("mosca"), 6, 6, (1000 / 30) * 31, 31, "mosca");
-		fly->addComponent<TutorialFly>();
+		fly->addComponent<FlyHp>();
 		fly->addComponent<FlyMovement>();
 		fly->addToGroup(ecs::_BOSSELEMENTS_GRP);
 	}

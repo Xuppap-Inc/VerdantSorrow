@@ -413,7 +413,7 @@ ecs::Entity* FrogAttackManager::createTongue(CollisionManager* colManager)
 }
 
 void FrogAttackManager::onFlyDied() {
-	frogState_ = FLY_DIED;
+	if(sC().getScene() == SceneManager::scenes::Frog_) frogState_ = FLY_DIED;
 }
 
 void FrogAttackManager::deactivateBoss()
