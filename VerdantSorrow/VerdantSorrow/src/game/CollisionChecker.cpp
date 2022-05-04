@@ -49,11 +49,14 @@ void CollisionChecker::checkCollisions()
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
 			MeleeAttack* mA = ent->getComponent<MeleeAttack>();
 			LanternMovement* lantern = ent->getComponent<LanternMovement>();
+
 			if (sC().getScene() == SceneManager::scenes::Tutorial_) {
 				auto player = mngr_->getHandler(ecs::_PLAYER);
+
 				//Si es el tutorial y una raíz te devuelve al principio
 				if(!player->getComponent<PlayerCtrl>()->isRolling() && c->getEntity()->getComponent<TutorialRootMovement>())
 					player->getComponent<Transform>()->getPos().setX(100);
+
 				//Si tiene componente image que solo tiene la puerta cambia de escena
 				else if (c->getEntity()->getComponent<Image>() && !c->getEntity()->getComponent<TutorialRootMovement>()) {
 					sC().changeStatePlayerInBoss(false);
@@ -110,7 +113,8 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 						auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
 						if (camShake != nullptr) {
-						camShake->shake(15, 10);
+
+							camShake->shake(15, 10);
 						}
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
