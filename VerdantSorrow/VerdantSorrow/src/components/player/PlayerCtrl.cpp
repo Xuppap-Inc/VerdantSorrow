@@ -140,8 +140,6 @@ void PlayerCtrl::doKnockback(int dir) {
 
 	isKnockback = true;
 	slide_ = true;
-
-	tr_ = nullptr;
 }
 
 void PlayerCtrl::doAttack()
