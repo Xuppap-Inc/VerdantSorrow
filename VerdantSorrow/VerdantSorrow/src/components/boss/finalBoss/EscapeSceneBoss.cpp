@@ -23,24 +23,15 @@ EscapeSceneBoss::~EscapeSceneBoss()
 
 void EscapeSceneBoss::initComponent()
 {
-	auto volume = sC().getHubScene()->getMusicVolume();
-	musicVolume_ = *volume;
+
 	tr_ = ent_->getComponent<Transform>();
 	bA_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
-	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
+
+	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr);
 
 	lastTimeInGround_ = mngr_->addTimer();
 
-
-	musica_ = &sdlutils().musics().at("music_manos");
-	musica_->play();
-	musica_->setMusicVolume(musicVolume_);
-
-	SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_enter");
-	s->play();
-	s->setChannelVolume(musicVolume_);
 }
 
 void EscapeSceneBoss::update()
@@ -86,7 +77,6 @@ void EscapeSceneBoss::bounce()
 		vel_ = Vector2D(1, 1);
 
 	// bounce on top/bottom borders
-	// Bola de fuego al tocar el techo
 	if (pos_.getY() < 0) {
 
 		pos_.setY(0.0f);
