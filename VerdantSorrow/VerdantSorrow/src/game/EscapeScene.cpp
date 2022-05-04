@@ -27,6 +27,8 @@
 #include "../components/fondos/Light.h"
 #include "TileMap.h"
 
+#include "../components/boss/finalBoss/FinalBossMovement.h"
+
 EscapeScene::EscapeScene() :Scene(), isAble(false), musicVolume_(60)
 {
 }
@@ -45,6 +47,10 @@ void EscapeScene::init()
 	mngr_->setColManager(colManager);
 
 	tileMap_ = new TileMap(mngr_, "resources/Huida/nivelHuida.tmx", colManager, 1.5, TileMap::Pivot::BOTTONLEFT);
+
+	//Creación del boss 
+	createBoss(colManager);
+
 	background();
 
 
@@ -58,7 +64,7 @@ void EscapeScene::init()
 	cameraTr->init(Vector2D(0, 0), Vector2D(0, 0), 0, 0, 0);
 	auto cameraC = camera->addComponent<ScrollCamera>(8);
 	cameraC->lock(false, true);
-	cameraC->setLimitsToPositions(tilemapTr->getWidth(),0,tilemapTr->getPos().getY(),sdlutils().height());
+	cameraC->setLimitsToPositions(tilemapTr->getWidth(), 0, tilemapTr->getPos().getY(), sdlutils().height());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
 
 	colCheck_ = new CollisionChecker(colManager, mngr_);
@@ -112,6 +118,34 @@ void EscapeScene::setAble(bool a)
 void EscapeScene::createLights() {
 	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
 
+}
+
+void EscapeScene::createBoss(CollisionManager* col)
+{
+	FinalBossFace = mngr_->addEntity();
+	mngr_->setHandler(ecs::_EYE, FinalBossFace);
+	FinalBossFace->addToGroup(ecs::_BOSS_GRP);
+
+	// poner a 30
+	auto FinalBossAtribs = FinalBossFace->addComponent<BossAtributos>(30);
+
+	auto BossTr = FinalBossFace->addComponent<Transform>();
+	auto BossX = 0;
+	auto BossY = sdlutils().height() / 2 ;
+	BossTr->init(Vector2D(BossX, BossY), Vector2D(0, 0), 350, 200, 0.0f, 0.55f);
+
+
+	FinalBossFace->addComponent<FramedImage>(&sdlutils().images().at("FinalBoss_Fase2"), 5, 4, 800, 20, "FinalBoss_Fase2");
+	BossTr->setScale(.3);
+
+	//auto movement_ = FinalBossFace->addComponent<FinalBossMovement>(col);
+	//movement_->setPhase(FinalBossMovement::Phase::PHASE2);
+
+	float colliderWidth = 200;
+	auto bossCollider = FinalBossFace->addComponent<RectangleCollider>(colliderWidth, colliderWidth);
+
+	bossCollider->setIsTrigger(true);
+	col->addCollider(bossCollider);
 }
 
 void EscapeScene::changescenes()

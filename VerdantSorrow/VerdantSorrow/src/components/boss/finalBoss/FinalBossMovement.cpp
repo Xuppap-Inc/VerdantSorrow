@@ -242,3 +242,8 @@ void FinalBossMovement::setDeadBoss(bool set)
 		s3->setChannelVolume(musicVolume_);
 	}
 }
+
+void FinalBossMovement::setPhase(Phase p)
+{
+	phase_ = p;
+}
