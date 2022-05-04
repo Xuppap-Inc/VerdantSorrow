@@ -46,8 +46,10 @@ void Mushroom::update()
 				if (lastPositionY + c->getEntity()->getComponent<RectangleCollider>()->getHeight() <= mushroomPos.getY() || lastPositionY >= mushroomPos.getY() + c->getHeight()) {
 					//arriba
 					if (lastPositionY <= tr_->getPos().getY()) {
-
-						velPlayer.setY(velPlayer.getY() * -1 - 3);
+						float vel = velPlayer.getY() * -1 - 3;
+						std::cout<< vel<<std::endl;
+						if (vel * -1 > 25)vel = -20;
+						velPlayer.setY(vel);
 					}
 					
 				}
