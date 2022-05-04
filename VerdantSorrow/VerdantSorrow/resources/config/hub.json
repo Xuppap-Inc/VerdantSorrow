@@ -218,7 +218,8 @@
 
   "musics_hub" : [
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.mp3" },
-    { "id" : "music_menu", "file" : "resources/sound/music_menu.mp3" }
+    { "id" : "music_menu", "file" : "resources/sound/music_menu.mp3" },
+    { "id" : "music_credits", "file" : "resources/sound/music_creditos.mp3" }
   ],
 
   "sounds_hub": [
