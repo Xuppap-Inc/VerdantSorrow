@@ -84,11 +84,20 @@ void ControlsScene::update()
 		sdlutils().clearRenderer();
 		mngr_->render();
 		mngr_->debug();
-		createText(sdlutils().width(), sdlutils().height()-400,"Move  -> W,A,S,D");
-		createText(sdlutils().width(), sdlutils().height()-350,"Jump -> W,SPACE");
-		createText(sdlutils().width(), sdlutils().height()-300,"Interact with characters -> SPACE");
-		createText(sdlutils().width(), sdlutils().height()-250,"Attack -> J,K,L");
-		createText(sdlutils().width(), sdlutils().height()-200,"Roll -> LEFT SHIFT");
+		//teclado
+		createText(sdlutils().width()/2, sdlutils().height()-400,"Move  -> W,A,S,D");
+		createText(sdlutils().width()/2, sdlutils().height()-350,"Jump -> W,SPACE");
+		createText(sdlutils().width()/2, sdlutils().height()-300,"Interact with characters -> SPACE");
+		createText(sdlutils().width()/2, sdlutils().height()-250,"Attack -> J,K,L");
+		createText(sdlutils().width()/2, sdlutils().height()-200,"Roll -> LEFT SHIFT");
+		createText(sdlutils().width()/2, sdlutils().height()-150,"Pause -> ESC");	
+		//Mando
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 400, "Move  -> W,A,S,D");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 350, "Jump -> W,SPACE");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 300, "Interact with characters -> SPACE");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 250, "Attack -> J,K,L");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height() - 200, "Roll -> LEFT SHIFT");
+		createText(sdlutils().width() + sdlutils().width() / 2, sdlutils().height()-150,"Pause -> ESC");
 		sdlutils().presentRenderer();
 	}
 
