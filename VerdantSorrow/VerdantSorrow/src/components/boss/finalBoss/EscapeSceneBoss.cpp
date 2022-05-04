@@ -48,7 +48,6 @@ void EscapeSceneBoss::update()
 
 		if (distance.magnitude() <= 2 * RETURNING_SPEED) {
 
-			tr_->getVel().set(0, 0);
 			returningToCenter = false;
 		}
 		else {
@@ -69,10 +68,12 @@ void EscapeSceneBoss::bounce()
 	if (vel_.magnitude() == 0)
 		vel_ = Vector2D(1, 1);
 
+			auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>();
+			//tr_->getVel().set(cameraTr->getPos().getX(), cameraTr->getPos().getY());
 	// bounce on top/bottom borders
-	if (pos_.getY() < 0) {
+	if (pos_.getY() < cameraTr->getPos().getY()+cameraTr->getHeight()/2) {
 
-		pos_.setY(0.0f);
+		pos_.setY(cameraTr->getPos().getY() + cameraTr->getHeight() / 2);
 		vel_.setY(-vel_.getY());
 	}
 	else if (pos_.getY() + tr_->getHeight() > sdlutils().height() - 150) {
@@ -91,14 +92,14 @@ void EscapeSceneBoss::bounce()
 		//Cambia el estado a suelo
 		eyeState_ = EyeState::GROUND;
 	}
-	else if (pos_.getX() + tr_->getWidth() > sdlutils().width()) {
+	else if (pos_.getX() + tr_->getWidth() > cameraTr->getPos().getX()+ cameraTr->getWidth()/2) {
 
-		pos_.setX(sdlutils().width() - tr_->getWidth());
+		pos_.setX(cameraTr->getPos().getX() + cameraTr->getWidth() / 2);
 		vel_.setX(-vel_.getX());
 	}
-	else if (pos_.getX() < 0) {
+	else if (pos_.getX() < cameraTr->getPos().getX() - cameraTr->getWidth() / 2) {
 
-		pos_.setX(0);
+		pos_.setX(cameraTr->getPos().getX() - cameraTr->getWidth() / 2);
 		vel_.setX(-vel_.getX());
 	}
 

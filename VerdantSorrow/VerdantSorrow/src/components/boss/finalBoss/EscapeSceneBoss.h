@@ -63,6 +63,7 @@ private:
 
 	bool returningToCenter = false;
 	int musicVolume_;
+
 };
 
 
