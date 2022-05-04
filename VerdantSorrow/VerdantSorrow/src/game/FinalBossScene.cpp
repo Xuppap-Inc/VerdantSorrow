@@ -116,7 +116,7 @@ void FinalBossScene::update()
 			else cout << "No se puede abrir el guardado.txt";
 		}
 		setAble(false);
-		sC().decideScene();
+		sC().changeScene(SceneManager::scenes::EscapeScene_);
 	}
 }
 
