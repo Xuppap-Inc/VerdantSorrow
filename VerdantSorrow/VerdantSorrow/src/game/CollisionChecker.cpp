@@ -20,6 +20,8 @@
 #include "../components/fondos/ParticleSystem.h"
 #include "../components/CameraShake.h"
 #include "Hub.h"
+#include "../components/tutorial/TutorialRootMovement.h"
+#include "TutorialScene.h"
 
 
 
@@ -47,8 +49,19 @@ void CollisionChecker::checkCollisions()
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
 			MeleeAttack* mA = ent->getComponent<MeleeAttack>();
 			LanternMovement* lantern = ent->getComponent<LanternMovement>();
-
-			if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
+			if (sC().getScene() == SceneManager::scenes::Tutorial_) {
+				auto player = mngr_->getHandler(ecs::_PLAYER);
+				//Si es el tutorial y una raíz te devuelve al principio
+				if(!player->getComponent<PlayerCtrl>()->isRolling() && c->getEntity()->getComponent<TutorialRootMovement>())
+					player->getComponent<Transform>()->getPos().setX(100);
+				//Si tiene componente image que solo tiene la puerta cambia de escena
+				else if (c->getEntity()->getComponent<Image>() && !c->getEntity()->getComponent<TutorialRootMovement>()) {
+					sC().changeStatePlayerInBoss(false);
+					sC().getTutorialScene()->changeSceneState(true);
+					sC().changeScene(SceneManager::Hub_);
+				}
+			}
+			else if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
@@ -129,6 +142,8 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 				TutorialFly* tFl = ent->getComponent<TutorialFly>();
 				if (tFl != nullptr) {
+					mngr_->getHandler(ecs::_hdlr_TUTORIALENTRY)->getComponent<Image>()->setVisible(true);
+					mngr_->getHandler(ecs::_hdlr_TUTORIALENTRY)->getComponent<RectangleCollider>()->setActive(true);
 					tFl->receiveHit();
 				}
 			}

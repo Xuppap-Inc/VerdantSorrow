@@ -99,5 +99,6 @@
 	_EYE, \
 	_WAVE_GENERATOR, \
 	_hdlr_CAMERA, \
+	_hdlr_TUTORIALENTRY, \
 	_hdlr_TILEMAP
 

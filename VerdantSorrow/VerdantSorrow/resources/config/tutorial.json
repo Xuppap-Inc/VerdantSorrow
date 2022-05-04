@@ -114,8 +114,12 @@
             "file": "resources/images/particula_damage.png"
         },
         {
-            "id": "you_died",
-            "file": "resources/images/you_died.png"
+            "id": "platform",
+            "file": "resources/images/nivel_huida/plataforma_entera.png"
+        },
+        {
+            "id": "door",
+            "file": "resources/images/Hub/end_closed.png"
         }
     ],
 

@@ -43,6 +43,7 @@ public:
 	FinalBossScene* getEyeScene() { return fin_; };
 	MenuScene* getMenuScene() { return menu_; };
 	EscapeScene* getEscapeScene() { return ecapesc_; };
+	TutorialScene* getTutorialScene() { return tut_; };
 	//activa la primera escena a la que se puede acceder desde el hub
 	void setFirstSceneAble();
 private:
