@@ -48,7 +48,6 @@ void EscapeSceneBoss::bounce()
 		vel_ = Vector2D(1, 1);
 
 	auto cameraTr = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<Transform>();
-	//tr_->getVel().set(cameraTr->getPos().getX(), cameraTr->getPos().getY());
 	// bounce on top/bottom borders
 	if (pos_.getY() < cameraTr->getPos().getY() + cameraTr->getHeight() / 2) {
 

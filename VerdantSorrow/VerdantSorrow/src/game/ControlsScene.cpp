@@ -45,7 +45,7 @@ void ControlsScene::createImages(float x, float y, float w, float h, std::string
 	auto newImage = mngr_->addEntity();
 	auto tr = newImage->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, h, 0.0f);
 	newImage->addComponent<Image>(&sdlutils().imagesHub().at(controlsImage));
-
+	newImage->addToGroup(ecs::_UI_GRP);
 }
 
 void ControlsScene::createText(float x, float y,std::string message)
