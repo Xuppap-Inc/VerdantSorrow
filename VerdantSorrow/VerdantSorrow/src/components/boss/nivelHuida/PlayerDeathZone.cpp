@@ -7,6 +7,7 @@
 #include "../../../game/SceneManager.h"
 #include "../../../game/EscapeScene.h"
 #include "../../../game/Hub.h"
+#include "../../../game/Game.h"
 PlayerDeathZone::PlayerDeathZone(CollisionManager* colManager, std::string s) : tr_(nullptr), colMan_(colManager), collider_(nullptr), area_(s)
 {
 }
@@ -34,6 +35,7 @@ void PlayerDeathZone::update()
 				if (area_ == "died")
 					sC().getEscapeScene()->init();
 				else {
+					Game::instance()->state_ = Game::FINALDEFEATED;
 					sC().changeScene(SceneManager::Hub_);
 				}
 			}
