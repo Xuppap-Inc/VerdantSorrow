@@ -73,7 +73,7 @@ void MenuScene::update()
 		auto& ihdlr = ih();
 		if (ihdlr.keyDownEvent()|| ihdlr.controllerDownEvent()) {
 			
-			generateAllButtons();
+			//generateAllButtons();
 			buttonsActive_ = true;
 
 			background2Img_->setAlpha(0);
