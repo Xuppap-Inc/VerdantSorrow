@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\boss\finalBoss\EscapeSceneBoss.h" />
     <ClInclude Include="src\components\boss\nivelHuida\PlayerDeathZone.h" />
     <ClInclude Include="src\components\boss\nivelHuida\ChangeVertical.h" />
     <ClInclude Include="src\components\FollowCamera.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\boss\finalBoss\EscapeSceneBoss.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\PlayerDeathZone.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\ChangeVertical.cpp" />
     <ClCompile Include="src\components\FollowCamera.cpp" />
