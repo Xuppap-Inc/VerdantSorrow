@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\CreditsScene.h" />
     <ClInclude Include="src\components\boss\finalBoss\EscapeSceneBoss.h" />
     <ClInclude Include="src\components\boss\nivelHuida\PlayerDeathZone.h" />
     <ClInclude Include="src\components\boss\nivelHuida\ChangeVertical.h" />
@@ -128,6 +129,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\CreditsScene.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\EscapeSceneBoss.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\PlayerDeathZone.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\ChangeVertical.cpp" />
@@ -253,6 +255,7 @@
     <Media Include="resources\sound\sfx_rana_damage.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\Menu Buttons\Large Buttons\Large Buttons\creditsButton.png" />
     <Image Include="resources\favicon.ico" />
     <Image Include="resources\images\BossBarArrow_Left.png" />
     <Image Include="resources\images\BossFinal_ManoDer.png" />

@@ -73,7 +73,7 @@ void MenuScene::update()
 		auto& ihdlr = ih();
 		if (ihdlr.keyDownEvent()|| ihdlr.controllerDownEvent()) {
 			
-			//generateAllButtons();
+			generateAllButtons();
 			buttonsActive_ = true;
 
 			background2Img_->setAlpha(0);
@@ -151,9 +151,13 @@ void MenuScene::onButtonClicked(int index)
 	case 3: //Boton controls
 		sC().changeScene(SceneManager::Controls_);
 		break; 
-	case 4: //Boton quit
+	case 4: //Boton creditos
+		sC().changeScene(SceneManager::Credits_);
+		break;
+	case 5: //Boton quit
 		Game::instance()->setExit(true);
 		break;
+
 	default:
 		break;
 
