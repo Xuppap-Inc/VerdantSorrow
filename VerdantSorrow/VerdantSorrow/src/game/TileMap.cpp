@@ -159,11 +159,19 @@ void TileMap::createObjects()
 					else if (name == "entradasbosses") {
 						vector<tmx::Property> properties = object.getProperties();
 
+						//segio aqui, haz esta basura por favor me quiero morir aaaaaaaaaaaaaaa
+						int i = 0;
+						while (i < properties.size() && properties[i].getName() != "EntradaBoss")i++;
+
+						if (i < properties.size()) {
+							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() + "_" + "open"));
+						}
+						ent->addToGroup(ecs::_UI_GRP);
+
 						int i = 0;
 						while (i < properties.size() && properties[i].getName() != "Boss")i++;
 
 						if (i < properties.size()) {
-							ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() + "_" + "open"));
 							ent->addComponent<PlatformAtribsForHub>(properties[i].getStringValue());
 						}
 						ent->addToGroup(ecs::_UI_GRP);
