@@ -22,6 +22,7 @@
 #include "Hub.h"
 #include "../components/tutorial/TutorialRootMovement.h"
 #include "TutorialScene.h"
+#include "../components/boss/frog_boss/FlyMovement.h"
 
 
 
@@ -64,7 +65,9 @@ void CollisionChecker::checkCollisions()
 					sC().changeScene(SceneManager::Hub_);
 				}
 			}
-			else if ((bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr || wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
+			else if ((ent->getComponent<FlyMovement>() && sC().getScene() == SceneManager::scenes::EscapeScene_) ||
+				(bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr ||
+				wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
@@ -85,6 +88,7 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 			if (c->isActive() && c->isTrigger())
 			{
+
 				ecs::Entity* ent = c->getEntity();
 
 				BossAtributos* bA = nullptr;
@@ -164,6 +168,8 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 
 
 	if (!attrib->getInvulnerable() && !playerCtrl->isRolling()) {
+		if (ent->getComponent<FlyMovement>()) ent->setAlive(false);
+
 		attrib->damagePlayer(1);
 		attrib->setInvulnerable(true);
 		attrib->setInvulnerableTimer(5000);

@@ -50,6 +50,10 @@ void CreditsScene::onButtonClicked(int index)
 			sC().changeScene(SceneManager::Menu_);
 			changeSc_ = true;
 		}
+		else {
+			sC().changeScene(SceneManager::Hub_);
+			changeSc_ = true;
+		}
 		break;
 	}
 }

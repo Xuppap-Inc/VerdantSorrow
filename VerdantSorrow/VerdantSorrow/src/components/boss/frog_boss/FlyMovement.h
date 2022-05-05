@@ -2,6 +2,7 @@
 #include "../../../ecs/Component.h"
 
 class Transform;
+class VirtualTimer;
 class FlyMovement :public ecs::Component
 {
 public:
@@ -16,7 +17,8 @@ private:
 
 	Transform* tr_;
 	Transform* playerTr_;
-	int dirX_, dirY_;
+	int dirX_, dirY_, timeOfLife_;
 	int spaceWhereExplotes;
+	VirtualTimer* vt_;
 };
 

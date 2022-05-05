@@ -6,7 +6,7 @@
 #include "../../../sdlutils/SDLUtils.h"
 #include "../../../game/Hub.h"
 
-FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(5)
+FlyMovement::FlyMovement() : tr_(), dirX_(1), dirY_(1), playerTr_(), spaceWhereExplotes(5), timeOfLife_(2000)
 {
 }
 
@@ -15,7 +15,6 @@ FlyMovement::~FlyMovement()
 }
 
 void FlyMovement::initComponent() {
-	
 	tr_ = ent_->getComponent<Transform>();
 	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 
@@ -24,6 +23,8 @@ void FlyMovement::initComponent() {
 	s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
 
 	bool correct = tr_ != nullptr && playerTr_ != nullptr;
+	vt_ = mngr_->addTimer();
+	vt_->reset();
 }
 
 void FlyMovement::update()
@@ -42,6 +43,8 @@ void FlyMovement::update()
 	vel = new Vector2D(dirX_ * SPEED, dirY_ * SPEED);;
 	
 	//Si queda poco espacio explota y muere
-	if (abs(playerTr_->getPos().getX() - tr_->getPos().getX()) < spaceWhereExplotes && abs(playerTr_->getPos().getY() - tr_->getPos().getY() < spaceWhereExplotes))
+	if (vt_->currTime() > timeOfLife_) {
 		ent_->setAlive(false);
+		vt_->reset();
+	}
 }
