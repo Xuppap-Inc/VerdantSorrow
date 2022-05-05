@@ -14,10 +14,13 @@ class Spikes :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_MUSHROOM)
-        Spikes(CollisionManager* colMan);
+    __CMPID_DECL__(ecs::_SPIKES)
+        Spikes(CollisionManager* colMan,bool move);
 
     ~Spikes();
+    void setmove(bool s) {
+        movement_ = s;
+    }
     void initComponent() override;
     void update() override;
 protected:
@@ -28,4 +31,5 @@ protected:
     bool moving_;
     int activationDistance_;
     float spikeVelocity_;
+    bool movement_;
 };

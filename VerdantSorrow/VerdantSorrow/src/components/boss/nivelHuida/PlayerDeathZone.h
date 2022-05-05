@@ -14,7 +14,7 @@ class PlayerDeathZone :
     public ecs::Component
 {
 public:
-    __CMPID_DECL__(ecs::_MUSHROOM)
+    __CMPID_DECL__(ecs::_DEATHZONE)
         PlayerDeathZone(CollisionManager* colMan,std::string s);
 
     ~PlayerDeathZone();

@@ -145,12 +145,12 @@
   <object id="549" gid="3" x="6212.3" y="4112.92" width="98.5741" height="103.685"/>
   <object id="550" gid="3" x="6204.27" y="4028.95" width="98.5741" height="103.685"/>
   <object id="551" gid="3" x="6212.3" y="3951.55" width="98.5741" height="103.685"/>
-  <object id="555" gid="8" x="1395.09" y="4647.98" width="91.4694" height="284.496">
+  <object id="555" gid="8" x="1210.24" y="4675.25" width="91.4694" height="284.496">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="556" gid="8" x="1521.63" y="4646.29" width="91.4694" height="284.496">
+  <object id="556" gid="8" x="1415.57" y="4670.53" width="91.4694" height="284.496">
    <properties>
     <property name="damage" type="bool" value="true"/>
    </properties>
@@ -502,8 +502,7 @@
     <property name="trigger" value="camera"/>
    </properties>
   </object>
-  <object id="646" x="7130.3" y="4530.3"/>
-  <object id="675" x="1222.73" y="5194.3" width="390.909" height="96.9697"/>
+  <object id="675" x="1222.73" y="5199.3" width="390.909" height="96.9697"/>
   <object id="682" x="5124.24" y="2730.3" width="412.126" height="96.9697"/>
   <object id="691" x="6239.39" y="1293.94" width="172.727" height="154.545"/>
   <object id="694" x="5537.03" y="684.433" width="353.879" height="151.663"/>
@@ -514,7 +513,6 @@
   <object id="705" x="6033.34" y="903.03" width="263.636" height="203.03"/>
   <object id="723" x="4883.33" y="3339.39" width="215.152" height="96.9697"/>
   <object id="725" x="-372.727" y="4412.12" width="418.182" height="1742.42"/>
-  <object id="726" x="845.455" y="5593.94"/>
   <object id="727" x="4839.39" y="-72.7273" width="1984.85" height="175.758"/>
   <object id="729" x="6715.15" y="-27.2727" width="687.879" height="672.727">
    <properties>

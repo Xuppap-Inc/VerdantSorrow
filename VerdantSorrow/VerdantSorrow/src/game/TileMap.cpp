@@ -188,8 +188,11 @@ void TileMap::createObjects()
 						if (i < properties.size()) {
 							ent->addComponent<Image>(&sdlutils().images().at("pincho"));
 							ent->addComponent<SimpleGravity>(0.2);
-							ent->addComponent<Spikes>(col_);
+							ent->addComponent<Spikes>(col_,true);
 							ent->addToGroup(ecs::_UI_GRP);
+						}
+						else {
+							ent->addComponent<Spikes>(col_, false);
 						}
 
 					}
