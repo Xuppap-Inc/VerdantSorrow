@@ -370,7 +370,7 @@ TESTIMONIAL
     min-height: 390px;
 }
 .bg-testicolor{
-    background-color: RGBA(73, 84, 105, 0.61);
+    background-color: rgba(47, 4, 14, 0.3);
     min-height: 390px;
 }
 .white
@@ -428,7 +428,7 @@ TESTIMONIAL
 #footer
 {
     padding: 20px 0px;
-    background: rgba(47, 4, 14, 1);
+    background: rgb(27, 3, 8);
 }
 .footer-img{
     width: 50px;
