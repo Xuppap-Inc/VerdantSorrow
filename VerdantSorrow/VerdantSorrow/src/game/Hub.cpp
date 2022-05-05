@@ -72,7 +72,7 @@ void Hub::init()
 	auto y = playerTr_->getPos().getY() - sdlutils().height() / 2;
 
 	cameraTr->init(Vector2D(x, y), Vector2D(0, 0), 0, 0, 0);
-	auto cameraC = camera->addComponent<ScrollCamera>(3);
+	auto cameraC = camera->addComponent<ScrollCamera>(2);
 	auto tilemapTR = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 	cameraC->setLimitToDimensions(tilemapTR->getPos().getX(), tilemapTR->getPos().getY(), tilemapTR->getWidth(), tilemapTR->getHeight());
 	mngr_->setHandler(ecs::_hdlr_CAMERA, camera);
@@ -108,7 +108,7 @@ void Hub::teleportPlayer()
 	auto tilemapTr = mngr_->getHandler(ecs::_hdlr_TILEMAP)->getComponent<Transform>();
 
 	// SpawnpointInicial
-	Vector2D spawnPoint = { tilemapTr->getWidth() / 2 - 200, tilemapTr->getHeight() / 2 };
+	Vector2D spawnPoint = {1000, tilemapTr->getHeight() - 350 };
 
 	if (!firstTimeEnteringGame) {
 
@@ -272,7 +272,7 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 
 	//Componente que permite controlar al jugador
-	player_->addComponent<PlayerHubControl>(4, colManager);
+	player_->addComponent<PlayerHubControl>(2, colManager);
 
 
 	//Componente ui jugador
