@@ -9,216 +9,224 @@
     { "id" : "PTMONO24", "file" : "resources/fonts/PTMono-Regular.ttf", "size": 24 },
     { "id": "SOURCESERIF24", "file": "resources/fonts/SourceSerifPro-Regular.ttf", "size": 24}
   ],
-    "images_hub": [
-        {
-            "id": "BlackScreen",
-            "file": "resources/images/blackScreen.png"
-        },
-        {
-            "id": "etheria",
-            "file": "resources/images/Hub/etheria.png"
-        },
-        {
-            "id": "lumine",
-            "file": "resources/images/Hub/lumine.png"
-        },
-        {
-            "id": "terria",
-            "file": "resources/images/Hub/terria.png"
-        },
-        {
-            "id": "end_open",
-            "file": "resources/images/Hub/end_open.png"
-        },
-        {
-            "id": "end_closed",
-            "file": "resources/images/Hub/end_closed.png"
-        },
-        {
-            "id": "eye_open",
-            "file": "resources/images/Hub/eye_open.png"
-        },
-        {
-            "id": "eye_closed",
-            "file": "resources/images/Hub/eye_closed.png"
-        },
-        {
-            "id": "eye_win",
-            "file": "resources/images/Hub/eye_win.png"
-        },
-        {
-            "id": "frog_open",
-            "file": "resources/images/Hub/frog_open.png"
-        },
-        {
-            "id": "frog_win",
-            "file": "resources/images/Hub/frog_win.png"
-        },
-        {
-            "id": "tree_win",
-            "file": "resources/images/Hub/tree_win.png"
-        },
-        {
-            "id": "tree_open",
-            "file": "resources/images/Hub/tree_open.png"
-        },
-        {
-            "id": "tree_closed",
-            "file": "resources/images/Hub/tree_closed.png"
-        },
-        {
-            "id": "resume",
-            "file": "resources/images/MenuPausa/resumeButton.png"
-        },
-        {
-            "id": "back",
-            "file": "resources/images/MenuControles/backButton.png"
-        },
-        {
-            "id": "keyboardControls",
-            "file": "resources/images/MenuControles/Teclado.png"
-        },
-        {
-            "id": "MandoControls",
-            "file": "resources/images/MenuControles/Mando.png"
-        },
-        {
-            "id": "menu",
-            "file": "resources/images/MenuPausa/menuButton.png"
-        },
-        {
-            "id": "volume",
-            "file": "resources/images/MenuPausa/audioButton.png"
-        },
-        {
-            "id": "rightVolume",
-            "file": "resources/images/MenuPausa/rightVolume.png"
-        },
-        {
-            "id": "leftVolume",
-            "file": "resources/images/MenuPausa/leftVolume.png"
-        },
-        {
-            "id": "menuFondo",
-            "file": "resources/images/MenuPrincipal/menuFondo.png"
-        },
-        {
-            "id": "menuFondoSet",
-            "file": "resources/images/MenuPrincipal/fondoMenu.png"
-        },
-        {
-            "id": "menuFondoLogo",
-            "file": "resources/images/MenuPrincipal/menuFondoLogo.png"
-        },
-        {
-            "id": "menuFondo1",
-            "file": "resources/images/MenuPrincipal/menuFondo1.png"
-        },
-        {
-            "id": "menuFondo2",
-            "file": "resources/images/MenuPrincipal/menuFondo2.png"
-        },
-        {
-            "id": "particula_menu",
-            "file": "resources/images/MenuPrincipal/particula_menu.png"
-        },
-        {
-            "id": "particula_menu2",
-            "file": "resources/images/MenuPrincipal/particula_menu2.png"
-        },
-        {
-            "id": "new_Game",
-            "file": "resources/images/MenuPrincipal/newGameButton.png"
-        },
-        {
-            "id": "continue",
-            "file": "resources/images/MenuPrincipal/continueButton.png"
-        },
-        {
-            "id": "controls",
-            "file": "resources/images/MenuPrincipal/controlsButton.png"
-        },
-        {
-            "id": "settings",
-            "file": "resources/images/MenuPrincipal/settingsButton.png"
-        },
-        {
-            "id": "quit",
-            "file": "resources/images/MenuPrincipal/quitButton.png"
-        },
-        {
-            "id": "credits",
-            "file": "resources/images/MenuPrincipal/creditsButton.png"
-        },
-        {
-            "id": "foto1080",
-            "file": "resources/images/MenuPrincipal/1080.png"
-        },
-        {
-            "id": "foto720",
-            "file": "resources/images/MenuPrincipal/720.png"
-        },
-        {
-            "id": "foto480",
-            "file": "resources/images/MenuPrincipal/480.png"
-        },
-        {
-            "id": "foto144",
-            "file": "resources/images/MenuPrincipal/144.png"
-        },
-        {
-            "id": "matt",
-            "file": "resources/images/matt.png"
-        },
-        {
-            "id": "chica",
-            "file": "resources/images/topdownchicafrente.png"
-        },
-        {
-            "id": "idle_Kyna",
-            "file": "resources/images/idle_Kyna_TopDown_Spritesheet.png"
-        },
-        {
-            "id": "walk_Kyna",
-            "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
-        },
-        {
-            "id": "walk_side_Kyna",
-            "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
-        },
-        {
-            "id": "walk_up_Kyna",
-            "file": "resources/images/walk_Back_Kyna_TopDown_Spritesheet.png"
-        },
-        {
-            "id": "heart",
-            "file": "resources/images/heart.png"
-        },
-        {
-            "id": "heartBlack",
-            "file": "resources/images/heartBlack.png"
-        },
-        {
-            "id": "healthDetail",
-            "file": "resources/images/HealthDetail.png"
-        },
-        {
-            "id": "spritesheet_hoguera",
-            "file": "resources/images/spritesheet_hoguera.png"
-        },
-        {
-            "id": "luz_naranja",
-            "file": "resources/images/luz_naranja.png"
-        },
-        {
-            "id": "letterE",
-            "file": "resources/images/letterE.png"
-        },
-        {
-            "id": "CajaDialogo",
-            "file": "resources/images/CajaDialogo.png"
-        }
-    ],
+  "images_hub": [
+    {
+      "id": "BlackScreen",
+      "file": "resources/images/blackScreen.png"
+    },
+    {
+      "id": "etheria",
+      "file": "resources/images/Hub/etheria.png"
+    },
+    {
+      "id": "lumine",
+      "file": "resources/images/Hub/lumine.png"
+    },
+    {
+      "id": "terria",
+      "file": "resources/images/Hub/terria.png"
+    },
+    {
+      "id": "end_open",
+      "file": "resources/images/Hub/end_open.png"
+    },
+    {
+      "id": "end_closed",
+      "file": "resources/images/Hub/end_closed.png"
+    },
+    {
+      "id": "eye_open",
+      "file": "resources/images/Hub/eye_open.png"
+    },
+    {
+      "id": "eye_closed",
+      "file": "resources/images/Hub/eye_closed.png"
+    },
+    {
+      "id": "eye_win",
+      "file": "resources/images/Hub/eye_win.png"
+    },
+    {
+      "id": "frog_open",
+      "file": "resources/images/Hub/frog_open.png"
+    },
+    {
+      "id": "frog_win",
+      "file": "resources/images/Hub/frog_win.png"
+    },
+    {
+      "id": "tree_win",
+      "file": "resources/images/Hub/tree_win.png"
+    },
+    {
+      "id": "tree_open",
+      "file": "resources/images/Hub/tree_open.png"
+    },
+    {
+      "id": "tree_closed",
+      "file": "resources/images/Hub/tree_closed.png"
+    },
+    {
+      "id": "resume",
+      "file": "resources/images/MenuPausa/resumeButton.png"
+    },
+    {
+      "id": "back",
+      "file": "resources/images/MenuControles/backButton.png"
+    },
+    {
+      "id": "keyboardControls",
+      "file": "resources/images/MenuControles/Teclado.png"
+    },
+    {
+      "id": "MandoControls",
+      "file": "resources/images/MenuControles/Mando.png"
+    },
+    {
+      "id": "menu",
+      "file": "resources/images/MenuPausa/menuButton.png"
+    },
+    {
+      "id": "volume",
+      "file": "resources/images/MenuPausa/audioButton.png"
+    },
+    {
+      "id": "rightVolume",
+      "file": "resources/images/MenuPausa/rightVolume.png"
+    },
+    {
+      "id": "leftVolume",
+      "file": "resources/images/MenuPausa/leftVolume.png"
+    },
+    {
+      "id": "menuFondo",
+      "file": "resources/images/MenuPrincipal/menuFondo.png"
+    },
+    {
+      "id": "menuFondoSet",
+      "file": "resources/images/MenuPrincipal/fondoMenu.png"
+    },
+    {
+      "id": "menuFondoLogo",
+      "file": "resources/images/MenuPrincipal/menuFondoLogo.png"
+    },
+    {
+      "id": "menuFondo1",
+      "file": "resources/images/MenuPrincipal/menuFondo1.png"
+    },
+    {
+      "id": "menuFondo2",
+      "file": "resources/images/MenuPrincipal/menuFondo2.png"
+    },
+    {
+      "id": "particula_menu",
+      "file": "resources/images/MenuPrincipal/particula_menu.png"
+    },
+    {
+      "id": "particula_menu2",
+      "file": "resources/images/MenuPrincipal/particula_menu2.png"
+    },
+    {
+      "id": "new_Game",
+      "file": "resources/images/MenuPrincipal/newGameButton.png"
+    },
+    {
+      "id": "continue",
+      "file": "resources/images/MenuPrincipal/continueButton.png"
+    },
+    {
+      "id": "controls",
+      "file": "resources/images/MenuPrincipal/controlsButton.png"
+    },
+    {
+      "id": "settings",
+      "file": "resources/images/MenuPrincipal/settingsButton.png"
+    },
+    {
+      "id": "quit",
+      "file": "resources/images/MenuPrincipal/quitButton.png"
+    },
+    {
+      "id": "credits",
+      "file": "resources/images/MenuPrincipal/creditsButton.png"
+    },
+    {
+      "id": "foto1080",
+      "file": "resources/images/MenuPrincipal/1080.png"
+    },
+    {
+      "id": "foto720",
+      "file": "resources/images/MenuPrincipal/720.png"
+    },
+    {
+      "id": "foto480",
+      "file": "resources/images/MenuPrincipal/480.png"
+    },
+    {
+      "id": "foto144",
+      "file": "resources/images/MenuPrincipal/144.png"
+    },
+    {
+      "id": "matt",
+      "file": "resources/images/matt.png"
+    },
+    {
+      "id": "chica",
+      "file": "resources/images/topdownchicafrente.png"
+    },
+    {
+      "id": "idle_Kyna",
+      "file": "resources/images/idle_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_Kyna",
+      "file": "resources/images/walk_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_side_Kyna",
+      "file": "resources/images/walk_side_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "walk_up_Kyna",
+      "file": "resources/images/walk_Back_Kyna_TopDown_Spritesheet.png"
+    },
+    {
+      "id": "heart",
+      "file": "resources/images/heart.png"
+    },
+    {
+      "id": "heartBlack",
+      "file": "resources/images/heartBlack.png"
+    },
+    {
+      "id": "healthDetail",
+      "file": "resources/images/HealthDetail.png"
+    },
+    {
+      "id": "spritesheet_hoguera",
+      "file": "resources/images/spritesheet_hoguera.png"
+    },
+    {
+      "id": "luz_naranja",
+      "file": "resources/images/luz_naranja.png"
+    },
+    {
+      "id": "letterE",
+      "file": "resources/images/letterE.png"
+    },
+    {
+      "id": "CajaDialogo",
+      "file": "resources/images/CajaDialogo.png"
+    },
+    {
+      "id": "spotlight_cyan",
+      "file": "resources/images/spotlight_cyan.png"
+    },
+    {
+      "id": "spotlight_yellow",
+      "file": "resources/images/spotlight_yellow.png"
+    }
+  ],
 
   "musics_hub" : [
     { "id" : "musica_hub", "file" : "resources/sound/musica_hub.mp3" },

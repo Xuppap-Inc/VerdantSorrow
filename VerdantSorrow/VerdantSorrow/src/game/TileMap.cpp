@@ -213,6 +213,7 @@ void TileMap::createObjects()
 							}
 						}
 					}
+					
 
 				}
 
@@ -237,6 +238,23 @@ void TileMap::createObjects()
 
 
 				}
+				else if (name == "lights") {
+					ecs::Entity* ent = mngr_->addEntity();
+					auto tr = ent->addComponent<Transform>();
+					tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+					
+					vector<tmx::Property> properties = object.getProperties();
+					int i = 0;
+					while (i < properties.size() && properties[i].getName() != "luz")i++;
+
+					if (i < properties.size()){
+						ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() ));
+						ent->addToGroup(ecs::_PARTICLES_FRONT);
+						//spotlight_yellow
+					}
+
+				}
+				
 			}
 		}
 	}
