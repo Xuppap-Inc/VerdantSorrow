@@ -46,14 +46,8 @@ void CreditsScene::onButtonClicked(int index)
 	switch (index)
 	{
 	case 0: //Boton salida al menu principal
-		if (sC().getPreviousScene() == SceneManager::Menu_) {
-			sC().changeScene(SceneManager::Menu_);
-			changeSc_ = true;
-		}
-		else {
-			sC().changeScene(SceneManager::Hub_);
-			changeSc_ = true;
-		}
+		sC().changeScene(SceneManager::Menu_);
+		changeSc_ = true;
 		break;
 	}
 }
