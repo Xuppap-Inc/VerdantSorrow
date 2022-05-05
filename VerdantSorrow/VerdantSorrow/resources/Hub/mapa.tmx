@@ -797,7 +797,7 @@
   <object id="1620" x="2108.48" y="494.726" width="170.667" height="144"/>
   <object id="1621" x="1924.48" y="973.392" width="978.667" height="249.333"/>
   <object id="1622" x="1672.48" y="994.726" width="254.666" height="220"/>
-  <object id="1623" x="1555.15" y="1101.4" width="521.333" height="257.333"/>
+  <object id="1623" x="1555.15" y="1101.4" width="470.333" height="244.333"/>
   <object id="1624" x="2352.48" y="1209.39" width="532" height="94.6667"/>
   <object id="1625" x="2493.81" y="1420.06" width="398.667" height="202.667"/>
   <object id="1626" x="2859.15" y="1582.73" width="200" height="630.667"/>
@@ -823,7 +823,7 @@
   <object id="1677" x="1516" y="1085.33" width="85.333" height="217.333"/>
   <object id="1701" x="1266" y="703.333" width="363.667" height="185.334"/>
   <object id="1703" x="1104.67" y="398" width="173.333" height="121.333"/>
-  <object id="1706" x="2089" y="1416" width="88" height="89"/>
+  <object id="1706" x="2105" y="1432" width="55" height="50"/>
  </objectgroup>
  <objectgroup id="15" name="areas" locked="1">
   <object id="1683" x="-3.0303" y="9.09091" width="1224.24" height="1178.79">
