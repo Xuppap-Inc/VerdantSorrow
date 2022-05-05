@@ -17,6 +17,7 @@
 #include "../../Image.h"
 #include "../../fondos/ParticleSystem.h"
 #include "../../../game/Hub.h"
+#include "../../CameraShake.h"
 
 FrogAttackManager::FrogAttackManager(CollisionManager* collManager) : frogJump_(), bigJump_(),
 fly_(), player_(), tr_(), collManager_(collManager), frogState_(START_ANIMATION), attr_(),
@@ -453,6 +454,9 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 		s->play();
 		s->setChannelVolume(musicVolume_);
 		if (jumpDirection_ == 0) jumpDirection_ = oldJumpDirection_;
+
+		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+		camShake->shake(20, 50, false);
 	}
 	else {
 		jumpsUntilNextTongue_--;
@@ -462,6 +466,8 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 		s->play();
 		s->setChannelVolume(musicVolume_);
 
+		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+		camShake->shake(10, 30, false);
 	}
 }
 

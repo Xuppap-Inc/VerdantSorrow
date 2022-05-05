@@ -8,6 +8,10 @@
 #include "../../../game/EscapeScene.h"
 #include "../../../game/Hub.h"
 #include "../../../game/Game.h"
+
+#include <iostream>
+#include <fstream>
+
 PlayerDeathZone::PlayerDeathZone(CollisionManager* colManager, std::string s) : tr_(nullptr), colMan_(colManager), collider_(nullptr), area_(s)
 {
 }
@@ -35,7 +39,15 @@ void PlayerDeathZone::update()
 				if (area_ == "died")
 					sC().getEscapeScene()->init();
 				else {
-					Game::instance()->state_ = Game::FINALDEFEATED;
+					Game::instance()->state_ = Game::State::FINALDEFEATED;
+
+					std::ofstream myfile("resources/config/guardado.txt");
+					if (myfile.is_open())
+					{
+						myfile << Game::State::FINALDEFEATED;
+						myfile.close();
+					}
+					else std::cout << "No se puede abrir el guardado.txt";
 					sC().changeScene(SceneManager::Hub_);
 				}
 			}

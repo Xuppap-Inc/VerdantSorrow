@@ -27,8 +27,7 @@
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
 #include "Game.h"
-#include <iostream>
-#include <fstream>
+
 #include "../components/CameraShake.h"
 
 
@@ -104,15 +103,6 @@ void FinalBossScene::update()
 		if (playerAttribs_->isDefeated()) sC().changeEyeEssenceState(true);
 		if (bossHealth->isDefeated()) {
 			sC().changeStatePlayerInBoss(false);
-			Game::instance()->state_ = Game::State::FINALDEFEATED;
-
-			ofstream myfile("resources/config/guardado.txt");
-			if (myfile.is_open())
-			{
-				myfile << Game::State::FINALDEFEATED;
-				myfile.close();
-			}
-			else cout << "No se puede abrir el guardado.txt";
 		}
 		setAble(false);
 		if (bossHealth->isDefeated()) sC().changeScene(SceneManager::scenes::EscapeScene_);
