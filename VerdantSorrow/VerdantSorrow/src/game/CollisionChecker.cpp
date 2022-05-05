@@ -192,11 +192,11 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		playerCtrl->doKnockback(enemyXpos >= (playerTr->getPos().getX() + playerTr->getWidth() / 2) ? -1 : 1);
 		vt_->reset();
 
-		if (!sC().getScene() == SceneManager::scenes::EscapeScene_)
+		if (!sC().getScene() != SceneManager::scenes::EscapeScene_)
 		{
 			auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-			camShake->shake(20, 10);
-			camShake->shake(20, 10, false);
+			camShake->shake(25, 10);
+			camShake->shake(25, 10, false);
 		}
 	}
 }
