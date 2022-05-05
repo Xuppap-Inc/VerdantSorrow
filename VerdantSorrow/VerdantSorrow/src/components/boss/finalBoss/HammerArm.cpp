@@ -11,6 +11,7 @@
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
 #include "../../../game/Hub.h"
+#include "../../CameraShake.h"
 
 HammerArm::HammerArm(CollisionManager* colManager) :colManager_(colManager), tr_(nullptr), state_(REPOSO), initialPos(), waveSp_(),
 lastTimeFloor_(), collider_(), playerTr_(), playerXPos()
@@ -63,6 +64,9 @@ void HammerArm::attack(bool quemado)
 		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
 		s->play();
 		s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
+
+		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+		camShake->shake(20, 60, false);
 
 		if (quemado)
 		{

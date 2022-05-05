@@ -7,6 +7,7 @@
 #include "../../../ecs/Manager.h"
 #include "../../fondos/ParticleSystem.h"
 #include "../../../game/Hub.h"
+#include "../../CameraShake.h"
 
 
 ClapAttack::ClapAttack(bool leftHand) : leftHand_(leftHand), tr_(nullptr), state_(REPOSO), vt_(), initialPos(), collider_()
@@ -75,6 +76,9 @@ void ClapAttack::goCenter(bool quemado)
 			SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack2");
 			s->play();
 			s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
+
+			auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+			camShake->shake(20, 60);
 
 			if (quemado) {
 				SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_fire_clap");

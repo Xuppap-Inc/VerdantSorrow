@@ -192,8 +192,6 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		vt_->reset();
 
 		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-		if (camShake != nullptr) {
-			camShake->shake(10, 10);
-		}
+        camShake->shake(1, 5);
 	}
 }
