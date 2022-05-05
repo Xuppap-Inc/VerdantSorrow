@@ -57,10 +57,10 @@
    <image width="666" height="568" source="../images/nivel_huida/disparamoskasderecha.png"/>
   </tile>
   <tile id="16" type="Plataforma">
-   <image width="105" height="103" source="../images/nivel_huida/final plataforma abajo.png"/>
+   <image width="105" height="105" source="../images/nivel_huida/inicio plataforma abajo.png"/>
   </tile>
   <tile id="17" type="Plataforma">
-   <image width="105" height="103" source="../images/nivel_huida/final plataforma arriba.png"/>
+   <image width="105" height="105" source="../images/nivel_huida/inicio plataforma arriba.png"/>
   </tile>
   <tile id="18" type="Plataforma">
    <image width="103" height="105" source="../images/nivel_huida/final plataforma.png"/>
