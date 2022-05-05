@@ -93,6 +93,12 @@ void HandsManager::checkPhaseChange()
 			multFase_ = 4;
 		}
 
+
+		ParticleSystem* particlesys = new ParticleSystem(&sdlutils().images().at("spotlight_purple"), mngr_);
+		particlesys->createLightsFollow(1, leftHandTr_, 800);
+		ParticleSystem* particlesys2 = new ParticleSystem(&sdlutils().images().at("spotlight_purple"), mngr_);
+		particlesys2->createLightsFollow(1, rightHandTr_, 800);
+
 		colliderLeftHand_->setIsTrigger(true);
 		colliderRightHand_->setIsTrigger(true);
 	}

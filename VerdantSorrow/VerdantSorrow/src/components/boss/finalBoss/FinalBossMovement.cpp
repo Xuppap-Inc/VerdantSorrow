@@ -59,7 +59,7 @@ void FinalBossMovement::initComponent()
 	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
 	ParticleSystem* particlesys5 = new ParticleSystem(&sdlutils().images().at("spotlight_red"), mngr_);
-	particlesys5->createLightsFollow(1, tr_, 700);
+	particlesys5->createLightsFollow(1, tr_, 600);
 }
 
 void FinalBossMovement::update()
