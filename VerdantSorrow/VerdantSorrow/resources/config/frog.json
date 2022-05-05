@@ -1,5 +1,5 @@
 {
-  "assets" : 84,
+  "assets" : 74,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -90,10 +90,6 @@
       "file": "resources/images/Suelo.png"
     },
     {
-      "id": "fondoSuelo",
-      "file": "resources/images/fondoSuelo.png"
-    },
-    {
       "id": "ranacambiofase",
       "file": "resources/images/rana_cambio_fase.png"
     },
@@ -170,14 +166,6 @@
       "file": "resources/images/wave.png"
     },
     {
-      "id": "particle",
-      "file": "resources/images/particle.png"
-    },
-    {
-      "id": "luz_verde",
-      "file": "resources/images/luz_verde.png"
-    },
-    {
       "id": "luz_negro",
       "file": "resources/images/luz_negro.png"
     },
@@ -200,10 +188,6 @@
     {
       "id": "particula_lluvia",
       "file": "resources/images/particula_lluvia.png"
-    },
-    {
-      "id": "luz_cyan",
-      "file": "resources/images/luz_cyan.png"
     },
     {
       "id": "simbolo_terria",

@@ -1,6 +1,6 @@
 {
 
-  "assets" : 109,
+  "assets" : 112,
   
   "fonts_hub" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -169,14 +169,6 @@
     {
       "id": "foto144",
       "file": "resources/images/MenuPrincipal/144.png"
-    },
-    {
-      "id": "matt",
-      "file": "resources/images/matt.png"
-    },
-    {
-      "id": "chica",
-      "file": "resources/images/topdownchicafrente.png"
     },
     {
       "id": "idle_Kyna",

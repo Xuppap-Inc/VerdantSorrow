@@ -82,13 +82,13 @@ void EscapeScene::update()
 	mngr_->update();
 	colCheck_->checkCollisions();
 	mngr_->refresh();
-	changescenes();
 	sdlutils().clearRenderer();
 	mngr_->render();
 #ifdef _DEBUG
 	mngr_->debug();
 #endif
 	sdlutils().presentRenderer();
+	changescenes();
 }
 
 

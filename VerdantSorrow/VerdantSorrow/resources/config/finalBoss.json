@@ -1,5 +1,5 @@
 {
-  "assets" : 66,
+  "assets" : 64,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -39,10 +39,6 @@
     {
       "id": "manoDer_fondo",
       "file": "resources/images/BossFinal_ManoDer_fondo.png"
-    },
-    {
-      "id": "chica",
-      "file": "resources/images/chicafoto.png"
     },
     {
       "id": "Chica_Idle",
@@ -111,10 +107,6 @@
     {
       "id": "middleBar",
       "file": "resources/images/middleBar.png"
-    },
-    {
-      "id": "fondo1",
-      "file": "resources/images/fondo1.png"
     },
     {
       "id": "wave",

@@ -1,5 +1,5 @@
 {
-    "assets": 53,
+    "assets": 43,
 
     "fonts": [
         {
@@ -24,18 +24,6 @@
         {
             "id": "fondoNegro",
             "file": "resources/images/fondoNegro.png"
-        },
-        {
-            "id": "manoIzq",
-            "file": "resources/images/BossFinal_ManoIzq.png"
-        },
-        {
-            "id": "manoDer",
-            "file": "resources/images/BossFinal_ManoDer.png"
-        },
-        {
-            "id": "chica",
-            "file": "resources/images/chicafoto.png"
         },
         {
             "id": "Chica_Idle",
@@ -118,14 +106,6 @@
             "file": "resources/images/middleBar.png"
         },
         {
-            "id": "fondo1",
-            "file": "resources/images/fondo1.png"
-        },
-        {
-            "id": "wave",
-            "file": "resources/images/wave.png"
-        },
-        {
             "id": "particle",
             "file": "resources/images/particlered.png"
         },
@@ -137,36 +117,6 @@
             "id": "vfx_manos_fuego",
             "file": "resources/images/vfx_manos_fuego.png"
         },
-        {
-            "id": "luz_roja",
-            "file": "resources/images/luz_roja.png"
-        },
-        {
-            "id": "luz_rosa",
-            "file": "resources/images/luz_rosa.png"
-        },
-        {
-            "id": "capa",
-            "file": "resources/images/capa.png"
-        },
-
-        {
-            "id": "nubescapa",
-            "file": "resources/images/nubescapa.png"
-        },
-        {
-            "id": "capa1",
-            "file": "resources/images/capa1.png"
-        },
-        {
-            "id": "capa2",
-            "file": "resources/images/capa2.png"
-        },
-        {
-            "id": "capa3",
-            "file": "resources/images/capa3.png"
-        },
-
         {
             "id": "Parallax_Layer1",
             "file": "resources/images/Parallax_Layer1.png"

@@ -116,9 +116,12 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 						player->getComponent<Attack>()->attackCollided();
 
-						auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-						camShake->shake(1, 5);
-						camShake->shake(1, 5, false);
+						if (!sC().getScene() == SceneManager::scenes::EscapeScene_)
+						{
+							auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+							camShake->shake(1, 5);
+							camShake->shake(1, 5, false);
+						}
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
@@ -189,8 +192,11 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		playerCtrl->doKnockback(enemyXpos >= (playerTr->getPos().getX() + playerTr->getWidth() / 2) ? -1 : 1);
 		vt_->reset();
 
-		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-        camShake->shake(20, 10);
-        camShake->shake(20, 10, false);
+		if (!sC().getScene() == SceneManager::scenes::EscapeScene_)
+		{
+			auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+			camShake->shake(20, 10);
+			camShake->shake(20, 10, false);
+		}
 	}
 }

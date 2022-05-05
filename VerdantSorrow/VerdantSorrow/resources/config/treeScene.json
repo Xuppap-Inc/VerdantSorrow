@@ -1,5 +1,5 @@
 {
-  "assets" : 75,
+  "assets" : 72,
 
   "fonts": [
     {
@@ -21,10 +21,6 @@
 
 
   "images": [
-    {
-      "id": "chica",
-      "file": "resources/images/chicafoto.png"
-    },
     {
       "id": "Chica_Idle",
       "file": "resources/images/idle.png"
@@ -98,10 +94,6 @@
       "file": "resources/images/fondo arbol.png"
     },
     {
-      "id": "groot",
-      "file": "resources/images/groot.png"
-    },
-    {
       "id": "lampara",
       "file": "resources/images/lampara.png"
     },
@@ -156,10 +148,6 @@
     {
       "id": "Suelo",
       "file": "resources/images/Suelo.png"
-    },
-    {
-      "id": "particle",
-      "file": "resources/images/particleyellow.png"
     },
     {
       "id": "particula_tierra",

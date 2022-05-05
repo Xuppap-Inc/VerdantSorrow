@@ -52,7 +52,7 @@ void TutorialScene::init()
 
 void TutorialScene::background()
 {
-	Scene::background("fondoSuelo");
+	Scene::background("fondo1b");
 }
 
 void TutorialScene::update()
