@@ -147,8 +147,12 @@
       "file": "resources/images/MenuPrincipal/settingsButton.png"
     },
     {
-      "id": "quit",
-      "file": "resources/images/MenuPrincipal/quitButton.png"
+        "id": "quit",
+        "file": "resources/images/MenuPrincipal/quitButton.png"
+    },
+    {
+      "id": "CreditsBackground",
+      "file": "resources/images/MenuPrincipal/Creditos.png"
     },
     {
       "id": "credits",

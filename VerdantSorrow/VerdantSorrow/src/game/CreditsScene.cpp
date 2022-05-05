@@ -68,7 +68,7 @@ void CreditsScene::background()
 {
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("menuFondoSet"));
+	backgr_->addComponent<Image>(&sdlutils().imagesHub().at("CreditsBackground"));
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
