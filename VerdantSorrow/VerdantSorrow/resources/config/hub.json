@@ -11,6 +11,10 @@
   ],
   "images_hub": [
     {
+      "id": "fuego",
+      "file": "resources/images/spritesheet_hoguera.png"
+    },
+    {
       "id": "BlackScreen",
       "file": "resources/images/blackScreen.png"
     },

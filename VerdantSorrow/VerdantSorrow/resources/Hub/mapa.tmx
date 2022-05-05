@@ -609,7 +609,11 @@
   <object id="1141" gid="48" x="579" y="1625" width="90" height="90"/>
   <object id="1142" gid="48" x="623" y="1627" width="90" height="90"/>
   <object id="1143" gid="48" x="543" y="1565" width="90" height="90"/>
-  <object id="1145" gid="58" x="1283.21" y="1518.91" width="212.121" height="221.212"/>
+  <object id="1145" gid="58" x="1283.21" y="1518.91" width="212.121" height="221.212">
+   <properties>
+    <property name="fuego" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="1146" gid="45" x="1021.91" y="1335.21" width="132" height="157"/>
   <object id="1147" gid="45" x="1126.76" y="939.879" width="160" height="215"/>
   <object id="1148" gid="45" x="1065.45" y="592.848" width="160" height="215"/>
@@ -731,7 +735,7 @@
   <object id="1508" gid="40" x="807.576" y="1390.24" width="100" height="132"/>
   <object id="1509" gid="40" x="868.182" y="1475.09" width="100" height="132"/>
   <object id="1510" gid="40" x="1010.61" y="1347.82" width="100" height="132"/>
-  <object id="1511" gid="40" x="1501.52" y="1141.76" width="100" height="132"/>
+  <object id="1511" gid="40" x="1485.52" y="1202.76" width="100" height="132"/>
   <object id="1512" gid="40" x="2456.06" y="1672.06" width="100" height="132"/>
   <object id="1513" gid="39" x="2243.94" y="1772.06" width="100" height="132"/>
   <object id="1515" gid="41" x="2523.03" y="1535.27" width="160" height="215"/>
@@ -768,7 +772,7 @@
   <object id="1741" gid="47" x="597" y="831" width="40" height="76"/>
   <object id="1749" gid="47" x="1025" y="737" width="40" height="76"/>
  </objectgroup>
- <objectgroup id="11" name="colliders" visible="0" locked="1">
+ <objectgroup id="11" name="colliders">
   <object id="1598" x="960.485" y="1896.06" width="745.333" height="292"/>
   <object id="1599" x="1174.15" y="1547.39" width="372" height="405.333"/>
   <object id="1600" x="1545.81" y="1597.39"/>
@@ -816,12 +820,12 @@
   <object id="1674" x="1101.33" y="854.667" width="125.333" height="90.6667"/>
   <object id="1675" x="2176.67" y="896" width="308" height="249.333"/>
   <object id="1676" x="1116.67" y="905.667" width="233.333" height="90.6667"/>
-  <object id="1677" x="1526" y="1043.33" width="85.333" height="217.333"/>
+  <object id="1677" x="1516" y="1085.33" width="85.333" height="217.333"/>
   <object id="1701" x="1266" y="703.333" width="363.667" height="185.334"/>
   <object id="1703" x="1104.67" y="398" width="173.333" height="121.333"/>
   <object id="1706" x="2089" y="1416" width="88" height="89"/>
  </objectgroup>
- <objectgroup id="15" name="areas" visible="0" locked="1">
+ <objectgroup id="15" name="areas" locked="1">
   <object id="1683" x="-3.0303" y="9.09091" width="1224.24" height="1178.79">
    <properties>
     <property name="area" value="eye"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="trees" tilewidth="1200" tileheight="1200" tilecount="33" columns="0">
+<tileset version="1.8" tiledversion="1.8.4" name="trees" tilewidth="300" tileheight="321" tilecount="33" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="14">
   <image width="239" height="321" source="../assets/arbol.png"/>
@@ -68,7 +68,7 @@
   <image width="110" height="110" source="../assets/pinomorado1.png"/>
  </tile>
  <tile id="35">
-  <image width="1200" height="1200" source="../assets/FUEGO.png"/>
+  <image width="300" height="300" source="../assets/transparent.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="268" y="556" width="446" height="416"/>
   </objectgroup>
