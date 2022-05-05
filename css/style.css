@@ -82,7 +82,7 @@ HEADER
 ************************************
 ***********************************/
 .header{
-    background: url('../images/jefeOjo.png') no-repeat fixed;
+     background: url('../images/ultimo_colla_del_curso.png'); /*no-repeat fixed; */
     background-size: cover;
     min-height: 650px;
     position: relative;
@@ -131,11 +131,11 @@ HEADER
     transition: color 0.2s ease-out;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    color: rgba(47, 4, 14, 1);
+    color: rgb(102, 45, 58);
     background-color: transparent;
 }
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
-    color: rgba(47, 4, 14, 1);
+    color: rgb(102, 45, 58);
 }
 .banner-info
 {
@@ -201,7 +201,8 @@ h2.bnr-sub-title
 
 #service
 {
-    background-color: #141414;
+    background-color:  rgb(15, 3, 6);
+    ;
 }
 ul.service-list li i
 {
@@ -331,7 +332,7 @@ ul.service-list li i
     width:100%;
     height:100%;
     padding: 20px 20px;
-    background-color: #BE9E21;
+    background-color: rgba(47, 4, 14, 1);
     backface-visibility:hidden;
     -webkit-transform:rotateY(-180deg);
     -moz-transform:rotateY(-180deg);
@@ -364,7 +365,7 @@ TESTIMONIAL
 ***********************************/
 #testimonial
 {
-    background: url('../images/fondo.jpg') no-repeat;
+    background: url('../images/menu.png') no-repeat;
     background-size: cover;
     min-height: 390px;
 }
@@ -427,8 +428,7 @@ TESTIMONIAL
 #footer
 {
     padding: 20px 0px;
-    background: rgb(7 ,53, 62);
-    color: white;
+    background: rgba(47, 4, 14, 1);
 }
 .footer-img{
     width: 50px;
