@@ -450,9 +450,13 @@ void FrogAttackManager::onGrounded(bool& jump, bool isBig)
 		}
 		waveSp_->createWaves(200, 70, Vector2D(1, 0), tr_);
 
-		SoundEffect* s = &sdlutils().soundEffects().at("sfx_manos_attack");
+		SoundEffect* s = &sdlutils().soundEffects().at("sfx_rana_attack");
 		s->play();
 		s->setChannelVolume(musicVolume_);
+		SoundEffect* s2 = &sdlutils().soundEffects().at("sfx_manos_attack");
+		s2->play();
+		s2->setChannelVolume(musicVolume_);
+
 		if (jumpDirection_ == 0) jumpDirection_ = oldJumpDirection_;
 
 		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();

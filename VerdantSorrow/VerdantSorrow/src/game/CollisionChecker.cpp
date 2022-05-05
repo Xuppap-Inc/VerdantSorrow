@@ -116,11 +116,11 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 
 						player->getComponent<Attack>()->attackCollided();
 
-						if (!sC().getScene() == SceneManager::scenes::EscapeScene_)
+						if (sC().getScene() != SceneManager::scenes::EscapeScene_)
 						{
 							auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-							camShake->shake(1, 5);
-							camShake->shake(1, 5, false);
+							camShake->shake(3, 5);
+							camShake->shake(3, 5, false);
 						}
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
