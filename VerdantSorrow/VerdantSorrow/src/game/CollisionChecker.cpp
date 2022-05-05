@@ -23,6 +23,7 @@
 #include "../components/tutorial/TutorialRootMovement.h"
 #include "TutorialScene.h"
 #include "../components/boss/frog_boss/FlyMovement.h"
+#include "../components/boss/nivelHuida/Spikes.h"
 
 
 
@@ -50,7 +51,7 @@ void CollisionChecker::checkCollisions()
 			ClapAttack* cA = ent->getComponent<ClapAttack>();
 			MeleeAttack* mA = ent->getComponent<MeleeAttack>();
 			LanternMovement* lantern = ent->getComponent<LanternMovement>();
-
+			Spikes* spik = ent->getComponent<Spikes>();
 			if (sC().getScene() == SceneManager::scenes::Tutorial_) {
 				auto player = mngr_->getHandler(ecs::_PLAYER);
 
@@ -67,7 +68,7 @@ void CollisionChecker::checkCollisions()
 			}
 			else if ((ent->getComponent<FlyMovement>() && sC().getScene() == SceneManager::scenes::EscapeScene_) ||
 				(bA != nullptr && sC().getScene() != SceneManager::scenes::Eye_) && lantern == nullptr ||
-				wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr)
+				wave != nullptr || tA != nullptr || cA != nullptr||mA!=nullptr||spik!=nullptr)
 				hurtPlayerAndKnockback(player, ent);
 		}
 	}
