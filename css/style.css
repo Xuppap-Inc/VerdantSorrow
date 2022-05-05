@@ -1,7 +1,7 @@
 body {
 	line-height: 1.4;
 	font-family: 'Roboto', sans-serif;
-    color: #67696c;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 300;
     letter-spacing: 0.5px;
@@ -82,7 +82,7 @@ HEADER
 ************************************
 ***********************************/
 .header{
-    background: url('../images/fondo.jpg') no-repeat fixed;
+     background: url('../images/ultimo_colla_del_curso.png'); /*no-repeat fixed; */
     background-size: cover;
     min-height: 650px;
     position: relative;
@@ -101,12 +101,12 @@ HEADER
 
 .navbar-default .navbar-default
 {
-    color: #002F2F;
+    color: rgba(47, 4, 14, 0.9);
 }
 
 .top-nav-collapse {
     padding: 10px; 
-    background: rgba(7 ,53, 62, 0.9);
+    background: rgba(47, 4, 14, 0.9);
 }
 
 .navbar-default {
@@ -131,13 +131,11 @@ HEADER
     transition: color 0.2s ease-out;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    color: rgb(43,121,135);
+    color: rgb(102, 45, 58);
     background-color: transparent;
 }
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
-    background-color: transparent;
-    color:rgb(43,121,135);
-    ;
+    color: rgb(102, 45, 58);
 }
 .banner-info
 {
@@ -171,10 +169,10 @@ h2.bnr-sub-title
     margin-top: 50px;
     color: #fff;
     border: 0;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 300;
     line-height: 24px;
-    padding: 10px 30px;
+    padding: 20px 40px;
     border-radius: 60px;
     margin: 50px 10px 0 0;
     outline: none !important;
@@ -186,8 +184,7 @@ h2.bnr-sub-title
 
 .btn-download
 {
-    background-color:rgb(7 ,53, 62);
-    ;
+    background-color:rgba(47, 4, 14, 1);
 }
 .btn-more, .btn-more:focus
 {
@@ -201,65 +198,11 @@ h2.bnr-sub-title
     color: #fff;
 }
 
-/* .overlay-detail a i{
-   text-align: center;
-   position: absolute;
-   bottom: 25px;
-   font-size: 38px;
-   color: #fff;
-} */
 
-/***********************************
-************************************
-features
-************************************
-***********************************/
-.title, .service-title
-{
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 35px;
-    text-transform: uppercase;
-}
-.item-img
-{
-    margin-bottom: 15px;
-}
-.sub-title
-{
-    font-size: 20px;
-}
-.bottom-line
-{
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border: 0;
-    border-top: 0px;
-    height: 3px;
-    width: 40px;
-    background-color: #BE9E21;
-}
-.wrap-item h3 {
-    font-size: 24px;
-    line-height: 25px;
-}
-.pad-bt15 {
-    padding-bottom: 15px;
-}
-.sec-sub-title
-{
-    padding-top: 30px;
-}
-.sec-sub-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #002F2F;
-    text-transform: uppercase;
-    margin: 25px 0px;
-    line-height: 1.7;
-}
 #service
 {
-    background-color: #F3F4F8;
+    background-color:  rgb(15, 3, 6);
+    ;
 }
 ul.service-list li i
 {
@@ -340,6 +283,9 @@ ul.service-list li i
 .bx-wrapper {
     margin: 0 auto 35px;
 }
+#portfolio{
+    background-color: rgb(20, 7, 9);
+}
 .portfolio-item
 {
     position:relative;
@@ -386,7 +332,7 @@ ul.service-list li i
     width:100%;
     height:100%;
     padding: 20px 20px;
-    background-color: #BE9E21;
+    background-color: rgba(47, 4, 14, 1);
     backface-visibility:hidden;
     -webkit-transform:rotateY(-180deg);
     -moz-transform:rotateY(-180deg);
@@ -419,12 +365,12 @@ TESTIMONIAL
 ***********************************/
 #testimonial
 {
-    background: url('../images/fondo.jpg') no-repeat;
+    background: url('../images/menu.png') no-repeat;
     background-size: cover;
     min-height: 390px;
 }
 .bg-testicolor{
-    background-color: RGBA(73, 84, 105, 0.61);
+    background-color: rgba(47, 4, 14, 0.3);
     min-height: 390px;
 }
 .white
@@ -482,8 +428,7 @@ TESTIMONIAL
 #footer
 {
     padding: 20px 0px;
-    background: rgb(7 ,53, 62);
-    color: white;
+    background: rgb(27, 3, 8);
 }
 .footer-img{
     width: 50px;
