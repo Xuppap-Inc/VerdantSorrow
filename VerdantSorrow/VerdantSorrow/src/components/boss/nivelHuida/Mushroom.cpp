@@ -47,7 +47,7 @@ void Mushroom::update()
 					//arriba
 					if (lastPositionY <= tr_->getPos().getY()) {
 						float vel = velPlayer.getY() * -1 - 3;
-						std::cout<< vel<<std::endl;
+
 						if (vel * -1 > 25)vel = -20;
 						velPlayer.setY(vel);
 					}
