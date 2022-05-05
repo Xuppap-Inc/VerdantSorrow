@@ -15,6 +15,7 @@
 #include "../components/boss/nivelHuida/Spikes.h"
 #include "../components/boss/nivelHuida/ChangeVertical.h"
 #include "../components/boss/nivelHuida/PlayerDeathZone.h"
+#include "../components/FramedImage.h"
 
 TileMap::TileMap(ecs::Manager* mngr, string tileMapPath, CollisionManager* col, double scale, Pivot pivot) :col_(col), dialogBox_(nullptr), scale_(scale), pivot_(pivot)
 {
@@ -213,6 +214,7 @@ void TileMap::createObjects()
 							}
 						}
 					}
+					
 
 				}
 
@@ -237,6 +239,40 @@ void TileMap::createObjects()
 
 
 				}
+				else if (name == "lights") {
+					ecs::Entity* ent = mngr_->addEntity();
+					auto tr = ent->addComponent<Transform>();
+					tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+					
+					vector<tmx::Property> properties = object.getProperties();
+					int i = 0;
+					while (i < properties.size() && properties[i].getName() != "luz")i++;
+
+					if (i < properties.size()){
+						ent->addComponent<Image>(&sdlutils().imagesHub().at(properties[i].getStringValue() ));
+						ent->addToGroup(ecs::_PARTICLES_FRONT);
+						//spotlight_yellow
+					}
+
+				}
+				else if (name == "arboles") {
+					
+
+					vector<tmx::Property> properties = object.getProperties();
+					int i = 0;
+					while (i < properties.size() && properties[i].getName() != "fuego")i++;
+
+					if (i < properties.size()) {
+						ecs::Entity* ent = mngr_->addEntity();
+						auto tr = ent->addComponent<Transform>();
+						tr->init(Vector2D(r.x, r.y), Vector2D(), r.w, r.h, 0.0f);
+			
+						ent->addComponent<FramedImage>(&sdlutils().imagesHub().at("fuego"),6,6,2000,34,"hola");
+						ent->addToGroup(ecs::_BOSS_GRP);
+
+					}
+				}
+				
 			}
 		}
 	}
