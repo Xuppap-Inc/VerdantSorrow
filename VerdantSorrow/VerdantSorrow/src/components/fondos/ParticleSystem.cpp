@@ -7,6 +7,7 @@
 #include "ShowAtOppositeSide.h"
 #include "Disolve.h"
 #include "Target.h"
+#include "LightFollows.h"
 
 ParticleSystem::ParticleSystem(Texture* tex, ecs::Manager* mngr):tex_(tex),mngr_(mngr)
 {
@@ -466,5 +467,30 @@ void ParticleSystem::createParticlesKillPlayer(int numpart, int x, int y)
 		imag->setAlpha(200);
 		particle->addComponent<Disolve>(sdlutils().rand().nextInt(1000, 3000));
 		particle->addToGroup(ecs::_PARTICLES_UI);
+	}
+}
+
+void ParticleSystem::createLights(int numpart, int x, int y, int w)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		particle->addComponent<Transform>(Vector2D(x, y), Vector2D(), w, w, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(255);
+		particle->addToGroup(ecs::_LIGHTS_GRP);
+	}
+}
+
+void ParticleSystem::createLightsFollow(int numpart, Transform* follow, int w)
+{
+	for (int i = 0; i < numpart; i++) {
+		auto particle = mngr_->addEntity();
+
+		particle->addComponent<Transform>(Vector2D(), Vector2D(), w, w, 0.0f);
+		Image* imag = particle->addComponent<Image>(tex_);
+		imag->setAlpha(255);
+		particle->addComponent<LightFollows>(follow);
+		particle->addToGroup(ecs::_LIGHTS_GRP);
 	}
 }

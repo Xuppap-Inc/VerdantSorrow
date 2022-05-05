@@ -1,5 +1,5 @@
 {
-  "assets" : 64,
+  "assets" : 66,
 
   "fonts" : [
     { "id" : "ARIAL16", "file" : "resources/fonts/ARIAL.ttf", "size": 16 },
@@ -179,6 +179,18 @@
     {
       "id": "you_died",
       "file": "resources/images/you_died.png"
+    },
+    {
+      "id": "spotlight_cyan",
+      "file": "resources/images/spotlight_cyan.png"
+    },
+    {
+      "id": "spotlight_red",
+      "file": "resources/images/spotlight_red.png"
+    },
+    {
+      "id": "spotlight_purple",
+      "file": "resources/images/spotlight_purple.png"
     }
   ],
 

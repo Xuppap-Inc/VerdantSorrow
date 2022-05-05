@@ -26,7 +26,6 @@
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
-#include "../components/fondos/Light.h"
 #include "Game.h"
 #include <iostream>
 #include <fstream>

@@ -97,6 +97,8 @@ void TreeAttackManager::initComponent()
 	ParticleSystem* particlesys4 = new ParticleSystem(&sdlutils().images().at("particula_hoja"), mngr_);
 	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
+	ParticleSystem* particlesys5 = new ParticleSystem(&sdlutils().images().at("spotlight_yellow"), mngr_);
+	particlesys5->createLightsFollow(1, lanternTr_, 800);
 
 	bool correct = tr_ != nullptr && player_ != nullptr && rootWave_ != nullptr && rootAutoAim_ != nullptr && meleeAttack_ != nullptr && lanternTr_ != nullptr;
 	assert(correct);

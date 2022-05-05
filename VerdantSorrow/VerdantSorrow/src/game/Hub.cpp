@@ -22,7 +22,6 @@
 #include "CollisionManager.h"
 #include "../game/SceneManager.h"
 #include "../components/fondos/ParticleSystem.h"
-#include "../components/fondos/Light.h"
 #include "../components/hub/PlatformAtribsForHub.h"
 #include "../sdlutils/Texture.h"
 #include "../json/JSONValue.h"
@@ -86,7 +85,6 @@ void Hub::init()
 	ParticleSystem* particlesys_ = new ParticleSystem(&sdlutils().imagesHub().at("particula_menu"), mngr_);
 	particlesys_->createParticlesMenu(30);
 
-	createLights();
 
 	if (blackScreen_ == nullptr) {
 		createBlackScreen();
@@ -286,9 +284,4 @@ void Hub::playerGenerator(CollisionManager* colManager) {
 
 
 	player_->addToGroup(ecs::_PLAYER_GRP);
-}
-
-void Hub::createLights() {
-	new Light(&sdlutils().imagesHub().at("luz_naranja"), -200, -100, 800, 100, mngr_);
-	
 }

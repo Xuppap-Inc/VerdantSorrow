@@ -212,22 +212,14 @@
     {
       "id": "you_died",
       "file": "resources/images/you_died.png"
-    }
-  ],
-
-  "messages": [
-    {
-      "id": "PressAnyKey",
-      "text": "Press Any Key",
-      "font": "ARIAL24",
-      "color": "0x112233ff",
-      "bg": "0xffffffff"
     },
     {
-      "id": "HelloSDL",
-      "text": "Hello SDL!",
-      "font": "ARIAL48",
-      "color": "0x0000ffff"
+      "id": "spotlight_yellow",
+      "file": "resources/images/spotlight_yellow.png"
+    },
+    {
+      "id": "spotlight_cyan",
+      "file": "resources/images/spotlight_cyan.png"
     }
   ],
 

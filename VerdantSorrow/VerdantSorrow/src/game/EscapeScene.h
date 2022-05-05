@@ -22,7 +22,6 @@ public:
 
 	bool getAble();
 	void setAble(bool a);
-	void createLights();
 	
 
 	int* getMusicVolume() { return &musicVolume_; };

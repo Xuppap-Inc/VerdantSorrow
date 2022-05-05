@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\fondos\LightFollows.h" />
     <ClInclude Include="src\game\CreditsScene.h" />
     <ClInclude Include="src\components\boss\finalBoss\EscapeSceneBoss.h" />
     <ClInclude Include="src\components\boss\nivelHuida\PlayerDeathZone.h" />
@@ -37,7 +38,6 @@
     <ClInclude Include="src\game\EscapeScene.h" />
     <ClInclude Include="src\game\Fondos\Parallax.h" />
     <ClInclude Include="src\components\fondos\Renderparallax.h" />
-    <ClInclude Include="src\components\fondos\Light.h" />
     <ClInclude Include="src\game\PauseMenu.h" />
     <ClInclude Include="src\components\fondos\ShowAtOppositeSide.h" />
     <ClInclude Include="src\components\fondos\ParticleSystem.h" />
@@ -121,7 +121,6 @@
     <ClInclude Include="src\utils\Vector2D.h" />
     <ClInclude Include="src\components\boss\wave\WaveMovement.h" />
     <ClInclude Include="src\components\boss\frog_boss\TongueAttack.h" />
-    <ClInclude Include="src\components\VFX.h" />
     <ClInclude Include="src\game\TutorialScene.h" />
     <ClInclude Include="src\components\tutorial\TutorialSpawnRoot.h" />
     <ClInclude Include="src\components\fondos\Target.h" />
@@ -129,6 +128,7 @@
     <ClInclude Include="src\components\tutorial\TutorialRootMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\fondos\LightFollows.cpp" />
     <ClCompile Include="src\game\CreditsScene.cpp" />
     <ClCompile Include="src\components\boss\finalBoss\EscapeSceneBoss.cpp" />
     <ClCompile Include="src\components\boss\nivelHuida\PlayerDeathZone.cpp" />
@@ -147,7 +147,6 @@
     <ClCompile Include="src\game\EscapeScene.cpp" />
     <ClCompile Include="src\game\Fondos\Parallax.cpp" />
     <ClCompile Include="src\components\fondos\Renderparallax.cpp" />
-    <ClCompile Include="src\components\fondos\Light.cpp" />
     <ClCompile Include="src\game\PauseMenu.cpp" />
     <ClCompile Include="src\components\fondos\ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\components\fondos\ParticleSystem.cpp" />
@@ -217,7 +216,6 @@
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
     <ClCompile Include="src\components\boss\wave\WaveMovement.cpp" />
-    <ClCompile Include="src\components\VFX.cpp" />
     <ClCompile Include="src\game\TutorialScene.cpp" />
     <ClCompile Include="src\components\tutorial\TutorialSpawnRoot.cpp" />
     <ClCompile Include="src\components\fondos\Target.cpp" />

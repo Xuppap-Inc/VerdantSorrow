@@ -33,8 +33,7 @@ void FinalBossMovement::initComponent()
 	bA_ = ent_->getComponent<BossAtributos>();
 	anim_ = ent_->getComponent<FramedImage>();
 	waveSp_ = mngr_->getHandler(ecs::_WAVE_GENERATOR)->getComponent<WaveSpawner>();
-	playerTr_ = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
-	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr, playerTr_ != nullptr);
+	assert(tr_ != nullptr, bA_ != nullptr, waveSp_ != nullptr);
 
 	lastTimeInGround_ = mngr_->addTimer();
 
@@ -59,6 +58,8 @@ void FinalBossMovement::initComponent()
 	ParticleSystem* particlesys4 = new ParticleSystem(&sdlutils().images().at("luz_morado"), mngr_);
 	particlesys4->createParticlesBossSpawn(100, tr_->getPos().getX() + (tr_->getWidth() / 2), tr_->getPos().getY() + (tr_->getHeight() / 2));
 
+	ParticleSystem* particlesys5 = new ParticleSystem(&sdlutils().images().at("spotlight_red"), mngr_);
+	particlesys5->createLightsFollow(1, tr_, 700);
 }
 
 void FinalBossMovement::update()

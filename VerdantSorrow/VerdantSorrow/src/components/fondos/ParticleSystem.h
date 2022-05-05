@@ -67,6 +67,10 @@ public:
 
 	void createParticlesKillPlayer(int numpart, int x, int y);
 
+	void createLights(int numpart, int x, int y, int w);
+
+	void createLightsFollow(int numpart, Transform* follow, int w);
+
 private:
 
 	Texture* tex_;

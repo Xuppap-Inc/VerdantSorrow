@@ -23,7 +23,6 @@ public:
 	bool getAble();
 	void setAble(bool a);
 
-	void createLights();
 	TreeAttackManager* getTreeAttackManager() { return treeMngr_; };
 private:
 	Entity* player;

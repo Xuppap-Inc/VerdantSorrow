@@ -14,7 +14,6 @@ public:
 
 	virtual void update() override;
 	void playerGenerator(CollisionManager* colManager);
-	void createLights();
 	bool getAble();
 	void setAble(bool a);
 	void changeScene_(bool ch);

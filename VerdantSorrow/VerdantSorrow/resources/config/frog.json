@@ -236,6 +236,10 @@
     {
       "id": "you_died",
       "file": "resources/images/you_died.png"
+    },
+    {
+      "id": "spotlight_cyan",
+      "file": "resources/images/spotlight_cyan.png"
     }
   ],
 

@@ -25,7 +25,6 @@
 #include "SceneManager.h"
 #include "../game/CollisionChecker.h"
 #include "../components/fondos/ParticleSystem.h"
-#include "../components/fondos/Light.h"
 #include "TileMap.h"
 
 #include "../components/boss/finalBoss/FinalBossMovement.h"
@@ -116,10 +115,6 @@ void EscapeScene::setAble(bool a)
 	isAble = a;
 }
 
-void EscapeScene::createLights() {
-	new Light(&sdlutils().images().at("luz_rojo"), 200, 100, 100, 100, mngr_);
-
-}
 
 void EscapeScene::createBoss(CollisionManager* col)
 {
