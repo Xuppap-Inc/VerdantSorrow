@@ -18,6 +18,7 @@
 #include "../BossAtributos.h"
 #include "../../fondos/ParticleSystem.h"
 #include "../../../game/Hub.h"
+#include "../../CameraShake.h"
 
 TreeAttackManager::~TreeAttackManager()
 {
@@ -465,6 +466,9 @@ void TreeAttackManager::attackWave()
 
 		animNewState_ = ANIM_ROOTS;
 		anim_->repeat(false);
+
+		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
+		camShake->shake(40, 20);
 
 		movement_->setMoveActive(false);
 
