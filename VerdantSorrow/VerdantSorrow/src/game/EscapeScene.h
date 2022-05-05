@@ -26,9 +26,10 @@ public:
 
 	int* getMusicVolume() { return &musicVolume_; };
 	Music* getMusic() { return musica_; };
-
+	bool playerDying_;
 	void createBoss(CollisionManager* col);
 private:
+	
 	bool isAble;
 	Entity* player;
 	Entity* FinalBossFace;

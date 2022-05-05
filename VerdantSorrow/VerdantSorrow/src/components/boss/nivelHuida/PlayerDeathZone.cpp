@@ -36,8 +36,10 @@ void PlayerDeathZone::update()
 
 		for (auto c : colMan_->getCollisions(collider_)) {
 			if (c->isActive() && !c->isTrigger() && c->getEntity()->getComponent<PlayerAttributes>()) {
-				if (area_ == "died")
+				if (area_ == "died"){
+					sC().getEscapeScene()->playerDying_ = true;
 					sC().getEscapeScene()->init();
+				}
 				else {
 					Game::instance()->state_ = Game::State::FINALDEFEATED;
 

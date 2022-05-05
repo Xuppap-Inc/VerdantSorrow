@@ -41,7 +41,6 @@ EscapeScene::~EscapeScene()
 void EscapeScene::init()
 {
 	Scene::init();
-
 	//Para gestionar las colisiones
 	CollisionManager* colManager = new CollisionManager();
 	mngr_->setColManager(colManager);
@@ -78,17 +77,20 @@ void EscapeScene::init()
 
 void EscapeScene::update()
 {
-
+	playerDying_ = false;
 	mngr_->update();
-	colCheck_->checkCollisions();
-	mngr_->refresh();
-	sdlutils().clearRenderer();
-	mngr_->render();
+	if(!playerDying_){
+		colCheck_->checkCollisions();
+		mngr_->refresh();
+		sdlutils().clearRenderer();
+		mngr_->render();
 #ifdef _DEBUG
-	mngr_->debug();
+		mngr_->debug();
 #endif
-	sdlutils().presentRenderer();
-	changescenes();
+		sdlutils().presentRenderer();
+		changescenes();
+	}
+	
 }
 
 

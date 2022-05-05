@@ -35,7 +35,7 @@ void Spikes::update()
 		auto playerTr = mngr_->getHandler(ecs::_PLAYER)->getComponent<Transform>();
 		if (!moving_ && tr_->getPos().getX() - playerTr->getPos().getX() + playerTr->getWidth() <= activationDistance_) {
 			moving_ = true;
-			gr_->setActive(true);
+			ent_->setAlive(false);
 			tr_->getVel().setY(spikeVelocity_);
 		}
 	}
