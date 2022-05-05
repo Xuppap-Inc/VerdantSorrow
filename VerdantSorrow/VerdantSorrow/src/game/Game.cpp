@@ -28,19 +28,14 @@ void Game::start() {
 	firstScene = SceneManager::scenes::Menu_;
 	sC().setFirstSceneAble();
 	
-
 	SDLUtils::init("Verdant Sorrow", w, h);
-
 	auto& scMngr_ = sC();
-	
 	scMngr_.changeScene(firstScene);
-
 	update();
 }
 
 void Game::update()
 {
-
 	//Imput handler
 	auto& ihdlr = ih();
 
