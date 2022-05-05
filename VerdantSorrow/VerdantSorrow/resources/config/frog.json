@@ -82,16 +82,8 @@
       "file": "resources/images/middleBar.png"
     },
     {
-      "id": "fondo1",
-      "file": "resources/images/fondo1.png"
-    },
-    {
-      "id": "fondodel",
-      "file": "resources/images/fondodel.png"
-    },
-    {
-      "id": "nubes",
-      "file": "resources/images/nubes.png"
+      "id": "fondo1b",
+      "file": "resources/images/fondo1b.png"
     },
     {
       "id": "Suelo",
@@ -100,10 +92,6 @@
     {
       "id": "fondoSuelo",
       "file": "resources/images/fondoSuelo.png"
-    },
-    {
-      "id": "fondoNegro",
-      "file": "resources/images/fondoNegro.png"
     },
     {
       "id": "ranacambiofase",

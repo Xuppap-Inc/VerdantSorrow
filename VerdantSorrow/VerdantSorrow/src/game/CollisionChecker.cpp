@@ -117,10 +117,8 @@ void CollisionChecker::checkAttackCollisions(Attack* playerAt, ecs::Entity* play
 						player->getComponent<Attack>()->attackCollided();
 
 						auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-						if (camShake != nullptr) {
-
-							camShake->shake(5, 5);
-						}
+						camShake->shake(1, 5);
+						camShake->shake(1, 5, false);
 
 						SoundEffect* s = &sdlutils().soundEffects().at("sfx_chica_attack1");
 						s->setChannelVolume(*sC().getHubScene()->getMusicVolume());
@@ -192,6 +190,7 @@ void CollisionChecker::hurtPlayerAndKnockback(ecs::Entity* player, ecs::Entity* 
 		vt_->reset();
 
 		auto camShake = mngr_->getHandler(ecs::_hdlr_CAMERA)->getComponent<CameraShake>();
-        camShake->shake(1, 5);
+        camShake->shake(20, 10);
+        camShake->shake(20, 10, false);
 	}
 }

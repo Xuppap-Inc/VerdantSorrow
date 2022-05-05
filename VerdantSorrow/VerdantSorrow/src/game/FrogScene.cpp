@@ -122,25 +122,15 @@ void FrogScene::waveSpawerGenerator(CollisionManager*& colManager)
 
 void FrogScene::background()
 {
-	auto blCK = mngr_->addEntity();
-	blCK->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	blCK->addComponent<Image>(&sdlutils().images().at("fondoNegro"));
 	auto backgr_ = mngr_->addEntity();
 	auto backgr_Tr = backgr_->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	backgr_->addComponent<Image>(&sdlutils().images().at("fondo1"));
-
-	auto parallax_ = new Parallax(mngr_);
-	parallax_->AddLayer(&sdlutils().images().at("nubes"), 14, sdlutils().height(), sdlutils().width(), 0);
-	auto fondodel = mngr_->addEntity();
-	auto fondotr = fondodel->addComponent<Transform>(Vector2D(0, 0), Vector2D(), sdlutils().width(), sdlutils().height(), 0.0f);
-	fondodel->addComponent<Image>(&sdlutils().images().at("fondodel"));
+	backgr_->addComponent<Image>(&sdlutils().images().at("fondo1b"));
 
 	auto suelo = mngr_->addEntity();
 	auto suelo_Tr = suelo->addComponent<Transform>(Vector2D(0, sdlutils().height() - sdlutils().height() - 190), Vector2D(), sdlutils().width() + 20, sdlutils().height() + 190, 0.0f);
 	suelo->addComponent<Image>(&sdlutils().images().at("Suelo"));	
-	blCK->addToGroup(ecs::_BACKGROUND_1_GRP);
+
 	backgr_->addToGroup(ecs::_BACKGROUND_1_GRP);
-	fondodel->addToGroup(ecs::_BACKGROUND_1_GRP);
 	suelo->addToGroup(ecs::_BACKGROUND_1_GRP);
 }
 
