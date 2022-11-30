@@ -3,8 +3,8 @@
 
 #define MyAppName "Verdant Sorrow"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "My Company, Inc."
-#define MyAppURL "https://www.example.com/"
+#define MyAppPublisher "Xuppap Inc."
+#define MyAppURL "https://xuppap-inc.github.io/VerdantSorrow/"
 #define MyAppExeName "VerdantSorrowRelease.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
