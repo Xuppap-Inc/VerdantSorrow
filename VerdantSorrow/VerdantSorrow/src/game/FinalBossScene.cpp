@@ -105,7 +105,10 @@ void FinalBossScene::update()
 			sC().changeStatePlayerInBoss(false);
 		}
 		setAble(false);
-		if (bossHealth->isDefeated()) sC().changeScene(SceneManager::scenes::EscapeScene_);
+		if (bossHealth->isDefeated()) {
+			Game::instance()->state_ = Game::State::FINALDEFEATED;
+			sC().changeScene(SceneManager::scenes::Hub_);
+		}
 		else sC().decideScene();
 	}
 }

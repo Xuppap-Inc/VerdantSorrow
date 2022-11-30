@@ -47,11 +47,25 @@ void SceneManager::update()
 
 	if (ihdlr.keyDownEvent() || ihdlr.controllerDownEvent())
 	{
-		if (ihdlr.isKeyDown(pauseKeyboardButton)|| ihdlr.isControllerButtonDown(pauseGamepadButton))
-		{
-			if((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
+		if (ihdlr.isKeyDown(SDL_SCANCODE_1) && actScene != Frog_) {
+			playerInBossFight = false;
+			sC().changeScene(Frog_);
+		}
+		else if (ihdlr.isKeyDown(SDL_SCANCODE_2) && actScene != Tree_) {
+			playerInBossFight = false;
+			sC().changeScene(Tree_);
+		}
+		else if (ihdlr.isKeyDown(SDL_SCANCODE_3) && actScene != Eye_) {
+			playerInBossFight = false;
+			sC().changeScene(Eye_);
+		}
+		else {
+			if (ihdlr.isKeyDown(pauseKeyboardButton) || ihdlr.isControllerButtonDown(pauseGamepadButton))
 			{
-				activatePause();
+				if ((previousScene_ != Menu_ && actScene != Menu_) || (previousScene_ == Menu_ && actScene == Hub_))
+				{
+					activatePause();
+				}
 			}
 		}
 	}

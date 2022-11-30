@@ -118,7 +118,7 @@ void MenuScene::onButtonClicked(int index)
 			myfile.close();
 		}
 		else cout << "No se puede abrir el guardado.txt";
-		sC().changeScene(SceneManager::Tutorial_);
+		sC().changeScene(SceneManager::Hub_);
 		musica_->pauseMusic();
 	}
 	else if(index==1) //No te permite leer un archivo dentro de un switch asi que hay que hacer esto
